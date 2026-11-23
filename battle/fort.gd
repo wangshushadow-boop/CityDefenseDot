@@ -9,7 +9,7 @@ var ram_at: Vector2
 
 func _init(faction: int) -> void:
 	side = faction
-	gate = Vector2(-18 if side == 0 else 18, 0)
+	gate = Vector2(-36 if side == 0 else 36, 0)
 	ram_at = yard()
 
 func yard() -> Vector2:

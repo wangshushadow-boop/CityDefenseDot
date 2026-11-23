@@ -1,13 +1,28 @@
 class_name BattleSpace extends RefCounted
-## 灰盒地图在 X/Z 平面模拟。墙、门洞、视线和移动共享一份几何数据。
-const LIMIT := Vector2(28, 14)
-const GRAIN := Vector2(0, -5)
-const WOOD := Vector2(0, 8)
-const SIDE_Z := 8.0
+## 河谷战场在 X/Z 平面计算移动，门洞、障碍和视线共用同一份地理数据。
+const Terrain := preload("res://battle/terrain.gd")
+const LIMIT := Terrain.LIMIT
+const GRAIN := Vector2(0, -21)
+const WOOD := Vector2(0, 16)
+const SIDE_Z := 12.0
 const HALF_GAP := 2.0
 const CELL := 5.0
 var forts: Array[BattleFort] = [BattleFort.new(0), BattleFort.new(1)]
 var buckets := {}
+var terrain := Terrain.new()
+var paths := AStarGrid2D.new()
+
+func _init() -> void:
+	# 半米网格为斜向跨格预留树干间隙，避免角色在两格之间擦入障碍。
+	paths.cell_size = Vector2(0.5, 0.5)
+	var extent := Vector2i(LIMIT / paths.cell_size)
+	paths.region = Rect2i(-extent, extent * 2 + Vector2i.ONE)
+	paths.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	paths.update()
+	for x in range(-extent.x, extent.x + 1):
+		for z in range(-extent.y, extent.y + 1):
+			var cell := Vector2i(x, z)
+			paths.set_point_solid(cell, terrain.blocked(Vector2(cell) * paths.cell_size, 0.24))
 
 func rebuild(teams: Array[BattleTeam]) -> void:
 	buckets.clear()
@@ -31,6 +46,10 @@ func near(at: Vector2, radius: float, side: int) -> Array[BattleAgent]:
 	return found
 
 func clear_line(a: Vector2, b: Vector2) -> bool:
+	for rock: Vector3 in Terrain.ROCKS:
+		var center := Vector2(rock.x, rock.y)
+		if a != b and center.distance_squared_to(Geometry2D.get_closest_point_to_segment(center, a, b)) < rock.z * rock.z:
+			return false
 	for fort in forts:
 		if (a.x < fort.gate.x) == (b.x < fort.gate.x):
 			continue
@@ -64,6 +83,27 @@ func move(unit: BattleAgent, goal: Vector2, dt: float, route := true) -> bool:
 				dest = door + Vector2(ahead * 1.4, 0)
 			break
 	var next := from.move_toward(dest, unit.spec.speed * dt)
+	if route and not unit.detour.is_empty() and unit.detour_goal.distance_to(dest) > 2:
+		unit.detour.clear()
+	if route and (not unit.detour.is_empty() or terrain.blocked(from.move_toward(dest, 1.5)) or terrain.blocked(next)):
+		# 门楼仍由上面的门洞路点处理，局部网格只规划到当前一侧的路点。
+		if unit.detour.is_empty():
+			var start := Vector2i((from / paths.cell_size).round())
+			var end := Vector2i((dest / paths.cell_size).round())
+			if paths.is_point_solid(start):
+				for offset in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+					var candidate: Vector2i = start + offset
+					if paths.is_in_boundsv(candidate) and not paths.is_point_solid(candidate):
+						start = candidate
+						break
+			unit.detour = paths.get_point_path(start, end, true)
+			unit.detour_goal = dest
+		while not unit.detour.is_empty() and from.distance_to(unit.detour[0]) < 0.18:
+			unit.detour.remove_at(0)
+		if not unit.detour.is_empty():
+			next = from.move_toward(unit.detour[0], unit.spec.speed * dt)
+	if terrain.blocked(next):
+		return false
 	if not clear_line(from, next):
 		return false
 	unit.position = next

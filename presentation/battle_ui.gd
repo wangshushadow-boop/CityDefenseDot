@@ -9,6 +9,9 @@ var stats: Label
 var feedback: Label
 var picker: OptionButton
 var garrison: SpinBox
+var commands: Control
+var facilities: Control
+var hint: Label
 
 func _ready() -> void:
 	add_child(root)
@@ -58,6 +61,14 @@ func menu() -> void:
 	garrison.max_value = 17
 	garrison.value = 8
 	stack.add_child(garrison)
+	label(stack, "三国场景与角色 · Polyfork（已调整模型与服色）", 13)
+	for item in [["Three Kingdoms Settlements", "https://polyfork.dev/kit/three-kingdoms-settlements-a-1e817b"],
+			["CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/"]]:
+		var link := LinkButton.new()
+		link.text = item[0]
+		link.uri = item[1]
+		link.add_theme_font_size_override("font_size", 13)
+		stack.add_child(link)
 	button(stack, "进入战场", func(): start_requested.emit(int(garrison.value)))
 
 func battle(team: BattleTeam) -> void:
@@ -71,6 +82,7 @@ func battle(team: BattleTeam) -> void:
 	bg.offset_top = -177
 	bg.offset_bottom = -8
 	var orders := HBoxContainer.new()
+	commands = orders
 	bottom.add_child(orders)
 	picker = OptionButton.new()
 	orders.add_child(picker)
@@ -79,11 +91,20 @@ func battle(team: BattleTeam) -> void:
 	for code in BattleFormation.LABELS.size():
 		button(orders, BattleFormation.LABELS[code], ordered.emit.bind(code))
 	var tools := HBoxContainer.new()
+	facilities = tools
 	bottom.add_child(tools)
 	for entry in [["建造攻城槌", "ram"], ["修正门", "repair"], ["开关侧门", "gate"], ["投降", "surrender"]]:
 		button(tools, entry[0], action_requested.emit.bind(entry[1]))
 	feedback = label(bottom, "点击地面选目标，然后下令")
-	label(bottom, "WASD 移动统领    空格攻击    Shift 格挡    青色为己方", 14)
+	hint = label(bottom, "", 14)
+
+func command_mode(active: bool) -> void:
+	commands.visible = active
+	facilities.visible = active
+	feedback.visible = active
+	var panel_root := hint.get_parent().get_parent().get_parent() as Control
+	panel_root.offset_top = -177 if active else -54
+	hint.text = "点击地面选目标 · 选择小队并下令 · Tab 切换操控" if active else "WASD 移动 · 鼠标环视 · 左键攻击 · 右键格挡 · Tab 小队指挥"
 
 func refresh(mission: BattleMission) -> void:
 	var team := mission.teams[0]

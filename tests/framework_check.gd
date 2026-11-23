@@ -26,11 +26,43 @@ func run() -> void:
 	check(app.view.models.size() == 60 and app.view.camera.current, "场景应准备角色模型与相机")
 	var team := m.teams[0]
 	var group := team.groups[1]
+	check(app.view.camera.projection == Camera3D.PROJECTION_PERSPECTIVE and app.view.camera.position.distance_to(app.view.models[team.leader].position) < 5, "开局应为统领肩后透视镜头")
+	check(app.view.models[team.leader].motion.get_animation("Walk").loop_mode == Animation.LOOP_LINEAR, "行军动画应可连续循环")
+	app.view.camera.orbit(Vector2(200, 10))
+	var forward: Vector2 = app.view.camera.movement(Vector2.UP)
+	check(forward.y > 0.5 and forward.x > 0.7, "前进方向应随镜头转动")
+	app.set_commanding(true)
+	check(app.ui.commands.visible, "指挥模式应显示小队命令")
+	app.view.camera.yaw = 0
+	check(BattleSpace.LIMIT * 2 == Vector2(112, 56), "可玩区域应扩大为 112 × 56 米")
+	var probe := BattleAgent.new(0, Vector2(-10, 0), CONFIG.infantry)
+	var crossed := false
+	for step in 650:
+		m.field.move(probe, BattleSpace.GRAIN, 1.0 / 30.0)
+		if absf(probe.position.y - FieldTerrain.river_z(probe.position.x)) < 0.5:
+			crossed = true
+			check(FieldTerrain.ford(probe.position.x) >= 0.75, "过河应经过浅滩")
+			break
+	check(crossed, "单兵应能找到浅滩")
+	for step in 650:
+		m.field.move(probe, BattleSpace.GRAIN, 1.0 / 30.0)
+	check(probe.position.distance_to(BattleSpace.GRAIN) < 0.2, "绕行后应能抵达对岸粮仓")
+	probe.position = Vector2(-30,-8)
+	for step in 120:
+		m.field.move(probe, Vector2(-26,-8), 1.0 / 30.0, false)
+	check(not FieldTerrain.in_rock(probe.position), "统领和士兵移动应遵守同一岩石边界")
+	probe.position = Vector2.ZERO
+	probe.detour.clear()
+	var woodland := Vector2(-32, 24)
+	for step in 950:
+		m.field.move(probe, woodland, 1.0 / 30.0)
+	check(probe.position.distance_to(woodland) < 0.2, "穿过林缘的路段应绕开相邻网格之间的树干")
 	app.ui.picker.select(1)
 	app.aim = BattleSpace.WOOD
 	app.ui.ordered.emit(BattleFormation.Order.HOLD)
 	check(group.goal == BattleSpace.WOOD, "玩家命令应到达选中的小队")
-	for i in 360:
+	# 两城间距随地图翻倍，给出城编队走到伐木场的行军时间。
+	for i in 600:
 		m.tick(1.0 / 30.0)
 	check(group.members[0].position.distance_to(BattleSpace.WOOD) < 8, "出城队应通过门洞抵达伐木场附近")
 	check(m.teams[1].groups[1].goal != m.field.forts[1].yard(), "敌将应为外勤队分配任务")
@@ -85,6 +117,7 @@ func run() -> void:
 	m.command(1, BattleFormation.Order.CHARGE, BattleSpace.GRAIN)
 	m.tick(0.1)
 	app.view.refresh(app.aim, 0.1)
+	check(app.view.camera.overview and app.view.camera.projection == Camera3D.PROJECTION_ORTHOGONAL, "统领阵亡应切到全图指挥")
 	app.ui.refresh(m)
 	check(group.goal == BattleSpace.GRAIN and app.ui.stats.text.contains("指挥视角"), "统领阵亡后仍可指挥")
 	app.ui.action_requested.emit("surrender")

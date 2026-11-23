@@ -8,6 +8,8 @@ var guarding := false
 var cooldown := 0.0
 var target: BattleAgent
 var hits := 0
+var detour := PackedVector2Array()
+var detour_goal: Vector2
 
 func _init(faction: int, origin: Vector2, data: TroopSpec) -> void:
 	side = faction

@@ -23,6 +23,7 @@ func issue(next: Order, point: Vector2) -> void:
 	# 改令后立刻丢弃上个目标，避免撤回中的士兵继续追敌。
 	for unit in members:
 		unit.target = null
+		unit.detour.clear()
 
 func slot(index: int) -> Vector2:
 	return anchor + Vector2((index % 4 - 1.5) * 0.8, (floori(index / 4.0) - 1) * 0.85)
