@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="BattleRules" load_steps=6 format=3]
+[ext_resource type="Script" path="res://data/battle_rules.gd" id="1"]
+[ext_resource type="Script" path="res://data/troop_spec.gd" id="2"]
+[sub_resource type="Resource" id="commander"]
+script = ExtResource("2")
+title = "统领"
+weapon = "剑盾"
+health = 160.0
+damage = 24.0
+speed = 4.8
+[sub_resource type="Resource" id="infantry"]
+script = ExtResource("2")
+title = "步兵"
+weapon = "剑盾"
+[sub_resource type="Resource" id="archer"]
+script = ExtResource("2")
+title = "弓兵"
+weapon = "弓"
+health = 75.0
+damage = 11.0
+reach = 7.0
+interval = 1.6
+ranged = true
+[resource]
+script = ExtResource("1")
+commander = SubResource("commander")
+infantry = SubResource("infantry")
+archer = SubResource("archer")
