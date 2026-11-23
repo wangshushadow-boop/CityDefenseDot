@@ -12,6 +12,8 @@ var garrison: SpinBox
 var commands: Control
 var facilities: Control
 var hint: Label
+var reticle: Label
+var score: Label
 
 func _ready() -> void:
 	add_child(root)
@@ -75,6 +77,18 @@ func battle(team: BattleTeam) -> void:
 	clear()
 	var top := panel(Vector2(10, 8))
 	stats = label(top, "")
+	score = label(top, "", 16)
+	score.hide()
+	reticle = label(root, "·", 20)
+	reticle.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	reticle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	reticle.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	reticle.offset_left = -65
+	reticle.offset_right = 65
+	reticle.offset_top = -18
+	reticle.offset_bottom = 18
+	reticle.add_theme_constant_override("outline_size", 4)
+	reticle.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var bottom := panel(Vector2(10, 0))
 	var bg := bottom.get_parent().get_parent() as Control
 	bg.anchor_top = 1
@@ -95,16 +109,29 @@ func battle(team: BattleTeam) -> void:
 	bottom.add_child(tools)
 	for entry in [["建造攻城槌", "ram"], ["修正门", "repair"], ["开关侧门", "gate"], ["投降", "surrender"]]:
 		button(tools, entry[0], action_requested.emit.bind(entry[1]))
-	feedback = label(bottom, "点击地面选目标，然后下令")
+	feedback = label(bottom, "")
 	hint = label(bottom, "", 14)
 
-func command_mode(active: bool) -> void:
+func command_mode(active: bool, overview := false) -> void:
 	commands.visible = active
 	facilities.visible = active
-	feedback.visible = active
+	feedback.text = "点击地面选目标，然后下令" if active else ""
+	reticle.visible = not active
 	var panel_root := hint.get_parent().get_parent().get_parent() as Control
-	panel_root.offset_top = -177 if active else -54
-	hint.text = "点击地面选目标 · 选择小队并下令 · Tab 切换操控" if active else "WASD 移动 · 鼠标环视 · 左键攻击 · 右键格挡 · Tab 小队指挥"
+	panel_root.offset_top = -177 if active else -80
+	hint.text = "Esc / Backspace 收起指挥面板　·　Tab 查看战况" if active else "左键蓄力松开出招　右键格挡　E 踢击　空格跳跃　0–3 选队　F1 军令　Esc 面板"
+	if overview:
+		hint.text = "统领已阵亡　·　点击地面指挥幸存小队　·　Tab 查看战况"
+
+func update_reticle(unit: BattleAgent, gesture: CommanderCombat.Direction, orders: bool, commanding: bool) -> void:
+	reticle.visible = unit.alive() and not commanding
+	if orders:
+		reticle.text = "⚑"
+		return
+	var combat := unit.manual
+	var committed := combat.winding or unit.guarding or combat.swing_time > 0
+	var arrow: String = ["←", "→", "↑", "↓"][combat.direction if committed else gesture]
+	reticle.text = ("格 " if unit.guarding else "蓄 " if combat.winding else "") + arrow
 
 func refresh(mission: BattleMission) -> void:
 	var team := mission.teams[0]
@@ -123,6 +150,18 @@ func refresh(mission: BattleMission) -> void:
 		stats.text += "　正在护槌"
 	elif not group.notice.is_empty():
 		stats.text += "　" + group.notice
+	if team.leader.alive() and not commands.visible:
+		if team.leader.manual.shield_hp < 100:
+			stats.text += "　盾耐久 %.0f" % team.leader.manual.shield_hp
+		var facility := mission.nearby_facility()
+		if not facility.is_empty():
+			stats.text += "\n[F] " + {"gate": "开关侧门", "repair": "维修正门", "ram": "建造攻城槌"}[facility]
+	if score.visible:
+		var rows := PackedStringArray(["战场兵力　　　　　存活 / 开局"])
+		for side in mission.teams:
+			for squad in side.groups:
+				rows.append("%s　%s　　　%d / %d" % ["我方" if side.side == 0 else "敌方", squad.title, squad.strength(), squad.members.size()])
+		score.text = "\n".join(rows)
 
 func summary(result: Dictionary) -> void:
 	clear()

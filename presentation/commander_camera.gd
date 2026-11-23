@@ -4,15 +4,35 @@ const Terrain := preload("res://battle/terrain.gd")
 var yaw := 0.0
 var pitch := 0.14
 var overview := false
+var first_person := false
+var zoom := false
+var distance := 3.2
+var free_yaw := 0.0
+var free_pitch := 0.0
+var free_look := false
+var locked: BattleAgent
 
 func orbit(relative: Vector2) -> void:
 	if not overview:
-		yaw = wrapf(yaw + relative.x * 0.003, -PI, PI)
-		pitch = clampf(pitch + relative.y * 0.003, -0.16, 0.95)
+		if free_look:
+			free_yaw = wrapf(free_yaw + relative.x * 0.003, -PI, PI)
+			free_pitch = clampf(pitch + free_pitch + relative.y * 0.003, -1.25, 1.25) - pitch
+			return
+		if locked == null:
+			yaw = wrapf(yaw + relative.x * 0.003, -PI, PI)
+		pitch = clampf(pitch + relative.y * 0.003, -1.25, 1.25)
 
 func movement(axis: Vector2) -> Vector2:
 	var forward := Vector2.from_angle(yaw)
 	return (axis.x * Vector2(-forward.y, forward.x) - axis.y * forward).limit_length()
+
+func track_target(unit: BattleAgent, field: BattleSpace) -> void:
+	if locked == null:
+		return
+	if not unit.alive() or not locked.alive() or unit.position.distance_to(locked.position) > 18 or not field.clear_line(unit.position, locked.position):
+		locked = null
+	else:
+		yaw = (locked.position - unit.position).angle()
 
 func follow(unit: BattleAgent, field: BattleSpace) -> void:
 	overview = not unit.alive()
@@ -25,13 +45,21 @@ func follow(unit: BattleAgent, field: BattleSpace) -> void:
 		return
 	projection = PROJECTION_PERSPECTIVE
 	keep_aspect = KEEP_HEIGHT
-	fov = 65
-	var front := Vector2.from_angle(yaw)
+	fov = 38 if zoom else 65
+	var front := Vector2.from_angle(yaw + (free_yaw if free_look else 0.0))
 	var side := Vector2(-front.y, front.x)
-	var eye := Vector3(unit.position.x, Terrain.height(unit.position) + 1.50, unit.position.y)
+	var head_height := 1.50 + unit.manual.elevation
+	if unit.manual.crouching:
+		head_height -= CommanderCombat.CROUCH_DROP
+	var eye := Vector3(unit.position.x, Terrain.height(unit.position) + head_height, unit.position.y)
 	var shoulder := eye + Vector3(side.x, 0, side.y) * 0.48
-	var back := Vector3(-front.x * cos(pitch), sin(pitch), -front.y * cos(pitch))
-	var desired := shoulder + back * 3.2
+	var angle := pitch + (free_pitch if free_look else 0.0)
+	var back := Vector3(-front.x * cos(angle), sin(angle), -front.y * cos(angle))
+	if first_person:
+		position = eye + Vector3(front.x, 0, front.y) * 0.13
+		look_at(position - back)
+		return
+	var desired := shoulder + back * distance
 	# 由肩向后探测，在墙、岩石和山坡前收短镜头。
 	position = eye
 	for i in range(1, 17):

@@ -18,6 +18,9 @@ func yard() -> Vector2:
 func front_open() -> bool:
 	return gate_hp <= 0 or (ram_hp > 0 and absf(ram_at.x - gate.x) < 6)
 
+func damage_gate(amount: float) -> void:
+	gate_hp = maxf(0, gate_hp - amount)
+
 func build(supply: BattleSupply, rules: BattleRules) -> String:
 	if ram_hp > 0:
 		return "已有攻城槌"
@@ -52,4 +55,4 @@ func tick_ram(dt: float, enemy: BattleFort, field: BattleSpace) -> void:
 		var stop := enemy.gate.move_toward(Vector2.ZERO, 1)
 		ram_at = ram_at.move_toward(stop, dt * 2.3)
 		if ram_at.distance_to(stop) < 0.1:
-			enemy.gate_hp = maxf(0, enemy.gate_hp - dt * 12)
+			enemy.damage_gate(dt * 12)

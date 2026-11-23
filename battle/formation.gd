@@ -10,6 +10,7 @@ var order := Order.HOLD
 var goal: Vector2
 var anchor: Vector2
 var escort: BattleFort
+var pursue_enemies := false
 var notice := ""
 var arrived := 0
 var engaged := 0
@@ -19,6 +20,7 @@ func issue(next: Order, point: Vector2) -> void:
 	order = next
 	goal = point
 	escort = null
+	pursue_enemies = false
 	notice = ""
 	# 改令后立刻丢弃上个目标，避免撤回中的士兵继续追敌。
 	for unit in members:

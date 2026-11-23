@@ -16,6 +16,7 @@ var gates: Array[Array] = []
 var sides: Array[Array] = []
 var rams: Array[MeshInstance3D] = []
 var flags: Array[MeshInstance3D] = []
+var captions: Array[Label3D] = []
 var marker: MeshInstance3D
 const COLORS := [Color("#46c6dd"), Color("#ef886a")]
 
@@ -74,6 +75,8 @@ func caption(at: Vector2, value: String, h := 2.5) -> void:
 	label.fixed_size = true
 	label.pixel_size = 0.0011
 	label.font_size = 30
+	label.visible = false
+	captions.append(label)
 	add_child(label)
 
 func build(current: BattleMission) -> void:
@@ -131,6 +134,7 @@ func build(current: BattleMission) -> void:
 			soldier.build(unit, unit == team.leader, uniforms[team.side])
 			models[unit] = soldier
 	marker = block(Vector2.ZERO, Vector3(1.3, 0.12, 1.3), Color.GOLD, 0.15)
+	marker.hide()
 	refresh(Vector2.ZERO, 0.0)
 
 func refresh(aim: Vector2, dt: float) -> void:
@@ -148,7 +152,11 @@ func refresh(aim: Vector2, dt: float) -> void:
 		var owner := mission.supply.points[i].owner
 		var mat: StandardMaterial3D = flags[i].material_override
 		mat.albedo_color = COLORS[owner].darkened(0.4) if owner >= 0 else Color.SLATE_GRAY
-	marker.position.x = aim.x
-	marker.position.z = aim.y
-	marker.position.y = Terrain.height(aim) + 0.12
+	place_marker(aim)
 	camera.follow(mission.teams[0].leader, mission.field)
+	var commander: SoldierView = models[mission.teams[0].leader]
+	for part in commander.head_parts:
+		part.visible = not camera.first_person or camera.overview
+
+func place_marker(at: Vector2) -> void:
+	marker.position = Vector3(at.x, Terrain.height(at) + 0.12, at.y)

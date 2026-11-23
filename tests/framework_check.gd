@@ -13,6 +13,155 @@ func check(ok: bool, title: String) -> void:
 		failures += 1
 		push_error(title)
 
+func key(code: Key, down := true) -> void:
+	var event := InputEventKey.new()
+	event.physical_keycode = code
+	event.pressed = down
+	root.push_input(event, true)
+
+func mouse(button: MouseButton, down: bool) -> void:
+	var event := InputEventMouseButton.new()
+	event.button_index = button
+	event.pressed = down
+	root.push_input(event, true)
+
+func motion(delta: Vector2) -> void:
+	var event := InputEventMouseMotion.new()
+	event.relative = delta
+	root.push_input(event, true)
+
+func check_controls(app: Node) -> void:
+	var m: BattleMission = app.mission
+	var player := m.teams[0].leader
+	var fighter := player.manual
+	var front := m.teams[1].units[1]
+	var rear := m.teams[1].units[2]
+	# 在城内空地单独对练，避免友军先击倒目标或目标自行撤离。
+	player.position = Vector2(-45, -17)
+	front.stagger = 2
+	rear.stagger = 2
+	front.position = player.position + Vector2.RIGHT * 0.85
+	rear.position = player.position - Vector2.RIGHT * 0.55
+	m.field.rebuild(m.teams)
+	for delta: Vector2 in [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]:
+		motion(delta * 6)
+		mouse(MOUSE_BUTTON_LEFT, true)
+		check(fighter.winding and fighter.direction == CommanderCombat.mouse_direction(delta), "按下左键应锁定鼠标指示的来向")
+		mouse(MOUSE_BUTTON_RIGHT, true)
+		mouse(MOUSE_BUTTON_LEFT, false)
+		check(player.guarding and fighter.swing_time == 0 and player.cooldown == 0, "右键应取消蓄力，松开左键不能补出一击")
+		mouse(MOUSE_BUTTON_RIGHT, false)
+	mouse(MOUSE_BUTTON_LEFT, true)
+	fighter.tick(player, m.field, 1.4)
+	check(front.hits == 0, "长按左键不能自动攻击")
+	mouse(MOUSE_BUTTON_LEFT, false)
+	m.tick(0.11)
+	m.tick(0.01)
+	check(front.hits == 1 and rear.hits == 0, "松开一次只命中身前目标一次")
+	key(KEY_SPACE)
+	app._physics_process(0.03)
+	check(fighter.elevation > 0 and not fighter.winding, "空格应起跳")
+	fighter.tick(player, m.field, 1.0)
+	key(KEY_Z)
+	check(fighter.crouching and fighter.movement_scale(Vector2.RIGHT) < 1, "下蹲降低移动速度")
+	key(KEY_Z)
+	key(KEY_CAPSLOCK)
+	check(fighter.walking and fighter.movement_scale(Vector2.RIGHT) < 1, "步行应可切换")
+	key(KEY_CAPSLOCK)
+	key(KEY_SHIFT)
+	app._physics_process(0.01)
+	check(app.view.camera.fov < 50 and not player.guarding, "Shift 应收窄视野")
+	key(KEY_SHIFT, false)
+	key(KEY_QUOTELEFT)
+	var facing := fighter.facing
+	motion(Vector2(90, -15))
+	check(fighter.facing.is_equal_approx(facing) and app.view.camera.free_yaw != 0, "自由观察须保持行进朝向")
+	key(KEY_QUOTELEFT, false)
+	check(app.view.camera.free_yaw == 0 and app.view.camera.free_pitch == 0, "松开观察应回到角色视角")
+	key(KEY_R)
+	app._physics_process(0.01)
+	check(app.view.camera.first_person and not app.view.models[player].head_parts[0].visible, "第一人称应隐藏挡住视野的头盔")
+	key(KEY_R)
+	mouse(MOUSE_BUTTON_MIDDLE, true)
+	check(app.view.camera.locked == front, "中键应锁定视线内的前方敌人")
+	mouse(MOUSE_BUTTON_MIDDLE, true)
+	player.cooldown = 0
+	mouse(MOUSE_BUTTON_RIGHT, true)
+	var hp := player.hp
+	check(fighter.absorb(player, 10, front, CommanderCombat.Direction.LEFT) == 0 and fighter.shield_hp < 100, "盾牌应消耗耐久拦截正面伤害")
+	check(fighter.absorb(player, 10, rear, CommanderCombat.Direction.LEFT) == 10, "举盾不能防住背后的攻击")
+	key(KEY_E)
+	check(fighter.bashing and front.stagger > 0 and not player.guarding and player.hp == hp, "举盾时 E 应盾击并打断近敌")
+	mouse(MOUSE_BUTTON_RIGHT, false)
+	fighter.tick(player, m.field, 0.9)
+	mouse(MOUSE_BUTTON_WHEEL_DOWN, true)
+	motion(Vector2.LEFT * 4)
+	mouse(MOUSE_BUTTON_RIGHT, true)
+	check(not fighter.shield and fighter.absorb(player, 10, front, CommanderCombat.Direction.RIGHT) == 0 and fighter.absorb(player, 10, front, CommanderCombat.Direction.LEFT) == 10, "持剑格挡只拦截对向近战")
+	mouse(MOUSE_BUTTON_RIGHT, false)
+	player.cooldown = 0
+	mouse(MOUSE_BUTTON_LEFT, true)
+	app._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
+	mouse(MOUSE_BUTTON_LEFT, false)
+	check(app.commanding and not fighter.winding and fighter.swing_time == 0, "失去焦点后应解除蓄力")
+	key(KEY_ESCAPE)
+	key(KEY_TAB)
+	check(app.ui.score.visible and not app.commanding, "Tab 应显示战况并保留战斗控制")
+	key(KEY_TAB, false)
+	key(KEY_2)
+	key(KEY_F1)
+	key(KEY_F2)
+	check(m.teams[0].groups[2].order == BattleFormation.Order.FOLLOW and m.teams[0].groups[0].order == BattleFormation.Order.HOLD, "2、F1、F2 应只让弓兵跟随")
+	key(KEY_0)
+	key(KEY_F1)
+	key(KEY_F3)
+	m.tick(0.03)
+	check(m.teams[0].groups.all(func(g: BattleFormation): return g.pursue_enemies and g.order == BattleFormation.Order.CHARGE), "0、F1、F3 应令全军主动追敌")
+	app.view.camera.pitch = 0.65
+	app.view.refresh(app.aim, 0)
+	key(KEY_3)
+	key(KEY_F1)
+	key(KEY_F1)
+	check(not app.choosing_order and not m.teams[0].groups[0].pursue_enemies and m.teams[0].groups[0].goal == app.aim, "3、F1、F1 应令守门队停止追敌并到准星地面坚守")
+	player.position = m.field.forts[0].gate + Vector2(0, BattleSpace.SIDE_Z)
+	key(KEY_F)
+	check(not m.field.forts[0].side_open, "靠近己方侧门时 F 应与城防交互")
+	# 关闭的城墙挡住武器、锁敌和踢击；打开侧门后同一位置可交手。
+	player.position.x -= 0.4
+	front.position = player.position + Vector2.RIGHT * 0.8
+	m.field.rebuild(m.teams)
+	check(fighter.front_target(player, m.field, 1.3, 0.38) == null, "关门应阻止准星隔墙选敌")
+	key(KEY_F)
+	front.cooldown = 0
+	front.stagger = 0
+	front.windup = -1
+	front.next_strike = CommanderCombat.Direction.RIGHT
+	motion(Vector2.LEFT * 3)
+	mouse(MOUSE_BUTTON_RIGHT, true)
+	var hp_before := player.hp
+	check(not front.strike(player, m.field) and front.windup > 0, "近敌应先亮出攻击方向")
+	front.windup = 0
+	check(front.strike(player, m.field) and player.hp == hp_before, "匹配方向的剑挡应在实际受击路径生效")
+	mouse(MOUSE_BUTTON_RIGHT, false)
+	player.position = Vector2(-45, -17)
+	fighter.facing = Vector2.RIGHT
+	front.position = player.position + Vector2(0.8, 0.6)
+	rear.position = player.position + Vector2(0.8, -0.6)
+	m.field.rebuild(m.teams)
+	var front_hits := front.hits
+	var rear_hits := rear.hits
+	fighter.direction = CommanderCombat.Direction.LEFT
+	fighter.hit(player, m.field)
+	check(front.hits == front_hits and rear.hits == rear_hits + 1, "并列敌人中左斩应先扫到左敌")
+	fighter.direction = CommanderCombat.Direction.RIGHT
+	fighter.hit(player, m.field)
+	check(front.hits == front_hits + 1 and rear.hits == rear_hits + 1, "右斩应先扫到右敌")
+	key(KEY_BACKSLASH)
+	mouse(MOUSE_BUTTON_LEFT, true)
+	check(not fighter.drawn and not fighter.winding, "收剑后不能空手发出剑击")
+	mouse(MOUSE_BUTTON_WHEEL_UP, true)
+	check(fighter.drawn, "上滚应重新装备主手剑")
+
 func run() -> void:
 	var invalid := BattleSetup.standalone(CONFIG)
 	invalid.roster[1].id = invalid.roster[0].id
@@ -141,6 +290,11 @@ func run() -> void:
 	app.ui.menu_requested.emit()
 	app.ui.start_requested.emit(8)
 	m = app.mission
+	check_controls(app)
+	await process_frame
+	await process_frame
+	# 多道按键军令在同一帧注入，等音频线程播完提示再销毁战场。
+	await create_timer(0.2).timeout
 	for unit in m.teams[1].units:
 		unit.receive_hit(10000)
 	m.tick(0.1)

@@ -23,6 +23,7 @@ func _init(input: BattleSetup, config: BattleRules) -> void:
 		deploy(entry)
 	for team in teams:
 		team.last_strength = team.strength()
+	teams[0].leader.manual = CommanderCombat.new()
 	field.rebuild(teams)
 
 func deploy(entry: Dictionary) -> void:
@@ -47,7 +48,7 @@ func deploy(entry: Dictionary) -> void:
 	if group.role != "leader":
 		team.groups.append(group)
 
-func tick(dt: float, movement := Vector2.ZERO, attacking := false, guarding := false) -> void:
+func tick(dt: float, movement: Vector2 = Vector2.ZERO) -> void:
 	if not result.is_empty():
 		return
 	elapsed += dt
@@ -59,20 +60,17 @@ func tick(dt: float, movement := Vector2.ZERO, attacking := false, guarding := f
 	for team in teams:
 		for unit in team.units:
 			unit.cooldown = maxf(0, unit.cooldown - dt)
+			unit.stagger = maxf(0, unit.stagger - dt)
+			if unit.windup >= 0:
+				unit.windup = maxf(0, unit.windup - dt)
 	field.rebuild(teams)
 	if decision_clock <= 0:
 		GeneralAI.decide(teams[1], field, supply, rules)
 		decision_clock = 1.0
 	var player := teams[0].leader
 	if player.alive():
-		player.guarding = guarding
-		field.move(player, player.position + movement.limit_length() * dt * player.spec.speed, dt, false)
-		if attacking:
-			var enemy := SoldierAI.choose(player, field, player.position, player.spec.reach)
-			if enemy != null:
-				player.strike(enemy, field)
-			else:
-				SoldierAI.hit_gate(player, field)
+		field.move(player, player.position + movement.limit_length() * dt * player.spec.speed * player.manual.movement_scale(movement), dt, false)
+		player.manual.tick(player, field, dt)
 	var enemy_leader := teams[1].leader
 	if enemy_leader.alive():
 		var rally := field.forts[1].yard()
@@ -82,6 +80,8 @@ func tick(dt: float, movement := Vector2.ZERO, attacking := false, guarding := f
 		SoldierAI.act(enemy_leader, field, rally, 8, scan, dt)
 	for team in teams:
 		for group in team.groups:
+			if scan and group.pursue_enemies:
+				FormationAI.refresh_charge_goal(group, teams[1 - team.side])
 			FormationAI.tick(group, team, field, scan, dt)
 	field.rebuild(teams)
 	for fort in field.forts:
@@ -91,13 +91,27 @@ func tick(dt: float, movement := Vector2.ZERO, attacking := false, guarding := f
 	if not end.is_empty():
 		finish(end.winner, end.reason)
 
-func command(group: int, order: BattleFormation.Order, at: Vector2) -> void:
+func command(group: int, order: BattleFormation.Order, at: Vector2, pursue := false) -> void:
 	if not result.is_empty() or group < 0 or group >= teams[0].groups.size():
 		return
 	teams[0].command(group, order, at.clamp(-BattleSpace.LIMIT, BattleSpace.LIMIT))
 	var fort := field.forts[0]
-	if order == BattleFormation.Order.CHARGE and fort.ram_hp > 0 and at.distance_to(fort.ram_at) < 2:
+	if pursue and order == BattleFormation.Order.CHARGE:
+		teams[0].groups[group].pursue_enemies = true
+		scan_clock = 0
+	elif order == BattleFormation.Order.CHARGE and fort.ram_hp > 0 and at.distance_to(fort.ram_at) < 2:
 		teams[0].groups[group].escort = fort
+
+func nearby_facility() -> String:
+	var fort := field.forts[0]
+	var at := teams[0].leader.position
+	if at.distance_to(fort.gate + Vector2(0, BattleSpace.SIDE_Z)) < 3:
+		return "gate"
+	if at.distance_to(fort.gate) < 3:
+		return "repair"
+	if at.distance_to(fort.yard()) < 3:
+		return "ram"
+	return ""
 
 func player_action(key: String) -> String:
 	if not result.is_empty():

@@ -1,5 +1,23 @@
 class_name FormationAI extends RefCounted
 ## 小队把军令转换为互异的局部岗位，反馈到位/交战/受阻人数。
+static func refresh_charge_goal(group: BattleFormation, opponents: BattleTeam) -> void:
+	# 全军冲锋时每队从自己的位置择敌，敌军转移后仍会继续追击。
+	var center := Vector2.ZERO
+	var count := 0
+	for member in group.members:
+		if member.alive():
+			center += member.position
+			count += 1
+	if count == 0:
+		return
+	center /= count
+	var nearest := INF
+	for enemy in opponents.units:
+		var distance := center.distance_squared_to(enemy.position)
+		if enemy.alive() and distance < nearest:
+			nearest = distance
+			group.goal = enemy.position
+
 static func tick(group: BattleFormation, team: BattleTeam, field: BattleSpace, scan: bool, dt: float) -> void:
 	group.anchor = group.goal
 	if group.escort != null:
