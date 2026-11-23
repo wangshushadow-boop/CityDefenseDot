@@ -6,12 +6,14 @@ class Point:
 	var owner: int
 	var contender := -1
 	var progress := 0.0
+	var contested := false
 	func _init(label: String, pos: Vector2, side: int = -1) -> void:
 		title = label
 		at = pos
 		owner = side
 	func occupy(blue: bool, red: bool, dt: float, duration: float) -> void:
-		if blue and red:
+		contested = blue and red
+		if contested:
 			return
 		var side := 0 if blue else (1 if red else -1)
 		if side < 0 or side == owner:

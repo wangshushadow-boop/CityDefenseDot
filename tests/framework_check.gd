@@ -168,7 +168,15 @@ func run() -> void:
 	check(not invalid.validation_error().is_empty(), "重复来源编号应在部署前被拒绝")
 	var app := preload("res://app/main.tscn").instantiate()
 	root.add_child(app)
-	var play: Button = app.ui.root.find_children("*", "Button", true, false).back()
+	var deployment: Control = app.ui.root.get_child(0)
+	deployment.garrison.value = 5
+	check(deployment.find_children("*", "Label", true, false).any(func(line: Label): return line.text.contains("出城步兵 13")), "部署预览应随留守人数更新")
+	deployment.show_detail("操作手册")
+	check(deployment.detail.visible and not deployment.main.visible, "手册应从部署页打开")
+	deployment.close_detail()
+	check(deployment.garrison.value == 5 and deployment.main.visible, "返回部署应保留已调人数")
+	deployment.garrison.value = 8
+	var play: Button = app.ui.root.find_child("Deploy", true, false)
 	play.pressed.emit()
 	var m: BattleMission = app.mission
 	check(m.teams[0].strength() == 30 and m.teams[1].strength() == 30, "开局兵力应各含统领 30 人")
@@ -182,6 +190,25 @@ func run() -> void:
 	check(forward.y > 0.5 and forward.x > 0.7, "前进方向应随镜头转动")
 	app.set_commanding(true)
 	check(app.ui.commands.visible, "指挥模式应显示小队命令")
+	check(app.ui.map_card.visible and app.ui.picker.get_item_text(app.ui.picker.selected) == "全军", "指挥面板应提供全军与沙盘")
+	var map: Control = app.ui.field_map
+	map.size = Vector2(274, 137)
+	var pick := InputEventMouseButton.new()
+	pick.pressed = true
+	pick.button_index = MOUSE_BUTTON_LEFT
+	pick.position = map.map_point(BattleSpace.WOOD)
+	map._gui_input(pick)
+	check(app.aim.is_equal_approx(BattleSpace.WOOD), "沙盘选取伐木场应更新真实目标")
+	app.ui.ordered.emit(BattleFormation.Order.HOLD)
+	check(team.groups.all(func(squad: BattleFormation): return squad.goal.is_equal_approx(BattleSpace.WOOD)), "面板全军坚守应到达每支小队")
+	app.ui.gate.pressed.emit()
+	check(not m.field.forts[0].side_open and app.ui.feedback.text.contains("关闭"), "设施按钮应显示城防模块返回的结果")
+	app.ui.gate.pressed.emit()
+	app.ui.resume.pressed.emit()
+	check(not app.commanding and not app.ui.map_card.visible, "返回操控应关闭面板与沙盘")
+	app.set_commanding(true)
+	for squad in team.groups:
+		squad.issue(BattleFormation.Order.HOLD, squad.anchor)
 	app.view.camera.yaw = 0
 	check(BattleSpace.LIMIT * 2 == Vector2(112, 56), "可玩区域应扩大为 112 × 56 米")
 	var probe := BattleAgent.new(0, Vector2(-10, 0), CONFIG.infantry)
@@ -241,6 +268,7 @@ func run() -> void:
 	var previous := grain.progress
 	grain.occupy(true, true, 3, CONFIG.capture_seconds)
 	check(grain.progress == previous, "争夺中的进度应暂停")
+	check(app.ui.point_text(grain, "粮仓", CONFIG.capture_seconds).contains("争夺中"), "军报应解释两军争夺时占领暂停")
 	grain.occupy(true, false, CONFIG.capture_seconds, CONFIG.capture_seconds)
 	check(grain.owner == 0, "完成占领后应易主")
 	var empty := BattleSpace.new()
@@ -267,10 +295,15 @@ func run() -> void:
 	m.tick(0.1)
 	app.view.refresh(app.aim, 0.1)
 	check(app.view.camera.overview and app.view.camera.projection == Camera3D.PROJECTION_ORTHOGONAL, "统领阵亡应切到全图指挥")
+	app.ui.toggle_score(true)
 	app.ui.refresh(m)
+	var leader_cells: Array = app.ui.report.cells[m.setup.roster[0].id]
+	check(leader_cells[0].text == "0" and leader_cells[1].text == "1", "实时军报应按统领来源行更新伤亡")
+	app.ui.toggle_score(false)
 	check(group.goal == BattleSpace.GRAIN and app.ui.stats.text.contains("指挥视角"), "统领阵亡后仍可指挥")
 	app.ui.action_requested.emit("surrender")
 	check(m.result.winner == 1 and m.result.roster[0].losses == 1, "结算应带回统领伤亡与胜负")
+	check(app.ui.root.find_children("*", "Label", true, false).any(func(line: Label): return line.text.contains("玩家投降")), "战报应展示本局实际终局原因")
 	var snapshot := m.result.duplicate(true)
 	m.tick(10)
 	m.finish(0, "重复")

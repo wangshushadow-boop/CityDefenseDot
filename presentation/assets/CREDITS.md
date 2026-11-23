@@ -17,6 +17,10 @@
 
 导入脚本为模型启用原始顶点色，并设置角色动画循环。
 
+## 界面画稿
+
+部署与结算共用的[双城河谷背景](../ui/river_pass.png)由 ImageGen 为本项目生成。军旗标记和沙盘直接由 Godot 绘制。
+
 ## 参考工程的野外资源
 
 `meadow/pine.obj`、`broadleaf.obj`、`grass_clump.obj` 和 `boulder.obj` 取自用户指定的本机项目 `CityDefenseGodot/levels/meadow/`。本工程复用其网格与植被 UV 约定，按双城布局重新布置树木和石群，并为当前地形配置地表、河水及植被着色。这四个网格的来源独立于上述 Polyfork 许可。

@@ -10,7 +10,6 @@ var commanding := false
 var gesture := CommanderCombat.Direction.RIGHT
 var guard_held := false
 var guard_side := CommanderCombat.Direction.RIGHT
-var all_selected := true
 var choosing_order := false
 var inspect_points := false
 
@@ -21,7 +20,9 @@ func _ready() -> void:
 	ui.menu_requested.connect(menu)
 	ui.ordered.connect(order)
 	ui.action_requested.connect(action)
-	ui.menu()
+	ui.resume_requested.connect(set_commanding.bind(false))
+	ui.target_selected.connect(select_target)
+	ui.menu(BattleSetup.standalone(RULES))
 
 func start(guards: int) -> void:
 	open_battle(BattleSetup.standalone(RULES, guards))
@@ -39,9 +40,7 @@ func open_battle(setup: BattleSetup) -> void:
 	add_child(view)
 	view.build(mission)
 	aim = BattleSpace.GRAIN
-	ui.battle(mission.teams[0])
-	ui.picker.item_selected.connect(func(_index: int): all_selected = false)
-	all_selected = true
+	ui.battle(mission)
 	gesture = CommanderCombat.Direction.RIGHT
 	ui.refresh(mission)
 	set_commanding(false)
@@ -62,7 +61,7 @@ func clear_controls() -> void:
 	view.camera.free_look = false
 	view.camera.free_yaw = 0
 	view.camera.free_pitch = 0
-	ui.score.hide()
+	ui.toggle_score(false)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and mission and mission.result.is_empty():
@@ -103,6 +102,10 @@ func _input(event: InputEvent) -> void:
 		var key: Key = event.physical_keycode if event.physical_keycode != KEY_NONE else event.keycode
 		if not event.echo and handle_key(key, event.pressed, leader):
 			get_viewport().set_input_as_handled()
+	elif ui.score.visible and event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+		if event.pressed:
+			ui.report_scroll.scroll_vertical += -40 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 40
+		get_viewport().set_input_as_handled()
 	elif not commanding and leader.alive():
 		if event is InputEventMouseMotion:
 			var delta: Vector2 = event.relative
@@ -137,12 +140,12 @@ func _input(event: InputEvent) -> void:
 
 func handle_key(key: Key, pressed: bool, leader: BattleAgent) -> bool:
 	if key == KEY_TAB:
-		ui.score.visible = pressed
+		ui.toggle_score(pressed)
 		return true
 	if key in [KEY_BACKSPACE, KEY_ESCAPE] and pressed:
 		if choosing_order:
 			choosing_order = false
-			ui.feedback.text = ""
+			ui.notify_order("")
 		else:
 			set_commanding(not commanding or not leader.alive())
 		return true
@@ -156,10 +159,11 @@ func handle_key(key: Key, pressed: bool, leader: BattleAgent) -> bool:
 					found = true
 					break
 			if not found:
-				ui.feedback.text = "本次出战名单没有该编队"
+				ui.notify_order("本次出战名单没有该编队")
 				return true
-		all_selected = key == KEY_0
-		ui.feedback.text = "已选%s · F1 下达移动军令" % selected_name()
+		else:
+			ui.picker.select(mission.teams[0].groups.size())
+		ui.notify_order("已选%s · F1 下达移动军令" % selected_name())
 		return true
 	if pressed and choosing_order and key in [KEY_F1, KEY_F2, KEY_F3]:
 		keyboard_order([BattleFormation.Order.HOLD, BattleFormation.Order.FOLLOW, BattleFormation.Order.CHARGE][key - KEY_F1])
@@ -167,7 +171,7 @@ func handle_key(key: Key, pressed: bool, leader: BattleAgent) -> bool:
 	if pressed and key == KEY_F1:
 		choosing_order = true
 		leader.manual.cancel(leader)
-		ui.feedback.text = "%s · F1 到此坚守　F2 跟随我　F3 冲锋" % selected_name()
+		ui.notify_order("")
 		return true
 	if commanding or not leader.alive():
 		return false
@@ -200,14 +204,14 @@ func foot_action(key: Key, leader: BattleAgent) -> bool:
 		KEY_F:
 			var facility := mission.nearby_facility()
 			if facility.is_empty():
-				ui.feedback.text = "附近没有可操作的设施"
+				ui.notify_order("附近没有可操作的设施")
 			else:
 				action(facility)
 		_: return false
 	return true
 
 func selected_name() -> String:
-	return "全军" if all_selected else mission.teams[0].groups[ui.picker.selected].title
+	return ui.picker.get_item_text(ui.picker.selected)
 
 func order_ground() -> Variant:
 	var screen := get_viewport().get_mouse_position() if commanding else get_viewport().get_visible_rect().size * 0.5
@@ -218,42 +222,53 @@ func keyboard_order(code: BattleFormation.Order) -> void:
 	if code == BattleFormation.Order.HOLD:
 		var ground: Variant = order_ground()
 		if ground == null:
-			ui.feedback.text = "请对准战场地面，再按 F1 定位"
+			ui.notify_order("请对准战场地面，再按 F1 定位")
 			return
 		at = ground
-	for i in mission.teams[0].groups.size():
-		if all_selected or ui.picker.selected == i:
-			mission.command(i, code, at, code == BattleFormation.Order.CHARGE)
 	aim = at
-	choosing_order = false
-	ui.feedback.text = "%s · %s" % [selected_name(), BattleFormation.LABELS[code]]
-	sound.play()
+	ui.field_map.aim = at
+	issue_order(code, code == BattleFormation.Order.CHARGE)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not mission or not mission.result.is_empty() or not commanding:
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if choosing_order:
-			keyboard_order(BattleFormation.Order.HOLD)
-			return
 		var point = view.camera.ground_point(event.position)
 		if point is Vector2:
-			aim = point
-			ui.feedback.text = "目标已选定，可下达坚守或冲锋"
+			select_target(point)
+		elif choosing_order:
+			ui.notify_order("请对准战场地面或点击沙盘定位")
+
+func select_target(at: Vector2) -> void:
+	aim = at
+	ui.field_map.aim = at
+	ui.field_map.queue_redraw()
+	if choosing_order:
+		issue_order(BattleFormation.Order.HOLD, false)
+	else:
+		ui.notify_order("目标已选定，可下达坚守或冲锋")
 
 func order(code: BattleFormation.Order) -> void:
 	if not mission or not mission.result.is_empty():
 		return
-	mission.command(ui.picker.selected, code, aim)
-	ui.feedback.text = "军令已下达 · " + BattleFormation.LABELS[code]
-	sound.play()
+	issue_order(code, false)
+
+func issue_order(code: BattleFormation.Order, pursue: bool) -> void:
+	var groups := mission.teams[0].groups
+	for i in groups.size():
+		if ui.picker.selected == groups.size() or ui.picker.selected == i:
+			mission.command(i, code, aim, pursue)
+	choosing_order = false
+	ui.notify_order("%s · %s" % [selected_name(), BattleFormation.LABELS[code]])
+	if not sound.playing:
+		sound.play()
 
 func action(key: String) -> void:
 	if not mission or not mission.result.is_empty():
 		return
 	var message := mission.player_action(key)
 	if mission.result.is_empty():
-		ui.feedback.text = message
+		ui.notify_order(message)
 
 func show_result(result: Dictionary) -> void:
 	clear_controls()
@@ -265,7 +280,7 @@ func menu() -> void:
 	view.queue_free()
 	view = null
 	mission = null
-	ui.menu()
+	ui.menu(BattleSetup.standalone(RULES))
 
 func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
