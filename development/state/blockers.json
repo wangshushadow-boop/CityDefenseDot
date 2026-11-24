@@ -1,17 +1,5 @@
 {
   "schema_version": 1,
-  "blockers": [
-    {
-      "id": "P2-TEAM-SOURCES",
-      "stage": "P2",
-      "status": "OPEN",
-      "scope": "跨队部署与战果集成",
-      "reason": "现有 v1 Side.roster_allocations 没有分队条目语义，待负责人裁定。",
-      "owner": "项目负责人",
-      "evidence": [
-        "docs/architecture/decisions/ADR-014-field-source-teams.md"
-      ]
-    }
-  ],
-  "note": "P2 阻塞项只影响依赖跨队归属的工作。"
+  "blockers": [],
+  "note": "2026-11-24 项目负责人批准 ADR-014 方案 A。"
 }

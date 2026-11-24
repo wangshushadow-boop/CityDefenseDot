@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2_V1_TEAM_PREFLIGHT PASS v1_accepts_unspecified_team_owners=true teams=2 sources=4
+exit=0

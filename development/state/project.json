@@ -26,7 +26,8 @@
     "approved_adrs": [
       "ADR-011",
       "ADR-012",
-      "ADR-013"
+      "ADR-013",
+      "ADR-014"
     ],
     "approval": {
       "by": "项目负责人",
@@ -39,7 +40,7 @@
     }
   },
   "updated_at": "2026-11-24",
-  "note": "P2 实时战争启动，首批独占领域任务；公开的野战兵源归属解释单独签核，P3 未授权。",
+  "note": "P2 实时战争开发中；野战来源语义已签核。",
   "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
   "p1_decisions": {
@@ -51,5 +52,11 @@
       "2A"
     ],
     "candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2"
+  },
+  "p2_decisions": {
+    "date": "2026-11-24",
+    "by": "项目负责人",
+    "source": "本次会话对 ADR-014 的选择",
+    "approval": "A · 沿用 v1，由每方列出自己分到的兵员编号区间，开战前校验无重复、无遗漏"
   }
 }

@@ -116,6 +116,8 @@ FormationOrder {
 
 `MissionResult` 的 end_status 枚举候选为 alive/wounded/dead/captured/withdrawn/not_spawned，失能与死亡的最终归类必须采用 ENC 规则，不能由动画或未授权客户端决定；若进入战役前需要暂定伤亡，使用独立观测字段及结算规则版本，不修改最终结果的唯一来源语义。结果哈希用于损坏检测，赛果真实性另需认证服务端。
 
+P2 野战在各 Side.roster_allocations 中列出半开来源区间。准备阶段校验跨队唯一、完整覆盖和范围合法；v1 通用读取仍兼容历史训练。[ADR-014](decisions/ADR-014-field-source-teams.md)
+
 ## 5. 跨模块关键时序
 
 ```mermaid
