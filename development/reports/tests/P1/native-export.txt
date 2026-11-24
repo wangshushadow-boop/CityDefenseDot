@@ -1,0 +1,13 @@
+commit=9b0587765f532b61c8d5a7029a19b389a8c291b2
+Godot --headless --editor --import: exit=0
+Godot --headless --export-release P1Native <temp>/Recollection.exe
+ERROR: Cannot export project with preset "P1Native" due to configuration errors:
+C:/Users/10822/AppData/Local/Packages/openai.codex_2p2nqsd0c76g0/AC/#!sandbox.{7d0d59d5-1621-4b46-90db-4fad53319583}/Temp/tmp8y82vnid/Godot/export_templates/4.7.2.stable/windows_debug_x86_64.exe
+C:/Users/10822/AppData/Local/Packages/openai.codex_2p2nqsd0c76g0/AC/#!sandbox.{7d0d59d5-1621-4b46-90db-4fad53319583}/Temp/tmp8y82vnid/Godot/export_templates/4.7.2.stable/windows_release_x86_64.exe
+ERROR: Project export for preset "P1Native" failed.
+exit=1
+exe_exists=False
+
+Installed-template inspection (Windows user, local and engine sidecar):
+[{"directory":"C:\\Users\\10822\\AppData\\Roaming\\Godot\\export_templates\\4.7.2.stable","debug":false,"release":false},{"directory":"C:/Users/10822/AppData/Local/Godot/export_templates/4.7.2.stable","debug":false,"release":false},{"directory":"D:/Program/Godot/Standard/editor_data/export_templates/4.7.2.stable","debug":false,"release":false}]
+The first isolated editor setup failed its strict import diagnostic check; the complete source-tree import and release export are reported above.

@@ -1,0 +1,17 @@
+python -X utf8 development/check_project.py
+PASS: 57 canonical SDDs, 96 directory mappings, 39 navigation/alias entries
+PASS: 93 requirement rows, 208 test rows, 983 local Markdown link occurrences
+PASS: source baseline SHA-256 and registry/trace consistency
+Documentation checks only; no game implementation or test execution verified.
+PASS: 96 code navigation directories; 57 owner boundaries; original archive integrity
+PASS: 97 graph nodes (88 work packages + 9 gates), acyclic, 28 registered execution tasks
+PASS: module/requirement/test references, state records, 6 custom role TOML files parse
+Structure checks only. Codex runtime, game code, real tests and performance NOT verified by this script.
+exit=0
+
+python -X utf8 docs/architecture/check_mirror.py
+PASS: 57 canonical SDDs, 96 directory mappings, 39 navigation/alias entries
+PASS: 93 requirement rows, 208 test rows, 983 local Markdown link occurrences
+PASS: source baseline SHA-256 and registry/trace consistency
+Documentation checks only; no game implementation or test execution verified.
+exit=0

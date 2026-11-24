@@ -1,0 +1,24 @@
+{
+  "commit": "565c32e11395c418276e2324e23710e414d121ee",
+  "independent_builds": 3,
+  "identical_artifacts": {
+    "client.pck": {
+      "bytes": 290232,
+      "sha256": "f6bf2447d5521db6f555b042302189125218600463775ab66b762ebe6795f451"
+    },
+    "server.pck": {
+      "bytes": 290232,
+      "sha256": "b0ea35521c8c3174d3a4bc1c2b63f38dbe1157d017f6947fb2eb49f4ae166077"
+    },
+    "base.zip": {
+      "bytes": 1252,
+      "sha256": "398b5ea2f988f7c9a6ee02ed6dee02614fb94fc0623eed2596109549ea4513ee"
+    }
+  },
+  "compared": [
+    "developer",
+    "independent_qa",
+    "independent_review"
+  ],
+  "domain_test_reports": "Run-specific timing evidence excluded."
+}

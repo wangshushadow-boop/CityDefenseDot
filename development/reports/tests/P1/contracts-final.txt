@@ -1,0 +1,44 @@
+Initial rerun with system GBK output: exit 1 (UnicodeEncodeError while printing intentionally malformed UTF-8 sample).
+Documented python -X utf8 rerun:
+Python UCD 15.0.0 | seed 241124 | 13390 vectors
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+QA_CANONICAL 13390 candidates, mismatches=0
+Unicode parsing error: Byte 22 is not a correct continuation byte after e2 82
+Unicode parsing error: Byte 22 is not a correct continuation byte after e2 82
+Unicode parsing error: Overlong encoding (c0 af)
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (af)
+Unicode parsing error: Overlong encoding (c0 af)
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (af)
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (ff)
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (ff)
+Unicode parsing error: Byte a0 is not a correct continuation byte after ed
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (a0)
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (80)
+Unicode parsing error: Byte a0 is not a correct continuation byte after ed
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (a0)
+Unicode parsing error, some characters were replaced with � (U+FFFD): Invalid UTF-8 leading byte (80)
+QA-CANONICAL Godot exit=0 | PASS
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1-QA-CON-SHAPES 46 passed / 0 failed
+QA-SHAPES Godot exit=0 | PASS
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-CON-01 PASS
+T-CON-02 PASS
+T-CON-03 PASS
+P1-CON-BOUNDARY PASS
+CON_CHECKS errors=0
+CON Godot exit=0 | PASS
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS T-CON-02
+PASS P1-PORTS-V1
+PORTS Godot exit=0 | PASS
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CON_ORACLE nfc=34155 wire=14 errors=0
+CON_ORACLE_REVERSE PASS SHA256=1447f704cfcd725189cf1fb2154fb64faba7377f5fa1e59ee66c4d7e02131bcf UCD=15.0.0
+ORACLE Python exit=0 | PASS
+exit=0

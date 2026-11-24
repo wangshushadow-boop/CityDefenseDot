@@ -2,10 +2,10 @@
   "schema_version": 1,
   "project": "recollection",
   "delivery_version": "0.3",
-  "active_stage": "P1",
+  "active_stage": null,
   "stage_status": {
     "P0": "DONE",
-    "P1": "IN_PROGRESS",
+    "P1": "DONE",
     "P2": "PLANNED",
     "P3": "PLANNED",
     "P4": "PLANNED",
@@ -14,9 +14,9 @@
     "P7": "PLANNED",
     "P8": "PLANNED"
   },
-  "authorized_by": "项目负责人，本次会话授权开始 P1",
+  "authorized_by": "项目负责人已授权且完成 P1；后续阶段待独立授权。",
   "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
-  "integrated_commit": "86f3946a5a0b942047deda4a20a8511f50ca3251",
+  "integrated_commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",
@@ -39,8 +39,8 @@
     }
   },
   "updated_at": "2026-11-24",
-  "note": "ADR-013 与内容预算口径已批准；P1 开发中。",
-  "last_completed_stage": "P0",
+  "note": "P1 运行时与工程基础已验收。默认 1A/2A 已实施，15 个工作包和阶段门禁均为 DONE，P2–P8 仍为 PLANNED。",
+  "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
   "p1_decisions": {
     "by": "项目负责人",

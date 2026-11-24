@@ -1,0 +1,14 @@
+{
+  "commit": "565c32e11395c418276e2324e23710e414d121ee",
+  "gate_summary": "STATUS 25 / 25",
+  "build": "D:\\work\\game\\recollection\\out\\p1qa-ci\\build\\565c32e11395-795a23b99fed",
+  "results": {
+    "gates": 0,
+    "author-gates": 0,
+    "build": 0,
+    "metadata": 0,
+    "reload-server": 0,
+    "reload-client": 0,
+    "reload-content": 0
+  }
+}

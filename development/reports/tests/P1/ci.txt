@@ -1,0 +1,42 @@
+unit actual=0 expected=0
+test_dependency_edges (__main__.Gates.test_dependency_edges) ... ok
+test_release_fail_closed (__main__.Gates.test_release_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.538s
+
+OK
+
+dependencies actual=0 expected=0
+dependencies PASS issues=0
+
+release actual=1 expected=1
+AT-15: complete scenario PASS and linked evidence required
+AT-16: complete scenario PASS and linked evidence required
+release FAIL issues=293
+
+test_dependency_edges (__main__.Gates.test_dependency_edges) ... ok
+test_release_fail_closed (__main__.Gates.test_release_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.167s
+
+OK
+T-CI-01 production dependency graph PASS
+application PASS exit 0
+bootstrap PASS exit 0
+campaign PASS exit 0
+content PASS exit 0
+contracts PASS exit 0
+core PASS exit 0
+definitions PASS exit 0
+engine PASS exit 0
+harness PASS exit 0
+inventory PASS exit 0
+mission PASS exit 0
+persistence PASS exit 0
+ports PASS exit 0
+rules PASS exit 0
+telemetry PASS exit 0
+T-CI-03 PASS D:\work\game\recollection\out\p1-build\b4c36e1ff66c-715ac77e9381\manifest.json
+integrated development build exit=0

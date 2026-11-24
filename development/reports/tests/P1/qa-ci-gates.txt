@@ -1,0 +1,26 @@
+checkout-dependencies PASS 0 dependencies PASS issues=0
+checkout-release PASS 1 AT-16: complete scenario PASS and linked evidence required release FAIL issues=293
+domain-import-0 PASS 1 mission/runtime/domain.gd -> presentation/ui/display.gd: forbidden static dependency dependencies FAIL issues=1
+domain-import-1 PASS 1 mission/runtime/domain.gd -> presentation/ui/display.gd: forbidden static dependency dependencies FAIL issues=1
+global-class-domain PASS 1 mission/runtime/domain.gd -> presentation/ui/display.gd: forbidden static dependency dependencies FAIL issues=1
+cycle PASS 1 files cycle: core/a.gd -> core/b.gd -> core/a.gd dependencies FAIL issues=1
+no-dep-comment PASS 0 dependencies PASS issues=0
+no-dep-display-name PASS 0 dependencies PASS issues=0
+same-domain-public-port PASS 0 dependencies PASS issues=0
+typed-resource-constant PASS 1 mission/runtime/domain.gd -> presentation/ui/display.gd: forbidden static dependency dependencies FAIL issues=1
+uid-resource PASS 1 mission/runtime/domain.gd -> presentation/ui/display.gd: forbidden static dependency dependencies FAIL issues=1
+scene-external PASS 1 mission/runtime/qa.tscn -> presentation/ui/display.gd: forbidden static dependency dependencies FAIL issues=1
+synthetic-complete PASS 0 release PASS issues=0
+missing-evidence PASS 1 AT-16: unavailable scenario evidence release FAIL issues=18
+empty-evidence PASS 1 AT-16: unavailable scenario evidence release FAIL issues=18
+failed-case PASS 1 QA-01/T-QA-01: missing, not PASS, or test evidence unavailable release FAIL issues=1
+unrun-case PASS 1 QA-01/T-QA-01: missing, not PASS, or test evidence unavailable release FAIL issues=1
+case-missing PASS 1 QA-01/T-QA-01: missing, not PASS, or test evidence unavailable release FAIL issues=1
+requirement-failed PASS 1 QA-01: implementation, responsible owner, PASS and evidence required release FAIL issues=1
+requirement-missing PASS 1 MUST matrix missing, duplicated or different from GATE-P7 release FAIL issues=1
+missing-scenario PASS 1 AT-16: full scenario missing release FAIL issues=1
+partial-scenario PASS 1 AT-03: complete scenario PASS and linked evidence required release FAIL issues=1
+unknown-case PASS 1 QA-01/T-UNKNOWN: missing, not PASS, or test evidence unavailable release FAIL issues=1
+evidence-wrong-id PASS 1 QA-01/T-QA-01: missing, not PASS, or test evidence unavailable release FAIL issues=1
+evidence-conflict PASS 1 QA-01/T-QA-01: missing, not PASS, or test evidence unavailable release FAIL issues=1
+STATUS 25 / 25

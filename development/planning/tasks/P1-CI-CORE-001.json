@@ -45,5 +45,5 @@
     "基于同一代码、内容与协议构建 PCK，并用独立目录下的 Godot 客户端/专服进程重载；无模板的独立 EXE 结果另列。",
     "独立入口可指定 Godot 路径和输出位置，在全新快照/临时资源根执行。构建记录真实 git commit、Godot/协议版本、内容与 PCK SHA-256，可脱离源码通过 --main-pack <pck> -- --p1-smoke 重放。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

@@ -612,14 +612,21 @@
       ]
     },
     "CI": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P1-CI-CORE",
         "P6-NET-INTEGRATION",
         "P7-CI-RELEASE"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-CI-01",
+        "T-CI-02",
+        "T-CI-03"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/stages/P1.md"
+      ]
     }
   }
 }

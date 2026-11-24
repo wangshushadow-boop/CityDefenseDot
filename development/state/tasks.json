@@ -392,24 +392,37 @@
       ]
     },
     "P1-CI-CORE": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1-ci",
       "base_commit": "9fc92d07965cfb065e71c07d9fb7e1ad0e3b8265",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "565c32e11395c418276e2324e23710e414d121ee",
+      "integrated_commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": [
         "P1-CI-CORE-001"
       ]
     },
     "GATE-P1": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
-      "child_ids": []
+      "status": "DONE",
+      "owner": "root",
+      "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
+      "candidate_commit": "565c32e11395c418276e2324e23710e414d121ee",
+      "integrated_commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/integration/P1.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/tests/P1/build-manifest.json",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "child_ids": [],
+      "completed_at": "2026-11-24T22:30:56+08:00"
     },
     "P2-MIS-RT-BATTLE": {
       "status": "PLANNED",
@@ -1402,12 +1415,17 @@
       "child_ids": []
     },
     "P1-CI-CORE-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1-ci",
       "base_commit": "9fc92d07965cfb065e71c07d9fb7e1ad0e3b8265",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "565c32e11395c418276e2324e23710e414d121ee",
+      "integrated_commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": []
     },
     "P1-CON-002": {
@@ -5556,6 +5574,214 @@
       "reason": "主 Agent 分配隔离任务",
       "evidence": [],
       "commit": "9fc92d07965cfb065e71c07d9fb7e1ad0e3b8265"
+    },
+    {
+      "task_id": "P1-CI-CORE-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P1-CI-CORE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P1-CI-CORE-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P1-CI-CORE-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P1-CI-CORE",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P1-CI-CORE",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P1-CI-CORE",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P1-CI-CORE",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:30:09+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-CI-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "GATE-P1",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:30:56+08:00",
+      "reason": "15 个前置工作包已全部集成",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/integration/P1.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/tests/P1/build-manifest.json",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "GATE-P1",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:30:56+08:00",
+      "reason": "主 Agent 核验阶段范围、实际可启动交付物与原始证据",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/integration/P1.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/tests/P1/build-manifest.json",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "GATE-P1",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:30:56+08:00",
+      "reason": "真实双端、完整 P1 套件与存档恢复复测通过",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/integration/P1.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/tests/P1/build-manifest.json",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "GATE-P1",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:30:56+08:00",
+      "reason": "独立 QA/审查以及默认 1A+2A 签核已核对",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/integration/P1.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/tests/P1/build-manifest.json",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "GATE-P1",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:30:56+08:00",
+      "reason": "集成点工件大小、SHA-256、内容原字节与无源码重载核对通过",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/integration/P1.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/tests/P1/build-manifest.json",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "GATE-P1",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:30:56+08:00",
+      "reason": "P1 全部门禁满足，停止在本阶段",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/integration/P1.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/tests/P1/build-manifest.json",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
     }
   ]
 }

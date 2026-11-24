@@ -33,3 +33,11 @@ c6981d3 的 Session 跨模块实测满足 T-TEST-03 的结算故障判据：写�
 ## 启动回归
 
 普通 Windows 客户端的按钮走生产 Session，完成新建、保存、训练、退出及重新读盘；普通 headless 进程持续运行到第 15 个固定步，未创建 Control，随后逆序释放服务。早期 BOOT 候选在缺少必需 battle_limit 时进入训练后才抛出脚本错误。修订后在 content 装配阶段返回具体字段、清理已创建服务，预期退出 1。注册环可在构造 Session 前检出；清理遇到可重试错误时，业务入口保持关闭。[双端对照脚本](boot_profiles.py) · [普通菜单实测](qa-boot-desktop.txt)
+
+## 最终构建与启动
+
+在运行时集成提交 b4c36e1 上执行 `python ci/build.py --godot <Godot-console> --out out/p1-build`，退出 0。先从 Git 归档运行 2 组 Python 门禁测例和 15 套真实 Godot 模块入口，再导出客户端与专服 PCK、基础内容 ZIP。在无源码目录以 RTX 3090 Windows 客户端及 headless 各推进 3 tick，协议 1、内容摘要和状态摘要均一致。真实数据工具从解压的外置 ZIP 编译得到相同的内容摘要。主 Agent 另独立核算 4 个文件的大小与 SHA-256，并逐字节将基础 ZIP 对照 Git 源文件。三次从同一候选 565c32e 重建，client.pck、server.pck、base.zip 三件分别字节一致，运行耗时单独留在测试记录。[构建清单](build-manifest.json) · [逐套结果](domain-tests.json) · [独立冷启动](delivery-profiles.txt) · [同提交复建](build-repro.json)
+
+独立 CI 运行 25 个正反场景。缺失的完整 MUST/AT 凭证使 release 命令预期返回 1，候选报告 293 条诊断；每条诊断可以是一个需求或一个关联用例。T-CI-04 未进行同硬件正式战场性能回退演练。本机对 P1 完整工程的独立 Windows EXE 发布导出同样返回 1，找不到匹配的 Windows 模板。[门禁结果](ci.txt) · [原生导出](native-export.txt) · [独立 QA 汇总](qa-ci-summary.json)
+
+主 Agent 另按 UTF-8 控制台重放 13,390 个参照样本、46 项形状断言及 34,155 个 NFC 样本，全部通过。之前未启用 UTF-8 的一次调用因系统 GBK 无法打印预期的无效输入诊断而退出 1。[完整输出](contracts-final.txt)
