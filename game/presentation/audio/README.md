@@ -2,4 +2,4 @@
 
 项目：`recollection`。模块：`AUD`。
 
-**状态：目录骨架，未实现。** 本目录 README 仅作为导航；正式设计见 [模块规格](../../../docs/systems/game/presentation/audio/README.md)。实际文件及测试在对应任务获准后建立，不在这里重复设计，不将目录存在当作功能完成。
+[野战音频端口](ports/field_audio.gd)负责已确认事件的声音、音乐和字幕。[模块用例](../../tests/p2/audio/run.gd)演示 Mission 接线与作用域释放。[模块规格](../../../docs/systems/game/presentation/audio/README.md)
