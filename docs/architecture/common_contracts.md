@@ -2,7 +2,7 @@
 
 > 适用所有 SDD。基线： [总体规格书](../game_design.md) §3、§10、§12、§17–20。下文明确的是独立设计的补充约束，不修改上传原文。接口字段、枚举、目录新增、配置默认和技术版本需评审后冻结。涉及所有权、持久格式、网络版本的冲突先提交 ADR；不允许各 AI 自行选择不同解释。
 
-项目负责人于 2026-11-24 批准 v1 的表示、时序、所有权及兼容规则。本文保留跨模块字段清单，签核的具体参数、版本及迁移政策见 [ADR-012](decisions/ADR-012-contract-freeze.md)，引擎、采样与回溯预算见 [ADR-011](decisions/ADR-011-technology-stack.md)。
+项目负责人于 2026-11-24 批准 v1 的表示、时序、所有权及兼容规则。本文保留跨模块字段清单，签核的具体参数、版本及迁移政策见 [ADR-012](decisions/ADR-012-contract-freeze.md)，引擎、采样与回溯预算见 [ADR-011](decisions/ADR-011-technology-stack.md)。 本阶段新增的三类端口、MoveIntent 速度量化及存档物理提交见 [ADR-013](decisions/ADR-013-p1-ports-and-save.md)。
 
 ## 1. 类型与单位
 

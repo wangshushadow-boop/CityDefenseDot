@@ -180,9 +180,9 @@
       ]
     },
     "P1-CORE": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1core",
+      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -191,9 +191,9 @@
       ]
     },
     "P1-DEF": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1def",
+      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -1151,18 +1151,18 @@
       "child_ids": []
     },
     "P1-CORE-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1core",
+      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P1-DEF-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1def",
+      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -3102,6 +3102,78 @@
         "development/reports/integration/P1.md"
       ],
       "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CORE",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-CORE",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-CORE-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-CORE-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-DEF",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-DEF",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-DEF-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-DEF-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:21:08+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
     }
   ]
 }

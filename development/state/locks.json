@@ -1,5 +1,40 @@
 {
   "schema_version": 1,
-  "locks": [],
+  "locks": [
+    {
+      "task_id": "P1-CORE-001",
+      "owner": "p1core",
+      "branch": "detached",
+      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-core",
+      "allowed_paths": [
+        "game/core/",
+        "game/tests/p1/core/",
+        "development/reports/tasks/P1-CORE-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    },
+    {
+      "task_id": "P1-DEF-001",
+      "owner": "p1def",
+      "branch": "detached",
+      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-definitions",
+      "allowed_paths": [
+        "game/shared/definitions/",
+        "game/tests/p1/definitions/",
+        "development/reports/tasks/P1-DEF-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    }
+  ],
   "note": "P1 分批按任务独占写范围，集成后释放。"
 }

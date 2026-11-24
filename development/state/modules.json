@@ -20,22 +20,23 @@
       "evidence": []
     },
     "CON": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "VERIFIED",
       "work_package_ids": [
         "P0-CONTRACTS",
         "P1-CON"
       ],
-      "verified_test_ids": [],
-      "evidence": [
-        "development/reports/stages/P1.md",
-        "development/reports/tests/P1/contract-candidate.txt"
-      ],
-      "candidate_commit": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
-      "candidate_test_ids": [
+      "verified_test_ids": [
         "T-CON-01",
         "T-CON-02",
         "T-CON-03"
-      ]
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-CON-001.md",
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/tests/P1/contracts/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "candidate_commit": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2"
     },
     "APP": {
       "status": "NOT_IMPLEMENTED",

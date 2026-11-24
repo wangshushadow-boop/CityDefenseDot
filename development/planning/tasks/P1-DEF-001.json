@@ -33,8 +33,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-definitions",
   "scope": "定义注册、不可变快照、稳定 ID/引用及 schema 校验。 验证类型化 DefId、重复、引用、升级图，返回只读副本。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -43,5 +43,5 @@
     "重复/失效 ID、升级 DAG、合法定义测试。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

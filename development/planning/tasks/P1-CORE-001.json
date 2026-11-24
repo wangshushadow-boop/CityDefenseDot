@@ -31,8 +31,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-core",
   "scope": "调度、时间/随机、生命周期、scope、取消和稳定提交。 按 scope 与版本取消、确定性独立流、有限队列，正式调用可重放。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -41,5 +41,5 @@
     "时钟与随机可重复；取消/旧 scope 拒绝。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }
