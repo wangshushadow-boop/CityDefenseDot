@@ -1,4 +1,4 @@
-"""Build and cold-start the P1 Windows client, dedicated server and base content from Git HEAD."""
+"""Build and cold-start the Windows client, dedicated server and base content from Git HEAD."""
 import argparse
 import hashlib
 import json
@@ -18,6 +18,7 @@ from gates import dependencies
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = Path("infrastructure/content/base")
+FIELD = Path("content/base/field")
 PRESET = '''[preset.0]
 name="Recollection"
 platform="Windows Desktop"
@@ -25,7 +26,7 @@ runnable=true
 custom_features="{target}"
 export_filter="all_resources"
 include_filter="*.json"
-exclude_filter="*.md,*.py,tests/*"
+exclude_filter="*.md,*.py,tests/*,addons/field_export/*"
 script_export_mode=0
 [preset.0.options]
 binary_format/architecture="x86_64"
@@ -79,6 +80,11 @@ def check_runtime_pack(engine, stage, env, pck, stamp, script):
         raise ValueError(f"packed metadata mismatch for {pck.name}: {packed}")
 
 
+def field_content(engine, where, env, options, paths):
+    args = [*options, "--", "--profile=tool", *["--content-path=" + str(path) for path in paths]]
+    return boot_record(godot(engine, args, where, env), "tool")["content_hash"]
+
+
 def build(engine, out):
     commit = subprocess.check_output(["git", "rev-parse", "--verify", "HEAD"], cwd=ROOT, text=True).strip()
     out = out.resolve()
@@ -102,12 +108,15 @@ def build(engine, out):
             tree = Path(tree)
             with tarfile.open(archive) as tar:
                 tar.extractall(tree, filter="data")
-            for file in ("build.py", "gates.py", "inspect_pack.gd"):
+            for file in ("build.py", "gates.py", "inspect_pack.gd", "inspect_field.gd",
+                         "field_export/plugin.cfg", "field_export/plugin.gd"):
                 at_commit = tree / "ci" / file
                 if not at_commit.is_file() or (ROOT / "ci" / file).read_text("utf-8") != at_commit.read_text("utf-8"):
                     raise ValueError(f"build recipe ci/{file} differs from Git input {commit}")
             inspector = scratch / "inspect_pack.gd"
             shutil.copyfile(tree / "ci/inspect_pack.gd", inspector)
+            field_inspector = scratch / "inspect_field.gd"
+            shutil.copyfile(tree / "ci/inspect_field.gd", field_inspector)
             game = tree / "game"
             expected = json.loads((tree / "development/state/project.json").read_bytes())["technical_stack"]["engine_version"]
             version = run([engine, "--version"], cold, env).strip()
@@ -133,9 +142,17 @@ def build(engine, out):
             # binary scene IDs otherwise introduce entropy into equivalent PCKs.
             with (game / "project.godot").open("a", encoding="utf-8") as settings:
                 settings.write("\n[editor]\nexport/convert_text_resources_to_binary=false\n")
+                settings.write('\n[editor_plugins]\nenabled=PackedStringArray("res://addons/field_export/plugin.cfg")\n')
+            shutil.copytree(tree / "ci/field_export", game / "addons/field_export")
             stamp = {"git_commit": commit, "engine_version": version, "language": "GDScript"}
             source = boot(engine, cold, env, ["--path", game], "tool")
             stamp.update(protocol_version=source["protocol_version"], content_hash=source["content_hash"])
+            paths = ["res://" + folder.as_posix() for folder in (BASE, FIELD)]
+            field_smokes = {"source": field_content(engine, cold, env, ["--path", game], paths)}
+            field_manifest = json.loads((game / FIELD / "manifest.json").read_bytes())
+            entries = field_manifest["entrypoints"]
+            field_files = sorted({"manifest.json", *entries["resources"], *entries["definitions"], *entries["patches"]})
+            expected_models = [name for name in entries["resources"] if name.endswith(".glb")]
             raw = game / BASE
             with zipfile.ZipFile(stage / "base.zip", "w", compression=zipfile.ZIP_DEFLATED) as content:
                 def add_raw(name, data):
@@ -147,6 +164,8 @@ def build(engine, out):
                 for path in sorted(raw.rglob("*")):
                     if path.is_file() and not path.name.endswith((".md", ".uid", ".import")):
                         add_raw("base/" + path.relative_to(raw).as_posix(), path.read_bytes())
+                for name in field_files:
+                    add_raw("field/" + name, (game / FIELD / name).read_bytes())
             for target in ("client", "server"):
                 (game / "export_presets.cfg").write_text(PRESET.format(target=target), encoding="utf-8")
                 (game / "build_info.json").write_bytes(json_bytes(stamp | {"target": target}))
@@ -158,6 +177,12 @@ def build(engine, out):
             pack = stage / (target + ".pck")
             check_runtime_pack(engine, cold, env, pack, stamp | {"target": target}, inspector)
             smokes[target] = boot(engine, cold, env, ["--main-pack", pack], profile)
+            field_smokes[target] = field_content(engine, cold, env, ["--main-pack", pack], paths)
+            model_log = godot(engine, ["--main-pack", pack, "--script", field_inspector], cold, env)
+            model_rows = [json.loads(line.removeprefix("FIELD_MODELS ")) for line in model_log.splitlines()
+                          if line.startswith("FIELD_MODELS ")]
+            if model_rows != [expected_models] or not expected_models:
+                raise ValueError(f"missing instantiated field models in {target}: {model_log}")
         if smokes["client"]["state_hash"] != smokes["server"]["state_hash"]:
             raise ValueError("client/server fixed-tick Mission states differ")
         with zipfile.ZipFile(stage / "base.zip") as zipped:
@@ -167,13 +192,18 @@ def build(engine, out):
         log = godot(engine, ["--main-pack", stage / "server.pck", "--", "--profile=tool",
                              "--content-path=" + str(cold / "base")], cold, env)
         smokes["base"] = boot_record(log, "tool")
+        field_smokes["zip"] = field_content(engine, cold, env, ["--main-pack", stage / "server.pck"],
+                                            [cold / "base", cold / "field"])
+        if len(set(field_smokes.values())) != 1:
+            raise ValueError(f"cold-start field content differs from source: {field_smokes}")
         if any(row["content_hash"] != stamp["content_hash"] or row["protocol_version"] != stamp["protocol_version"]
                for row in smokes.values()):
             raise ValueError("cold-start content/protocol mismatch")
         artifacts = {name: {"size": (stage / name).stat().st_size,
                             "sha256": hashlib.sha256((stage / name).read_bytes()).hexdigest()}
                      for name in ("client.pck", "server.pck", "base.zip", "domain-tests.json")}
-        (stage / "manifest.json").write_bytes(json_bytes(stamp | {"channel": "development", "artifacts": artifacts, "smokes": smokes}))
+        (stage / "manifest.json").write_bytes(json_bytes(stamp | {"channel": "development", "artifacts": artifacts, "smokes": smokes,
+                                                              "field": {"content_hashes": field_smokes, "models": expected_models}}))
         # Every successful invocation publishes a complete, distinct directory.
         destination = out / (commit[:12] + "-" + uuid.uuid4().hex[:12])
         stage.rename(destination)
