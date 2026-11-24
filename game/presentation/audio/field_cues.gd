@@ -1,6 +1,8 @@
 extends RefCounted
 
 const TEXT = preload("res://presentation/audio/captions.tres")
+const ORDERS_ZH = preload("res://presentation/audio/orders_zh.tres")
+const ORDERS_EN = preload("res://presentation/audio/orders_en.tres")
 # Category, priority, audible range (metres), timbre.
 const CUES := {
 	"command":["Voice",100,0,0], "warning":["Voice",90,0,0],
@@ -28,6 +30,11 @@ func caption(key: String) -> String:
 
 func spoken(order: String) -> String:
 	return order if TEXT.get_meta("en").has("audio.order."+order) else "command"
+
+func recorded_voice(key: String) -> AudioStreamWAV:
+	var bank: Resource = ORDERS_ZH if TranslationServer.get_locale().begins_with("zh") else ORDERS_EN
+	return bank.get_meta("clips")[key]
+
 
 func clip(id: String) -> AudioStreamWAV:
 	if _cache.has(id):
