@@ -33,8 +33,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "9fc92d07965cfb065e71c07d9fb7e1ad0e3b8265",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-ci",
   "scope": "本地与 CI 统一构建/测试/架构检查；版本锁定。 从干净 checkout 导入、运行、测试、构建 PCK、静态边界和故障阻断。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -45,5 +45,5 @@
     "基于同一代码、内容与协议构建 PCK，并用独立目录下的 Godot 客户端/专服进程重载；无模板的独立 EXE 结果另列。",
     "独立入口可指定 Godot 路径和输出位置，在全新快照/临时资源根执行。构建记录真实 git commit、Godot/协议版本、内容与 PCK SHA-256，可脱离源码通过 --main-pack <pck> -- --p1-smoke 重放。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

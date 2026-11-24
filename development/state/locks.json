@@ -1,5 +1,23 @@
 {
   "schema_version": 1,
-  "locks": [],
+  "locks": [
+    {
+      "task_id": "P1-CI-CORE-001",
+      "owner": "p1-ci",
+      "branch": "detached",
+      "base_commit": "9fc92d07965cfb065e71c07d9fb7e1ad0e3b8265",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-ci",
+      "allowed_paths": [
+        "ci/",
+        "game/tests/p1/ci/",
+        "development/reports/tasks/P1-CI-CORE-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    }
+  ],
   "note": "P1 分批按任务独占写范围，集成后释放。"
 }
