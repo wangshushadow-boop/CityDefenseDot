@@ -66,6 +66,7 @@ func run() -> void:
 	var again := cold.compile(cold.scan_packages(paths),{})
 	check(again.ok and again.value.hash==compiled.value.hash,"stable content digest")
 	var registry: RefCounted = compiled.value.registry
+	check(not FileAccess.get_file_as_bytes(FIELD+"/river_plain.tscn").has(13),"identical source scene bytes across platforms")
 	var spec: Dictionary = registry.get_definition("field:scene/river_plain","scene").value
 	check(registry.get_definition("field:ruleset/field_battle","ruleset").value.mode=="field","compiled rule")
 	for role in ["infantry","archer","cavalry"]:

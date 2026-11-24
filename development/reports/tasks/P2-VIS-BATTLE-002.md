@@ -5,3 +5,5 @@
 在 Windows 及 Godot 4.7.2 Standard 中执行 `python game/tests/p2/field_assets/cold_import.py --godot <Godot控制台路径>`。在新的临时工程和用户目录完成真实编辑器导入，再执行 Godot 游戏入口，进程分别退出 0。将包次序颠倒重编后内容摘要均为 `aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1`。取样相隔 0.22 秒，三具 22 骨角色各有 20、19、19 根骨骼位姿发生改变，50 骨坐骑有 32 根。三个人物分别有 12 个蒙皮网格，马匹有 1 个。正式场景的西东集结点在同一物理导航世界可达。
 
 资源测试覆盖 T-VIS-01 的绑定前提。整套真实战斗的挂点、命中时间、500/1,000 人的显存和帧率仍待 VIS、FIELD-INTEGRATION 实测。[包内署名](../../../game/content/base/field/CREDITS.md)
+
+跨签出复测首次发现 Windows 自动将 river_plain.tscn 变为 CRLF，使首次开发与新签出的 ContentHash 分别为 aec256b4… 和 3e4ead4b…，尽管可见内容一致。已给资源包内 TSCN 固定 LF，并对作为内容哈希输入的场景字节加入冷导入回归；GLB 保持原始字节。
