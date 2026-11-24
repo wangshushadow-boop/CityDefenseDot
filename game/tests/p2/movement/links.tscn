@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="NavigationMesh" id="Islands"]
+vertices = PackedVector3Array(-2,0,-2, -2,0,2, 2,0,2, 2,0,-2, 4,0,-2, 4,0,2, 8,0,2, 8,0,-2, 10,2,-2, 10,2,2, 14,2,2, 14,2,-2, 16,2,-2, 16,2,2, 20,2,2, 20,2,-2)
+polygons = [PackedInt32Array(0,1,2,3), PackedInt32Array(4,5,6,7), PackedInt32Array(8,9,10,11), PackedInt32Array(12,13,14,15)]
+
+[node name="NavigationFixture" type="Node3D"]
+
+[node name="Islands" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("Islands")
+
+[node name="Gate" type="NavigationLink3D" parent="."]
+enabled = false
+start_position = Vector3(1.9,0,0)
+end_position = Vector3(4.1,0,0)
+metadata/link_id = "gate"
+
+[node name="Ladder" type="NavigationLink3D" parent="."]
+enabled = false
+start_position = Vector3(7.9,0,0)
+end_position = Vector3(10.1,2,0)
+metadata/link_id = "ladder"
+
+[node name="Breach" type="NavigationLink3D" parent="."]
+enabled = false
+start_position = Vector3(13.9,2,0)
+end_position = Vector3(16.1,2,0)
+metadata/link_id = "breach"
