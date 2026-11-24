@@ -307,6 +307,43 @@ func transitions() -> void:
 	check(hidden.intel.visible_enemies.is_empty() and assigned(lost.value,1).target_formation==null and local.commit().ok,"lost contact not retained as target")
 	local.close()
 
+func reentrant_admission() -> void:
+	board = AI.new(SCOPE,los)
+	form = FORM.new(SCOPE,authenticate,func(_point): return R.ok(true))
+	var own := unit(0,0,"archer",Vector3(-9,0,-8))
+	form.add_formation(0,0,"player",[own.handle])
+	form.set_delegate(0,"ai",player,0)
+	var current := frame(1,[own])
+	var admit := func(job: Dictionary):
+		var receipt: Dictionary = board.collect(job,[])
+		check(receipt.ok,"accepted current BAI grant")
+		check(form.set_delegate(0,"",player,form.view(0).value.control_revision).ok,"player revoked in admission")
+		return receipt
+	var local := Tactics.new(SCOPE,0,granted,probe,live,admit)
+	var staged := local.stage(current.job,current.intel,[])
+	check(staged.ok and staged.value.formation_tasks.size()==1,"granted formation staged")
+	check(not local.commit().ok and local.view().is_empty(),"revocation during admission prevents publication")
+
+func typed_plan_ids() -> void:
+	board = AI.new(SCOPE,los)
+	form = FORM.new(SCOPE,authenticate,func(_point): return R.ok(true))
+	var left := unit(0,0,"infantry",Vector3.ZERO)
+	var right := unit(1,1,"infantry",Vector3.RIGHT)
+	right.team_key = "0"
+	for row: Dictionary in [left,right]:
+		form.add_formation(row.formation_id,row.team_key,"ai",[row.handle])
+	board.publish(1,nav,[left,right])
+	board.schedule({"tactical":0})
+	board.publish(61,nav,[left,right])
+	var ids := {}
+	for job: Dictionary in board.schedule().value.jobs:
+		if job.layer != "tactical":
+			continue
+		var owner := Tactics.new(SCOPE,job.subject,granted,probe,live,board.collect.bind([]))
+		check(owner.stage(job,live(job.subject),[]).ok and owner.commit().ok,"plan committed for typed team")
+		ids[owner.view().id] = true
+	check(ids.size()==2,"same-text legal teams can address both plan IDs")
+
 func _initialize() -> void:
 	run.call_deferred()
 
@@ -332,6 +369,8 @@ func run() -> void:
 		exercise()
 		ties()
 		transitions()
+		reentrant_admission()
+		typed_plan_ids()
 		sample(500)
 		sample(1000)
 	check(physical_errors==0,"all occlusion calls succeeded")

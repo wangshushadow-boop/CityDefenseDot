@@ -287,28 +287,29 @@ func _plan_step(stamp: Dictionary, groups: Dictionary, contacts: Array, sites: A
 	if finished: phase = "Finish"
 	var transitioned: bool = _plan.is_empty() or _plan.phase!=phase
 	_candidate = {"scope_id":_scope,"instance":_instance,"team":_team,"tick":stamp.tick,"nav_revision":stamp.nav_revision,
-		"id":"%s/%s/%s"%[_instance,_team,stamp.tick] if transitioned else _plan.id,
+		"id":"%s/%s/%s/%s"%[_instance,typeof(_team),_team,stamp.tick] if transitioned else _plan.id,
 		"created_tick":stamp.tick if transitioned else _plan.created_tick,"phase":phase,"strength":total,
 		"formation_tasks":tasks,"feedback":statuses,"locked_until":stamp.tick+STICK_TICKS if transitioned else _plan.locked_until}
 	_stamp = stamp.duplicate(true)
 	return R.ok(_candidate.duplicate(true))
 
+func _candidate_current() -> bool:
+	if _closed or not _authority.is_valid() or _snapshot().get("stamp") != _stamp:
+		return false
+	for task: Dictionary in _candidate.formation_tasks:
+		if not is_same(_authority.call(_scope,task.formation_id,task.control_revision,task.order_revision),true) or _closed:
+			return false
+	return not _closed
+
 func commit() -> Dictionary:
 	if _busy or _closed or _candidate.is_empty():
 		return R.fail("InvalidState","tactical_commit")
 	_busy = true
-	var fresh := _authority.is_valid()
+	var fresh := _candidate_current()
 	if fresh:
-		for task: Dictionary in _candidate.formation_tasks:
-			if not is_same(_authority.call(_scope,task.formation_id,task.control_revision,task.order_revision),true) or _closed:
-				fresh = false
-				break
-	if fresh:
-		fresh = _snapshot().get("stamp")==_stamp and not _closed
-	if fresh:
-		# The BAI dispatcher alone can attest that this exact L1 job was issued.
+		# Admission consumes the BAI job and can publish new FORM permissions.
 		var receipt: Variant = _admit_job.call(_pending_job) if _admit_job.is_valid() else null
-		fresh = receipt is Dictionary and is_same(receipt.get("ok"),true) and not _closed
+		fresh = receipt is Dictionary and is_same(receipt.get("ok"),true) and _candidate_current()
 	_busy = false
 	if fresh:
 		_plan = _candidate
