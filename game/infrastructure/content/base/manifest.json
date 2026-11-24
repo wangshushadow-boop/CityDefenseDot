@@ -1,0 +1,21 @@
+{
+  "id": "base",
+  "version": "1.0.0",
+  "game_api_version": 1,
+  "license": "Original recollection project content",
+  "requires": [],
+  "conflicts": [],
+  "load_after": [],
+  "entrypoints": {
+    "definitions": [
+      "definitions/runtime.json"
+    ],
+    "resources": [
+      "scenes/training.scene.json"
+    ],
+    "patches": []
+  },
+  "config": {
+    "battle_limit": 500
+  }
+}
