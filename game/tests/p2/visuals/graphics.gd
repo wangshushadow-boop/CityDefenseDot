@@ -42,7 +42,7 @@ func setup() -> void:
 		quit(3)
 		return
 	root.add_child(camera)
-	camera.fov = 58
+	camera.fov = 60
 	camera.current = true
 	root.msaa_3d = Viewport.MSAA_2X
 	RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(),true)
@@ -118,8 +118,8 @@ func _physics_process(_dt: float) -> bool:
 		quit(4)
 		return false
 	vis.consume_view_events(SCOPE,tick,events)
-	camera.position = Vector3(4.5*sin(tick/150.0),24,44)
-	camera.look_at(Vector3(0,1,0))
+	camera.position = Vector3(6.0*sin(tick/150.0),38,45)
+	camera.look_at(Vector3(0,0.5,0))
 	var now := Time.get_ticks_usec()
 	if tick==WARM: started = now
 	elif tick>WARM: ticks.append([tick,now-begin,now-started])
@@ -156,7 +156,7 @@ func finish() -> void:
 	var data := {"people":amount,"horses":amount/5,"in_frustum":in_frustum,"near_min":min_near,
 		"far_min":min_far,"seed":241124,"pixels":[root.size.x,root.size.y],
 		"adapter":RenderingServer.get_video_adapter_name(),"driver":RenderingServer.get_current_rendering_driver_name(),
-		"renderer":RenderingServer.get_current_rendering_method(),"vsync":DisplayServer.window_get_vsync_mode(),
+		"shadow_size":ProjectSettings.get_setting("rendering/lights_and_shadows/directional_shadow/size"),"camera_fov":camera.fov,"renderer":RenderingServer.get_current_rendering_method(),"vsync":DisplayServer.window_get_vsync_mode(),
 		"metrics":vis.report(),"frames":frames,"ticks":ticks}
 	var file := FileAccess.open(out_file,FileAccess.WRITE)
 	if not file:

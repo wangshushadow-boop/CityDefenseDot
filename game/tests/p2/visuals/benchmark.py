@@ -24,6 +24,8 @@ def summarize(samples):
         raise ValueError("missing sample range")
     if samples["renderer"] != "forward_plus" or samples["driver"] != "vulkan" or samples["vsync"] != 0:
         raise ValueError("render settings")
+    if samples.get("shadow_size") != 2048 or samples.get("camera_fov") != 60 or samples["seed"] != 241124:
+        raise ValueError("P0 lighting, camera or seed")
     if (samples["pixels"] != [1920,1080] or samples["in_frustum"] != count+count//5
             or samples["near_min"] == 0 or samples["far_min"] == 0):
         raise ValueError("population or viewport")
