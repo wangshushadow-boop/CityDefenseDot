@@ -203,4 +203,7 @@ func run() -> void:
 		digests.append([unguarded,guarded])
 	adapter.release_scope(SCOPE)
 	print("P2-COM-001 T-COM-01/T-COM-05 slice errors=", failures, " replay_sha256=", C.hash_value(digests).value)
+	var ran: bool = await preload("res://tests/p2/combat/field_cases.gd").new().run(self, adapter, check)
+	check(ran, "completed field suite")
+	print("P2-COM-002 ", "PASS" if failures == 0 else "FAIL", " errors=", failures)
 	quit(1 if failures else 0)
