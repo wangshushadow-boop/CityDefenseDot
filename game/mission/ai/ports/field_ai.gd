@@ -198,15 +198,21 @@ func _allowed(job: Dictionary, intent: Dictionary) -> bool:
 			return false
 		if job.layer == "tactical" and _board.formations[id][0].team_key != job.subject:
 			return false
-	if intent.get("target_formation_id") != null:
-		var view: Dictionary = team_view(job.subject).value if job.layer == "tactical" else formation_view(job.subject).value
-		var observed := false
-		for contact in view.visible_enemies:
-			if contact.formation_id == intent.target_formation_id:
-				observed = true
-				break
-		if not observed:
+	var target: Variant = intent.get("target_formation_id")
+	if target != null:
+		if not V.integer(target,0,V.MAX_U32) or target in ids or not _board.formations.has(target):
 			return false
+		var team: Variant = job.subject if job.layer == "tactical" else _board.formations[job.subject][0].team_key
+		var allied := is_same(_board.formations[target][0].team_key,team)
+		if intent.get("order_type") == "follow":
+			return allied
+		if allied or intent.get("order_type") not in ["face_enemy","charge"]:
+			return false
+		var view: Dictionary = team_view(team).value if job.layer == "tactical" else formation_view(job.subject).value
+		for contact in view.visible_enemies:
+			if contact.formation_id == target:
+				return true
+		return false
 	return true
 
 func collect(job: Dictionary, intents: Array) -> Dictionary:

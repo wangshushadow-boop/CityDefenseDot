@@ -55,6 +55,7 @@ static func unit(i: int, team: int, f: int, p: Vector3, role: String="infantry")
 
 func domains() -> bool:
 	var start := failed
+	formation_targets()
 	var com := Combat.new()
 	var mov := Movement.new(engine,SCOPE)
 	form = Formation.new(SCOPE,auth,func(_p): return R.ok(true))
@@ -126,6 +127,26 @@ func domains() -> bool:
 	check(delegated.drain().value.is_empty(),"revocation rechecked before dispatch")
 	print("T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=",failed-start)
 	return failed == start
+
+func formation_targets() -> void:
+	var ai := AI.new(SCOPE,func(_a,_b):return true)
+	var rows := [unit(0,0,0,Vector3.ZERO),unit(1,0,1,Vector3.RIGHT),unit(2,0,2,Vector3.BACK)]
+	rows[2].team_key = "0"
+	check(ai.publish(1,0,rows).ok,"target roster")
+	for job in ai.schedule().value.jobs:
+		if job.layer!="formation" or job.subject!=0:
+			continue
+		var friendly := order("captain","follow")
+		friendly.target_formation_id = 2
+		check(not ai.collect(job,[friendly]).ok,"cannot follow even a visible enemy")
+		friendly.target_formation_id = 0
+		check(not ai.collect(job,[friendly]).ok,"cannot follow self")
+		friendly.target_formation_id = 1
+		var attack := friendly.duplicate(true)
+		attack.order_type = "charge"
+		check(not ai.collect(job,[attack]).ok,"cannot charge ally")
+		check(ai.collect(job,[friendly]).ok,"follow another friendly formation")
+	ai.close()
 
 class Delayed:
 	extends RefCounted
