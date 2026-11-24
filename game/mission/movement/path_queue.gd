@@ -113,6 +113,9 @@ static func _comes_first(left: Dictionary, right: Dictionary) -> bool:
 func attempts_at(tick: int) -> int:
 	return _meter.spent if _meter.tick == tick else 0
 
+func has_answer(tick: int, revision: int, origin: Array, goal: Array, profile: String) -> bool:
+	return _meter.tick==tick and _meter.revision==revision and _meter.answers.has([origin,goal,profile])
+
 func process_budget(tick: int, remaining: int = 2147483647) -> Dictionary:
 	if tick < 0 or tick < _meter.tick:
 		return R.fail("StaleVersion", "tick")
