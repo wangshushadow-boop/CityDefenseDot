@@ -1,5 +1,3 @@
 # game/mission/ai/formation/
 
-项目：`recollection`。模块：`BAI-F`。
-
-**状态：目录骨架，未实现。** 本目录 README 仅作为导航；正式设计见 [模块规格](../../../../docs/systems/game/mission/ai/formation/README.md)。实际文件及测试在对应任务获准后建立，不在这里重复设计，不将目录存在当作功能完成。
+本模块执行 P2 野战编队任务。游戏装配入口为 [field_formation_ai.gd](ports/field_formation_ai.gd)，行为选择见 [field_behavior.gd](behaviors/field_behavior.gd)。职责与验收条件见[编队 AI 规格](../../../../docs/systems/game/mission/ai/formation/README.md)。
