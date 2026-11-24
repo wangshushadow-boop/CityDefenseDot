@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "p0:scene/mounted",
+  "author": "recollection P0",
+  "source": "Original procedural fixture from fixture.py",
+  "usage": "recollection internal technical validation",
+  "scene": "res://sample.gltf",
+  "markers": ["Spawn_A", "Gate_A"],
+  "rigs": [
+    {"bone": "Arm", "socket": "WeaponGrip"},
+    {"bone": "HorseSpine", "socket": "Saddle"}
+  ],
+  "action": {"clip": "Strike", "start_s": 0.15, "end_s": 0.38}
+}
