@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://tests/p2/mission/ground.tscn" id="ground"]
+
+[sub_resource type="BoxShape3D" id="TargetBody"]
+size = Vector3(0.15,1.5,0.8)
+
+[node name="RulesGround" type="Node3D"]
+
+[node name="Nav" parent="." instance=ExtResource("ground")]
+
+[node name="Defender" type="StaticBody3D" parent="."]
+position = Vector3(1,0,0)
+metadata/entity_handle = "defender"
+metadata/region = "body"
+
+[node name="Collider" type="CollisionShape3D" parent="Defender"]
+shape = SubResource("TargetBody")
