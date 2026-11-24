@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BOOT-01 PASS
+T-BOOT-02 PASS
+T-BOOT-03 PASS
+BOOT-BOUNDARIES PASS
+BOOT_CHECKS errors=0
+exit=0

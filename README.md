@@ -2,25 +2,18 @@
 
 古代中国风 3D 沙盒战争游戏 · 规格驱动开发项目
 
-**交付版本：0.3 / 研发初始化基线**。功能规模以《骑马与砍杀2：霸主》为参照，所有程序、世界、角色、文本及资产独立原创。完整陆地单人/剧情、自定义战斗、多人和 MOD 均为 MUST；海战为独立 EXT。阶段实施不缩减最终目标。
+**设计基线 0.3**。功能规模以《骑马与砍杀2：霸主》为参照，所有程序、世界、角色、文本及资产独立原创。完整陆地单人/剧情、自定义战斗、多人和 MOD 均为 MUST；海战为独立 EXT。阶段实施不缩减最终目标。
 
-## 快速开始（你只需要一个 Codex 项目窗口）
+## 启动与测试
 
-1. 将 `recollection/` 解压至开发目录，从该目录打开 Codex。若需要 Git，先在此目录初始化仓库并提交初始基线（下面是新目录的示例）。已有 Git 仓库不要重复初始化或覆盖历史。
-2. 运行 `python3 development/check_project.py` 检查文档、目录、任务依赖及初始状态。管理工具使用 Python 3.11+ 标准库，不代表游戏开发语言已选择。
-3. 把 [首次启动提示词](development/prompts/initialize.md) 复制给 Codex，明确只执行 P0（技术验证与架构冻结）。主 Agent 使用原生 Subagents 组织工作；若客户端不提供该能力，则按同样职责顺序执行并说明限制。
-4. 每个阶段完成后查看验收报告并决定下一阶段。以后直接发送“按照 AGENTS.md 和 PROJECT_STATE.md，开始 P1，组织多 Agent 实现并验收，完成后停止”。阶段指令见 [prompts](development/prompts/README.md)。
+用 Godot 4.7.2 Standard 打开 [game/project.godot](game/project.godot)。Windows PowerShell 可从仓库根目录运行以下命令。第一条启动客户端，第二条以 headless 运行同一组合根的固定步验收，第三条执行各模块的真实 Godot 测试。
 
-```bash
-# 在已解压的 recollection/ 中执行；若已经是 Git 仓库请跳过初始化。
-git init -b main
-git add .
-git commit -m "chore: initialize recollection design and development baseline"
-python3 development/check_project.py
-python3 development/check_project.py --ready P0
+```powershell
+$godot = 'D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe'
+& $godot --path game
+& $godot --headless --path game -- --p1-smoke
+python game/tests/p1/harness/suite.py --godot $godot
 ```
-
-若 Git 未配置用户名/邮箱，自行设置后再提交。Codex 项目配置需要受信任的项目，遵守本地沙盒与审批规则；不会自动授予更高权限。详见 [Codex 使用指南](development/codex_setup.md)。
 
 ## 设计与研发入口
 
@@ -37,11 +30,11 @@ python3 development/check_project.py --ready P0
 | [研发工作流](development/workflow.md) | 分配、审查、修复、集成、暂停与恢复 |
 | [验收矩阵](docs/testing/acceptance_matrix.md) | 17 个跨系统场景 |
 | [需求追踪](docs/testing/requirements_trace.csv) | 93 个需求及状态 |
-| [模块测试规格](docs/testing/test_cases.csv) | 208 条规格，初始 NOT_RUN |
-| [目录索引](PROJECT_TREE.md) | 完整目录与代码骨架 |
+| [模块测试规格](docs/testing/test_cases.csv) | 208 条规格及逐项实测状态 |
+| [目录索引](PROJECT_TREE.md) | 规划目录与模块归属 |
 
 ## 当前交付边界
 
-这是完整设计、研发执行文档、Codex 项目配置和代码目录骨架；**不是已可启动的游戏**。引擎、语言、版本、公共接口编码、测试框架、性能基线仍需 P0 实验及批准。不存在假造的 `project.godot`、模拟游戏通过报告或临时正式实现。P0/P1 决策后才创建对应引擎工程。所有实际游戏测试初始 NOT_RUN；已有检查仅验证文档、配置和研发计划结构。
+P1 交付公共运行时、会话、战役和 Mission 基础门面、磁盘事务与工程装配。后续战斗、世界、多人及正式内容的阶段边界见[路线图](development/planning/roadmap.md)。本机实测、历史失败及未运行项见[P1 阶段验收](development/reports/stages/P1.md)。
 
 [变更记录](CHANGELOG.md) · [已知问题](KNOWN_ISSUES.md) · [基线来源](docs/architecture/baselines/README.md) · [交付核查](development/reports/bootstrap_verification.md)

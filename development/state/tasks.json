@@ -376,12 +376,17 @@
       ]
     },
     "P1-BOOT": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1-bootstrap",
       "base_commit": "7bff1a63fd5e6aa35df5ca40a80b0bf452282205",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "31ccf84089985d384b29e1b8f5364c4ab352e00f",
+      "integrated_commit": "86f3946a5a0b942047deda4a20a8511f50ca3251",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": [
         "P1-BOOT-001"
       ]
@@ -1383,12 +1388,17 @@
       "child_ids": []
     },
     "P1-BOOT-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1-bootstrap",
       "base_commit": "7bff1a63fd5e6aa35df5ca40a80b0bf452282205",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "31ccf84089985d384b29e1b8f5364c4ab352e00f",
+      "integrated_commit": "86f3946a5a0b942047deda4a20a8511f50ca3251",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": []
     },
     "P1-CI-CORE-001": {
@@ -5398,6 +5408,118 @@
       "reason": "主 Agent 分配隔离任务",
       "evidence": [],
       "commit": "7bff1a63fd5e6aa35df5ca40a80b0bf452282205"
+    },
+    {
+      "task_id": "P1-BOOT-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
+    },
+    {
+      "task_id": "P1-BOOT-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
+    },
+    {
+      "task_id": "P1-BOOT-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
+    },
+    {
+      "task_id": "P1-BOOT-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
+    },
+    {
+      "task_id": "P1-BOOT",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
+    },
+    {
+      "task_id": "P1-BOOT",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
+    },
+    {
+      "task_id": "P1-BOOT",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
+    },
+    {
+      "task_id": "P1-BOOT",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:18:06+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "86f3946a5a0b942047deda4a20a8511f50ca3251"
     }
   ]
 }

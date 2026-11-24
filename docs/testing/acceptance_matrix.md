@@ -1,6 +1,6 @@
 # 端到端验收矩阵（原规格书 §22.2）
 
-以下 17 个场景保留原规格书要求；具体可执行测试需要 P0 技术选型后实现。各模块用例 ID 见 `test_cases.csv`，需求索引见 `requirements_trace.csv`。初始状态均为 NOT_RUN。
+以下 17 个场景保留原规格书要求；实际验收按已冻结的技术栈和阶段门禁执行。各模块用例 ID 见 `test_cases.csv`，需求索引见 `requirements_trace.csv`。表内状态对应完整场景。
 
 | AT ID | 操作 | 成功标准 | 关联需求 | 状态 |
 |---|---|---|---|---|
@@ -23,3 +23,7 @@
 | AT-17 | 海上运输—战斗—占领—舰队/战役回写（扩展） | 船舶、船员、港口与货物一致，旧本体存档有迁移策略 | NAVAL（EXT） | NOT_RUN |
 
 文档镜像版：需求追踪表的 `document_paths` 及模块用例表的 `document_path` 指向 `docs/systems/` 内唯一权威 SDD；`code_paths` 列出计划实现目录。测试状态和原有判据不变。
+
+## P1 切片证据
+
+AT-10 的四个结算写入断点覆盖进程终止、冷启动和重发，账户及回执恰好提交一次。AT-15 已覆盖同一世界 50 次 Mission 切换、写盘与重载，完整八小时压力尚未执行。完整场景状态见上表。[运行记录](../../development/reports/tests/P1/session/README.md)

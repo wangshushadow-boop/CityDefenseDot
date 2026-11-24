@@ -2,13 +2,20 @@
   "schema_version": 1,
   "modules": {
     "BOOT": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P1-BOOT",
         "P6-NET-INTEGRATION"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-BOOT-01",
+        "T-BOOT-02",
+        "T-BOOT-03"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-BOOT-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "CORE": {
       "status": "VERIFIED",

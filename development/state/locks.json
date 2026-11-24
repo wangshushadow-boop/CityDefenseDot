@@ -1,23 +1,5 @@
 {
   "schema_version": 1,
-  "locks": [
-    {
-      "task_id": "P1-BOOT-001",
-      "owner": "p1-bootstrap",
-      "branch": "detached",
-      "base_commit": "7bff1a63fd5e6aa35df5ca40a80b0bf452282205",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-bootstrap",
-      "allowed_paths": [
-        "game/bootstrap/",
-        "game/tests/p1/bootstrap/",
-        "development/reports/tasks/P1-BOOT-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/project.godot"
-      ]
-    }
-  ],
+  "locks": [],
   "note": "P1 分批按任务独占写范围，集成后释放。"
 }

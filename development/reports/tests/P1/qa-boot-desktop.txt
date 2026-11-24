@@ -1,0 +1,7 @@
+desktop-actions Godot exit=0 elapsed=2.91s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090
+
+P1_BOOT {"content_hash":"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579","display":"Windows","event":"ready","exit_code":0,"failed_module":"","mission_tick":0,"presentation_loaded":true,"profile":"client","protocol_version":1,"release_order":[],"state_hash":""}
+QA-BOOT-NORMAL display=Windows checks=7 failures=0
+P1_BOOT {"content_hash":"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579","display":"Windows","event":"stopped","exit_code":0,"failed_module":"","mission_tick":3,"presentation_loaded":true,"profile":"client","protocol_version":1,"release_order":["session","persistence","engine","core","content","compiler","telemetry"],"state_hash":""}

@@ -29,3 +29,7 @@ Mission 的同一已记录权威实例在实际 Windows 与 headless 重放，�
 APP 候选的 48 项独立鉴权、幂等、失败恢复断言通过。65,537 项的 APP 规范回执可恢复；独立 QA 从合规的旧 v1 存档实际写入第 65,537 个关键赛果，17 页逐条校验、冷读、最早回执重发与旧版备份通过。[APP 独立输出](qa-application.txt) · [长档实盘](qa-persist-pages.txt)
 
 c6981d3 的 Session 跨模块实测满足 T-TEST-03 的结算故障判据：写前、写中、标记前及标记后中止，再用新进程重发，同一奖励只有一笔。T-PERSIST-04 的完整 50 次 Mission 切换、保存、重载通过，关闭后节点、对象、资源和引擎租约回到预热基线。结算夹具注入结果与奖励规则，完整 AT-10 保留 NOT_RUN。[逐次指标、历史失败与断点记录](session/README.md)
+
+## 启动回归
+
+普通 Windows 客户端的按钮走生产 Session，完成新建、保存、训练、退出及重新读盘；普通 headless 进程持续运行到第 15 个固定步，未创建 Control，随后逆序释放服务。早期 BOOT 候选在缺少必需 battle_limit 时进入训练后才抛出脚本错误。修订后在 content 装配阶段返回具体字段、清理已创建服务，预期退出 1。注册环可在构造 Session 前检出；清理遇到可重试错误时，业务入口保持关闭。[双端对照脚本](boot_profiles.py) · [普通菜单实测](qa-boot-desktop.txt)

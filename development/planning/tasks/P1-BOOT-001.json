@@ -46,5 +46,5 @@
     "从同一组合根启动桌面和 headless，用 test/CI 接口验证同一 Mission 固定步状态。阶段集成追加 50 次真实 Mission 切换与磁盘重载，单列 AT-15 长周期条件。",
     "集成脚本约定：主场景为 res://bootstrap/main.tscn，测试启动参数 -- --p1-smoke。日志同时输出 profile、协议版本、内容摘要、Mission tick 和退出码。普通桌面启动提供调用真实 Session 的入口，普通 headless 启动维持权威运行。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

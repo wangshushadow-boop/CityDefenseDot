@@ -1,0 +1,4 @@
+missing-config Godot exit=1 elapsed=0.55s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1_BOOT {"content_hash":"","display":"headless","error":{"code":"InvalidArgument","detail":null,"field":"content.battle_limit","message_key":"error.invalid_argument","retryable":false},"event":"failed","exit_code":1,"failed_module":"content","mission_tick":0,"presentation_loaded":false,"profile":"headless","protocol_version":1,"release_order":["compiler","telemetry"],"state_hash":""}

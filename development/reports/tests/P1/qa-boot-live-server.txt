@@ -1,0 +1,6 @@
+authority-close Godot exit=0 elapsed=0.83s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1_BOOT {"content_hash":"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579","display":"headless","event":"ready","exit_code":0,"failed_module":"","mission_tick":0,"presentation_loaded":false,"profile":"headless","protocol_version":1,"release_order":[],"state_hash":""}
+QA-BOOT-NORMAL display=headless checks=1 failures=0
+P1_BOOT {"content_hash":"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579","display":"headless","event":"stopped","exit_code":0,"failed_module":"","mission_tick":15,"presentation_loaded":false,"profile":"headless","protocol_version":1,"release_order":["session","persistence","engine","core","content","compiler","telemetry"],"state_hash":""}

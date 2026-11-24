@@ -1,7 +1,7 @@
 test_id,module,requirement,given,when,then,status,evidence,document_path,code_paths
-T-BOOT-01,BOOT,§20.2,两个模块互相 requires,启动,拒绝并显示环路且未构造 Session,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
-T-BOOT-02,BOOT,§19.1 / NET-01,headless 配置、无显示设备,启动专服,不加载 UI/音频且 Mission 端口可运行,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
-T-BOOT-03,BOOT,§20.3,内容载入错误,启动,逆序释放已建服务，返回可诊断报告,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
+T-BOOT-01,BOOT,§20.2,两个模块互相 requires,启动,拒绝并显示环路且未构造 Session,PASS,development/reports/tests/P1/bootstrap.txt,docs/systems/game/bootstrap/README.md,game/bootstrap/
+T-BOOT-02,BOOT,§19.1 / NET-01,headless 配置、无显示设备,启动专服,不加载 UI/音频且 Mission 端口可运行,PASS,development/reports/tests/P1/bootstrap.txt,docs/systems/game/bootstrap/README.md,game/bootstrap/
+T-BOOT-03,BOOT,§20.3,内容载入错误,启动,逆序释放已建服务，返回可诊断报告,PASS,development/reports/tests/P1/bootstrap.txt,docs/systems/game/bootstrap/README.md,game/bootstrap/
 T-CORE-01,CORE,WLD-02,固定种子、相同事件和不同 worker 数,重复运行纯逻辑,相位顺序、随机状态与哈希一致,PASS,development/reports/tests/P1/core.txt,docs/systems/game/core/README.md,game/core/
 T-CORE-02,CORE,BAT-05,旧 Mission 作业延迟返回,销毁并新建 Mission,旧结果被拒绝，无跨任务写入,PASS,development/reports/tests/P1/core.txt,docs/systems/game/core/README.md,game/core/
 T-CORE-03,CORE,§3.3,事件订阅不断生成后续命令,执行,达到预算，后续可诊断，不无限递归,PASS,development/reports/tests/P1/core.txt,docs/systems/game/core/README.md,game/core/
