@@ -1,0 +1,5 @@
+SESSION_BASELINE {"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1512,"orphans":0,"resources":22,"static_bytes":30180368}
+SESSION_AFTER_CLOSE {"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1513,"orphans":0,"resources":22,"static_bytes":30184684}
+FAIL post-close node, object, resource and lease baseline [{ "objects": 1512, "nodes": 1, "orphans": 0, "resources": 22, "static_bytes": 30180368, "engine": { "scopes": 0, "leases": 0, "requests": 0 } }, { "objects": 1513, "nodes": 1, "orphans": 0, "resources": 22, "static_bytes": 30184684, "engine": { "scopes": 0, "leases": 0, "requests": 0 } }]
+SESSION_END cycles FAIL
+PROCESS cycles/cycles exit=1

@@ -1,0 +1,66 @@
+ENGINE 4.7.2.stable.official.ed1daf0bf
+SOURCE application/game_session.gd sha256=9f92daddeff402bf675237222864023c38f7fd82b8498f01ee8bf06bbcf700af
+SOURCE application/receipt_book.gd sha256=46fb82e750f6b5998bbf2e552f00c8a10b6a5bb934313858adae72748f74a6ca
+SOURCE infrastructure/persistence/save_service.gd sha256=14b685938578459c6a250cbc0a77e2eb4bf1af7fc41b3a0f319cf2d620a1acb7
+SOURCE tests/p1/application/fixture.gd sha256=da4f8535cde278998ea9dcca95c421e548567f77517f09591bb8a875ed1cbe84
+SOURCE qa_session.gd sha256=c7d12e4bcc099002cb18803c1787afbac3c02162ae2692a316238955d25c3e3f
+SESSION_BASELINE {"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1513,"orphans":0,"resources":22,"static_bytes":30208332}
+SESSION_CYCLE {"cycle":1,"elapsed_ms":1755,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30236236}
+SESSION_CYCLE {"cycle":2,"elapsed_ms":1847,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30246152}
+SESSION_CYCLE {"cycle":3,"elapsed_ms":1895,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30254388}
+SESSION_CYCLE {"cycle":4,"elapsed_ms":1948,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30262648}
+SESSION_CYCLE {"cycle":5,"elapsed_ms":1941,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30270860}
+SESSION_CYCLE {"cycle":6,"elapsed_ms":1951,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30279144}
+SESSION_CYCLE {"cycle":7,"elapsed_ms":1958,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30287356}
+SESSION_CYCLE {"cycle":8,"elapsed_ms":1990,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30295568}
+SESSION_CYCLE {"cycle":9,"elapsed_ms":2008,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30303876}
+SESSION_CYCLE {"cycle":10,"elapsed_ms":2005,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30312088}
+SESSION_CYCLE {"cycle":11,"elapsed_ms":2016,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30320300}
+SESSION_CYCLE {"cycle":12,"elapsed_ms":2040,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30328512}
+SESSION_CYCLE {"cycle":13,"elapsed_ms":2013,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30336868}
+SESSION_CYCLE {"cycle":14,"elapsed_ms":2040,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30345080}
+SESSION_CYCLE {"cycle":15,"elapsed_ms":2081,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30353292}
+SESSION_CYCLE {"cycle":16,"elapsed_ms":2062,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30361504}
+SESSION_CYCLE {"cycle":17,"elapsed_ms":2061,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30369716}
+SESSION_CYCLE {"cycle":18,"elapsed_ms":2088,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30378504}
+SESSION_CYCLE {"cycle":19,"elapsed_ms":2125,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30386932}
+SESSION_CYCLE {"cycle":20,"elapsed_ms":2101,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30395144}
+SESSION_CYCLE {"cycle":21,"elapsed_ms":2121,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30403356}
+SESSION_CYCLE {"cycle":22,"elapsed_ms":2158,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30411568}
+SESSION_CYCLE {"cycle":23,"elapsed_ms":2146,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30419780}
+SESSION_CYCLE {"cycle":24,"elapsed_ms":2146,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30427992}
+SESSION_CYCLE {"cycle":25,"elapsed_ms":2148,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30436204}
+SESSION_CYCLE {"cycle":26,"elapsed_ms":2173,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30444416}
+SESSION_CYCLE {"cycle":27,"elapsed_ms":2181,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30452628}
+SESSION_CYCLE {"cycle":28,"elapsed_ms":2177,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30461176}
+SESSION_CYCLE {"cycle":29,"elapsed_ms":2207,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30469388}
+SESSION_CYCLE {"cycle":30,"elapsed_ms":2235,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30477600}
+SESSION_CYCLE {"cycle":31,"elapsed_ms":2186,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30485812}
+SESSION_CYCLE {"cycle":32,"elapsed_ms":2187,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30494024}
+SESSION_CYCLE {"cycle":33,"elapsed_ms":2241,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30502236}
+SESSION_CYCLE {"cycle":34,"elapsed_ms":2226,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30510448}
+SESSION_CYCLE {"cycle":35,"elapsed_ms":2261,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30518660}
+SESSION_CYCLE {"cycle":36,"elapsed_ms":2283,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30528072}
+SESSION_CYCLE {"cycle":37,"elapsed_ms":2232,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30536284}
+SESSION_CYCLE {"cycle":38,"elapsed_ms":2252,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30544496}
+SESSION_CYCLE {"cycle":39,"elapsed_ms":2267,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30552708}
+SESSION_CYCLE {"cycle":40,"elapsed_ms":2270,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30560920}
+SESSION_CYCLE {"cycle":41,"elapsed_ms":2309,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30569132}
+SESSION_CYCLE {"cycle":42,"elapsed_ms":2341,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30577848}
+SESSION_CYCLE {"cycle":43,"elapsed_ms":2309,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30586060}
+SESSION_CYCLE {"cycle":44,"elapsed_ms":2323,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30594272}
+SESSION_CYCLE {"cycle":45,"elapsed_ms":2391,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30602484}
+SESSION_CYCLE {"cycle":46,"elapsed_ms":2360,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30610696}
+SESSION_CYCLE {"cycle":47,"elapsed_ms":2322,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30618908}
+SESSION_CYCLE {"cycle":48,"elapsed_ms":2362,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30627120}
+SESSION_CYCLE {"cycle":49,"elapsed_ms":2369,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30635332}
+SESSION_CYCLE {"cycle":50,"elapsed_ms":2341,"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1516,"orphans":0,"resources":22,"static_bytes":30643544}
+SESSION_AFTER_CLOSE {"engine":{"leases":0,"requests":0,"scopes":0},"nodes":1,"objects":1513,"orphans":0,"resources":22,"static_bytes":30211248}
+SESSION_END cycles PASS
+PROCESS cycles/cycles exit=0
+SERIES nodes first=1 last=1 range=1..1
+SERIES orphans first=0 last=0 range=0..0
+SERIES resources first=22 last=22 range=22..22
+SERIES objects first=1516 last=1516 range=1516..1516
+DISK cycles/cycles source=primary commit=a58aed5d4a2dbe9bc5044853d61636f6 sha256=851ff01cd2a09929df9d85ad7845fa4d52e9983b70b0390593c6ab5d3255848e balances=[50, 51] results=50
+P1_SESSION_INTEGRATION PASS

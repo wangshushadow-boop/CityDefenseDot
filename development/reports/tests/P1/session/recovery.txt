@@ -1,0 +1,51 @@
+ENGINE 4.7.2.stable.official.ed1daf0bf
+SOURCE application/game_session.gd sha256=9f92daddeff402bf675237222864023c38f7fd82b8498f01ee8bf06bbcf700af
+SOURCE application/receipt_book.gd sha256=46fb82e750f6b5998bbf2e552f00c8a10b6a5bb934313858adae72748f74a6ca
+SOURCE infrastructure/persistence/save_service.gd sha256=14b685938578459c6a250cbc0a77e2eb4bf1af7fc41b3a0f319cf2d620a1acb7
+SOURCE tests/p1/application/fixture.gd sha256=da4f8535cde278998ea9dcca95c421e548567f77517f09591bb8a875ed1cbe84
+SOURCE qa_session.gd sha256=c7d12e4bcc099002cb18803c1787afbac3c02162ae2692a316238955d25c3e3f
+SESSION_CHECKPOINT commit=0526551f75c0d73fb8c322c4897db5e3 payer=100 reserve=1 result_count=0
+PROCESS before_write/crash exit=0
+DISK before_write/crash source=primary commit=bc0542b2df00390efcd5a127da8ad174 sha256=216738cc7e3c5c8c715da437548dd39aa12ee5fc8888b49d5198229db9c72cbe balances=[100, 1] results=0
+SESSION_RETRY point=before_write action=retry pending_before=true source_before=primary payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END retry PASS
+PROCESS before_write/retry exit=0
+DISK before_write/retry source=primary commit=c21ccfbb828f52f409a64dc463ed0f51 sha256=7efed8ac8a102fe4279e6116b0522f329888fc3d9a58ebed9f57d0e5443ead34 balances=[99, 2] results=1
+SESSION_RETRY point=before_write action=inspect pending_before=false source_before=primary payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END inspect PASS
+PROCESS before_write/inspect exit=0
+DISK before_write/inspect source=primary commit=c21ccfbb828f52f409a64dc463ed0f51 sha256=7efed8ac8a102fe4279e6116b0522f329888fc3d9a58ebed9f57d0e5443ead34 balances=[99, 2] results=1
+SESSION_CHECKPOINT commit=35c6b573118339cb5cd5a93f79a6917c payer=100 reserve=1 result_count=0
+PROCESS partial_world/crash exit=0
+DISK partial_world/crash source=primary commit=42ca72dfc0ddf8ad2ec994e8390cb3de sha256=9a909470223db64ffc3234b670a28f25c9fff5bf7878c61ce8d1819d2e246a38 balances=[100, 1] results=0
+SESSION_RETRY point=partial_world action=retry pending_before=true source_before=primary payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END retry PASS
+PROCESS partial_world/retry exit=0
+DISK partial_world/retry source=primary commit=e4d4db5128acfac3596639f9fbb1fd01 sha256=35a74a11327ea3018c856bae6c13144d60df7d2e7fc40a6b375d3334fbda2f87 balances=[99, 2] results=1
+SESSION_RETRY point=partial_world action=inspect pending_before=false source_before=primary payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END inspect PASS
+PROCESS partial_world/inspect exit=0
+DISK partial_world/inspect source=primary commit=e4d4db5128acfac3596639f9fbb1fd01 sha256=35a74a11327ea3018c856bae6c13144d60df7d2e7fc40a6b375d3334fbda2f87 balances=[99, 2] results=1
+SESSION_CHECKPOINT commit=f40bad519a2d88581f136d5b37e99754 payer=100 reserve=1 result_count=0
+PROCESS before_marker/crash exit=0
+DISK before_marker/crash source=backup commit=655ffb592157f65190689f8fdb57a7aa sha256=bf94facb2e9fca4694174a2ebb3a209e69bc127f9c739ac18d9d9d521cbc7fcd balances=[100, 1] results=0
+SESSION_RETRY point=before_marker action=retry pending_before=true source_before=backup payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END retry PASS
+PROCESS before_marker/retry exit=0
+DISK before_marker/retry source=primary commit=1b70dd173c993f1a51d9a561dc8f6e96 sha256=471ef397384b49d13657cd526097bcaf80041106aa2dffa6af9c1828eba7d44a balances=[99, 2] results=1
+SESSION_RETRY point=before_marker action=inspect pending_before=false source_before=primary payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END inspect PASS
+PROCESS before_marker/inspect exit=0
+DISK before_marker/inspect source=primary commit=1b70dd173c993f1a51d9a561dc8f6e96 sha256=471ef397384b49d13657cd526097bcaf80041106aa2dffa6af9c1828eba7d44a balances=[99, 2] results=1
+SESSION_CHECKPOINT commit=468a8c86341759e0b8701ea88f694aa5 payer=100 reserve=1 result_count=0
+PROCESS after_marker/crash exit=0
+DISK after_marker/crash source=primary commit=7c0e50a9877ff95cf2e839c60e297483 sha256=2443669a6b5056d873410d99df15c05ee5d012cbc00899361f051284947d857e balances=[99, 2] results=1
+SESSION_RETRY point=after_marker action=retry pending_before=false source_before=primary payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END retry PASS
+PROCESS after_marker/retry exit=0
+DISK after_marker/retry source=primary commit=7c0e50a9877ff95cf2e839c60e297483 sha256=2443669a6b5056d873410d99df15c05ee5d012cbc00899361f051284947d857e balances=[99, 2] results=1
+SESSION_RETRY point=after_marker action=inspect pending_before=false source_before=primary payer=99 reserve=2 result_count=1 receipt_revision=3
+SESSION_END inspect PASS
+PROCESS after_marker/inspect exit=0
+DISK after_marker/inspect source=primary commit=7c0e50a9877ff95cf2e839c60e297483 sha256=2443669a6b5056d873410d99df15c05ee5d012cbc00899361f051284947d857e balances=[99, 2] results=1
+P1_SESSION_INTEGRATION PASS

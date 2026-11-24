@@ -146,7 +146,7 @@ T-AUD-03,AUD,BAT-05,结束 Mission,释放音源,无残留跨场景播放,NOT_RUN
 T-PERSIST-01,PERSIST,SAV-01,多槽、世界多年状态和 RNG,保存加载,规范化领域快照一致,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-PERSIST-02,PERSIST,SAV-02 / BAT-03,写前/中/提交标记后模拟断电或磁盘满,恢复重试,读有效前/后版本，结果恰好一次,PASS,development/reports/tests/P1/persistence.txt,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-PERSIST-03,PERSIST,SAV-03,旧 schema、动态锻造物品、缺 MOD,加载,逐级迁移或明确拒绝，原档保留,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
-T-PERSIST-04,PERSIST,§22.2 / AT-15,50 次 Mission 切换和存档,循环,无泄漏、存档可载入,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
+T-PERSIST-04,PERSIST,§22.2 / AT-15,50 次 Mission 切换和存档,循环,无泄漏、存档可载入,PASS,development/reports/tests/P1/session/cycles.txt,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-INF-CONTENT-01,INF-CONTENT,EXT-01 / MOD-05,新增文化/兵种/装备/规则/任务/场景/AI MOD,编译加载,通过公开扩展点不改核心,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
 T-INF-CONTENT-02,INF-CONTENT,EXT-02,循环依赖、补丁冲突、危险路径、多人哈希不符,验证,拒绝并定位包,PASS,development/reports/tests/P1/content.txt,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
 T-INF-CONTENT-03,INF-CONTENT,EXT-03,发布包 API 版本和许可证齐全,编译发布,输出可复现哈希和报告,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
@@ -201,7 +201,7 @@ T-TOOLS-02,TOOLS,ECO-06 / SAI-03,20 固定种子多年仿真,运行,报告硬不
 T-TOOLS-03,TOOLS,BAI-06 / §19.4,500/1000 真战斗基准,运行,完整硬件、帧/tick、内存报告,NOT_RUN,,docs/systems/tools/README.md,tools/
 T-TEST-01,TEST,§22.2 / AT-01–AT-17,完整 fixture 与构建,执行端到端矩阵,所有 MUST 场景通过，EXT 独立,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
 T-TEST-02,TEST,§22.3,20 固定种子及随机种子,1/3/10 年仿真,硬不变量零失败，软指标有报告,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
-T-TEST-03,TEST,BAT-03 / SAV-02,结算提交前/中/后故障,恢复,恰好一次提交,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
+T-TEST-03,TEST,BAT-03 / SAV-02,结算提交前/中/后故障,恢复,恰好一次提交,PASS,development/reports/tests/P1/session/recovery.txt,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
 T-TEST-04,TEST,BAI-06 / NET-06,战斗和多人容量基准,压力,真实动作/AI/导航，不丢权威状态,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
 T-CI-01,CI,§20.2,领域 import presentation 或形成环,依赖检查,阻断并报告路径,NOT_RUN,,docs/systems/ci/README.md,ci/
 T-CI-02,CI,§23.3,任一 MUST 测试未通过或证据缺失,发布门禁,拒绝发布,NOT_RUN,,docs/systems/ci/README.md,ci/

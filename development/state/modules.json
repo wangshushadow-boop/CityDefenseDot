@@ -424,7 +424,8 @@
         "P7-POLISH"
       ],
       "verified_test_ids": [
-        "T-PERSIST-02"
+        "T-PERSIST-02",
+        "T-PERSIST-04"
       ],
       "evidence": [
         "development/reports/tasks/P1-PERSIST-CORE-001.md",
@@ -595,7 +596,9 @@
         "P6-NET-INTEGRATION",
         "P7-TEST-RELEASE"
       ],
-      "verified_test_ids": [],
+      "verified_test_ids": [
+        "T-TEST-03"
+      ],
       "evidence": [
         "development/reports/tasks/P1-TEST-HARNESS-001.md",
         "development/reports/stages/P1.md"

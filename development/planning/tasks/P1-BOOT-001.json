@@ -33,8 +33,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "7bff1a63fd5e6aa35df5ca40a80b0bf452282205",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-bootstrap",
   "scope": "选定引擎工程入口、组合根、运行 profile、失败清理；headless 基础验证。 实际 GUI/headless 启动同一组合根、图校验、失败逆序释放，与内容真实装配。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -46,5 +46,5 @@
     "从同一组合根启动桌面和 headless，用 test/CI 接口验证同一 Mission 固定步状态。阶段集成追加 50 次真实 Mission 切换与磁盘重载，单列 AT-15 长周期条件。",
     "集成脚本约定：主场景为 res://bootstrap/main.tscn，测试启动参数 -- --p1-smoke。日志同时输出 profile、协议版本、内容摘要、Mission tick 和退出码。普通桌面启动提供调用真实 Session 的入口，普通 headless 启动维持权威运行。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }
