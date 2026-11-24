@@ -16,7 +16,7 @@
   },
   "authorized_by": "项目负责人，本次会话授权开始 P1",
   "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
-  "integrated_commit": "98a64dd017cca657992c2680dad7e4f2dd45f6b3",
+  "integrated_commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",

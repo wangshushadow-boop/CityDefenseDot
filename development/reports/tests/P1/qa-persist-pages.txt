@@ -1,0 +1,24 @@
+source_sha256=14b685938578459c6a250cbc0a77e2eb4bf1af7fc41b3a0f319cf2d620a1acb7
+synthetic_legacy_facts=65536 bytes=8782052 sha256=8d087b4ef6e0a9cb4abce14bec9b41c57ef73162a9d375ee47b37b8f7d151fe1
+commit: exit=0 elapsed=10.16s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+QA-ARCHIVE commit PASS {"ok":true,"value":{"commit_id":"7a0ab97dc64c2f6ea78ae51d0d008635"}}
+python_verified=65537 page_count=17 upgraded_bytes=8782248 sha256=e75feff89f3f99162b465be7574e00d3d46fb2e8bf441cfd08d2119eab001355
+recover: exit=0 elapsed=6.47s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+QA-ARCHIVE recover PASS {"count":65537,"day":65537,"source":"primary"}
+replay-old: exit=0 elapsed=6.36s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+QA-ARCHIVE replay-old PASS {"ok":true,"value":{"commit_id":"00000000000000000000000000000001"}}
+conflict: exit=0 elapsed=0.26s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+QA-ARCHIVE conflict PASS {"error":{"code":"Conflict","detail":null,"field":"applied_result_id","message_key":"error.conflict","retryable":false},"ok":false}
+duplicate-pages: exit=0 elapsed=0.25s
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+QA-ARCHIVE duplicate-pages PASS {"error":{"code":"InvalidState","detail":null,"field":"world.fields","message_key":"error.invalid_state","retryable":false},"ok":false}
+QA-PERSIST-ARCHIVE PASS

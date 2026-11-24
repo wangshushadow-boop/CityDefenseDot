@@ -8,9 +8,9 @@ T-CORE-03,CORE,§3.3,事件订阅不断生成后续命令,执行,达到预算，
 T-CON-01,CON,BAT-03,结果中的 source_slot 重复或版本错误,验证,拒绝并定位字段，世界无写入,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
 T-CON-02,CON,NET-05,客户端协议主版本或内容哈希不符,握手,拒绝并说明兼容版本,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
 T-CON-03,CON,SAV-03,旧字段版本及未知关键字段,解码,迁移受支持版本，否则明确拒绝,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
-T-APP-01,APP,BAT-03,结果已提交但回执丢失,重复提交同 result_id,返回原回执，资产和 revision 不再变化,NOT_RUN,,docs/systems/game/application/README.md,game/application/
-T-APP-02,APP,BAT-04 / MOD-03,加载已有战役后进入自定义战斗,完成并退出,战役快照哈希不变,NOT_RUN,,docs/systems/game/application/README.md,game/application/
-T-APP-03,APP,BAT-05,Mission 资源加载失败,返回地图,恢复旧状态、预留释放且无旧回调,NOT_RUN,,docs/systems/game/application/README.md,game/application/
+T-APP-01,APP,BAT-03,结果已提交但回执丢失,重复提交同 result_id,返回原回执，资产和 revision 不再变化,PASS,development/reports/tests/P1/application.txt,docs/systems/game/application/README.md,game/application/
+T-APP-02,APP,BAT-04 / MOD-03,加载已有战役后进入自定义战斗,完成并退出,战役快照哈希不变,PASS,development/reports/tests/P1/application.txt,docs/systems/game/application/README.md,game/application/
+T-APP-03,APP,BAT-05,Mission 资源加载失败,返回地图,恢复旧状态、预留释放且无旧回调,PASS,development/reports/tests/P1/application.txt,docs/systems/game/application/README.md,game/application/
 T-APP-04,APP,MOD-01 / MOD-02,创建剧情或沙盒,进入地图,正确注册模式规则，沙盒无强制主线,NOT_RUN,,docs/systems/game/application/README.md,game/application/
 T-CAMP-01,CAMP,WLD-02,日结执行到一半预算耗尽,下一帧继续,所有 day_id 阶段一次完成且最终账本一致,PASS,development/reports/tests/P1/campaign.txt,docs/systems/game/campaign/README.md,game/campaign/
 T-CAMP-02,CAMP,WLD-04,战役进入访问或战斗,结束返回,时间按规则推进、远方状态不丢失,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "P1-PERSIST-CORE-002",
+  "kind": "EXECUTION",
+  "parent": "P1-PERSIST-CORE",
+  "stage": "P1",
+  "module_id": "PERSIST",
+  "title": "关键赛果账本分页与旧档读取",
+  "spec": "docs/systems/game/infrastructure/persistence/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CON",
+    "P1-CORE",
+    "P1-DEF"
+  ],
+  "requirements": [
+    "BAT-03",
+    "SAV-01",
+    "SAV-02",
+    "SAV-03"
+  ],
+  "acceptance_test_ids": [
+    "T-PERSIST-01",
+    "T-PERSIST-02",
+    "T-PERSIST-03",
+    "T-PERSIST-04"
+  ],
+  "allowed_paths": [
+    "game/infrastructure/persistence/save_service.gd",
+    "game/tests/p1/persistence/ledger_pages.gd",
+    "game/tests/p1/persistence/ledger_pages.gd.uid",
+    "development/reports/tasks/P1-PERSIST-CORE-002.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "e1b3c79010decdd694da3b1cec00a5b8f237b0dc",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-persist-pages",
+  "scope": "在原有关键提交中归档赛果索引，支持超过 65,536 项并保留旧回执。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "实测 65,537 条完整事实、旧格式读取、重复页拒绝、原有真实文件事务回归。"
+  ],
+  "status": "DONE"
+}

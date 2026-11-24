@@ -46,7 +46,7 @@
       "candidate_commit": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2"
     },
     "APP": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-CONTRACTS",
         "P1-APP-CORE",
@@ -54,8 +54,15 @@
         "P4-SOCIETY-INTEGRATION",
         "P5-SINGLE-INTEGRATION"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-APP-01",
+        "T-APP-02",
+        "T-APP-03"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "CAMP": {
       "status": "PARTIAL",

@@ -281,16 +281,18 @@
       "status": "DONE",
       "owner": "p1-persistence",
       "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
-      "candidate_commit": "01166d7237c18fe7491e14ec9c6673c7842d886c",
-      "integrated_commit": "1c387d244167a8d5569ad2b9bf384f1e435a9885",
+      "candidate_commit": "6bd6daaf9ac5be63ff395a25c722970711f1777b",
+      "integrated_commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be",
       "evidence": [
         "development/reports/tasks/P1-PERSIST-CORE-001.md",
         "development/reports/reviews/P1.md",
         "development/reports/tests/P1/README.md",
-        "development/reports/integration/P1.md"
+        "development/reports/integration/P1.md",
+        "development/reports/tasks/P1-PERSIST-CORE-002.md"
       ],
       "child_ids": [
-        "P1-PERSIST-CORE-001"
+        "P1-PERSIST-CORE-001",
+        "P1-PERSIST-CORE-002"
       ]
     },
     "P1-INF-ENGINE-PORTS": {
@@ -358,12 +360,17 @@
       ]
     },
     "P1-APP-CORE": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1-application",
       "base_commit": "98a64dd017cca657992c2680dad7e4f2dd45f6b3",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "7928a492feaa47c20331615d1d0bfa2651c78868",
+      "integrated_commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": [
         "P1-APP-CORE-001"
       ]
@@ -1362,12 +1369,17 @@
       "child_ids": []
     },
     "P1-APP-CORE-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1-application",
       "base_commit": "98a64dd017cca657992c2680dad7e4f2dd45f6b3",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "7928a492feaa47c20331615d1d0bfa2651c78868",
+      "integrated_commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": []
     },
     "P1-BOOT-001": {
@@ -1418,6 +1430,20 @@
         "development/reports/integration/P1.md"
       ],
       "child_ids": []
+    },
+    "P1-PERSIST-CORE-002": {
+      "status": "DONE",
+      "owner": "root",
+      "base_commit": "e1b3c79010decdd694da3b1cec00a5b8f237b0dc",
+      "integrated_commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be",
+      "candidate_commit": "6bd6daaf9ac5be63ff395a25c722970711f1777b",
+      "child_ids": [],
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ]
     }
   },
   "transitions": [
@@ -5031,6 +5057,311 @@
       "reason": "主 Agent 分配隔离任务",
       "evidence": [],
       "commit": "98a64dd017cca657992c2680dad7e4f2dd45f6b3"
+    },
+    {
+      "task_id": "P1-APP-CORE",
+      "old": "IN_PROGRESS",
+      "new": "BLOCKED",
+      "time": "2026-11-24T22:02:41+08:00",
+      "reason": "独立测试发现底层长期存档上限，等待候选集成；现有兼容基线上的 APP 开发和独立探针继续",
+      "evidence": [],
+      "commit": "e1b3c79010decdd694da3b1cec00a5b8f237b0dc"
+    },
+    {
+      "task_id": "P1-APP-CORE-001",
+      "old": "IN_PROGRESS",
+      "new": "BLOCKED",
+      "time": "2026-11-24T22:02:41+08:00",
+      "reason": "独立测试发现底层长期存档上限，等待候选集成；现有兼容基线上的 APP 开发和独立探针继续",
+      "evidence": [],
+      "commit": "e1b3c79010decdd694da3b1cec00a5b8f237b0dc"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE",
+      "old": "DONE",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:02:41+08:00",
+      "reason": "下游集成揭示长期账本上限，执行专项回归",
+      "evidence": [],
+      "commit": "e1b3c79010decdd694da3b1cec00a5b8f237b0dc"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-002",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:02:41+08:00",
+      "reason": "正式登记已确认的边界回归",
+      "evidence": [],
+      "commit": "e1b3c79010decdd694da3b1cec00a5b8f237b0dc"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:02:41+08:00",
+      "reason": "独占存储目录修复",
+      "evidence": [],
+      "commit": "e1b3c79010decdd694da3b1cec00a5b8f237b0dc"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-APP-CORE",
+      "old": "BLOCKED",
+      "new": "READY",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "存档新回归已复审、独立 QA、合并复测通过",
+      "evidence": [],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-APP-CORE",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "恢复 APP 集成",
+      "evidence": [],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-APP-CORE-001",
+      "old": "BLOCKED",
+      "new": "READY",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "存档新回归已复审、独立 QA、合并复测通过",
+      "evidence": [],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-APP-CORE-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:07:23+08:00",
+      "reason": "恢复 APP 集成",
+      "evidence": [],
+      "commit": "9baf976b1e5bd28f4fe4452982f9a0e5240777be"
+    },
+    {
+      "task_id": "P1-APP-CORE-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
+    },
+    {
+      "task_id": "P1-APP-CORE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
+    },
+    {
+      "task_id": "P1-APP-CORE-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
+    },
+    {
+      "task_id": "P1-APP-CORE-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
+    },
+    {
+      "task_id": "P1-APP-CORE",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
+    },
+    {
+      "task_id": "P1-APP-CORE",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
+    },
+    {
+      "task_id": "P1-APP-CORE",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
+    },
+    {
+      "task_id": "P1-APP-CORE",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T22:08:09+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-APP-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "c6981d3be7dca45a7b40fcd717547a93a9c2dd3b"
     }
   ]
 }

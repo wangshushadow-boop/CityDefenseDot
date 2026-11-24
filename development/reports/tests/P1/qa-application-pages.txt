@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+
+QA-APP-BOOK-BOUNDARY histories=65537 pages=17 wire_bytes=16515388 recovered=true duplicate=true legacy=true

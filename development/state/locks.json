@@ -1,23 +1,5 @@
 {
   "schema_version": 1,
-  "locks": [
-    {
-      "task_id": "P1-APP-CORE-001",
-      "owner": "p1-application",
-      "branch": "detached",
-      "base_commit": "98a64dd017cca657992c2680dad7e4f2dd45f6b3",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-application",
-      "allowed_paths": [
-        "game/application/",
-        "game/tests/p1/application/",
-        "development/reports/tasks/P1-APP-CORE-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/project.godot"
-      ]
-    }
-  ],
+  "locks": [],
   "note": "P1 分批按任务独占写范围，集成后释放。"
 }
