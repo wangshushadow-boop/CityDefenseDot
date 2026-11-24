@@ -123,7 +123,10 @@ func register_system(phase: String, system: Dictionary) -> Dictionary:
 		return R.fail("InvalidArgument","system.transaction")
 	if typeof(system.get("can_retire",false)) != TYPE_BOOL or (system.get("can_retire",false) and phase not in ["damage","objectives"]):
 		return R.fail("InvalidArgument","system.can_retire")
-	_systems[id] = {"phase":phase,"run":system.run,"commit":system.get("commit",Callable()),
+	var gate: Variant = system.get("can_gate_waves",false)
+	if not gate is bool or (gate and (_field==null or phase!="objectives")):
+		return R.fail("InvalidArgument","system.can_gate_waves")
+	_systems[id] = {"can_gate_waves":gate,"phase":phase,"run":system.run,"commit":system.get("commit",Callable()),
 		"rollback":system.get("rollback",Callable()),"can_retire":system.get("can_retire",false)}
 	return R.ok()
 
@@ -207,13 +210,14 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 		staged = initial.value.entities
 	var context := _make_view(staged)
 	var ending := false
+	var excluded_teams := {}
 	for phase: String in PHASES:
 		# Ordinary reinforcements enter after this tick's damage, retirement
 		# and objective checks. Their first movement and action run next tick.
 		if phase == "snapshot" and _field != null and not opening and not ending and (_retry_wave or tick % _field.cooldown == 0):
 			if staged.active_sources < _spec.battle_limit and staged.spawned.size() < staged.reserved_count:
 				var limit := mini(_field.wave_size,_spec.battle_limit-staged.active_sources)
-				var wave: Dictionary = _field.auto_wave(staged,limit,_engine,_mission,_clear_sites)
+				var wave: Dictionary = _field.auto_wave(staged,limit,_engine,_mission,_clear_sites,excluded_teams)
 				if not wave.ok:
 					if wave.error.code not in ["Unavailable","StaleVersion"]:
 						return _abort_tick(wave,attempted)
@@ -242,6 +246,12 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 				return _abort_tick(R.fail("InvalidArgument","system.value"),attempted)
 			if phase == "objectives" and typeof(report.get("value")) == TYPE_DICTIONARY and report.value.get("outcome") != null:
 				ending = true
+			if _field != null and typeof(report.get("value")) == TYPE_DICTIONARY and report.value.has("withdrawn_team_keys"):
+				if not system.can_gate_waves:
+					return _abort_tick(R.fail("Unauthorized","system.wave_eligibility"),attempted)
+				var filtered: Dictionary = _field.exclude_teams(report.value.withdrawn_team_keys,excluded_teams)
+				if not filtered.ok:
+					return _abort_tick(filtered,attempted)
 			if system.can_retire:
 				var payload: Variant = report.get("value")
 				if typeof(payload) != TYPE_DICTIONARY or typeof(payload.get("retire_handles",[])) != TYPE_ARRAY:

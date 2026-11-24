@@ -192,11 +192,21 @@ func _allocate(entities: RefCounted, candidates: Array) -> Dictionary:
 	handles.make_read_only()
 	return R.ok({"entities":staged,"handles":handles})
 
-func auto_wave(entities: RefCounted, limit: int, engine: RefCounted, scope: String, clear_sites: Callable) -> Dictionary:
+# Consume only this step's objective projection; RULES owns withdrawal history.
+func exclude_teams(keys: Variant, excluded: Dictionary) -> Dictionary:
+	if not keys is Array:
+		return R.fail("InvalidArgument","withdrawn_team_keys")
+	for key in keys:
+		if typeof(key) not in [TYPE_STRING,TYPE_INT] or not _zones.has(key):
+			return R.fail("InvalidArgument","withdrawn_team_keys")
+		excluded[key] = true
+	return R.ok()
+
+func auto_wave(entities: RefCounted, limit: int, engine: RefCounted, scope: String, clear_sites: Callable, excluded: Dictionary = {}) -> Dictionary:
 	var counts := _counts(entities)
 	var possible := []
 	for side in _sides:
-		if counts.get(side.team,0) >= _zones[side.team].quota:
+		if excluded.has(side.team) or counts.get(side.team,0) >= _zones[side.team].quota:
 			continue
 		for point in _zones[side.team].points:
 			possible.append({"team_key":side.team,"spawn_position_mm":point})
