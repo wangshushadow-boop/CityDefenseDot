@@ -1,0 +1,166 @@
+{
+  "workload": "res://tests/p2/ai/run.gd",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "ticks_per_size": 120,
+  "hz": 60,
+  "target_p95_us": 16667,
+  "inputs": {
+    "tests/p2/ai/run.gd": "6f9c6e1632b03f9e4c1138b3347436c162af716c629083b275f141acc508edd0",
+    "tests/p2/ai/arena.tscn": "dfae6f7a526dd60701681a2668496f9dc8aa773eca303cf995f57cad8b33dd6f",
+    "mission/ai/ports/field_ai.gd": "dcb73008aa8687907388530627fa5b686a42d008ea932cb8ab1aa06ca9ce8354",
+    "mission/ai/perception/field_perception.gd": "7f87bd5ef1485b60c305deff8fb5b71272e873ed2aed588033367d9ed9890b5b",
+    "mission/ai/scheduler/field_schedule.gd": "334211ad2d69137a10e5901a169672f6bb6e6843f68884a74a4891af327d0b3f"
+  },
+  "runs": {
+    "baseline": [
+      {
+        "round": 1,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3165 ai_p95_us=4421 ai_p99_us=5161 combined_p95_us=10746 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=205.258333333333 schedule=377.558333333333 decisions=2732.95833333333 los_inclusive=832.375 cache_hits=130 scouts=196 group_contacts=396 mov=2098.625 project_mov=1192.98333333333 com=2407.64166666667",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6493 ai_p95_us=8491 ai_p99_us=9224 combined_p95_us=22310 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=499.983333333333 schedule=674.308333333333 decisions=5622.625 los_inclusive=1651.39166666667 cache_hits=167 scouts=196 group_contacts=396 mov=4393.40833333333 project_mov=2611.75 com=5061.5",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      },
+      {
+        "round": 2,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3048 ai_p95_us=3573 ai_p99_us=4083 combined_p95_us=9304 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=177.05 schedule=337.85 decisions=2600.95833333333 los_inclusive=797.116666666667 cache_hits=130 scouts=196 group_contacts=396 mov=2020.35 project_mov=1130.74166666667 com=2313.75",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6246 ai_p95_us=7660 ai_p99_us=8580 combined_p95_us=19340 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=410.908333333333 schedule=637.175 decisions=5341.49166666667 los_inclusive=1600.55 cache_hits=167 scouts=196 group_contacts=396 mov=4188.7 project_mov=2411.73333333333 com=4727.475",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      },
+      {
+        "round": 3,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3058 ai_p95_us=3732 ai_p99_us=4483 combined_p95_us=10447 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=174.033333333333 schedule=349.333333333333 decisions=2641.65 los_inclusive=818.366666666667 cache_hits=130 scouts=196 group_contacts=396 mov=2058.21666666667 project_mov=1156.76666666667 com=2425.8",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6145 ai_p95_us=6892 ai_p99_us=7198 combined_p95_us=18554 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=391.2 schedule=607.441666666667 decisions=5210.50833333333 los_inclusive=1548.85 cache_hits=167 scouts=196 group_contacts=396 mov=4125.21666666667 project_mov=2349.4 com=4775.13333333333",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      }
+    ],
+    "canonical_actions_only": [
+      {
+        "round": 1,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3344 ai_p95_us=4594 ai_p99_us=5187 combined_p95_us=9485 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=212.091666666667 schedule=409.308333333333 decisions=2864.45 los_inclusive=866.191666666667 cache_hits=130 scouts=196 group_contacts=396 mov=2261.71666666667 project_mov=1264.975 com=792.225",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=7779 ai_p95_us=12089 ai_p99_us=13852 combined_p95_us=26236 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=741.108333333333 schedule=843.4 decisions=6997.13333333333 los_inclusive=2050.625 cache_hits=167 scouts=196 group_contacts=396 mov=5346.525 project_mov=3073.55 com=2215.93333333333",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      },
+      {
+        "round": 2,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3407 ai_p95_us=4146 ai_p99_us=4808 combined_p95_us=9204 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=221.575 schedule=384.866666666667 decisions=2848.00833333333 los_inclusive=854.466666666667 cache_hits=130 scouts=196 group_contacts=396 mov=2182.30833333333 project_mov=1270.20833333333 com=811.241666666667",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6965 ai_p95_us=9531 ai_p99_us=10696 combined_p95_us=20898 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=561.516666666667 schedule=717.658333333333 decisions=5944.8 los_inclusive=1727.96666666667 cache_hits=167 scouts=196 group_contacts=396 mov=4640.75833333333 project_mov=2715.20833333333 com=1845.575",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      },
+      {
+        "round": 3,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3496 ai_p95_us=4291 ai_p99_us=4873 combined_p95_us=9083 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=230.383333333333 schedule=413.175 decisions=2980.33333333333 los_inclusive=907.216666666667 cache_hits=130 scouts=196 group_contacts=396 mov=2235.825 project_mov=1280.78333333333 com=818.758333333333",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6910 ai_p95_us=8962 ai_p99_us=10149 combined_p95_us=19244 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=533.616666666667 schedule=710.133333333333 decisions=5925.58333333333 los_inclusive=1732.9 cache_hits=167 scouts=196 group_contacts=396 mov=4686.69166666667 project_mov=2736.68333333333 com=1834.7",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      }
+    ],
+    "canonical_actions_and_timers": [
+      {
+        "round": 1,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3264 ai_p95_us=4375 ai_p99_us=5903 combined_p95_us=8655 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=201.316666666667 schedule=383.666666666667 decisions=2807.225 los_inclusive=848.341666666667 cache_hits=130 scouts=196 group_contacts=396 mov=2104.575 project_mov=1192.23333333333 com=444.566666666667",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=7134 ai_p95_us=8120 ai_p99_us=9326 combined_p95_us=16918 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=603.316666666667 schedule=722.041666666667 decisions=5936.90833333333 los_inclusive=1719.85 cache_hits=167 scouts=196 group_contacts=396 mov=4491.11666666667 project_mov=2718.625 com=999.725",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      },
+      {
+        "round": 2,
+        "exit": 0,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3110 ai_p95_us=3730 ai_p99_us=5162 combined_p95_us=7407 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=179.433333333333 schedule=352.141666666667 decisions=2687.65 los_inclusive=817.508333333333 cache_hits=130 scouts=196 group_contacts=396 mov=2052.55 project_mov=1193.04166666667 com=415.05",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6273 ai_p95_us=6974 ai_p99_us=7542 combined_p95_us=14574 cpu_budget=PASS",
+          "BAI_MEAN_US people=1000 publish=380.158333333333 schedule=622.741666666667 decisions=5367.95833333333 los_inclusive=1582.80833333333 cache_hits=167 scouts=196 group_contacts=396 mov=4100.41666666667 project_mov=2395.85833333333 com=846.958333333333",
+          "FIELD_AI errors=0"
+        ]
+      },
+      {
+        "round": 3,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3046 ai_p95_us=3660 ai_p99_us=5261 combined_p95_us=8163 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=171.516666666667 schedule=346.991666666667 decisions=2650.36666666667 los_inclusive=814.425 cache_hits=130 scouts=196 group_contacts=396 mov=2335.65833333333 project_mov=1335.49166666667 com=402.5",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=7067 ai_p95_us=8051 ai_p99_us=9259 combined_p95_us=18020 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=563.35 schedule=714.308333333333 decisions=5842.45833333333 los_inclusive=1700.41666666667 cache_hits=167 scouts=196 group_contacts=396 mov=5028.075 project_mov=3077.68333333333 com=959.425",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      }
+    ],
+    "candidate_with_view_cache": [
+      {
+        "round": 1,
+        "exit": 0,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3641 ai_p95_us=5212 ai_p99_us=6252 combined_p95_us=10220 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=280.65 schedule=448.75 decisions=3117.625 los_inclusive=932.5 cache_hits=130 scouts=196 group_contacts=396 mov=2377.29166666667 project_mov=1385.05833333333 com=502.741666666667",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6900 ai_p95_us=7543 ai_p99_us=7979 combined_p95_us=15950 cpu_budget=PASS",
+          "BAI_MEAN_US people=1000 publish=507.091666666667 schedule=684.75 decisions=5730.54166666667 los_inclusive=1679.86666666667 cache_hits=167 scouts=196 group_contacts=396 mov=4407.61666666667 project_mov=2609.95 com=928.758333333333",
+          "FIELD_AI errors=0"
+        ]
+      },
+      {
+        "round": 2,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3471 ai_p95_us=3964 ai_p99_us=4289 combined_p95_us=8201 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=227.75 schedule=400.466666666667 decisions=2874.63333333333 los_inclusive=860.758333333333 cache_hits=130 scouts=196 group_contacts=396 mov=2159.54166666667 project_mov=1282.61666666667 com=466.408333333333",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=7593 ai_p95_us=10198 ai_p99_us=12607 combined_p95_us=20152 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=717.925 schedule=787.016666666667 decisions=6391.31666666667 los_inclusive=1858.925 cache_hits=167 scouts=196 group_contacts=396 mov=4765.43333333333 project_mov=2858.6 com=1089.85833333333",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      },
+      {
+        "round": 3,
+        "exit": 1,
+        "measurements": [
+          "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3251 ai_p95_us=3712 ai_p99_us=4110 combined_p95_us=7635 cpu_budget=PASS",
+          "BAI_MEAN_US people=500 publish=184.558333333333 schedule=359.65 decisions=2737.18333333333 los_inclusive=838.241666666667 cache_hits=130 scouts=196 group_contacts=396 mov=2119.26666666667 project_mov=1178.03333333333 com=418.641666666667",
+          "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=7050 ai_p95_us=9034 ai_p99_us=11568 combined_p95_us=19162 cpu_budget=FAIL",
+          "BAI_MEAN_US people=1000 publish=520.941666666667 schedule=722.191666666667 decisions=6035.36666666667 los_inclusive=1782.56666666667 cache_hits=167 scouts=196 group_contacts=396 mov=4613.36666666667 project_mov=2722.01666666667 com=990.875",
+          "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+          "FIELD_AI errors=1"
+        ]
+      }
+    ]
+  }
+}

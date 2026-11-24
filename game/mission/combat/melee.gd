@@ -17,12 +17,15 @@ const MAX_CHARGE := 4
 var _tick := 0
 var _actors := {}
 var _querying := false
+# Only these actors have a pending timed transition. Entries follow their authority row across forks.
+var _timed := {}
 
 
 func fork():
 	var copy = get_script().new()
 	copy._tick = _tick
 	copy._actors = _actors.duplicate()
+	copy._timed = _timed.duplicate()
 	return copy
 
 
@@ -56,6 +59,7 @@ func remove_actor(handle: Dictionary) -> Dictionary:
 	if _actor(handle, _actors).is_empty():
 		return R.fail("NotFound", "actor_handle")
 	_actors.erase(handle.index)
+	_timed.erase(handle.index)
 	return R.ok()
 
 
@@ -75,6 +79,13 @@ static func _enter(state: Dictionary, phase: String, tick: int) -> void:
 		state.attack_id = ""
 		state.charge = 0
 		state.hit_set = {}
+
+
+static func _track_phase(clocks: Dictionary, index: int, phase: String) -> void:
+	if phase in ["Windup", "Active", "Recovery", "Stagger"]:
+		clocks[index] = true
+	else:
+		clocks.erase(index)
 
 
 static func _elapsed_phase(state: Dictionary, tick: int) -> String:
@@ -158,6 +169,38 @@ static func _apply(state: Dictionary, intent: Dictionary, tick: int) -> Dictiona
 		_:
 			return R.fail("InvalidArgument", "input_phase")
 	return R.ok()
+
+
+# A known local action contains only fixed ASCII strings, integers and booleans.
+# Delegate all other representations to the v1 validator for its exact error or acceptance.
+static func _schema_keys(data: Dictionary, fields: Dictionary) -> bool:
+	if data.size() != fields.size():
+		return false
+	for key in data:
+		if typeof(key) != TYPE_STRING or not fields.has(key):
+			return false
+	return true
+
+
+static func _canonical_handle(value: Variant) -> bool:
+	return (
+		typeof(value) == TYPE_DICTIONARY and _schema_keys(value, S.SHAPES.AgentHandle)
+		and V.integer(value.index, 0, V.MAX_U32) and V.integer(value.generation, 1, V.MAX_U32)
+	)
+
+
+static func _known_action(kind: String, intent: Dictionary) -> bool:
+	if kind == "EquipIntent" or not _schema_keys(intent, S.SHAPES[kind]):
+		return false
+	if not _canonical_handle(intent.actor_handle) or typeof(intent.direction) != TYPE_STRING or intent.direction not in DIRECTIONS:
+		return false
+	if kind == "BlockIntent":
+		return typeof(intent.held) == TYPE_BOOL
+	return (
+		typeof(intent.input_phase) == TYPE_STRING and intent.input_phase in ["start", "hold", "release", "cancel"]
+		and V.integer(intent.weapon_slot, 0, V.MAX_U32)
+		and (intent.target_hint == null or _canonical_handle(intent.target_hint))
+	)
 
 
 static func _contact_less(a: Dictionary, b: Dictionary) -> bool:
@@ -249,36 +292,43 @@ func step(tick: Variant, intents: Array, query_contacts: Callable = Callable()) 
 	# Structural errors reject the tick; an illegal action receives a rejection
 	# receipt and cannot stall other actors' fixed-step clocks.
 	var next := _actors.duplicate()
-	for index in next:
+	var clocks := _timed.duplicate()
+	for index in _timed:
 		var state: Dictionary = next[index]
 		var phase := _elapsed_phase(state, tick)
 		if phase != state.phase:
 			state = state.duplicate()
 			_enter(state, phase, tick)
 			next[index] = state
+			_track_phase(clocks, index, phase)
 	var receipts := []
 	for intent in intents:
 		if typeof(intent) != TYPE_DICTIONARY:
 			return R.fail("InvalidArgument", "intent")
 		var kind := "BlockIntent" if intent.has("held") else ("EquipIntent" if intent.has("item_ref") else "AttackIntent")
-		var validated := S.validate_shape(kind, intent)
-		if not validated.ok:
-			return validated
-		var state := _actor(intent.actor_handle, next)
-		if state.is_empty():
+		if not _known_action(kind, intent):
+			var validated := S.validate_shape(kind, intent)
+			if not validated.ok:
+				return validated
+		var state: Dictionary = next.get(intent.actor_handle.index, {})
+		if state.is_empty() or state.handle.generation != intent.actor_handle.generation:
 			receipts.append(R.fail("NotFound", "actor_handle"))
 			continue
+		var prior_phase: String = state.phase
 		state = state.duplicate()
-		var receipt := _apply(state, validated.value, tick)
+		var receipt := _apply(state, intent, tick)
 		if receipt.ok:
 			next[intent.actor_handle.index] = state
+			if state.phase != prior_phase:
+				_track_phase(clocks, intent.actor_handle.index, state.phase)
 		receipts.append(receipt)
 	var candidates := []
 	if not query_contacts.is_null():
 		if not query_contacts.is_valid():
 			return R.fail("Unavailable", "collision_query")
 		var active := []
-		for state: Dictionary in next.values():
+		for index in clocks:
+			var state: Dictionary = next[index]
 			if state.phase == "Active":
 				var swing := {"attacker":state.handle.duplicate(), "attack_id":state.attack_id, "direction":state.direction}
 				if state.has("weapons"):
@@ -305,6 +355,8 @@ func step(tick: Variant, intents: Array, query_contacts: Callable = Callable()) 
 		state.hp = maxi(0, state.hp - contacts.value.damages[index])
 		_enter(state, "Downed" if state.hp == 0 else "Stagger", tick)
 		next[index] = state
+		_track_phase(clocks, index, state.phase)
+	_timed = clocks
 	_actors = next
 	_tick = tick
 	return R.ok({"tick":_tick, "receipts":receipts, "hits":contacts.value.events.duplicate(true)})
