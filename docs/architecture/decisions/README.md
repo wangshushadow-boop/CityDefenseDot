@@ -5,3 +5,5 @@
 P0 已于 2026-11-24 验收，以下为负责人签核的技术与契约基线。[ADR-011 技术栈与性能基线](ADR-011-technology-stack.md) · [ADR-012 公共契约 v1](ADR-012-contract-freeze.md) · [阶段验收](../../../development/reports/stages/P0.md)
 
 2026-11-24，项目负责人选择默认 1A，批准 P1 端口、速度量化与持久提交。[ADR-013](ADR-013-p1-ports-and-save.md)
+
+[ADR-014 野战兵源归属](ADR-014-field-source-teams.md) 记录 P2 的待裁定事项。

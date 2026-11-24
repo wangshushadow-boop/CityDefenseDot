@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "P2-COM-001",
+  "kind": "EXECUTION",
+  "parent": "P2-COM",
+  "stage": "P2",
+  "module_id": "COM",
+  "title": "方向动作、格挡与接触去重",
+  "spec": "docs/systems/game/mission/combat/README.md",
+  "depends_on": [
+    "GATE-P1"
+  ],
+  "requirements": [
+    "BAI-05",
+    "COM-01",
+    "COM-02",
+    "COM-03",
+    "COM-04",
+    "COM-05",
+    "COM-06"
+  ],
+  "acceptance_test_ids": [
+    "T-COM-01",
+    "T-COM-05"
+  ],
+  "allowed_paths": [
+    "game/mission/combat/",
+    "game/tests/p2/combat/",
+    "development/reports/tasks/P2-COM-001.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-combat",
+  "scope": "落实 COM 内部固定步动作状态、来自既有 AttackIntent/BlockIntent 的四方向、蓄力与取消、每一次攻击只对同一目标生效一次。使用虚构游戏数值和离散 tick。补合法与非法时间窗、同 tick、重复提交及重放；不选新跨域字段或大型中间件。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "落实 COM 内部固定步动作状态、来自既有 AttackIntent/BlockIntent 的四方向、蓄力与取消、每一次攻击只对同一目标生效一次。使用虚构游戏数值和离散 tick。补合法与非法时间窗、同 tick、重复提交及重放；不选新跨域字段或大型中间件。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "IN_PROGRESS"
+}

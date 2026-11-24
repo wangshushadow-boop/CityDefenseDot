@@ -1,6 +1,6 @@
 # recollection 项目状态
 
-**P1 已验收，当前没有执行中的阶段。** 2026-11-24，公共运行时与工程基础的 15 个工作包均为 DONE，GATE-P1 已关闭。已验证的运行时集成提交为 `b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b`，分支为 `codex/p1-runtime`。P2–P8 均为 PLANNED。
+**P2 实时战争已启动。** 2026-11-24，公共运行时与工程基础的 15 个工作包均为 DONE，GATE-P1 已关闭。已验证的运行时集成提交为 `b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b`，分支为 `codex/p1-runtime`。P2 从 P1 验收提交 `005d777` 分支，后续阶段保持 PLANNED。
 
 | 项目 | 当前状态 |
 |---|---|
@@ -12,3 +12,5 @@
 | 待验 | 正式战斗/世界/在线玩法、完整 AT-10/AT-15、固定设备的正式性能回退与发布验收按路线图进行。独立 EXE 导出缺少 4.7.2 Windows 模板，退出 1。 |
 
 [阶段验收报告](development/reports/stages/P1.md) · [运行与构建](ci/README.md) · [测试与未测项](development/reports/tests/P1/README.md) · [任务及锁](development/state/tasks.json) · [负责人签核](docs/architecture/decisions/ADR-013-p1-ports-and-save.md)
+
+[P2 工作批次](development/planning/P2.md) · [P2 阶段记录](development/reports/stages/P2.md)

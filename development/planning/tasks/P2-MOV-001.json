@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "P2-MOV-001",
+  "kind": "EXECUTION",
+  "parent": "P2-MOV",
+  "stage": "P2",
+  "module_id": "MOV",
+  "title": "路径请求预算、共享与版本失效",
+  "spec": "docs/systems/game/mission/movement/README.md",
+  "depends_on": [
+    "GATE-P1"
+  ],
+  "requirements": [
+    "BAI-02",
+    "BAI-06",
+    "COM-04",
+    "NAV-01"
+  ],
+  "acceptance_test_ids": [
+    "T-MOV-01",
+    "T-MOV-04"
+  ],
+  "allowed_paths": [
+    "game/mission/movement/",
+    "game/tests/p2/movement/",
+    "development/reports/tasks/P2-MOV-001.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-movement",
+  "scope": "复用既有适配器按任务作用域的路径/导航同步方法实现 MOV 内部共享路径队列、去重、有界处理、版本失效、重试。验证相同请求、500/1000 请求负载的队列上限及真实导航链接同步（若有不能覆盖的物理条件则单独注明）。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "复用既有适配器按任务作用域的路径/导航同步方法实现 MOV 内部共享路径队列、去重、有界处理、版本失效、重试。验证相同请求、500/1000 请求负载的队列上限及真实导航链接同步（若有不能覆盖的物理条件则单独注明）。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "IN_PROGRESS"
+}

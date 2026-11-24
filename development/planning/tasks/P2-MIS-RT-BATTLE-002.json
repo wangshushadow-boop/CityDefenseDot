@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "P2-MIS-RT-BATTLE-002",
+  "kind": "EXECUTION",
+  "parent": "P2-MIS-RT-BATTLE",
+  "stage": "P2",
+  "module_id": "MIS-RT",
+  "title": "Mission 运行时、实体与增援（BATTLE）的野战接入与整体验收",
+  "spec": "docs/systems/game/mission/runtime/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-MIS-RT-BATTLE-001"
+  ],
+  "requirements": [
+    "BAT-01",
+    "BAT-02",
+    "BAT-05",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-01",
+    "T-MIS-RT-02",
+    "T-MIS-RT-03",
+    "T-MIS-RT-04"
+  ],
+  "allowed_paths": [
+    "game/mission/runtime/",
+    "game/tests/p2/mission/",
+    "development/reports/tasks/P2-MIS-RT-BATTLE-002.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "落实部署、波次、增援、规则 tick 相位、实体生命周期。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "战场部署/增援及 generation、旧 scope、结果边界测试。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "PLANNED"
+}

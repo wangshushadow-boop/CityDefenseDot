@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "P2-COM-002",
+  "kind": "EXECUTION",
+  "parent": "P2-COM",
+  "stage": "P2",
+  "module_id": "COM",
+  "title": "动作、装备、命中、伤害与士气执行的野战接入与整体验收",
+  "spec": "docs/systems/game/mission/combat/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM-001"
+  ],
+  "requirements": [
+    "BAI-05",
+    "COM-01",
+    "COM-02",
+    "COM-03",
+    "COM-04",
+    "COM-05",
+    "COM-06"
+  ],
+  "acceptance_test_ids": [
+    "T-COM-01",
+    "T-COM-02",
+    "T-COM-03",
+    "T-COM-04",
+    "T-COM-05",
+    "T-COM-06",
+    "T-COM-07"
+  ],
+  "allowed_paths": [
+    "game/mission/combat/",
+    "game/tests/p2/combat/",
+    "development/reports/tasks/P2-COM-002.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "方向攻击/格挡/蓄力/取消、近远程碰撞与伤害、骑乘、士气、固定 tick。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "COM-01–05、士气与实际动作测试；多人 COM-06 后续复验。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "PLANNED"
+}

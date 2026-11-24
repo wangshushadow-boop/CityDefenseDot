@@ -1,5 +1,17 @@
 {
   "schema_version": 1,
-  "blockers": [],
-  "note": "两项审批已由项目负责人按默认组合 1A+2A 解除。"
+  "blockers": [
+    {
+      "id": "P2-TEAM-SOURCES",
+      "stage": "P2",
+      "status": "OPEN",
+      "scope": "跨队部署与战果集成",
+      "reason": "现有 v1 Side.roster_allocations 没有分队条目语义，待负责人裁定。",
+      "owner": "项目负责人",
+      "evidence": [
+        "docs/architecture/decisions/ADR-014-field-source-teams.md"
+      ]
+    }
+  ],
+  "note": "P2 阻塞项只影响依赖跨队归属的工作。"
 }

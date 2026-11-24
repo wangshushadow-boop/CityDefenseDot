@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "P2-FORM-002",
+  "kind": "EXECUTION",
+  "parent": "P2-FORM",
+  "stage": "P2",
+  "module_id": "FORM",
+  "title": "编队、指挥授权、阵型与槽位执行的野战接入与整体验收",
+  "spec": "docs/systems/game/mission/formation/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-FORM-001"
+  ],
+  "requirements": [
+    "BAI-01",
+    "BAI-02",
+    "BAI-05",
+    "NET-04"
+  ],
+  "acceptance_test_ids": [
+    "T-FORM-01",
+    "T-FORM-02",
+    "T-FORM-03",
+    "T-FORM-04"
+  ],
+  "allowed_paths": [
+    "game/mission/formation/",
+    "game/tests/p2/formation/",
+    "development/reports/tasks/P2-FORM-002.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "命令权威、七类阵型、槽位、成员、队形与执行；与 AI 决策分离。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "权限、阵型、槽位与伤亡重组；玩家/AI 共用接口。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "PLANNED"
+}

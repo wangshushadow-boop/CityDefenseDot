@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-MIS-RT-BATTLE-001",
+  "kind": "EXECUTION",
+  "parent": "P2-MIS-RT-BATTLE",
+  "stage": "P2",
+  "module_id": "MIS-RT",
+  "title": "已预留人形兵源的部署、移除及增援边界",
+  "spec": "docs/systems/game/mission/runtime/README.md",
+  "depends_on": [
+    "GATE-P1"
+  ],
+  "requirements": [
+    "BAT-01",
+    "BAT-02",
+    "BAT-05",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-02"
+  ],
+  "allowed_paths": [
+    "game/mission/runtime/",
+    "game/tests/p2/mission/",
+    "development/reports/tasks/P2-MIS-RT-BATTLE-001.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-mission",
+  "scope": "在现有 prepare、apply_deployment、allocate_entity、remove_entity 和 finalize 路径建立可复用的已预留来源索引，避免逐次线性扫描；实测 1000 个分散来源、500 容量、多波换入、迟到/重复/恶意槽及批次原子性，维护 generation、未入场。此任务不猜兵源所属队伍；强制正确区分战斗实体与非兵源，保留 P1 兼容。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "在现有 prepare、apply_deployment、allocate_entity、remove_entity 和 finalize 路径建立可复用的已预留来源索引，避免逐次线性扫描；实测 1000 个分散来源、500 容量、多波换入、迟到/重复/恶意槽及批次原子性，维护 generation、未入场。此任务不猜兵源所属队伍；强制正确区分战斗实体与非兵源，保留 P1 兼容。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "IN_PROGRESS"
+}

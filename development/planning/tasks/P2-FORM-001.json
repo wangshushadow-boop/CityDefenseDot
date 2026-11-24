@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-FORM-001",
+  "kind": "EXECUTION",
+  "parent": "P2-FORM",
+  "stage": "P2",
+  "module_id": "FORM",
+  "title": "七种队形的槽位生成、投影和稳定分配",
+  "spec": "docs/systems/game/mission/formation/README.md",
+  "depends_on": [
+    "GATE-P1"
+  ],
+  "requirements": [
+    "BAI-01",
+    "BAI-02",
+    "BAI-05",
+    "NET-04"
+  ],
+  "acceptance_test_ids": [
+    "T-FORM-02"
+  ],
+  "allowed_paths": [
+    "game/mission/formation/",
+    "game/tests/p2/formation/",
+    "development/reports/tasks/P2-FORM-001.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-formation",
+  "scope": "实现 GDD 七种队形、人数变化、合法地形投影、窄路压缩及恢复和稳定槽位指派的领域算法，重复输入必须可重放；失败与局部伤亡不得使两个成员占同一槽或发布半份结果。验证 500/1000 成员、投影失败和重排。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "实现 GDD 七种队形、人数变化、合法地形投影、窄路压缩及恢复和稳定槽位指派的领域算法，重复输入必须可重放；失败与局部伤亡不得使两个成员占同一槽或发布半份结果。验证 500/1000 成员、投影失败和重排。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "IN_PROGRESS"
+}

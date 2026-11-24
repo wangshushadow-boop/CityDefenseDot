@@ -425,40 +425,52 @@
       "completed_at": "2026-11-24T22:30:56+08:00"
     },
     "P2-MIS-RT-BATTLE": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p2mission",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
-      "child_ids": []
+      "child_ids": [
+        "P2-MIS-RT-BATTLE-001",
+        "P2-MIS-RT-BATTLE-002"
+      ]
     },
     "P2-COM": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p2combat",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
-      "child_ids": []
+      "child_ids": [
+        "P2-COM-001",
+        "P2-COM-002"
+      ]
     },
     "P2-MOV": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p2movement",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
-      "child_ids": []
+      "child_ids": [
+        "P2-MOV-001",
+        "P2-MOV-002"
+      ]
     },
     "P2-FORM": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p2formation",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
-      "child_ids": []
+      "child_ids": [
+        "P2-FORM-001",
+        "P2-FORM-002"
+      ]
     },
     "P2-BAI": {
       "status": "PLANNED",
@@ -1472,6 +1484,78 @@
         "development/reports/tests/P1/README.md",
         "development/reports/integration/P1.md"
       ]
+    },
+    "P2-MIS-RT-BATTLE-001": {
+      "status": "IN_PROGRESS",
+      "owner": "p2mission",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-MIS-RT-BATTLE-002": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-COM-001": {
+      "status": "IN_PROGRESS",
+      "owner": "p2combat",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-COM-002": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-MOV-001": {
+      "status": "IN_PROGRESS",
+      "owner": "p2movement",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-MOV-002": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FORM-001": {
+      "status": "IN_PROGRESS",
+      "owner": "p2formation",
+      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FORM-002": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
     }
   },
   "transitions": [
@@ -5782,6 +5866,150 @@
         "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
       ],
       "commit": "b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b"
+    },
+    {
+      "task_id": "P2-MIS-RT-BATTLE",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:19+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-MIS-RT-BATTLE",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:19+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-MIS-RT-BATTLE-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:19+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-MIS-RT-BATTLE-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:19+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-COM",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:19+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-COM",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:19+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-COM-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:19+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-COM-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-MOV",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-MOV",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-MOV-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-MOV-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-FORM",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-FORM",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-FORM-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
+    },
+    {
+      "task_id": "P2-FORM-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T22:46:20+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "005d777101654e67263e04fc6f2965403222e0b4"
     }
   ]
 }

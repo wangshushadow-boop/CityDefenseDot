@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "P2-MOV-002",
+  "kind": "EXECUTION",
+  "parent": "P2-MOV",
+  "stage": "P2",
+  "module_id": "MOV",
+  "title": "战场路径、避障、运动与动态导航的野战接入与整体验收",
+  "spec": "docs/systems/game/mission/movement/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-MOV-001"
+  ],
+  "requirements": [
+    "BAI-02",
+    "BAI-06",
+    "COM-04",
+    "NAV-01"
+  ],
+  "acceptance_test_ids": [
+    "T-MOV-01",
+    "T-MOV-02",
+    "T-MOV-03",
+    "T-MOV-04"
+  ],
+  "allowed_paths": [
+    "game/mission/movement/",
+    "game/tests/p2/movement/",
+    "development/reports/tasks/P2-MOV-002.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "NavMesh、编队共享路径、局部避障/拥堵、移动与位姿、动态 Link 端口。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "可达/不可达、导航版本与真实人群测试；攻城 Link 在 P4 完整复验。",
+    "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
+  ],
+  "status": "PLANNED"
+}
