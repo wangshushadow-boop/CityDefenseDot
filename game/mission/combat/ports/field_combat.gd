@@ -7,14 +7,25 @@ const MAX_SOURCES := 16
 const SPREAD_TICKS := 15
 const ROUTE_AT := 25
 const REGROUP_AT := 55
+const MAX_VIEW_ACTORS := 4096
+const MAX_VIEW_SHOTS := 4096
+var _scope_id: String
+# Actor rows use copy-on-write. A previous projection stays valid while its row is identical.
+var _view_cache := {}
 var _shots := {}
 var _ride_paths := {}
 var _pending_spread := {}
 var _sampling := {}
 
 
+func _init(scope_id: String = "") -> void:
+	_scope_id = scope_id
+
+
 func fork():
 	var copy = super.fork()
+	copy._scope_id = _scope_id
+	copy._view_cache = _view_cache.duplicate()
 	copy._shots = _shots.duplicate()
 	copy._ride_paths = _ride_paths.duplicate()
 	copy._pending_spread = _pending_spread.duplicate()
@@ -91,6 +102,7 @@ func _unlink(rider: Dictionary, horse: Dictionary, fallen: bool) -> void:
 	b.rider_handle = null
 	if fallen and a.phase != "Downed":
 		_enter(a, "Stagger", _tick)
+		_track_phase(_timed, rider.index, a.phase)
 	_actors[rider.index] = a
 	_actors[horse.index] = b
 	_ride_paths.erase(horse.index)
@@ -116,7 +128,57 @@ func remove_actor(handle: Dictionary) -> Dictionary:
 		_unlink(handle,state.mount_handle,false)
 	elif state.get("rider_handle") != null:
 		_unlink(state.rider_handle,handle,true)
-	return super.remove_actor(handle)
+	var removed := super.remove_actor(handle)
+	if removed.ok:
+		_view_cache.erase(handle.index)
+	return removed
+
+
+# Local authority assembly read. Poses come from MOV. Shots retain their own IDs after the shooter retires.
+func field_view(scope_id: String, handles: Array, projectile_limit: Variant = 1024) -> Dictionary:
+	if scope_id.is_empty() or scope_id != _scope_id:
+		return R.fail("NotFound", "combat_scope")
+	if handles.size() > MAX_VIEW_ACTORS or not V.integer(projectile_limit, 0, MAX_VIEW_SHOTS):
+		return R.fail("InvalidArgument", "view_limit")
+	var actors := []
+	var seen := {}
+	for handle in handles:
+		if typeof(handle) != TYPE_DICTIONARY:
+			return R.fail("InvalidArgument", "actor_handle")
+		var state := _actor(handle, _actors)
+		if state.is_empty():
+			return R.fail("NotFound", "actor_handle")
+		if seen.has(handle.index):
+			return R.fail("Conflict", "actor_handle")
+		seen[handle.index] = true
+		actors.append(_actor_view(state))
+	var projectiles := []
+	for id: String in _shots:
+		if projectiles.size() == projectile_limit:
+			break
+		var shot: Dictionary = _shots[id]
+		var item := {"id":id, "position":Sweeps.v3(shot.position)*0.001, "direction":Sweeps.v3(shot.velocity).normalized()}
+		item.make_read_only()
+		projectiles.append(item)
+	actors.make_read_only()
+	projectiles.make_read_only()
+	var view_data := {"scope_id":scope_id, "tick":_tick, "actors":actors, "projectiles":projectiles, "projectile_count":_shots.size()}
+	view_data.make_read_only()
+	return R.ok(view_data)
+
+
+func _actor_view(state: Dictionary) -> Dictionary:
+	var index: int = state.handle.index
+	var cached: Variant = _view_cache.get(index)
+	if cached != null and is_same(state, cached[0]):
+		return cached[1]
+	var item := {"handle":state.handle, "team":state.team, "role":state.role,
+		"phase":state.phase, "since":state.since, "direction":state.direction,
+		"weapon_slot":state.weapon_slot, "mount_handle":state.mount_handle, "hp":state.hp,
+		"routing":state.routing, "morale":state.morale, "ammo":state.ammo, "shield":state.shield}
+	item.make_read_only()
+	_view_cache[index] = [state, item]
+	return item
 
 
 func has_pending_projectiles() -> bool:
@@ -190,6 +252,7 @@ func _change_morale(index: int, delta: int, events: Array) -> bool:
 	if changed:
 		if routing:
 			_enter(state,"Ready",_tick)
+			_track_phase(_timed, index, state.phase)
 		events.append({"type":"routed" if routing else "regrouped", "actor_handle":state.handle, "morale":value})
 	_actors[index] = state
 	return changed and routing
