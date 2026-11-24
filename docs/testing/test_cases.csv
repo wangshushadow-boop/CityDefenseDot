@@ -5,9 +5,9 @@ T-BOOT-03,BOOT,§20.3,内容载入错误,启动,逆序释放已建服务，返�
 T-CORE-01,CORE,WLD-02,固定种子、相同事件和不同 worker 数,重复运行纯逻辑,相位顺序、随机状态与哈希一致,NOT_RUN,,docs/systems/game/core/README.md,game/core/
 T-CORE-02,CORE,BAT-05,旧 Mission 作业延迟返回,销毁并新建 Mission,旧结果被拒绝，无跨任务写入,NOT_RUN,,docs/systems/game/core/README.md,game/core/
 T-CORE-03,CORE,§3.3,事件订阅不断生成后续命令,执行,达到预算，后续可诊断，不无限递归,NOT_RUN,,docs/systems/game/core/README.md,game/core/
-T-CON-01,CON,BAT-03,结果中的 source_slot 重复或版本错误,验证,拒绝并定位字段，世界无写入,NOT_RUN,,docs/systems/game/contracts/README.md,game/contracts/
-T-CON-02,CON,NET-05,客户端协议主版本或内容哈希不符,握手,拒绝并说明兼容版本,NOT_RUN,,docs/systems/game/contracts/README.md,game/contracts/
-T-CON-03,CON,SAV-03,旧字段版本及未知关键字段,解码,迁移受支持版本，否则明确拒绝,NOT_RUN,,docs/systems/game/contracts/README.md,game/contracts/
+T-CON-01,CON,BAT-03,结果中的 source_slot 重复或版本错误,验证,拒绝并定位字段，世界无写入,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
+T-CON-02,CON,NET-05,客户端协议主版本或内容哈希不符,握手,拒绝并说明兼容版本,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
+T-CON-03,CON,SAV-03,旧字段版本及未知关键字段,解码,迁移受支持版本，否则明确拒绝,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
 T-APP-01,APP,BAT-03,结果已提交但回执丢失,重复提交同 result_id,返回原回执，资产和 revision 不再变化,NOT_RUN,,docs/systems/game/application/README.md,game/application/
 T-APP-02,APP,BAT-04 / MOD-03,加载已有战役后进入自定义战斗,完成并退出,战役快照哈希不变,NOT_RUN,,docs/systems/game/application/README.md,game/application/
 T-APP-03,APP,BAT-05,Mission 资源加载失败,返回地图,恢复旧状态、预留释放且无旧回调,NOT_RUN,,docs/systems/game/application/README.md,game/application/

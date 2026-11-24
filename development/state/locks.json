@@ -1,41 +1,5 @@
 {
   "schema_version": 1,
-  "locks": [
-    {
-      "task_id": "P1-CON-001",
-      "owner": "contract",
-      "branch": "detached",
-      "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-con",
-      "allowed_paths": [
-        "game/contracts/",
-        "game/tests/p1/contracts/",
-        "development/reports/tasks/P1-CON-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/project.godot",
-        "game/contracts/ports/"
-      ]
-    },
-    {
-      "task_id": "P1-CON-002",
-      "owner": "ports",
-      "branch": "detached",
-      "base_commit": "b639e2e5828e409cf309aed83cf04a3a699c598b",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-ports",
-      "allowed_paths": [
-        "game/contracts/ports/",
-        "game/tests/p1/ports/",
-        "development/reports/tasks/P1-CON-002.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/project.godot"
-      ]
-    }
-  ],
+  "locks": [],
   "note": "P1 分批按任务独占写范围，集成后释放。"
 }

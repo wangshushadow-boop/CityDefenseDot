@@ -26,7 +26,16 @@
         "P1-CON"
       ],
       "verified_test_ids": [],
-      "evidence": []
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt"
+      ],
+      "candidate_commit": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
+      "candidate_test_ids": [
+        "T-CON-01",
+        "T-CON-02",
+        "T-CON-03"
+      ]
     },
     "APP": {
       "status": "NOT_IMPLEMENTED",

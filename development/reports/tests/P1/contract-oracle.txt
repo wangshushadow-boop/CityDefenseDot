@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CON_ORACLE nfc=34155 wire=14 errors=0
+CON_ORACLE_REVERSE PASS SHA256=1447f704cfcd725189cf1fb2154fb64faba7377f5fa1e59ee66c4d7e02131bcf UCD=15.0.0
+exit=0

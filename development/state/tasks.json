@@ -160,12 +160,16 @@
       }
     },
     "P1-CON": {
-      "status": "IN_PROGRESS",
+      "status": "BLOCKED",
       "owner": "contract",
       "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
-      "candidate_commit": null,
+      "candidate_commit": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
       "integrated_commit": null,
-      "evidence": [],
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
       "child_ids": [
         "P1-CON-001",
         "P1-CON-002"
@@ -1126,12 +1130,16 @@
       "child_ids": []
     },
     "P1-CON-001": {
-      "status": "IN_PROGRESS",
+      "status": "BLOCKED",
       "owner": "contract",
       "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
-      "candidate_commit": null,
+      "candidate_commit": "c5e61b929176e9fe2086d968b66d714b2b1b703f",
       "integrated_commit": null,
-      "evidence": [],
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
       "child_ids": []
     },
     "P1-CORE-001": {
@@ -1261,14 +1269,16 @@
       "child_ids": []
     },
     "P1-CON-002": {
-      "status": "REVIEW",
+      "status": "BLOCKED",
       "owner": "ports",
       "base_commit": "b639e2e5828e409cf309aed83cf04a3a699c598b",
       "candidate_commit": "33f36b878b0bad8013d62e9b9c933c769298b8d2",
       "integrated_commit": null,
       "evidence": [
         "development/reports/reviews/P1.md",
-        "development/reports/tests/P1/README.md"
+        "development/reports/tests/P1/README.md",
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt"
       ],
       "child_ids": []
     }
@@ -2762,6 +2772,97 @@
         "development/reports/tests/P1/README.md"
       ],
       "commit": "33f36b8"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:07:47+08:00",
+      "reason": "两份候选均已实际执行测试",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
+      "commit": "f37b8f4"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:07:47+08:00",
+      "reason": "候选经过独立代码审查和 QA",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
+      "commit": "f37b8f4"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "REVIEW",
+      "new": "BLOCKED",
+      "time": "2026-11-24T21:07:47+08:00",
+      "reason": "等候负责人签核 ADR-013，已测实现保存在独立候选分支",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
+      "commit": "f37b8f4"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "REVIEW",
+      "new": "BLOCKED",
+      "time": "2026-11-24T21:07:47+08:00",
+      "reason": "等候负责人签核 ADR-013，已测实现保存在独立候选分支",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
+      "commit": "f37b8f4"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:07:47+08:00",
+      "reason": "两份候选均已实际执行测试",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
+      "commit": "f37b8f4"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:07:47+08:00",
+      "reason": "候选经过独立代码审查和 QA",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
+      "commit": "f37b8f4"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "REVIEW",
+      "new": "BLOCKED",
+      "time": "2026-11-24T21:07:47+08:00",
+      "reason": "等候负责人签核 ADR-013，已测实现保存在独立候选分支",
+      "evidence": [
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P1/contract-candidate.txt",
+        "development/reports/reviews/P1.md"
+      ],
+      "commit": "f37b8f4"
     }
   ]
 }

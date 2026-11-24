@@ -1,13 +1,13 @@
 # recollection 项目状态
 
-**P1 公共运行时与工程基础正在执行。** 2026-11-24，项目负责人批准 ADR-011、ADR-012 和按已测范围验收 P0。P1 已获本次会话授权，P2–P8 为 PLANNED。[P1 执行与验收记录](development/reports/stages/P1.md) · [P0 签核报告](development/reports/stages/P0.md)
+**P1 已获授权，公共契约候选已通过测试，等待 ADR-013 签核。** 2026-11-24；P0 已按实测范围验收，GATE-P1 尚未通过，P2–P8 为 PLANNED。[P1 阶段记录](development/reports/stages/P1.md) · [P0 签核报告](development/reports/stages/P0.md)
 
 | 项目 | 最新状态 |
 |---|---|
-| 技术栈 | Godot Standard 4.7.2.stable.official.ed1daf0bf、类型化 GDScript、Forward+/Vulkan；ENet 权威专服 30 Hz，快照 15 Hz。Python 3.12.14 标准库与 Godot headless/桌面实验用于验证。 |
-| 关键契约 | 带类型的持久 UUID、作用域句柄、坐标与精度、命令/快照所有权、规范 UTF-8 JSON/SHA-256 和版本迁移策略已批准。 |
-| 实测 | RTX 3090 上完成 500/1000 活跃人形桌面压测、256 人动态导航、1/4 进程故障与 64/128 个回环连接实验，以及原创内容 PCK 和跨引擎编解码测试。 |
-| 游戏实现 | GDD 与 57 份 SDD 的正式模块实现仍待后续阶段。P0 实验位于 test_scenarios/p0。93 条需求 NOT_IMPLEMENTED，208 项模块测试、17 项 AT 为 NOT_RUN。 |
-| 本地归档 | 分支 codex/p0-validation；初始基线 eea39fa，实验集成 47d3a40，负责人签核 ab80995。10 个 P0 执行任务、8 个工作包与阶段门禁均为 DONE。实验锁已释放。 |
+| 技术栈 | 已批准 Godot Standard 4.7.2、类型化 GDScript、Forward+/Vulkan、ENet 权威专服、规范 UTF-8 JSON/SHA-256。 |
+| P0 | RTX 3090 上完成 500/1000 人压测、动态导航、回环联网及原创内容 PCK 验证。签核提交 ab80995，P1 启动基线 f72d1cb。 |
+| P1 实现 | 两个契约开发任务已提交到已测联合候选分支 codex/p1-contract-candidate，提交 f37b8f4。等待负责人批准 ADR-013 后集成到 codex/p1-runtime。 |
+| 实际测试 | T-CON-01/02/03 在候选上 PASS。其余 205 项模块用例和 17 项完整 AT 保持 NOT_RUN。93 条需求仍未按完整游戏能力验收。 |
+| 恢复 | 已保存候选、审查、QA 与失败记录。ADR-013 签核后重跑契约，再按 DAG 开始 CORE 与 DEF。§23.2 的原创内容规模与预算口径可并行确认。 |
 
-[机器状态](development/state/project.json) · [任务与变更记录](development/state/tasks.json) · [独立 QA](development/reports/tests/P0/README.md) · [集成记录](development/reports/integration/P0.md)
+[待决 ADR](docs/architecture/decisions/ADR-013-p1-ports-and-save.md) · [机器状态](development/state/project.json) · [任务记录](development/state/tasks.json) · [集成与复跑命令](development/reports/integration/P1.md)

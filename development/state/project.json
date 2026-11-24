@@ -5,7 +5,7 @@
   "active_stage": "P1",
   "stage_status": {
     "P0": "DONE",
-    "P1": "IN_PROGRESS",
+    "P1": "BLOCKED",
     "P2": "PLANNED",
     "P3": "PLANNED",
     "P4": "PLANNED",
@@ -38,6 +38,7 @@
     }
   },
   "updated_at": "2026-11-24",
-  "note": "P1 公共运行时与工程基础执行中。",
-  "last_completed_stage": "P0"
+  "note": "P1 已授权。首批联合候选 f37b8f4 完成验证，等待 ADR-013 签核后集成并解锁 CORE/DEF。",
+  "last_completed_stage": "P0",
+  "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2"
 }
