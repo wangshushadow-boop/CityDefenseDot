@@ -54,12 +54,28 @@ func run() -> void:
 		check(adapter.query_sweep_batch([ray,sphere],stamp).value==hits.value,"repeat stable sweep")
 		ray["ignored_handles"] = ["near"]
 		check(adapter.query_sweep_batch([ray],stamp).value.size()==1,"ignore handle")
+	var overlap := adapter.query_sweep_batch([{"from":[-2000,1000,0],"to":[10000,1000,0],"radius_mm":50}],stamp)
+	check(overlap.ok and overlap.value.size()==2 and overlap.value[0].entity_handle=="near" and overlap.value[0].fraction_ppm==0, "report initial overlap before later sweep contact")
 	var long_hit := adapter.query_sweep_batch([{"from":[-1000000,1000,250],"to":[1000000,1000,250],"radius_mm":150}],stamp)
 	check(long_hit.ok and long_hit.value.size()==2,"2 km continuous sphere detects both thin bodies")
 	print("T-INF-ENGINE-02 ","PASS" if failures==initial else "FAIL", " hits=",hits.get("value",[]))
 	initial = failures
 	check(not adapter.instantiate_visual({}, "m").ok,"headless refuses presentation")
 	check(adapter.release_scope("m").released==1,"release real root")
+	var client := Adapter.new(root, false)
+	var visual_scope := client.open_scope("visual-control")
+	var server_scope := adapter.open_scope("visual-control")
+	check(visual_scope.ok and server_scope.ok, "open separate runtimes")
+	check(client.instantiate_visual({"visual_scene":Arena.simulation_scene},"visual-control").ok, "load client-only scene with real colliders")
+	await physics_frame
+	await physics_frame
+	var comparison := {"scope_id":"visual-control", "tick":2}
+	var only_ray := {"from":[-10000,1000,0],"to":[10000,1000,0]}
+	var client_hits := client.query_sweep_batch([only_ray],comparison)
+	var server_hits := adapter.query_sweep_batch([only_ray],comparison)
+	check(client_hits.ok and server_hits.ok and client_hits.value.is_empty() and client_hits.value == server_hits.value, "presentation cannot affect authority")
+	client.release_scope("visual-control")
+	adapter.release_scope("visual-control")
 	print("P1-ENGINE-HEADLESS-SLICE ","PASS" if failures==initial else "FAIL")
 	initial = failures
 	var samples: Array[int] = []

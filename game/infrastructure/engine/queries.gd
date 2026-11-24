@@ -94,6 +94,17 @@ static func _sphere_hit(space: PhysicsDirectSpaceState3D, origin: Vector3, targe
 	query.shape = sphere
 	query.collision_mask = mask
 	query.exclude = excluded
+	# A shape cast ignores existing penetration. Query the starting sphere
+	# separately; an interior point need not have a unique contact normal.
+	query.transform = Transform3D(Basis.IDENTITY,origin)
+	var initial := space.intersect_shape(query, 1)
+	if not initial.is_empty():
+		var hit: Dictionary = initial[0]
+		var contact := space.get_rest_info(query)
+		hit["position"] = contact.get("point",origin) if contact.get("rid") == hit.rid else origin
+		hit["normal"] = contact.get("normal",Vector3.ZERO) if contact.get("rid") == hit.rid else Vector3.ZERO
+		hit["fraction"] = 0.0
+		return hit
 	var length := origin.distance_to(target)
 	var parts := maxi(1,ceili(length / 12.0))
 	if parts > 4096:

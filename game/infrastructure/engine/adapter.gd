@@ -31,10 +31,10 @@ func open_scope(scope: String) -> Dictionary:
 	token.make_read_only()
 	var viewport := SubViewport.new()
 	viewport.world_3d = World3D.new()
-	viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED if _headless else SubViewport.UPDATE_ALWAYS
+	viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	_host.add_child(viewport)
 	_scopes[scope] = {"token":token,"view":viewport,"leases":{},"links":{},"revision":0,
-		"pending":false,"iteration":0,"requested":0,"claims":{}}
+		"pending":false,"iteration":0,"requested":0,"claims":{},"presentation":null}
 	return R.ok(token)
 
 func _authorized(token: Dictionary) -> bool:
@@ -147,7 +147,15 @@ func instantiate_visual(definition: Dictionary, scope_id: String) -> Dictionary:
 	var instance := packed.instantiate()
 	if instance == null:
 		return R.fail("Unavailable","visual_scene")
-	_scopes[scope_id].view.add_child(instance)
+	var scope: Dictionary = _scopes[scope_id]
+	# Presentation resources may contain colliders or navigation meshes. Their
+	# world stays separate even when children are added after instantiation.
+	if scope.presentation == null:
+		var presentation := SubViewport.new()
+		presentation.world_3d = World3D.new()
+		scope.view.add_child(presentation)
+		scope.presentation = presentation
+	scope.presentation.add_child(instance)
 	_serial += 1
 	return R.ok({"scope_id":scope_id,"visual_id":_serial})
 
