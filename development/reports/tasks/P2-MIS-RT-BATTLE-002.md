@@ -17,3 +17,5 @@ Windows，Godot 4.7.2 Standard。工作树内执行 `Godot --headless --path gam
 | ci/gates.py dependencies | 0 | 静态依赖错误 0。 |
 
 对照脚本 `development/reports/tests/P2/runtime_tick_probe.gd` 和已集成基线采用相同命令、120 次采样。1,000 人及每步 50 条合法输入时，Mission 单项 P95 从 13.533 ms 下降到 2.197 ms。该项不含 AI、移动、动作或显示。动态占位在本任务自测由受控查询提供，结算构造使用 P1 的测试提供方。完整 T-MIS-RT-01 的胜负/结果、AT-04、AT-05 的实际撤退命令与最终现场依赖后续 RULES/RESULTS/BOOT。访问玩法完整移动交互尚未执行。
+
+独立审查发现初版 34eb76d 在清场回调后重新读取外部部署数组，修复为回调前冻结已校验的槽位与全部嵌套组件。回归在回调中覆盖槽位、深层参数并清空原数组，实际部署保持校验时的槽位、参数与数量。此版本野战 1,049 项断言通过。

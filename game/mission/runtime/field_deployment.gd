@@ -151,6 +151,7 @@ func deploy(entities: RefCounted, orders: Array, engine: RefCounted, scope: Stri
 		return R.fail("Unavailable","battle_limit")
 	var counts := _counts(entities)
 	var rows := []
+	var candidates := []
 	var slots := {}
 	var sites := {}
 	for order in orders:
@@ -170,19 +171,21 @@ func deploy(entities: RefCounted, orders: Array, engine: RefCounted, scope: Stri
 		if count > _zones[row.team_key].quota:
 			return R.fail("Unavailable","team_quota")
 		counts[row.team_key] = count
-		rows.append(row)
+		var owned: Dictionary = Entities.freeze(row)
+		rows.append(owned)
+		candidates.append({"slot":order.source_slot,"components":owned})
 	var checked := _check_sites(rows,engine,scope,clear_sites)
 	if not checked.ok:
 		return checked
 	if false in checked.value:
 		return R.fail("Unavailable","deployment.spawn_site")
-	return _allocate(entities,orders,rows)
+	return _allocate(entities,candidates)
 
-func _allocate(entities: RefCounted, orders: Array, rows: Array) -> Dictionary:
+func _allocate(entities: RefCounted, candidates: Array) -> Dictionary:
 	var staged: RefCounted = entities.fork()
 	var handles := []
-	for i in orders.size():
-		var spawned: Dictionary = staged.allocate(orders[i].source_slot,rows[i],_capacity)
+	for candidate in candidates:
+		var spawned: Dictionary = staged.allocate(candidate.slot,candidate.components,_capacity)
 		if not spawned.ok:
 			return spawned
 		handles.append(spawned.value)
@@ -232,12 +235,12 @@ func auto_wave(entities: RefCounted, limit: int, engine: RefCounted, scope: Stri
 				added = true
 		if not added or orders.size() == limit:
 			break
-	var rows := []
+	var candidates := []
 	for order in orders:
 		var row := _bind(order.source_slot,order.components)
 		if not row.ok:
 			return row
-		rows.append(row.value)
+		candidates.append({"slot":order.source_slot,"components":row.value})
 	if orders.is_empty():
 		return R.ok({"entities":entities,"handles":[]})
-	return _allocate(entities,orders,rows)
+	return _allocate(entities,candidates)

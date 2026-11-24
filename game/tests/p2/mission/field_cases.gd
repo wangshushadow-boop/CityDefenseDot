@@ -11,6 +11,7 @@ var retire := []
 var staged_tick := 0
 var published_tick := 0
 var stalled := false
+var external_orders := []
 
 func check(ok: bool, label: String) -> void:
 	checks += 1
@@ -19,6 +20,10 @@ func check(ok: bool, label: String) -> void:
 		printerr("FAIL field-mission ",label)
 
 func clear_sites(_scope: String, rows: Array) -> Dictionary:
+	if not external_orders.is_empty():
+		external_orders[0].source_slot = 999
+		external_orders[0].components.detail.note = "changed"
+		external_orders.clear()
 	if stalled:
 		return R.fail("Unavailable","world_sync")
 	var reply := []
@@ -77,7 +82,7 @@ func run(test: SceneTree) -> int:
 	visible[east] = true
 	check(not mission.apply_deployment(explicit).ok and mission.view()==prev,"enemy occupies second site")
 	visible.clear()
-	explicit[1].components.team_key = 0
+	explicit[1].components["team_key"] = 0
 	check(not mission.apply_deployment(explicit).ok and mission.view()==prev,"cannot alias typed team")
 	check(not mission.allocate_entity(0,{}).ok and not mission.allocate_entity(null,{"type":"human"}).ok,"field cannot bypass spawn director")
 	check(mission.register_system("movement",{"id":"units","run":prepare_move,"commit":func(): published_tick=staged_tick,"rollback":func(): staged_tick=published_tick}).ok,"register reversible calculation")
@@ -144,8 +149,15 @@ func run(test: SceneTree) -> int:
 	var invalid := [{"source_slot":0,"components":{"spawn_position_mm":west}},{"source_slot":1,"components":{"spawn_position_mm":invalid_point}}]
 	check(not manual.apply_deployment(invalid).ok and manual.view().entities.is_empty(),"real nav rejects unreachable spawn")
 	explicit[1].components.erase("team_key")
+	explicit[0].components["detail"] = {"note":"original"}
+	external_orders = explicit
 	var placed := manual.apply_deployment(explicit)
-	check(placed.ok and placed.value[0].index==0 and placed.value[1].index==1,"successful exact positioning")
+	check(placed.ok and placed.value[0].index==0 and placed.value[1].index==1,"successful exact positioning " + str(placed.get("error",{})))
+	if not placed.ok:
+		manual.dispose()
+		return failures
+	var committed: Dictionary = manual.resolve_entity(scope_id,placed.value[0]).value
+	check(explicit.is_empty() and committed.source_slot==0 and committed.components.detail.note=="original","clearance callback cannot alter validated batch")
 	check(manual.step_fixed(1,[]).ok,"manual front starts")
 	stalled = true
 	check(manual.step_fixed(2,[]).ok and manual.view().entities.size()==2,"temporary unavailable wave keeps current battle running")
