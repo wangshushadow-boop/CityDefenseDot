@@ -35,8 +35,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-formation2",
   "scope": "命令权威、七类阵型、槽位、成员、队形与执行；与 AI 决策分离。",
   "non_goals": [
     "未经批准的公共契约扩展、其他阶段玩法。"
@@ -45,5 +45,5 @@
     "权限、阵型、槽位与伤亡重组；玩家/AI 共用接口。",
     "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

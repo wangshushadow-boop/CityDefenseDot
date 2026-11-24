@@ -2,33 +2,32 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P2-MIS-RT-BATTLE-001",
-      "owner": "p2mission",
+      "task_id": "P2-MIS-RT-BATTLE-003",
+      "owner": "contracts",
       "branch": "detached",
-      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-mission",
+      "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-field_sources",
       "allowed_paths": [
-        "game/mission/runtime/",
-        "game/tests/p2/mission/",
-        "development/reports/tasks/P2-MIS-RT-BATTLE-001.md"
+        "game/contracts/field_sources.gd",
+        "game/contracts/field_sources.gd.uid",
+        "game/tests/p2/field_sources/",
+        "development/reports/tasks/P2-MIS-RT-BATTLE-003.md"
       ],
       "excluded_paths": [
-        "game/contracts/",
-        "game/bootstrap/",
         "development/state/",
         "docs/architecture/"
       ]
     },
     {
-      "task_id": "P2-COM-001",
+      "task_id": "P2-COM-002",
       "owner": "p2combat",
       "branch": "detached",
-      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-combat",
+      "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-combat2",
       "allowed_paths": [
         "game/mission/combat/",
         "game/tests/p2/combat/",
-        "development/reports/tasks/P2-COM-001.md"
+        "development/reports/tasks/P2-COM-002.md"
       ],
       "excluded_paths": [
         "game/contracts/",
@@ -38,15 +37,15 @@
       ]
     },
     {
-      "task_id": "P2-MOV-001",
-      "owner": "p2movement",
+      "task_id": "P2-MOV-002",
+      "owner": "nav",
       "branch": "detached",
-      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-movement",
+      "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-movement2",
       "allowed_paths": [
         "game/mission/movement/",
         "game/tests/p2/movement/",
-        "development/reports/tasks/P2-MOV-001.md"
+        "development/reports/tasks/P2-MOV-002.md"
       ],
       "excluded_paths": [
         "game/contracts/",
@@ -56,15 +55,15 @@
       ]
     },
     {
-      "task_id": "P2-FORM-001",
+      "task_id": "P2-FORM-002",
       "owner": "p2formation",
       "branch": "detached",
-      "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-formation",
+      "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-formation2",
       "allowed_paths": [
         "game/mission/formation/",
         "game/tests/p2/formation/",
-        "development/reports/tasks/P2-FORM-001.md"
+        "development/reports/tasks/P2-FORM-002.md"
       ],
       "excluded_paths": [
         "game/contracts/",
@@ -74,5 +73,5 @@
       ]
     }
   ],
-  "note": "P1 分批按任务独占写范围，集成后释放。"
+  "note": "各阶段按执行任务独占写入，验收后释放。"
 }

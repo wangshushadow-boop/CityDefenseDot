@@ -35,8 +35,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-movement2",
   "scope": "NavMesh、编队共享路径、局部避障/拥堵、移动与位姿、动态 Link 端口。",
   "non_goals": [
     "未经批准的公共契约扩展、其他阶段玩法。"
@@ -45,5 +45,5 @@
     "可达/不可达、导航版本与真实人群测试；攻城 Link 在 P4 完整复验。",
     "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

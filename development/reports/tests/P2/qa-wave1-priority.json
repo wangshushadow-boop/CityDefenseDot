@@ -1,0 +1,13 @@
+{
+  "module": "movement",
+  "suite": "D:/work/game/recollection/out/p2-qa/characterize-priority.gd",
+  "display": "headless",
+  "sha": "a279107c4713492a66480e90f5ff5f1c9ce33bcd",
+  "exit": 0,
+  "pass_mark": true,
+  "tail": [
+    "",
+    "SUSTAINED_HIGH_PRIORITY low_wait_ticks=300",
+    "QA_EXTRAS PASS checks=2 failures=0"
+  ]
+}

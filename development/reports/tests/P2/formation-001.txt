@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-FORM-GEOMETRY count=500 kinds=7 elapsed_us=263506
+P2-FORM-GEOMETRY count=1000 kinds=7 elapsed_us=589875
+P2-FORM-ROLLBACK exercised
+T-FORM-02-LAYOUT PASS
+P2-FORM-001 PASS failures=0 reachable_slots=52506 seed=241124
+exit=0

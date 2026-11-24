@@ -1,0 +1,54 @@
+[
+  {
+    "module": "mission",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-mission.gd",
+    "display": "headless",
+    "sha": "4223b347dc6502d377b30ef9e18d4d66c572c0ca",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_EXTRAS PASS checks=4296 failures=0"
+    ]
+  },
+  {
+    "module": "combat",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-combat.gd",
+    "display": "headless",
+    "sha": "6a38bb5ba5822234c0afd4ca853f12534ab2dd18",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_EXTRAS PASS checks=8 failures=0"
+    ]
+  },
+  {
+    "module": "movement",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-movement.gd",
+    "display": "headless",
+    "sha": "a279107c4713492a66480e90f5ff5f1c9ce33bcd",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "",
+      "REOPEN result={ \"code\": \"StaleVersion\", \"field\": \"path_ticket\", \"detail\": <null>, \"message_key\": \"error.stale_version\", \"retryable\": false }",
+      "QA_EXTRAS PASS checks=13 failures=0"
+    ]
+  },
+  {
+    "module": "formation",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-formation.gd",
+    "display": "headless",
+    "sha": "e085cb4456a3bb8748352b2566da2da587a386e3",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_EXTRAS PASS checks=3614 failures=0"
+    ]
+  }
+]

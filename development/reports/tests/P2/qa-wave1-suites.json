@@ -1,0 +1,106 @@
+[
+  {
+    "module": "mission",
+    "suite": "p2/mission",
+    "display": "headless",
+    "sha": "4223b347dc6502d377b30ef9e18d4d66c572c0ca",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "",
+      "WAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100",
+      "P2-MISSION-SOURCE PASS failures=0"
+    ]
+  },
+  {
+    "module": "mission",
+    "suite": "p1/mission",
+    "display": "headless",
+    "sha": "4223b347dc6502d377b30ef9e18d4d66c572c0ca",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  },
+  {
+    "module": "movement",
+    "suite": "p2/movement",
+    "display": "headless",
+    "sha": "a279107c4713492a66480e90f5ff5f1c9ce33bcd",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "MOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24",
+      "T-MOV-04 PASS shared_requests=1500 distinct_requests=1500",
+      "MOV_QUEUE_CHECKS errors=0 display=headless"
+    ]
+  },
+  {
+    "module": "movement",
+    "suite": "p1/engine",
+    "display": "headless",
+    "sha": "a279107c4713492a66480e90f5ff5f1c9ce33bcd",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-ENGINE-HEADLESS-SLICE PASS",
+      "T-INF-ENGINE-04 PASS loops=50 median_us=3996 p95_us=4045 max_us=4182",
+      "ENGINE failures=0"
+    ]
+  },
+  {
+    "module": "combat",
+    "suite": "p2/combat",
+    "display": "headless",
+    "sha": "6a38bb5ba5822234c0afd4ca853f12534ab2dd18",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1"
+    ]
+  },
+  {
+    "module": "combat",
+    "suite": "p1/rules",
+    "display": "headless",
+    "sha": "6a38bb5ba5822234c0afd4ca853f12534ab2dd18",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "T-SHRULE-02 PASS",
+      "T-SHRULE-03 PASS",
+      "P1-RULES-RNG PASS"
+    ]
+  },
+  {
+    "module": "formation",
+    "suite": "p2/formation",
+    "display": "headless",
+    "sha": "e085cb4456a3bb8748352b2566da2da587a386e3",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P2-FORM-ROLLBACK exercised",
+      "T-FORM-02-LAYOUT PASS",
+      "P2-FORM-001 PASS failures=0 reachable_slots=52506 seed=241124"
+    ]
+  },
+  {
+    "module": "formation",
+    "suite": "p1/mission",
+    "display": "headless",
+    "sha": "e085cb4456a3bb8748352b2566da2da587a386e3",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  }
+]

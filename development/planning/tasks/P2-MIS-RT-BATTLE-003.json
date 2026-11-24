@@ -31,8 +31,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field_sources",
   "scope": "实现 ADR-014 方案 A，独立野战校验及只读查表，不改变历史 v1 的通用校验。",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -41,5 +41,5 @@
     "两队同兵种、同来源被拆分、空/非法/非整数/重叠/漏分、超大区间（不能展开整域）、P1 兼容实跑",
     "提交检查并经独立审查、QA 和合入态复测。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

@@ -1,0 +1,15 @@
+[
+  {
+    "module": "movement",
+    "suite": "p2/movement",
+    "display": "window",
+    "sha": "a279107c4713492a66480e90f5ff5f1c9ce33bcd",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "MOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24",
+      "T-MOV-04 PASS shared_requests=1500 distinct_requests=1500",
+      "MOV_QUEUE_CHECKS errors=0 display=Windows"
+    ]
+  }
+]

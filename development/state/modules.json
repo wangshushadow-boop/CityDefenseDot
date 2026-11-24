@@ -327,14 +327,19 @@
       "evidence": []
     },
     "MOV": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-NAV",
         "P2-MOV",
         "P7-POLISH"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-MOV-01",
+        "T-MOV-04"
+      ],
+      "evidence": [
+        "development/reports/tasks/P2-MOV-001.md"
+      ]
     },
     "SIEGE": {
       "status": "NOT_IMPLEMENTED",

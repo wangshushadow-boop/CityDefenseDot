@@ -41,5 +41,5 @@
     "在现有 prepare、apply_deployment、allocate_entity、remove_entity 和 finalize 路径建立可复用的已预留来源索引，避免逐次线性扫描；实测 1000 个分散来源、500 容量、多波换入、迟到/重复/恶意槽及批次原子性，维护 generation、未入场。此任务不猜兵源所属队伍；强制正确区分战斗实体与非兵源，保留 P1 兼容。",
     "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

@@ -1,10 +1,10 @@
 # recollection 项目状态
 
-**P2 实时战争已启动。** 2026-11-24，公共运行时与工程基础的 15 个工作包均为 DONE，GATE-P1 已关闭。已验证的运行时集成提交为 `b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b`，分支为 `codex/p1-runtime`。P2 从 P1 验收提交 `005d777` 分支，后续阶段保持 PLANNED。
+**P2 实时战争开发中。** 首批 4 个执行任务已通过独立 QA、审查与合并态回归，集成提交为 `cdfe8eb`。第二批为野战兵源归属、完整动作、移动及编队命令。 2026-11-24，公共运行时与工程基础的 15 个工作包均为 DONE，GATE-P1 已关闭。已验证的运行时集成提交为 `b4c36e1ff66c9ee74dbab5a2d2703ef490318b5b`，分支为 `codex/p1-runtime`。P2 从 P1 验收提交 `005d777` 分支，后续阶段保持 PLANNED。
 
 | 项目 | 当前状态 |
 |---|---|
-| 引擎与契约 | Godot 4.7.2 Standard、类型化 GDScript、Forward+/Vulkan，已签核 ADR-011/012/013。Mission、联网与 MOD v1 端口已冻结。 |
+| 引擎与契约 | Godot 4.7.2 Standard、类型化 GDScript、Forward+/Vulkan，已签核 ADR-011/012/013/014。Mission、联网与 MOD v1 端口已冻结。 |
 | 可运行入口 | 用指定 Godot 打开 [game/project.godot](game/project.godot)，或从仓库根运行 `Godot --path game`。专服固定步验收使用 `Godot --headless --path game -- --p1-smoke`。 |
 | 交付构建 | 客户端 PCK、专服 PCK、原始资源 ZIP 已独立冷重载。可从 Git 提交重建，产物写入本地 out/p1-build；版本和摘要见[交付清单](development/reports/tests/P1/build-manifest.json)。 |
 | 验证 | 15 套 Godot 入口通过。54 个阶段候选模块用例中 36 项完整通过，18 项完整条件尚未执行。四个断点恢复、50 次任务切换及存档冷载均通过。 |

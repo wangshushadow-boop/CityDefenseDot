@@ -45,5 +45,5 @@
     "落实 COM 内部固定步动作状态、来自既有 AttackIntent/BlockIntent 的四方向、蓄力与取消、每一次攻击只对同一目标生效一次。使用虚构游戏数值和离散 tick。补合法与非法时间窗、同 tick、重复提交及重放；不选新跨域字段或大型中间件。",
     "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }
