@@ -33,6 +33,7 @@ var _played := 0
 var _dropped := 0
 var _peak := 0
 var _voice_id := ""
+var _voice_language := ""
 var _speaking := false
 static var _tts_owner := 0
 
@@ -58,9 +59,9 @@ func open_scope(scope_id: String, voice_budget: int = 16, settings_path: String 
 	_played = 0
 	_dropped = 0
 	_peak = 0
-	if voice_budget >= 5 and ProjectSettings.get_setting("audio/general/text_to_speech",false) and DisplayServer.has_feature(DisplayServer.FEATURE_TEXT_TO_SPEECH):
-		var language := TranslationServer.get_locale().get_slice("_",0)
-		var voices := DisplayServer.tts_get_voices_for_language(language)
+	if voice_budget >= 5 and ProjectSettings.get_setting_with_override("audio/general/text_to_speech") and DisplayServer.has_feature(DisplayServer.FEATURE_TEXT_TO_SPEECH):
+		_voice_language = TranslationServer.get_locale().get_slice("_",0)
+		var voices := DisplayServer.tts_get_voices_for_language(_voice_language)
 		if not voices.is_empty():
 			_voice_id = voices[0]
 	# Private bus names allow two listeners/scopes to coexist with independent settings.
@@ -133,6 +134,10 @@ func set_mixer(partial_settings: Dictionary) -> Dictionary:
 	_mix = changed
 	if _mix.master <= 0 or _mix.voice <= 0:
 		_stop_speech()
+		for slot: Dictionary in _pool:
+			if slot.busy and slot.category == "Voice":
+				slot.node.stop()
+				slot.busy = false
 	if not _mix.subtitles:
 		_caption.hide()
 		_caption_priority = -1
@@ -167,6 +172,12 @@ func _finished(index: int) -> void:
 
 
 func _claim(spatial: bool, score: int, command: bool) -> int:
+	# Two spoken orders in the same listener mix would mask one another.
+	if command:
+		for i in _pool.size():
+			var current: Dictionary = _pool[i]
+			if current.busy and current.category == "Voice":
+				return i if score >= current.score else -1
 	var lowest := -1
 	for i in _pool.size():
 		var slot: Dictionary = _pool[i]
@@ -276,7 +287,12 @@ func play_event(event: Dictionary, listener_position: Vector3 = Vector3.ZERO) ->
 	var was_voice: bool = slot.busy and slot.category == "Voice"
 	player.stop()
 	player.bus = _buses[category]
-	player.stream = _cues.clip(clip)
+	var device_voice := category == "Voice" and not _voice_id.is_empty() and _voice_language == TranslationServer.get_locale().get_slice("_",0)
+	if category == "Voice" and not device_voice:
+		_stop_speech()
+		player.stream = _cues.recorded_voice(key)
+	else:
+		player.stream = _cues.clip(clip)
 	player.volume_db = -10.0 if spatial and occluded else 0.0
 	if spatial:
 		player.global_position = position
@@ -286,7 +302,7 @@ func play_event(event: Dictionary, listener_position: Vector3 = Vector3.ZERO) ->
 	slot.cue = clip
 	slot.category = category
 	player.play()
-	if category == "Voice" and not _voice_id.is_empty():
+	if device_voice:
 		_tts_owner = get_instance_id()
 		_speaking = true
 		DisplayServer.tts_speak(_cues.caption(key),_voice_id,roundi(_mix.voice*_mix.master*100),1.0,1.0,0,true)
