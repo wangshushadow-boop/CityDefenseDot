@@ -1,0 +1,209 @@
+﻿test_id,module,requirement,given,when,then,status,evidence,document_path,code_paths
+T-BOOT-01,BOOT,§20.2,两个模块互相 requires,启动,拒绝并显示环路且未构造 Session,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
+T-BOOT-02,BOOT,§19.1 / NET-01,headless 配置、无显示设备,启动专服,不加载 UI/音频且 Mission 端口可运行,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
+T-BOOT-03,BOOT,§20.3,内容载入错误,启动,逆序释放已建服务，返回可诊断报告,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
+T-CORE-01,CORE,WLD-02,固定种子、相同事件和不同 worker 数,重复运行纯逻辑,相位顺序、随机状态与哈希一致,NOT_RUN,,docs/systems/game/core/README.md,game/core/
+T-CORE-02,CORE,BAT-05,旧 Mission 作业延迟返回,销毁并新建 Mission,旧结果被拒绝，无跨任务写入,NOT_RUN,,docs/systems/game/core/README.md,game/core/
+T-CORE-03,CORE,§3.3,事件订阅不断生成后续命令,执行,达到预算，后续可诊断，不无限递归,NOT_RUN,,docs/systems/game/core/README.md,game/core/
+T-CON-01,CON,BAT-03,结果中的 source_slot 重复或版本错误,验证,拒绝并定位字段，世界无写入,NOT_RUN,,docs/systems/game/contracts/README.md,game/contracts/
+T-CON-02,CON,NET-05,客户端协议主版本或内容哈希不符,握手,拒绝并说明兼容版本,NOT_RUN,,docs/systems/game/contracts/README.md,game/contracts/
+T-CON-03,CON,SAV-03,旧字段版本及未知关键字段,解码,迁移受支持版本，否则明确拒绝,NOT_RUN,,docs/systems/game/contracts/README.md,game/contracts/
+T-APP-01,APP,BAT-03,结果已提交但回执丢失,重复提交同 result_id,返回原回执，资产和 revision 不再变化,NOT_RUN,,docs/systems/game/application/README.md,game/application/
+T-APP-02,APP,BAT-04 / MOD-03,加载已有战役后进入自定义战斗,完成并退出,战役快照哈希不变,NOT_RUN,,docs/systems/game/application/README.md,game/application/
+T-APP-03,APP,BAT-05,Mission 资源加载失败,返回地图,恢复旧状态、预留释放且无旧回调,NOT_RUN,,docs/systems/game/application/README.md,game/application/
+T-APP-04,APP,MOD-01 / MOD-02,创建剧情或沙盒,进入地图,正确注册模式规则，沙盒无强制主线,NOT_RUN,,docs/systems/game/application/README.md,game/application/
+T-CAMP-01,CAMP,WLD-02,日结执行到一半预算耗尽,下一帧继续,所有 day_id 阶段一次完成且最终账本一致,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
+T-CAMP-02,CAMP,WLD-04,战役进入访问或战斗,结束返回,时间按规则推进、远方状态不丢失,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
+T-CAMP-03,CAMP,WLD-05,同内容、种子和开局,创建两次,规范化初始状态哈希一致,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
+T-CAMP-04,CAMP,SAI-03 / ECO-06,20 固定种子无玩家仿真十年,每日检查,无非法资源/孤儿引用，输出软指标轨迹,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
+T-WORLD-01,WORLD,WLD-01,两支相向队伍跨越接触半径,三种速度推进,均发生一次接触，不跳过遭遇,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
+T-WORLD-02,WORLD,WLD-03,敌军离开观察范围,查询和 AI 规划,只得到旧情报，不泄漏实时坐标,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
+T-WORLD-03,WORLD,WLD-04,道路关闭、天气变化,移动中更新,路线版本失效并合法重算或停留,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
+T-WORLD-04,WORLD,WLD-05,同种子与定义,创建地图与初始单位,拓扑/初始位置一致,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
+T-CHR-01,CHR,CHR-01,角色技能经验跨升级阈值,重复提交同来源,升级一次，互斥天赋不能同时选取,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CHR-02,CHR,CHR-02,装备需双手或骑乘且库存不足,换装,拒绝或原子交换，无物品复制,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CHR-03,CHR,CHR-03,英雄已被俘且受伤,恢复、入队、死亡,主状态和位置合法，死亡不可复活,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CHR-04,CHR,CLN-03,玩家英雄退休,执行继承,新的玩家控制器绑定合法继承人，装备按归属迁移,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CLAN-01,CLAN,CLN-01,同伴名额已满或人物在另一队伍任互斥角色,招募/任命,拒绝且原职责不变,NOT_RUN,,docs/systems/game/campaign/clan/README.md,game/campaign/clan/
+T-CLAN-02,CLAN,CLN-02,多年婚育、衰老与死亡,逐日推进,谱系无环，成年和继承引用有效,NOT_RUN,,docs/systems/game/campaign/clan/README.md,game/campaign/clan/
+T-CLAN-03,CLAN,CLN-03 / AT-09,玩家领袖死亡且有两候选,选择继承人,玩家可继续，所有资产/任务有合法归属,NOT_RUN,,docs/systems/game/campaign/clan/README.md,game/campaign/clan/
+T-PARTY-01,PARTY,ARM-01,有经验、资金和材料的名册,招募、训练、升级、转驻军,数量和 XP 变化合法，无循环升级,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
+T-PARTY-02,PARTY,ARM-02,库存少于当日粮耗并拖欠工资,日结,不负库存，士气变化且逃兵有来源,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
+T-PARTY-03,PARTY,ARM-03,有普通俘虏和英雄俘虏,赎回、转化、逃脱,英雄位置唯一，正确移除名册,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
+T-PARTY-04,PARTY,ARM-04,同一 Party 已在 Army A,加入 B 或解散 A,拒绝重复成员，解散释放控制,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
+T-PARTY-05,PARTY,ARM-05 / BAT-02,兵力已预留且部分未上场,尝试转移并结算,拒绝预留转移；未入场归原队伍,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
+T-INV-01,INV,ARM-05 / ECO-03,一方货物或金钱不足,提交交换,双方余额、库存、流水不变,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-INV-02,INV,CHR-02,同一装备被两个槽位引用,交换或校验,拒绝重复持有,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-INV-03,INV,ECO-03,重复交易 ID、不同 payload,提交,相同返回原回执，不同 Conflict,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-INV-04,INV,§22.3,随机资源流水,属性测试,总量等于初始+合法产生-合法消耗,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-DEF-01,DEF,ARM-01,兵种升级形成环,编译,拒绝并显示路径,NOT_RUN,,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
+T-DEF-02,DEF,EXT-01,新增原创兵种、装备、文化,编译加载,不改核心代码即可查询,NOT_RUN,,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
+T-DEF-03,DEF,SAV-03 / ECO-05,锻造动态物品写入存档,重载,ID、部件、规则快照可解析,NOT_RUN,,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
+T-SHRULE-01,SHRULE,CHR-01,互斥或不同作用域天赋,计算效果,仅合法组生效，分项可解释,NOT_RUN,,docs/systems/game/shared/rules/README.md,game/shared/rules/
+T-SHRULE-02,SHRULE,ECO-03,买卖价格为小数,计算报价,买向上卖向下，金额整数,NOT_RUN,,docs/systems/game/shared/rules/README.md,game/shared/rules/
+T-SHRULE-03,SHRULE,COM-03,护甲值与输入越界,计算规则,显式拒绝或限幅，无 NaN,NOT_RUN,,docs/systems/game/shared/rules/README.md,game/shared/rules/
+T-ECO-01,ECO,ECO-01,村产原料、工坊配方、城镇需求,逐日模拟,货物有来源去向，生产运输消费形成循环,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
+T-ECO-02,ECO,ECO-02,围城切断商路,观察库存与恢复,供给下降、价格变化，解围后可恢复,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
+T-ECO-03,ECO,ECO-03,报价之后他人买走库存,提交旧报价,StaleVersion/重新报价，不扣款,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
+T-ECO-04,ECO,ECO-04,工坊原料和现金不足,日结,减产/停产，商队与工坊账本不负,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
+T-ECO-05,ECO,ECO-05,非法部件与合法订单,分别制造,非法零变更；合法唯一产物，材料和经验准确,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
+T-ECO-06,ECO,ECO-06,多种子十年无玩家,跟踪库存与货币,硬不变量零失败，软趋势按评审基线,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
+T-SET-01,SET,SET-01,税收、工资、建筑和粮食不足,推进多日,资源不负、治理变量可解释,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
+T-SET-02,SET,SET-02 / POL-04,领地易主或叛乱,提交政治结果,owner、税收、驻军、总督引用一致,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
+T-SET-03,SET,SET-03,围城与村庄劫掠中断,解除并等待恢复,资源与繁荣变化正确，无重复战利品,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
+T-SET-04,SET,SET-04,NPC 死亡、敌城封锁、玩家犯罪,访问,名单/合法和非法路径按实际状态生成,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
+T-POL-01,POL,POL-01,佣兵加入、封臣退国与建国,执行身份变更,唯一合法成员关系，收入及战争关系同步,NOT_RUN,,docs/systems/game/campaign/politics/README.md,game/campaign/politics/
+T-POL-02,POL,POL-02,非成员、重复投票和截止后投票,提交,拒绝；合法决议影响力仅扣一次,NOT_RUN,,docs/systems/game/campaign/politics/README.md,game/campaign/politics/
+T-POL-03,POL,POL-03,战争期间有效围城与追击,议和,取消非法行动并应用协议、贡金,NOT_RUN,,docs/systems/game/campaign/politics/README.md,game/campaign/politics/
+T-POL-04,POL,POL-04,最后封地易主或君主死亡,执行兴亡/继任,合法政治引用，无孤儿决议,NOT_RUN,,docs/systems/game/campaign/politics/README.md,game/campaign/politics/
+T-ENC-01,ENC,SAI-02,固定输入和种子的自动遭遇,重复结算计算,结果可复现、来源槽总量守恒,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
+T-ENC-02,ENC,BAT-03,提交前/中/后故障,恢复并重试,无重复资产或丢失已提交结果,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
+T-ENC-03,ENC,ARM-05 / BAT-02,有预备队未生成,实时战斗结束,每槽唯一终态，未生成归源,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
+T-ENC-04,ENC,SGE-01,围城设备建造且商路阻断,推进/解围,费用、工事、粮耗和恢复一致,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
+T-ENC-05,ENC,SGE-03,强攻失败或守军出击成功,提交,围城或撤围状态按规则，领地不错误易主,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
+T-QUEST-01,QUEST,QST-01,多阶段交付/护送有时限,事件和期限触发,合法分支、完成或过期,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
+T-QUEST-02,QUEST,QST-02,发布者死亡、同一事件重复重放,推进,替代或失败，奖励仅一次,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
+T-QUEST-03,QUEST,QST-03 / MOD-01 / MOD-02,分别创建剧情和沙盒,完整主线、失败恢复、继续,剧情可继续，沙盒无强制任务,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
+T-QUEST-04,QUEST,QST-04,对话显示后角色或价格变化,选择,重新校验，失败不扣资源,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
+T-QUEST-05,QUEST,QST-05,多年仿真、地区资源枯竭,生成任务,不产生不可达任务或无限积累,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
+T-SAI-01,SAI,SAI-01,资源、可见情报与外交限制同时存在,生成计划,只输出合法候选并使用同一命令接口,NOT_RUN,,docs/systems/game/campaign/strategic_ai/README.md,game/campaign/strategic_ai/
+T-SAI-02,SAI,WLD-03,敌方未发现且移动,重新评分,不读取其真实坐标,NOT_RUN,,docs/systems/game/campaign/strategic_ai/README.md,game/campaign/strategic_ai/
+T-SAI-03,SAI,SAI-03,长期世界仿真,记录计划切换,无高频抖动、无无限补兵，政治经济轨迹可解释,NOT_RUN,,docs/systems/game/campaign/strategic_ai/README.md,game/campaign/strategic_ai/
+T-SAI-K-01,SAI-K,SAI-01 / POL-02,财政不足、两线战争、决议待投票,规划,优先可维持目标，不直接宣战,NOT_RUN,,docs/systems/game/campaign/strategic_ai/kingdom/README.md,game/campaign/strategic_ai/kingdom/
+T-SAI-K-02,SAI-K,SAI-03,长期战争损失和和平条件变化,更新,可提出合法议和与复苏计划,NOT_RUN,,docs/systems/game/campaign/strategic_ai/kingdom/README.md,game/campaign/strategic_ai/kingdom/
+T-SAI-C-01,SAI-C,SAI-01 / CLN-01,可用英雄少且资金紧张,规划,无非法任命或超预算招募,NOT_RUN,,docs/systems/game/campaign/strategic_ai/clan/README.md,game/campaign/strategic_ai/clan/
+T-SAI-C-02,SAI-C,CLN-02 / SAI-03,家族领袖死亡,更新,合法继任并重新规划,NOT_RUN,,docs/systems/game/campaign/strategic_ai/clan/README.md,game/campaign/strategic_ai/clan/
+T-SAI-A-01,SAI-A,SAI-01 / ARM-04,成员无法抵达或凝聚不足,执行集合,超时重评/解散，不重复成员,NOT_RUN,,docs/systems/game/campaign/strategic_ai/army/README.md,game/campaign/strategic_ai/army/
+T-SAI-A-02,SAI-A,SGE-01 / SAI-03,围城期间粮食低、已知援军抵达,重评,合法撤围/补给或继续并有评分解释,NOT_RUN,,docs/systems/game/campaign/strategic_ai/army/README.md,game/campaign/strategic_ai/army/
+T-SAI-P-01,SAI-P,SAI-01 / WLD-03,商队有货、路线敌情过期,选择路线,按许可情报与风险评分，交易资金真实,NOT_RUN,,docs/systems/game/campaign/strategic_ai/party/README.md,game/campaign/strategic_ai/party/
+T-SAI-P-02,SAI-P,ECO-04 / SAI-03,利润为负且补给低,运行行为,返回补给/停业，无无限资金,NOT_RUN,,docs/systems/game/campaign/strategic_ai/party/README.md,game/campaign/strategic_ai/party/
+T-SAI-P-03,SAI-P,ARM-04,军团任务结束,更新,队伍恢复自身合法目标,NOT_RUN,,docs/systems/game/campaign/strategic_ai/party/README.md,game/campaign/strategic_ai/party/
+T-MIS-RT-01,MIS-RT,BAT-01,双方兵力已预留、规则野战,部署并战斗到结束,胜负和结果正确，源槽完整,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
+T-MIS-RT-02,MIS-RT,BAT-02,总兵力 1000、同屏上限 500,多波增援、撤退,无重复生成，未入场保留,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
+T-MIS-RT-03,MIS-RT,BAT-05,50 次创建销毁且有在途任务,切换场景,无跨 Mission 回调或单调资源泄漏,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
+T-MIS-RT-04,MIS-RT,MIS-02,访问规则无 Combat,启动并退出,仍能移动交互，无战斗系统副作用,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
+T-COM-01,COM,COM-01,四向攻击、格挡、蓄力与取消窗口,逐 tick 输入,合法转换，超时取消拒绝，多骨骼接触一次伤害,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
+T-COM-02,COM,COM-02,高速弹体和障碍、空弹药,射击,不穿墙/跳过命中，空弹药拒绝,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
+T-COM-03,COM,COM-03,盾覆盖与不同护甲区域,同武器击中,正确格挡、盾破和伤害分项,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
+T-COM-04,COM,COM-04,骑手在马背且马失能,受击,马/骑手独立状态，合法落马,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
+T-COM-05,COM,COM-05,玩家和 AI 提交相同合法意图,不同渲染帧率重放纯逻辑,动作与伤害一致,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
+T-COM-06,COM,COM-06,重复网络输入/非法命中包,服务器处理,无重复伤害与越权,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
+T-COM-07,COM,BAI-05,单位士气越阈值且有出口,伤亡阶段,溃逃、传播限频、可见反馈正确,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
+T-FORM-01,FORM,BAI-01,玩家命令与委派 AI 同 tick 冲突,提交,玩家获胜，AI 回执说明,NOT_RUN,,docs/systems/game/mission/formation/README.md,game/mission/formation/
+T-FORM-02,FORM,BAI-02,七种阵型、伤亡、狭窄通道,执行队形切换,槽唯一、可达、稳定重组,NOT_RUN,,docs/systems/game/mission/formation/README.md,game/mission/formation/
+T-FORM-03,FORM,BAI-05,目标不可达或队伍溃散,提交/运行订单,状态失败或安全调整，HUD 有原因,NOT_RUN,,docs/systems/game/mission/formation/README.md,game/mission/formation/
+T-FORM-04,FORM,NET-04,另一玩家发送非授权编队订单,提交,Unauthorized，订单不变,NOT_RUN,,docs/systems/game/mission/formation/README.md,game/mission/formation/
+T-BAI-01,BAI,BAI-01,玩家与 AI 同时控制编队,执行同命令接口,授权规则一致，无第二套执行器,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
+T-BAI-02,BAI,BAI-05,敌方被遮挡、旧快照返回,AI 查询与提交,只读取许可情报，旧意图拒绝,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
+T-BAI-03,BAI,BAI-06,500/1000 混合战场,记录调度性能,符合 §19.4 待验证预算，无持续积压,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
+T-BAI-04,BAI,BAT-05,Mission 销毁时 worker 正计算,创建新 Mission,旧意图不能写入,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
+T-BAI-T-01,BAI-T,BAI-04,兵种混合且存在可达高地/平地,选择战术,评分体现地形、有效射线与兵种适配,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
+T-BAI-T-02,BAI-T,BAI-04,任务不可达或增援改变力量比,更新,触发回退/重分配或撤退,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
+T-BAI-T-03,BAI-T,BAI-01,玩家未委派自己的编队,AI 分配任务,不覆盖玩家订单,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
+T-BAI-F-01,BAI-F,BAI-01,玩家命令保持且 AI 认为冲锋高分,决策,保留保持约束,NOT_RUN,,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
+T-BAI-F-02,BAI-F,BAI-02,队形遭遇窄门和伤亡,更新行为,申请可行队形，重组后恢复,NOT_RUN,,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
+T-BAI-F-03,BAI-F,BAI-04,弹药不足或任务超时,反馈,合法回退且 L1 得到原因,NOT_RUN,,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
+T-BAI-I-01,BAI-I,BAI-03,四类兵种和各自合法装备,运行交战,角色决策不同、意图统一,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-BAI-I-02,BAI-I,BAI-05,敌人被遮挡或目标 handle 失效,决策,不继续非法攻击，重选有限候选,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-BAI-I-03,BAI-I,COM-05,同一动作玩家与 AI 发起,执行,由同一 COM 校验，结果语义一致,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-BAI-I-04,BAI-I,BAI-06,千人压力且出现紧急威胁,运行,紧急反应可执行，低频不冻结移动,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-MOV-01,MOV,NAV-01,门关闭后破坏、梯启用、缺口产生,查询路径,正确等待版本并使用新可达链接,NOT_RUN,,docs/systems/game/mission/movement/README.md,game/mission/movement/
+T-MOV-02,MOV,BAI-02 / NAV-01,大量士兵通过窄门,运行编队,有分流/回退，无永久停滞或瞬移,NOT_RUN,,docs/systems/game/mission/movement/README.md,game/mission/movement/
+T-MOV-03,MOV,COM-04,高速骑兵转向进入窄梯,运动,合法转向限制，禁止进入不适用 profile,NOT_RUN,,docs/systems/game/mission/movement/README.md,game/mission/movement/
+T-MOV-04,MOV,BAI-06,500/1000 混合路径,压力,请求队列有界，不每帧全图寻路,NOT_RUN,,docs/systems/game/mission/movement/README.md,game/mission/movement/
+T-SIEGE-01,SIEGE,SGE-02,梯/塔/门/投射器械均存在,攻防并破坏,合法器械操作和动态导航可通行,NOT_RUN,,docs/systems/game/mission/siege/README.md,game/mission/siege/
+T-SIEGE-02,SIEGE,NAV-01,城门破坏与同步延迟,查询,旧链接拒绝，更新后路径可用,NOT_RUN,,docs/systems/game/mission/siege/README.md,game/mission/siege/
+T-SIEGE-03,SIEGE,SGE-03,进攻失败但城墙损坏,结算,保存损坏和器械状态，领地不自动易主,NOT_RUN,,docs/systems/game/mission/siege/README.md,game/mission/siege/
+T-SIEGE-04,SIEGE,MIS-03,器械乘员点无可达路径,编译场景,拒绝内容并标记位置,NOT_RUN,,docs/systems/game/mission/siege/README.md,game/mission/siege/
+T-RULES-01,RULES,BAT-01 / MIS-01,野战、村庄、藏身处、竞技、访问、潜入、剧情各定义,运行完整流程,规则与目标完成/失败，复用核心,NOT_RUN,,docs/systems/game/mission/rules/README.md,game/mission/rules/
+T-RULES-02,RULES,MIS-02,竞技临时装备、自定义战斗、战役访问,退出,无临时奖励/装备串域,NOT_RUN,,docs/systems/game/mission/rules/README.md,game/mission/rules/
+T-RULES-03,RULES,MOD-03 / BAT-04,自定义地图、天气、人数与野战/攻城,完成,无战役状态写入,NOT_RUN,,docs/systems/game/mission/rules/README.md,game/mission/rules/
+T-RULES-04,RULES,MOD-04 / NET-02,五种多人模式含队长与攻城,运行回合,规则重生、计分和权限正确,NOT_RUN,,docs/systems/game/mission/rules/README.md,game/mission/rules/
+T-RULES-05,RULES,SGE-02,城防突破并满足占领条件,评估,不是仅按击杀数判胜,NOT_RUN,,docs/systems/game/mission/rules/README.md,game/mission/rules/
+T-INTERACT-01,INTERACT,SET-04,世界中领主死亡、商人存在,进入城镇,仅合法 NPC 生成,NOT_RUN,,docs/systems/game/mission/interaction/README.md,game/mission/interaction/
+T-INTERACT-02,INTERACT,QST-04,对话目标离场或权限变化,执行选择,拒绝/替代流程，无越权,NOT_RUN,,docs/systems/game/mission/interaction/README.md,game/mission/interaction/
+T-INTERACT-03,INTERACT,MIS-01 / MIS-02,潜入、监狱、酒馆和访问,交互并离开,规则反馈正确，无临时装备串域,NOT_RUN,,docs/systems/game/mission/interaction/README.md,game/mission/interaction/
+T-RESULTS-01,RESULTS,BAT-02 / ARM-05,部分槽未生成、撤离受伤、英雄击倒,构建结果,每槽唯一分类，总量守恒,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
+T-RESULTS-02,RESULTS,BAT-03,缺槽、重复槽、revision 不符,验证,拒绝并保留诊断,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
+T-RESULTS-03,RESULTS,BAT-04,自定义或多人赛局,结果路由,不会生成战役资产变更,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
+T-RESULTS-04,RESULTS,SGE-03,城防和设备损坏,生成结果,差异可追踪且不误计人形槽,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
+T-UI-01,UI,UX-01,键鼠、手柄及回退/取消,完成招募交易战斗等主流程,无阻断，取消不改数据,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
+T-UI-02,UI,UX-02,多编队部署和命令失败,操作 HUD,选择、目标、当前命令和失败原因准确,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
+T-UI-03,UI,UX-03,切换语言、1080p/不同分辨率及字号,遍历主界面,文本无溢出阻断，使用本地化键,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
+T-UI-04,UI,ACC-01,重新映射、色盲/字幕设置,保存重启,设置恢复且主流程可操作,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
+T-INPUT-01,INPUT,ACC-01 / UX-01,键鼠与手柄重映射、断开设备,操作并切换上下文,无卡键，设置持久化,NOT_RUN,,docs/systems/game/presentation/input/README.md,game/presentation/input/
+T-INPUT-02,INPUT,COM-05,相同方向动作来自不同设备,转换,规范意图一致,NOT_RUN,,docs/systems/game/presentation/input/README.md,game/presentation/input/
+T-INPUT-03,INPUT,NET-04 / BAI-01,试图选择无权限单位,发送订单,权威拒绝且 UI 有反馈,NOT_RUN,,docs/systems/game/presentation/input/README.md,game/presentation/input/
+T-CAM-01,CAM,UX-02,玩家在城墙和骑乘状态切视角,移动相机,无长期穿模，指挥目标正确,NOT_RUN,,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
+T-CAM-02,CAM,ACC-01,关闭晃动、修改 FOV,切场重启,设置有效,NOT_RUN,,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
+T-CAM-03,CAM,NET-04,观战者请求未授权敌方视角,切换,拒绝并保持合法视图,NOT_RUN,,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
+T-VIS-01,VIS,VIS-01,不同兵种装备、骑乘和方向攻击,播放并验证挂点/窗口,视觉与权威动作一致，无穿戴错位,NOT_RUN,,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
+T-VIS-02,VIS,COM-05,切换动画 LOD/帧率,同输入战斗,权威伤害/伤亡不变,NOT_RUN,,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
+T-VIS-03,VIS,BAI-06 / §19.4,500/1000 真实动画混合单位,压力,测量 FPS/显存/蒙皮，不以静止实例替代,NOT_RUN,,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
+T-AUD-01,AUD,AUD-01,500 人战斗、大量命中和命令语音,播放,音源预算内，命令可辨识,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
+T-AUD-02,AUD,ACC-01,关闭音效或开启字幕,完成战斗,信息仍可访问,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
+T-AUD-03,AUD,BAT-05,结束 Mission,释放音源,无残留跨场景播放,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
+T-PERSIST-01,PERSIST,SAV-01,多槽、世界多年状态和 RNG,保存加载,规范化领域快照一致,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
+T-PERSIST-02,PERSIST,SAV-02 / BAT-03,写前/中/提交标记后模拟断电或磁盘满,恢复重试,读有效前/后版本，结果恰好一次,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
+T-PERSIST-03,PERSIST,SAV-03,旧 schema、动态锻造物品、缺 MOD,加载,逐级迁移或明确拒绝，原档保留,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
+T-PERSIST-04,PERSIST,§22.2 / AT-15,50 次 Mission 切换和存档,循环,无泄漏、存档可载入,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
+T-INF-CONTENT-01,INF-CONTENT,EXT-01 / MOD-05,新增文化/兵种/装备/规则/任务/场景/AI MOD,编译加载,通过公开扩展点不改核心,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
+T-INF-CONTENT-02,INF-CONTENT,EXT-02,循环依赖、补丁冲突、危险路径、多人哈希不符,验证,拒绝并定位包,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
+T-INF-CONTENT-03,INF-CONTENT,EXT-03,发布包 API 版本和许可证齐全,编译发布,输出可复现哈希和报告,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
+T-INF-CONTENT-04,INF-CONTENT,MIS-03,场景缺出生/目标引用,校验,构建阻断,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
+T-INF-ENGINE-01,INF-ENGINE,NAV-01,请求开门后引擎尚未同步,查询,旧 nav_revision 明确，不能返回错误路径,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-INF-ENGINE-02,INF-ENGINE,COM-02,高速弹体连续扫掠,碰撞适配,返回稳定候选，不漏穿越,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-INF-ENGINE-03,INF-ENGINE,NET-01,headless 环境,运行同 Mission,同规则，不依赖渲染,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-INF-ENGINE-04,INF-ENGINE,§19.4,50 次任务加载/取消/销毁,循环,租约释放，记录真实性能,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-NET-01,NET,NET-03,150 ms RTT、30 ms 抖动、3% 丢包及乱序,运行战斗、重连,状态收敛，无持续漂移,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/
+T-NET-02,NET,NET-04 / COM-06,客户端伪造伤害/他人编队和旧序号,发送,拒绝或去重，无权威变更,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/
+T-NET-03,NET,NET-05,内容版本/基线错误,重连,拒绝不兼容或请求全量基线,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/
+T-NET-04,NET,NET-06,64/128 真人和约定 AI 数,压测,记录带宽、tick、延迟，满足评审预算,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/
+T-TELEM-01,TELEM,§19.4,500/1000 战场基准,运行报告,包含 P50/P95/P99、实体数、CPU/GPU、队列和内存,NOT_RUN,,docs/systems/game/infrastructure/telemetry/README.md,game/infrastructure/telemetry/
+T-TELEM-02,TELEM,NET-06,多人连接含凭证,采集日志,敏感值脱敏，健康指标齐全,NOT_RUN,,docs/systems/game/infrastructure/telemetry/README.md,game/infrastructure/telemetry/
+T-TELEM-03,TELEM,§22.3,经济长期仿真,输出日报,可追溯异常库存和 AI 切换,NOT_RUN,,docs/systems/game/infrastructure/telemetry/README.md,game/infrastructure/telemetry/
+T-MP-01,MP,MOD-04 / NET-02,各多人模式、匹配和目录,加入/完成,规则组装、阵营和结果正确,NOT_RUN,,docs/systems/game/multiplayer/README.md,game/multiplayer/
+T-MP-02,MP,NET-03,中途断线,重连,原 seat 恢复或按规则超时，无重复角色,NOT_RUN,,docs/systems/game/multiplayer/README.md,game/multiplayer/
+T-MP-03,MP,NET-05,服务不可用、重复赛果,处理,私人服务器继续；官方重复结果不发奖,NOT_RUN,,docs/systems/game/multiplayer/README.md,game/multiplayer/
+T-MP-04,MP,NET-06,举报/静音与账号隐私,测试,权限审计和隐私符合约束,NOT_RUN,,docs/systems/game/multiplayer/README.md,game/multiplayer/
+T-ADDONS-01,ADDONS,EXT-03,内容作者创建兵种及任务模板,验证、导出,生成版本化包及 API/授权说明,NOT_RUN,,docs/systems/game/addons/README.md,game/addons/
+T-ADDONS-02,ADDONS,MIS-03,场景目标不可达、动画窗口不合法,验证,定位错误并阻断发布,NOT_RUN,,docs/systems/game/addons/README.md,game/addons/
+T-ADDONS-03,ADDONS,EXT-01,通过 SDK 注册新战术,加载,不修改既有 AI 内部类,NOT_RUN,,docs/systems/game/addons/README.md,game/addons/
+T-BASE-01,BASE,EXT-01 / MIS-03,新原创文化、兵种、场景包,编译,合法引用、可达出生/目标和升级图,NOT_RUN,,docs/systems/game/content/base/README.md,game/content/base/
+T-BASE-02,BASE,VIS-01,角色马匹与兵器不同组合,导入验证,骨骼、挂点、尺寸、动画窗口兼容,NOT_RUN,,docs/systems/game/content/base/README.md,game/content/base/
+T-BASE-03,BASE,UX-03,主流程各语言资源,校验,无关键缺失文本,NOT_RUN,,docs/systems/game/content/base/README.md,game/content/base/
+T-BASE-04,BASE,§1.3 / §23.3,正式内容清单,发布评审,数量、质量、授权、玩法标记符合冻结基线,NOT_RUN,,docs/systems/game/content/base/README.md,game/content/base/
+T-NAVAL-C-01,NAVAL-C,NAVAL-01,舰船建造、维修、买卖、编队和港口,执行登船航行登陆,船、队伍、货物唯一归属,NOT_RUN,,docs/systems/game/addons/naval/campaign/README.md,game/addons/naval/campaign/
+T-NAVAL-C-02,NAVAL-C,NAVAL-02,港口封锁、海运商队、沿岸袭击,逐日推进,供应与后勤变化可解释,NOT_RUN,,docs/systems/game/addons/naval/campaign/README.md,game/addons/naval/campaign/
+T-NAVAL-C-03,NAVAL-C,NAVAL-05,海战后捕获船只,结算,船舶货物和人员与来源一致,NOT_RUN,,docs/systems/game/addons/naval/campaign/README.md,game/addons/naval/campaign/
+T-NAVAL-C-04,NAVAL-C,NAVAL-07,未安装海战扩展的本体,创建/加载/陆战,无海战依赖或行为变化,NOT_RUN,,docs/systems/game/addons/naval/campaign/README.md,game/addons/naval/campaign/
+T-NAVAL-M-01,NAVAL-M,NAVAL-03,多船风浪、碰撞、损伤和火力,操船接舷,状态机、船体/部件与动作正确,NOT_RUN,,docs/systems/game/addons/naval/mission/README.md,game/addons/naval/mission/
+T-NAVAL-M-02,NAVAL-M,NAVAL-04,船舶运动中连通/断开接舷,船员移动、沉没,局部路径与跨船状态合法，源槽不丢,NOT_RUN,,docs/systems/game/addons/naval/mission/README.md,game/addons/naval/mission/
+T-NAVAL-M-03,NAVAL-M,NAVAL-05,船员、船体和货物有不同结果,生成并提交扩展结果,来源完整、幂等,NOT_RUN,,docs/systems/game/addons/naval/mission/README.md,game/addons/naval/mission/
+T-NAVAL-M-04,NAVAL-M,NAVAL-07,海战模块未启用,启动野战,原陆战规则和存档保持兼容,NOT_RUN,,docs/systems/game/addons/naval/mission/README.md,game/addons/naval/mission/
+T-NAVAL-P-01,NAVAL-P,NAVAL-06 / MOD-06,海战剧情、海员、船型与自定义海战,编译试玩,完整模式和工具可使用,NOT_RUN,,docs/systems/game/content/expansions/naval/README.md,game/content/expansions/naval/;game/addons/naval/
+T-NAVAL-P-02,NAVAL-P,NAVAL-05,扩展世界存档含舰船动态状态,迁移,数据完整或明确拒绝,NOT_RUN,,docs/systems/game/content/expansions/naval/README.md,game/content/expansions/naval/;game/addons/naval/
+T-NAVAL-P-03,NAVAL-P,NAVAL-07,本体和启用扩展的世界分别加载,回归,未启用本体不受影响,NOT_RUN,,docs/systems/game/content/expansions/naval/README.md,game/content/expansions/naval/;game/addons/naval/
+T-NATIVE-01,NATIVE,BAI-06 / §19.4,相同混合战场及脚本/原生实现,差分、压测,结果语义一致，记录实际性能变化,NOT_RUN,,docs/systems/native/README.md,native/
+T-NATIVE-02,NATIVE,§20.2,错误 ABI、数组长度或已释放 scope,调用,安全拒绝，不访问越界,NOT_RUN,,docs/systems/native/README.md,native/
+T-NATIVE-03,NATIVE,BAT-05,50 次场景切换,释放 native buffers,无内存泄漏,NOT_RUN,,docs/systems/native/README.md,native/
+T-SERVER-D-01,SERVER-D,NET-01,无显示/GPU 设备,运行专服 Mission,与单人同规则，真实权威模拟,NOT_RUN,,docs/systems/server/dedicated/README.md,server/dedicated/
+T-SERVER-D-02,SERVER-D,NET-05,专服崩溃或赛果重复提交,重启/重试,状态明确，奖励不重复,NOT_RUN,,docs/systems/server/dedicated/README.md,server/dedicated/
+T-SERVER-D-03,SERVER-D,NET-06,64/128 真人和约定 AI,压测,tick、带宽、内存符合冻结容量目标,NOT_RUN,,docs/systems/server/dedicated/README.md,server/dedicated/
+T-SERVER-L-01,SERVER-L,NET-02,跨地区、不同版本的匹配请求,分配,仅兼容且满足容量的玩家匹配,NOT_RUN,,docs/systems/server/lobby_service/README.md,server/lobby_service/
+T-SERVER-L-02,SERVER-L,NET-05,重复或不可信服务器结果,提交,去重或拒绝，无重复排名奖励,NOT_RUN,,docs/systems/server/lobby_service/README.md,server/lobby_service/
+T-SERVER-L-03,SERVER-L,NET-06,权限/隐私/处罚操作,测试,越权拒绝、审计和最小数据收集,NOT_RUN,,docs/systems/server/lobby_service/README.md,server/lobby_service/
+T-SERVER-OPS-01,SERVER-OPS,NET-05,新版本协议不兼容或实例失败,滚动发布/回滚,匹配正确隔离，已提交结果保持,NOT_RUN,,docs/systems/server/deployment/README.md,server/deployment/
+T-SERVER-OPS-02,SERVER-OPS,NET-06,实例满载及故障,健康与扩容测试,容量、延迟和报警可测,NOT_RUN,,docs/systems/server/deployment/README.md,server/deployment/
+T-SERVER-OPS-03,SERVER-OPS,§20.3,自托管构建包,安装升级,版本/哈希可验证，配置可回滚,NOT_RUN,,docs/systems/server/deployment/README.md,server/deployment/
+T-TOOLS-01,TOOLS,MIS-03 / EXT-03,场景缺出生、引用、任务不可达或未授权资产,运行 CLI,非零退出码与准确错误定位,NOT_RUN,,docs/systems/tools/README.md,tools/
+T-TOOLS-02,TOOLS,ECO-06 / SAI-03,20 固定种子多年仿真,运行,报告硬不变量与软指标,NOT_RUN,,docs/systems/tools/README.md,tools/
+T-TOOLS-03,TOOLS,BAI-06 / §19.4,500/1000 真战斗基准,运行,完整硬件、帧/tick、内存报告,NOT_RUN,,docs/systems/tools/README.md,tools/
+T-TEST-01,TEST,§22.2 / AT-01–AT-17,完整 fixture 与构建,执行端到端矩阵,所有 MUST 场景通过，EXT 独立,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
+T-TEST-02,TEST,§22.3,20 固定种子及随机种子,1/3/10 年仿真,硬不变量零失败，软指标有报告,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
+T-TEST-03,TEST,BAT-03 / SAV-02,结算提交前/中/后故障,恢复,恰好一次提交,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
+T-TEST-04,TEST,BAI-06 / NET-06,战斗和多人容量基准,压力,真实动作/AI/导航，不丢权威状态,NOT_RUN,,docs/systems/game/tests/README.md,game/tests/;test_scenarios/
+T-CI-01,CI,§20.2,领域 import presentation 或形成环,依赖检查,阻断并报告路径,NOT_RUN,,docs/systems/ci/README.md,ci/
+T-CI-02,CI,§23.3,任一 MUST 测试未通过或证据缺失,发布门禁,拒绝发布,NOT_RUN,,docs/systems/ci/README.md,ci/
+T-CI-03,CI,EXT-03 / NET-05,生成客户端/服务器/内容包,构建,版本、协议和哈希一致，可追踪,NOT_RUN,,docs/systems/ci/README.md,ci/
+T-CI-04,CI,§22.3,相同基准性能回退超过阈值,回归,报告并需评审，不隐藏问题,NOT_RUN,,docs/systems/ci/README.md,ci/

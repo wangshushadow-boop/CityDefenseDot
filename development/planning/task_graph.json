@@ -1,0 +1,3311 @@
+{
+  "schema_version": 1,
+  "project": "recollection",
+  "kind": "work_package_dag",
+  "note": "PACKAGE 为计划工作包，不是直接写代码的执行任务。candidate_test_ids 与 requirement_ids 是相关范围索引，不等于全部应在此阶段完成；细化任务须明确实际验收子集、延期完整复验及未覆盖功能。GATE 必须实际通过；P7 收口全部 MUST，P8 收口 EXT。",
+  "packages": [
+    {
+      "id": "P0-ENV",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "检查工具、硬件、权限与项目基线",
+      "module_ids": [],
+      "depends_on": [],
+      "scope": "Git、Codex 与 Python 版本、引擎候选环境、CPU/GPU/内存/驱动、沙盒与子 Agent 能力；只读检查，必要初始化经用户同意。",
+      "acceptance": "实际命令、版本、硬件、工具可用性和结构检查报告；不能执行的环境项明确阻塞。",
+      "approval_required": false,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "P0-CRITERIA",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "设计真实负载实验与判据",
+      "module_ids": [
+        "TEST",
+        "TELEM"
+      ],
+      "depends_on": [
+        "P0-ENV"
+      ],
+      "scope": "明确 §19.4/22.3 基准、固定种子、输入/镜头、混合步骑弓、动作蒙皮、弹体、拥堵、专服容量和采样；实验隔离。",
+      "acceptance": "实验规范与复现命令，真实负载及指标定义明确；无静止替代。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/tests/README.md",
+        "docs/systems/game/infrastructure/telemetry/README.md"
+      ],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "P0-BATTLE",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "动作、蒙皮与混合战场容量试验",
+      "module_ids": [
+        "COM",
+        "VIS",
+        "MIS-RT",
+        "NATIVE",
+        "INF-ENGINE"
+      ],
+      "depends_on": [
+        "P0-CRITERIA"
+      ],
+      "scope": "候选引擎隔离验证方向动作、真实混合 500/1000 单位、动画蒙皮/碰撞及 CPU/GPU；不写正式核心。",
+      "acceptance": "实测报告，至少含基准场景、数量、P95、平均 FPS、tick、内存、失败项；不达标评估替代。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/combat/README.md",
+        "docs/systems/game/presentation/visuals/README.md",
+        "docs/systems/game/mission/runtime/README.md",
+        "docs/systems/native/README.md",
+        "docs/systems/game/infrastructure/engine/README.md"
+      ],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "P0-NAV",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "动态导航与人群瓶颈实验",
+      "module_ids": [
+        "MOV",
+        "FORM",
+        "INF-ENGINE"
+      ],
+      "depends_on": [
+        "P0-CRITERIA"
+      ],
+      "scope": "狭窄门洞/桥/楼梯、队列、共享路径、动态 Link 与拥堵恢复；与战场实验共享只读规范，独立输出。",
+      "acceptance": "真实导航压测、成本与不可达处理报告；失败不通过。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/movement/README.md",
+        "docs/systems/game/mission/formation/README.md",
+        "docs/systems/game/infrastructure/engine/README.md"
+      ],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "P0-NET",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "专用服务器与联网可行性实验",
+      "module_ids": [
+        "NET",
+        "MP",
+        "SERVER-D"
+      ],
+      "depends_on": [
+        "P0-CRITERIA"
+      ],
+      "scope": "headless 候选运行、权威 tick、输入/快照、容量、丢包/乱序/延迟与带宽测试；仅实验不承诺完整多人。",
+      "acceptance": "实际服务端和客户端实验、性能与安全边界证据；记录未验证项。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/network/README.md",
+        "docs/systems/game/multiplayer/README.md",
+        "docs/systems/server/dedicated/README.md"
+      ],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "P0-CONTENT",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "资产、编辑器与工具链可行性",
+      "module_ids": [
+        "BASE",
+        "TOOLS",
+        "INF-CONTENT"
+      ],
+      "depends_on": [
+        "P0-CRITERIA"
+      ],
+      "scope": "骨架/马匹/武器挂点、动画窗口、场景标记、导入/构建、内容编译与许可证；测试授权资产。",
+      "acceptance": "导入和验证样例、工具选型依据、可复现流程及后续资产标准。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/content/base/README.md",
+        "docs/systems/tools/README.md",
+        "docs/systems/game/infrastructure/content/README.md"
+      ],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "P0-CONTRACTS",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "公共契约与版本化方案提案",
+      "module_ids": [
+        "CON",
+        "CORE",
+        "APP",
+        "PERSIST"
+      ],
+      "depends_on": [
+        "P0-ENV"
+      ],
+      "scope": "审查 SDD 冲突与单位、ID、authority、tick、快照、交易、EncounterSpec/MissionResult、FormationOrder、存档/网络/MOD；提出 ADR-012。",
+      "acceptance": "可审查契约第一版、测试向量/版本迁移、依赖端口及所有权，未决项有清单；待最终批准。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/contracts/README.md",
+        "docs/systems/game/core/README.md",
+        "docs/systems/game/application/README.md",
+        "docs/systems/game/infrastructure/persistence/README.md"
+      ],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "P0-DECISIONS",
+      "stage": "P0",
+      "kind": "PACKAGE",
+      "title": "技术栈、基准和契约冻结",
+      "module_ids": [],
+      "depends_on": [
+        "P0-BATTLE",
+        "P0-NAV",
+        "P0-NET",
+        "P0-CONTENT",
+        "P0-CONTRACTS"
+      ],
+      "scope": "整合真实实验；选择精确引擎/主语言/工具版本、构建/测试/CI、性能目标、核心契约与内容管线，形成 ADR-011/012。",
+      "acceptance": "关键目标有真实证据，ADR 由项目负责人批准；环境与版本可复现，缺任何关键证据不通过。",
+      "approval_required": true,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": [],
+      "execution_boundary": "P0 仅环境检查、设计评审、隔离技术实验与报告；正式 game 业务实现不得在 P0 批量生成。实验代码位于 test_scenarios/p0/<task-id>/ 或 native/benchmarks/p0/<task-id>/，公共契约及 ADR 仅按审批规则修改。"
+    },
+    {
+      "id": "GATE-P0",
+      "stage": "P0",
+      "kind": "GATE",
+      "title": "P0 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P0-ENV",
+        "P0-CRITERIA",
+        "P0-BATTLE",
+        "P0-NAV",
+        "P0-NET",
+        "P0-CONTENT",
+        "P0-CONTRACTS",
+        "P0-DECISIONS"
+      ],
+      "scope": "检查 P0 所有工作包、性能和批准记录。",
+      "acceptance": "真实 500/1000 混合场景报告、动画/动态导航/专服实验、环境锁定和负责人批准。",
+      "approval_required": true,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": []
+    },
+    {
+      "id": "P1-CON",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "公共契约与版本管理",
+      "module_ids": [
+        "CON"
+      ],
+      "depends_on": [
+        "GATE-P0"
+      ],
+      "scope": "按批准 ADR 实现稳定值类型、命令/查询/事件/意图、版本、错误、跨域契约与编解码样例。",
+      "acceptance": "契约向量、边界/版本/ID 测试通过。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/contracts/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CON-01",
+        "T-CON-02",
+        "T-CON-03"
+      ],
+      "requirement_ids": [
+        "BAT-03",
+        "NET-05",
+        "SAV-03"
+      ]
+    },
+    {
+      "id": "P1-CORE",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "核心运行时原语与调度",
+      "module_ids": [
+        "CORE"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CON"
+      ],
+      "scope": "调度、时间/随机、生命周期、scope、取消和稳定提交。",
+      "acceptance": "时钟与随机可重复；取消/旧 scope 拒绝。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/core/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CORE-01",
+        "T-CORE-02",
+        "T-CORE-03"
+      ],
+      "requirement_ids": [
+        "BAT-05",
+        "WLD-02"
+      ]
+    },
+    {
+      "id": "P1-DEF",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "定义数据与引用注册",
+      "module_ids": [
+        "DEF"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CON"
+      ],
+      "scope": "定义注册、不可变快照、稳定 ID/引用及 schema 校验。",
+      "acceptance": "重复/失效 ID、升级 DAG、合法定义测试。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/shared/definitions/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-DEF-01",
+        "T-DEF-02",
+        "T-DEF-03"
+      ],
+      "requirement_ids": [
+        "ARM-01",
+        "ECO-05",
+        "EXT-01",
+        "SAV-03"
+      ]
+    },
+    {
+      "id": "P1-TEST-HARNESS",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "领域、集成、场景与长期测试（HARNESS）",
+      "module_ids": [
+        "TEST"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CORE",
+        "P1-DEF"
+      ],
+      "scope": "选定测试框架、fixture、运行脚本、证据输出、契约和领域初始测试；暂不宣称完整 AT。",
+      "acceptance": "可真实运行并报告失败、跳过和种子；用一组正常与失败样例验证框架。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/tests/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-TEST-01",
+        "T-TEST-02",
+        "T-TEST-03",
+        "T-TEST-04"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "BAT-03",
+        "NET-06",
+        "SAV-02"
+      ]
+    },
+    {
+      "id": "P1-SHRULE",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "公共规则、数值与效果计算",
+      "module_ids": [
+        "SHRULE"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CORE",
+        "P1-DEF"
+      ],
+      "scope": "公共数值规则、效果堆叠、可注入随机、配置解释。",
+      "acceptance": "纯函数与边界测试，不写业务状态。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/shared/rules/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SHRULE-01",
+        "T-SHRULE-02",
+        "T-SHRULE-03"
+      ],
+      "requirement_ids": [
+        "CHR-01",
+        "COM-03",
+        "ECO-03"
+      ]
+    },
+    {
+      "id": "P1-INV",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "库存、账户、账本与资源事务",
+      "module_ids": [
+        "INV"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CORE",
+        "P1-DEF"
+      ],
+      "scope": "货物、金钱账户、交易写集与流水。",
+      "acceptance": "非负/守恒、失败回滚、幂等，真实领域测试。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/shared/inventory/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-INV-01",
+        "T-INV-02",
+        "T-INV-03",
+        "T-INV-04"
+      ],
+      "requirement_ids": [
+        "ARM-05",
+        "CHR-02",
+        "ECO-03"
+      ]
+    },
+    {
+      "id": "P1-INF-CONTENT-CORE",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "数据包编译、MOD 注册与配置合并（CORE）",
+      "module_ids": [
+        "INF-CONTENT"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-DEF",
+        "P1-CORE"
+      ],
+      "scope": "内容解析/编译、manifest、依赖/冲突、版本与资源引用；P6 完整 SDK/发布。",
+      "acceptance": "合法/非法样例编译，内容 hash 稳定。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/content/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-INF-CONTENT-01",
+        "T-INF-CONTENT-02",
+        "T-INF-CONTENT-03",
+        "T-INF-CONTENT-04"
+      ],
+      "requirement_ids": [
+        "EXT-01",
+        "EXT-02",
+        "EXT-03",
+        "MIS-03",
+        "MOD-05"
+      ]
+    },
+    {
+      "id": "P1-PERSIST-CORE",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "存档、原子提交、迁移与恢复（CORE）",
+      "module_ids": [
+        "PERSIST"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CON",
+        "P1-CORE",
+        "P1-DEF"
+      ],
+      "scope": "存档核心快照、迁移、原子提交与恢复端口；完整战役状态后续接入。",
+      "acceptance": "基础快照往返、损坏/写入故障、逐级迁移通过。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/persistence/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-PERSIST-01",
+        "T-PERSIST-02",
+        "T-PERSIST-03",
+        "T-PERSIST-04"
+      ],
+      "requirement_ids": [
+        "BAT-03",
+        "SAV-01",
+        "SAV-02",
+        "SAV-03"
+      ]
+    },
+    {
+      "id": "P1-INF-ENGINE-PORTS",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "引擎适配、物理、导航与资源端口（PORTS）",
+      "module_ids": [
+        "INF-ENGINE"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CORE",
+        "P1-CON"
+      ],
+      "scope": "选定引擎的资源、场景、物理、导航与线程适配端口，先验证基本调用和生命周期。",
+      "acceptance": "实际引擎适配 smoke test；核心无场景依赖。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/engine/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-INF-ENGINE-01",
+        "T-INF-ENGINE-02",
+        "T-INF-ENGINE-03",
+        "T-INF-ENGINE-04"
+      ],
+      "requirement_ids": [
+        "COM-02",
+        "NAV-01",
+        "NET-01"
+      ]
+    },
+    {
+      "id": "P1-TELEM",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "日志、指标、诊断与崩溃报告",
+      "module_ids": [
+        "TELEM"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CORE"
+      ],
+      "scope": "统一日志、指标、运行环境与性能采样。",
+      "acceptance": "scope/tick/ID 可追踪、隐私最小化、真实采样。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/telemetry/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-TELEM-01",
+        "T-TELEM-02",
+        "T-TELEM-03"
+      ],
+      "requirement_ids": [
+        "NET-06"
+      ]
+    },
+    {
+      "id": "P1-CAMP-RUNTIME",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "战略世界运行时（RUNTIME）",
+      "module_ids": [
+        "CAMP"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CORE",
+        "P1-INV",
+        "P1-DEF"
+      ],
+      "scope": "战略运行时壳、分相调度、注册与只读快照；不伪造经济/政治。",
+      "acceptance": "空/最小合法世界运行、提交及释放验证。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CAMP-01",
+        "T-CAMP-02",
+        "T-CAMP-03",
+        "T-CAMP-04"
+      ],
+      "requirement_ids": [
+        "ECO-06",
+        "SAI-03",
+        "WLD-02",
+        "WLD-04",
+        "WLD-05"
+      ]
+    },
+    {
+      "id": "P1-MIS-RT-PORTS",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "Mission 运行时、实体与增援（PORTS）",
+      "module_ids": [
+        "MIS-RT"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CORE",
+        "P1-DEF",
+        "P1-INF-ENGINE-PORTS"
+      ],
+      "scope": "Mission 生命周期、实体存储、generation、固定 tick、系统注册与结果端口；战斗阶段实现留 P2。",
+      "acceptance": "创建/销毁、scope 隔离、tick 与异步取消验证。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/runtime/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-MIS-RT-01",
+        "T-MIS-RT-02",
+        "T-MIS-RT-03",
+        "T-MIS-RT-04"
+      ],
+      "requirement_ids": [
+        "BAT-01",
+        "BAT-02",
+        "BAT-05",
+        "MIS-02"
+      ]
+    },
+    {
+      "id": "P1-APP-CORE",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "应用层、GameSession 与事务（CORE）",
+      "module_ids": [
+        "APP"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-CAMP-RUNTIME",
+        "P1-MIS-RT-PORTS",
+        "P1-PERSIST-CORE",
+        "P1-INV"
+      ],
+      "scope": "Session、路由、用例/事务协调、跨域端口；先接真实基础能力。",
+      "acceptance": "状态转移/失败回退、事务与模式边界测试。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/application/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-APP-01",
+        "T-APP-02",
+        "T-APP-03",
+        "T-APP-04"
+      ],
+      "requirement_ids": [
+        "BAT-03",
+        "BAT-04",
+        "BAT-05",
+        "MOD-01",
+        "MOD-02",
+        "MOD-03"
+      ]
+    },
+    {
+      "id": "P1-BOOT",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "启动、装配与配置",
+      "module_ids": [
+        "BOOT"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-APP-CORE",
+        "P1-INF-CONTENT-CORE",
+        "P1-INF-ENGINE-PORTS",
+        "P1-TELEM"
+      ],
+      "scope": "选定引擎工程入口、组合根、运行 profile、失败清理；headless 基础验证。",
+      "acceptance": "可实际启动/释放；循环注册拒绝，headless 不加载表现层。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/bootstrap/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BOOT-01",
+        "T-BOOT-02",
+        "T-BOOT-03"
+      ],
+      "requirement_ids": [
+        "NET-01"
+      ]
+    },
+    {
+      "id": "P1-CI-CORE",
+      "stage": "P1",
+      "kind": "PACKAGE",
+      "title": "持续集成、架构门禁与发布构建（CORE）",
+      "module_ids": [
+        "CI"
+      ],
+      "depends_on": [
+        "GATE-P0",
+        "P1-BOOT",
+        "P1-TEST-HARNESS"
+      ],
+      "scope": "本地与 CI 统一构建/测试/架构检查；版本锁定。",
+      "acceptance": "真实构建、测试及故障阻断演示；结构检查不是游戏测试。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/ci/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CI-01",
+        "T-CI-02",
+        "T-CI-03",
+        "T-CI-04"
+      ],
+      "requirement_ids": [
+        "EXT-03",
+        "NET-05"
+      ]
+    },
+    {
+      "id": "GATE-P1",
+      "stage": "P1",
+      "kind": "GATE",
+      "title": "P1 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P1-CON",
+        "P1-CORE",
+        "P1-DEF",
+        "P1-TEST-HARNESS",
+        "P1-SHRULE",
+        "P1-INV",
+        "P1-INF-CONTENT-CORE",
+        "P1-PERSIST-CORE",
+        "P1-INF-ENGINE-PORTS",
+        "P1-TELEM",
+        "P1-CAMP-RUNTIME",
+        "P1-MIS-RT-PORTS",
+        "P1-APP-CORE",
+        "P1-BOOT",
+        "P1-CI-CORE"
+      ],
+      "scope": "AT-10 存档与事务基础切片；完整遭遇故障在 P3 及 P7 复验。",
+      "acceptance": "可启动/可 headless（按选定环境）、纯领域测试、内容验证、原子存档与初始迁移；冻结战场、联网、MOD 端口。",
+      "approval_required": false,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": []
+    },
+    {
+      "id": "P2-MIS-RT-BATTLE",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "Mission 运行时、实体与增援（BATTLE）",
+      "module_ids": [
+        "MIS-RT"
+      ],
+      "depends_on": [
+        "GATE-P1"
+      ],
+      "scope": "落实部署、波次、增援、规则 tick 相位、实体生命周期。",
+      "acceptance": "战场部署/增援及 generation、旧 scope、结果边界测试。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/runtime/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-MIS-RT-01",
+        "T-MIS-RT-02",
+        "T-MIS-RT-03",
+        "T-MIS-RT-04"
+      ],
+      "requirement_ids": [
+        "BAT-01",
+        "BAT-02",
+        "BAT-05",
+        "MIS-02"
+      ]
+    },
+    {
+      "id": "P2-COM",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "动作、装备、命中、伤害与士气执行",
+      "module_ids": [
+        "COM"
+      ],
+      "depends_on": [
+        "GATE-P1"
+      ],
+      "scope": "方向攻击/格挡/蓄力/取消、近远程碰撞与伤害、骑乘、士气、固定 tick。",
+      "acceptance": "COM-01–05、士气与实际动作测试；多人 COM-06 后续复验。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/combat/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-COM-01",
+        "T-COM-02",
+        "T-COM-03",
+        "T-COM-04",
+        "T-COM-05",
+        "T-COM-06",
+        "T-COM-07"
+      ],
+      "requirement_ids": [
+        "BAI-05",
+        "COM-01",
+        "COM-02",
+        "COM-03",
+        "COM-04",
+        "COM-05",
+        "COM-06"
+      ]
+    },
+    {
+      "id": "P2-MOV",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "战场路径、避障、运动与动态导航",
+      "module_ids": [
+        "MOV"
+      ],
+      "depends_on": [
+        "GATE-P1"
+      ],
+      "scope": "NavMesh、编队共享路径、局部避障/拥堵、移动与位姿、动态 Link 端口。",
+      "acceptance": "可达/不可达、导航版本与真实人群测试；攻城 Link 在 P4 完整复验。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/movement/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-MOV-01",
+        "T-MOV-02",
+        "T-MOV-03",
+        "T-MOV-04"
+      ],
+      "requirement_ids": [
+        "BAI-02",
+        "BAI-06",
+        "COM-04",
+        "NAV-01"
+      ]
+    },
+    {
+      "id": "P2-FORM",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "编队、指挥授权、阵型与槽位执行",
+      "module_ids": [
+        "FORM"
+      ],
+      "depends_on": [
+        "GATE-P1"
+      ],
+      "scope": "命令权威、七类阵型、槽位、成员、队形与执行；与 AI 决策分离。",
+      "acceptance": "权限、阵型、槽位与伤亡重组；玩家/AI 共用接口。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/formation/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-FORM-01",
+        "T-FORM-02",
+        "T-FORM-03",
+        "T-FORM-04"
+      ],
+      "requirement_ids": [
+        "BAI-01",
+        "BAI-02",
+        "BAI-05",
+        "NET-04"
+      ]
+    },
+    {
+      "id": "P2-BAI",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "战场 AI 共同基础、感知与调度",
+      "module_ids": [
+        "BAI"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-FORM",
+        "P2-MOV",
+        "P2-COM"
+      ],
+      "scope": "战场共同感知、快照/黑板、调度、优先级与预算；排除 tactical/formation/individual 独立实现。",
+      "acceptance": "可见性、旧意图拒绝、scope 生命周期、分层调度与性能。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/ai/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BAI-01",
+        "T-BAI-02",
+        "T-BAI-03",
+        "T-BAI-04"
+      ],
+      "requirement_ids": [
+        "BAI-01",
+        "BAI-05",
+        "BAI-06",
+        "BAT-05"
+      ]
+    },
+    {
+      "id": "P2-BAI-T",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "L1 战术 AI：全军计划",
+      "module_ids": [
+        "BAI-T"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-BAI"
+      ],
+      "scope": "全军战术计划、候选评分、阶段、编队任务与回退。",
+      "acceptance": "地形/兵力/目标与可达性、退却改计划、命令授权。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/ai/tactical/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BAI-T-01",
+        "T-BAI-T-02",
+        "T-BAI-T-03"
+      ],
+      "requirement_ids": [
+        "BAI-01",
+        "BAI-04"
+      ]
+    },
+    {
+      "id": "P2-BAI-F",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "L2 编队 AI：执行战术任务",
+      "module_ids": [
+        "BAI-F"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-BAI"
+      ],
+      "scope": "编队行为、推进/防守/射击/冲锋/撤退/重组，输出目标而不写执行状态。",
+      "acceptance": "保持与失效命令、队形与战术约束。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/ai/formation/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BAI-F-01",
+        "T-BAI-F-02",
+        "T-BAI-F-03"
+      ],
+      "requirement_ids": [
+        "BAI-01",
+        "BAI-02",
+        "BAI-04"
+      ]
+    },
+    {
+      "id": "P2-BAI-I",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "L3 个体 AI：士兵感知、目标与动作意图",
+      "module_ids": [
+        "BAI-I"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-BAI"
+      ],
+      "scope": "个体感知、FSM/Utility、目标、近战/远程/骑兵/骑射、紧急反应。",
+      "acceptance": "四兵种、有限感知、目标锁定、命令与实际动作接口。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/ai/individual/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BAI-I-01",
+        "T-BAI-I-02",
+        "T-BAI-I-03",
+        "T-BAI-I-04"
+      ],
+      "requirement_ids": [
+        "BAI-03",
+        "BAI-05",
+        "BAI-06",
+        "COM-05"
+      ]
+    },
+    {
+      "id": "P2-RULES-FIELD",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "Mission 规则、目标与玩法组合（FIELD）",
+      "module_ids": [
+        "RULES"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-MIS-RT-BATTLE",
+        "P2-FORM",
+        "P2-COM"
+      ],
+      "scope": "野战规则、目标、撤退、结束、击倒处理；保留可组合模式接口。",
+      "acceptance": "真实野战胜败、撤退、增援和模式隔离；其他规则在 P4–P6。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/rules/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-RULES-01",
+        "T-RULES-02",
+        "T-RULES-03",
+        "T-RULES-04",
+        "T-RULES-05"
+      ],
+      "requirement_ids": [
+        "BAT-01",
+        "BAT-04",
+        "MIS-01",
+        "MIS-02",
+        "MOD-03",
+        "MOD-04",
+        "NET-02",
+        "SGE-02"
+      ]
+    },
+    {
+      "id": "P2-RESULTS",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "来源追踪、战斗结果与统计",
+      "module_ids": [
+        "RESULTS"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-MIS-RT-BATTLE",
+        "P2-COM",
+        "P2-RULES-FIELD"
+      ],
+      "scope": "来源槽、伤亡/俘虏候选、经验/战利品意图及结果完整性。",
+      "acceptance": "每槽唯一终态、未入场明确、结果稳定、无战役写入。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/results/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-RESULTS-01",
+        "T-RESULTS-02",
+        "T-RESULTS-03",
+        "T-RESULTS-04"
+      ],
+      "requirement_ids": [
+        "ARM-05",
+        "BAT-02",
+        "BAT-03",
+        "BAT-04",
+        "SGE-03"
+      ]
+    },
+    {
+      "id": "P2-INPUT",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "输入设备、控制映射与玩家命令",
+      "module_ids": [
+        "INPUT"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-COM",
+        "P2-FORM"
+      ],
+      "scope": "输入映射、移动/视角/攻击/格挡/指挥与手柄。",
+      "acceptance": "玩家/AI 意图同语义、权限、重映射。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/input/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-INPUT-01",
+        "T-INPUT-02",
+        "T-INPUT-03"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "BAI-01",
+        "COM-05",
+        "NET-04",
+        "UX-01"
+      ]
+    },
+    {
+      "id": "P2-CAM",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "相机、视角、选取与观战",
+      "module_ids": [
+        "CAM"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-INPUT",
+        "P2-MOV"
+      ],
+      "scope": "一/三人称、骑乘、碰撞、选取、部署和观战相机。",
+      "acceptance": "相机不改变权威结果、合法视角。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/camera/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CAM-01",
+        "T-CAM-02",
+        "T-CAM-03"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "NET-04",
+        "UX-02"
+      ]
+    },
+    {
+      "id": "P2-VIS-BATTLE",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "地图与战场视觉代理、动画、LOD（BATTLE）",
+      "module_ids": [
+        "VIS"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-COM",
+        "P2-MOV"
+      ],
+      "scope": "视觉代理、骨骼/动画、动作标记、装备/LOD，真实战斗与地图基础。",
+      "acceptance": "动画/权威窗口同步，LOD/蒙皮性能。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/visuals/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-VIS-01",
+        "T-VIS-02",
+        "T-VIS-03"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "COM-05",
+        "VIS-01"
+      ]
+    },
+    {
+      "id": "P2-AUD-BATTLE",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "音频、战斗语音与音乐（BATTLE）",
+      "module_ids": [
+        "AUD"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-COM",
+        "P2-FORM"
+      ],
+      "scope": "命令、命中、音源预算、混音和战斗音乐。",
+      "acceptance": "声音与权威事件一致、并发预算及可访问性。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/audio/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-AUD-01",
+        "T-AUD-02",
+        "T-AUD-03"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "AUD-01",
+        "BAT-05"
+      ]
+    },
+    {
+      "id": "P2-UI-BATTLE",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "界面、ReadModel 与交互流程（BATTLE）",
+      "module_ids": [
+        "UI"
+      ],
+      "depends_on": [
+        "GATE-P1",
+        "P2-FORM",
+        "P2-RULES-FIELD",
+        "P2-INPUT"
+      ],
+      "scope": "战斗 HUD、部署/编队/指令、目标和结果预览。",
+      "acceptance": "战斗可读性、权限/错误反馈与操作测试。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/ui/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-UI-01",
+        "T-UI-02",
+        "T-UI-03",
+        "T-UI-04"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "UX-01",
+        "UX-02",
+        "UX-03"
+      ]
+    },
+    {
+      "id": "P2-FIELD-INTEGRATION",
+      "stage": "P2",
+      "kind": "PACKAGE",
+      "title": "混合战场端到端集成与性能",
+      "module_ids": [
+        "TEST"
+      ],
+      "depends_on": [
+        "P2-MIS-RT-BATTLE",
+        "P2-RULES-FIELD",
+        "P2-RESULTS",
+        "P2-BAI-T",
+        "P2-BAI-F",
+        "P2-BAI-I",
+        "P2-VIS-BATTLE",
+        "P2-AUD-BATTLE",
+        "P2-CAM",
+        "P2-UI-BATTLE"
+      ],
+      "scope": "真实 500/1000 混合野战、真实动作/AI/导航/动画、玩家命令与结果；P2 后续任务完整收口。",
+      "acceptance": "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/tests/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-TEST-01",
+        "T-TEST-02",
+        "T-TEST-03",
+        "T-TEST-04"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "BAT-03",
+        "NET-06",
+        "SAV-02"
+      ]
+    },
+    {
+      "id": "GATE-P2",
+      "stage": "P2",
+      "kind": "GATE",
+      "title": "P2 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P2-MIS-RT-BATTLE",
+        "P2-COM",
+        "P2-MOV",
+        "P2-FORM",
+        "P2-BAI",
+        "P2-BAI-T",
+        "P2-BAI-F",
+        "P2-BAI-I",
+        "P2-RULES-FIELD",
+        "P2-RESULTS",
+        "P2-INPUT",
+        "P2-CAM",
+        "P2-VIS-BATTLE",
+        "P2-AUD-BATTLE",
+        "P2-UI-BATTLE",
+        "P2-FIELD-INTEGRATION"
+      ],
+      "scope": "AT-04 完整；AT-05 战场来源槽切片；COM-06 与多人完整验收留 P6。",
+      "acceptance": "真实混合野战、编队/命令/士气/结果、500/1000 人性能验证；COM/BAT/BAI/NAV 本阶段能力。",
+      "approval_required": false,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": []
+    },
+    {
+      "id": "P3-WORLD",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "世界地图、时钟、交通、情报",
+      "module_ids": [
+        "WORLD"
+      ],
+      "depends_on": [
+        "GATE-P2"
+      ],
+      "scope": "地图坐标、交通图、时钟、天气、移动、可见情报与遭遇候选。",
+      "acceptance": "三档速度/暂停/拦截/世界种子、只读情报。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/world/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-WORLD-01",
+        "T-WORLD-02",
+        "T-WORLD-03",
+        "T-WORLD-04"
+      ],
+      "requirement_ids": [
+        "WLD-01",
+        "WLD-03",
+        "WLD-04",
+        "WLD-05"
+      ]
+    },
+    {
+      "id": "P3-CHR",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "英雄、成长、装备与生命状态",
+      "module_ids": [
+        "CHR"
+      ],
+      "depends_on": [
+        "GATE-P2"
+      ],
+      "scope": "人物创建、属性技能天赋、装备、生命/伤病与死亡。",
+      "acceptance": "成长/装备/生命规则，库存一致性。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/character/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CHR-01",
+        "T-CHR-02",
+        "T-CHR-03",
+        "T-CHR-04"
+      ],
+      "requirement_ids": [
+        "CHR-01",
+        "CHR-02",
+        "CHR-03",
+        "CLN-03"
+      ]
+    },
+    {
+      "id": "P3-CLAN",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "家族、婚育、同伴、职责与继承",
+      "module_ids": [
+        "CLAN"
+      ],
+      "depends_on": [
+        "GATE-P2",
+        "P3-CHR"
+      ],
+      "scope": "家族、同伴、角色、婚育、继承；先通过政治/领地端口，不伪造实际政治。",
+      "acceptance": "谱系与身份唯一，换代和角色约束；政治/任务后续复验。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/clan/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CLAN-01",
+        "T-CLAN-02",
+        "T-CLAN-03"
+      ],
+      "requirement_ids": [
+        "CLN-01",
+        "CLN-02",
+        "CLN-03"
+      ]
+    },
+    {
+      "id": "P3-PARTY",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "队伍、军团、名册、俘虏、补给",
+      "module_ids": [
+        "PARTY"
+      ],
+      "depends_on": [
+        "GATE-P2",
+        "P3-CHR",
+        "P3-CLAN",
+        "P3-WORLD"
+      ],
+      "scope": "兵种树、名册、招募/升级、俘虏、后勤和军团基本编制。",
+      "acceptance": "兵力/经验/金钱/货物守恒，工资粮耗与逃兵。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/party/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-PARTY-01",
+        "T-PARTY-02",
+        "T-PARTY-03",
+        "T-PARTY-04",
+        "T-PARTY-05"
+      ],
+      "requirement_ids": [
+        "ARM-01",
+        "ARM-02",
+        "ARM-03",
+        "ARM-04",
+        "ARM-05",
+        "BAT-02"
+      ]
+    },
+    {
+      "id": "P3-ENC-ENCOUNTER",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "遭遇、战略围城、预留与自动结算（ENCOUNTER）",
+      "module_ids": [
+        "ENC"
+      ],
+      "depends_on": [
+        "GATE-P2",
+        "P3-PARTY",
+        "P3-WORLD"
+      ],
+      "scope": "遭遇、预留、自动战斗、战斗跨域提交、故障恢复；战略围城留 P4。",
+      "acceptance": "来源槽守恒、自动结算可复现、幂等和中断恢复。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/encounter/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-ENC-01",
+        "T-ENC-02",
+        "T-ENC-03",
+        "T-ENC-04",
+        "T-ENC-05"
+      ],
+      "requirement_ids": [
+        "ARM-05",
+        "BAT-02",
+        "BAT-03",
+        "SAI-02",
+        "SGE-01",
+        "SGE-03"
+      ]
+    },
+    {
+      "id": "P3-CAMP-DOMAINS",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "战略世界运行时（DOMAINS）",
+      "module_ids": [
+        "CAMP"
+      ],
+      "depends_on": [
+        "GATE-P2",
+        "P3-ENC-ENCOUNTER"
+      ],
+      "scope": "接入世界/人物/家族/队伍和日结相位、访问/遭遇时间规则。",
+      "acceptance": "长期运行、暂停/切换及可用模块真实演化。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CAMP-01",
+        "T-CAMP-02",
+        "T-CAMP-03",
+        "T-CAMP-04"
+      ],
+      "requirement_ids": [
+        "ECO-06",
+        "SAI-03",
+        "WLD-02",
+        "WLD-04",
+        "WLD-05"
+      ]
+    },
+    {
+      "id": "P3-APP-CAMPAIGN",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "应用层、GameSession 与事务（CAMPAIGN）",
+      "module_ids": [
+        "APP"
+      ],
+      "depends_on": [
+        "GATE-P2",
+        "P3-ENC-ENCOUNTER",
+        "P3-CAMP-DOMAINS"
+      ],
+      "scope": "连接创建/遭遇/战场返回、跨域事务、自动结算、读模型。",
+      "acceptance": "从建角、招兵、旅行、野战结算可实际运行。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/application/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-APP-01",
+        "T-APP-02",
+        "T-APP-03",
+        "T-APP-04"
+      ],
+      "requirement_ids": [
+        "BAT-03",
+        "BAT-04",
+        "BAT-05",
+        "MOD-01",
+        "MOD-02",
+        "MOD-03"
+      ]
+    },
+    {
+      "id": "P3-PERSIST-CAMPAIGN",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "存档、原子提交、迁移与恢复（CAMPAIGN）",
+      "module_ids": [
+        "PERSIST"
+      ],
+      "depends_on": [
+        "GATE-P2",
+        "P3-APP-CAMPAIGN"
+      ],
+      "scope": "持久领域快照、预留、结算日志与迁移；之后新领域持续接入。",
+      "acceptance": "实际存档恢复、提交前中后注入故障；AT-10。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/persistence/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-PERSIST-01",
+        "T-PERSIST-02",
+        "T-PERSIST-03",
+        "T-PERSIST-04"
+      ],
+      "requirement_ids": [
+        "BAT-03",
+        "SAV-01",
+        "SAV-02",
+        "SAV-03"
+      ]
+    },
+    {
+      "id": "P3-UI-CAMPAIGN",
+      "stage": "P3",
+      "kind": "PACKAGE",
+      "title": "界面、ReadModel 与交互流程（CAMPAIGN）",
+      "module_ids": [
+        "UI"
+      ],
+      "depends_on": [
+        "GATE-P2",
+        "P3-APP-CAMPAIGN"
+      ],
+      "scope": "战略地图、创建角色、家族、名册、库存、基础遭遇与结果界面。",
+      "acceptance": "真实用例与取消不改数据；可操作主循环。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/ui/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-UI-01",
+        "T-UI-02",
+        "T-UI-03",
+        "T-UI-04"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "UX-01",
+        "UX-02",
+        "UX-03"
+      ]
+    },
+    {
+      "id": "GATE-P3",
+      "stage": "P3",
+      "kind": "GATE",
+      "title": "P3 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P3-WORLD",
+        "P3-CHR",
+        "P3-CLAN",
+        "P3-PARTY",
+        "P3-ENC-ENCOUNTER",
+        "P3-CAMP-DOMAINS",
+        "P3-APP-CAMPAIGN",
+        "P3-PERSIST-CAMPAIGN",
+        "P3-UI-CAMPAIGN"
+      ],
+      "scope": "AT-05/09/10 的已具备功能；AT-01 贸易/任务部分待 P4/P5；AT-09 涉及领地/政治/任务部分同样延期。",
+      "acceptance": "角色创建/招兵/地图接战/结算及保存恢复闭环，身份与资源一致。",
+      "approval_required": false,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": []
+    },
+    {
+      "id": "P4-ECO",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "经济、市场、商队、工坊与锻造",
+      "module_ids": [
+        "ECO"
+      ],
+      "depends_on": [
+        "GATE-P3"
+      ],
+      "scope": "生产消费、价格/报价、交易、商队、工坊和锻造、可存档动态物品。",
+      "acceptance": "账本守恒、交易原子性、围城供需、制造防循环套利。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/economy/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-ECO-01",
+        "T-ECO-02",
+        "T-ECO-03",
+        "T-ECO-04",
+        "T-ECO-05",
+        "T-ECO-06"
+      ],
+      "requirement_ids": [
+        "ECO-01",
+        "ECO-02",
+        "ECO-03",
+        "ECO-04",
+        "ECO-05",
+        "ECO-06"
+      ]
+    },
+    {
+      "id": "P4-SET",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "城镇、城堡、村庄与领地治理",
+      "module_ids": [
+        "SET"
+      ],
+      "depends_on": [
+        "GATE-P3"
+      ],
+      "scope": "城镇/城堡/村庄、治理、驻军民兵、建设/饥荒/叛乱。",
+      "acceptance": "治理/归属、建设/产出、合法过渡，日结资源一致。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/settlement/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SET-01",
+        "T-SET-02",
+        "T-SET-03",
+        "T-SET-04"
+      ],
+      "requirement_ids": [
+        "POL-04",
+        "SET-01",
+        "SET-02",
+        "SET-03",
+        "SET-04"
+      ]
+    },
+    {
+      "id": "P4-POL",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "王国、决议、外交、战争与身份",
+      "module_ids": [
+        "POL"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-SET"
+      ],
+      "scope": "王国、成员、政策、决议/投票、战争和平、封地及兴亡。",
+      "acceptance": "权限、影响力、外交/领地/家族事务一致。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/politics/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-POL-01",
+        "T-POL-02",
+        "T-POL-03",
+        "T-POL-04"
+      ],
+      "requirement_ids": [
+        "POL-01",
+        "POL-02",
+        "POL-03",
+        "POL-04"
+      ]
+    },
+    {
+      "id": "P4-ENC-SIEGE",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "遭遇、战略围城、预留与自动结算（SIEGE）",
+      "module_ids": [
+        "ENC"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-ECO",
+        "P4-SET",
+        "P4-POL"
+      ],
+      "scope": "战略围城、封锁、器械建造、工事损坏、撤围/解围、预留与结算。",
+      "acceptance": "SGE-01/03，围城状态与领地回写正确。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/encounter/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-ENC-01",
+        "T-ENC-02",
+        "T-ENC-03",
+        "T-ENC-04",
+        "T-ENC-05"
+      ],
+      "requirement_ids": [
+        "ARM-05",
+        "BAT-02",
+        "BAT-03",
+        "SAI-02",
+        "SGE-01",
+        "SGE-03"
+      ]
+    },
+    {
+      "id": "P4-SAI",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "战略 AI 总控、调度与任务规划",
+      "module_ids": [
+        "SAI"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-ECO",
+        "P4-SET",
+        "P4-POL"
+      ],
+      "scope": "战略调度、授权情报、Utility/HTN、计划锁/冷却，排除四个 planner 独立子目录。",
+      "acceptance": "合法命令、资源限制、长期计划与稳定调度。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/strategic_ai/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SAI-01",
+        "T-SAI-02",
+        "T-SAI-03"
+      ],
+      "requirement_ids": [
+        "SAI-01",
+        "SAI-03",
+        "WLD-03"
+      ]
+    },
+    {
+      "id": "P4-SAI-K",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "战略 AI：王国规划",
+      "module_ids": [
+        "SAI-K"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-SAI"
+      ],
+      "scope": "王国战略/外交与目标优先级；输出合法命令与有限资源下可复现计划。",
+      "acceptance": "按对应 SDD 测试可行性、选择滞回、资源与情报限制。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/strategic_ai/kingdom/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SAI-K-01",
+        "T-SAI-K-02"
+      ],
+      "requirement_ids": [
+        "POL-02",
+        "SAI-01",
+        "SAI-03"
+      ]
+    },
+    {
+      "id": "P4-SAI-C",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "战略 AI：家族规划",
+      "module_ids": [
+        "SAI-C"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-SAI"
+      ],
+      "scope": "家族经营/招募/投票/角色与效忠；输出合法命令与有限资源下可复现计划。",
+      "acceptance": "按对应 SDD 测试可行性、选择滞回、资源与情报限制。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/strategic_ai/clan/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SAI-C-01",
+        "T-SAI-C-02"
+      ],
+      "requirement_ids": [
+        "CLN-01",
+        "CLN-02",
+        "SAI-01",
+        "SAI-03"
+      ]
+    },
+    {
+      "id": "P4-SAI-A",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "战略 AI：军团规划",
+      "module_ids": [
+        "SAI-A"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-SAI",
+        "P4-ENC-SIEGE"
+      ],
+      "scope": "军团集合/补给/围城/撤退；输出合法命令与有限资源下可复现计划。",
+      "acceptance": "按对应 SDD 测试可行性、选择滞回、资源与情报限制。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/strategic_ai/army/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SAI-A-01",
+        "T-SAI-A-02"
+      ],
+      "requirement_ids": [
+        "ARM-04",
+        "SAI-01",
+        "SAI-03",
+        "SGE-01"
+      ]
+    },
+    {
+      "id": "P4-SAI-P",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "战略 AI：队伍规划与类型策略",
+      "module_ids": [
+        "SAI-P"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-SAI"
+      ],
+      "scope": "队伍巡逻、追逃、商队/盗匪/村民策略；输出合法命令与有限资源下可复现计划。",
+      "acceptance": "按对应 SDD 测试可行性、选择滞回、资源与情报限制。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/strategic_ai/party/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SAI-P-01",
+        "T-SAI-P-02",
+        "T-SAI-P-03"
+      ],
+      "requirement_ids": [
+        "ARM-04",
+        "ECO-04",
+        "SAI-01",
+        "SAI-03",
+        "WLD-03"
+      ]
+    },
+    {
+      "id": "P4-SIEGE",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "实时攻城器械、城防与动态连接",
+      "module_ids": [
+        "SIEGE"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-ENC-SIEGE"
+      ],
+      "scope": "攻城器械、梯/塔/门/城墙缺口、动态连接、真实攻守行为与结果。",
+      "acceptance": "器械使用、导航与拥堵恢复、工事损坏回写。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/siege/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SIEGE-01",
+        "T-SIEGE-02",
+        "T-SIEGE-03",
+        "T-SIEGE-04"
+      ],
+      "requirement_ids": [
+        "MIS-03",
+        "NAV-01",
+        "SGE-02",
+        "SGE-03"
+      ]
+    },
+    {
+      "id": "P4-RULES-SIEGE",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "Mission 规则、目标与玩法组合（SIEGE）",
+      "module_ids": [
+        "RULES"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-SIEGE"
+      ],
+      "scope": "攻城多阶段目标和撤退、守军出击规则。",
+      "acceptance": "非单击杀胜负；真实攻守结果。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/rules/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-RULES-01",
+        "T-RULES-02",
+        "T-RULES-03",
+        "T-RULES-04",
+        "T-RULES-05"
+      ],
+      "requirement_ids": [
+        "BAT-01",
+        "BAT-04",
+        "MIS-01",
+        "MIS-02",
+        "MOD-03",
+        "MOD-04",
+        "NET-02",
+        "SGE-02"
+      ]
+    },
+    {
+      "id": "P4-BAI-SIEGE",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "战场 AI 共同基础、感知与调度（SIEGE）",
+      "module_ids": [
+        "BAI",
+        "BAI-T",
+        "BAI-F",
+        "BAI-I"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-SIEGE",
+        "P4-RULES-SIEGE"
+      ],
+      "scope": "攻城 AI 公共协调/器械岗位感知；分别派生授权任务给三层独立模块，避免父目录覆盖。",
+      "acceptance": "真实分路、器械使用、拥堵恢复，AT-06。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/ai/README.md",
+        "docs/systems/game/mission/ai/tactical/README.md",
+        "docs/systems/game/mission/ai/formation/README.md",
+        "docs/systems/game/mission/ai/individual/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BAI-01",
+        "T-BAI-02",
+        "T-BAI-03",
+        "T-BAI-04",
+        "T-BAI-T-01",
+        "T-BAI-T-02",
+        "T-BAI-T-03",
+        "T-BAI-F-01",
+        "T-BAI-F-02",
+        "T-BAI-F-03",
+        "T-BAI-I-01",
+        "T-BAI-I-02",
+        "T-BAI-I-03",
+        "T-BAI-I-04"
+      ],
+      "requirement_ids": [
+        "BAI-01",
+        "BAI-02",
+        "BAI-03",
+        "BAI-04",
+        "BAI-05",
+        "BAI-06",
+        "BAT-05",
+        "COM-05"
+      ]
+    },
+    {
+      "id": "P4-UI-SOCIETY",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "界面、ReadModel 与交互流程（SOCIETY）",
+      "module_ids": [
+        "UI"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P4-ECO",
+        "P4-SET",
+        "P4-POL"
+      ],
+      "scope": "交易、锻造、领地、政治、外交、军团及围城操作。",
+      "acceptance": "状态预览、失败解释、合法交易及决议流程。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/ui/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-UI-01",
+        "T-UI-02",
+        "T-UI-03",
+        "T-UI-04"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "UX-01",
+        "UX-02",
+        "UX-03"
+      ]
+    },
+    {
+      "id": "P4-SOCIETY-INTEGRATION",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "社会系统与攻城集成",
+      "module_ids": [
+        "CAMP",
+        "APP",
+        "TEST",
+        "PERSIST"
+      ],
+      "depends_on": [
+        "P4-SAI-K",
+        "P4-SAI-C",
+        "P4-SAI-A",
+        "P4-SAI-P",
+        "P4-BAI-SIEGE",
+        "P4-UI-SOCIETY"
+      ],
+      "scope": "接入分相日结、经济政治、围城和结算存档；固定种子长期模拟。",
+      "acceptance": "AT-02/03/06/08/14 适用完整/切片；硬不变量零失败，报告软指标及未完内容。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/README.md",
+        "docs/systems/game/application/README.md",
+        "docs/systems/game/tests/README.md",
+        "docs/systems/game/infrastructure/persistence/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-APP-01",
+        "T-APP-02",
+        "T-APP-03",
+        "T-APP-04",
+        "T-CAMP-01",
+        "T-CAMP-02",
+        "T-CAMP-03",
+        "T-CAMP-04",
+        "T-PERSIST-01",
+        "T-PERSIST-02",
+        "T-PERSIST-03",
+        "T-PERSIST-04",
+        "T-TEST-01",
+        "T-TEST-02",
+        "T-TEST-03",
+        "T-TEST-04"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "BAT-03",
+        "BAT-04",
+        "BAT-05",
+        "ECO-06",
+        "MOD-01",
+        "MOD-02",
+        "MOD-03",
+        "NET-06",
+        "SAI-03",
+        "SAV-01",
+        "SAV-02",
+        "SAV-03",
+        "WLD-02",
+        "WLD-04",
+        "WLD-05"
+      ]
+    },
+    {
+      "id": "GATE-P4",
+      "stage": "P4",
+      "kind": "GATE",
+      "title": "P4 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P4-ECO",
+        "P4-SET",
+        "P4-POL",
+        "P4-ENC-SIEGE",
+        "P4-SAI",
+        "P4-SAI-K",
+        "P4-SAI-C",
+        "P4-SAI-A",
+        "P4-SAI-P",
+        "P4-SIEGE",
+        "P4-RULES-SIEGE",
+        "P4-BAI-SIEGE",
+        "P4-UI-SOCIETY",
+        "P4-SOCIETY-INTEGRATION"
+      ],
+      "scope": "AT-02/03/06/08/14 按完整已具备范围；需后续内容/任务部分在 P5/P7 复验。",
+      "acceptance": "经济/政治长期仿真，围城粮耗、器械/动态链接、占领回写；无非法资产或身份。",
+      "approval_required": false,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": []
+    },
+    {
+      "id": "P5-QUEST",
+      "stage": "P5",
+      "kind": "PACKAGE",
+      "title": "动态任务、剧情导演、对话与事件",
+      "module_ids": [
+        "QUEST"
+      ],
+      "depends_on": [
+        "GATE-P4"
+      ],
+      "scope": "任务状态机、动态事件、原创剧情/教程、对话、失效和奖励幂等。",
+      "acceptance": "主线/沙盒、分支、期限、替代角色、对话/任务命令。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/quest/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-QUEST-01",
+        "T-QUEST-02",
+        "T-QUEST-03",
+        "T-QUEST-04",
+        "T-QUEST-05"
+      ],
+      "requirement_ids": [
+        "MOD-01",
+        "MOD-02",
+        "QST-01",
+        "QST-02",
+        "QST-03",
+        "QST-04",
+        "QST-05"
+      ]
+    },
+    {
+      "id": "P5-INTERACT",
+      "stage": "P5",
+      "kind": "PACKAGE",
+      "title": "场景交互、NPC 与访问流程",
+      "module_ids": [
+        "INTERACT"
+      ],
+      "depends_on": [
+        "GATE-P4",
+        "P5-QUEST"
+      ],
+      "scope": "场景访问、NPC 动态排班、对话、非法活动/街区/监狱及退出。",
+      "acceptance": "场景与菜单共享用例、合法与非法路径、不串域。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/interaction/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-INTERACT-01",
+        "T-INTERACT-02",
+        "T-INTERACT-03"
+      ],
+      "requirement_ids": [
+        "MIS-01",
+        "MIS-02",
+        "QST-04",
+        "SET-04"
+      ]
+    },
+    {
+      "id": "P5-RULES-SINGLE",
+      "stage": "P5",
+      "kind": "PACKAGE",
+      "title": "Mission 规则、目标与玩法组合（SINGLE）",
+      "module_ids": [
+        "RULES"
+      ],
+      "depends_on": [
+        "GATE-P4",
+        "P5-INTERACT"
+      ],
+      "scope": "竞技、藏身处、村庄、访问、训练/剧情及自定义野战/攻城；复用战斗。",
+      "acceptance": "各类型目标/奖励/临时装备隔离；自定义不写战役。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/rules/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-RULES-01",
+        "T-RULES-02",
+        "T-RULES-03",
+        "T-RULES-04",
+        "T-RULES-05"
+      ],
+      "requirement_ids": [
+        "BAT-01",
+        "BAT-04",
+        "MIS-01",
+        "MIS-02",
+        "MOD-03",
+        "MOD-04",
+        "NET-02",
+        "SGE-02"
+      ]
+    },
+    {
+      "id": "P5-BASE-INITIAL",
+      "stage": "P5",
+      "kind": "PACKAGE",
+      "title": "本体原创内容包与资源制作（INITIAL）",
+      "module_ids": [
+        "BASE"
+      ],
+      "depends_on": [
+        "GATE-P4",
+        "P5-QUEST"
+      ],
+      "scope": "原创文化/地图/兵种/装备/任务与本地化的可玩正式内容生产基线；全量在 P7。",
+      "acceptance": "资源引用、任务/地图可达、骨架/动作、原创授权和内容编译。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/content/base/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BASE-01",
+        "T-BASE-02",
+        "T-BASE-03",
+        "T-BASE-04"
+      ],
+      "requirement_ids": [
+        "EXT-01",
+        "MIS-03",
+        "UX-03",
+        "VIS-01"
+      ]
+    },
+    {
+      "id": "P5-UI-SINGLE",
+      "stage": "P5",
+      "kind": "PACKAGE",
+      "title": "界面、ReadModel 与交互流程（SINGLE）",
+      "module_ids": [
+        "UI"
+      ],
+      "depends_on": [
+        "GATE-P4",
+        "P5-RULES-SINGLE",
+        "P5-BASE-INITIAL"
+      ],
+      "scope": "所有单人主要界面、百科、任务、对话、竞技、设置与难度/可访问性。",
+      "acceptance": "键鼠/手柄/语言/字号主流程，无阻断。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/ui/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-UI-01",
+        "T-UI-02",
+        "T-UI-03",
+        "T-UI-04"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "UX-01",
+        "UX-02",
+        "UX-03"
+      ]
+    },
+    {
+      "id": "P5-SINGLE-INTEGRATION",
+      "stage": "P5",
+      "kind": "PACKAGE",
+      "title": "完整单人闭环与内容集成",
+      "module_ids": [
+        "APP",
+        "CAMP",
+        "PERSIST",
+        "INPUT",
+        "CAM",
+        "VIS",
+        "AUD",
+        "TEST"
+      ],
+      "depends_on": [
+        "P5-UI-SINGLE",
+        "P5-BASE-INITIAL",
+        "P5-RULES-SINGLE"
+      ],
+      "scope": "整合任务/剧情/世界、访问、场景规则、表现与存档，完整单人端到端回归。",
+      "acceptance": "MOD-01/02/03、AT-01/07/09/16 完整；AT-11 自定义切片，所有本阶段玩法真实可用。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/application/README.md",
+        "docs/systems/game/campaign/README.md",
+        "docs/systems/game/infrastructure/persistence/README.md",
+        "docs/systems/game/presentation/input/README.md",
+        "docs/systems/game/presentation/camera/README.md",
+        "docs/systems/game/presentation/visuals/README.md",
+        "docs/systems/game/presentation/audio/README.md",
+        "docs/systems/game/tests/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-APP-01",
+        "T-APP-02",
+        "T-APP-03",
+        "T-APP-04",
+        "T-CAMP-01",
+        "T-CAMP-02",
+        "T-CAMP-03",
+        "T-CAMP-04",
+        "T-INPUT-01",
+        "T-INPUT-02",
+        "T-INPUT-03",
+        "T-CAM-01",
+        "T-CAM-02",
+        "T-CAM-03",
+        "T-VIS-01",
+        "T-VIS-02",
+        "T-VIS-03",
+        "T-AUD-01",
+        "T-AUD-02",
+        "T-AUD-03",
+        "T-PERSIST-01",
+        "T-PERSIST-02",
+        "T-PERSIST-03",
+        "T-PERSIST-04",
+        "T-TEST-01",
+        "T-TEST-02",
+        "T-TEST-03",
+        "T-TEST-04"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "AUD-01",
+        "BAI-01",
+        "BAI-06",
+        "BAT-03",
+        "BAT-04",
+        "BAT-05",
+        "COM-05",
+        "ECO-06",
+        "MOD-01",
+        "MOD-02",
+        "MOD-03",
+        "NET-04",
+        "NET-06",
+        "SAI-03",
+        "SAV-01",
+        "SAV-02",
+        "SAV-03",
+        "UX-01",
+        "UX-02",
+        "VIS-01",
+        "WLD-02",
+        "WLD-04",
+        "WLD-05"
+      ]
+    },
+    {
+      "id": "GATE-P5",
+      "stage": "P5",
+      "kind": "GATE",
+      "title": "P5 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P5-QUEST",
+        "P5-INTERACT",
+        "P5-RULES-SINGLE",
+        "P5-BASE-INITIAL",
+        "P5-UI-SINGLE",
+        "P5-SINGLE-INTEGRATION"
+      ],
+      "scope": "AT-01/07/09/16 完整；其他单人 AT 回归；AT-11 的自定义战斗切片，多人部分待 P6。",
+      "acceptance": "MOD-01/02/03、全部单人主要玩法与可访问性；原创内容制作标准已实施。",
+      "approval_required": false,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": []
+    },
+    {
+      "id": "P6-NET",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "网络协议、传输、权威与状态复制",
+      "module_ids": [
+        "NET"
+      ],
+      "depends_on": [
+        "GATE-P5"
+      ],
+      "scope": "权威命令/复制、可靠/不可靠通道、序列/版本/兴趣管理、预测/回溯与反作弊。",
+      "acceptance": "实际网络延迟/丢包/越权/重复输入，状态收敛。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/network/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-NET-01",
+        "T-NET-02",
+        "T-NET-03",
+        "T-NET-04"
+      ],
+      "requirement_ids": [
+        "COM-06",
+        "NET-03",
+        "NET-04",
+        "NET-05",
+        "NET-06"
+      ]
+    },
+    {
+      "id": "P6-MP",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "多人会话、大厅、匹配与模式组装",
+      "module_ids": [
+        "MP"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-NET"
+      ],
+      "scope": "多人会话、匹配/大厅接口、重连/观战、模式装配。",
+      "acceptance": "玩家身份/权限、会话与模式隔离。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/multiplayer/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-MP-01",
+        "T-MP-02",
+        "T-MP-03",
+        "T-MP-04"
+      ],
+      "requirement_ids": [
+        "MOD-04",
+        "NET-02",
+        "NET-03",
+        "NET-05",
+        "NET-06"
+      ]
+    },
+    {
+      "id": "P6-RULES-MULTI",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "Mission 规则、目标与玩法组合（MULTI）",
+      "module_ids": [
+        "RULES"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-NET",
+        "P6-MP"
+      ],
+      "scope": "多人所有主要模式、计分、出生/重生、队长、攻城及公平。",
+      "acceptance": "规则回合与权限，所有模式可玩。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/mission/rules/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-RULES-01",
+        "T-RULES-02",
+        "T-RULES-03",
+        "T-RULES-04",
+        "T-RULES-05"
+      ],
+      "requirement_ids": [
+        "BAT-01",
+        "BAT-04",
+        "MIS-01",
+        "MIS-02",
+        "MOD-03",
+        "MOD-04",
+        "NET-02",
+        "SGE-02"
+      ]
+    },
+    {
+      "id": "P6-SERVER-D",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "专用权威战斗服务器",
+      "module_ids": [
+        "SERVER-D"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-NET",
+        "P6-RULES-MULTI"
+      ],
+      "scope": "专用权威服务器、headless、真实容量与健康报告。",
+      "acceptance": "服务端/客户端共享规则，压力及故障证据。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/server/dedicated/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SERVER-D-01",
+        "T-SERVER-D-02",
+        "T-SERVER-D-03"
+      ],
+      "requirement_ids": [
+        "NET-01",
+        "NET-05",
+        "NET-06"
+      ]
+    },
+    {
+      "id": "P6-SERVER-L",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "大厅后端、身份、匹配与赛果",
+      "module_ids": [
+        "SERVER-L"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-MP"
+      ],
+      "scope": "身份、大厅/目录、匹配分配、赛果/处罚和重试。",
+      "acceptance": "认证、重连、赛果幂等、隐私安全。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/server/lobby_service/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SERVER-L-01",
+        "T-SERVER-L-02",
+        "T-SERVER-L-03"
+      ],
+      "requirement_ids": [
+        "NET-02",
+        "NET-05",
+        "NET-06"
+      ]
+    },
+    {
+      "id": "P6-SERVER-OPS",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "部署、扩容、运维与发布",
+      "module_ids": [
+        "SERVER-OPS"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-SERVER-D",
+        "P6-SERVER-L"
+      ],
+      "scope": "部署、版本/健康、扩容、监控、回滚、日志。",
+      "acceptance": "实际部署/失败演练、配置/密钥不入库。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/server/deployment/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-SERVER-OPS-01",
+        "T-SERVER-OPS-02",
+        "T-SERVER-OPS-03"
+      ],
+      "requirement_ids": [
+        "NET-05",
+        "NET-06"
+      ]
+    },
+    {
+      "id": "P6-INF-CONTENT-SDK",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "数据包编译、MOD 注册与配置合并（SDK）",
+      "module_ids": [
+        "INF-CONTENT"
+      ],
+      "depends_on": [
+        "GATE-P5"
+      ],
+      "scope": "完成包管理、补丁、加载顺序、兼容、冲突与信任模型。",
+      "acceptance": "MOD 内容/哈希、版本冲突与不可信扩展拒绝。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/content/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-INF-CONTENT-01",
+        "T-INF-CONTENT-02",
+        "T-INF-CONTENT-03",
+        "T-INF-CONTENT-04"
+      ],
+      "requirement_ids": [
+        "EXT-01",
+        "EXT-02",
+        "EXT-03",
+        "MIS-03",
+        "MOD-05"
+      ]
+    },
+    {
+      "id": "P6-ADDONS",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "编辑器插件与可信扩展 SDK",
+      "module_ids": [
+        "ADDONS"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-INF-CONTENT-SDK"
+      ],
+      "scope": "公开扩展注册点、编辑器插件/SDK、API 兼容。",
+      "acceptance": "新增行为/规则/兵种/场景不改核心，可信/不可信边界。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/addons/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-ADDONS-01",
+        "T-ADDONS-02",
+        "T-ADDONS-03"
+      ],
+      "requirement_ids": [
+        "EXT-01",
+        "EXT-03",
+        "MIS-03"
+      ]
+    },
+    {
+      "id": "P6-TOOLS",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "内容 CLI、验证器与开发调试工具",
+      "module_ids": [
+        "TOOLS"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-INF-CONTENT-SDK",
+        "P6-ADDONS"
+      ],
+      "scope": "世界/场景、兵种装备、经济、任务、动画、战斗/战役调试、打包校验。",
+      "acceptance": "真实编辑/编译/失败诊断与 MOD 发布。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/tools/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-TOOLS-01",
+        "T-TOOLS-02",
+        "T-TOOLS-03"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "ECO-06",
+        "EXT-03",
+        "MIS-03",
+        "SAI-03"
+      ]
+    },
+    {
+      "id": "P6-UI-MULTI",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "界面、ReadModel 与交互流程（MULTI）",
+      "module_ids": [
+        "UI"
+      ],
+      "depends_on": [
+        "GATE-P5",
+        "P6-MP",
+        "P6-RULES-MULTI"
+      ],
+      "scope": "多人大厅、匹配/服务器、阵营、比分/观战/举报/延迟。",
+      "acceptance": "主要模式和 UI 操作、错误/断线恢复。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/presentation/ui/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-UI-01",
+        "T-UI-02",
+        "T-UI-03",
+        "T-UI-04"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "UX-01",
+        "UX-02",
+        "UX-03"
+      ]
+    },
+    {
+      "id": "P6-NET-INTEGRATION",
+      "stage": "P6",
+      "kind": "PACKAGE",
+      "title": "联机和 MOD 端到端验收",
+      "module_ids": [
+        "TEST",
+        "COM",
+        "FORM",
+        "BOOT",
+        "CI"
+      ],
+      "depends_on": [
+        "P6-SERVER-OPS",
+        "P6-TOOLS",
+        "P6-UI-MULTI"
+      ],
+      "scope": "真实服务端、所有模式、故障/越权、内容扩展、容量与安全；回归 COM-06、NET/EXT。",
+      "acceptance": "AT-11/12/13、NET-01–06、EXT-01–03 等适用完整测试；记录容量及真实环境。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/tests/README.md",
+        "docs/systems/game/mission/combat/README.md",
+        "docs/systems/game/mission/formation/README.md",
+        "docs/systems/game/bootstrap/README.md",
+        "docs/systems/ci/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BOOT-01",
+        "T-BOOT-02",
+        "T-BOOT-03",
+        "T-COM-01",
+        "T-COM-02",
+        "T-COM-03",
+        "T-COM-04",
+        "T-COM-05",
+        "T-COM-06",
+        "T-COM-07",
+        "T-FORM-01",
+        "T-FORM-02",
+        "T-FORM-03",
+        "T-FORM-04",
+        "T-TEST-01",
+        "T-TEST-02",
+        "T-TEST-03",
+        "T-TEST-04",
+        "T-CI-01",
+        "T-CI-02",
+        "T-CI-03",
+        "T-CI-04"
+      ],
+      "requirement_ids": [
+        "BAI-01",
+        "BAI-02",
+        "BAI-05",
+        "BAI-06",
+        "BAT-03",
+        "COM-01",
+        "COM-02",
+        "COM-03",
+        "COM-04",
+        "COM-05",
+        "COM-06",
+        "EXT-03",
+        "NET-01",
+        "NET-04",
+        "NET-05",
+        "NET-06",
+        "SAV-02"
+      ]
+    },
+    {
+      "id": "GATE-P6",
+      "stage": "P6",
+      "kind": "GATE",
+      "title": "P6 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P6-NET",
+        "P6-MP",
+        "P6-RULES-MULTI",
+        "P6-SERVER-D",
+        "P6-SERVER-L",
+        "P6-SERVER-OPS",
+        "P6-INF-CONTENT-SDK",
+        "P6-ADDONS",
+        "P6-TOOLS",
+        "P6-UI-MULTI",
+        "P6-NET-INTEGRATION"
+      ],
+      "scope": "AT-11/12/13；AT-15 服务器相关切片。",
+      "acceptance": "NET/EXT、模式隔离、版本/身份/重连、联机与内容工具真实验收。",
+      "approval_required": false,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": []
+    },
+    {
+      "id": "P7-BASE-FULL",
+      "stage": "P7",
+      "kind": "PACKAGE",
+      "title": "本体原创内容包与资源制作（FULL）",
+      "module_ids": [
+        "BASE"
+      ],
+      "depends_on": [
+        "GATE-P6"
+      ],
+      "scope": "根据冻结规模制作完整原创地图、文化、兵种装备、场景、任务、音频、翻译、授权。",
+      "acceptance": "§1.3/21/23.3 内容规模、可达、授权、资产预算与真实玩法验收。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/content/base/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-BASE-01",
+        "T-BASE-02",
+        "T-BASE-03",
+        "T-BASE-04"
+      ],
+      "requirement_ids": [
+        "EXT-01",
+        "MIS-03",
+        "UX-03",
+        "VIS-01"
+      ]
+    },
+    {
+      "id": "P7-TOOLS-RELEASE",
+      "stage": "P7",
+      "kind": "PACKAGE",
+      "title": "内容 CLI、验证器与开发调试工具（RELEASE）",
+      "module_ids": [
+        "TOOLS"
+      ],
+      "depends_on": [
+        "GATE-P6",
+        "P7-BASE-FULL"
+      ],
+      "scope": "全量内容验证、批量平衡及制作工具完善。",
+      "acceptance": "全量内容编译无关键错误；许可证与调试/验证报告。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/tools/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-TOOLS-01",
+        "T-TOOLS-02",
+        "T-TOOLS-03"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "ECO-06",
+        "EXT-03",
+        "MIS-03",
+        "SAI-03"
+      ]
+    },
+    {
+      "id": "P7-NATIVE-PROFILING",
+      "stage": "P7",
+      "kind": "PACKAGE",
+      "title": "可选原生热路径与 GDExtension（PROFILING）",
+      "module_ids": [
+        "NATIVE"
+      ],
+      "depends_on": [
+        "GATE-P6"
+      ],
+      "scope": "按 profiler 处理实际热点；是否采用原生扩展由 ADR 与压测决定，不强制引入。",
+      "acceptance": "有需要时真实优化及行为一致；若不需原生，记录负责人批准的 profiling 证据与不引入决定，不宣称实现 C++。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/native/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-NATIVE-01",
+        "T-NATIVE-02",
+        "T-NATIVE-03"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "BAT-05"
+      ]
+    },
+    {
+      "id": "P7-POLISH",
+      "stage": "P7",
+      "kind": "PACKAGE",
+      "title": "跨域平衡、性能、稳定性与体验收口",
+      "module_ids": [
+        "TELEM",
+        "INF-ENGINE",
+        "VIS",
+        "AUD",
+        "UI",
+        "SAI",
+        "BAI",
+        "MOV",
+        "COM",
+        "CAMP",
+        "QUEST",
+        "ECO",
+        "PERSIST",
+        "NET"
+      ],
+      "depends_on": [
+        "GATE-P6",
+        "P7-BASE-FULL",
+        "P7-NATIVE-PROFILING"
+      ],
+      "scope": "对所有真实功能做缺陷修复、长时模拟、战斗手感、内容与性能回归；分模块细化而非跨目录任意修改。",
+      "acceptance": "硬不变量零失败、真实压力达到批准基线、人工试玩/可访问性确认；所有 MUST 缺陷有处理。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/infrastructure/telemetry/README.md",
+        "docs/systems/game/infrastructure/engine/README.md",
+        "docs/systems/game/presentation/visuals/README.md",
+        "docs/systems/game/presentation/audio/README.md",
+        "docs/systems/game/presentation/ui/README.md",
+        "docs/systems/game/campaign/strategic_ai/README.md",
+        "docs/systems/game/mission/ai/README.md",
+        "docs/systems/game/mission/movement/README.md",
+        "docs/systems/game/mission/combat/README.md",
+        "docs/systems/game/campaign/README.md",
+        "docs/systems/game/campaign/quest/README.md",
+        "docs/systems/game/campaign/economy/README.md",
+        "docs/systems/game/infrastructure/persistence/README.md",
+        "docs/systems/game/infrastructure/network/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CAMP-01",
+        "T-CAMP-02",
+        "T-CAMP-03",
+        "T-CAMP-04",
+        "T-ECO-01",
+        "T-ECO-02",
+        "T-ECO-03",
+        "T-ECO-04",
+        "T-ECO-05",
+        "T-ECO-06",
+        "T-QUEST-01",
+        "T-QUEST-02",
+        "T-QUEST-03",
+        "T-QUEST-04",
+        "T-QUEST-05",
+        "T-SAI-01",
+        "T-SAI-02",
+        "T-SAI-03",
+        "T-COM-01",
+        "T-COM-02",
+        "T-COM-03",
+        "T-COM-04",
+        "T-COM-05",
+        "T-COM-06",
+        "T-COM-07",
+        "T-BAI-01",
+        "T-BAI-02",
+        "T-BAI-03",
+        "T-BAI-04",
+        "T-MOV-01",
+        "T-MOV-02",
+        "T-MOV-03",
+        "T-MOV-04",
+        "T-UI-01",
+        "T-UI-02",
+        "T-UI-03",
+        "T-UI-04",
+        "T-VIS-01",
+        "T-VIS-02",
+        "T-VIS-03",
+        "T-AUD-01",
+        "T-AUD-02",
+        "T-AUD-03",
+        "T-PERSIST-01",
+        "T-PERSIST-02",
+        "T-PERSIST-03",
+        "T-PERSIST-04",
+        "T-INF-ENGINE-01",
+        "T-INF-ENGINE-02",
+        "T-INF-ENGINE-03",
+        "T-INF-ENGINE-04",
+        "T-NET-01",
+        "T-NET-02",
+        "T-NET-03",
+        "T-NET-04",
+        "T-TELEM-01",
+        "T-TELEM-02",
+        "T-TELEM-03"
+      ],
+      "requirement_ids": [
+        "ACC-01",
+        "AUD-01",
+        "BAI-01",
+        "BAI-02",
+        "BAI-05",
+        "BAI-06",
+        "BAT-03",
+        "BAT-05",
+        "COM-01",
+        "COM-02",
+        "COM-03",
+        "COM-04",
+        "COM-05",
+        "COM-06",
+        "ECO-01",
+        "ECO-02",
+        "ECO-03",
+        "ECO-04",
+        "ECO-05",
+        "ECO-06",
+        "MOD-01",
+        "MOD-02",
+        "NAV-01",
+        "NET-01",
+        "NET-03",
+        "NET-04",
+        "NET-05",
+        "NET-06",
+        "QST-01",
+        "QST-02",
+        "QST-03",
+        "QST-04",
+        "QST-05",
+        "SAI-01",
+        "SAI-03",
+        "SAV-01",
+        "SAV-02",
+        "SAV-03",
+        "UX-01",
+        "UX-02",
+        "UX-03",
+        "VIS-01",
+        "WLD-02",
+        "WLD-03",
+        "WLD-04",
+        "WLD-05"
+      ]
+    },
+    {
+      "id": "P7-TEST-RELEASE",
+      "stage": "P7",
+      "kind": "PACKAGE",
+      "title": "领域、集成、场景与长期测试（RELEASE）",
+      "module_ids": [
+        "TEST"
+      ],
+      "depends_on": [
+        "GATE-P6",
+        "P7-POLISH",
+        "P7-TOOLS-RELEASE"
+      ],
+      "scope": "完整本体需求/模块用例、AT-01–16、20 种子/十年仿真、50 次 Mission 切换、8h、网络及存档故障回归。",
+      "acceptance": "全部适用 MUST 实测通过，软指标/性能/兼容及人工验收报告；NAVAL 保留 EXT。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/tests/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-TEST-01",
+        "T-TEST-02",
+        "T-TEST-03",
+        "T-TEST-04"
+      ],
+      "requirement_ids": [
+        "BAI-06",
+        "BAT-03",
+        "NET-06",
+        "SAV-02"
+      ]
+    },
+    {
+      "id": "P7-CI-RELEASE",
+      "stage": "P7",
+      "kind": "PACKAGE",
+      "title": "持续集成、架构门禁与发布构建（RELEASE）",
+      "module_ids": [
+        "CI"
+      ],
+      "depends_on": [
+        "GATE-P6",
+        "P7-TEST-RELEASE"
+      ],
+      "scope": "可复现 PC/专服构建、内容包、签名/版本、安装/升级/回滚、授权与质量门禁。",
+      "acceptance": "真实发布候选构建、版本与内容 hash、安装升级及回滚证据，负责人批准。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/ci/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-CI-01",
+        "T-CI-02",
+        "T-CI-03",
+        "T-CI-04"
+      ],
+      "requirement_ids": [
+        "EXT-03",
+        "NET-05"
+      ]
+    },
+    {
+      "id": "GATE-P7",
+      "stage": "P7",
+      "kind": "GATE",
+      "title": "P7 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P7-BASE-FULL",
+        "P7-TOOLS-RELEASE",
+        "P7-NATIVE-PROFILING",
+        "P7-POLISH",
+        "P7-TEST-RELEASE",
+        "P7-CI-RELEASE"
+      ],
+      "scope": "全部 AT-01–16 以最终内容、构建和环境重新验收。",
+      "acceptance": "全部 MUST 需求/本体测试、AT-01–16、长时间仿真和回归、授权与人工试玩/发布批准。",
+      "approval_required": true,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": [
+        "ACC-01",
+        "ARM-01",
+        "ARM-02",
+        "ARM-03",
+        "ARM-04",
+        "ARM-05",
+        "AUD-01",
+        "BAI-01",
+        "BAI-02",
+        "BAI-03",
+        "BAI-04",
+        "BAI-05",
+        "BAI-06",
+        "BAT-01",
+        "BAT-02",
+        "BAT-03",
+        "BAT-04",
+        "BAT-05",
+        "CHR-01",
+        "CHR-02",
+        "CHR-03",
+        "CLN-01",
+        "CLN-02",
+        "CLN-03",
+        "COM-01",
+        "COM-02",
+        "COM-03",
+        "COM-04",
+        "COM-05",
+        "COM-06",
+        "ECO-01",
+        "ECO-02",
+        "ECO-03",
+        "ECO-04",
+        "ECO-05",
+        "ECO-06",
+        "EXT-01",
+        "EXT-02",
+        "EXT-03",
+        "MIS-01",
+        "MIS-02",
+        "MIS-03",
+        "MOD-01",
+        "MOD-02",
+        "MOD-03",
+        "MOD-04",
+        "MOD-05",
+        "NAV-01",
+        "NET-01",
+        "NET-02",
+        "NET-03",
+        "NET-04",
+        "NET-05",
+        "NET-06",
+        "POL-01",
+        "POL-02",
+        "POL-03",
+        "POL-04",
+        "QST-01",
+        "QST-02",
+        "QST-03",
+        "QST-04",
+        "QST-05",
+        "SAI-01",
+        "SAI-02",
+        "SAI-03",
+        "SAV-01",
+        "SAV-02",
+        "SAV-03",
+        "SET-01",
+        "SET-02",
+        "SET-03",
+        "SET-04",
+        "SGE-01",
+        "SGE-02",
+        "SGE-03",
+        "UX-01",
+        "UX-02",
+        "UX-03",
+        "VIS-01",
+        "WLD-01",
+        "WLD-02",
+        "WLD-03",
+        "WLD-04",
+        "WLD-05"
+      ]
+    },
+    {
+      "id": "P8-NAVAL-C",
+      "stage": "P8",
+      "kind": "PACKAGE",
+      "title": "海战扩展：战略水域、港口、舰队",
+      "module_ids": [
+        "NAVAL-C"
+      ],
+      "depends_on": [
+        "GATE-P7"
+      ],
+      "scope": "战略水域、港口、舰船/舰队、船坞、海上补给贸易/封锁与登陆。",
+      "acceptance": "NAVAL-01/02，乘员、资源和所有权一致。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/addons/naval/campaign/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-NAVAL-C-01",
+        "T-NAVAL-C-02",
+        "T-NAVAL-C-03",
+        "T-NAVAL-C-04"
+      ],
+      "requirement_ids": [
+        "NAVAL-01",
+        "NAVAL-02",
+        "NAVAL-05",
+        "NAVAL-07"
+      ]
+    },
+    {
+      "id": "P8-NAVAL-M",
+      "stage": "P8",
+      "kind": "PACKAGE",
+      "title": "海战扩展：船舶运动、接舷、战斗 AI",
+      "module_ids": [
+        "NAVAL-M"
+      ],
+      "depends_on": [
+        "GATE-P7"
+      ],
+      "scope": "实时船舶参考系、浮力/风浪/部件、登船/动态链接、船员/舰队 AI、撤退沉没。",
+      "acceptance": "NAVAL-03/04，真实舰船/船员战斗、导航与权威损伤。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/addons/naval/mission/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-NAVAL-M-01",
+        "T-NAVAL-M-02",
+        "T-NAVAL-M-03",
+        "T-NAVAL-M-04"
+      ],
+      "requirement_ids": [
+        "NAVAL-03",
+        "NAVAL-04",
+        "NAVAL-05",
+        "NAVAL-07"
+      ]
+    },
+    {
+      "id": "P8-NAVAL-P",
+      "stage": "P8",
+      "kind": "PACKAGE",
+      "title": "海战扩展：内容包、工具与兼容",
+      "module_ids": [
+        "NAVAL-P"
+      ],
+      "depends_on": [
+        "GATE-P7",
+        "P8-NAVAL-C",
+        "P8-NAVAL-M"
+      ],
+      "scope": "扩展包、场景/文化/船型/技能、海战任务与自定义、工具、跨域结果和兼容。",
+      "acceptance": "NAVAL-05/06/07、AT-17、本体存档/规则与完整回归。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/content/expansions/naval/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-NAVAL-P-01",
+        "T-NAVAL-P-02",
+        "T-NAVAL-P-03"
+      ],
+      "requirement_ids": [
+        "MOD-06",
+        "NAVAL-05",
+        "NAVAL-06",
+        "NAVAL-07"
+      ]
+    },
+    {
+      "id": "GATE-P8",
+      "stage": "P8",
+      "kind": "GATE",
+      "title": "P8 阶段验收",
+      "module_ids": [],
+      "depends_on": [
+        "P8-NAVAL-C",
+        "P8-NAVAL-M",
+        "P8-NAVAL-P"
+      ],
+      "scope": "AT-17 与本体相关回归。",
+      "acceptance": "NAVAL/EXT 范围完成，AT-17、本体回归与兼容迁移；独立发布批准。",
+      "approval_required": true,
+      "spec_paths": [],
+      "candidate_test_ids": [],
+      "requirement_ids": [
+        "MOD-06",
+        "NAVAL-01",
+        "NAVAL-02",
+        "NAVAL-03",
+        "NAVAL-04",
+        "NAVAL-05",
+        "NAVAL-06",
+        "NAVAL-07"
+      ]
+    }
+  ]
+}

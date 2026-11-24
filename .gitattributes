@@ -1,0 +1,9 @@
+* text=auto
+*.md text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.py text eol=lf
+*.csv text eol=lf
+# LFS file types are selected in P0; do not impose unavailable filters before Git LFS is installed.
+
+docs/architecture/baselines/source_game_design_v1.0.md.txt -text

@@ -1,0 +1,534 @@
+{
+  "schema_version": 1,
+  "modules": {
+    "BOOT": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P1-BOOT",
+        "P6-NET-INTEGRATION"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "CORE": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CONTRACTS",
+        "P1-CORE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "CON": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CONTRACTS",
+        "P1-CON"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "APP": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CONTRACTS",
+        "P1-APP-CORE",
+        "P3-APP-CAMPAIGN",
+        "P4-SOCIETY-INTEGRATION",
+        "P5-SINGLE-INTEGRATION"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "CAMP": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P1-CAMP-RUNTIME",
+        "P3-CAMP-DOMAINS",
+        "P4-SOCIETY-INTEGRATION",
+        "P5-SINGLE-INTEGRATION",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "WORLD": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P3-WORLD"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "CHR": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P3-CHR"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "CLAN": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P3-CLAN"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "PARTY": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P3-PARTY"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "INV": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P1-INV"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "DEF": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P1-DEF"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SHRULE": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P1-SHRULE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "ECO": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-ECO",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SET": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-SET"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "POL": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-POL"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "ENC": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P3-ENC-ENCOUNTER",
+        "P4-ENC-SIEGE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "QUEST": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P5-QUEST",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SAI": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-SAI",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SAI-K": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-SAI-K"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SAI-C": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-SAI-C"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SAI-A": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-SAI-A"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SAI-P": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-SAI-P"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "MIS-RT": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-BATTLE",
+        "P1-MIS-RT-PORTS",
+        "P2-MIS-RT-BATTLE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "COM": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-BATTLE",
+        "P2-COM",
+        "P6-NET-INTEGRATION",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "FORM": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-NAV",
+        "P2-FORM",
+        "P6-NET-INTEGRATION"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "BAI": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-BAI",
+        "P4-BAI-SIEGE",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "BAI-T": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-BAI-T",
+        "P4-BAI-SIEGE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "BAI-F": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-BAI-F",
+        "P4-BAI-SIEGE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "BAI-I": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-BAI-I",
+        "P4-BAI-SIEGE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "MOV": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-NAV",
+        "P2-MOV",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SIEGE": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P4-SIEGE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "RULES": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-RULES-FIELD",
+        "P4-RULES-SIEGE",
+        "P5-RULES-SINGLE",
+        "P6-RULES-MULTI"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "INTERACT": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P5-INTERACT"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "RESULTS": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-RESULTS"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "UI": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-UI-BATTLE",
+        "P3-UI-CAMPAIGN",
+        "P4-UI-SOCIETY",
+        "P5-UI-SINGLE",
+        "P6-UI-MULTI",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "INPUT": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-INPUT",
+        "P5-SINGLE-INTEGRATION"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "CAM": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-CAM",
+        "P5-SINGLE-INTEGRATION"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "VIS": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-BATTLE",
+        "P2-VIS-BATTLE",
+        "P5-SINGLE-INTEGRATION",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "AUD": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P2-AUD-BATTLE",
+        "P5-SINGLE-INTEGRATION",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "PERSIST": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CONTRACTS",
+        "P1-PERSIST-CORE",
+        "P3-PERSIST-CAMPAIGN",
+        "P4-SOCIETY-INTEGRATION",
+        "P5-SINGLE-INTEGRATION",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "INF-CONTENT": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CONTENT",
+        "P1-INF-CONTENT-CORE",
+        "P6-INF-CONTENT-SDK"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "INF-ENGINE": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-BATTLE",
+        "P0-NAV",
+        "P1-INF-ENGINE-PORTS",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "NET": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-NET",
+        "P6-NET",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "TELEM": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CRITERIA",
+        "P1-TELEM",
+        "P7-POLISH"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "MP": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-NET",
+        "P6-MP"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "ADDONS": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P6-ADDONS"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "BASE": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CONTENT",
+        "P5-BASE-INITIAL",
+        "P7-BASE-FULL"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "NAVAL-C": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P8-NAVAL-C"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "NAVAL-M": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P8-NAVAL-M"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "NAVAL-P": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P8-NAVAL-P"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "NATIVE": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-BATTLE",
+        "P7-NATIVE-PROFILING"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SERVER-D": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-NET",
+        "P6-SERVER-D"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SERVER-L": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P6-SERVER-L"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "SERVER-OPS": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P6-SERVER-OPS"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "TOOLS": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CONTENT",
+        "P6-TOOLS",
+        "P7-TOOLS-RELEASE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "TEST": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P0-CRITERIA",
+        "P1-TEST-HARNESS",
+        "P2-FIELD-INTEGRATION",
+        "P4-SOCIETY-INTEGRATION",
+        "P5-SINGLE-INTEGRATION",
+        "P6-NET-INTEGRATION",
+        "P7-TEST-RELEASE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    },
+    "CI": {
+      "status": "NOT_IMPLEMENTED",
+      "work_package_ids": [
+        "P1-CI-CORE",
+        "P6-NET-INTEGRATION",
+        "P7-CI-RELEASE"
+      ],
+      "verified_test_ids": [],
+      "evidence": []
+    }
+  }
+}

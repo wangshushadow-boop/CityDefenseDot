@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "resolution": "最长注册目录前缀决定归属；子模块不继承父模块写权限。README 导航、父目录、公共契约与全局文件不自动授予写入。scope 白名单以实际任务为准；主 Agent 审核 diff。",
+  "module_owners": {
+    "BOOT": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/bootstrap/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/bootstrap/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "CORE": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/core/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/core/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "CON": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/contracts/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/contracts/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "APP": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/application/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/application/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "CAMP": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/"
+      ],
+      "excluded_independent_module_roots": [
+        "game/campaign/character/",
+        "game/campaign/clan/",
+        "game/campaign/economy/",
+        "game/campaign/encounter/",
+        "game/campaign/party/",
+        "game/campaign/politics/",
+        "game/campaign/quest/",
+        "game/campaign/settlement/",
+        "game/campaign/strategic_ai/",
+        "game/campaign/strategic_ai/army/",
+        "game/campaign/strategic_ai/clan/",
+        "game/campaign/strategic_ai/evaluation/",
+        "game/campaign/strategic_ai/kingdom/",
+        "game/campaign/strategic_ai/party/",
+        "game/campaign/strategic_ai/perception/",
+        "game/campaign/strategic_ai/planning/",
+        "game/campaign/strategic_ai/scheduler/",
+        "game/campaign/world/"
+      ],
+      "canonical_spec": "docs/systems/game/campaign/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "WORLD": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/world/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/world/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "CHR": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/character/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/character/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "CLAN": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/clan/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/clan/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "PARTY": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/party/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/party/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "INV": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/shared/inventory/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/shared/inventory/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "DEF": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/shared/definitions/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/shared/definitions/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SHRULE": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/shared/rules/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/shared/rules/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "ECO": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/economy/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/economy/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SET": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/settlement/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/settlement/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "POL": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/politics/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/politics/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "ENC": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/encounter/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/encounter/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "QUEST": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/quest/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/quest/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SAI": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/strategic_ai/"
+      ],
+      "excluded_independent_module_roots": [
+        "game/campaign/strategic_ai/army/",
+        "game/campaign/strategic_ai/clan/",
+        "game/campaign/strategic_ai/kingdom/",
+        "game/campaign/strategic_ai/party/"
+      ],
+      "canonical_spec": "docs/systems/game/campaign/strategic_ai/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SAI-K": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/strategic_ai/kingdom/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/strategic_ai/kingdom/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SAI-C": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/strategic_ai/clan/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/strategic_ai/clan/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SAI-A": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/strategic_ai/army/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/strategic_ai/army/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SAI-P": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/campaign/strategic_ai/party/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/campaign/strategic_ai/party/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "MIS-RT": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/runtime/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/runtime/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "COM": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/combat/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/combat/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "FORM": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/formation/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/formation/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "BAI": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/ai/"
+      ],
+      "excluded_independent_module_roots": [
+        "game/mission/ai/formation/",
+        "game/mission/ai/formation/behaviors/",
+        "game/mission/ai/formation/controller/",
+        "game/mission/ai/formation/evaluation/",
+        "game/mission/ai/individual/",
+        "game/mission/ai/individual/behaviors/",
+        "game/mission/ai/individual/controller/",
+        "game/mission/ai/individual/decision/",
+        "game/mission/ai/individual/roles/",
+        "game/mission/ai/individual/targeting/",
+        "game/mission/ai/tactical/",
+        "game/mission/ai/tactical/commander/",
+        "game/mission/ai/tactical/evaluation/",
+        "game/mission/ai/tactical/planning/",
+        "game/mission/ai/tactical/strategies/"
+      ],
+      "canonical_spec": "docs/systems/game/mission/ai/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "BAI-T": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/ai/tactical/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/ai/tactical/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "BAI-F": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/ai/formation/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/ai/formation/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "BAI-I": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/ai/individual/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/ai/individual/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "MOV": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/movement/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/movement/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SIEGE": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/siege/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/siege/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "RULES": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/rules/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/rules/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "INTERACT": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/interaction/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/interaction/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "RESULTS": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/mission/results/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/mission/results/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "UI": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/presentation/ui/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/presentation/ui/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "INPUT": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/presentation/input/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/presentation/input/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "CAM": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/presentation/camera/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/presentation/camera/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "VIS": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/presentation/visuals/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/presentation/visuals/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "AUD": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/presentation/audio/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/presentation/audio/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "PERSIST": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/infrastructure/persistence/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/infrastructure/persistence/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "INF-CONTENT": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/infrastructure/content/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/infrastructure/content/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "INF-ENGINE": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/infrastructure/engine/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/infrastructure/engine/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "NET": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/infrastructure/network/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/infrastructure/network/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "TELEM": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/infrastructure/telemetry/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/infrastructure/telemetry/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "MP": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/multiplayer/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/multiplayer/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "ADDONS": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/addons/"
+      ],
+      "excluded_independent_module_roots": [
+        "game/addons/naval/",
+        "game/addons/naval/campaign/",
+        "game/addons/naval/mission/"
+      ],
+      "canonical_spec": "docs/systems/game/addons/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "BASE": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/content/base/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/content/base/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "NAVAL-C": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/addons/naval/campaign/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/addons/naval/campaign/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "NAVAL-M": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/addons/naval/mission/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/addons/naval/mission/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "NAVAL-P": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/content/expansions/naval/",
+        "game/addons/naval/"
+      ],
+      "excluded_independent_module_roots": [
+        "game/addons/naval/campaign/",
+        "game/addons/naval/mission/"
+      ],
+      "canonical_spec": "docs/systems/game/content/expansions/naval/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "NATIVE": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "native/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/native/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SERVER-D": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "server/dedicated/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/server/dedicated/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SERVER-L": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "server/lobby_service/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/server/lobby_service/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "SERVER-OPS": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "server/deployment/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/server/deployment/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "TOOLS": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "tools/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/tools/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "TEST": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "game/tests/",
+        "test_scenarios/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/game/tests/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    },
+    "CI": {
+      "owner_role": "developer",
+      "allowed_module_roots": [
+        "ci/"
+      ],
+      "excluded_independent_module_roots": [],
+      "canonical_spec": "docs/systems/ci/README.md",
+      "note": "这里只是所有权上界，任务必须给出更小授权路径；共享测试/契约/状态需另行授权。"
+    }
+  },
+  "main_agent_only": [
+    "development/state/",
+    "development/planning/task_graph.json",
+    "development/planning/module_owners.json",
+    "PROJECT_STATE.md",
+    "docs/testing/requirements_trace.csv",
+    "docs/testing/test_cases.csv",
+    "docs/testing/acceptance_matrix.md",
+    ".codex/",
+    "AGENTS.md"
+  ],
+  "shared_change_policy": "契约、公共框架、注册表、引擎配置及多模块文件由主 Agent 串行授权与审批；不得多个 Agent 同时写。"
+}

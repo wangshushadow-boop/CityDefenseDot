@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "project": "recollection",
+  "delivery_version": "0.3",
+  "active_stage": null,
+  "stage_status": {
+    "P0": "PLANNED",
+    "P1": "PLANNED",
+    "P2": "PLANNED",
+    "P3": "PLANNED",
+    "P4": "PLANNED",
+    "P5": "PLANNED",
+    "P6": "PLANNED",
+    "P7": "PLANNED",
+    "P8": "PLANNED"
+  },
+  "authorized_by": null,
+  "base_commit": null,
+  "integrated_commit": null,
+  "technical_stack": {
+    "status": "UNDECIDED",
+    "engine": null,
+    "engine_version": null,
+    "primary_language": null,
+    "test_framework": null,
+    "approved_adrs": []
+  },
+  "updated_at": "2026-11-24",
+  "note": "设计与研发初始化包。游戏实现、测试、Codex 运行均未开始。"
+}

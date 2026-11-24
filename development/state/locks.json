@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "locks": [],
+  "note": "主 Agent 管理，记录 task_id、worktree、branch、base_commit、allowed_paths、excluded_paths、owner。空表示尚未领任务。"
+}

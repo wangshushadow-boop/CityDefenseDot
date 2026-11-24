@@ -1,0 +1,1942 @@
+{
+  "schema_version": 2,
+  "source_sha256": "421296a4fce6344a8a403a92d3a71619e20756fe50968504e0c6bf000bee672a",
+  "note": "dependencies are collaboration/ports, not direct imports; proposed design only; module.doc is the sole canonical SDD; code_paths and entrypoints are aligned arrays; directory_entries map planned directories, not existing implementation.",
+  "modules": [
+    {
+      "id": "BOOT",
+      "title": "启动、装配与配置",
+      "doc": "docs/systems/game/bootstrap/README.md",
+      "code": "game/bootstrap/",
+      "source": "§2.3、§3、§19、§20",
+      "requirements": [
+        "NET-01"
+      ],
+      "dependencies": "CORE、CON、APP、INF-CONTENT、INF-ENGINE、PERSIST；按运行 profile 选择 PRESENTATION 或 SERVER",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/bootstrap/",
+      "code_paths": [
+        "game/bootstrap/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/bootstrap/README.md"
+      ]
+    },
+    {
+      "id": "CORE",
+      "title": "核心运行时原语与调度",
+      "doc": "docs/systems/game/core/README.md",
+      "code": "game/core/",
+      "source": "§2.3、§3.3、§4.2、§19.2",
+      "requirements": [
+        "WLD-02",
+        "BAT-05"
+      ],
+      "dependencies": "CON；以 core 的端口适配平台任务池与单调时钟",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/core/",
+      "code_paths": [
+        "game/core/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/core/README.md"
+      ]
+    },
+    {
+      "id": "CON",
+      "title": "公共契约与版本管理",
+      "doc": "docs/systems/game/contracts/README.md",
+      "code": "game/contracts/",
+      "source": "§3.3、§17、§20.2",
+      "requirements": [
+        "BAT-03",
+        "NET-05",
+        "SAV-03"
+      ],
+      "dependencies": "无业务模块依赖；CORE 可以使用契约基础类型，禁止相互 import（基础 Result/Id 定义仅在 core 或 contracts 中择一，本提案按公共类型在 contracts、调度在 core）",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/contracts/",
+      "code_paths": [
+        "game/contracts/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/contracts/README.md"
+      ]
+    },
+    {
+      "id": "APP",
+      "title": "应用层、GameSession 与事务",
+      "doc": "docs/systems/game/application/README.md",
+      "code": "game/application/",
+      "source": "§2.3、§3、§10.2、§17.5、§20",
+      "requirements": [
+        "BAT-03",
+        "BAT-04",
+        "MOD-03",
+        "BAT-05",
+        "MOD-01",
+        "MOD-02"
+      ],
+      "dependencies": "CORE/CON、Campaign/Mission 公共门面、Persistence/Content/Engine 端口、MP 会话",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/application/",
+      "code_paths": [
+        "game/application/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/application/README.md"
+      ]
+    },
+    {
+      "id": "CAMP",
+      "title": "战略世界运行时",
+      "doc": "docs/systems/game/campaign/README.md",
+      "code": "game/campaign/",
+      "source": "§3.4、§4.2、§10.2、§17、§22",
+      "requirements": [
+        "WLD-02",
+        "WLD-04",
+        "WLD-05",
+        "SAI-03",
+        "ECO-06"
+      ],
+      "dependencies": "CORE/CON、shared；本域各公开门面由 BOOT 注入；通过 APP 对接 Mission",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/ （根级编排文件）",
+      "code_paths": [
+        "game/campaign/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/README.md"
+      ]
+    },
+    {
+      "id": "WORLD",
+      "title": "世界地图、时钟、交通、情报",
+      "doc": "docs/systems/game/campaign/world/README.md",
+      "code": "game/campaign/world/",
+      "source": "§4、§17.5、§19",
+      "requirements": [
+        "WLD-01",
+        "WLD-03",
+        "WLD-04",
+        "WLD-05"
+      ],
+      "dependencies": "CORE/CON/DEF；读取 PARTY、POL、SET 的授权投影；将接触候选传 APP",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/world/",
+      "code_paths": [
+        "game/campaign/world/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/world/README.md"
+      ]
+    },
+    {
+      "id": "CHR",
+      "title": "英雄、成长、装备与生命状态",
+      "doc": "docs/systems/game/campaign/character/README.md",
+      "code": "game/campaign/character/",
+      "source": "§5.1、§5.3、§11、§17",
+      "requirements": [
+        "CHR-01",
+        "CHR-02",
+        "CHR-03",
+        "CLN-03"
+      ],
+      "dependencies": "DEF/CON/SHRULE、INV；通过 CLAN/PARTY/POL 查询与 APP 事务更新",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/character/",
+      "code_paths": [
+        "game/campaign/character/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/character/README.md"
+      ]
+    },
+    {
+      "id": "CLAN",
+      "title": "家族、婚育、同伴、职责与继承",
+      "doc": "docs/systems/game/campaign/clan/README.md",
+      "code": "game/campaign/clan/",
+      "source": "§5.2、§9.1、§17",
+      "requirements": [
+        "CLN-01",
+        "CLN-02",
+        "CLN-03"
+      ],
+      "dependencies": "CHR/DEF 公开查询、INV/PARTY/SET/POL 通过 APP 协作",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/clan/",
+      "code_paths": [
+        "game/campaign/clan/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/clan/README.md"
+      ]
+    },
+    {
+      "id": "PARTY",
+      "title": "队伍、军团、名册、俘虏、补给",
+      "doc": "docs/systems/game/campaign/party/README.md",
+      "code": "game/campaign/party/",
+      "source": "§6、§9.3、§10.2、§17",
+      "requirements": [
+        "ARM-01",
+        "ARM-02",
+        "ARM-03",
+        "ARM-04",
+        "ARM-05",
+        "BAT-02"
+      ],
+      "dependencies": "DEF/SHRULE、INV/CHR/CLAN/WORLD/POL 的公共投影，APP 事务",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/party/",
+      "code_paths": [
+        "game/campaign/party/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/party/README.md"
+      ]
+    },
+    {
+      "id": "INV",
+      "title": "库存、账户、账本与资源事务",
+      "doc": "docs/systems/game/shared/inventory/README.md",
+      "code": "game/shared/inventory/",
+      "source": "§6、§7.1、§17.5",
+      "requirements": [
+        "ARM-05",
+        "ECO-03",
+        "CHR-02"
+      ],
+      "dependencies": "CON/DEF；APP 负责跨域事务装配",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/shared/inventory/",
+      "code_paths": [
+        "game/shared/inventory/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/shared/inventory/README.md"
+      ]
+    },
+    {
+      "id": "DEF",
+      "title": "定义数据与引用注册",
+      "doc": "docs/systems/game/shared/definitions/README.md",
+      "code": "game/shared/definitions/",
+      "source": "§5–7、§17.1、§17.3、§18.2",
+      "requirements": [
+        "ARM-01",
+        "EXT-01",
+        "SAV-03",
+        "ECO-05"
+      ],
+      "dependencies": "CON；由 INF-CONTENT 注入经编译数据",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/shared/definitions/",
+      "code_paths": [
+        "game/shared/definitions/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/shared/definitions/README.md"
+      ]
+    },
+    {
+      "id": "SHRULE",
+      "title": "公共规则、数值与效果计算",
+      "doc": "docs/systems/game/shared/rules/README.md",
+      "code": "game/shared/rules/",
+      "source": "§3.3、§5、§6、§7、§11、§17",
+      "requirements": [
+        "CHR-01",
+        "ECO-03",
+        "COM-03"
+      ],
+      "dependencies": "CON/DEF",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/shared/rules/",
+      "code_paths": [
+        "game/shared/rules/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/shared/rules/README.md"
+      ]
+    },
+    {
+      "id": "ECO",
+      "title": "经济、市场、商队、工坊与锻造",
+      "doc": "docs/systems/game/campaign/economy/README.md",
+      "code": "game/campaign/economy/",
+      "source": "§7、§8、§9.3、§17.5",
+      "requirements": [
+        "ECO-01",
+        "ECO-02",
+        "ECO-03",
+        "ECO-04",
+        "ECO-05",
+        "ECO-06"
+      ],
+      "dependencies": "DEF/SHRULE/INV；WORLD/SET/PARTY/CHR 只读投影与 APP 事务",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/economy/",
+      "code_paths": [
+        "game/campaign/economy/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/economy/README.md"
+      ]
+    },
+    {
+      "id": "SET",
+      "title": "城镇、城堡、村庄与领地治理",
+      "doc": "docs/systems/game/campaign/settlement/README.md",
+      "code": "game/campaign/settlement/",
+      "source": "§8、§9.1、§13、§17",
+      "requirements": [
+        "SET-01",
+        "SET-02",
+        "POL-04",
+        "SET-03",
+        "SET-04"
+      ],
+      "dependencies": "DEF/SHRULE；POL、PARTY、ECO、INV、WORLD、CHR 经门面/APP",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/settlement/",
+      "code_paths": [
+        "game/campaign/settlement/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/settlement/README.md"
+      ]
+    },
+    {
+      "id": "POL",
+      "title": "王国、决议、外交、战争与身份",
+      "doc": "docs/systems/game/campaign/politics/README.md",
+      "code": "game/campaign/politics/",
+      "source": "§9.1–9.2、§17.5",
+      "requirements": [
+        "POL-01",
+        "POL-02",
+        "POL-03",
+        "POL-04"
+      ],
+      "dependencies": "DEF/SHRULE；CLAN/SET/PARTY/INV/WORLD 公开查询及应用用例",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/politics/",
+      "code_paths": [
+        "game/campaign/politics/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/politics/README.md"
+      ]
+    },
+    {
+      "id": "ENC",
+      "title": "遭遇、战略围城、预留与自动结算",
+      "doc": "docs/systems/game/campaign/encounter/README.md",
+      "code": "game/campaign/encounter/",
+      "source": "§4.3、§9.4、§10.2、§13.1、§17.4",
+      "requirements": [
+        "SAI-02",
+        "BAT-03",
+        "ARM-05",
+        "BAT-02",
+        "SGE-01",
+        "SGE-03"
+      ],
+      "dependencies": "CON/SHRULE/DEF；PARTY、CHR、INV、SET、POL、WORLD 门面；PERSIST 由 APP 协调",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/encounter/",
+      "code_paths": [
+        "game/campaign/encounter/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/encounter/README.md"
+      ]
+    },
+    {
+      "id": "QUEST",
+      "title": "动态任务、剧情导演、对话与事件",
+      "doc": "docs/systems/game/campaign/quest/README.md",
+      "code": "game/campaign/quest/",
+      "source": "§14、§2、§8.3、§13、§17",
+      "requirements": [
+        "QST-01",
+        "QST-02",
+        "QST-03",
+        "MOD-01",
+        "MOD-02",
+        "QST-04",
+        "QST-05"
+      ],
+      "dependencies": "CON/DEF/CORE；各域可见投影、APP 命令端口和 MissionResult",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/quest/",
+      "code_paths": [
+        "game/campaign/quest/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/quest/README.md"
+      ]
+    },
+    {
+      "id": "SAI",
+      "title": "战略 AI 总控、调度与任务规划",
+      "doc": "docs/systems/game/campaign/strategic_ai/README.md",
+      "code": "game/campaign/strategic_ai/",
+      "source": "§9.3–9.5、§4.2、§19",
+      "requirements": [
+        "SAI-01",
+        "WLD-03",
+        "SAI-03"
+      ],
+      "dependencies": "CORE/CON/DEF/SHRULE；WORLD 可见快照、POL/CLAN/PARTY/ECO/SET 查询端口、APP 命令端口",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/strategic_ai/",
+      "code_paths": [
+        "game/campaign/strategic_ai/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/strategic_ai/README.md"
+      ]
+    },
+    {
+      "id": "SAI-K",
+      "title": "战略 AI：王国规划",
+      "doc": "docs/systems/game/campaign/strategic_ai/kingdom/README.md",
+      "code": "game/campaign/strategic_ai/kingdom/",
+      "source": "§9.1、§9.3、§9.5",
+      "requirements": [
+        "SAI-01",
+        "POL-02",
+        "SAI-03"
+      ],
+      "dependencies": "SAI 公共规划器、POL/SET/PARTY/ECO/WORLD 只读投影",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/strategic_ai/kingdom/",
+      "code_paths": [
+        "game/campaign/strategic_ai/kingdom/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/strategic_ai/kingdom/README.md"
+      ]
+    },
+    {
+      "id": "SAI-C",
+      "title": "战略 AI：家族规划",
+      "doc": "docs/systems/game/campaign/strategic_ai/clan/README.md",
+      "code": "game/campaign/strategic_ai/clan/",
+      "source": "§5.2、§9.3",
+      "requirements": [
+        "SAI-01",
+        "CLN-01",
+        "CLN-02",
+        "SAI-03"
+      ],
+      "dependencies": "SAI、CLAN/CHR/POL/INV/SET/PARTY 许可查询",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/strategic_ai/clan/",
+      "code_paths": [
+        "game/campaign/strategic_ai/clan/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/strategic_ai/clan/README.md"
+      ]
+    },
+    {
+      "id": "SAI-A",
+      "title": "战略 AI：军团规划",
+      "doc": "docs/systems/game/campaign/strategic_ai/army/README.md",
+      "code": "game/campaign/strategic_ai/army/",
+      "source": "§6.2、§9.3、§13.1",
+      "requirements": [
+        "SAI-01",
+        "ARM-04",
+        "SGE-01",
+        "SAI-03"
+      ],
+      "dependencies": "SAI、PARTY/WORLD/ENC/SET/POL 许可查询",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/strategic_ai/army/",
+      "code_paths": [
+        "game/campaign/strategic_ai/army/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/strategic_ai/army/README.md"
+      ]
+    },
+    {
+      "id": "SAI-P",
+      "title": "战略 AI：队伍规划与类型策略",
+      "doc": "docs/systems/game/campaign/strategic_ai/party/README.md",
+      "code": "game/campaign/strategic_ai/party/",
+      "source": "§4.3、§6、§7.2、§9.3",
+      "requirements": [
+        "SAI-01",
+        "WLD-03",
+        "ECO-04",
+        "SAI-03",
+        "ARM-04"
+      ],
+      "dependencies": "SAI、WORLD/PARTY/ECO/SET/ENC/POL 许可查询",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/campaign/strategic_ai/party/",
+      "code_paths": [
+        "game/campaign/strategic_ai/party/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/campaign/strategic_ai/party/README.md"
+      ]
+    },
+    {
+      "id": "MIS-RT",
+      "title": "Mission 运行时、实体与增援",
+      "doc": "docs/systems/game/mission/runtime/README.md",
+      "code": "game/mission/runtime/",
+      "source": "§10.1、§10.3–10.5、§11.1、§19",
+      "requirements": [
+        "BAT-01",
+        "BAT-02",
+        "BAT-05",
+        "MIS-02"
+      ],
+      "dependencies": "CORE/CON/DEF、Mission 各公开系统接口；APP/EngineAdapter 负责初始化与场景资源",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/runtime/",
+      "code_paths": [
+        "game/mission/runtime/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/runtime/README.md"
+      ]
+    },
+    {
+      "id": "COM",
+      "title": "动作、装备、命中、伤害与士气执行",
+      "doc": "docs/systems/game/mission/combat/README.md",
+      "code": "game/mission/combat/",
+      "source": "§10.4、§11、§12.7、§16.2",
+      "requirements": [
+        "COM-01",
+        "COM-02",
+        "COM-03",
+        "COM-04",
+        "COM-05",
+        "COM-06",
+        "BAI-05"
+      ],
+      "dependencies": "CON/DEF/SHRULE、MIS-RT EntityStore 组件端口、MOV/INF-ENGINE 碰撞与位姿查询、RULES 规则",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/combat/",
+      "code_paths": [
+        "game/mission/combat/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/combat/README.md"
+      ]
+    },
+    {
+      "id": "FORM",
+      "title": "编队、指挥授权、阵型与槽位执行",
+      "doc": "docs/systems/game/mission/formation/README.md",
+      "code": "game/mission/formation/",
+      "source": "§12.1–12.4、§17.4、§10.3",
+      "requirements": [
+        "BAI-01",
+        "BAI-02",
+        "BAI-05",
+        "NET-04"
+      ],
+      "dependencies": "CON/DEF、MIS-RT/COM 查询、MOV 路径/投影端口、RULES 权限策略",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/formation/",
+      "code_paths": [
+        "game/mission/formation/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/formation/README.md"
+      ]
+    },
+    {
+      "id": "BAI",
+      "title": "战场 AI 共同基础、感知与调度",
+      "doc": "docs/systems/game/mission/ai/README.md",
+      "code": "game/mission/ai/",
+      "source": "§12.1、§12.3–12.5、§19.2–19.4",
+      "requirements": [
+        "BAI-01",
+        "BAI-05",
+        "BAI-06",
+        "BAT-05"
+      ],
+      "dependencies": "CORE/CON/DEF/SHRULE；MIS-RT、FORM、COM、MOV、RULES 的快照/命令端口",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/ai/",
+      "code_paths": [
+        "game/mission/ai/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/ai/README.md"
+      ]
+    },
+    {
+      "id": "BAI-T",
+      "title": "L1 战术 AI：全军计划",
+      "doc": "docs/systems/game/mission/ai/tactical/README.md",
+      "code": "game/mission/ai/tactical/",
+      "source": "§12.1、§12.3、§12.8",
+      "requirements": [
+        "BAI-04",
+        "BAI-01"
+      ],
+      "dependencies": "BAI 共同感知；FORM 订单授权端口；RULES 目标查询；MOV 可达区域",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/ai/tactical/",
+      "code_paths": [
+        "game/mission/ai/tactical/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/ai/tactical/README.md"
+      ]
+    },
+    {
+      "id": "BAI-F",
+      "title": "L2 编队 AI：执行战术任务",
+      "doc": "docs/systems/game/mission/ai/formation/README.md",
+      "code": "game/mission/ai/formation/",
+      "source": "§12.1–12.4、§12.8",
+      "requirements": [
+        "BAI-01",
+        "BAI-02",
+        "BAI-04"
+      ],
+      "dependencies": "BAI、BAI-T FormationTask、FORM/MOV/COM/RULES 只读端口与订单入口",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/ai/formation/",
+      "code_paths": [
+        "game/mission/ai/formation/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/ai/formation/README.md"
+      ]
+    },
+    {
+      "id": "BAI-I",
+      "title": "L3 个体 AI：士兵感知、目标与动作意图",
+      "doc": "docs/systems/game/mission/ai/individual/README.md",
+      "code": "game/mission/ai/individual/",
+      "source": "§12.5、§11、§12.8",
+      "requirements": [
+        "BAI-03",
+        "BAI-05",
+        "COM-05",
+        "BAI-06"
+      ],
+      "dependencies": "BAI 感知与调度；BAI-F 成员约束、FORM 槽位查询、COM/MOV 执行接口",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/ai/individual/",
+      "code_paths": [
+        "game/mission/ai/individual/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/ai/individual/README.md"
+      ]
+    },
+    {
+      "id": "MOV",
+      "title": "战场路径、避障、运动与动态导航",
+      "doc": "docs/systems/game/mission/movement/README.md",
+      "code": "game/mission/movement/",
+      "source": "§11.5、§12.6、§13.1、§19",
+      "requirements": [
+        "NAV-01",
+        "BAI-02",
+        "COM-04",
+        "BAI-06"
+      ],
+      "dependencies": "CON/DEF、MIS-RT 组件访问、FORM 槽位、COM 动作/骑乘约束、INF-ENGINE",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/movement/",
+      "code_paths": [
+        "game/mission/movement/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/movement/README.md"
+      ]
+    },
+    {
+      "id": "SIEGE",
+      "title": "实时攻城器械、城防与动态连接",
+      "doc": "docs/systems/game/mission/siege/README.md",
+      "code": "game/mission/siege/",
+      "source": "§13.1、§12、§10.2",
+      "requirements": [
+        "SGE-02",
+        "NAV-01",
+        "SGE-03",
+        "MIS-03"
+      ],
+      "dependencies": "MIS-RT、COM、MOV、FORM、RULES、CON/DEF",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/siege/",
+      "code_paths": [
+        "game/mission/siege/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/siege/README.md"
+      ]
+    },
+    {
+      "id": "RULES",
+      "title": "Mission 规则、目标与玩法组合",
+      "doc": "docs/systems/game/mission/rules/README.md",
+      "code": "game/mission/rules/",
+      "source": "§1.2、§10、§13.2、§16.3",
+      "requirements": [
+        "BAT-01",
+        "MIS-01",
+        "MIS-02",
+        "MOD-03",
+        "BAT-04",
+        "MOD-04",
+        "NET-02",
+        "SGE-02"
+      ],
+      "dependencies": "CON/DEF、MIS-RT、FORM/COM/MOV/SIEGE/INTERACT/RESULTS 公共接口",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/rules/",
+      "code_paths": [
+        "game/mission/rules/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/rules/README.md"
+      ]
+    },
+    {
+      "id": "INTERACT",
+      "title": "场景交互、NPC 与访问流程",
+      "doc": "docs/systems/game/mission/interaction/README.md",
+      "code": "game/mission/interaction/",
+      "source": "§8.3、§13.2、§14.3、§15",
+      "requirements": [
+        "SET-04",
+        "QST-04",
+        "MIS-01",
+        "MIS-02"
+      ],
+      "dependencies": "CON/DEF、MIS-RT、MOV/COM、RULES、APP 业务用例端口",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/interaction/",
+      "code_paths": [
+        "game/mission/interaction/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/interaction/README.md"
+      ]
+    },
+    {
+      "id": "RESULTS",
+      "title": "来源追踪、战斗结果与统计",
+      "doc": "docs/systems/game/mission/results/README.md",
+      "code": "game/mission/results/",
+      "source": "§10.2、§10.5、§17.4、§22",
+      "requirements": [
+        "BAT-02",
+        "ARM-05",
+        "BAT-03",
+        "BAT-04",
+        "SGE-03"
+      ],
+      "dependencies": "CON、MIS-RT/COM/FORM/RULES/SIEGE 的只读终态；APP ResultRouter",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/mission/results/",
+      "code_paths": [
+        "game/mission/results/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/mission/results/README.md"
+      ]
+    },
+    {
+      "id": "UI",
+      "title": "界面、ReadModel 与交互流程",
+      "doc": "docs/systems/game/presentation/ui/README.md",
+      "code": "game/presentation/ui/",
+      "source": "§15.1、§1.4、§2.3、§16",
+      "requirements": [
+        "UX-01",
+        "UX-02",
+        "UX-03",
+        "ACC-01"
+      ],
+      "dependencies": "CON、APP/MP 公共查询和命令端口、INPUT/CAMERA/VIS/AUD 的表现端口",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/presentation/ui/",
+      "code_paths": [
+        "game/presentation/ui/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/presentation/ui/README.md"
+      ]
+    },
+    {
+      "id": "INPUT",
+      "title": "输入设备、控制映射与玩家命令",
+      "doc": "docs/systems/game/presentation/input/README.md",
+      "code": "game/presentation/input/",
+      "source": "§1.4、§11.2、§12.2、§15、§16.2",
+      "requirements": [
+        "ACC-01",
+        "UX-01",
+        "COM-05",
+        "NET-04",
+        "BAI-01"
+      ],
+      "dependencies": "CON、APP/MP 命令端口、COM/FORM 控制上下文只读、UI/CAMERA",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/presentation/input/",
+      "code_paths": [
+        "game/presentation/input/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/presentation/input/README.md"
+      ]
+    },
+    {
+      "id": "CAM",
+      "title": "相机、视角、选取与观战",
+      "doc": "docs/systems/game/presentation/camera/README.md",
+      "code": "game/presentation/camera/",
+      "source": "§11.2、§15.2、§16.3",
+      "requirements": [
+        "UX-02",
+        "ACC-01",
+        "NET-04"
+      ],
+      "dependencies": "CON、INPUT、INF-ENGINE 只读碰撞/选取、MIS-RT/WORLD/NET 许可视图",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/presentation/camera/",
+      "code_paths": [
+        "game/presentation/camera/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/presentation/camera/README.md"
+      ]
+    },
+    {
+      "id": "VIS",
+      "title": "地图与战场视觉代理、动画、LOD",
+      "doc": "docs/systems/game/presentation/visuals/README.md",
+      "code": "game/presentation/visuals/",
+      "source": "§11.1–11.4、§15.2、§19、§21",
+      "requirements": [
+        "VIS-01",
+        "COM-05",
+        "BAI-06"
+      ],
+      "dependencies": "CON/DEF、INF-ENGINE 资源/渲染端口、COM/MIS-RT/WORLD 只读视图与 ViewEvents",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/presentation/visuals/",
+      "code_paths": [
+        "game/presentation/visuals/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/presentation/visuals/README.md"
+      ]
+    },
+    {
+      "id": "AUD",
+      "title": "音频、战斗语音与音乐",
+      "doc": "docs/systems/game/presentation/audio/README.md",
+      "code": "game/presentation/audio/",
+      "source": "§15.2–15.3、§1.4、§21",
+      "requirements": [
+        "AUD-01",
+        "ACC-01",
+        "BAT-05"
+      ],
+      "dependencies": "CON/DEF、VIS ViewEvents、UI 设置、INF-ENGINE 音频适配",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/presentation/audio/",
+      "code_paths": [
+        "game/presentation/audio/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/presentation/audio/README.md"
+      ]
+    },
+    {
+      "id": "PERSIST",
+      "title": "存档、原子提交、迁移与恢复",
+      "doc": "docs/systems/game/infrastructure/persistence/README.md",
+      "code": "game/infrastructure/persistence/",
+      "source": "§10.2、§17、§18.1、§22",
+      "requirements": [
+        "SAV-01",
+        "SAV-02",
+        "BAT-03",
+        "SAV-03"
+      ],
+      "dependencies": "CON、CORE 文件/时钟端口、APP/CAMP 快照端口、DEF/INF-CONTENT 兼容检查",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/infrastructure/persistence/",
+      "code_paths": [
+        "game/infrastructure/persistence/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/infrastructure/persistence/README.md"
+      ]
+    },
+    {
+      "id": "INF-CONTENT",
+      "title": "数据包编译、MOD 注册与配置合并",
+      "doc": "docs/systems/game/infrastructure/content/README.md",
+      "code": "game/infrastructure/content/",
+      "source": "§17.3、§18.2、§21、§25",
+      "requirements": [
+        "EXT-01",
+        "MOD-05",
+        "EXT-02",
+        "EXT-03",
+        "MIS-03"
+      ],
+      "dependencies": "CON/DEF/CORE、INF-ENGINE 资源端口；BOOT 装配注册点；ADDONS/TOOLS 共用验证器",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/infrastructure/content/",
+      "code_paths": [
+        "game/infrastructure/content/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/infrastructure/content/README.md"
+      ]
+    },
+    {
+      "id": "INF-ENGINE",
+      "title": "引擎适配、物理、导航与资源端口",
+      "doc": "docs/systems/game/infrastructure/engine/README.md",
+      "code": "game/infrastructure/engine/",
+      "source": "§19、§10.4、§11、§12.6、§20",
+      "requirements": [
+        "NAV-01",
+        "COM-02",
+        "NET-01"
+      ],
+      "dependencies": "CON/CORE 与各领域定义的 local ports；仅适配层依赖引擎 API",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/infrastructure/engine/",
+      "code_paths": [
+        "game/infrastructure/engine/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/infrastructure/engine/README.md"
+      ]
+    },
+    {
+      "id": "NET",
+      "title": "网络协议、传输、权威与状态复制",
+      "doc": "docs/systems/game/infrastructure/network/README.md",
+      "code": "game/infrastructure/network/",
+      "source": "§16.2、§16.4、§17、§19",
+      "requirements": [
+        "NET-03",
+        "NET-04",
+        "COM-06",
+        "NET-05",
+        "NET-06"
+      ],
+      "dependencies": "CON/CORE、MIS-RT/COM/FORM/MOV 的网络端口，MP 身份会话，平台传输 SDK",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/infrastructure/network/",
+      "code_paths": [
+        "game/infrastructure/network/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/infrastructure/network/README.md"
+      ]
+    },
+    {
+      "id": "TELEM",
+      "title": "日志、指标、诊断与崩溃报告",
+      "doc": "docs/systems/game/infrastructure/telemetry/README.md",
+      "code": "game/infrastructure/telemetry/",
+      "source": "§19.4、§20.2、§22、§16.3",
+      "requirements": [
+        "NET-06"
+      ],
+      "dependencies": "CON/CORE；各领域通过注入 Logger/MetricsPort 上报",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/infrastructure/telemetry/",
+      "code_paths": [
+        "game/infrastructure/telemetry/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/infrastructure/telemetry/README.md"
+      ]
+    },
+    {
+      "id": "MP",
+      "title": "多人会话、大厅、匹配与模式组装",
+      "doc": "docs/systems/game/multiplayer/README.md",
+      "code": "game/multiplayer/",
+      "source": "§1.2、§16.1–16.4、§20",
+      "requirements": [
+        "MOD-04",
+        "NET-02",
+        "NET-03",
+        "NET-05",
+        "NET-06"
+      ],
+      "dependencies": "CON/CORE、NET、APP/MIS-RT/RULES/FORM 公共接口、SERVER 服务 API",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/multiplayer/",
+      "code_paths": [
+        "game/multiplayer/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/multiplayer/README.md"
+      ]
+    },
+    {
+      "id": "ADDONS",
+      "title": "编辑器插件与可信扩展 SDK",
+      "doc": "docs/systems/game/addons/README.md",
+      "code": "game/addons/",
+      "source": "§18.2、§20.1、§21",
+      "requirements": [
+        "EXT-03",
+        "MIS-03",
+        "EXT-01"
+      ],
+      "dependencies": "INF-CONTENT/DEF、INF-ENGINE 编辑器端口、CON、TOOLS",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/addons/",
+      "code_paths": [
+        "game/addons/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/addons/README.md"
+      ]
+    },
+    {
+      "id": "BASE",
+      "title": "本体原创内容包与资源制作",
+      "doc": "docs/systems/game/content/base/README.md",
+      "code": "game/content/base/",
+      "source": "§1.1–1.3、§15.2、§18、§21",
+      "requirements": [
+        "EXT-01",
+        "MIS-03",
+        "VIS-01",
+        "UX-03"
+      ],
+      "dependencies": "DEF/INF-CONTENT/TOOLS 规范；各游戏系统消费编译定义",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/content/base/",
+      "code_paths": [
+        "game/content/base/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/content/base/README.md"
+      ]
+    },
+    {
+      "id": "NAVAL-C",
+      "title": "海战扩展：战略水域、港口、舰队",
+      "doc": "docs/systems/game/addons/naval/campaign/README.md",
+      "code": "game/addons/naval/campaign/",
+      "source": "§24.1、§24.3–24.4，MOD-06",
+      "requirements": [
+        "MOD-06",
+        "NAVAL-01",
+        "NAVAL-02",
+        "NAVAL-05",
+        "NAVAL-07"
+      ],
+      "dependencies": "DEF/CON、WORLD/PARTY/ECO/INV/ENC/SAI 的版本化扩展点",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/addons/naval/campaign/（新增建议，ADR-010 评审）",
+      "code_paths": [
+        "game/addons/naval/campaign/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/addons/naval/campaign/README.md"
+      ]
+    },
+    {
+      "id": "NAVAL-M",
+      "title": "海战扩展：船舶运动、接舷、战斗 AI",
+      "doc": "docs/systems/game/addons/naval/mission/README.md",
+      "code": "game/addons/naval/mission/",
+      "source": "§24.2–24.3、§12、§19，MOD-06",
+      "requirements": [
+        "MOD-06",
+        "NAVAL-03",
+        "NAVAL-04",
+        "NAVAL-05",
+        "NAVAL-07"
+      ],
+      "dependencies": "NAVAL-C/CON/DEF、MIS-RT/COM/FORM/MOV/BAI/RULES/RESULTS 扩展端口、INF-ENGINE",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/addons/naval/mission/（新增建议，ADR-010 评审）",
+      "code_paths": [
+        "game/addons/naval/mission/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/addons/naval/mission/README.md"
+      ]
+    },
+    {
+      "id": "NAVAL-P",
+      "title": "海战扩展：内容包、工具与兼容",
+      "doc": "docs/systems/game/content/expansions/naval/README.md",
+      "code": "game/content/expansions/naval/",
+      "source": "§24、§18.2、§21，MOD-06",
+      "requirements": [
+        "MOD-06",
+        "NAVAL-06",
+        "NAVAL-05",
+        "NAVAL-07"
+      ],
+      "dependencies": "NAVAL-C/NAVAL-M、INF-CONTENT/DEF、PERSIST、ADDONS/TOOLS",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/content/expansions/naval/；game/addons/naval/（代码路径建议）",
+      "code_paths": [
+        "game/content/expansions/naval/",
+        "game/addons/naval/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/content/expansions/naval/README.md",
+        "docs/systems/game/addons/naval/README.md"
+      ]
+    },
+    {
+      "id": "NATIVE",
+      "title": "可选原生热路径与 GDExtension",
+      "doc": "docs/systems/native/README.md",
+      "code": "native/",
+      "source": "§19.1–19.4、§20.1、§23",
+      "requirements": [
+        "BAI-06",
+        "BAT-05"
+      ],
+      "dependencies": "CON 版本化批量接口、CORE 调度、INF-ENGINE 适配；不从 native 反向调用可变场景树",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "native/",
+      "code_paths": [
+        "native/"
+      ],
+      "entrypoints": [
+        "docs/systems/native/README.md"
+      ]
+    },
+    {
+      "id": "SERVER-D",
+      "title": "专用权威战斗服务器",
+      "doc": "docs/systems/server/dedicated/README.md",
+      "code": "server/dedicated/",
+      "source": "§16.1、§16.2、§19、§20",
+      "requirements": [
+        "NET-01",
+        "NET-05",
+        "NET-06"
+      ],
+      "dependencies": "BOOT/MP/NET/MIS-RT/RULES、SERVER-L 服务 API、TELEM",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "server/dedicated/",
+      "code_paths": [
+        "server/dedicated/"
+      ],
+      "entrypoints": [
+        "docs/systems/server/dedicated/README.md"
+      ]
+    },
+    {
+      "id": "SERVER-L",
+      "title": "大厅后端、身份、匹配与赛果",
+      "doc": "docs/systems/server/lobby_service/README.md",
+      "code": "server/lobby_service/",
+      "source": "§16.1、§16.3、§16.4、§20",
+      "requirements": [
+        "NET-02",
+        "NET-05",
+        "NET-06"
+      ],
+      "dependencies": "CON、MP/NET 服务端口、SERVER-D、平台身份 SDK 与持久化数据库适配",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "server/lobby_service/",
+      "code_paths": [
+        "server/lobby_service/"
+      ],
+      "entrypoints": [
+        "docs/systems/server/lobby_service/README.md"
+      ]
+    },
+    {
+      "id": "SERVER-OPS",
+      "title": "部署、扩容、运维与发布",
+      "doc": "docs/systems/server/deployment/README.md",
+      "code": "server/deployment/",
+      "source": "§16、§19.4、§20.3、§23",
+      "requirements": [
+        "NET-05",
+        "NET-06"
+      ],
+      "dependencies": "SERVER-D/SERVER-L、CI、TELEM、INF-CONTENT",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "server/deployment/",
+      "code_paths": [
+        "server/deployment/"
+      ],
+      "entrypoints": [
+        "docs/systems/server/deployment/README.md"
+      ]
+    },
+    {
+      "id": "TOOLS",
+      "title": "内容 CLI、验证器与开发调试工具",
+      "doc": "docs/systems/tools/README.md",
+      "code": "tools/",
+      "source": "§20.1、§21、§22",
+      "requirements": [
+        "MIS-03",
+        "EXT-03",
+        "ECO-06",
+        "SAI-03",
+        "BAI-06"
+      ],
+      "dependencies": "INF-CONTENT/DEF、INF-ENGINE、ADDONS、CAMP/MIS-RT 公开仿真端口、TELEM",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "tools/",
+      "code_paths": [
+        "tools/"
+      ],
+      "entrypoints": [
+        "docs/systems/tools/README.md"
+      ]
+    },
+    {
+      "id": "TEST",
+      "title": "领域、集成、场景与长期测试",
+      "doc": "docs/systems/game/tests/README.md",
+      "code": "game/tests/",
+      "source": "§22、§23.3",
+      "requirements": [
+        "BAT-03",
+        "SAV-02",
+        "BAI-06",
+        "NET-06"
+      ],
+      "dependencies": "所有模块公开接口；TOOLS、TELEM、CI、INF-ENGINE；测试可使用独立 fixture，不改正式世界",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "game/tests/；test_scenarios/",
+      "code_paths": [
+        "game/tests/",
+        "test_scenarios/"
+      ],
+      "entrypoints": [
+        "docs/systems/game/tests/README.md",
+        "docs/systems/test_scenarios/README.md"
+      ]
+    },
+    {
+      "id": "CI",
+      "title": "持续集成、架构门禁与发布构建",
+      "doc": "docs/systems/ci/README.md",
+      "code": "ci/",
+      "source": "§20.2–20.3、§21–23",
+      "requirements": [
+        "EXT-03",
+        "NET-05"
+      ],
+      "dependencies": "BOOT/TOOLS/TEST/TELEM、SERVER-OPS、版本锁定与资产仓库",
+      "status": "DESIGN_PROPOSED",
+      "code_description": "ci/",
+      "code_paths": [
+        "ci/"
+      ],
+      "entrypoints": [
+        "docs/systems/ci/README.md"
+      ]
+    }
+  ],
+  "layout_version": "0.2-mirror",
+  "directory_entries": [
+    {
+      "code_path": "game/",
+      "doc": "docs/systems/game/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "game/bootstrap/",
+      "doc": "docs/systems/game/bootstrap/README.md",
+      "kind": "canonical",
+      "module_id": "BOOT",
+      "canonical_doc": "docs/systems/game/bootstrap/README.md"
+    },
+    {
+      "code_path": "game/core/",
+      "doc": "docs/systems/game/core/README.md",
+      "kind": "canonical",
+      "module_id": "CORE",
+      "canonical_doc": "docs/systems/game/core/README.md"
+    },
+    {
+      "code_path": "game/contracts/",
+      "doc": "docs/systems/game/contracts/README.md",
+      "kind": "canonical",
+      "module_id": "CON",
+      "canonical_doc": "docs/systems/game/contracts/README.md"
+    },
+    {
+      "code_path": "game/application/",
+      "doc": "docs/systems/game/application/README.md",
+      "kind": "canonical",
+      "module_id": "APP",
+      "canonical_doc": "docs/systems/game/application/README.md"
+    },
+    {
+      "code_path": "game/campaign/",
+      "doc": "docs/systems/game/campaign/README.md",
+      "kind": "canonical",
+      "module_id": "CAMP",
+      "canonical_doc": "docs/systems/game/campaign/README.md"
+    },
+    {
+      "code_path": "game/campaign/world/",
+      "doc": "docs/systems/game/campaign/world/README.md",
+      "kind": "canonical",
+      "module_id": "WORLD",
+      "canonical_doc": "docs/systems/game/campaign/world/README.md"
+    },
+    {
+      "code_path": "game/campaign/character/",
+      "doc": "docs/systems/game/campaign/character/README.md",
+      "kind": "canonical",
+      "module_id": "CHR",
+      "canonical_doc": "docs/systems/game/campaign/character/README.md"
+    },
+    {
+      "code_path": "game/campaign/clan/",
+      "doc": "docs/systems/game/campaign/clan/README.md",
+      "kind": "canonical",
+      "module_id": "CLAN",
+      "canonical_doc": "docs/systems/game/campaign/clan/README.md"
+    },
+    {
+      "code_path": "game/campaign/party/",
+      "doc": "docs/systems/game/campaign/party/README.md",
+      "kind": "canonical",
+      "module_id": "PARTY",
+      "canonical_doc": "docs/systems/game/campaign/party/README.md"
+    },
+    {
+      "code_path": "game/campaign/economy/",
+      "doc": "docs/systems/game/campaign/economy/README.md",
+      "kind": "canonical",
+      "module_id": "ECO",
+      "canonical_doc": "docs/systems/game/campaign/economy/README.md"
+    },
+    {
+      "code_path": "game/campaign/settlement/",
+      "doc": "docs/systems/game/campaign/settlement/README.md",
+      "kind": "canonical",
+      "module_id": "SET",
+      "canonical_doc": "docs/systems/game/campaign/settlement/README.md"
+    },
+    {
+      "code_path": "game/campaign/politics/",
+      "doc": "docs/systems/game/campaign/politics/README.md",
+      "kind": "canonical",
+      "module_id": "POL",
+      "canonical_doc": "docs/systems/game/campaign/politics/README.md"
+    },
+    {
+      "code_path": "game/campaign/encounter/",
+      "doc": "docs/systems/game/campaign/encounter/README.md",
+      "kind": "canonical",
+      "module_id": "ENC",
+      "canonical_doc": "docs/systems/game/campaign/encounter/README.md"
+    },
+    {
+      "code_path": "game/campaign/quest/",
+      "doc": "docs/systems/game/campaign/quest/README.md",
+      "kind": "canonical",
+      "module_id": "QUEST",
+      "canonical_doc": "docs/systems/game/campaign/quest/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/",
+      "doc": "docs/systems/game/campaign/strategic_ai/README.md",
+      "kind": "canonical",
+      "module_id": "SAI",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/kingdom/",
+      "doc": "docs/systems/game/campaign/strategic_ai/kingdom/README.md",
+      "kind": "canonical",
+      "module_id": "SAI-K",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/kingdom/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/clan/",
+      "doc": "docs/systems/game/campaign/strategic_ai/clan/README.md",
+      "kind": "canonical",
+      "module_id": "SAI-C",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/clan/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/army/",
+      "doc": "docs/systems/game/campaign/strategic_ai/army/README.md",
+      "kind": "canonical",
+      "module_id": "SAI-A",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/army/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/party/",
+      "doc": "docs/systems/game/campaign/strategic_ai/party/README.md",
+      "kind": "canonical",
+      "module_id": "SAI-P",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/party/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/planning/",
+      "doc": "docs/systems/game/campaign/strategic_ai/planning/README.md",
+      "kind": "inherited",
+      "module_id": "SAI",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/evaluation/",
+      "doc": "docs/systems/game/campaign/strategic_ai/evaluation/README.md",
+      "kind": "inherited",
+      "module_id": "SAI",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/perception/",
+      "doc": "docs/systems/game/campaign/strategic_ai/perception/README.md",
+      "kind": "inherited",
+      "module_id": "SAI",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/README.md"
+    },
+    {
+      "code_path": "game/campaign/strategic_ai/scheduler/",
+      "doc": "docs/systems/game/campaign/strategic_ai/scheduler/README.md",
+      "kind": "inherited",
+      "module_id": "SAI",
+      "canonical_doc": "docs/systems/game/campaign/strategic_ai/README.md"
+    },
+    {
+      "code_path": "game/mission/",
+      "doc": "docs/systems/game/mission/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "game/mission/runtime/",
+      "doc": "docs/systems/game/mission/runtime/README.md",
+      "kind": "canonical",
+      "module_id": "MIS-RT",
+      "canonical_doc": "docs/systems/game/mission/runtime/README.md"
+    },
+    {
+      "code_path": "game/mission/combat/",
+      "doc": "docs/systems/game/mission/combat/README.md",
+      "kind": "canonical",
+      "module_id": "COM",
+      "canonical_doc": "docs/systems/game/mission/combat/README.md"
+    },
+    {
+      "code_path": "game/mission/formation/",
+      "doc": "docs/systems/game/mission/formation/README.md",
+      "kind": "canonical",
+      "module_id": "FORM",
+      "canonical_doc": "docs/systems/game/mission/formation/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/",
+      "doc": "docs/systems/game/mission/ai/README.md",
+      "kind": "canonical",
+      "module_id": "BAI",
+      "canonical_doc": "docs/systems/game/mission/ai/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/tactical/",
+      "doc": "docs/systems/game/mission/ai/tactical/README.md",
+      "kind": "canonical",
+      "module_id": "BAI-T",
+      "canonical_doc": "docs/systems/game/mission/ai/tactical/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/tactical/commander/",
+      "doc": "docs/systems/game/mission/ai/tactical/commander/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-T",
+      "canonical_doc": "docs/systems/game/mission/ai/tactical/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/tactical/strategies/",
+      "doc": "docs/systems/game/mission/ai/tactical/strategies/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-T",
+      "canonical_doc": "docs/systems/game/mission/ai/tactical/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/tactical/evaluation/",
+      "doc": "docs/systems/game/mission/ai/tactical/evaluation/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-T",
+      "canonical_doc": "docs/systems/game/mission/ai/tactical/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/tactical/planning/",
+      "doc": "docs/systems/game/mission/ai/tactical/planning/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-T",
+      "canonical_doc": "docs/systems/game/mission/ai/tactical/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/formation/",
+      "doc": "docs/systems/game/mission/ai/formation/README.md",
+      "kind": "canonical",
+      "module_id": "BAI-F",
+      "canonical_doc": "docs/systems/game/mission/ai/formation/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/formation/controller/",
+      "doc": "docs/systems/game/mission/ai/formation/controller/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-F",
+      "canonical_doc": "docs/systems/game/mission/ai/formation/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/formation/behaviors/",
+      "doc": "docs/systems/game/mission/ai/formation/behaviors/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-F",
+      "canonical_doc": "docs/systems/game/mission/ai/formation/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/formation/evaluation/",
+      "doc": "docs/systems/game/mission/ai/formation/evaluation/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-F",
+      "canonical_doc": "docs/systems/game/mission/ai/formation/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/individual/",
+      "doc": "docs/systems/game/mission/ai/individual/README.md",
+      "kind": "canonical",
+      "module_id": "BAI-I",
+      "canonical_doc": "docs/systems/game/mission/ai/individual/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/individual/controller/",
+      "doc": "docs/systems/game/mission/ai/individual/controller/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-I",
+      "canonical_doc": "docs/systems/game/mission/ai/individual/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/individual/decision/",
+      "doc": "docs/systems/game/mission/ai/individual/decision/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-I",
+      "canonical_doc": "docs/systems/game/mission/ai/individual/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/individual/targeting/",
+      "doc": "docs/systems/game/mission/ai/individual/targeting/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-I",
+      "canonical_doc": "docs/systems/game/mission/ai/individual/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/individual/behaviors/",
+      "doc": "docs/systems/game/mission/ai/individual/behaviors/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-I",
+      "canonical_doc": "docs/systems/game/mission/ai/individual/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/individual/roles/",
+      "doc": "docs/systems/game/mission/ai/individual/roles/README.md",
+      "kind": "inherited",
+      "module_id": "BAI-I",
+      "canonical_doc": "docs/systems/game/mission/ai/individual/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/perception/",
+      "doc": "docs/systems/game/mission/ai/perception/README.md",
+      "kind": "inherited",
+      "module_id": "BAI",
+      "canonical_doc": "docs/systems/game/mission/ai/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/blackboard/",
+      "doc": "docs/systems/game/mission/ai/blackboard/README.md",
+      "kind": "inherited",
+      "module_id": "BAI",
+      "canonical_doc": "docs/systems/game/mission/ai/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/scheduler/",
+      "doc": "docs/systems/game/mission/ai/scheduler/README.md",
+      "kind": "inherited",
+      "module_id": "BAI",
+      "canonical_doc": "docs/systems/game/mission/ai/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/ports/",
+      "doc": "docs/systems/game/mission/ai/ports/README.md",
+      "kind": "inherited",
+      "module_id": "BAI",
+      "canonical_doc": "docs/systems/game/mission/ai/README.md"
+    },
+    {
+      "code_path": "game/mission/ai/debug/",
+      "doc": "docs/systems/game/mission/ai/debug/README.md",
+      "kind": "inherited",
+      "module_id": "BAI",
+      "canonical_doc": "docs/systems/game/mission/ai/README.md"
+    },
+    {
+      "code_path": "game/mission/movement/",
+      "doc": "docs/systems/game/mission/movement/README.md",
+      "kind": "canonical",
+      "module_id": "MOV",
+      "canonical_doc": "docs/systems/game/mission/movement/README.md"
+    },
+    {
+      "code_path": "game/mission/siege/",
+      "doc": "docs/systems/game/mission/siege/README.md",
+      "kind": "canonical",
+      "module_id": "SIEGE",
+      "canonical_doc": "docs/systems/game/mission/siege/README.md"
+    },
+    {
+      "code_path": "game/mission/rules/",
+      "doc": "docs/systems/game/mission/rules/README.md",
+      "kind": "canonical",
+      "module_id": "RULES",
+      "canonical_doc": "docs/systems/game/mission/rules/README.md"
+    },
+    {
+      "code_path": "game/mission/interaction/",
+      "doc": "docs/systems/game/mission/interaction/README.md",
+      "kind": "canonical",
+      "module_id": "INTERACT",
+      "canonical_doc": "docs/systems/game/mission/interaction/README.md"
+    },
+    {
+      "code_path": "game/mission/results/",
+      "doc": "docs/systems/game/mission/results/README.md",
+      "kind": "canonical",
+      "module_id": "RESULTS",
+      "canonical_doc": "docs/systems/game/mission/results/README.md"
+    },
+    {
+      "code_path": "game/shared/",
+      "doc": "docs/systems/game/shared/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "game/shared/definitions/",
+      "doc": "docs/systems/game/shared/definitions/README.md",
+      "kind": "canonical",
+      "module_id": "DEF",
+      "canonical_doc": "docs/systems/game/shared/definitions/README.md"
+    },
+    {
+      "code_path": "game/shared/inventory/",
+      "doc": "docs/systems/game/shared/inventory/README.md",
+      "kind": "canonical",
+      "module_id": "INV",
+      "canonical_doc": "docs/systems/game/shared/inventory/README.md"
+    },
+    {
+      "code_path": "game/shared/rules/",
+      "doc": "docs/systems/game/shared/rules/README.md",
+      "kind": "canonical",
+      "module_id": "SHRULE",
+      "canonical_doc": "docs/systems/game/shared/rules/README.md"
+    },
+    {
+      "code_path": "game/presentation/",
+      "doc": "docs/systems/game/presentation/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "game/presentation/ui/",
+      "doc": "docs/systems/game/presentation/ui/README.md",
+      "kind": "canonical",
+      "module_id": "UI",
+      "canonical_doc": "docs/systems/game/presentation/ui/README.md"
+    },
+    {
+      "code_path": "game/presentation/input/",
+      "doc": "docs/systems/game/presentation/input/README.md",
+      "kind": "canonical",
+      "module_id": "INPUT",
+      "canonical_doc": "docs/systems/game/presentation/input/README.md"
+    },
+    {
+      "code_path": "game/presentation/camera/",
+      "doc": "docs/systems/game/presentation/camera/README.md",
+      "kind": "canonical",
+      "module_id": "CAM",
+      "canonical_doc": "docs/systems/game/presentation/camera/README.md"
+    },
+    {
+      "code_path": "game/presentation/visuals/",
+      "doc": "docs/systems/game/presentation/visuals/README.md",
+      "kind": "canonical",
+      "module_id": "VIS",
+      "canonical_doc": "docs/systems/game/presentation/visuals/README.md"
+    },
+    {
+      "code_path": "game/presentation/audio/",
+      "doc": "docs/systems/game/presentation/audio/README.md",
+      "kind": "canonical",
+      "module_id": "AUD",
+      "canonical_doc": "docs/systems/game/presentation/audio/README.md"
+    },
+    {
+      "code_path": "game/infrastructure/",
+      "doc": "docs/systems/game/infrastructure/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "game/infrastructure/persistence/",
+      "doc": "docs/systems/game/infrastructure/persistence/README.md",
+      "kind": "canonical",
+      "module_id": "PERSIST",
+      "canonical_doc": "docs/systems/game/infrastructure/persistence/README.md"
+    },
+    {
+      "code_path": "game/infrastructure/content/",
+      "doc": "docs/systems/game/infrastructure/content/README.md",
+      "kind": "canonical",
+      "module_id": "INF-CONTENT",
+      "canonical_doc": "docs/systems/game/infrastructure/content/README.md"
+    },
+    {
+      "code_path": "game/infrastructure/engine/",
+      "doc": "docs/systems/game/infrastructure/engine/README.md",
+      "kind": "canonical",
+      "module_id": "INF-ENGINE",
+      "canonical_doc": "docs/systems/game/infrastructure/engine/README.md"
+    },
+    {
+      "code_path": "game/infrastructure/network/",
+      "doc": "docs/systems/game/infrastructure/network/README.md",
+      "kind": "canonical",
+      "module_id": "NET",
+      "canonical_doc": "docs/systems/game/infrastructure/network/README.md"
+    },
+    {
+      "code_path": "game/infrastructure/telemetry/",
+      "doc": "docs/systems/game/infrastructure/telemetry/README.md",
+      "kind": "canonical",
+      "module_id": "TELEM",
+      "canonical_doc": "docs/systems/game/infrastructure/telemetry/README.md"
+    },
+    {
+      "code_path": "game/multiplayer/",
+      "doc": "docs/systems/game/multiplayer/README.md",
+      "kind": "canonical",
+      "module_id": "MP",
+      "canonical_doc": "docs/systems/game/multiplayer/README.md"
+    },
+    {
+      "code_path": "game/addons/",
+      "doc": "docs/systems/game/addons/README.md",
+      "kind": "canonical",
+      "module_id": "ADDONS",
+      "canonical_doc": "docs/systems/game/addons/README.md"
+    },
+    {
+      "code_path": "game/addons/naval/",
+      "doc": "docs/systems/game/addons/naval/README.md",
+      "kind": "alias",
+      "module_id": "NAVAL-P",
+      "canonical_doc": "docs/systems/game/content/expansions/naval/README.md"
+    },
+    {
+      "code_path": "game/addons/naval/campaign/",
+      "doc": "docs/systems/game/addons/naval/campaign/README.md",
+      "kind": "canonical",
+      "module_id": "NAVAL-C",
+      "canonical_doc": "docs/systems/game/addons/naval/campaign/README.md"
+    },
+    {
+      "code_path": "game/addons/naval/mission/",
+      "doc": "docs/systems/game/addons/naval/mission/README.md",
+      "kind": "canonical",
+      "module_id": "NAVAL-M",
+      "canonical_doc": "docs/systems/game/addons/naval/mission/README.md"
+    },
+    {
+      "code_path": "game/content/",
+      "doc": "docs/systems/game/content/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "game/content/base/",
+      "doc": "docs/systems/game/content/base/README.md",
+      "kind": "canonical",
+      "module_id": "BASE",
+      "canonical_doc": "docs/systems/game/content/base/README.md"
+    },
+    {
+      "code_path": "game/content/base/definitions/",
+      "doc": "docs/systems/game/content/base/definitions/README.md",
+      "kind": "inherited",
+      "module_id": "BASE",
+      "canonical_doc": "docs/systems/game/content/base/README.md"
+    },
+    {
+      "code_path": "game/content/base/maps/",
+      "doc": "docs/systems/game/content/base/maps/README.md",
+      "kind": "inherited",
+      "module_id": "BASE",
+      "canonical_doc": "docs/systems/game/content/base/README.md"
+    },
+    {
+      "code_path": "game/content/base/scenes/",
+      "doc": "docs/systems/game/content/base/scenes/README.md",
+      "kind": "inherited",
+      "module_id": "BASE",
+      "canonical_doc": "docs/systems/game/content/base/README.md"
+    },
+    {
+      "code_path": "game/content/base/assets/",
+      "doc": "docs/systems/game/content/base/assets/README.md",
+      "kind": "inherited",
+      "module_id": "BASE",
+      "canonical_doc": "docs/systems/game/content/base/README.md"
+    },
+    {
+      "code_path": "game/content/base/localization/",
+      "doc": "docs/systems/game/content/base/localization/README.md",
+      "kind": "inherited",
+      "module_id": "BASE",
+      "canonical_doc": "docs/systems/game/content/base/README.md"
+    },
+    {
+      "code_path": "game/content/expansions/",
+      "doc": "docs/systems/game/content/expansions/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "game/content/expansions/naval/",
+      "doc": "docs/systems/game/content/expansions/naval/README.md",
+      "kind": "canonical",
+      "module_id": "NAVAL-P",
+      "canonical_doc": "docs/systems/game/content/expansions/naval/README.md"
+    },
+    {
+      "code_path": "game/tests/",
+      "doc": "docs/systems/game/tests/README.md",
+      "kind": "canonical",
+      "module_id": "TEST",
+      "canonical_doc": "docs/systems/game/tests/README.md"
+    },
+    {
+      "code_path": "native/",
+      "doc": "docs/systems/native/README.md",
+      "kind": "canonical",
+      "module_id": "NATIVE",
+      "canonical_doc": "docs/systems/native/README.md"
+    },
+    {
+      "code_path": "native/include/",
+      "doc": "docs/systems/native/include/README.md",
+      "kind": "inherited",
+      "module_id": "NATIVE",
+      "canonical_doc": "docs/systems/native/README.md"
+    },
+    {
+      "code_path": "native/src/",
+      "doc": "docs/systems/native/src/README.md",
+      "kind": "inherited",
+      "module_id": "NATIVE",
+      "canonical_doc": "docs/systems/native/README.md"
+    },
+    {
+      "code_path": "native/benchmarks/",
+      "doc": "docs/systems/native/benchmarks/README.md",
+      "kind": "inherited",
+      "module_id": "NATIVE",
+      "canonical_doc": "docs/systems/native/README.md"
+    },
+    {
+      "code_path": "server/",
+      "doc": "docs/systems/server/README.md",
+      "kind": "index",
+      "module_id": null,
+      "canonical_doc": null
+    },
+    {
+      "code_path": "server/dedicated/",
+      "doc": "docs/systems/server/dedicated/README.md",
+      "kind": "canonical",
+      "module_id": "SERVER-D",
+      "canonical_doc": "docs/systems/server/dedicated/README.md"
+    },
+    {
+      "code_path": "server/lobby_service/",
+      "doc": "docs/systems/server/lobby_service/README.md",
+      "kind": "canonical",
+      "module_id": "SERVER-L",
+      "canonical_doc": "docs/systems/server/lobby_service/README.md"
+    },
+    {
+      "code_path": "server/deployment/",
+      "doc": "docs/systems/server/deployment/README.md",
+      "kind": "canonical",
+      "module_id": "SERVER-OPS",
+      "canonical_doc": "docs/systems/server/deployment/README.md"
+    },
+    {
+      "code_path": "tools/",
+      "doc": "docs/systems/tools/README.md",
+      "kind": "canonical",
+      "module_id": "TOOLS",
+      "canonical_doc": "docs/systems/tools/README.md"
+    },
+    {
+      "code_path": "test_scenarios/",
+      "doc": "docs/systems/test_scenarios/README.md",
+      "kind": "alias",
+      "module_id": "TEST",
+      "canonical_doc": "docs/systems/game/tests/README.md"
+    },
+    {
+      "code_path": "ci/",
+      "doc": "docs/systems/ci/README.md",
+      "kind": "canonical",
+      "module_id": "CI",
+      "canonical_doc": "docs/systems/ci/README.md"
+    }
+  ],
+  "project": "recollection",
+  "original_source_sha256": "04c00274a2465d24ee71ae492810cdcd02dca99279143027c566eb37d5b90e54",
+  "original_source_archive": "docs/architecture/baselines/source_game_design_v1.0.md.txt"
+}

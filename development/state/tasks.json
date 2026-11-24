@@ -1,0 +1,890 @@
+{
+  "schema_version": 1,
+  "tasks": {
+    "P0-ENV": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": [
+        "P0-ENV-001"
+      ]
+    },
+    "P0-CRITERIA": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P0-BATTLE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P0-NAV": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P0-NET": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P0-CONTENT": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P0-CONTRACTS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P0-DECISIONS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P0": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-CON": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-CORE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-DEF": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-TEST-HARNESS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-SHRULE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-INV": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-INF-CONTENT-CORE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-PERSIST-CORE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-INF-ENGINE-PORTS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-TELEM": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-CAMP-RUNTIME": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-MIS-RT-PORTS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-APP-CORE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-BOOT": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P1-CI-CORE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P1": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-MIS-RT-BATTLE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-COM": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-MOV": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FORM": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-BAI": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-BAI-T": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-BAI-F": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-BAI-I": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-RULES-FIELD": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-RESULTS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-INPUT": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-CAM": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-VIS-BATTLE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-AUD-BATTLE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-UI-BATTLE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P2": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-WORLD": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CLAN": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-PARTY": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-ENC-ENCOUNTER": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CAMP-DOMAINS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-APP-CAMPAIGN": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-PERSIST-CAMPAIGN": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-UI-CAMPAIGN": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P3": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-ECO": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SET": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-POL": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-ENC-SIEGE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SAI": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SAI-K": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SAI-C": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SAI-A": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SAI-P": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SIEGE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-RULES-SIEGE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-BAI-SIEGE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-UI-SOCIETY": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P4-SOCIETY-INTEGRATION": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P4": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P5-QUEST": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P5-INTERACT": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P5-RULES-SINGLE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P5-BASE-INITIAL": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P5-UI-SINGLE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P5-SINGLE-INTEGRATION": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P5": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-NET": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-MP": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-RULES-MULTI": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-SERVER-D": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-SERVER-L": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-SERVER-OPS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-INF-CONTENT-SDK": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-ADDONS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-TOOLS": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-UI-MULTI": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P6-NET-INTEGRATION": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P6": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P7-BASE-FULL": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P7-TOOLS-RELEASE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P7-NATIVE-PROFILING": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P7-POLISH": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P7-TEST-RELEASE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P7-CI-RELEASE": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P7": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P8-NAVAL-C": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P8-NAVAL-M": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P8-NAVAL-P": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "GATE-P8": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P0-ENV-001": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    }
+  },
+  "transitions": []
+}

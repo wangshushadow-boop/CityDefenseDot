@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "P0-ENV-001",
+  "kind": "EXECUTION",
+  "parent": "P0-ENV",
+  "stage": "P0",
+  "module_id": null,
+  "title": "检查项目与本机环境、记录可执行能力",
+  "spec": "development/codex_setup.md",
+  "depends_on": [],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "allowed_paths": [
+    "development/reports/tasks/P0-ENV-001.md"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "docs/",
+    ".codex/",
+    "development/state/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "读取仓库与工具链现状，不安装软件、不修改游戏代码或权限。实际检查 Git root、HEAD/工作区、Python 版本、结构检查、Codex 客户端版本/子 Agent 能力、已安装引擎与编译器、CPU/GPU/内存/驱动；将结果写入任务报告。",
+  "non_goals": [
+    "不冻结技术栈",
+    "不进行 500/1000 人性能测试",
+    "不改全局状态（主 Agent 独占）",
+    "不安装或下载依赖"
+  ],
+  "acceptance": [
+    "记录实际命令、退出码、环境版本和可用性；不能运行的命令注明原因。",
+    "运行 python3 development/check_project.py，保留真实结果；若结构失败，记录阻塞而不是绕过。",
+    "明确哪些技术实验可运行、哪些缺软件/硬件/审批，以及下一步建议。",
+    "主 Agent 核对报告与真实环境，独立验收后更新任务状态；未具备完整环境可完成调查任务但后续实验必须 BLOCKED。"
+  ],
+  "status": "PLANNED",
+  "note": "启动 P0 后主 Agent 填写真实 base_commit/worktree 再领取；无运行证据，不自动执行。"
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "P2-FORM-001",
+  "kind": "EXECUTION",
+  "parent": "P2-FORM",
+  "stage": "P2",
+  "module_id": "FORM",
+  "title": "编队指令权限与优先级",
+  "spec": "docs/systems/game/mission/formation/README.md",
+  "depends_on": [
+    "GATE-P1"
+  ],
+  "requirements": [
+    "BAI-01",
+    "NET-04"
+  ],
+  "acceptance_test_ids": [
+    "T-FORM-01",
+    "T-FORM-04"
+  ],
+  "allowed_paths": [
+    "game/mission/formation/",
+    "game/tests/mission/formation/"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/mission/ai/",
+    "game/mission/combat/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "使用冻结的 FormationOrder/控制权端口实现权限校验与玩家指令优先；拒绝越权命令，不修改编队状态。",
+  "non_goals": [
+    "不实现战术/个体 AI",
+    "不修改网络协议",
+    "不实现其他阵型算法"
+  ],
+  "acceptance": [
+    "按 T-FORM-01，玩家与 AI 同时控制时玩家获胜且回执说明。",
+    "按 T-FORM-04，未授权请求返回 Unauthorized 且订单不变。",
+    "实际测试、独立审查、集成回归和路径检查通过；NET-04 的完整多人验收留 P6。"
+  ],
+  "status": "PLANNED",
+  "note": "示例，不是已登记任务；主 Agent 需复核冻结的真实接口和基线再登记。"
+}

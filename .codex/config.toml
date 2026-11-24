@@ -1,0 +1,7 @@
+# Project-scoped configuration; user/workspace permissions still apply.
+# https://developers.openai.com/codex/subagents/
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+# Do not pin a model before checking local entitlement/availability.
+# Do not override approval_policy or sandbox_mode.

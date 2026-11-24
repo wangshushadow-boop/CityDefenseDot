@@ -1,0 +1,22 @@
+# Local caches / build outputs / user data
+**/.godot/
+**/.import/
+**/__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+.DS_Store
+.idea/
+.vscode/
+/build/
+/dist/
+/out/
+/.worktrees/
+/worktrees/
+/saves/
+/user_data/
+# Do not ignore tracked report summaries or authored evidence; large raw reports should be stored with hash/reference.

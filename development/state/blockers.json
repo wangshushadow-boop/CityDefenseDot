@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "blockers": [],
+  "note": "暂无已执行任务。初始化未决事项见 KNOWN_ISSUES.md。实际阻塞记录 id、task_id、reason、needed_action、owner、status、evidence。"
+}
