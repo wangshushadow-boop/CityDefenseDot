@@ -1,0 +1,12 @@
+config_version=5
+
+[application]
+config/name="P0 dynamic gate"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="recollection/p0-nav"
+
+[navigation]
+3d/default_cell_size=0.25
+
+[rendering]
+renderer/rendering_method="gl_compatibility"

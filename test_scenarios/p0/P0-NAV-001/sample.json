@@ -1,0 +1,91 @@
+{
+  "crowd_route_queries": 8,
+  "duration_simulated_s": 131.766666666667,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "highest_agent_y_m": 2.5,
+  "max_step_m": 0.100006103515625,
+  "measured_queries": 136,
+  "min_headway_m": 0.649997711181641,
+  "passed": true,
+  "peak_waiting": 155,
+  "people": 256,
+  "phases": [
+    {
+      "arrived": 0,
+      "crossings": 0,
+      "phase": "initially_closed",
+      "tick": 1250,
+      "waiting": 155
+    },
+    {
+      "arrived": 32,
+      "crossings": 64,
+      "phase": "open_during_traffic",
+      "tick": 1743,
+      "waiting": 0
+    },
+    {
+      "arrived": 64,
+      "crossings": 64,
+      "phase": "reclosed_during_traffic",
+      "tick": 2093,
+      "waiting": 145
+    },
+    {
+      "arrived": 256,
+      "crossings": 256,
+      "phase": "reopened_and_drained",
+      "tick": 3953,
+      "waiting": 0
+    }
+  ],
+  "physics_hz_simulated": 30,
+  "query_max_us": 21,
+  "query_p95_us": 4,
+  "stale_rejections": 3,
+  "startup_frames": 4,
+  "transitions": [
+    {
+      "approach_end": "(0.0, 0.0, 0.0)",
+      "map_region_count": 2,
+      "open": false,
+      "outside_points": 5,
+      "projected_goal": "(24.0, 2.5, 0.0)",
+      "revision": 3,
+      "route_points": 4,
+      "sync_physics_frames": 2
+    },
+    {
+      "approach_end": "(24.0, 2.5, 0.0)",
+      "map_region_count": 2,
+      "open": true,
+      "outside_points": 5,
+      "projected_goal": "(24.0, 2.5, 0.0)",
+      "revision": 4,
+      "route_points": 9,
+      "sync_physics_frames": 2
+    },
+    {
+      "approach_end": "(0.0, 0.0, 0.0)",
+      "map_region_count": 2,
+      "open": false,
+      "outside_points": 5,
+      "projected_goal": "(24.0, 2.5, 0.0)",
+      "revision": 5,
+      "route_points": 4,
+      "sync_physics_frames": 4
+    },
+    {
+      "approach_end": "(24.0, 2.5, 0.0)",
+      "map_region_count": 2,
+      "open": true,
+      "outside_points": 5,
+      "projected_goal": "(24.0, 2.5, 0.0)",
+      "revision": 6,
+      "route_points": 9,
+      "sync_physics_frames": 3
+    }
+  ],
+  "wall_ms": 288.925
+}
