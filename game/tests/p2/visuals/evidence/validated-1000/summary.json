@@ -1,0 +1,170 @@
+[
+  {
+    "trial": 1,
+    "engine_exit": 0,
+    "file": "trial-1.json.gz",
+    "sha256_raw": "93d2a200ca7a57c13e983f8dea9cce2571f1a8ab6b6006fb34537a2f90f2995d",
+    "stats": {
+      "frames": 646,
+      "fps": 107.72968853445931,
+      "low_1pct_fps": 59.465153420095824,
+      "p50_ms": 10.703,
+      "p95_ms": 14.372,
+      "p99_ms": 16.373,
+      "worst_ms": 17.793,
+      "tick_p95_ms": 8.634,
+      "viewport_cpu_p95_ms": 0.978999972343445,
+      "viewport_gpu_p95_ms": 4.14499998092651,
+      "max_draws": 1246,
+      "max_renderer_vram_bytes": 232381488,
+      "debt_ms_per_second": [
+        -11.992999999999938,
+        -2.04099999999994,
+        1.3460000000000036,
+        -15.342999999999847,
+        -9.570999999999913,
+        -3.536000000000058
+      ],
+      "within_visual_budget": true
+    },
+    "scene": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "driver": "vulkan",
+      "far_min": 1164,
+      "horses": 200,
+      "in_frustum": 1200,
+      "metrics": {
+        "corpses": 29,
+        "far_animated_instances": 1164,
+        "impacts": 13,
+        "mounts": 200,
+        "near_skeletons": 36,
+        "projectiles": 154,
+        "scope_id": "visual-mixed-field",
+        "tick": 480,
+        "visible_actors": 1200
+      },
+      "near_min": 36,
+      "people": 1000,
+      "pixels": [
+        1920,
+        1080
+      ],
+      "renderer": "forward_plus",
+      "seed": 241124,
+      "vsync": 0
+    }
+  },
+  {
+    "trial": 2,
+    "engine_exit": 0,
+    "file": "trial-2.json.gz",
+    "sha256_raw": "fb07e295519d0f50f3077ff42c204b6e77a8306fb00434f12c7ca4eb2b6b125a",
+    "stats": {
+      "frames": 799,
+      "fps": 133.04129741740033,
+      "low_1pct_fps": 70.28271220986417,
+      "p50_ms": 6.787,
+      "p95_ms": 12.239,
+      "p99_ms": 13.849,
+      "worst_ms": 15.001,
+      "tick_p95_ms": 7.838,
+      "viewport_cpu_p95_ms": 0.823000013828278,
+      "viewport_gpu_p95_ms": 2.32699990272522,
+      "max_draws": 1246,
+      "max_renderer_vram_bytes": 232381488,
+      "debt_ms_per_second": [
+        9.004999999999995,
+        4.369000000000142,
+        16.463999999999942,
+        5.253999999999905,
+        8.751000000000204,
+        5.670000000000073
+      ],
+      "within_visual_budget": true
+    },
+    "scene": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "driver": "vulkan",
+      "far_min": 1164,
+      "horses": 200,
+      "in_frustum": 1200,
+      "metrics": {
+        "corpses": 29,
+        "far_animated_instances": 1164,
+        "impacts": 13,
+        "mounts": 200,
+        "near_skeletons": 36,
+        "projectiles": 154,
+        "scope_id": "visual-mixed-field",
+        "tick": 480,
+        "visible_actors": 1200
+      },
+      "near_min": 36,
+      "people": 1000,
+      "pixels": [
+        1920,
+        1080
+      ],
+      "renderer": "forward_plus",
+      "seed": 241124,
+      "vsync": 0
+    }
+  },
+  {
+    "trial": 3,
+    "engine_exit": 0,
+    "file": "trial-3.json.gz",
+    "sha256_raw": "128698419145a23a5067b2f265c0b208db92ec2bb36e4622439f37e483f8584d",
+    "stats": {
+      "frames": 688,
+      "fps": 114.67576427729934,
+      "low_1pct_fps": 64.45968967263687,
+      "p50_ms": 10.33,
+      "p95_ms": 12.949,
+      "p99_ms": 14.939,
+      "worst_ms": 15.972,
+      "tick_p95_ms": 7.839,
+      "viewport_cpu_p95_ms": 0.889999985694885,
+      "viewport_gpu_p95_ms": 4.17700004577637,
+      "max_draws": 1246,
+      "max_renderer_vram_bytes": 232382640,
+      "debt_ms_per_second": [
+        -14.735000000000014,
+        -14.955999999999904,
+        -1.6269999999999527,
+        -11.360999999999876,
+        2.1580000000003565,
+        -0.4749999999994543
+      ],
+      "within_visual_budget": true
+    },
+    "scene": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "driver": "vulkan",
+      "far_min": 1164,
+      "horses": 200,
+      "in_frustum": 1200,
+      "metrics": {
+        "corpses": 29,
+        "far_animated_instances": 1164,
+        "impacts": 13,
+        "mounts": 200,
+        "near_skeletons": 36,
+        "projectiles": 154,
+        "scope_id": "visual-mixed-field",
+        "tick": 480,
+        "visible_actors": 1200
+      },
+      "near_min": 36,
+      "people": 1000,
+      "pixels": [
+        1920,
+        1080
+      ],
+      "renderer": "forward_plus",
+      "seed": 241124,
+      "vsync": 0
+    }
+  }
+]
