@@ -1,6 +1,7 @@
 extends SceneTree
 
 const Layout = preload("res://mission/formation/slot_layout.gd")
+const FieldCases = preload("res://tests/p2/formation/field_cases.gd")
 const Adapter = preload("res://infrastructure/engine/adapter.gd")
 const R = preload("res://contracts/result.gd")
 const FLOOR := {"id":"test:scene/formation_floor", "simulation_scene":"res://tests/p2/formation/floor.tscn"}
@@ -40,6 +41,14 @@ func _on_nav(points: PackedVector3Array) -> Dictionary:
 		positions.append(Vector3(end[0], end[1], end[2]) * 0.001)
 	projected += positions.size()
 	return R.ok(positions)
+
+func _targets_on_nav(points: PackedVector3Array, at: Vector3) -> Dictionary:
+	origin = at
+	return _on_nav(points)
+
+func _order_reachable(_id: int, target_mm: Array) -> bool:
+	var reply := adapter.query_path_batch([{"from":_mm(OPEN), "to":target_mm}], nav_revision, SCOPE)
+	return reply.ok and reply.value[0].reachable
 
 func _roster(count: int) -> Array:
 	var handles := []
@@ -179,6 +188,14 @@ func run() -> void:
 	_exercise(500)
 	_exercise(1000)
 	_failures_and_rotation()
+	var previous_failures := failures
+	FieldCases.new(check, _order_reachable, _targets_on_nav, OPEN, NARROW).run()
+	var authority_status := "PASS" if failures == previous_failures else "FAIL"
+	print("T-FORM-01 ", authority_status)
+	print("T-FORM-02 ", "PASS" if failures == 0 else "FAIL")
+	print("T-FORM-03-READ-MODEL ", authority_status)
+	print("T-FORM-04-AUTHORITY ", authority_status)
+	print("P2-FORM-002 ", authority_status)
 	check(adapter.release_scope(SCOPE).released == 1, "nav scope released")
 	print("T-FORM-02-LAYOUT ", "PASS" if failures == 0 else "FAIL")
 	print("P2-FORM-001 ", "PASS" if failures == 0 else "FAIL", " failures=", failures, " reachable_slots=", projected, " seed=241124")
