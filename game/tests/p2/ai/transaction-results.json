@@ -1,0 +1,216 @@
+{
+  "task": "P2-BAI-001",
+  "game": "c45eb1516bc881acb31e422a07ced392680f6afd",
+  "movement": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf",
+  "combat": "e3edbbf630bb8b29bf2f957f22e5567345142a0b",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "hz": 60,
+  "ticks_per_population": 120,
+  "gate_us": 16667,
+  "default_flags": [],
+  "legacy_flags": [
+    "--",
+    "--legacy-read"
+  ],
+  "runs": [
+    {
+      "candidate": "transaction",
+      "label": "trial1",
+      "engine_exit_code": 1,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3248 ai_p95_us=3831 ai_p99_us=4075 combined_p95_us=7314 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=191.425 schedule=361.533333333333 decisions=2721.51666666667 los_inclusive=831.075 cache_hits=130 scouts=196 group_contacts=396 mov_begin=566.616666666667 mov_step=2050.13333333333 project_mov=62.425 com_fork=41.725 com_step=387.641666666667 commit_and_publish=55.4083333333333",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=7137 ai_p95_us=10090 ai_p99_us=10804 combined_p95_us=18797 cpu_budget=FAIL",
+        "BAI_MEAN_US people=1000 publish=597.575 schedule=736.266666666667 decisions=6038.29166666667 los_inclusive=1761.10833333333 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1455.13333333333 mov_step=4626.09166666667 project_mov=146.925 com_fork=132.391666666667 com_step=893.566666666667 commit_and_publish=136.325",
+        "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+        "FIELD_AI errors=1"
+      ]
+    },
+    {
+      "candidate": "transaction",
+      "label": "trial2",
+      "engine_exit_code": 0,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3019 ai_p95_us=3380 ai_p99_us=3924 combined_p95_us=6544 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=158.3 schedule=334.7 decisions=2553.875 los_inclusive=787.816666666667 cache_hits=130 scouts=196 group_contacts=396 mov_begin=490.816666666667 mov_step=1986.625 project_mov=58.0083333333333 com_fork=32.525 com_step=354.766666666667 commit_and_publish=46.8666666666667",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5974 ai_p95_us=6863 ai_p99_us=8054 combined_p95_us=12877 cpu_budget=PASS",
+        "BAI_MEAN_US people=1000 publish=358.483333333333 schedule=588.383333333333 decisions=5127.43333333333 los_inclusive=1538.7 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1022.775 mov_step=3937.625 project_mov=114.875 com_fork=73.9666666666667 com_step=707.083333333333 commit_and_publish=95.1833333333333",
+        "FIELD_AI errors=0"
+      ]
+    },
+    {
+      "candidate": "transaction",
+      "label": "trial3",
+      "engine_exit_code": 0,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3011 ai_p95_us=3455 ai_p99_us=3927 combined_p95_us=6582 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=166.066666666667 schedule=328.983333333333 decisions=2562.65833333333 los_inclusive=794.583333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=492.383333333333 mov_step=1975.35833333333 project_mov=57.325 com_fork=32.6583333333333 com_step=356.275 commit_and_publish=48.2083333333333",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6024 ai_p95_us=6680 ai_p99_us=7516 combined_p95_us=12756 cpu_budget=PASS",
+        "BAI_MEAN_US people=1000 publish=346.391666666667 schedule=585.675 decisions=5147.23333333333 los_inclusive=1540.7 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1019.46666666667 mov_step=3927.31666666667 project_mov=111.625 com_fork=74.5416666666667 com_step=718.416666666667 commit_and_publish=97.0583333333333",
+        "FIELD_AI errors=0"
+      ]
+    },
+    {
+      "candidate": "transaction",
+      "label": "legacy",
+      "engine_exit_code": 1,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=true jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3110 ai_p95_us=4177 ai_p99_us=5139 combined_p95_us=9086 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=175.158333333333 schedule=344.033333333333 decisions=2753.6 los_inclusive=853.683333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=518.9 mov_step=2038.675 project_mov=1289.80833333333 com_fork=34.9333333333333 com_step=366.166666666667 commit_and_publish=54.4333333333333",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=true jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=7454 ai_p95_us=9965 ai_p99_us=13024 combined_p95_us=23316 cpu_budget=FAIL",
+        "BAI_MEAN_US people=1000 publish=641.358333333333 schedule=769.833333333333 decisions=6245.625 los_inclusive=1832.475 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1546.45833333333 mov_step=4684.00833333333 project_mov=3056.70833333333 com_fork=138.241666666667 com_step=898.058333333333 commit_and_publish=136.916666666667",
+        "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+        "FIELD_AI errors=1"
+      ]
+    },
+    {
+      "candidate": "cutoff",
+      "label": "optimized1",
+      "engine_exit_code": 1,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2977 ai_p95_us=3406 ai_p99_us=4150 combined_p95_us=6607 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=168.25 schedule=325.4 decisions=2536.99166666667 los_inclusive=792.5 cache_hits=130 scouts=196 group_contacts=396 mov_begin=505.066666666667 mov_step=2027.45833333333 project_mov=59.4666666666667 com_fork=33.4916666666667 com_step=347.091666666667 commit_and_publish=46.4916666666667",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6723 ai_p95_us=8951 ai_p99_us=10692 combined_p95_us=17021 cpu_budget=FAIL",
+        "BAI_MEAN_US people=1000 publish=477.866666666667 schedule=687.841666666667 decisions=5767.39166666667 los_inclusive=1718.95 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1304.86666666667 mov_step=4423.01666666667 project_mov=127.35 com_fork=112.208333333333 com_step=853.625 commit_and_publish=114.8",
+        "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+        "FIELD_AI errors=1"
+      ]
+    },
+    {
+      "candidate": "cutoff",
+      "label": "optimized2",
+      "engine_exit_code": 1,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2983 ai_p95_us=3413 ai_p99_us=3629 combined_p95_us=6683 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=164.333333333333 schedule=325.425 decisions=2515.56666666667 los_inclusive=797.733333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=523.233333333333 mov_step=2034.125 project_mov=60.325 com_fork=32.9333333333333 com_step=346.216666666667 commit_and_publish=47.4416666666667",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6979 ai_p95_us=9379 ai_p99_us=10561 combined_p95_us=16895 cpu_budget=FAIL",
+        "BAI_MEAN_US people=1000 publish=540.55 schedule=706.541666666667 decisions=5930.44166666667 los_inclusive=1756.6 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1463.93333333333 mov_step=4452.96666666667 project_mov=139.883333333333 com_fork=129.658333333333 com_step=898.233333333333 commit_and_publish=129.916666666667",
+        "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+        "FIELD_AI errors=1"
+      ]
+    },
+    {
+      "candidate": "cutoff",
+      "label": "optimized3",
+      "engine_exit_code": 1,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3026 ai_p95_us=3541 ai_p99_us=3828 combined_p95_us=6908 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=168.425 schedule=334.166666666667 decisions=2598.275 los_inclusive=817.658333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=509.408333333333 mov_step=2035.03333333333 project_mov=62.5166666666667 com_fork=34.6083333333333 com_step=359.166666666667 commit_and_publish=49.6083333333333",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6990 ai_p95_us=8761 ai_p99_us=11607 combined_p95_us=17869 cpu_budget=FAIL",
+        "BAI_MEAN_US people=1000 publish=533.825 schedule=698.866666666667 decisions=5984.68333333333 los_inclusive=1776.25 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1388.7 mov_step=4407.15833333333 project_mov=133.85 com_fork=123.65 com_step=853.425 commit_and_publish=122.575",
+        "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+        "FIELD_AI errors=1"
+      ]
+    },
+    {
+      "candidate": "cutoff",
+      "label": "legacy",
+      "engine_exit_code": 1,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=true jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3126 ai_p95_us=3823 ai_p99_us=4868 combined_p95_us=8422 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=177.925 schedule=354.583333333333 decisions=2680.01666666667 los_inclusive=828.35 cache_hits=130 scouts=196 group_contacts=396 mov_begin=529.483333333333 mov_step=2024.20833333333 project_mov=1349.775 com_fork=37.7333333333333 com_step=362.033333333333 commit_and_publish=51.8",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=true jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6118 ai_p95_us=7679 ai_p99_us=8663 combined_p95_us=16718 cpu_budget=FAIL",
+        "BAI_MEAN_US people=1000 publish=382.0 schedule=609.85 decisions=5255.33333333333 los_inclusive=1585.91666666667 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1100.025 mov_step=4016.61666666667 project_mov=2644.85 com_fork=86.7333333333333 com_step=722.975 commit_and_publish=108.266666666667",
+        "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+        "FIELD_AI errors=1"
+      ]
+    },
+    {
+      "candidate": "packed_sort",
+      "label": "rank1",
+      "engine_exit_code": 0,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2887 ai_p95_us=3305 ai_p99_us=3701 combined_p95_us=6525 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=168.841666666667 schedule=330.116666666667 decisions=2438.95833333333 los_inclusive=793.158333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=509.616666666667 mov_step=2031.3 project_mov=61.4333333333333 com_fork=33.625 com_step=349.841666666667 commit_and_publish=48.8083333333333",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5848 ai_p95_us=6745 ai_p99_us=8545 combined_p95_us=13801 cpu_budget=PASS",
+        "BAI_MEAN_US people=1000 publish=375.05 schedule=600.358333333333 decisions=5053.00833333333 los_inclusive=1581.60833333333 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1101.975 mov_step=4046.33333333333 project_mov=119.775 com_fork=82.8833333333333 com_step=724.6 commit_and_publish=100.675",
+        "FIELD_AI errors=0"
+      ]
+    },
+    {
+      "candidate": "packed_sort",
+      "label": "rank2",
+      "engine_exit_code": 0,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2854 ai_p95_us=3327 ai_p99_us=3901 combined_p95_us=6572 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=169.133333333333 schedule=330.975 decisions=2432.28333333333 los_inclusive=786.366666666667 cache_hits=130 scouts=196 group_contacts=396 mov_begin=511.0 mov_step=2020.375 project_mov=60.2833333333333 com_fork=35.9583333333333 com_step=360.233333333333 commit_and_publish=50.725",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6284 ai_p95_us=7447 ai_p99_us=8735 combined_p95_us=14724 cpu_budget=PASS",
+        "BAI_MEAN_US people=1000 publish=448.541666666667 schedule=661.641666666667 decisions=5286.56666666667 los_inclusive=1626.775 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1238.65833333333 mov_step=4249.20833333333 project_mov=125.158333333333 com_fork=103.733333333333 com_step=835.833333333333 commit_and_publish=118.141666666667",
+        "FIELD_AI errors=0"
+      ]
+    },
+    {
+      "candidate": "packed_sort",
+      "label": "rank3",
+      "engine_exit_code": 0,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2779 ai_p95_us=3276 ai_p99_us=3411 combined_p95_us=6348 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=158.066666666667 schedule=315.558333333333 decisions=2367.69166666667 los_inclusive=773.283333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=489.95 mov_step=1960.03333333333 project_mov=57.0583333333333 com_fork=33.9333333333333 com_step=339.008333333333 commit_and_publish=44.9583333333333",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6426 ai_p95_us=8156 ai_p99_us=11987 combined_p95_us=15014 cpu_budget=PASS",
+        "BAI_MEAN_US people=1000 publish=454.166666666667 schedule=653.033333333333 decisions=5564.95833333333 los_inclusive=1724.29166666667 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1263.15 mov_step=4252.70833333333 project_mov=128.741666666667 com_fork=106.25 com_step=810.6 commit_and_publish=112.316666666667",
+        "FIELD_AI errors=0"
+      ]
+    },
+    {
+      "candidate": "packed_sort",
+      "label": "legacy",
+      "engine_exit_code": 1,
+      "output": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=true jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2814 ai_p95_us=3412 ai_p99_us=3958 combined_p95_us=7855 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=165.3 schedule=329.816666666667 decisions=2381.45833333333 los_inclusive=769.558333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=504.583333333333 mov_step=1975.90833333333 project_mov=1261.10833333333 com_fork=33.75 com_step=342.858333333333 commit_and_publish=45.375",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=true jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5750 ai_p95_us=7766 ai_p99_us=8686 combined_p95_us=17726 cpu_budget=FAIL",
+        "BAI_MEAN_US people=1000 publish=405.575 schedule=605.8 decisions=5021.425 los_inclusive=1573.4 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1072.85 mov_step=4127.90833333333 project_mov=2701.53333333333 com_fork=84.2666666666667 com_step=728.866666666667 commit_and_publish=104.6",
+        "FAIL 1000 combined fixed-step P95 <= 16.667ms",
+        "FIELD_AI errors=1"
+      ]
+    }
+  ]
+}

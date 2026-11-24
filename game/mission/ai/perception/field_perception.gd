@@ -16,7 +16,7 @@ var _order: Array[Dictionary] = []
 var _slots := {}
 var _positions := PackedVector3Array()
 var _camp := PackedInt32Array()
-var _ids := PackedInt64Array()
+var _rank_keys := PackedVector3Array()
 var _cells: Array[Vector2i] = []
 var _owned := {}
 var _status := {}
@@ -95,7 +95,8 @@ func build(units: Array) -> Dictionary:
 		if not camps.has(team):
 			camps[team] = camps.size()
 		_camp.append(camps[team])
-		_ids.append(id)
+		# The two 16-bit halves preserve the full unsigned handle on standard floats.
+		_rank_keys.append(Vector3(0,id >> 16,id & 0xffff))
 		if not teams.has(team):
 			teams[team] = []
 		if not formations.has(group):
@@ -252,10 +253,8 @@ func sense(me: Dictionary, radius: float, limit: int, stamp: Dictionary, visible
 	var near := _cells[self_slot]
 	var reach := ceili(radius/CELL)
 	var radius_squared := radius*radius
-	var ally_slots: Array[int] = []
-	var ally_distances := PackedFloat64Array()
-	var opponents: Array[int] = []
-	var opponent_distances := PackedFloat64Array()
+	var friends := PackedVector3Array()
+	var opponents := PackedVector3Array()
 	var scanned := 0
 	for offset in _offsets:
 		if absi(offset.x)>reach or absi(offset.y)>reach:
@@ -272,33 +271,29 @@ func sense(me: Dictionary, radius: float, limit: int, stamp: Dictionary, visible
 			var d := position.distance_squared_to(_positions[index])
 			if index == self_slot or d > radius_squared:
 				continue
-			var friendly := _camp[index] == own_camp
-			var list: Array[int] = ally_slots if friendly else opponents
-			var distances: PackedFloat64Array = ally_distances if friendly else opponent_distances
-			var bound := limit if friendly else 2*limit
-			if list.size() == bound and d > distances[-1]:
-				continue
-			var slot := distances.bsearch(d)
-			while slot < list.size() and distances[slot]==d and _ids[list[slot]] < _ids[index]:
-				slot += 1
-			if slot == bound:
-				continue
-			if list.size() == bound:
-				list.pop_back()
-				distances.resize(bound-1)
-			list.insert(slot,index)
-			distances.insert(slot,d)
+			var key := _rank_keys[index]
+			key.x = d
+			if _camp[index] == own_camp:
+				friends.append(key)
+			else:
+				opponents.append(key)
 		if scanned >= EXAMINED:
 			break
 	examined += scanned
+	# Godot sorts the bounded samples natively by squared distance, then handle.
+	friends.sort()
+	opponents.sort()
 	var enemies := []
 	var allies := []
-	for index in ally_slots:
-		allies.append(_contact(_order[index]))
+	for k in mini(limit,friends.size()):
+		var rank := friends[k]
+		allies.append(_contact(actors[(int(rank.y) << 16) | int(rank.z)]))
 	var pairs: Dictionary = _visibility.get_or_add(id,{})
-	for index in opponents:
+	for k in mini(2*limit,opponents.size()):
+		var rank := opponents[k]
+		var target_id := (int(rank.y) << 16) | int(rank.z)
+		var index: int = _slots[target_id]
 		var other: Dictionary = _order[index]
-		var target_id := _ids[index]
 		var target := _positions[index]
 		var pair: Variant = pairs.get(target_id)
 		var clear := false

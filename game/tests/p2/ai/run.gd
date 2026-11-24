@@ -239,6 +239,15 @@ func threat_cadence() -> void:
 	check(count[0]>=18 and count[1]==10 and groups[0]>=9,"local threat raises decision rate within budget")
 	print("BAI_CADENCE two_seconds critical/normal=",count," threatened_squads=",groups)
 
+func bounded_contact_order() -> void:
+	var ai := AI.new(SCOPE,los)
+	var p := Vector3(-8,0,0)
+	var rows := [unit(0,0,0,p),unit(0xffffffff,1,1,p+Vector3.RIGHT),
+		unit(0xfffffffe,1,1,p+Vector3.LEFT),unit(0x1000001,1,1,p+Vector3.BACK*0.5)]
+	check(ai.publish(0,1,rows).ok,"wide handle fixture")
+	var contacts: Array = ai.sense(handle(0),4,2).value.visible_enemies
+	check(contacts.size()==2 and contacts[0].handle.index==0x1000001 and contacts[1].handle.index==0xfffffffe,"nearest then full-width handle on equal distance")
+
 func mixed_load(n: int) -> bool:
 	var ai := AI.new(SCOPE,los)
 	var mov := Movement.new(engine,SCOPE)
@@ -260,11 +269,16 @@ func mixed_load(n: int) -> bool:
 	var los_us := 0
 	var cache_hits := 0
 	var movement_us := 0
+	var movement_begin_us := 0
+	var movement_commit_us := 0
 	var projection_us := 0
 	var combat_us := 0
+	var combat_fork_us := 0
 	var scouts := 0
 	var group_contacts := 0
 	var full_publish := "--full-publish" in OS.get_cmdline_user_args()
+	var legacy_read := "--legacy-read" in OS.get_cmdline_user_args()
+	var handles := []
 	for g in 20:
 		var profile := "mounted" if g%10 >= 8 else "foot"
 		mov.set_corridor(str(g),origin,origin+Vector3(16,0,0),profile)
@@ -277,11 +291,15 @@ func mixed_load(n: int) -> bool:
 		if not com.enlist(row.handle,{"team":team,"role":role}).ok or not mov.spawn(row.handle,p,"mounted" if role=="cavalry" else "foot",Vector3.RIGHT).ok or not mov.assign(row.handle,str(group),p-origin).ok:
 			return false
 		rows.append(row)
+		handles.append(row.handle)
+	var movement_roster := mov.bind_roster(handles)
+	if not movement_roster.ok:
+		return false
 	var nav_revision := 0
 	# Finish the real shared-route/member admission before timing decisions.
 	for warm in ceili(n/8.0)+6:
-		var result := mov.step(warm,1.0/60)
-		if not result.ok:
+		var result := mov.stage_step(warm,1.0/60)
+		if not result.ok or not mov.commit_step(result.value.stage_token).ok:
 			return false
 		nav_revision = result.value.nav_revision
 	var start_tick := ceili(n/8.0)+6
@@ -292,14 +310,30 @@ func mixed_load(n: int) -> bool:
 		return false
 	for tick in range(1,121):
 		var start := Time.get_ticks_usec()
-		if not mov.step(start_tick+tick,1.0/60).ok:
+		var opened := mov.begin_step(start_tick+tick)
+		if not opened.ok:
+			return false
+		var prepared := Time.get_ticks_usec()
+		var moved_draft := mov.stage_step(start_tick+tick,1.0/60,opened.value)
+		if not moved_draft.ok:
 			return false
 		var moved := Time.get_ticks_usec()
-		for i in n:
-			positions[i] = mov.view(rows[i].handle).value.position
+		if legacy_read:
+			for i in n:
+				var pose := mov.view(handles[i],opened.value)
+				if not pose.ok:
+					return false
+				positions[i] = pose.value.position
+		else:
+			var snapshot := mov.read_positions(movement_roster.value,opened.value)
+			if not snapshot.ok or snapshot.value.size()!=n:
+				return false
+			positions = snapshot.value
 		var begin_ai := Time.get_ticks_usec()
-		movement_us += moved-start
+		movement_begin_us += prepared-start
+		movement_us += moved-prepared
 		projection_us += begin_ai-moved
+		nav_revision = moved_draft.value.nav_revision
 		if full_publish:
 			for i in n:
 				rows[i].position = positions[i]
@@ -346,26 +380,39 @@ func mixed_load(n: int) -> bool:
 		scouts += m.scouts
 		ai_cost.append(Time.get_ticks_usec()-begin_ai)
 		var begin_combat := Time.get_ticks_usec()
-		var applied := com.step_field(tick,consumed,{},Callable())
+		var combat_draft: RefCounted = com.fork()
+		var forked := Time.get_ticks_usec()
+		var applied: Dictionary = combat_draft.step_field(tick,consumed,{},Callable())
 		if not applied.ok or applied.value.receipts.size()!=consumed.size():
 			return false
 		for receipt in applied.value.receipts:
 			if not receipt.ok:
 				return false
 		inputs += consumed.size()
-		combat_us += Time.get_ticks_usec()-begin_combat
+		var checked := Time.get_ticks_usec()
+		if not mov.commit_step(opened.value).ok:
+			return false
+		com = combat_draft
+		combat_fork_us += forked-begin_combat
+		combat_us += checked-forked
+		movement_commit_us += Time.get_ticks_usec()-checked
 		all_cost.append(Time.get_ticks_usec()-start)
 	ai_cost.sort()
 	all_cost.sort()
-	print("BAI_LOAD people=",n," ticks=120 hz=60 full_publish=",full_publish," jobs=",jobs_count," urgent=",reactions,
+	print("BAI_LOAD people=",n," ticks=120 hz=60 full_publish=",full_publish," legacy_read=",legacy_read," jobs=",jobs_count," urgent=",reactions,
 		" examined=",inspected," physical_los=",rays," contacts=",seen," com_inputs=",inputs,
 		" max_backlog=",max_backlog," ai_p50_us=",ai_cost[59]," ai_p95_us=",ai_cost[113],
 		" ai_p99_us=",ai_cost[118]," combined_p95_us=",all_cost[113]," cpu_budget=","PASS" if all_cost[113]<=16667 else "FAIL")
 	print("BAI_MEAN_US people=",n," publish=",publish_us/120.0," schedule=",schedule_us/120.0,
 		" decisions=",decisions_us/120.0," los_inclusive=",los_us/120.0," cache_hits=",cache_hits,
-		" scouts=",scouts," group_contacts=",group_contacts," mov=",movement_us/120.0," project_mov=",projection_us/120.0," com=",combat_us/120.0)
+		" scouts=",scouts," group_contacts=",group_contacts," mov_begin=",movement_begin_us/120.0,
+		" mov_step=",movement_us/120.0," project_mov=",projection_us/120.0,
+		" com_fork=",combat_fork_us/120.0," com_step=",combat_us/120.0," commit_and_publish=",movement_commit_us/120.0)
 	if "--functional-only" not in OS.get_cmdline_user_args():
 		check(all_cost[113]<=16667,str(n)+" combined fixed-step P95 <= 16.667ms")
+	if not full_publish:
+		var expected: Array = [254439,10504,10239,5120,5120] if n==500 else [494511,20501,20226,10114,10120]
+		check([inspected,rays,seen,inputs,jobs_count.individual]==expected,"reference mixed field workload")
 	return seen>0 and inputs>0 and group_contacts>0 and jobs_count.individual>=n*9 and reactions==120 and max_backlog==0 and inspected<=(jobs_count.individual+scouts)*48
 
 func _initialize() -> void:
@@ -392,6 +439,7 @@ func run() -> void:
 		check(teardown_worker(),"async scope teardown")
 		await incremental_visibility()
 		threat_cadence()
+		bounded_contact_order()
 		check(mixed_load(500),"500 mixed active actors")
 		check(mixed_load(1000),"1000 mixed active actors")
 	engine.release_scope(SCOPE)
