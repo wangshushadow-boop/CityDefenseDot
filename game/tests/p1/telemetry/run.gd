@@ -21,6 +21,9 @@ func _initialize() -> void:
 	check(not JSON.stringify(report).contains("private-value"),"redaction")
 	report.records.clear()
 	check(d.export_report("session").records.size() == 4,"detached evidence")
+	d.log({"code":{"token":"private-value"},"level":"error"})
+	var sanitized := d.export_report("session").records.back() as Dictionary
+	check(sanitized.code == "event" and not JSON.stringify(sanitized).contains("private-value"),"malformed code filtered")
 	var path := "user://p1-diagnostics-%d.json" % OS.get_process_id()
 	var captured := d.capture_crash({"scope_id":"mission","token":"private-value"},path)
 	check(captured.ok,"local crash capture")

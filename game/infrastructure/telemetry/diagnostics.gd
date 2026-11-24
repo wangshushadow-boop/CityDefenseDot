@@ -29,7 +29,8 @@ func log(record: Dictionary) -> void:
 	safe["at_usec"] = Time.get_ticks_usec()
 	safe["fields"] = _context(record.fields) if typeof(record.get("fields")) == TYPE_DICTIONARY else {}
 	safe["level"] = record.get("level") if record.get("level") in ["debug","info","warning","error"] else "info"
-	safe["code"] = str(record.get("code", "event")).validate_node_name().left(80)
+	var code: Variant = record.get("code")
+	safe["code"] = code.left(80) if typeof(code) == TYPE_STRING and code.is_valid_ascii_identifier() else "event"
 	if _records.size() == _limit:
 		_records.pop_front()
 		_dropped += 1
