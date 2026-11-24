@@ -1,0 +1,16 @@
+config_version=5
+
+[application]
+config/name="P0 loopback transport experiment"
+
+[physics]
+common/physics_ticks_per_second=30
+
+[threading]
+worker_pool/max_threads=2
+
+[debug]
+file_logging/enable_file_logging=false
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
