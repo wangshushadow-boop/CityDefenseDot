@@ -93,10 +93,10 @@ T-FORM-01,FORM,BAI-01,玩家命令与委派 AI 同 tick 冲突,提交,玩家获�
 T-FORM-02,FORM,BAI-02,七种阵型、伤亡、狭窄通道,执行队形切换,槽唯一、可达、稳定重组,PASS,development/reports/tests/P2/formation-002.txt,docs/systems/game/mission/formation/README.md,game/mission/formation/
 T-FORM-03,FORM,BAI-05,目标不可达或队伍溃散,提交/运行订单,状态失败或安全调整，HUD 有原因,NOT_RUN,,docs/systems/game/mission/formation/README.md,game/mission/formation/
 T-FORM-04,FORM,NET-04,另一玩家发送非授权编队订单,提交,Unauthorized，订单不变,NOT_RUN,,docs/systems/game/mission/formation/README.md,game/mission/formation/
-T-BAI-01,BAI,BAI-01,玩家与 AI 同时控制编队,执行同命令接口,授权规则一致，无第二套执行器,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
-T-BAI-02,BAI,BAI-05,敌方被遮挡、旧快照返回,AI 查询与提交,只读取许可情报，旧意图拒绝,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
+T-BAI-01,BAI,BAI-01,玩家与 AI 同时控制编队,执行同命令接口,授权规则一致，无第二套执行器,PASS,development/reports/tests/P2/ai-001.txt,docs/systems/game/mission/ai/README.md,game/mission/ai/
+T-BAI-02,BAI,BAI-05,敌方被遮挡、旧快照返回,AI 查询与提交,只读取许可情报，旧意图拒绝,PASS,development/reports/tests/P2/ai-001.txt,docs/systems/game/mission/ai/README.md,game/mission/ai/
 T-BAI-03,BAI,BAI-06,500/1000 混合战场,记录调度性能,符合 §19.4 待验证预算，无持续积压,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
-T-BAI-04,BAI,BAT-05,Mission 销毁时 worker 正计算,创建新 Mission,旧意图不能写入,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
+T-BAI-04,BAI,BAT-05,Mission 销毁时 worker 正计算,创建新 Mission,旧意图不能写入,PASS,development/reports/tests/P2/ai-001.txt,docs/systems/game/mission/ai/README.md,game/mission/ai/
 T-BAI-T-01,BAI-T,BAI-04,兵种混合且存在可达高地/平地,选择战术,评分体现地形、有效射线与兵种适配,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
 T-BAI-T-02,BAI-T,BAI-04,任务不可达或增援改变力量比,更新,触发回退/重分配或撤退,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
 T-BAI-T-03,BAI-T,BAI-01,玩家未委派自己的编队,AI 分配任务,不覆盖玩家订单,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
@@ -132,17 +132,17 @@ T-UI-02,UI,UX-02,多编队部署和命令失败,操作 HUD,选择、目标、当
 T-UI-03,UI,UX-03,切换语言、1080p/不同分辨率及字号,遍历主界面,文本无溢出阻断，使用本地化键,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
 T-UI-04,UI,ACC-01,重新映射、色盲/字幕设置,保存重启,设置恢复且主流程可操作,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
 T-INPUT-01,INPUT,ACC-01 / UX-01,键鼠与手柄重映射、断开设备,操作并切换上下文,无卡键，设置持久化,NOT_RUN,,docs/systems/game/presentation/input/README.md,game/presentation/input/
-T-INPUT-02,INPUT,COM-05,相同方向动作来自不同设备,转换,规范意图一致,NOT_RUN,,docs/systems/game/presentation/input/README.md,game/presentation/input/
-T-INPUT-03,INPUT,NET-04 / BAI-01,试图选择无权限单位,发送订单,权威拒绝且 UI 有反馈,NOT_RUN,,docs/systems/game/presentation/input/README.md,game/presentation/input/
-T-CAM-01,CAM,UX-02,玩家在城墙和骑乘状态切视角,移动相机,无长期穿模，指挥目标正确,NOT_RUN,,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
-T-CAM-02,CAM,ACC-01,关闭晃动、修改 FOV,切场重启,设置有效,NOT_RUN,,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
-T-CAM-03,CAM,NET-04,观战者请求未授权敌方视角,切换,拒绝并保持合法视图,NOT_RUN,,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
-T-VIS-01,VIS,VIS-01,不同兵种装备、骑乘和方向攻击,播放并验证挂点/窗口,视觉与权威动作一致，无穿戴错位,NOT_RUN,,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
-T-VIS-02,VIS,COM-05,切换动画 LOD/帧率,同输入战斗,权威伤害/伤亡不变,NOT_RUN,,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
+T-INPUT-02,INPUT,COM-05,相同方向动作来自不同设备,转换,规范意图一致,PASS,development/reports/tests/P2/input-001.txt,docs/systems/game/presentation/input/README.md,game/presentation/input/
+T-INPUT-03,INPUT,NET-04 / BAI-01,试图选择无权限单位,发送订单,权威拒绝且 UI 有反馈,PASS,development/reports/tests/P2/input-001.txt,docs/systems/game/presentation/input/README.md,game/presentation/input/
+T-CAM-01,CAM,UX-02,玩家在城墙和骑乘状态切视角,移动相机,无长期穿模，指挥目标正确,PASS,development/reports/tests/P2/qa-camera-001.json,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
+T-CAM-02,CAM,ACC-01,关闭晃动、修改 FOV,切场重启,设置有效,PASS,development/reports/tests/P2/qa-camera-001.json,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
+T-CAM-03,CAM,NET-04,观战者请求未授权敌方视角,切换,拒绝并保持合法视图,PASS,development/reports/tests/P2/qa-camera-001.json,docs/systems/game/presentation/camera/README.md,game/presentation/camera/
+T-VIS-01,VIS,VIS-01,不同兵种装备、骑乘和方向攻击,播放并验证挂点/窗口,视觉与权威动作一致，无穿戴错位,PASS,development/reports/tests/P2/visuals-001.txt,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
+T-VIS-02,VIS,COM-05,切换动画 LOD/帧率,同输入战斗,权威伤害/伤亡不变,PASS,development/reports/tests/P2/visuals-001.txt,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
 T-VIS-03,VIS,BAI-06 / §19.4,500/1000 真实动画混合单位,压力,测量 FPS/显存/蒙皮，不以静止实例替代,NOT_RUN,,docs/systems/game/presentation/visuals/README.md,game/presentation/visuals/
 T-AUD-01,AUD,AUD-01,500 人战斗、大量命中和命令语音,播放,音源预算内，命令可辨识,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
-T-AUD-02,AUD,ACC-01,关闭音效或开启字幕,完成战斗,信息仍可访问,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
-T-AUD-03,AUD,BAT-05,结束 Mission,释放音源,无残留跨场景播放,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
+T-AUD-02,AUD,ACC-01,关闭音效或开启字幕,完成战斗,信息仍可访问,PASS,development/reports/tests/P2/audio-001.txt,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
+T-AUD-03,AUD,BAT-05,结束 Mission,释放音源,无残留跨场景播放,PASS,development/reports/tests/P2/audio-001.txt,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
 T-PERSIST-01,PERSIST,SAV-01,多槽、世界多年状态和 RNG,保存加载,规范化领域快照一致,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-PERSIST-02,PERSIST,SAV-02 / BAT-03,写前/中/提交标记后模拟断电或磁盘满,恢复重试,读有效前/后版本，结果恰好一次,PASS,development/reports/tests/P1/persistence.txt,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-PERSIST-03,PERSIST,SAV-03,旧 schema、动态锻造物品、缺 MOD,加载,逐级迁移或明确拒绝，原档保留,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/

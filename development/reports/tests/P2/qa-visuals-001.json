@@ -1,0 +1,277 @@
+[
+  {
+    "name": "cold-import",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\suite-cold-import\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\checkout\\game",
+      "--editor",
+      "--import"
+    ],
+    "markers": [
+      "Godot Engine"
+    ],
+    "sha": "fae0bf9c805e2c73a6bb051c1e853feab44335c1",
+    "seconds": 4.11,
+    "log": "out\\p2-qa\\visuals-fae0bf9\\suite-cold-import\\stdout.txt",
+    "sha256": "b85e278e77fbeac31d5a26b9d30aa67a111e2d28af1701e747ac22bbe0ff08f1",
+    "tail": [
+      "\u001b[92m[ DONE ]\u001b[39m \u001b[1mreimport\u001b[22m",
+      "\u001b[0m",
+      "[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Started 正在加载编辑器 (5 steps)\u001b[39m\u001b[0m",
+      "[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | 正在加载编辑器布局……\u001b[39m\u001b[0m",
+      "[  16% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | 正在加载停靠面板……\u001b[39m\u001b[0m",
+      "\u001b[92m[ DONE ]\u001b[39m \u001b[1mloading_editor_layout\u001b[22m",
+      "\u001b[0m"
+    ]
+  },
+  {
+    "name": "functional",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\suite-functional\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\checkout\\game",
+      "--script",
+      "res://tests/p2/visuals/run.gd"
+    ],
+    "markers": [
+      "VIS_FUNCTIONAL failures=0"
+    ],
+    "sha": "fae0bf9c805e2c73a6bb051c1e853feab44335c1",
+    "seconds": 5.343,
+    "log": "out\\p2-qa\\visuals-fae0bf9\\suite-functional\\stdout.txt",
+    "sha256": "df96e153642f019db8be4fddc58925d406a281a28e7843d17142debf6edc5d36",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "VIS_FUNCTIONAL failures=0"
+    ]
+  },
+  {
+    "name": "future",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\suite-future\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\future.gd"
+    ],
+    "markers": [
+      "QA_FUTURE checks=5 errors=0"
+    ],
+    "sha": "fae0bf9c805e2c73a6bb051c1e853feab44335c1",
+    "seconds": 0.813,
+    "log": "out\\p2-qa\\visuals-fae0bf9\\suite-future\\stdout.txt",
+    "sha256": "cdf5acfc6aeb647812050a227676338c79aa7ea5df7d16f916696891abc4818b",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_FUTURE checks=5 errors=0"
+    ]
+  },
+  {
+    "name": "benchmark-500",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\checkout\\game\\tests\\p2\\visuals\\benchmark.py",
+      "--project",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\checkout\\game",
+      "--godot",
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--count",
+      "500",
+      "--out",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\render-500",
+      "--trials",
+      "1"
+    ],
+    "markers": [
+      "/1:"
+    ],
+    "sha": "fae0bf9c805e2c73a6bb051c1e853feab44335c1",
+    "seconds": 10.219,
+    "log": "out\\p2-qa\\visuals-fae0bf9\\gpu-benchmark-500\\stdout.txt",
+    "sha256": "afe0065ab522378f0592775179340ac30d72a1725b7097da787e7a6fc1ca1d94",
+    "tail": [
+      "500/1: 321.1 FPS p95=5.85ms skinned=36 batched=564"
+    ],
+    "extra_qa": "gpu",
+    "asset_sha": "7042c28",
+    "settings_sha": "49b608e",
+    "prepared_profiles_verified_by_sha256": {
+      "fixture_git_blob": "fae0bf9:game/tests/p2/visuals/graphics.gd",
+      "fixture_sha256": "3a510824f444589f1c26f35b9207a89684c1f0c38a4cb026cdbd5ec196f9624c",
+      "benchmark_sha256": "a6c02ea0ac40bdc7479821b95e65159508c282488c39da0ba89094e38e2fab14",
+      "archive_checkout": "aa8a71d",
+      "composed_settings": "2048 shadow, FoV 60 P0 trajectory",
+      "coverage": "production visual renderer, deterministic synthetic source only",
+      "runs": [
+        {
+          "population": 500,
+          "trial": 1,
+          "fps": 295.41348885997735,
+          "p95_ms": 6.312,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-500\\trial-1.json.gz",
+          "uncompressed_sha256": "81c50cdba5195aba7976a5d1a2577b827001d685eda9cf44ddc135eb9e04d7fd"
+        },
+        {
+          "population": 500,
+          "trial": 2,
+          "fps": 317.3424664095993,
+          "p95_ms": 5.964,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-500\\trial-2.json.gz",
+          "uncompressed_sha256": "7b59ad8421d964391967269008f5f35bad907ce30f6028b31b0120cdb27e5ae3"
+        },
+        {
+          "population": 500,
+          "trial": 3,
+          "fps": 314.6414020780657,
+          "p95_ms": 6.032,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-500\\trial-3.json.gz",
+          "uncompressed_sha256": "16670ad9b4bd40b86c8795e0cdce7831b7e659a76387f3acbf2b3b6959aeb1b0"
+        },
+        {
+          "population": 1000,
+          "trial": 1,
+          "fps": 127.99474838712469,
+          "p95_ms": 12.682,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-1000\\trial-1.json.gz",
+          "uncompressed_sha256": "cd549401d92503c8fd3eddebbc600933bc240e96f177a229f70162649a74ed2f"
+        },
+        {
+          "population": 1000,
+          "trial": 2,
+          "fps": 135.86397065871688,
+          "p95_ms": 11.947000000000001,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-1000\\trial-2.json.gz",
+          "uncompressed_sha256": "f3d05e4b130b60383899729bf767b60a65abc1d1c0b28d54b6ec859efc0f0b4a"
+        },
+        {
+          "population": 1000,
+          "trial": 3,
+          "fps": 134.81069901591513,
+          "p95_ms": 12.127,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-1000\\trial-3.json.gz",
+          "uncompressed_sha256": "1e0c3f1b270e58703379c8e9fdf12cf38e78e1c7227e39fee4a4fb5baa27f559"
+        }
+      ]
+    }
+  },
+  {
+    "name": "benchmark-1000",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\checkout\\game\\tests\\p2\\visuals\\benchmark.py",
+      "--project",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\checkout\\game",
+      "--godot",
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--count",
+      "1000",
+      "--out",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-fae0bf9\\render-1000",
+      "--trials",
+      "1"
+    ],
+    "markers": [
+      "/1:"
+    ],
+    "sha": "fae0bf9c805e2c73a6bb051c1e853feab44335c1",
+    "seconds": 10.828,
+    "log": "out\\p2-qa\\visuals-fae0bf9\\gpu-benchmark-1000\\stdout.txt",
+    "sha256": "b864860b0c8584dcb17d6709db39b393ccf8ead06b7f30f347c0b574d12469bf",
+    "tail": [
+      "1000/1: 145.1 FPS p95=11.45ms skinned=36 batched=1164"
+    ],
+    "extra_qa": "gpu",
+    "asset_sha": "7042c28",
+    "settings_sha": "49b608e",
+    "prepared_profiles_verified_by_sha256": {
+      "fixture_git_blob": "fae0bf9:game/tests/p2/visuals/graphics.gd",
+      "fixture_sha256": "3a510824f444589f1c26f35b9207a89684c1f0c38a4cb026cdbd5ec196f9624c",
+      "benchmark_sha256": "a6c02ea0ac40bdc7479821b95e65159508c282488c39da0ba89094e38e2fab14",
+      "archive_checkout": "aa8a71d",
+      "composed_settings": "2048 shadow, FoV 60 P0 trajectory",
+      "coverage": "production visual renderer, deterministic synthetic source only",
+      "runs": [
+        {
+          "population": 500,
+          "trial": 1,
+          "fps": 295.41348885997735,
+          "p95_ms": 6.312,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-500\\trial-1.json.gz",
+          "uncompressed_sha256": "81c50cdba5195aba7976a5d1a2577b827001d685eda9cf44ddc135eb9e04d7fd"
+        },
+        {
+          "population": 500,
+          "trial": 2,
+          "fps": 317.3424664095993,
+          "p95_ms": 5.964,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-500\\trial-2.json.gz",
+          "uncompressed_sha256": "7b59ad8421d964391967269008f5f35bad907ce30f6028b31b0120cdb27e5ae3"
+        },
+        {
+          "population": 500,
+          "trial": 3,
+          "fps": 314.6414020780657,
+          "p95_ms": 6.032,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-500\\trial-3.json.gz",
+          "uncompressed_sha256": "16670ad9b4bd40b86c8795e0cdce7831b7e659a76387f3acbf2b3b6959aeb1b0"
+        },
+        {
+          "population": 1000,
+          "trial": 1,
+          "fps": 127.99474838712469,
+          "p95_ms": 12.682,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-1000\\trial-1.json.gz",
+          "uncompressed_sha256": "cd549401d92503c8fd3eddebbc600933bc240e96f177a229f70162649a74ed2f"
+        },
+        {
+          "population": 1000,
+          "trial": 2,
+          "fps": 135.86397065871688,
+          "p95_ms": 11.947000000000001,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-1000\\trial-2.json.gz",
+          "uncompressed_sha256": "f3d05e4b130b60383899729bf767b60a65abc1d1c0b28d54b6ec859efc0f0b4a"
+        },
+        {
+          "population": 1000,
+          "trial": 3,
+          "fps": 134.81069901591513,
+          "p95_ms": 12.127,
+          "data": "out\\p2-qa\\visuals-aa8a71d\\p0-render-1000\\trial-3.json.gz",
+          "uncompressed_sha256": "1e0c3f1b270e58703379c8e9fdf12cf38e78e1c7227e39fee4a4fb5baa27f559"
+        }
+      ]
+    }
+  }
+]

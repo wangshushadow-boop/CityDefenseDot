@@ -1,0 +1,128 @@
+[
+  {
+    "name": "p2-motion_batch",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\suite-p2-motion_batch\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\checkout\\game",
+      "--script",
+      "res://tests/p2/motion_batch/run.gd"
+    ],
+    "markers": [
+      "P2-BAI-002 PASS"
+    ],
+    "sha": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf",
+    "seconds": 5.813,
+    "log": "out\\p2-qa\\motion_batch-b6db94b\\suite-p2-motion_batch\\stdout.txt",
+    "sha256": "b73cc8beaec2a3cf3e4488a93eaadd7096dccdba96cb08aab13bda71e68b2090",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "MOV_STAGE_CHOKE arrived=48 ticks=861 downstream_rollbacks=5 divergent_frames=0",
+      "MOV_BATCH people=500 moved=500 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=1296 packed_positions=54 packed_poses=88 stage=3884 direct_plus_scalar=4404 stage_read_commit=3972",
+      "MOV_BATCH people=1000 moved=1000 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=3019 packed_positions=107 packed_poses=220 stage=9576 direct_plus_scalar=10498 stage_read_commit=9752",
+      "P2-BAI-002 PASS checks=3359 failures=0"
+    ]
+  },
+  {
+    "name": "p2-movement",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\suite-p2-movement\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\checkout\\game",
+      "--script",
+      "res://tests/p2/movement/run.gd"
+    ],
+    "markers": [
+      "MOV_QUEUE_CHECKS errors=0"
+    ],
+    "sha": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf",
+    "seconds": 2.484,
+    "log": "out\\p2-qa\\motion_batch-b6db94b\\suite-p2-movement\\stdout.txt",
+    "sha256": "26512fa5914bd92c5a8928a4d1427aecfc1acd2c015599336ca9a448b23d0494",
+    "tail": [
+      "T-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327",
+      "T-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true",
+      "MOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2744",
+      "MOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8",
+      "MOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3650",
+      "MOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8",
+      "MOV_QUEUE_CHECKS errors=0 display=headless"
+    ]
+  },
+  {
+    "name": "old-probe",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\suite-old-probe\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\qa-mov2.gd"
+    ],
+    "markers": [
+      "PASS"
+    ],
+    "sha": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf",
+    "seconds": 1.828,
+    "log": "out\\p2-qa\\motion_batch-b6db94b\\suite-old-probe\\stdout.txt",
+    "sha256": "c06787a7d8cd19351f6ee21f1f552c5d6d4d5d87acd2d29708460c61c5f2fb90",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "PRESSURE active=160 corridors=160 peak_queries=8 foot_moved=120 horses_moved=40",
+      "CHOKE bidi=false n=64 arrived=64 ticks=1750 unchanged_final_300=39 still_in_gate=0 outside=0 max_step=0.1133351996541",
+      "CHOKE bidi=true n=64 arrived=64 ticks=1040 unchanged_final_300=0 still_in_gate=0 outside=0 max_step=0.11333427578211",
+      "INDEPENDENT_MOV PASS errors=0"
+    ]
+  },
+  {
+    "name": "probe",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\suite-probe\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\motion_batch-b6db94b\\independent.gd"
+    ],
+    "markers": [
+      "QA_MOV_BATCH errors=0"
+    ],
+    "sha": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf",
+    "seconds": 0.438,
+    "log": "out\\p2-qa\\motion_batch-b6db94b\\suite-probe\\stdout.txt",
+    "sha256": "b7fd863001eb98ec6a148b219c402514cb7eaf61aa0b6967cf95ee890587cf29",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_MOV_BATCH errors=0"
+    ]
+  }
+]

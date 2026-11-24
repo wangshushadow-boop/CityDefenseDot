@@ -1,0 +1,31 @@
+Godot --headless --path game --script res://tests/p2/input/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-INPUT-02 PASS
+T-INPUT-03 PASS
+T-INPUT-01-AUTOMATED PASS
+P2-INPUT-001 PASS checks=379 failures=0 physical_pads=0
+
+Godot --headless --path game --script res://tests/p2/combat/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1
+COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea
+COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=587 max_us=5193
+COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=1142 max_us=8974
+COM field physics batches=44 queries=46
+P2-COM-002 PASS errors=0
+
+Godot --headless --path game --script res://tests/p2/formation/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-FORM-GEOMETRY count=500 kinds=7 elapsed_us=248264
+P2-FORM-GEOMETRY count=1000 kinds=7 elapsed_us=584176
+P2-FORM-ROLLBACK exercised
+T-FORM-01 PASS
+T-FORM-02 PASS
+T-FORM-03-READ-MODEL PASS
+T-FORM-04-AUTHORITY PASS
+P2-FORM-002 PASS
+T-FORM-02-LAYOUT PASS
+P2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124

@@ -16,7 +16,7 @@
   },
   "authorized_by": "项目负责人本次会话明确授权“开始p2的工作”",
   "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-  "integrated_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
+  "integrated_commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",
@@ -39,7 +39,7 @@
       "record": "ab8099511aed0c4cd6a952464188ff2c81325aac"
     }
   },
-  "updated_at": "2026-11-24",
+  "updated_at": "2026-11-25",
   "note": "P2 实时战争开发中；野战来源语义已签核。",
   "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",

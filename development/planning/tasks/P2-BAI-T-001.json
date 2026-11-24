@@ -30,8 +30,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "154af0805882d215652556c3677b23efa06ac750",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-tactical",
   "scope": "全军战术计划、候选评分、阶段、编队任务与回退。 按公共任务与预算向下游提交游戏内战术任务",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -40,5 +40,5 @@
     "地形/兵力/目标与可达性、退却改计划、命令授权。",
     "按公共任务与预算向下游提交游戏内战术任务"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

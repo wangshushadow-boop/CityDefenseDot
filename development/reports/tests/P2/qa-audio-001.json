@@ -1,0 +1,226 @@
+[
+  {
+    "name": "p2-audio",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\suite-p2-audio\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\checkout\\game",
+      "--script",
+      "res://tests/p2/audio/run.gd"
+    ],
+    "markers": [
+      "T-AUD-03 PASS"
+    ],
+    "sha": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+    "seconds": 1.469,
+    "log": "out\\p2-qa\\audio-a7c2616\\suite-p2-audio\\stdout.txt",
+    "sha256": "eb5e8097e586b3badc04e1c6ba059ea840ec3b2bcac9a3f9e5b360f6aec62671",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-AUD-01-AUTO PASS actors=500 confirmed_hits=250 budget=12 peak=10 dropped=185 voice_pcm_frames=16384 pcm_peak=0.48492667078972 human_intelligibility=NOT_RUN",
+      "T-AUD-02 PASS silent_victory_caption=audio.defeat",
+      "T-AUD-03 PASS remaining_audio_buses=0",
+      "P2-AUD-BATTLE-001 PASS errors=0"
+    ]
+  },
+  {
+    "name": "muted-ui",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\suite-muted-ui\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-review\\audio3_music_bus.gd"
+    ],
+    "markers": [
+      "music-ui identical stream=false UI peak=0.0",
+      "audio.victory"
+    ],
+    "sha": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+    "seconds": 0.343,
+    "log": "out\\p2-qa\\audio-a7c2616\\suite-muted-ui\\stdout.txt",
+    "sha256": "fc5232547beb3633d8d15a486e4205cfac4df02707510984afd3b4f01c399733",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "playing bus=Field29460792787_Music seconds=3.2",
+      "music-ui identical stream=false UI peak=0.0 receipt={ \"ok\": true, \"value\": { \"status\": \"muted\", \"subtitle_key\": \"audio.victory\" } }",
+      "WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).",
+      "   at: cleanup (core/object/object.cpp:2536)"
+    ]
+  },
+  {
+    "name": "independent",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\suite-independent\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-e4d6cab\\qa-audio-drained.gd"
+    ],
+    "markers": [
+      "AUDIO_EXTRA PASS checks=11 errors=0"
+    ],
+    "sha": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+    "seconds": 0.344,
+    "log": "out\\p2-qa\\audio-a7c2616\\suite-independent\\stdout.txt",
+    "sha256": "7ef8fd8809676cf034fb1bd902a42d35fd0f09000a21c746074009cefc9c1eaf",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "AUDIO_EXTRA PASS checks=11 errors=0 driver=Dummy"
+    ]
+  },
+  {
+    "name": "p1-mission",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\suite-p1-mission\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\checkout\\game",
+      "--script",
+      "res://tests/p1/mission/run.gd"
+    ],
+    "markers": [
+      "T-MIS-RT-03 PASS"
+    ],
+    "sha": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+    "seconds": 0.547,
+    "log": "out\\p2-qa\\audio-a7c2616\\suite-p1-mission\\stdout.txt",
+    "sha256": "8644ca26f94d9e95b8b38d98b02c23b2fe03c836b5146e984d66548182f0ec9d",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  },
+  {
+    "name": "p1-bootstrap",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\suite-p1-bootstrap\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\checkout\\game",
+      "--script",
+      "res://tests/p1/bootstrap/run.gd"
+    ],
+    "markers": [
+      "T-BOOT-02 PASS"
+    ],
+    "sha": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+    "seconds": 0.531,
+    "log": "out\\p2-qa\\audio-a7c2616\\suite-p1-bootstrap\\stdout.txt",
+    "sha256": "bd010dd74338d139d571fe2fde12ebc08ae88b129ad4ac438a716ed77d98a67b",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-BOOT-01 PASS",
+      "T-BOOT-02 PASS",
+      "T-BOOT-03 PASS",
+      "BOOT-BOUNDARIES PASS",
+      "BOOT_CHECKS errors=0"
+    ]
+  },
+  {
+    "name": "p2-combat",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\suite-p2-combat\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\checkout\\game",
+      "--script",
+      "res://tests/p2/combat/run.gd"
+    ],
+    "markers": [
+      "T-COM"
+    ],
+    "sha": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+    "seconds": 0.531,
+    "log": "out\\p2-qa\\audio-a7c2616\\suite-p2-combat\\stdout.txt",
+    "sha256": "adb3c6b305ab2292555d55e2291d76dda6ea298cd956b8baf515550c9a4b61ed",
+    "tail": [
+      "",
+      "P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1",
+      "COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea",
+      "COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=673 max_us=4346",
+      "COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=1761 max_us=8683",
+      "COM field physics batches=44 queries=46",
+      "P2-COM-002 PASS errors=0"
+    ]
+  },
+  {
+    "name": "p2-formation",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\suite-p2-formation\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\audio-a7c2616\\checkout\\game",
+      "--script",
+      "res://tests/p2/formation/run.gd"
+    ],
+    "markers": [
+      "T-FORM"
+    ],
+    "sha": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+    "seconds": 1.375,
+    "log": "out\\p2-qa\\audio-a7c2616\\suite-p2-formation\\stdout.txt",
+    "sha256": "d2d2e8b43f4433f8d6aa0a7107360a311421a3b85133c5c41c229ac2565de563",
+    "tail": [
+      "T-FORM-01 PASS",
+      "T-FORM-02 PASS",
+      "T-FORM-03-READ-MODEL PASS",
+      "T-FORM-04-AUTHORITY PASS",
+      "P2-FORM-002 PASS",
+      "T-FORM-02-LAYOUT PASS",
+      "P2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124"
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+Godot --headless --path game --script res://tests/p2/combat_batch/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-BAI-003 PASS assertions=58 errors=0
+
+Godot --headless --path game --script res://tests/p2/combat/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1
+COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea
+COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=193 max_us=1147
+COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=884 max_us=2238
+COM field physics batches=44 queries=46
+P2-COM-002 PASS errors=0
+
+Godot --headless --path game --script res://tests/p1/mission/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373
+T-MIS-RT-03 PASS switches=50 live_nodes=1
+MISSION failures=0
+
+Godot --headless --path game --script res://tests/p1/engine/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-INF-ENGINE-01 PASS
+T-INF-ENGINE-02 PASS hits=[{ "query_index": 0, "entity_handle": "near", "fraction_ppm": 399000, "point_mm": [-2020, 1000, 0], "normal_ppm": [-1000000, 0, 0], "region": "body" }, { "query_index": 0, "entity_handle": "far", "fraction_ppm": 699000, "point_mm": [3980, 1000, 0], "normal_ppm": [-1000000, 0, 0], "region": "body" }, { "query_index": 1, "entity_handle": "near", "fraction_ppm": 395508, "point_mm": [-2020, 1000, 150], "normal_ppm": [-572602, 0, 819833], "region": "body" }, { "query_index": 1, "entity_handle": "far", "fraction_ppm": 695313, "point_mm": [3980, 1000, 150], "normal_ppm": [-593542, 0, 804803], "region": "body" }]
+P1-ENGINE-HEADLESS-SLICE PASS
+T-INF-ENGINE-04 PASS loops=50 median_us=3989 p95_us=4075 max_us=4607
+ENGINE failures=0
+
+Godot --headless --path game --script res://tests/p1/rules/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-SHRULE-01 PASS
+T-SHRULE-02 PASS
+T-SHRULE-03 PASS
+P1-RULES-RNG PASS

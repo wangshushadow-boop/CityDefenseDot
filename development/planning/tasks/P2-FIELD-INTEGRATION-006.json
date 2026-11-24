@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-006",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "MIS-RT",
+  "title": "现有 Mission 内的野战系统装配",
+  "spec": "docs/systems/game/mission/runtime/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-RESULTS",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I",
+    "P2-VIS-BATTLE",
+    "P2-AUD-BATTLE",
+    "P2-CAM",
+    "P2-UI-BATTLE"
+  ],
+  "requirements": [
+    "BAT-01",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-01",
+    "T-MIS-RT-02",
+    "T-TEST-01"
+  ],
+  "allowed_paths": [
+    "game/mission/runtime/",
+    "game/tests/p2/field_pipeline/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-006.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "复用 Mission.register_system，组装 MOV、FORM、COM、BAI、RULES、RESULTS 的正常调用与提交顺序；不新增 Session、真值或公共 DTO。验证下游拒绝时各域回滚。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "复用 Mission.register_system，组装 MOV、FORM、COM、BAI、RULES、RESULTS 的正常调用与提交顺序；不新增 Session、真值或公共 DTO。验证下游拒绝时各域回滚。",
+    "独立审查、独立 QA 及合并态实测"
+  ],
+  "status": "PLANNED"
+}

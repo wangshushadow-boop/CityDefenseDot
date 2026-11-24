@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "P2-RULES-FIELD-002",
+  "kind": "EXECUTION",
+  "parent": "P2-RULES-FIELD",
+  "stage": "P2",
+  "module_id": "MIS-RT",
+  "title": "按本步权威目标限制可增援方",
+  "spec": "docs/systems/game/mission/runtime/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "GATE-P1",
+    "P2-FORM",
+    "P2-COM"
+  ],
+  "requirements": [
+    "BAT-01",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-01",
+    "T-RULES-01"
+  ],
+  "allowed_paths": [
+    "game/mission/runtime/runtime.gd",
+    "game/mission/runtime/field_deployment.gd",
+    "game/tests/p2/field_eligibility/",
+    "development/reports/tasks/P2-RULES-FIELD-002.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-eligibility",
+  "scope": "实现通用的本步可增援方过滤，两项提案共用。由获授权 objectives 系统提供；未知队、下游失败、同 tick 重试与兼容性必须实测。本任务不决定三方终局。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "实现通用的本步可增援方过滤，两项提案共用。由获授权 objectives 系统提供；未知队、下游失败、同 tick 重试与兼容性必须实测。本任务不决定三方终局。",
+    "独立审查、独立 QA 及合并态实测"
+  ],
+  "status": "DONE"
+}

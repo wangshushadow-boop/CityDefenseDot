@@ -1,0 +1,30 @@
+[
+  {
+    "checkout_autocrlf": "true",
+    "git_sha": "6ff4bc0cf840d38dfc7a70c383a8145e8318b753",
+    "git_blobs": 194,
+    "scene_sha256": "bfd2046db32f8de6a75d4ac71bcbca9360577e09a0bfc7a5a8c322c149903f51",
+    "crlf": 0,
+    "exit": 0,
+    "tail": [
+      "FIELD_RIG horse bones=50 meshes=1 moving=32",
+      "FIELD_CONTENT hash=aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+      "P2-FIELD-ASSETS PASS failures=0"
+    ],
+    "pass_mark": true
+  },
+  {
+    "checkout_autocrlf": "false",
+    "git_sha": "6ff4bc0cf840d38dfc7a70c383a8145e8318b753",
+    "git_blobs": 194,
+    "scene_sha256": "bfd2046db32f8de6a75d4ac71bcbca9360577e09a0bfc7a5a8c322c149903f51",
+    "crlf": 0,
+    "exit": 0,
+    "tail": [
+      "FIELD_RIG horse bones=50 meshes=1 moving=32",
+      "FIELD_CONTENT hash=aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+      "P2-FIELD-ASSETS PASS failures=0"
+    ],
+    "pass_mark": true
+  }
+]

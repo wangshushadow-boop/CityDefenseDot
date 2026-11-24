@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "P2-BAI-003",
+  "kind": "EXECUTION",
+  "parent": "P2-BAI",
+  "stage": "P2",
+  "module_id": "COM",
+  "title": "密集意图校验与可见弹体快照",
+  "spec": "docs/systems/game/mission/combat/README.md",
+  "depends_on": [
+    "P2-COM",
+    "GATE-P1",
+    "P2-FORM",
+    "P2-MOV"
+  ],
+  "requirements": [
+    "BAI-06",
+    "COM-05"
+  ],
+  "acceptance_test_ids": [
+    "T-COM-01",
+    "T-COM-02",
+    "T-COM-05"
+  ],
+  "allowed_paths": [
+    "game/mission/combat/",
+    "game/tests/p2/combat_batch/",
+    "development/reports/tasks/P2-BAI-003.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-combat_batch",
+  "scope": "剖析并优化大量合法且反复的格挡/动作意图，无损保留完整合法性、错误码和幂等；提供当前弹体的只读有界投影给 VIS。不改变 v1 命令或公开持久数据。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "同一真实 500/1000 负载的分域前后测量；单写入、失败回滚、完整原回归及无跨作用域/代际信息泄露。",
+    "独立 QA、审查及合并态复测。"
+  ],
+  "status": "DONE"
+}

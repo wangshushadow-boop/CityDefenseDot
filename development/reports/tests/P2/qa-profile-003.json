@@ -1,0 +1,129 @@
+[
+  {
+    "name": "p2-field_profile",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\suite-p2-field_profile\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\checkout\\game",
+      "--script",
+      "res://tests/p2/field_profile/run.gd"
+    ],
+    "markers": [
+      "PASS"
+    ],
+    "sha": "49b608eb6abceb3b1e8825760bb456a542c3f9e8",
+    "seconds": 0.171,
+    "log": "out\\p2-qa\\profile-49b608e\\suite-p2-field_profile\\stdout.txt",
+    "sha256": "4e333613d302961ee60f989786a5c60283222d8027b1e8f220472dc3a49be351",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P2-FIELD-PROFILE PASS shadow=2048 renderer=forward_plus tts=true"
+    ]
+  },
+  {
+    "name": "p1-bootstrap",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\suite-p1-bootstrap\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\checkout\\game",
+      "--script",
+      "res://tests/p1/bootstrap/run.gd"
+    ],
+    "markers": [
+      "BOOT_CHECKS errors=0"
+    ],
+    "sha": "49b608eb6abceb3b1e8825760bb456a542c3f9e8",
+    "seconds": 0.625,
+    "log": "out\\p2-qa\\profile-49b608e\\suite-p1-bootstrap\\stdout.txt",
+    "sha256": "bd010dd74338d139d571fe2fde12ebc08ae88b129ad4ac438a716ed77d98a67b",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-BOOT-01 PASS",
+      "T-BOOT-02 PASS",
+      "T-BOOT-03 PASS",
+      "BOOT-BOUNDARIES PASS",
+      "BOOT_CHECKS errors=0"
+    ]
+  },
+  {
+    "name": "p2-audio",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\suite-p2-audio\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\checkout\\game",
+      "--script",
+      "res://tests/p2/audio/run.gd"
+    ],
+    "markers": [
+      "T-AUD-03 PASS"
+    ],
+    "sha": "49b608eb6abceb3b1e8825760bb456a542c3f9e8",
+    "seconds": 1.375,
+    "log": "out\\p2-qa\\profile-49b608e\\suite-p2-audio\\stdout.txt",
+    "sha256": "eb5e8097e586b3badc04e1c6ba059ea840ec3b2bcac9a3f9e5b360f6aec62671",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-AUD-01-AUTO PASS actors=500 confirmed_hits=250 budget=12 peak=10 dropped=185 voice_pcm_frames=16384 pcm_peak=0.48492667078972 human_intelligibility=NOT_RUN",
+      "T-AUD-02 PASS silent_victory_caption=audio.defeat",
+      "T-AUD-03 PASS remaining_audio_buses=0",
+      "P2-AUD-BATTLE-001 PASS errors=0"
+    ]
+  },
+  {
+    "name": "p1-engine",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\suite-p1-engine\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\profile-49b608e\\checkout\\game",
+      "--script",
+      "res://tests/p1/engine/run.gd"
+    ],
+    "markers": [
+      "PASS"
+    ],
+    "sha": "49b608eb6abceb3b1e8825760bb456a542c3f9e8",
+    "seconds": 0.438,
+    "log": "out\\p2-qa\\profile-49b608e\\suite-p1-engine\\stdout.txt",
+    "sha256": "dac987352c194e46ae4b5b74c8adb1584c16fe6893912ffa9fa8ec8270a35315",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-INF-ENGINE-01 PASS",
+      "T-INF-ENGINE-02 PASS hits=[{ \"query_index\": 0, \"entity_handle\": \"near\", \"fraction_ppm\": 399000, \"point_mm\": [-2020, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 0, \"entity_handle\": \"far\", \"fraction_ppm\": 699000, \"point_mm\": [3980, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"near\", \"fraction_ppm\": 395508, \"point_mm\": [-2020, 1000, 150], \"normal_ppm\": [-572602, 0, 819833], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"far\", \"fraction_ppm\": 695313, \"point_mm\": [3980, 1000, 150], \"normal_ppm\": [-593542, 0, 804803], \"region\": \"body\" }]",
+      "P1-ENGINE-HEADLESS-SLICE PASS",
+      "T-INF-ENGINE-04 PASS loops=50 median_us=3851 p95_us=4040 max_us=4047",
+      "ENGINE failures=0"
+    ]
+  }
+]

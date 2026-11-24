@@ -1,5 +1,18 @@
 {
   "schema_version": 1,
-  "blockers": [],
-  "note": "2026-11-24 项目负责人批准 ADR-014 方案 A。"
+  "blockers": [
+    {
+      "id": "P2-MULTISIDE-WITHDRAWAL",
+      "stage": "P2",
+      "status": "OPEN",
+      "scope": "三方及以上野战的撤退终局",
+      "reason": "请负责人裁定 ADR-015；ADR-014 的授权只涉及兵源归属。",
+      "owner": "项目负责人",
+      "evidence": [
+        "docs/architecture/decisions/ADR-015-multiside-withdrawal.md",
+        "development/reports/tests/P2/qa-ordinary-withdrawal.json"
+      ]
+    }
+  ],
+  "note": "ADR-014 已批准；ADR-015 仅影响三方及以上的撤退终局语义。"
 }

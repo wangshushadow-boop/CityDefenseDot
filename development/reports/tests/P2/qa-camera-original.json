@@ -1,0 +1,198 @@
+[
+  {
+    "name": "p2-camera",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\suite-p2-camera\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\checkout\\game",
+      "--script",
+      "res://tests/p2/camera/run.gd"
+    ],
+    "markers": [
+      "\"failures\":0"
+    ],
+    "sha": "8e659d02f961d7e6bef7df0b89d8c8a3618af749",
+    "seconds": 0.344,
+    "log": "out\\p2-qa\\camera-8e659d0\\suite-p2-camera\\stdout.txt",
+    "sha256": "bceac437fb6e7b27adc9f07b544360081071525b41423c9bc0e4f8c1baf9224c",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "CAMERA_RESULT {\"cases\":{\"T-CAM-01\":{\"grazing_arm_m\":1.90859496593475,\"pass\":true,\"update_p95_us\":44,\"updates\":60},\"T-CAM-03\":{\"pass\":true}},\"checks\":94,\"failures\":0,\"queries\":76,\"stage\":\"main\"}"
+    ]
+  },
+  {
+    "name": "restart",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\checkout\\game\\tests\\p2\\camera\\restart.py",
+      "--godot",
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe"
+    ],
+    "markers": [
+      "T-CAM-02 PASS across 4 fresh processes"
+    ],
+    "sha": "8e659d02f961d7e6bef7df0b89d8c8a3618af749",
+    "seconds": 1.078,
+    "log": "out\\p2-qa\\camera-8e659d0\\suite-restart\\stdout.txt",
+    "sha256": "27213ef8f9406d8b9025131961fc6551d62d5f96284f493b29ece39c2ad7973c",
+    "tail": [
+      "write: exit=0 6 checks",
+      "read: exit=0 5 checks",
+      "damaged: exit=0 1 checks",
+      "read: exit=0 5 checks",
+      "T-CAM-02 PASS across 4 fresh processes"
+    ]
+  },
+  {
+    "name": "lifetime",
+    "status": "FAIL",
+    "passed": false,
+    "pass_mark": false,
+    "exit": 1,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\suite-lifetime\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-review\\camera5_lifetime.gd"
+    ],
+    "markers": [
+      "scope released during query"
+    ],
+    "sha": "8e659d02f961d7e6bef7df0b89d8c8a3618af749",
+    "seconds": 0.266,
+    "log": "out\\p2-qa\\camera-8e659d0\\suite-lifetime\\stdout.txt",
+    "sha256": "33b8e8f6ec50632f77c92696d09e4e62f814454a2231404b16ba9cb7de7113e8",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "pose has no mounted truth; mode={ \"ok\": true, \"value\": <null> } active observer y=3.25563311576843",
+      "scope released during query, update={ \"ok\": true, \"value\": { \"scope_id\": \"\", \"mode\": \"\", \"target\": {  }, \"fov\": 75.0, \"shake\": true, \"active\": true } } state={ \"scope_id\": \"\", \"mode\": \"\", \"target\": {  }, \"fov\": 75.0, \"shake\": true, \"active\": true } current=true mask=1048575"
+    ]
+  },
+  {
+    "name": "camera",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\window-camera\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\checkout\\game",
+      "--resolution",
+      "640x400",
+      "--single-window",
+      "--audio-driver",
+      "Dummy",
+      "--script",
+      "res://tests/p2/camera/run.gd"
+    ],
+    "markers": [
+      "\"failures\":0",
+      "\"pixels\":[640,400]"
+    ],
+    "sha": "8e659d02f961d7e6bef7df0b89d8c8a3618af749",
+    "seconds": 1.484,
+    "log": "out\\p2-qa\\camera-8e659d0\\window-camera\\stdout.txt",
+    "sha256": "f9ceefb342486e760dcfb02393ea7009b45a7926e35803bd7d30dc373f34d26f",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "Vulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090",
+      "",
+      "CAMERA_RESULT {\"cases\":{\"T-CAM-01\":{\"grazing_arm_m\":1.90859496593475,\"pass\":true,\"update_p95_us\":43,\"updates\":60},\"T-CAM-03\":{\"pass\":true},\"window\":{\"adapter\":\"NVIDIA GeForce RTX 3090\",\"after\":[0.298039227724075,0.298039227724075,0.298039227724075],\"before\":[0.0980392172932625,0.764705896377563,0.278431385755539],\"driver\":\"vulkan\",\"pixels\":[640,400]}},\"checks\":97,\"failures\":0,\"queries\":77,\"stage\":\"main\"}"
+    ],
+    "extra_qa": "window"
+  },
+  {
+    "name": "window-1080-camera",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\checkout\\game",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\window-window-1080-camera\\engine.log",
+      "--resolution",
+      "1920x1080",
+      "--rendering-method",
+      "forward_plus",
+      "--rendering-driver",
+      "vulkan",
+      "--audio-driver",
+      "Dummy",
+      "--script",
+      "res://tests/p2/camera/run.gd"
+    ],
+    "markers": [
+      "\"failures\":0",
+      "\"pixels\":[1920,1080]"
+    ],
+    "sha": "8e659d02f961d7e6bef7df0b89d8c8a3618af749",
+    "seconds": 1.485,
+    "log": "out\\p2-qa\\camera-8e659d0\\window-window-1080-camera\\stdout.txt",
+    "sha256": "666e4cc55cc087945d0e430a0e882668fe851dc1e95eca4427c7655851623ab4",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "Vulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090",
+      "",
+      "CAMERA_RESULT {\"cases\":{\"T-CAM-01\":{\"grazing_arm_m\":1.90859496593475,\"pass\":true,\"update_p95_us\":46,\"updates\":60},\"T-CAM-03\":{\"pass\":true},\"window\":{\"adapter\":\"NVIDIA GeForce RTX 3090\",\"after\":[0.298039227724075,0.298039227724075,0.298039227724075],\"before\":[0.0980392172932625,0.764705896377563,0.278431385755539],\"driver\":\"vulkan\",\"pixels\":[1920,1080]}},\"checks\":97,\"failures\":0,\"queries\":77,\"stage\":\"main\"}"
+    ],
+    "extra_qa": "window"
+  },
+  {
+    "name": "intermediate-views",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\window-intermediate-views\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\checkout\\game",
+      "--resolution",
+      "640x400",
+      "--single-window",
+      "--audio-driver",
+      "Dummy",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\camera-8e659d0\\visibility.gd"
+    ],
+    "markers": [
+      "QA_CAM_FRAMES errors=0"
+    ],
+    "sha": "8e659d02f961d7e6bef7df0b89d8c8a3618af749",
+    "seconds": 1.469,
+    "log": "out\\p2-qa\\camera-8e659d0\\window-intermediate-views\\stdout.txt",
+    "sha256": "f2b979d1b0758ba00176139d1a49d3472b217371f9a0e72379bbbb8dbe1c3672",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "Vulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090",
+      "",
+      "QA_CAM_FRAMES errors=0 first=4c4c4cff green=08e50dff switch=4c4c4cff blue=0a14edff revoked=4c4c4cff resolution=(640, 400)"
+    ],
+    "extra_qa": "window"
+  }
+]

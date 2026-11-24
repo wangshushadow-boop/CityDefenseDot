@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P2-BAI-002",
+  "kind": "EXECUTION",
+  "parent": "P2-BAI",
+  "stage": "P2",
+  "module_id": "MOV",
+  "title": "位姿批读与候选固定步",
+  "spec": "docs/systems/game/mission/movement/README.md",
+  "depends_on": [
+    "P2-MOV",
+    "GATE-P1",
+    "P2-FORM",
+    "P2-COM"
+  ],
+  "requirements": [
+    "BAI-06",
+    "NAV-01"
+  ],
+  "acceptance_test_ids": [
+    "T-MOV-02",
+    "T-MOV-04"
+  ],
+  "allowed_paths": [
+    "game/mission/movement/",
+    "game/tests/p2/motion_batch/",
+    "development/reports/tasks/P2-BAI-002.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-motion_batch",
+  "scope": "以稳定句柄序列一次读出当前位置/速度/朝向，省去实测逐人约 2.81 ms；跨域下游失败时保留前一已提交状态、同 tick 可重试。真实导航后端在失败尝试也记入原预算。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "同一真实 500/1000 负载的分域前后测量；单写入、失败回滚、完整原回归及无跨作用域/代际信息泄露。",
+    "独立 QA、审查及合并态复测。"
+  ],
+  "status": "DONE"
+}

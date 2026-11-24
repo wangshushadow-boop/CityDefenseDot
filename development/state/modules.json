@@ -6,7 +6,8 @@
       "work_package_ids": [
         "P1-BOOT",
         "P6-NET-INTEGRATION",
-        "P2-FIELD-INTEGRATION"
+        "P2-FIELD-INTEGRATION",
+        "P2-VIS-BATTLE"
       ],
       "verified_test_ids": [
         "T-BOOT-01",
@@ -258,7 +259,9 @@
       "work_package_ids": [
         "P0-BATTLE",
         "P1-MIS-RT-PORTS",
-        "P2-MIS-RT-BATTLE"
+        "P2-MIS-RT-BATTLE",
+        "P2-RULES-FIELD",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-MIS-RT-03",
@@ -276,7 +279,8 @@
         "P0-BATTLE",
         "P2-COM",
         "P6-NET-INTEGRATION",
-        "P7-POLISH"
+        "P7-POLISH",
+        "P2-BAI"
       ],
       "verified_test_ids": [
         "T-COM-01",
@@ -304,14 +308,20 @@
       ]
     },
     "BAI": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-BAI",
         "P4-BAI-SIEGE",
         "P7-POLISH"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-BAI-01",
+        "T-BAI-02",
+        "T-BAI-04"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/ai-001.txt"
+      ]
     },
     "BAI-T": {
       "status": "NOT_IMPLEMENTED",
@@ -345,7 +355,9 @@
       "work_package_ids": [
         "P0-NAV",
         "P2-MOV",
-        "P7-POLISH"
+        "P7-POLISH",
+        "P2-BAI",
+        "P2-BAI-I"
       ],
       "verified_test_ids": [
         "T-MOV-01",
@@ -407,43 +419,64 @@
       "evidence": []
     },
     "INPUT": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-INPUT",
         "P5-SINGLE-INTEGRATION"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-INPUT-02",
+        "T-INPUT-03"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/input-001.txt"
+      ]
     },
     "CAM": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-CAM",
         "P5-SINGLE-INTEGRATION"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-CAM-01",
+        "T-CAM-02",
+        "T-CAM-03"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/qa-camera-001.json"
+      ]
     },
     "VIS": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-BATTLE",
         "P2-VIS-BATTLE",
         "P5-SINGLE-INTEGRATION",
         "P7-POLISH"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-VIS-01",
+        "T-VIS-02"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/visuals-001.txt"
+      ]
     },
     "AUD": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-AUD-BATTLE",
         "P5-SINGLE-INTEGRATION",
         "P7-POLISH"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-AUD-02",
+        "T-AUD-03"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/audio-001.txt"
+      ]
     },
     "PERSIST": {
       "status": "PARTIAL",

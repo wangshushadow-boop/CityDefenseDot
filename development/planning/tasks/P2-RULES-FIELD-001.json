@@ -40,8 +40,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-rules",
   "scope": "野战规则、目标、撤退、结束、击倒处理；保留可组合模式接口。 合法部署、运行、目标及终局与退场",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -50,5 +50,5 @@
     "真实野战胜败、撤退、增援和模式隔离；其他规则在 P4–P6。",
     "合法部署、运行、目标及终局与退场"
   ],
-  "status": "PLANNED"
+  "status": "BLOCKED"
 }

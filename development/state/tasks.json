@@ -494,20 +494,27 @@
       ]
     },
     "P2-BAI": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "nav",
       "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "3f7e7d07495be9d3428a67224b9b8dc265a4e45a",
+      "integrated_commit": "154af0805882d215652556c3677b23efa06ac750",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": [
-        "P2-BAI-001"
+        "P2-BAI-001",
+        "P2-BAI-002",
+        "P2-BAI-003"
       ]
     },
     "P2-BAI-T": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "main",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -516,9 +523,9 @@
       ]
     },
     "P2-BAI-F": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p2formation",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -527,25 +534,27 @@
       ]
     },
     "P2-BAI-I": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "combatbatch",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": [
-        "P2-BAI-I-001"
+        "P2-BAI-I-001",
+        "P2-BAI-I-002"
       ]
     },
     "P2-RULES-FIELD": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "main",
+      "base_commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": [
-        "P2-RULES-FIELD-001"
+        "P2-RULES-FIELD-001",
+        "P2-RULES-FIELD-002"
       ]
     },
     "P2-RESULTS": {
@@ -560,46 +569,67 @@
       ]
     },
     "P2-INPUT": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p2formation",
       "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "4f8ab4228883c449a82810ff839e528ea707bbef",
+      "integrated_commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": [
         "P2-INPUT-001"
       ]
     },
     "P2-CAM": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "status": "DONE",
+      "owner": "main",
+      "base_commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8",
+      "candidate_commit": "7b8dc269966c1183a54efca3a8d66f67fabf3dbf",
+      "integrated_commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": [
         "P2-CAM-001"
       ]
     },
     "P2-VIS-BATTLE": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "main",
       "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "fae0bf9c805e2c73a6bb051c1e853feab44335c1",
+      "integrated_commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": [
         "P2-VIS-BATTLE-001",
-        "P2-VIS-BATTLE-002"
+        "P2-VIS-BATTLE-002",
+        "P2-VIS-BATTLE-003"
       ]
     },
     "P2-AUD-BATTLE": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p2combat",
       "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+      "integrated_commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": [
         "P2-AUD-BATTLE-001"
       ]
@@ -627,7 +657,8 @@
         "P2-FIELD-INTEGRATION-003",
         "P2-FIELD-INTEGRATION-004",
         "P2-FIELD-INTEGRATION-005",
-        "P2-FIELD-INTEGRATION-001"
+        "P2-FIELD-INTEGRATION-001",
+        "P2-FIELD-INTEGRATION-006"
       ]
     },
     "GATE-P2": {
@@ -1648,48 +1679,56 @@
       "child_ids": []
     },
     "P2-BAI-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "nav",
       "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "3f7e7d07495be9d3428a67224b9b8dc265a4e45a",
+      "integrated_commit": "154af0805882d215652556c3677b23efa06ac750",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-BAI-T-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "nav",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P2-BAI-F-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p2formation",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P2-BAI-I-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "combatbatch",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P2-RULES-FIELD-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
-      "candidate_commit": null,
+      "status": "BLOCKED",
+      "owner": "main",
+      "base_commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a",
+      "candidate_commit": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
       "integrated_commit": null,
-      "evidence": [],
+      "evidence": [
+        "docs/architecture/decisions/ADR-015-multiside-withdrawal.md",
+        "development/reports/tests/P2/qa-ordinary-withdrawal.json"
+      ],
       "child_ids": []
     },
     "P2-RESULTS-001": {
@@ -1702,39 +1741,59 @@
       "child_ids": []
     },
     "P2-INPUT-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p2formation",
       "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "4f8ab4228883c449a82810ff839e528ea707bbef",
+      "integrated_commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-CAM-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "status": "DONE",
+      "owner": "main",
+      "base_commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8",
+      "candidate_commit": "7b8dc269966c1183a54efca3a8d66f67fabf3dbf",
+      "integrated_commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-VIS-BATTLE-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "battle",
       "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "fae0bf9c805e2c73a6bb051c1e853feab44335c1",
+      "integrated_commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-AUD-BATTLE-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p2combat",
       "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "a7c261676e3c959055f9fce4c0b4fc770adcf279",
+      "integrated_commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-UI-BATTLE-001": {
@@ -1761,12 +1820,17 @@
       "child_ids": []
     },
     "P2-VIS-BATTLE-002": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "main",
       "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "6ff4bc0cf840d38dfc7a70c383a8145e8318b753",
+      "integrated_commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-002": {
@@ -1809,6 +1873,80 @@
       "status": "PLANNED",
       "owner": null,
       "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-BAI-002": {
+      "status": "DONE",
+      "owner": "p2formation",
+      "base_commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0",
+      "candidate_commit": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf",
+      "integrated_commit": "701ff5b0eb230d96f5f331b9d3cff16552e62add",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/motion-batch-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "child_ids": []
+    },
+    "P2-BAI-003": {
+      "status": "DONE",
+      "owner": "combatbatch",
+      "base_commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0",
+      "candidate_commit": "e3edbbf630bb8b29bf2f957f22e5567345142a0b",
+      "integrated_commit": "d5cee7c0ac19ab31770205005ee2c3bc0deffdf5",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/combat-batch-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "child_ids": []
+    },
+    "P2-RULES-FIELD-002": {
+      "status": "DONE",
+      "owner": "main",
+      "base_commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8",
+      "candidate_commit": "b143462a4b9243ab03b5cec2c6b998c4ea328389",
+      "integrated_commit": "a9d3ce8ea97bcb7d0604d0cfa849567761773722",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/eligibility-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-006": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-VIS-BATTLE-003": {
+      "status": "DONE",
+      "owner": "main",
+      "base_commit": "a81ba1063b8f1d19af775be0ddc194f03441f12a",
+      "candidate_commit": "49b608eb6abceb3b1e8825760bb456a542c3f9e8",
+      "integrated_commit": "3452b58e6a060b707d25c4505f79258065791398",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/profile-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "child_ids": []
+    },
+    "P2-BAI-I-002": {
+      "status": "IN_PROGRESS",
+      "owner": "battle",
+      "base_commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -7328,6 +7466,1363 @@
         "development/reports/integration/P2.md"
       ],
       "commit": "6e399f2dbc754a494424c7d544d911fcda8e3775"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:31:23+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:31:23+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:31:23+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:31:23+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:40:26+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "1f8c6d4fe0d8f2f821bb45126c165f06ba587cc6"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:40:26+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "1f8c6d4fe0d8f2f821bb45126c165f06ba587cc6"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T23:40:26+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "1f8c6d4fe0d8f2f821bb45126c165f06ba587cc6"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T23:40:26+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "1f8c6d4fe0d8f2f821bb45126c165f06ba587cc6"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "DONE",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:41:04+08:00",
+      "reason": "主 Agent 对比合并态发现 TSCN 行尾导致跨签出内容摘要不同",
+      "evidence": [],
+      "commit": "1f8c6d4fe0d8f2f821bb45126c165f06ba587cc6"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:43:12+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:43:12+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T23:43:12+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T23:43:12+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-assets-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:45:20+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:45:20+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:45:21+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:45:21+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "7042c28fea7656b9a7b6824bf91472a1db0dccb0"
+    },
+    {
+      "task_id": "P2-INPUT-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "候选提交已冻结，开发自测及真实失败结果随提交保存",
+      "evidence": [],
+      "commit": "4f8ab4228883c449a82810ff839e528ea707bbef"
+    },
+    {
+      "task_id": "P2-INPUT-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "独立审查与独立 QA 对冻结提交复测",
+      "evidence": [],
+      "commit": "4f8ab4228883c449a82810ff839e528ea707bbef"
+    },
+    {
+      "task_id": "P2-BAI-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "候选提交已冻结，开发自测及真实失败结果随提交保存",
+      "evidence": [],
+      "commit": "aaf9228343126ad88c3037e0e57c78381b93b74f"
+    },
+    {
+      "task_id": "P2-BAI-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "独立审查与独立 QA 对冻结提交复测",
+      "evidence": [],
+      "commit": "aaf9228343126ad88c3037e0e57c78381b93b74f"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "候选提交已冻结，开发自测及真实失败结果随提交保存",
+      "evidence": [],
+      "commit": "a91b7fc86e76a826a879841bdfa4f2f803d66bf9"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "独立审查与独立 QA 对冻结提交复测",
+      "evidence": [],
+      "commit": "a91b7fc86e76a826a879841bdfa4f2f803d66bf9"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "候选提交已冻结，开发自测及真实失败结果随提交保存",
+      "evidence": [],
+      "commit": "a7c261676e3c959055f9fce4c0b4fc770adcf279"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:50:05+08:00",
+      "reason": "独立审查与独立 QA 对冻结提交复测",
+      "evidence": [],
+      "commit": "a7c261676e3c959055f9fce4c0b4fc770adcf279"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE-001",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-AUD-BATTLE",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T23:51:22+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-AUD-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "4cc9c23a908a0c15bff7c293579bdaca29483b58"
+    },
+    {
+      "task_id": "P2-INPUT-001",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-INPUT-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-INPUT-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-INPUT-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-INPUT",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-INPUT",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-INPUT",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-INPUT",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T23:51:28+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-INPUT-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-CAM",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:51:29+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-CAM",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:51:29+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:51:29+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:51:29+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:54:29+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:54:29+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T23:56:27+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T23:56:27+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "IN_PROGRESS",
+      "new": "BLOCKED",
+      "time": "2026-11-25T00:03:45+08:00",
+      "reason": "普通队长退出与权限回滚已有候选；三方终局需要独立 ADR-015 选择。",
+      "evidence": [
+        "docs/architecture/decisions/ADR-015-multiside-withdrawal.md"
+      ],
+      "commit": "1f33d56fb04529692a5c4a98e6297d8f50f8d810"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "固化实际候选，启动原套及真实边界探针",
+      "evidence": [],
+      "commit": "8e659d02f961d7e6bef7df0b89d8c8a3618af749"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "交独立审查与 QA",
+      "evidence": [],
+      "commit": "8e659d02f961d7e6bef7df0b89d8c8a3618af749"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "固化实际候选，启动原套及真实边界探针",
+      "evidence": [],
+      "commit": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "交独立审查与 QA",
+      "evidence": [],
+      "commit": "b6db94b8e65d2fcf61155b50d7f5888b732d55bf"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "固化实际候选，启动原套及真实边界探针",
+      "evidence": [],
+      "commit": "e3edbbf630bb8b29bf2f957f22e5567345142a0b"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "交独立审查与 QA",
+      "evidence": [],
+      "commit": "e3edbbf630bb8b29bf2f957f22e5567345142a0b"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "固化实际候选，启动原套及真实边界探针",
+      "evidence": [],
+      "commit": "b143462a4b9243ab03b5cec2c6b998c4ea328389"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "交独立审查与 QA",
+      "evidence": [],
+      "commit": "b143462a4b9243ab03b5cec2c6b998c4ea328389"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "固化实际候选，启动原套及真实边界探针",
+      "evidence": [],
+      "commit": "49b608eb6abceb3b1e8825760bb456a542c3f9e8"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "交独立审查与 QA",
+      "evidence": [],
+      "commit": "49b608eb6abceb3b1e8825760bb456a542c3f9e8"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "REVIEW",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:03:46+08:00",
+      "reason": "审查复现相机放弃作用域后被旧扫掠回调重新激活，正在退修。",
+      "evidence": [],
+      "commit": "8e659d02f961d7e6bef7df0b89d8c8a3618af749"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-25T00:05:25+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/combat-batch-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "d5cee7c0ac19ab31770205005ee2c3bc0deffdf5"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:05:25+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/combat-batch-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "d5cee7c0ac19ab31770205005ee2c3bc0deffdf5"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:05:25+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/combat-batch-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "d5cee7c0ac19ab31770205005ee2c3bc0deffdf5"
+    },
+    {
+      "task_id": "P2-BAI-003",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:05:25+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/combat-batch-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "d5cee7c0ac19ab31770205005ee2c3bc0deffdf5"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-25T00:05:30+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/eligibility-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "a9d3ce8ea97bcb7d0604d0cfa849567761773722"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:05:30+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/eligibility-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "a9d3ce8ea97bcb7d0604d0cfa849567761773722"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:05:30+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/eligibility-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "a9d3ce8ea97bcb7d0604d0cfa849567761773722"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:05:30+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/eligibility-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "a9d3ce8ea97bcb7d0604d0cfa849567761773722"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-25T00:05:34+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/profile-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "3452b58e6a060b707d25c4505f79258065791398"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:05:34+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/profile-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "3452b58e6a060b707d25c4505f79258065791398"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:05:34+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/profile-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "3452b58e6a060b707d25c4505f79258065791398"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-003",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:05:34+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-003.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/profile-003.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "3452b58e6a060b707d25c4505f79258065791398"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-25T00:05:45+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/motion-batch-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "701ff5b0eb230d96f5f331b9d3cff16552e62add"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:05:45+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/motion-batch-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "701ff5b0eb230d96f5f331b9d3cff16552e62add"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:05:45+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/motion-batch-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "701ff5b0eb230d96f5f331b9d3cff16552e62add"
+    },
+    {
+      "task_id": "P2-BAI-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:05:45+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-002.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/motion-batch-002.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "701ff5b0eb230d96f5f331b9d3cff16552e62add"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-001",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-VIS-BATTLE",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:05:59+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-VIS-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "824c2e68a5d115fd06c9641ef8568ddf9bf13898"
+    },
+    {
+      "task_id": "P2-BAI-001",
+      "old": "REVIEW",
+      "new": "TESTING",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:06:43+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-BAI-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-T",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-T",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-T-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-T-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-F",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-F",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-F-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-F-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-I",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-I",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-I-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-BAI-I-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:07:12+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "154af0805882d215652556c3677b23efa06ac750"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-CAM-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-CAM",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-CAM",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-CAM",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-CAM",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T00:11:23+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-CAM-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/camera-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-BAI-I-002",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T00:12:21+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
+    },
+    {
+      "task_id": "P2-BAI-I-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T00:12:21+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac"
     }
   ]
 }

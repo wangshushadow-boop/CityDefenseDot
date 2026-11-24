@@ -1,0 +1,404 @@
+[
+  {
+    "name": "p2-rules",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\suite-p2-rules\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p2/rules/run.gd"
+    ],
+    "markers": [
+      "P2-RULES-FIELD PASS"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.547,
+    "log": "out\\p2-qa\\rules-a0fbd85\\suite-p2-rules\\stdout.txt",
+    "sha256": "937568d06fe86d281a0413f5e91aafbdf95143ea361d398fb2339c125f176aa7",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P2-RULES-FIELD PASS assertions=38 physical_contacts=1"
+    ],
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "p2-field_eligibility",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\suite-p2-field_eligibility\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p2/field_eligibility/run.gd"
+    ],
+    "markers": [
+      "P2-WAVE-ELIGIBILITY failures=0"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.344,
+    "log": "out\\p2-qa\\rules-a0fbd85\\suite-p2-field_eligibility\\stdout.txt",
+    "sha256": "871c3929115d6fd6b9e048f292e6c371a9f9cd452e79fea96504a4edb0e0b46e",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P2-WAVE-ELIGIBILITY failures=0"
+    ],
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "captains",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\suite-captains\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\captains.gd"
+    ],
+    "markers": [
+      "QA_CAPTAINS errors=0"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.437,
+    "log": "out\\p2-qa\\rules-a0fbd85\\suite-captains\\stdout.txt",
+    "sha256": "20e474e168f875bc51f77cfcb7ec0e43f4cf2a7b209491ac3df3dee01d94d887",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_CAPTAINS errors=0 checks=12 entered=[0, 1, 3, 4, 6] retired=[{ \"source_slot_id\": 0, \"end_status\": \"wounded\", \"wounded\": true }, { \"source_slot_id\": 1, \"end_status\": \"withdrawn\" }]"
+    ],
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "bad-reader",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\suite-bad-reader\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-review\\rules6_bad_reader.gd"
+    ],
+    "markers": [
+      "empty successful read response="
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.344,
+    "log": "out\\p2-qa\\rules-a0fbd85\\suite-bad-reader\\stdout.txt",
+    "sha256": "b5fac3388de02315c9962b10dcca1e55af20629f1e3dbb13dc76a35e4f7dfa6e",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "empty successful read response={ \"ok\": false, \"error\": { \"code\": \"InvalidArgument\", \"field\": \"commander.resolve\", \"detail\": <null>, \"message_key\": \"error.invalid_argument\", \"retryable\": false } }"
+    ],
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "captain-sort",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\suite-captain-sort\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-review\\rules6_cap.gd"
+    ],
+    "markers": [
+      "same report=true",
+      " errors=0"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.343,
+    "log": "out\\p2-qa\\rules-a0fbd85\\suite-captain-sort\\stdout.txt",
+    "sha256": "8d2f476145fd15191356c0ba0ed43f09a3ec3e23dfdbf678a56cfa33d7d264b5",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "lookup re-entry withdrawal={ \"ok\": false, \"error\": { \"code\": \"InvalidState\", \"field\": \"outcome\", \"detail\": <null>, \"message_key\": \"error.invalid_state\", \"retryable\": false } } staged eligibility=[]",
+      "departed team options=[] accepted={ \"ok\": false, \"error\": { \"code\": \"Unauthorized\", \"field\": \"commander\", \"detail\": <null>, \"message_key\": \"error.unauthorized\", \"retryable\": false } } mode=spectate facts=[]",
+      "simultaneous order forward=[0, \"0\"] reverse=[0, \"0\"] same report=true",
+      "CAPTAINS checks=10 errors=0"
+    ],
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "actual-mission",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\suite-actual-mission\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-review\\rules6_mission.gd"
+    ],
+    "markers": [
+      "RULES_COMBINED checks=",
+      "faults=0"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.36,
+    "log": "out\\p2-qa\\rules-a0fbd85\\suite-actual-mission\\stdout.txt",
+    "sha256": "4740959ec0d7a10c18fa154e7105751c1b7d42bd7f3e0b22fcb0f078d4f2f070",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "RULES_COMBINED checks=8 faults=0"
+    ],
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "p1-engine",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\regressions-p1-engine\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p1/engine/run.gd"
+    ],
+    "markers": [
+      "ENGINE failures=0"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.438,
+    "log": "out\\p2-qa\\rules-a0fbd85\\regressions-p1-engine\\stdout.txt",
+    "sha256": "aa6cc14420419b966bb7f0492a29d5ebccdcfbd444bf6d8b468917119b82fe09",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-INF-ENGINE-01 PASS",
+      "T-INF-ENGINE-02 PASS hits=[{ \"query_index\": 0, \"entity_handle\": \"near\", \"fraction_ppm\": 399000, \"point_mm\": [-2020, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 0, \"entity_handle\": \"far\", \"fraction_ppm\": 699000, \"point_mm\": [3980, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"near\", \"fraction_ppm\": 395508, \"point_mm\": [-2020, 1000, 150], \"normal_ppm\": [-572602, 0, 819833], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"far\", \"fraction_ppm\": 695313, \"point_mm\": [3980, 1000, 150], \"normal_ppm\": [-593542, 0, 804803], \"region\": \"body\" }]",
+      "P1-ENGINE-HEADLESS-SLICE PASS",
+      "T-INF-ENGINE-04 PASS loops=50 median_us=3987 p95_us=4076 max_us=4188",
+      "ENGINE failures=0"
+    ],
+    "extra_qa": "regressions",
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "p2-movement",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\regressions-p2-movement\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p2/movement/run.gd"
+    ],
+    "markers": [
+      "MOV_QUEUE_CHECKS errors=0"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 2.468,
+    "log": "out\\p2-qa\\rules-a0fbd85\\regressions-p2-movement\\stdout.txt",
+    "sha256": "fb9ad145e837b028a1b58cef93445fcee17dd47441787fb7f02226c4127adbca",
+    "tail": [
+      "T-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327",
+      "T-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true",
+      "MOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2649",
+      "MOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8",
+      "MOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3869",
+      "MOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8",
+      "MOV_QUEUE_CHECKS errors=0 display=headless"
+    ],
+    "extra_qa": "regressions",
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "p1-rules",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\regressions-p1-rules\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p1/rules/run.gd"
+    ],
+    "markers": [
+      "PASS"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.266,
+    "log": "out\\p2-qa\\rules-a0fbd85\\regressions-p1-rules\\stdout.txt",
+    "sha256": "ed846cfff732f76619107f733f68be575cba96b0373faa54b5b2b70cea9424b4",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-SHRULE-01 PASS",
+      "T-SHRULE-02 PASS",
+      "T-SHRULE-03 PASS",
+      "P1-RULES-RNG PASS"
+    ],
+    "extra_qa": "regressions",
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "p1-mission",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\regressions-p1-mission\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p1/mission/run.gd"
+    ],
+    "markers": [
+      "T-MIS-RT-03 PASS"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.531,
+    "log": "out\\p2-qa\\rules-a0fbd85\\regressions-p1-mission\\stdout.txt",
+    "sha256": "8644ca26f94d9e95b8b38d98b02c23b2fe03c836b5146e984d66548182f0ec9d",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ],
+    "extra_qa": "regressions",
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "p2-combat",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\regressions-p2-combat\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p2/combat/run.gd"
+    ],
+    "markers": [
+      "P2-COM-002 PASS errors=0"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.531,
+    "log": "out\\p2-qa\\rules-a0fbd85\\regressions-p2-combat\\stdout.txt",
+    "sha256": "10e11f3600cadfb9a35bf62a4cbb31b63e9ac80b3454c2d2d00e1a5d3684c55e",
+    "tail": [
+      "",
+      "P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1",
+      "COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea",
+      "COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=432 max_us=4345",
+      "COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=1010 max_us=9296",
+      "COM field physics batches=44 queries=46",
+      "P2-COM-002 PASS errors=0"
+    ],
+    "extra_qa": "regressions",
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  },
+  {
+    "name": "p2-mission",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\regressions-p2-mission\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\checkout\\game",
+      "--script",
+      "res://tests/p2/mission/run.gd"
+    ],
+    "markers": [
+      "P2-MISSION-SOURCE PASS"
+    ],
+    "sha": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+    "seconds": 0.906,
+    "log": "out\\p2-qa\\rules-a0fbd85\\regressions-p2-mission\\stdout.txt",
+    "sha256": "2f9a7949936e59def1a714c0fcd2feba50b70ee0a26bbc63e42f678b4a0caa2e",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "WAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100",
+      "P2-MISSION-FIELD PASS checks=1038 failures=0",
+      "P2-MISSION-SOURCE PASS failures=0"
+    ],
+    "extra_qa": "regressions",
+    "runtime_commit": "b143462",
+    "adjudicated_scope": "ordinary captains only"
+  }
+]

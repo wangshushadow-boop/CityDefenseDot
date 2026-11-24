@@ -1,0 +1,12 @@
+Godot --headless --path game --script res://tests/p2/ai/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3041 ai_p95_us=3607 ai_p99_us=4073 combined_p95_us=7198 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=187.483333333333 schedule=356.916666666667 decisions=2560.175 los_inclusive=813.625 cache_hits=130 scouts=196 group_contacts=396 mov_begin=545.166666666667 mov_step=2062.2 project_mov=64.025 com_fork=41.575 com_step=388.275 commit_and_publish=56.6833333333333
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5649 ai_p95_us=6209 ai_p99_us=7091 combined_p95_us=12484 cpu_budget=PASS
+BAI_MEAN_US people=1000 publish=336.133333333333 schedule=573.883333333333 decisions=4801.95833333333 los_inclusive=1515.0 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1013.41666666667 mov_step=3952.15 project_mov=118.533333333333 com_fork=73.8416666666667 com_step=706.575 commit_and_publish=93.0416666666667
+FIELD_AI errors=0

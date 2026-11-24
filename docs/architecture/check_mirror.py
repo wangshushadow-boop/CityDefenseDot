@@ -19,6 +19,15 @@ def read_csv(name):
     with (ROOT / 'docs/testing' / name).open(encoding='utf-8-sig', newline='') as f:
         return list(csv.DictReader(f))
 
+def markdown_sources():
+    # QA exports and sibling worktrees contain independent repository roots.
+    generated_roots = {'.git', '.worktrees', 'worktrees', 'out', 'build', 'dist'}
+    for path in ROOT.iterdir():
+        if path.is_dir() and path.name not in generated_roots:
+            yield from path.rglob('*.md')
+        elif path.is_file() and path.suffix == '.md':
+            yield path
+
 def check():
     registry = json.loads(REGISTRY.read_text(encoding='utf-8'))
     mods = registry['modules']
@@ -72,7 +81,7 @@ def check():
         require(set(docs)=={by_id[m]['doc'] for m in mid}, f'document path mismatch: {r["requirement_id"]}')
         require(all(t in by_test and by_test[t]['module'] in mid for t in tids), f'unknown/mismatched test in requirement {r["requirement_id"]}')
     links=0
-    for f in ROOT.rglob('*.md'):
+    for f in markdown_sources():
         if f==ROOT/'docs/game_design.md':
             continue  # immutable input; it contains the original external references and examples
         for m in re.finditer(r'\]\(([^\s)]+)\)',f.read_text(encoding='utf-8')):

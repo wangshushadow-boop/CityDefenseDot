@@ -32,8 +32,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "549f1576f126579e55a644a641ad5c9c31b9b7a8",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-camera",
   "scope": "一/三人称、骑乘、碰撞、选取、部署和观战相机。 跟随、选中与观战，同一会话的视图",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -42,5 +42,5 @@
     "相机不改变权威结果、合法视角。",
     "跟随、选中与观战，同一会话的视图"
   ],
-  "status": "PLANNED"
+  "status": "DONE"
 }

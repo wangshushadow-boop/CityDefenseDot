@@ -2,78 +2,15 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P2-INPUT-001",
-      "owner": "p2formation",
-      "branch": "detached",
-      "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-input",
-      "allowed_paths": [
-        "game/presentation/input/",
-        "game/tests/p2/input/",
-        "development/reports/tasks/P2-INPUT-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/"
-      ]
-    },
-    {
-      "task_id": "P2-AUD-BATTLE-001",
-      "owner": "p2combat",
-      "branch": "detached",
-      "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-audio",
-      "allowed_paths": [
-        "game/presentation/audio/",
-        "game/tests/p2/audio/",
-        "development/reports/tasks/P2-AUD-BATTLE-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/"
-      ]
-    },
-    {
-      "task_id": "P2-BAI-001",
-      "owner": "nav",
-      "branch": "detached",
-      "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-ai",
-      "allowed_paths": [
-        "game/mission/ai/",
-        "game/tests/p2/ai/",
-        "development/reports/tasks/P2-BAI-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/mission/ai/formation/",
-        "game/mission/ai/formation/behaviors/",
-        "game/mission/ai/formation/controller/",
-        "game/mission/ai/formation/evaluation/",
-        "game/mission/ai/individual/",
-        "game/mission/ai/individual/behaviors/",
-        "game/mission/ai/individual/controller/",
-        "game/mission/ai/individual/decision/",
-        "game/mission/ai/individual/roles/",
-        "game/mission/ai/individual/targeting/",
-        "game/mission/ai/tactical/",
-        "game/mission/ai/tactical/commander/",
-        "game/mission/ai/tactical/evaluation/",
-        "game/mission/ai/tactical/planning/",
-        "game/mission/ai/tactical/strategies/"
-      ]
-    },
-    {
-      "task_id": "P2-VIS-BATTLE-002",
+      "task_id": "P2-RULES-FIELD-001",
       "owner": "main",
       "branch": "detached",
-      "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-field_assets",
+      "base_commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-rules",
       "allowed_paths": [
-        "game/content/base/field/",
-        "game/tests/p2/field_assets/",
-        "development/reports/tasks/P2-VIS-BATTLE-002.md"
+        "game/mission/rules/",
+        "game/tests/p2/rules/",
+        "development/reports/tasks/P2-RULES-FIELD-001.md"
       ],
       "excluded_paths": [
         "development/state/",
@@ -81,17 +18,67 @@
       ]
     },
     {
-      "task_id": "P2-VIS-BATTLE-001",
-      "owner": "battle",
+      "task_id": "P2-BAI-T-001",
+      "owner": "nav",
       "branch": "detached",
-      "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-visuals",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-tactical",
       "allowed_paths": [
-        "game/presentation/visuals/",
-        "game/tests/p2/visuals/",
-        "development/reports/tasks/P2-VIS-BATTLE-001.md"
+        "game/mission/ai/tactical/",
+        "game/tests/p2/tactical/",
+        "development/reports/tasks/P2-BAI-T-001.md"
       ],
       "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-BAI-F-001",
+      "owner": "p2formation",
+      "branch": "detached",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-formation_ai",
+      "allowed_paths": [
+        "game/mission/ai/formation/",
+        "game/tests/p2/formation_ai/",
+        "development/reports/tasks/P2-BAI-F-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-BAI-I-001",
+      "owner": "combatbatch",
+      "branch": "detached",
+      "base_commit": "154af0805882d215652556c3677b23efa06ac750",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-individual",
+      "allowed_paths": [
+        "game/mission/ai/individual/",
+        "game/tests/p2/individual/",
+        "development/reports/tasks/P2-BAI-I-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-BAI-I-002",
+      "owner": "battle",
+      "branch": "detached",
+      "base_commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-move_intents",
+      "allowed_paths": [
+        "game/mission/movement/",
+        "game/tests/p2/move_intents/",
+        "development/reports/tasks/P2-BAI-I-002.md"
+      ],
+      "excluded_paths": [
+        "game/contracts/",
+        "game/bootstrap/",
         "development/state/",
         "docs/architecture/"
       ]

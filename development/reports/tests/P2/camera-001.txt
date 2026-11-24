@@ -1,0 +1,12 @@
+Godot --headless --path game --script res://tests/p2/camera/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CAMERA_RESULT {"cases":{"T-CAM-01":{"grazing_arm_m":1.90859496593475,"pass":true,"update_p95_us":51,"updates":60},"T-CAM-03":{"pass":true}},"checks":94,"failures":0,"queries":76,"stage":"main"}
+
+Godot --headless --path game --script res://tests/p2/input/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-INPUT-02 PASS
+T-INPUT-03 PASS
+T-INPUT-01-AUTOMATED PASS
+P2-INPUT-001 PASS checks=379 failures=0 physical_pads=0

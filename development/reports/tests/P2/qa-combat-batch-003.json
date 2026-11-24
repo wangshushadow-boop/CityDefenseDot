@@ -1,0 +1,126 @@
+[
+  {
+    "name": "view-load",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\suite-view-load\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\checkout\\game",
+      "--script",
+      "res://tests/p2/combat_batch/run.gd",
+      "--",
+      "--view-load"
+    ],
+    "markers": [
+      "PASS assertions=178 errors=0"
+    ],
+    "sha": "e3edbbf630bb8b29bf2f957f22e5567345142a0b",
+    "seconds": 0.906,
+    "log": "out\\p2-qa\\combat_batch-e3edbbf\\suite-view-load\\stdout.txt",
+    "sha256": "bbce73a4d2e98693cb50009a6e5e7ffd6aa6c7d147e445b073b0fb2276c99080",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "COM_VIEW people=500 ticks=60 individual_p95_us=2157 batch_p95_us=1256",
+      "COM_VIEW people=1000 ticks=60 individual_p95_us=4264 batch_p95_us=2201",
+      "P2-BAI-003 PASS assertions=178 errors=0"
+    ]
+  },
+  {
+    "name": "p2-combat",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\suite-p2-combat\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\checkout\\game",
+      "--script",
+      "res://tests/p2/combat/run.gd"
+    ],
+    "markers": [
+      "P2-COM-002 PASS errors=0"
+    ],
+    "sha": "e3edbbf630bb8b29bf2f957f22e5567345142a0b",
+    "seconds": 0.531,
+    "log": "out\\p2-qa\\combat_batch-e3edbbf\\suite-p2-combat\\stdout.txt",
+    "sha256": "2bda21ba92f24d31ee2d03362b3b5899c6d36bb4bc6c8d248d04f2d6b631938a",
+    "tail": [
+      "",
+      "P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1",
+      "COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea",
+      "COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=203 max_us=1058",
+      "COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=421 max_us=2972",
+      "COM field physics batches=44 queries=46",
+      "P2-COM-002 PASS errors=0"
+    ]
+  },
+  {
+    "name": "previous-independent",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\suite-previous-independent\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\qa-com2.gd"
+    ],
+    "markers": [
+      "PASS"
+    ],
+    "sha": "e3edbbf630bb8b29bf2f957f22e5567345142a0b",
+    "seconds": 0.343,
+    "log": "out\\p2-qa\\combat_batch-e3edbbf\\suite-previous-independent\\stdout.txt",
+    "sha256": "f9941d62cb46d8b8c6f599ba0e9cd0bc0eb01ad3e7e6bc305e22d656a1f6acfd",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "COM_EXTRA PASS checks=2184 failures=0 real_sweep_queries=300 real_shape_hits=250 digest=0f0044cf83cf4762f34efc03631e0279b0b35d8a14819b0b4c20e1ea7e9e0b68"
+    ]
+  },
+  {
+    "name": "probe",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\suite-probe\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\combat_batch-e3edbbf\\independent.gd"
+    ],
+    "markers": [
+      "QA_COM_BATCH errors=0"
+    ],
+    "sha": "e3edbbf630bb8b29bf2f957f22e5567345142a0b",
+    "seconds": 0.25,
+    "log": "out\\p2-qa\\combat_batch-e3edbbf\\suite-probe\\stdout.txt",
+    "sha256": "778d063c58546a1668b3d31b4cfd7c474bee4ad181c8adca930136f72f2384ea",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_COM_BATCH errors=0"
+    ]
+  }
+]

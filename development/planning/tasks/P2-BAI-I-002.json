@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P2-BAI-I-002",
+  "kind": "EXECUTION",
+  "parent": "P2-BAI-I",
+  "stage": "P2",
+  "module_id": "MOV",
+  "title": "玩家与个体 AI 共用的 MOV 意图执行",
+  "spec": "docs/systems/game/mission/movement/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-BAI",
+    "P2-INPUT",
+    "P2-MOV"
+  ],
+  "requirements": [
+    "BAI-03",
+    "BAI-06",
+    "NAV-01"
+  ],
+  "acceptance_test_ids": [
+    "T-MOV-02",
+    "T-MOV-04"
+  ],
+  "allowed_paths": [
+    "game/mission/movement/",
+    "game/tests/p2/move_intents/",
+    "development/reports/tasks/P2-BAI-I-002.md"
+  ],
+  "excluded_paths": [
+    "game/contracts/",
+    "game/bootstrap/",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-move_intents",
+  "scope": "正常 MOV 候选步执行 v1 MoveIntent，统一玩家与个体 AI 的合法输入，保留导航、场景碰撞、速度约束、查询预算和回滚语义。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "相同意图无论玩家还是 AI 均产生相同位姿和拒绝原因。真实导航含断桥/障碍、步骑/停止、死亡或旧句柄、撤权与回滚，原 MOV 与 BAI 性能复验。"
+  ],
+  "status": "IN_PROGRESS"
+}

@@ -33,8 +33,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "154af0805882d215652556c3677b23efa06ac750",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-individual",
   "scope": "个体感知、FSM/Utility、目标、近战/远程/骑兵/骑射、紧急反应。 通过 COM、MOV 合法意图控制不同游戏兵种",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -43,5 +43,5 @@
     "四兵种、有限感知、目标锁定、命令与实际动作接口。",
     "通过 COM、MOV 合法意图控制不同游戏兵种"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

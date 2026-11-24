@@ -1,0 +1,481 @@
+[
+  {
+    "name": "cold-import",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\suite-cold-import\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\checkout\\game",
+      "--editor",
+      "--import"
+    ],
+    "markers": [
+      "Godot Engine"
+    ],
+    "sha": "aa8a71deed08536d0b00d4d29f1702bdc3fb6f39",
+    "seconds": 4.0,
+    "log": "out\\p2-qa\\visuals-aa8a71d\\suite-cold-import\\stdout.txt",
+    "sha256": "b85e278e77fbeac31d5a26b9d30aa67a111e2d28af1701e747ac22bbe0ff08f1",
+    "tail": [
+      "\u001b[92m[ DONE ]\u001b[39m \u001b[1mreimport\u001b[22m",
+      "\u001b[0m",
+      "[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Started 正在加载编辑器 (5 steps)\u001b[39m\u001b[0m",
+      "[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | 正在加载编辑器布局……\u001b[39m\u001b[0m",
+      "[  16% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | 正在加载停靠面板……\u001b[39m\u001b[0m",
+      "\u001b[92m[ DONE ]\u001b[39m \u001b[1mloading_editor_layout\u001b[22m",
+      "\u001b[0m"
+    ]
+  },
+  {
+    "name": "functional",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\suite-functional\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\checkout\\game",
+      "--script",
+      "res://tests/p2/visuals/run.gd"
+    ],
+    "markers": [
+      "VIS_FUNCTIONAL failures=0"
+    ],
+    "sha": "aa8a71deed08536d0b00d4d29f1702bdc3fb6f39",
+    "seconds": 5.359,
+    "log": "out\\p2-qa\\visuals-aa8a71d\\suite-functional\\stdout.txt",
+    "sha256": "df96e153642f019db8be4fddc58925d406a281a28e7843d17142debf6edc5d36",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "VIS_FUNCTIONAL failures=0"
+    ]
+  },
+  {
+    "name": "future",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\suite-future\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\future.gd"
+    ],
+    "markers": [
+      "QA_FUTURE checks=5 errors=0"
+    ],
+    "sha": "aa8a71deed08536d0b00d4d29f1702bdc3fb6f39",
+    "seconds": 0.813,
+    "log": "out\\p2-qa\\visuals-aa8a71d\\suite-future\\stdout.txt",
+    "sha256": "cdf5acfc6aeb647812050a227676338c79aa7ea5df7d16f916696891abc4818b",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_FUTURE checks=5 errors=0"
+    ]
+  },
+  {
+    "name": "benchmark-500",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\checkout\\game\\tests\\p2\\visuals\\benchmark.py",
+      "--project",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\checkout\\game",
+      "--godot",
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--count",
+      "500",
+      "--out",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\render-500"
+    ],
+    "markers": [
+      "/3:"
+    ],
+    "sha": "aa8a71deed08536d0b00d4d29f1702bdc3fb6f39",
+    "seconds": 29.343,
+    "log": "out\\p2-qa\\visuals-aa8a71d\\gpu-benchmark-500\\stdout.txt",
+    "sha256": "33e5472d761ba472937c1f24792270b2c861a26758189980f24f51438a7ee3d8",
+    "tail": [
+      "500/1: 303.3 FPS p95=5.95ms skinned=36 batched=564",
+      "500/2: 294.7 FPS p95=6.17ms skinned=36 batched=564",
+      "500/3: 303.9 FPS p95=6.07ms skinned=36 batched=564"
+    ],
+    "graphics_profile": "as-shipped, 4096 shadow, FOV 58",
+    "separate_base_assets": "7042c28",
+    "raw_summary": "out\\p2-qa\\visuals-aa8a71d\\render-500\\summary.json",
+    "frame_stats": [
+      {
+        "fps": 303.2846291288407,
+        "p95_ms": 5.946,
+        "tick_p95_ms": 3.555,
+        "vram_bytes": 232526608,
+        "rigs": 36,
+        "batched": 564,
+        "end": {
+          "corpses": 16,
+          "far_animated_instances": 564,
+          "impacts": 7,
+          "mounts": 100,
+          "near_skeletons": 36,
+          "projectiles": 78,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 600
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 294.7290483717178,
+        "p95_ms": 6.17,
+        "tick_p95_ms": 3.825,
+        "vram_bytes": 232526608,
+        "rigs": 36,
+        "batched": 564,
+        "end": {
+          "corpses": 16,
+          "far_animated_instances": 564,
+          "impacts": 7,
+          "mounts": 100,
+          "near_skeletons": 36,
+          "projectiles": 78,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 600
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 303.86219849298345,
+        "p95_ms": 6.0680000000000005,
+        "tick_p95_ms": 3.606,
+        "vram_bytes": 232526608,
+        "rigs": 36,
+        "batched": 564,
+        "end": {
+          "corpses": 16,
+          "far_animated_instances": 564,
+          "impacts": 7,
+          "mounts": 100,
+          "near_skeletons": 36,
+          "projectiles": 78,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 600
+        },
+        "within_visual_budget": true
+      }
+    ],
+    "workload": "Synthetic committed pose/event stream through production VIS; not whole-battle timing."
+  },
+  {
+    "name": "benchmark-1000",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\checkout\\game\\tests\\p2\\visuals\\benchmark.py",
+      "--project",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\checkout\\game",
+      "--godot",
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--count",
+      "1000",
+      "--out",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\render-1000"
+    ],
+    "markers": [
+      "/3:"
+    ],
+    "sha": "aa8a71deed08536d0b00d4d29f1702bdc3fb6f39",
+    "seconds": 30.047,
+    "log": "out\\p2-qa\\visuals-aa8a71d\\gpu-benchmark-1000\\stdout.txt",
+    "sha256": "24e1f31fbd9936855737562dd7b9123567bdbbc828409d47fd297a28173e5356",
+    "tail": [
+      "1000/1: 135.1 FPS p95=11.58ms skinned=36 batched=1164",
+      "1000/2: 137.1 FPS p95=11.57ms skinned=36 batched=1164",
+      "1000/3: 139.0 FPS p95=11.30ms skinned=36 batched=1164"
+    ],
+    "graphics_profile": "as-shipped, 4096 shadow, FOV 58",
+    "separate_base_assets": "7042c28",
+    "raw_summary": "out\\p2-qa\\visuals-aa8a71d\\render-1000\\summary.json",
+    "frame_stats": [
+      {
+        "fps": 135.0686599021169,
+        "p95_ms": 11.576,
+        "tick_p95_ms": 7.368,
+        "vram_bytes": 232381488,
+        "rigs": 36,
+        "batched": 1164,
+        "end": {
+          "corpses": 29,
+          "far_animated_instances": 1164,
+          "impacts": 13,
+          "mounts": 200,
+          "near_skeletons": 36,
+          "projectiles": 154,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 1200
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 137.06468654769984,
+        "p95_ms": 11.568,
+        "tick_p95_ms": 7.369,
+        "vram_bytes": 232382640,
+        "rigs": 36,
+        "batched": 1164,
+        "end": {
+          "corpses": 29,
+          "far_animated_instances": 1164,
+          "impacts": 13,
+          "mounts": 200,
+          "near_skeletons": 36,
+          "projectiles": 154,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 1200
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 138.9697696646801,
+        "p95_ms": 11.302,
+        "tick_p95_ms": 7.222,
+        "vram_bytes": 232383472,
+        "rigs": 36,
+        "batched": 1164,
+        "end": {
+          "corpses": 29,
+          "far_animated_instances": 1164,
+          "impacts": 13,
+          "mounts": 200,
+          "near_skeletons": 36,
+          "projectiles": 154,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 1200
+        },
+        "within_visual_budget": true
+      }
+    ],
+    "workload": "Synthetic committed pose/event stream through production VIS; not whole-battle timing."
+  },
+  {
+    "name": "benchmark-500",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\p0-profile\\game\\tests\\p2\\visuals\\benchmark.py",
+      "--project",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\p0-profile\\game",
+      "--godot",
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--count",
+      "500",
+      "--out",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\p0-render-500"
+    ],
+    "markers": [
+      "/3:"
+    ],
+    "sha": "aa8a71deed08536d0b00d4d29f1702bdc3fb6f39",
+    "seconds": 29.438,
+    "log": "out\\p2-qa\\visuals-aa8a71d\\gpu-p0-benchmark-500\\stdout.txt",
+    "sha256": "ec7f7a9abbaf04e700c51b5f789f2db33590b460d87aada7208dd06626429b7f",
+    "tail": [
+      "500/1: 295.4 FPS p95=6.31ms skinned=36 batched=564",
+      "500/2: 317.3 FPS p95=5.96ms skinned=36 batched=564",
+      "500/3: 314.6 FPS p95=6.03ms skinned=36 batched=564"
+    ],
+    "graphics_profile": "P0 shadow and camera, QA fixture only",
+    "separate_base_assets": "7042c28",
+    "raw_summary": "out\\p2-qa\\visuals-aa8a71d\\p0-render-500\\summary.json",
+    "frame_stats": [
+      {
+        "fps": 295.41348885997735,
+        "p95_ms": 6.312,
+        "tick_p95_ms": 3.838,
+        "vram_bytes": 207363792,
+        "rigs": 36,
+        "batched": 564,
+        "end": {
+          "corpses": 16,
+          "far_animated_instances": 564,
+          "impacts": 7,
+          "mounts": 100,
+          "near_skeletons": 36,
+          "projectiles": 78,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 600
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 317.3424664095993,
+        "p95_ms": 5.964,
+        "tick_p95_ms": 3.719,
+        "vram_bytes": 207363408,
+        "rigs": 36,
+        "batched": 564,
+        "end": {
+          "corpses": 16,
+          "far_animated_instances": 564,
+          "impacts": 7,
+          "mounts": 100,
+          "near_skeletons": 36,
+          "projectiles": 78,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 600
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 314.6414020780657,
+        "p95_ms": 6.032,
+        "tick_p95_ms": 3.755,
+        "vram_bytes": 207363408,
+        "rigs": 36,
+        "batched": 564,
+        "end": {
+          "corpses": 16,
+          "far_animated_instances": 564,
+          "impacts": 7,
+          "mounts": 100,
+          "near_skeletons": 36,
+          "projectiles": 78,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 600
+        },
+        "within_visual_budget": true
+      }
+    ],
+    "workload": "Synthetic committed pose/event stream through production VIS; not whole-battle timing."
+  },
+  {
+    "name": "benchmark-1000",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\p0-profile\\game\\tests\\p2\\visuals\\benchmark.py",
+      "--project",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\p0-profile\\game",
+      "--godot",
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--count",
+      "1000",
+      "--out",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\visuals-aa8a71d\\p0-render-1000"
+    ],
+    "markers": [
+      "/3:"
+    ],
+    "sha": "aa8a71deed08536d0b00d4d29f1702bdc3fb6f39",
+    "seconds": 30.063,
+    "log": "out\\p2-qa\\visuals-aa8a71d\\gpu-p0-benchmark-1000\\stdout.txt",
+    "sha256": "7574a9b33a2c7c4048db2e7a3dc0f867b8749fb0a7ff34ce49e22e89ee34a7d2",
+    "tail": [
+      "1000/1: 128.0 FPS p95=12.68ms skinned=36 batched=1164",
+      "1000/2: 135.9 FPS p95=11.95ms skinned=36 batched=1164",
+      "1000/3: 134.8 FPS p95=12.13ms skinned=36 batched=1164"
+    ],
+    "graphics_profile": "P0 shadow and camera, QA fixture only",
+    "separate_base_assets": "7042c28",
+    "raw_summary": "out\\p2-qa\\visuals-aa8a71d\\p0-render-1000\\summary.json",
+    "frame_stats": [
+      {
+        "fps": 127.99474838712469,
+        "p95_ms": 12.682,
+        "tick_p95_ms": 7.94,
+        "vram_bytes": 207333200,
+        "rigs": 36,
+        "batched": 1164,
+        "end": {
+          "corpses": 29,
+          "far_animated_instances": 1164,
+          "impacts": 13,
+          "mounts": 200,
+          "near_skeletons": 36,
+          "projectiles": 154,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 1200
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 135.86397065871688,
+        "p95_ms": 11.947000000000001,
+        "tick_p95_ms": 7.617,
+        "vram_bytes": 207333200,
+        "rigs": 36,
+        "batched": 1164,
+        "end": {
+          "corpses": 29,
+          "far_animated_instances": 1164,
+          "impacts": 13,
+          "mounts": 200,
+          "near_skeletons": 36,
+          "projectiles": 154,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 1200
+        },
+        "within_visual_budget": true
+      },
+      {
+        "fps": 134.81069901591513,
+        "p95_ms": 12.127,
+        "tick_p95_ms": 7.87,
+        "vram_bytes": 207331152,
+        "rigs": 36,
+        "batched": 1164,
+        "end": {
+          "corpses": 29,
+          "far_animated_instances": 1164,
+          "impacts": 13,
+          "mounts": 200,
+          "near_skeletons": 36,
+          "projectiles": 154,
+          "scope_id": "visual-mixed-field",
+          "tick": 480,
+          "visible_actors": 1200
+        },
+        "within_visual_budget": true
+      }
+    ],
+    "workload": "Synthetic committed pose/event stream through production VIS; not whole-battle timing."
+  }
+]

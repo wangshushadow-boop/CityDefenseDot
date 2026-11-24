@@ -1,0 +1,14 @@
+Godot --headless --path game --script res://tests/p2/audio/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-AUD-01-AUTO PASS actors=500 confirmed_hits=250 budget=12 peak=10 dropped=185 voice_pcm_frames=16384 pcm_peak=0.48492667078972 human_intelligibility=NOT_RUN
+T-AUD-02 PASS silent_victory_caption=audio.defeat
+T-AUD-03 PASS remaining_audio_buses=0
+P2-AUD-BATTLE-001 PASS errors=0
+
+Godot --headless --path game --script res://tests/p1/mission/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373
+T-MIS-RT-03 PASS switches=50 live_nodes=1
+MISSION failures=0

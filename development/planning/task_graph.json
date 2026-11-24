@@ -847,7 +847,9 @@
       "kind": "PACKAGE",
       "title": "战场 AI 共同基础、感知与调度",
       "module_ids": [
-        "BAI"
+        "BAI",
+        "MOV",
+        "COM"
       ],
       "depends_on": [
         "GATE-P1",
@@ -859,7 +861,9 @@
       "acceptance": "可见性、旧意图拒绝、scope 生命周期、分层调度与性能。",
       "approval_required": false,
       "spec_paths": [
-        "docs/systems/game/mission/ai/README.md"
+        "docs/systems/game/mission/ai/README.md",
+        "docs/systems/game/mission/movement/README.md",
+        "docs/systems/game/mission/combat/README.md"
       ],
       "candidate_test_ids": [
         "T-BAI-01",
@@ -937,7 +941,8 @@
       "kind": "PACKAGE",
       "title": "L3 个体 AI：士兵感知、目标与动作意图",
       "module_ids": [
-        "BAI-I"
+        "BAI-I",
+        "MOV"
       ],
       "depends_on": [
         "GATE-P1",
@@ -947,7 +952,8 @@
       "acceptance": "四兵种、有限感知、目标锁定、命令与实际动作接口。",
       "approval_required": false,
       "spec_paths": [
-        "docs/systems/game/mission/ai/individual/README.md"
+        "docs/systems/game/mission/ai/individual/README.md",
+        "docs/systems/game/mission/movement/README.md"
       ],
       "candidate_test_ids": [
         "T-BAI-I-01",
@@ -968,7 +974,8 @@
       "kind": "PACKAGE",
       "title": "Mission 规则、目标与玩法组合（FIELD）",
       "module_ids": [
-        "RULES"
+        "RULES",
+        "MIS-RT"
       ],
       "depends_on": [
         "GATE-P1",
@@ -980,7 +987,8 @@
       "acceptance": "真实野战胜败、撤退、增援和模式隔离；其他规则在 P4–P6。",
       "approval_required": false,
       "spec_paths": [
-        "docs/systems/game/mission/rules/README.md"
+        "docs/systems/game/mission/rules/README.md",
+        "docs/systems/game/mission/runtime/README.md"
       ],
       "candidate_test_ids": [
         "T-RULES-01",
@@ -1103,7 +1111,8 @@
       "title": "地图与战场视觉代理、动画、LOD（BATTLE）",
       "module_ids": [
         "VIS",
-        "BASE"
+        "BASE",
+        "BOOT"
       ],
       "depends_on": [
         "GATE-P1",
@@ -1115,7 +1124,8 @@
       "approval_required": false,
       "spec_paths": [
         "docs/systems/game/presentation/visuals/README.md",
-        "docs/systems/game/content/base/README.md"
+        "docs/systems/game/content/base/README.md",
+        "docs/systems/game/bootstrap/README.md"
       ],
       "candidate_test_ids": [
         "T-VIS-01",
@@ -1201,7 +1211,8 @@
         "BOOT",
         "APP",
         "INF-ENGINE",
-        "CI"
+        "CI",
+        "MIS-RT"
       ],
       "depends_on": [
         "P2-MIS-RT-BATTLE",
@@ -1223,7 +1234,8 @@
         "docs/systems/game/bootstrap/README.md",
         "docs/systems/game/application/README.md",
         "docs/systems/game/infrastructure/engine/README.md",
-        "docs/systems/ci/README.md"
+        "docs/systems/ci/README.md",
+        "docs/systems/game/mission/runtime/README.md"
       ],
       "candidate_test_ids": [
         "T-TEST-01",

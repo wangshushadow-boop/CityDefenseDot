@@ -1,0 +1,238 @@
+[
+  {
+    "name": "trial-1",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\suite-trial-1\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\checkout\\game",
+      "--script",
+      "res://tests/p2/ai/run.gd"
+    ],
+    "markers": [
+      "T-BAI-04 threaded_late_result_rejected=true",
+      "FIELD_AI errors=0"
+    ],
+    "sha": "3f7e7d07495be9d3428a67224b9b8dc265a4e45a",
+    "seconds": 3.672,
+    "log": "out\\p2-qa\\ai-3f7e7d0\\suite-trial-1\\stdout.txt",
+    "sha256": "eb4c3a8516ee0649ac8afa868c51732fb07516878dd632e61469f02516ffd6aa",
+    "tail": [
+      "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+      "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+      "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2930 ai_p95_us=3488 ai_p99_us=3915 combined_p95_us=6842 cpu_budget=PASS",
+      "BAI_MEAN_US people=500 publish=173.333333333333 schedule=342.383333333333 decisions=2476.88333333333 los_inclusive=797.633333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=522.933333333333 mov_step=2031.875 project_mov=59.3416666666667 com_fork=37.75 com_step=366.216666666667 commit_and_publish=51.2083333333333",
+      "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5741 ai_p95_us=7661 ai_p99_us=8697 combined_p95_us=15062 cpu_budget=PASS",
+      "BAI_MEAN_US people=1000 publish=368.391666666667 schedule=610.966666666667 decisions=5052.325 los_inclusive=1591.13333333333 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1120.8 mov_step=4077.125 project_mov=116.816666666667 com_fork=82.9916666666667 com_step=779.233333333333 commit_and_publish=103.466666666667",
+      "FIELD_AI errors=0"
+    ],
+    "movement_sha": "b6db94b",
+    "combat_sha": "e3edbbf",
+    "loads": [
+      {
+        "population": 500,
+        "decision_jobs": 5120,
+        "physical_los": 10504,
+        "accepted_intents": 5120,
+        "backlog": 0,
+        "ai_p95_us": 3488,
+        "combined_p95_us": 6842,
+        "budget": "PASS"
+      },
+      {
+        "population": 1000,
+        "decision_jobs": 10120,
+        "physical_los": 20501,
+        "accepted_intents": 10114,
+        "backlog": 0,
+        "ai_p95_us": 7661,
+        "combined_p95_us": 15062,
+        "budget": "PASS"
+      }
+    ]
+  },
+  {
+    "name": "trial-2",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\suite-trial-2\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\checkout\\game",
+      "--script",
+      "res://tests/p2/ai/run.gd"
+    ],
+    "markers": [
+      "T-BAI-04 threaded_late_result_rejected=true",
+      "FIELD_AI errors=0"
+    ],
+    "sha": "3f7e7d07495be9d3428a67224b9b8dc265a4e45a",
+    "seconds": 3.687,
+    "log": "out\\p2-qa\\ai-3f7e7d0\\suite-trial-2\\stdout.txt",
+    "sha256": "6a3b3afdf035436d0c74cde03b92f0ed8c964687eef66c945855f967c1c3f922",
+    "tail": [
+      "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+      "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+      "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2907 ai_p95_us=4449 ai_p99_us=5223 combined_p95_us=8417 cpu_budget=PASS",
+      "BAI_MEAN_US people=500 publish=182.375 schedule=361.658333333333 decisions=2533.3 los_inclusive=821.166666666667 cache_hits=130 scouts=196 group_contacts=396 mov_begin=548.858333333333 mov_step=2085.925 project_mov=60.4083333333333 com_fork=37.4416666666667 com_step=375.4 commit_and_publish=53.8666666666667",
+      "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6248 ai_p95_us=7337 ai_p99_us=9320 combined_p95_us=14582 cpu_budget=PASS",
+      "BAI_MEAN_US people=1000 publish=430.741666666667 schedule=640.066666666667 decisions=5262.15833333333 los_inclusive=1633.10833333333 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1217.23333333333 mov_step=4284.69166666667 project_mov=125.691666666667 com_fork=103.525 com_step=791.991666666667 commit_and_publish=110.983333333333",
+      "FIELD_AI errors=0"
+    ],
+    "movement_sha": "b6db94b",
+    "combat_sha": "e3edbbf",
+    "loads": [
+      {
+        "population": 500,
+        "decision_jobs": 5120,
+        "physical_los": 10504,
+        "accepted_intents": 5120,
+        "backlog": 0,
+        "ai_p95_us": 4449,
+        "combined_p95_us": 8417,
+        "budget": "PASS"
+      },
+      {
+        "population": 1000,
+        "decision_jobs": 10120,
+        "physical_los": 20501,
+        "accepted_intents": 10114,
+        "backlog": 0,
+        "ai_p95_us": 7337,
+        "combined_p95_us": 14582,
+        "budget": "PASS"
+      }
+    ]
+  },
+  {
+    "name": "trial-3",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\suite-trial-3\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\checkout\\game",
+      "--script",
+      "res://tests/p2/ai/run.gd"
+    ],
+    "markers": [
+      "T-BAI-04 threaded_late_result_rejected=true",
+      "FIELD_AI errors=0"
+    ],
+    "sha": "3f7e7d07495be9d3428a67224b9b8dc265a4e45a",
+    "seconds": 3.422,
+    "log": "out\\p2-qa\\ai-3f7e7d0\\suite-trial-3\\stdout.txt",
+    "sha256": "9a2ffb345aca30acccf50a58b18fe827ccc7c7fcd50d99c340b01fef27e6b168",
+    "tail": [
+      "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+      "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+      "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2765 ai_p95_us=3521 ai_p99_us=3994 combined_p95_us=7382 cpu_budget=PASS",
+      "BAI_MEAN_US people=500 publish=165.275 schedule=320.766666666667 decisions=2377.96666666667 los_inclusive=773.208333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=507.691666666667 mov_step=2041.88333333333 project_mov=62.5 com_fork=35.4166666666667 com_step=340.65 commit_and_publish=46.9416666666667",
+      "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5695 ai_p95_us=6506 ai_p99_us=9383 combined_p95_us=13035 cpu_budget=PASS",
+      "BAI_MEAN_US people=1000 publish=343.925 schedule=582.5 decisions=4892.58333333333 los_inclusive=1550.525 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1030.95833333333 mov_step=4058.44166666667 project_mov=124.575 com_fork=74.4583333333333 com_step=710.708333333333 commit_and_publish=96.125",
+      "FIELD_AI errors=0"
+    ],
+    "movement_sha": "b6db94b",
+    "combat_sha": "e3edbbf",
+    "loads": [
+      {
+        "population": 500,
+        "decision_jobs": 5120,
+        "physical_los": 10504,
+        "accepted_intents": 5120,
+        "backlog": 0,
+        "ai_p95_us": 3521,
+        "combined_p95_us": 7382,
+        "budget": "PASS"
+      },
+      {
+        "population": 1000,
+        "decision_jobs": 10120,
+        "physical_los": 20501,
+        "accepted_intents": 10114,
+        "backlog": 0,
+        "ai_p95_us": 6506,
+        "combined_p95_us": 13035,
+        "budget": "PASS"
+      }
+    ]
+  },
+  {
+    "name": "functional",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\suite-functional\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\ai-3f7e7d0\\checkout\\game",
+      "--script",
+      "res://tests/p2/ai/run.gd",
+      "--",
+      "--functional-only"
+    ],
+    "markers": [
+      "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+      "T-BAI-02 dynamic_wall=true",
+      "T-BAI-04 threaded_late_result_rejected=true",
+      "FIELD_AI errors=0"
+    ],
+    "sha": "3f7e7d07495be9d3428a67224b9b8dc265a4e45a",
+    "seconds": 3.688,
+    "log": "out\\p2-qa\\ai-3f7e7d0\\suite-functional\\stdout.txt",
+    "sha256": "3f4f78a968edd72cce09f04c4d79b28965744ff5068fcf7d0e9bb5ddcab97211",
+    "tail": [
+      "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+      "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+      "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2813 ai_p95_us=3174 ai_p99_us=3489 combined_p95_us=6394 cpu_budget=PASS",
+      "BAI_MEAN_US people=500 publish=162.783333333333 schedule=323.166666666667 decisions=2371.94166666667 los_inclusive=771.683333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=493.775 mov_step=1972.2 project_mov=59.7833333333333 com_fork=32.2166666666667 com_step=340.55 commit_and_publish=47.6583333333333",
+      "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6292 ai_p95_us=7684 ai_p99_us=8571 combined_p95_us=14883 cpu_budget=PASS",
+      "BAI_MEAN_US people=1000 publish=447.083333333333 schedule=672.425 decisions=5270.75833333333 los_inclusive=1628.83333333333 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1223.325 mov_step=4254.76666666667 project_mov=126.075 com_fork=99.075 com_step=801.625 commit_and_publish=126.158333333333",
+      "FIELD_AI errors=0"
+    ],
+    "movement_sha": "b6db94b",
+    "combat_sha": "e3edbbf",
+    "loads": [
+      {
+        "population": 500,
+        "decision_jobs": 5120,
+        "physical_los": 10504,
+        "accepted_intents": 5120,
+        "backlog": 0,
+        "ai_p95_us": 3174,
+        "combined_p95_us": 6394,
+        "budget": "PASS"
+      },
+      {
+        "population": 1000,
+        "decision_jobs": 10120,
+        "physical_los": 20501,
+        "accepted_intents": 10114,
+        "backlog": 0,
+        "ai_p95_us": 7684,
+        "combined_p95_us": 14883,
+        "budget": "PASS"
+      }
+    ]
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "p2-field_eligibility",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\suite-p2-field_eligibility\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\checkout\\game",
+      "--script",
+      "res://tests/p2/field_eligibility/run.gd"
+    ],
+    "markers": [
+      "P2-WAVE-ELIGIBILITY failures=0"
+    ],
+    "sha": "b143462a4b9243ab03b5cec2c6b998c4ea328389",
+    "seconds": 0.438,
+    "log": "out\\p2-qa\\eligibility-b143462\\suite-p2-field_eligibility\\stdout.txt",
+    "sha256": "871c3929115d6fd6b9e048f292e6c371a9f9cd452e79fea96504a4edb0e0b46e",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P2-WAVE-ELIGIBILITY failures=0"
+    ]
+  },
+  {
+    "name": "union",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\suite-union\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\independent.gd"
+    ],
+    "markers": [
+      "QA_WAVE_UNION failures=0"
+    ],
+    "sha": "b143462a4b9243ab03b5cec2c6b998c4ea328389",
+    "seconds": 0.359,
+    "log": "out\\p2-qa\\eligibility-b143462\\suite-union\\stdout.txt",
+    "sha256": "826523bee8aca5369bef6fbb372a1a22d629359afe22351bd81e400f5391d4e7",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "QA_WAVE_UNION failures=0"
+    ]
+  },
+  {
+    "name": "p2-mission",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\suite-p2-mission\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\checkout\\game",
+      "--script",
+      "res://tests/p2/mission/run.gd"
+    ],
+    "markers": [
+      "P2-MISSION-SOURCE PASS"
+    ],
+    "sha": "b143462a4b9243ab03b5cec2c6b998c4ea328389",
+    "seconds": 0.906,
+    "log": "out\\p2-qa\\eligibility-b143462\\suite-p2-mission\\stdout.txt",
+    "sha256": "2f9a7949936e59def1a714c0fcd2feba50b70ee0a26bbc63e42f678b4a0caa2e",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "WAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100",
+      "P2-MISSION-FIELD PASS checks=1038 failures=0",
+      "P2-MISSION-SOURCE PASS failures=0"
+    ]
+  },
+  {
+    "name": "p1-mission",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\suite-p1-mission\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\eligibility-b143462\\checkout\\game",
+      "--script",
+      "res://tests/p1/mission/run.gd"
+    ],
+    "markers": [
+      "T-MIS-RT-03 PASS"
+    ],
+    "sha": "b143462a4b9243ab03b5cec2c6b998c4ea328389",
+    "seconds": 0.531,
+    "log": "out\\p2-qa\\eligibility-b143462\\suite-p1-mission\\stdout.txt",
+    "sha256": "8644ca26f94d9e95b8b38d98b02c23b2fe03c836b5146e984d66548182f0ec9d",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  }
+]

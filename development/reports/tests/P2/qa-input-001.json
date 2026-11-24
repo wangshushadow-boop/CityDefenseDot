@@ -1,0 +1,228 @@
+[
+  {
+    "name": "p2-input",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\suite-p2-input\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\checkout\\game",
+      "--script",
+      "res://tests/p2/input/run.gd"
+    ],
+    "markers": [
+      "T-INPUT-03 PASS"
+    ],
+    "sha": "4f8ab4228883c449a82810ff839e528ea707bbef",
+    "seconds": 0.531,
+    "log": "out\\p2-qa\\input-4f8ab42\\suite-p2-input\\stdout.txt",
+    "sha256": "cf6d5d492cabe8f31f8887263bbd3d40e9ccec3e775adee5a9cb2b9da051ef8e",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "T-INPUT-02 PASS",
+      "T-INPUT-03 PASS",
+      "T-INPUT-01-AUTOMATED PASS",
+      "P2-INPUT-001 PASS checks=379 failures=0 physical_pads=0"
+    ]
+  },
+  {
+    "name": "edges",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\suite-edges\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-review\\input3_edges.gd"
+    ],
+    "markers": [
+      "retry cached="
+    ],
+    "sha": "4f8ab4228883c449a82810ff839e528ea707bbef",
+    "seconds": 0.344,
+    "log": "out\\p2-qa\\input-4f8ab42\\suite-edges\\stdout.txt",
+    "sha256": "55e52e09215d0b8c364f4405ba4d9a178a0a997d1b7cacdf6fb7d49e93d78e62",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "quick tap windup=Windup phases after explicit cancel on tick 2=[\"cancel\"]",
+      "focused button=false UI after reserved Escape=battle",
+      "retryable error={ \"ok\": false, \"error\": { \"code\": \"Unavailable\", \"field\": \"simulation\", \"detail\": <null>, \"message_key\": \"error.unavailable\", \"retryable\": true } } retry cached={ \"ok\": true, \"value\": <null> } total attempts=3 accepted on next=[{ \"mission_id\": \"mission/input\", \"source_tick\": 1, \"control_revision\": 4, \"inputs\": [{ \"actor_handle\": { \"index\": 7, \"generation\": 1 }, \"input_phase\": \"start\", \"direction\": \"up\", \"weapon_slot\": 0, \"target_hint\": <null> }, { \"actor_handle\": { \"index\": 7, \"generation\": 1 }, \"desired_direction\": [0, 0, 0], \"speed_fraction\": 0.0, \"stance\": \"walk\" }] }, { \"mission_id\": \"mission/input\", \"source_tick\": 2, \"control_revision\": 4, \"inputs\": [{ \"actor_handle\": { \"index\": 7, \"generation\": 1 }, \"input_phase\": \"hold\", \"direction\": \"up\", \"weapon_slot\": 0, \"target_hint\": <null> }, { \"actor_handle\": { \"index\": 7, \"generation\": 1 }, \"desired_direction\": [0, 0, 0], \"speed_fraction\": 0.0, \"stance\": \"walk\" }] }]"
+    ]
+  },
+  {
+    "name": "retry",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\suite-retry\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\checkout\\game",
+      "--script",
+      "res://tests/p2/input/retry_cases.gd"
+    ],
+    "markers": [
+      "PASS checks=49 failures=0"
+    ],
+    "sha": "4f8ab4228883c449a82810ff839e528ea707bbef",
+    "seconds": 0.438,
+    "log": "out\\p2-qa\\input-4f8ab42\\suite-retry\\stdout.txt",
+    "sha256": "a4f8f39c402ca0929c99920f1d4f320fe07d4a462bbb3571cbcd5963e45339f7",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "P2-INPUT-001-RETRY PASS checks=49 failures=0"
+    ]
+  },
+  {
+    "name": "independent",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\suite-independent\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\checkout\\game",
+      "--script",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-69764b6\\qa-input-controls.gd"
+    ],
+    "markers": [
+      "INPUT_EXTRA PASS checks=13 failures=0"
+    ],
+    "sha": "4f8ab4228883c449a82810ff839e528ea707bbef",
+    "seconds": 0.344,
+    "log": "out\\p2-qa\\input-4f8ab42\\suite-independent\\stdout.txt",
+    "sha256": "d3df1c8545a53e7cce4416b5f8a2a54c64801c6fd608c82600f650e147345a19",
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "PAD_STRENGTH 0.87804877758026/0.75609755516052/0.0",
+      "INPUT_EXTRA PASS checks=13 failures=0"
+    ]
+  },
+  {
+    "name": "p2-combat",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\suite-p2-combat\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\checkout\\game",
+      "--script",
+      "res://tests/p2/combat/run.gd"
+    ],
+    "markers": [
+      "T-COM"
+    ],
+    "sha": "4f8ab4228883c449a82810ff839e528ea707bbef",
+    "seconds": 0.625,
+    "log": "out\\p2-qa\\input-4f8ab42\\suite-p2-combat\\stdout.txt",
+    "sha256": "f655356b6d4e2e3e69f3e6b6e16c76051e00cd3b736745af50a1c15f1ee0b6cd",
+    "tail": [
+      "",
+      "P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1",
+      "COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea",
+      "COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=977 max_us=4195",
+      "COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=1372 max_us=8443",
+      "COM field physics batches=44 queries=46",
+      "P2-COM-002 PASS errors=0"
+    ]
+  },
+  {
+    "name": "p2-formation",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\suite-p2-formation\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\checkout\\game",
+      "--script",
+      "res://tests/p2/formation/run.gd"
+    ],
+    "markers": [
+      "T-FORM"
+    ],
+    "sha": "4f8ab4228883c449a82810ff839e528ea707bbef",
+    "seconds": 1.39,
+    "log": "out\\p2-qa\\input-4f8ab42\\suite-p2-formation\\stdout.txt",
+    "sha256": "cfa24b77a844305732ef604f6065f481dd59e68dcc53a76280e14e92766c8fe2",
+    "tail": [
+      "T-FORM-01 PASS",
+      "T-FORM-02 PASS",
+      "T-FORM-03-READ-MODEL PASS",
+      "T-FORM-04-AUTHORITY PASS",
+      "P2-FORM-002 PASS",
+      "T-FORM-02-LAYOUT PASS",
+      "P2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124"
+    ]
+  },
+  {
+    "name": "input",
+    "status": "PASS",
+    "passed": true,
+    "pass_mark": true,
+    "exit": 0,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\window-input\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\input-4f8ab42\\checkout\\game",
+      "--resolution",
+      "640x400",
+      "--single-window",
+      "--audio-driver",
+      "Dummy",
+      "--script",
+      "res://tests/p2/input/run.gd"
+    ],
+    "markers": [
+      "T-INPUT-03 PASS",
+      "380"
+    ],
+    "sha": "4f8ab4228883c449a82810ff839e528ea707bbef",
+    "seconds": 1.703,
+    "log": "out\\p2-qa\\input-4f8ab42\\window-input\\stdout.txt",
+    "sha256": "026343d3636a3fa1f910b0168a41b1f46f59638e310ef594aa6ecc1ed97f6dd5",
+    "tail": [
+      "Vulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090",
+      "",
+      "T-INPUT-02 PASS",
+      "INPUT authority feedback rendered with Windows",
+      "T-INPUT-03 PASS",
+      "T-INPUT-01-AUTOMATED PASS",
+      "P2-INPUT-001 PASS checks=380 failures=0 physical_pads=0"
+    ]
+  }
+]

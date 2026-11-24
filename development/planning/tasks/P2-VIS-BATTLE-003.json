@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "P2-VIS-BATTLE-003",
+  "kind": "EXECUTION",
+  "parent": "P2-VIS-BATTLE",
+  "stage": "P2",
+  "module_id": "BOOT",
+  "title": "应用 P0 锁定的方向光阴影与本地音频项目选项",
+  "spec": "docs/systems/game/bootstrap/README.md",
+  "depends_on": [
+    "P2-AUD-BATTLE",
+    "GATE-P1",
+    "P2-COM",
+    "P2-MOV"
+  ],
+  "requirements": [
+    "VIS-01",
+    "ACC-01"
+  ],
+  "acceptance_test_ids": [
+    "T-VIS-03",
+    "T-AUD-02"
+  ],
+  "allowed_paths": [
+    "game/tests/p2/field_profile/",
+    "development/reports/tasks/P2-VIS-BATTLE-003.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "a81ba1063b8f1d19af775be0ddc194f03441f12a",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-profile",
+  "scope": "仅显式锁定方向光阴影 2048 和开启已实现的可选设备语音入口。核对实际运行时项目选项和功能回归；不代表实体设备人工听辨。 共享配置由主集成人按 P1 惯例在 a81ba10 单独写入；此任务验证该配置。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "Godot 冷启动确认阴影 2048、TTS 项目开关，原有引擎渲染与音频回归。"
+  ],
+  "status": "DONE"
+}

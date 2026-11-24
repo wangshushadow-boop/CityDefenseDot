@@ -31,8 +31,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "154af0805882d215652556c3677b23efa06ac750",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-formation_ai",
   "scope": "编队行为、推进/防守/射击/冲锋/撤退/重组，输出目标而不写执行状态。 通过 FORM 合法命令执行任务与反馈",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -41,5 +41,5 @@
     "保持与失效命令、队形与战术约束。",
     "通过 FORM 合法命令执行任务与反馈"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }
