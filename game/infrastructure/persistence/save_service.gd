@@ -7,6 +7,7 @@ const S = preload("res://contracts/schema.gd")
 const V = preload("res://contracts/values.gd")
 const Platform = preload("res://infrastructure/persistence/atomic_windows.gd")
 const META := ["schema_version","game_version","content_packages","content_hash","world_id","game_minute","commit_id","checksum","summary"]
+const LEDGER_PAGE_SIZE := 4096
 const COMMON := ["world_id","game_minute","content_hash","content_packages"]
 
 var _root: String
@@ -73,17 +74,44 @@ static func _id_ok(id: String) -> bool:
 			return false
 	return true
 
-static func _valid_ledger(value: Variant) -> bool:
-	if typeof(value) != TYPE_DICTIONARY:
-		return false
-	for key in value:
-		var id: String = key.uri_decode()
-		if not _id_ok(id) or id.uri_encode() != key:
-			return false
-		var fact: Variant = value[key]
-		if typeof(fact)!=TYPE_DICTIONARY or fact.size()!=2 or not V.hex(fact.get("digest"),64) or not V.hex(fact.get("commit_id"),32):
-			return false
-	return true
+static func _ledger_to_disk(ledger: Dictionary) -> Variant:
+	var keys := ledger.keys()
+	keys.sort()
+	var pages := []
+	var page := {}
+	for key: String in keys:
+		page[key.uri_encode()] = ledger[key]
+		if page.size() == LEDGER_PAGE_SIZE and keys.size() > LEDGER_PAGE_SIZE:
+			pages.append(page)
+			page = {}
+	if pages.is_empty():
+		return page
+	if not page.is_empty():
+		pages.append(page)
+	return pages
+
+static func _ledger_from_disk(value: Variant) -> Dictionary:
+	var paged := C.is_json_array(value)
+	if not paged and typeof(value) != TYPE_DICTIONARY:
+		return R.fail("InvalidState","world.applied_results")
+	var pages: Array = value if paged else [value]
+	if pages.is_empty():
+		return R.fail("InvalidState","world.applied_results")
+	var ledger := {}
+	for page: Variant in pages:
+		if typeof(page) != TYPE_DICTIONARY or (paged and (page.is_empty() or page.size() > LEDGER_PAGE_SIZE)):
+			return R.fail("InvalidState","world.applied_results")
+		for key in page:
+			if typeof(key) != TYPE_STRING:
+				return R.fail("InvalidState","world.applied_results")
+			var id: String = key.uri_decode()
+			var fact: Variant = page[key]
+			if not _id_ok(id) or id.uri_encode() != key or ledger.has(id):
+				return R.fail("InvalidState","world.applied_results")
+			if typeof(fact)!=TYPE_DICTIONARY or fact.size()!=2 or not V.hex(fact.get("digest"),64) or not V.hex(fact.get("commit_id"),32):
+				return R.fail("InvalidState","world.applied_results")
+			ledger[id] = fact
+	return R.ok(ledger)
 
 static func migrate(data: Variant, from: Variant, to: Variant) -> Dictionary:
 	if not V.integer(from) or not V.integer(to):
@@ -144,11 +172,11 @@ static func _generation(dir: String) -> Dictionary:
 				return R.fail("StaleVersion","world."+key)
 		if not data.has_all(["snapshot","applied_results"]):
 			return R.fail("InvalidState","world.fields")
-		if not _shape(data.snapshot) or not _valid_ledger(data.applied_results):
+		var restored := _ledger_from_disk(data.applied_results)
+		if not _shape(data.snapshot) or not restored.ok:
 			return R.fail("InvalidState","world.fields")
 		snapshot=data.snapshot
-		for disk_key: String in data.applied_results:
-			ledger[disk_key.uri_decode()]=data.applied_results[disk_key]
+		ledger=restored.value
 	for key in COMMON:
 		if snapshot[key]!=m[key]:
 			return R.fail("InvalidState","manifest."+key)
@@ -226,10 +254,7 @@ func _commit(slot: String, snapshot: Dictionary, summary: Dictionary, result_id:
 	var commit_id := Crypto.new().generate_random_bytes(16).hex_encode()
 	if result_id!="":
 		ledger[result_id]={"digest":digest.value,"commit_id":commit_id}
-	var disk_ledger := {}
-	for key: String in ledger:
-		disk_ledger[key.uri_encode()]=ledger[key]
-	var bytes := C.encode({"snapshot":snapshot,"applied_results":disk_ledger})
+	var bytes := C.encode({"snapshot":snapshot,"applied_results":_ledger_to_disk(ledger)})
 	if not bytes.ok:
 		return bytes
 	var manifest := {"schema_version":1,"game_version":"0.1","commit_id":commit_id,
