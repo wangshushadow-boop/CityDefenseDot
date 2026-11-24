@@ -1,5 +1,5 @@
 # game/mission/ai/tactical/
 
-项目：`recollection`。模块：`BAI-T`。
+普通野战的 L1 入口是 [FieldTactics](ports/field_tactics.gd)。组合层分发 BAI 战术任务并提供实时视图、指挥权与地形查询。测试入口见 [真实野战场景](../../../tests/p2/tactical/run.gd)。
 
-**状态：目录骨架，未实现。** 本目录 README 仅作为导航；正式设计见 [模块规格](../../../../docs/systems/game/mission/ai/tactical/README.md)。实际文件及测试在对应任务获准后建立，不在这里重复设计，不将目录存在当作功能完成。
+[权威设计](../../../../docs/systems/game/mission/ai/tactical/README.md)
