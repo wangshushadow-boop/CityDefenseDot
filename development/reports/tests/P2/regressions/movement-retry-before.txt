@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOV_RETRY result={ "ok": false, "error": { "code": "Unavailable", "field": "navigation_sync", "detail": <null>, "message_key": "error.unavailable", "retryable": true } } speeds previous/rejected/retried/control=2.66666460037231/0.0/0.13333261013031/2.79999709129334 positions retry/control=(0.937778, 0.0, 0.0)/(1.026667, 0.0, 0.0)

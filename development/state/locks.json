@@ -2,23 +2,6 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P2-MIS-RT-BATTLE-003",
-      "owner": "contracts",
-      "branch": "detached",
-      "base_commit": "cdfe8eb6d507ef680c1d52bd28badb7ff5453b3b",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-field_sources",
-      "allowed_paths": [
-        "game/contracts/field_sources.gd",
-        "game/contracts/field_sources.gd.uid",
-        "game/tests/p2/field_sources/",
-        "development/reports/tasks/P2-MIS-RT-BATTLE-003.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/"
-      ]
-    },
-    {
       "task_id": "P2-COM-002",
       "owner": "p2combat",
       "branch": "detached",
@@ -64,6 +47,24 @@
         "game/mission/formation/",
         "game/tests/p2/formation/",
         "development/reports/tasks/P2-FORM-002.md"
+      ],
+      "excluded_paths": [
+        "game/contracts/",
+        "game/bootstrap/",
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-MIS-RT-BATTLE-002",
+      "owner": "main",
+      "branch": "detached",
+      "base_commit": "4c28a1796f6a2c62ec24e1467c7fd204fdaf9e1b",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-mission2",
+      "allowed_paths": [
+        "game/mission/runtime/",
+        "game/tests/p2/mission/",
+        "development/reports/tasks/P2-MIS-RT-BATTLE-002.md"
       ],
       "excluded_paths": [
         "game/contracts/",

@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+native close={ "ok": true, "value": { "requested_revision": 3, "applied_revision": 2, "status": "pending" } }
+MOV_DISCONNECTED closed_nav_ready=true member_reachable=false group_reachable=true step_ok=true actual_position=(11.94667, 0.0, 0.0) arrived=true

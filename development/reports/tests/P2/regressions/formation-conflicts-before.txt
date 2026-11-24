@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+cross-team owner merge={ "order_id": "player1", "issuer_id": "player", "state": "Failed", "reason": "formation_ids", "tick": 1 } otherwise-valid delegate hold={ "order_id": "captain1", "issuer_id": "captain", "state": "Replaced", "reason": "player_priority", "tick": 1 } active=<null>

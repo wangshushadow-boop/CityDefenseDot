@@ -1,0 +1,13 @@
+{
+  "module": "field_sources",
+  "suite": "D:/work/game/recollection/out/p2-qa/qa-field_sources.gd",
+  "display": "headless",
+  "sha": "bab104395a591da936b1de48f66220487f49711a",
+  "exit": 0,
+  "pass_mark": true,
+  "tail": [
+    "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+    "",
+    "FIELD_QA PASS checks=1798 distinct_slots=1488 failures=0"
+  ]
+}

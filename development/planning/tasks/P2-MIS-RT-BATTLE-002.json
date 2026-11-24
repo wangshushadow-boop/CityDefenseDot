@@ -36,8 +36,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "4c28a1796f6a2c62ec24e1467c7fd204fdaf9e1b",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-mission2",
   "scope": "落实部署、波次、增援、规则 tick 相位、实体生命周期。",
   "non_goals": [
     "未经批准的公共契约扩展、其他阶段玩法。"
@@ -46,5 +46,5 @@
     "战场部署/增援及 generation、旧 scope、结果边界测试。",
     "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

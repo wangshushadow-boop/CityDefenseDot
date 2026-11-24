@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PRESSURE active=160 corridors=160 peak_queries=8 foot_moved=120 horses_moved=40
+CHOKE bidi=false n=64 arrived=23 ticks=1800 unchanged_final_300=60 still_in_gate=0 outside=0 max_step=0.11333429068327
+CHOKE bidi=true n=64 arrived=0 ticks=1800 unchanged_final_300=64 still_in_gate=17 outside=1464 max_step=0.11333381384611
+INDEPENDENT_MOV FAIL errors=2
+FAIL bottleneck false
+FAIL bottleneck true

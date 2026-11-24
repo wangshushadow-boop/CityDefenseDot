@@ -1,0 +1,80 @@
+[
+  {
+    "module": "field_sources",
+    "suite": "p2/field_sources",
+    "display": "headless",
+    "sha": "bab104395a591da936b1de48f66220487f49711a",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "FIELD_SOURCES checks=45 failures=0"
+    ]
+  },
+  {
+    "module": "field_sources",
+    "suite": "p1/contracts",
+    "display": "headless",
+    "sha": "bab104395a591da936b1de48f66220487f49711a",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "T-CON-03 PASS",
+      "P1-CON-BOUNDARY PASS",
+      "CON_CHECKS errors=0"
+    ]
+  },
+  {
+    "module": "field_sources",
+    "suite": "p1/mission",
+    "display": "headless",
+    "sha": "bab104395a591da936b1de48f66220487f49711a",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  },
+  {
+    "module": "field_sources",
+    "suite": "p2/mission",
+    "display": "headless",
+    "sha": "bab104395a591da936b1de48f66220487f49711a",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "",
+      "WAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100",
+      "P2-MISSION-SOURCE PASS failures=0"
+    ]
+  },
+  {
+    "module": "field_sources",
+    "suite": "p1/application",
+    "display": "headless",
+    "sha": "bab104395a591da936b1de48f66220487f49711a",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "T-APP-03 PASS",
+      "T-APP-04-SLICE PASS",
+      "APP_CHECKS errors=0"
+    ]
+  },
+  {
+    "module": "field_sources",
+    "suite": "p1/persistence",
+    "display": "headless",
+    "sha": "bab104395a591da936b1de48f66220487f49711a",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "T-PERSIST-03_SLICE PASS",
+      "T-PERSIST-04 NOT_RUN (requires real 50 Mission transitions)",
+      "PERSIST_CHECKS errors=0 child_processes=27"
+    ]
+  }
+]
