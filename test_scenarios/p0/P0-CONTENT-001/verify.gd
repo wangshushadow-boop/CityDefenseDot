@@ -24,8 +24,12 @@ func validate(definition: Dictionary, scene: Node) -> String:
 			return "provenance"
 	if not definition.get("markers") is Array or definition.markers.size() != 2:
 		return "marker"
-	for marker in definition.markers:
-		if not marker is String or not scene.find_child(marker, true, false) is Node3D:
+	for index in definition.markers.size():
+		var marker = definition.markers[index]
+		var prefix := "Spawn_" if index == 0 else "Gate_"
+		if not marker is String or not marker.is_valid_identifier() or not marker.begins_with(prefix):
+			return "marker"
+		if not scene.find_child(marker, true, false) is Node3D:
 			return "marker"
 	var animated_rigs := {}
 	for mesh_node in scene.find_children("*", "MeshInstance3D", true, false):

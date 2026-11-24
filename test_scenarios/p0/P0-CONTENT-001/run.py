@@ -56,6 +56,8 @@ def main():
             ("rigs", [definition["rigs"][0] | {"socket": "MissingGrip"}, definition["rigs"][1]], "socket"),
             ("rigs", [definition["rigs"][0]] * 2, "socket"),
             ("markers", ["MissingSpawn", "Gate_A"], "marker"),
+            ("markers", ["Spawn_A", "Spawn_A"], "marker"),
+            ("markers", ["Spawn_*", "Gate_A"], "marker"),
             ("action", definition["action"] | {"clip": "MissingClip"}, "clip"),
             ("action", definition["action"] | {"end_s": 2}, "window"),
             ("action", definition["action"] | {"start_s": 0.38}, "window"),
