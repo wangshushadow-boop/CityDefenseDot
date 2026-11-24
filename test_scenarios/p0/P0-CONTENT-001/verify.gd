@@ -4,6 +4,8 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func has_socket(rig: Skeleton3D, bone: String, socket: String) -> bool:
+	if not bone.is_valid_identifier() or not socket.is_valid_identifier():
+		return false
 	var joint := rig.find_bone(bone)
 	if joint < 0:
 		return false
