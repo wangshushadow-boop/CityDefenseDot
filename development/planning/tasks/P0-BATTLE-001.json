@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "P0-BATTLE-001",
+  "kind": "EXECUTION",
+  "parent": "P0-BATTLE",
+  "stage": "P0",
+  "module_id": "COM",
+  "title": "动作、蒙皮与混合战场容量试验",
+  "spec": "docs/systems/game/mission/combat/README.md",
+  "related_specs": [
+    "docs/systems/game/mission/combat/README.md",
+    "docs/systems/game/presentation/visuals/README.md",
+    "docs/systems/game/mission/runtime/README.md",
+    "docs/systems/native/README.md",
+    "docs/systems/game/infrastructure/engine/README.md"
+  ],
+  "depends_on": [
+    "P0-CRITERIA"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "B500",
+    "B1000",
+    "B-PROFILE"
+  ],
+  "allowed_paths": [
+    "development/reports/tasks/P0-BATTLE-001.md",
+    "test_scenarios/p0/P0-BATTLE-001/",
+    "development/reports/benchmarks/P0-BATTLE-001/"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "24e64706989d1265057325cc4d29b34634150058",
+  "worktree": "D:/work/game/recollection/.worktrees/p0-battle",
+  "scope": "候选引擎隔离验证方向动作、真实混合 500/1000 单位、动画蒙皮/碰撞及 CPU/GPU；不写正式核心。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "按冻结实验判据重放 500/1000 混合图形负载、采集三轮原始数据，逐档判定、提出热点及复验计划。"
+  ],
+  "status": "DONE"
+}

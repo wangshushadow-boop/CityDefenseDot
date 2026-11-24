@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "P0-NET-002",
+  "kind": "EXECUTION",
+  "parent": "P0-NET",
+  "stage": "P0",
+  "module_id": "NET",
+  "title": "64/128 个回环连接与受限历史快照的容量试验",
+  "spec": "docs/systems/game/infrastructure/network/README.md",
+  "related_specs": [
+    "docs/systems/game/infrastructure/network/README.md",
+    "docs/systems/game/multiplayer/README.md",
+    "docs/systems/server/dedicated/README.md"
+  ],
+  "depends_on": [
+    "P0-CRITERIA",
+    "P0-NET-001"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "NET-CAPACITY",
+    "NET-HISTORY"
+  ],
+  "allowed_paths": [
+    "test_scenarios/p0/P0-NET-002/",
+    "development/reports/tasks/P0-NET-002.md"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "71ddfb6d2793f0565d6f3eeb423b40879a0366dc",
+  "worktree": "D:/work/game/recollection/.worktrees/p0-net-scale",
+  "scope": "64/128 个独立 ENet 连接分档，分离生成客户端与权威服务端进程；有界历史按连接映射攻击时间，在同一历史样本校验近战、弹体发射、格挡和盾牌，弹体后续权威前推。仅 P0 候选。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "固定 30Hz 服务端、15Hz 快照及种子，明确 64/128 均为合成连接、模拟实体数和受限时窗；实测各档握手、到达/收敛、tick P95 <33.33ms、积压、包量、窗口内/越窗/未来/重复判定，有失败则如实记录。",
+    "记录原始测量与精确命令，复跑通过才能建议窗口，不签发正式策略。"
+  ],
+  "status": "DONE"
+}

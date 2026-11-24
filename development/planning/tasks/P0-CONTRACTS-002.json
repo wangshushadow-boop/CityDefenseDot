@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "P0-CONTRACTS-002",
+  "kind": "EXECUTION",
+  "parent": "P0-CONTRACTS",
+  "stage": "P0",
+  "module_id": null,
+  "title": "候选引擎与 Python 的契约规范字节互操作",
+  "spec": "docs/architecture/common_contracts.md",
+  "related_specs": [
+    "docs/systems/game/contracts/README.md",
+    "docs/systems/game/core/README.md",
+    "docs/systems/game/application/README.md",
+    "docs/systems/game/infrastructure/persistence/README.md"
+  ],
+  "depends_on": [
+    "P0-ENV",
+    "P0-CONTRACTS-001"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "CON-INTEROP"
+  ],
+  "allowed_paths": [
+    "test_scenarios/p0/P0-CONTRACTS-002/",
+    "development/reports/tasks/P0-CONTRACTS-002.md"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "71ddfb6d2793f0565d6f3eeb423b40879a0366dc",
+  "worktree": "D:/work/game/recollection/.worktrees/p0-contract-codec",
+  "scope": "跨 Godot Standard 4.7.2 与 Python 实测 v1 样例规范字节、散列、整数/文本边界，以及引擎默认 JSON 行为，定位 ADR-012 的兼容风险。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "固定一组有正负数、键排序和非 ASCII 的双向规范字节、散列；运行引擎拒绝/兼容性探针，包括 bool、整数/浮点、重复键和可精确表达上界。",
+    "若引擎内建 JSON 丢失所需信息或允许非法表示，报告真实观察及可验证的字节级检查候选。避免实现完整生产协议。"
+  ],
+  "status": "DONE"
+}

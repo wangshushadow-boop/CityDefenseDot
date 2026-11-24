@@ -114,4 +114,3 @@ func run() -> void:
 		return
 	print("CONTENT_OK rigs=2 animated=2 sockets=2 markers=2 compiled_reload=true")
 	quit(0)
-

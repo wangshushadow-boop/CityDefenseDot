@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P0-CONTENT-001",
+  "kind": "EXECUTION",
+  "parent": "P0-CONTENT",
+  "stage": "P0",
+  "module_id": "BASE",
+  "title": "资产、编辑器与工具链可行性",
+  "spec": "docs/systems/game/content/base/README.md",
+  "related_specs": [
+    "docs/systems/game/content/base/README.md",
+    "docs/systems/tools/README.md",
+    "docs/systems/game/infrastructure/content/README.md"
+  ],
+  "depends_on": [
+    "P0-CRITERIA"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "CONTENT-IMPORT",
+    "CONTENT-REJECT"
+  ],
+  "allowed_paths": [
+    "development/reports/tasks/P0-CONTENT-001.md",
+    "test_scenarios/p0/P0-CONTENT-001/"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "24e64706989d1265057325cc4d29b34634150058",
+  "worktree": "D:/work/game/recollection",
+  "scope": "骨架/马匹/武器挂点、动画窗口、场景标记、导入/构建、内容编译与许可证；测试授权资产。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "按判据实跑原创内容的编辑器导入、编译和重载，拒绝坏输入，记录导出限制。"
+  ],
+  "status": "DONE"
+}

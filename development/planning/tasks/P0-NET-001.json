@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P0-NET-001",
+  "kind": "EXECUTION",
+  "parent": "P0-NET",
+  "stage": "P0",
+  "module_id": "NET",
+  "title": "专用服务器与联网可行性实验",
+  "spec": "docs/systems/game/infrastructure/network/README.md",
+  "related_specs": [
+    "docs/systems/game/infrastructure/network/README.md",
+    "docs/systems/game/multiplayer/README.md",
+    "docs/systems/server/dedicated/README.md"
+  ],
+  "depends_on": [
+    "P0-CRITERIA"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "NET-LOOP",
+    "NET-FAULT"
+  ],
+  "allowed_paths": [
+    "development/reports/tasks/P0-NET-001.md",
+    "test_scenarios/p0/P0-NET-001/"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "24e64706989d1265057325cc4d29b34634150058",
+  "worktree": "D:/work/game/recollection/.worktrees/p0-net",
+  "scope": "headless 候选运行、权威 tick、输入/快照、容量、丢包/乱序/延迟与带宽测试；仅实验不承诺完整多人。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "按判据实跑 1/4 客户端、本机权威模拟和故障注入，报告收敛、拒绝、成本与吞吐。"
+  ],
+  "status": "DONE"
+}

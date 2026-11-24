@@ -4,7 +4,7 @@
   "delivery_version": "0.3",
   "active_stage": null,
   "stage_status": {
-    "P0": "PLANNED",
+    "P0": "DONE",
     "P1": "PLANNED",
     "P2": "PLANNED",
     "P3": "PLANNED",
@@ -14,17 +14,30 @@
     "P7": "PLANNED",
     "P8": "PLANNED"
   },
-  "authorized_by": null,
-  "base_commit": null,
-  "integrated_commit": null,
+  "authorized_by": "项目负责人，本次会话 2026-11-24",
+  "base_commit": "eea39fae2885e1b54be1f5efaea9da8299c4e243",
+  "integrated_commit": "ab8099511aed0c4cd6a952464188ff2c81325aac",
   "technical_stack": {
-    "status": "UNDECIDED",
-    "engine": null,
-    "engine_version": null,
-    "primary_language": null,
-    "test_framework": null,
-    "approved_adrs": []
+    "status": "APPROVED",
+    "engine": "Godot Standard",
+    "engine_version": "4.7.2.stable.official.ed1daf0bf",
+    "primary_language": "类型化 GDScript",
+    "test_framework": "Godot headless 显式失败码 + Python 3.12.14 标准库 unittest/CLI",
+    "approved_adrs": [
+      "ADR-011",
+      "ADR-012"
+    ],
+    "approval": {
+      "by": "项目负责人",
+      "date": "2026-11-24",
+      "source": "本次 P0 会话的负责人答复",
+      "decision": "批准两份 ADR 和 P0 验收",
+      "scope": "ADR-011、ADR-012 和本次已测 P0，P1 另行授权",
+      "reviewed_candidate": "643d1d41c36dae263a50b5847d4b672459e90f7e",
+      "record": "ab8099511aed0c4cd6a952464188ff2c81325aac"
+    }
   },
   "updated_at": "2026-11-24",
-  "note": "设计与研发初始化包。游戏实现、测试、Codex 运行均未开始。"
+  "note": "P0 已按实测范围验收并结束。integrated_commit 是签核和技术成果集成点，随后提交状态与报告。P1 尚未授权。",
+  "last_completed_stage": "P0"
 }

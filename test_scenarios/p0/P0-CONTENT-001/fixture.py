@@ -70,4 +70,3 @@ def build(path):
                  "name": "Strike", "samplers": [{"input": times, "output": motion}],
                  "channels": tracks}]}
     path.write_text(json.dumps(model, separators=(",", ":")), encoding="utf-8")
-

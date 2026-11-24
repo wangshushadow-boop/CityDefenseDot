@@ -1,0 +1,227 @@
+[
+  {
+    "trial": 1,
+    "raw_file": "1000-1.json.gz",
+    "raw_sha256_uncompressed": "c0bfef103e4692428bf8ae22431016a19ca4e18cbb63fe1e7a380ed77423b153",
+    "godot_exit": 0,
+    "input": {
+      "activity": [
+        45447,
+        3225,
+        1781,
+        965,
+        965,
+        2257,
+        1871,
+        987,
+        2017,
+        1010
+      ],
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "count": 1000,
+      "display": "Windows",
+      "driver": "vulkan",
+      "engine": "4.7.2-stable (official)",
+      "horse_bones": 7,
+      "horse_triangles": 1344,
+      "human_bones": 7,
+      "human_triangles": 1344,
+      "max_visible_skeletons": 1270,
+      "min_active": 1000,
+      "min_visible_horses": 200,
+      "min_visible_humans": 1000,
+      "min_visible_skeletons": 1212,
+      "moved_units": 929,
+      "peak_arrows": 171,
+      "peak_corpses": 70,
+      "pixels": [
+        1920,
+        1080
+      ],
+      "renderer": "forward_plus",
+      "roles": [
+        500,
+        300,
+        200
+      ],
+      "seed": 241124,
+      "vsync": 0
+    },
+    "metrics": {
+      "frame_samples": 779,
+      "fps": 129.57429272645768,
+      "low_1pct_fps": 59.5672439725395,
+      "frame_p50_ms": 7.11,
+      "frame_p95_ms": 12.047,
+      "frame_p99_ms": 15.797,
+      "frame_worst_ms": 17.55,
+      "tick_p95_ms": 4.647,
+      "wall_debt_ms_each_second": [
+        1.19500000000005,
+        0.8450000000000273,
+        -0.16699999999991633,
+        0.7609999999999673,
+        -0.6159999999999854,
+        11.34100000000035
+      ],
+      "sustained_backlog": false,
+      "viewport_render_cpu_p95_ms": 3.78500008583069,
+      "viewport_gpu_p95_ms": 2.99399995803833,
+      "draw_calls_peak": 2680,
+      "primitives_peak": 3594344,
+      "renderer_video_bytes_peak": 171220528,
+      "rss_bytes_process_peak": 574443520
+    },
+    "failed_checks": []
+  },
+  {
+    "trial": 2,
+    "raw_file": "1000-2.json.gz",
+    "raw_sha256_uncompressed": "28fae5341d7a405c30cfcf9f75b34046076cff911a64d076559e8ad123132acc",
+    "godot_exit": 0,
+    "input": {
+      "activity": [
+        45447,
+        3225,
+        1781,
+        965,
+        965,
+        2257,
+        1871,
+        987,
+        2017,
+        1010
+      ],
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "count": 1000,
+      "display": "Windows",
+      "driver": "vulkan",
+      "engine": "4.7.2-stable (official)",
+      "horse_bones": 7,
+      "horse_triangles": 1344,
+      "human_bones": 7,
+      "human_triangles": 1344,
+      "max_visible_skeletons": 1270,
+      "min_active": 1000,
+      "min_visible_horses": 200,
+      "min_visible_humans": 1000,
+      "min_visible_skeletons": 1212,
+      "moved_units": 929,
+      "peak_arrows": 171,
+      "peak_corpses": 70,
+      "pixels": [
+        1920,
+        1080
+      ],
+      "renderer": "forward_plus",
+      "roles": [
+        500,
+        300,
+        200
+      ],
+      "seed": 241124,
+      "vsync": 0
+    },
+    "metrics": {
+      "frame_samples": 668,
+      "fps": 111.27185563309604,
+      "low_1pct_fps": 55.919475954625334,
+      "frame_p50_ms": 9.132,
+      "frame_p95_ms": 14.662,
+      "frame_p99_ms": 16.882,
+      "frame_worst_ms": 20.903,
+      "tick_p95_ms": 5.259,
+      "wall_debt_ms_each_second": [
+        15.76400000000001,
+        -9.349999999999909,
+        8.777000000000044,
+        3.242000000000189,
+        4.030999999999949,
+        3.2399999999997817
+      ],
+      "sustained_backlog": false,
+      "viewport_render_cpu_p95_ms": 3.61299991607666,
+      "viewport_gpu_p95_ms": 3.40400004386902,
+      "draw_calls_peak": 2680,
+      "primitives_peak": 3594344,
+      "renderer_video_bytes_peak": 171220528,
+      "rss_bytes_process_peak": 574676992
+    },
+    "failed_checks": []
+  },
+  {
+    "trial": 3,
+    "raw_file": "1000-3.json.gz",
+    "raw_sha256_uncompressed": "261e10ab9762a1987c805d65c89eac0aaac5eff4d078acb78f611093011d619b",
+    "godot_exit": 0,
+    "input": {
+      "activity": [
+        45447,
+        3225,
+        1781,
+        965,
+        965,
+        2257,
+        1871,
+        987,
+        2017,
+        1010
+      ],
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "count": 1000,
+      "display": "Windows",
+      "driver": "vulkan",
+      "engine": "4.7.2-stable (official)",
+      "horse_bones": 7,
+      "horse_triangles": 1344,
+      "human_bones": 7,
+      "human_triangles": 1344,
+      "max_visible_skeletons": 1270,
+      "min_active": 1000,
+      "min_visible_horses": 200,
+      "min_visible_humans": 1000,
+      "min_visible_skeletons": 1212,
+      "moved_units": 929,
+      "peak_arrows": 171,
+      "peak_corpses": 70,
+      "pixels": [
+        1920,
+        1080
+      ],
+      "renderer": "forward_plus",
+      "roles": [
+        500,
+        300,
+        200
+      ],
+      "seed": 241124,
+      "vsync": 0
+    },
+    "metrics": {
+      "frame_samples": 778,
+      "fps": 129.50903258916688,
+      "low_1pct_fps": 57.23279439118615,
+      "frame_p50_ms": 7.268,
+      "frame_p95_ms": 11.886,
+      "frame_p99_ms": 15.882,
+      "frame_worst_ms": 19.968,
+      "tick_p95_ms": 4.486,
+      "wall_debt_ms_each_second": [
+        -1.7450000000000045,
+        8.971000000000004,
+        1.3200000000001637,
+        -1.4149999999999636,
+        5.430000000000291,
+        6.988999999999578
+      ],
+      "sustained_backlog": false,
+      "viewport_render_cpu_p95_ms": 3.86800003051758,
+      "viewport_gpu_p95_ms": 2.84299993515015,
+      "draw_calls_peak": 2680,
+      "primitives_peak": 3594344,
+      "renderer_video_bytes_peak": 171220528,
+      "rss_bytes_process_peak": 576716800
+    },
+    "failed_checks": []
+  }
+]

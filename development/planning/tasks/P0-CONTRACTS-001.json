@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "P0-CONTRACTS-001",
+  "kind": "EXECUTION",
+  "parent": "P0-CONTRACTS",
+  "stage": "P0",
+  "module_id": null,
+  "title": "公共契约与版本化方案提案",
+  "spec": "docs/architecture/common_contracts.md",
+  "related_specs": [
+    "docs/systems/game/contracts/README.md",
+    "docs/systems/game/core/README.md",
+    "docs/systems/game/application/README.md",
+    "docs/systems/game/infrastructure/persistence/README.md"
+  ],
+  "depends_on": [
+    "P0-ENV"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "CON-VECTORS"
+  ],
+  "allowed_paths": [
+    "development/reports/tasks/P0-CONTRACTS-001.md",
+    "test_scenarios/p0/P0-CONTRACTS-001/",
+    "docs/architecture/decisions/ADR-012-contract-freeze.md"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "675aa6217117acebfbaf3ec3d463d5f07faa2fd8",
+  "worktree": "D:/work/game/recollection/.worktrees/p0-contracts",
+  "scope": "审查 SDD 冲突与单位、ID、authority、tick、快照、交易、EncounterSpec/MissionResult、FormationOrder、存档/网络/MOD；提出 ADR-012。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "提出 ADR-012 v1，核对消费者与所有权，实际运行编解码、拒绝及迁移正反向向量；冻结须另行批准。"
+  ],
+  "status": "DONE"
+}

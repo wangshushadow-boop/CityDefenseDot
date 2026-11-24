@@ -1,13 +1,15 @@
-# 公共契约与实现边界（设计提案）
+# 公共契约与实现边界
 
 > 适用所有 SDD。基线： [总体规格书](../game_design.md) §3、§10、§12、§17–20。下文明确的是独立设计的补充约束，不修改上传原文。接口字段、枚举、目录新增、配置默认和技术版本需评审后冻结。涉及所有权、持久格式、网络版本的冲突先提交 ADR；不允许各 AI 自行选择不同解释。
+
+项目负责人于 2026-11-24 批准 v1 的表示、时序、所有权及兼容规则。本文保留跨模块字段清单，签核的具体参数、版本及迁移政策见 [ADR-012](decisions/ADR-012-contract-freeze.md)，引擎、采样与回溯预算见 [ADR-011](decisions/ADR-011-technology-stack.md)。
 
 ## 1. 类型与单位
 
 | 类型 | 约定 | 约束 |
 |---|---|---|
 | `DefId` | `namespace:type/name` 字符串 | 稳定唯一，存档使用 ID，紧凑索引仅会话有效 |
-| `HeroId`、`PartyId`、`ClanId`、`KingdomId`、`SettlementId`、`ArmyId` | 类型化持久 ID（64 位或 UUID，P0 确定） | 不允许跨类型比较或重用 |
+| `HeroId`、`PartyId`、`ClanId`、`KingdomId`、`SettlementId`、`ArmyId` | 类型标签与小写规范 UUIDv4 字符串 | 不允许跨类型比较或重用 |
 | `MissionId` / `TeamId` / `FormationId` | 任务作用域 | Team/Formation 与 MissionId 一起定位 |
 | `AgentHandle` | `{index:uint32,generation:uint32}`，配套 MissionId | 索引重用必须增加 generation；过期返回 NotFound |
 | `SourceSlotId` | Encounter 内稳定来源槽 | 每人形兵源只有一个槽，未生成也有终态；坐骑非兵源 |
@@ -15,11 +17,11 @@
 | `SimTick` | 非负整数 | 由 MissionRuntime 递增，模拟频率配置 |
 | `Money` / `Influence` / `Count` | 最小单位整数（有界） | 余额非负，成本显式取整；中间计算检查溢出 |
 | `WorldMapPos` | 地图定义的独立坐标类型 | 不可直接转为战场位置 |
-| `Vec3` / `BattlePose` | 战场米、秒、弧度；建议右手 Y-up | 引擎轴与坐标变换由适配器处理；网络边界量化 |
+| `Vec3` / `BattlePose` | 战场米、秒、弧度；右手 Y-up | 引擎轴与坐标变换由适配器处理；网络边界量化 |
 | `Revision` | 每权威作用域单调增加 | 仅提交成功才增加；高频 tick 与业务 revision 区分 |
-| `ContentHash` / `IntegrityHash` | 规范化数据的稳定摘要 | 算法/编码版本需冻结；哈希不等于签名 |
+| `ContentHash` / `IntegrityHash` | 规范化数据的稳定摘要 | 按 ADR-012 的规范字节计算 SHA-256，认证另由信任链保证 |
 
-`?` 表示字段可空，`[]` 表示有上限的序列；必须区分 None 与零。公共结构不可引用引擎 Node/RID、线程、函数或裸指针；范围/编码/精度在 P0 schema 冻结。`Result<T>` 为 Ok(T) 或 Err(DomainError)，无隐式成功。
+`?` 表示字段可空，`[]` 表示有上限的序列；必须区分 None 与零。公共结构不可引用引擎 Node/RID、线程、函数或裸指针；v1 范围/编码/精度见 ADR-012。`Result<T>` 为 Ok(T) 或 Err(DomainError)，无隐式成功。
 
 ## 2. 权威命令、只读查询、事件与高频意图
 
@@ -161,7 +163,7 @@ flowchart TD
 
 ## 7. 版本、配置、性能与未决项
 
-- 存档 schema、内容 API、网络协议、原生 ABI 分别版本化；兼容策略由 ADR 冻结，迁移与测试同提交。
+- 存档 schema、内容 API、网络协议、原生 ABI 分别版本化；兼容策略按已批准的 ADR-012 执行，迁移与测试同提交。
 - 原规格数值作为初始目标：500 人默认、1000 压力，60/30 Hz、战略计划 1–6 游戏小时、战术 0.5–2 Hz、编队 2–5 Hz、个体 5–20 Hz；不是实测结果。配置必须声明单位、范围、默认、来源、难度作用及是否可 MOD 覆盖。
-- P0 必须冻结：引擎与具体版本、主语言、持久 ID 方案、序列化/哈希算法、测试框架、坐标轴与 tick 频率、网络传输和延迟补偿政策。P0 真实 500/1000 单位、蒙皮、动态攻城、headless 验证不通过不得扩大内容生产。
+- P0 采用已签核的 ADR-011 与 ADR-012。性能范围含 500/1000 名活跃人形、蒙皮、动态通行和 headless 专服；正式资产扩量时按 GDD 复验。
 - 玩法未穷举的原创新参数（各技能树、兵种树、战术权重、地图场景、经济需求、任务文本、船舶参数、视觉骨骼）由相应 SDD 后续数据表和内容评审冻结。不要把拟定数值或目录误认为已实现。

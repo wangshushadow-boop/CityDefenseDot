@@ -1,5 +1,5 @@
 {
   "schema_version": 1,
   "blockers": [],
-  "note": "暂无已执行任务。初始化未决事项见 KNOWN_ISSUES.md。实际阻塞记录 id、task_id、reason、needed_action、owner、status、evidence。"
+  "note": "P0 曾出现的负载口径、契约类型、导入和本机回环问题已经修复或通过授权复验。阶段门禁无未解决阻塞；外推限制见 P0 阶段报告。"
 }

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "P0-CRITERIA-001",
+  "kind": "EXECUTION",
+  "parent": "P0-CRITERIA",
+  "stage": "P0",
+  "module_id": "TEST",
+  "title": "设计真实负载实验与判据",
+  "spec": "docs/systems/game/tests/README.md",
+  "related_specs": [
+    "docs/systems/game/tests/README.md",
+    "docs/systems/game/infrastructure/telemetry/README.md"
+  ],
+  "depends_on": [
+    "P0-ENV"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "B500",
+    "B1000",
+    "B-PROFILE",
+    "NAV-LINK",
+    "NAV-CROWD",
+    "NET-LOOP",
+    "NET-FAULT",
+    "CONTENT-IMPORT",
+    "CONTENT-REJECT",
+    "CON-VECTORS"
+  ],
+  "allowed_paths": [
+    "development/reports/tasks/P0-CRITERIA-001.md"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "675aa6217117acebfbaf3ec3d463d5f07faa2fd8",
+  "worktree": "D:/work/game/recollection",
+  "scope": "明确 §19.4/22.3 基准、固定种子、输入/镜头、混合步骑弓、动作蒙皮、弹体、拥堵、专服容量和采样；实验隔离。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "固定各实验输入与判据，逐档报告和失败/未执行区分，独立审查及复核。"
+  ],
+  "status": "DONE"
+}

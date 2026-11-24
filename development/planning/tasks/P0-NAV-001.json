@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P0-NAV-001",
+  "kind": "EXECUTION",
+  "parent": "P0-NAV",
+  "stage": "P0",
+  "module_id": "MOV",
+  "title": "动态导航与人群瓶颈实验",
+  "spec": "docs/systems/game/mission/movement/README.md",
+  "related_specs": [
+    "docs/systems/game/mission/movement/README.md",
+    "docs/systems/game/mission/formation/README.md",
+    "docs/systems/game/infrastructure/engine/README.md"
+  ],
+  "depends_on": [
+    "P0-CRITERIA"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "NAV-LINK",
+    "NAV-CROWD"
+  ],
+  "allowed_paths": [
+    "development/reports/tasks/P0-NAV-001.md",
+    "test_scenarios/p0/P0-NAV-001/"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "24e64706989d1265057325cc4d29b34634150058",
+  "worktree": "D:/work/game/recollection/.worktrees/p0-nav",
+  "scope": "狭窄门洞/桥/楼梯、队列、共享路径、动态 Link 与拥堵恢复；与战场实验共享只读规范，独立输出。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "按判据实测动态导航和拥堵恢复，验证可达和过期路径，保留运行入口、测量和负例。"
+  ],
+  "status": "DONE"
+}

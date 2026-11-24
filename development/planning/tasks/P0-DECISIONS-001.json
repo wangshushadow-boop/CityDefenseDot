@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P0-DECISIONS-001",
+  "kind": "EXECUTION",
+  "parent": "P0-DECISIONS",
+  "stage": "P0",
+  "module_id": null,
+  "title": "技术栈、基准和契约冻结",
+  "spec": "development/planning/roadmap.md",
+  "related_specs": [],
+  "depends_on": [
+    "P0-BATTLE",
+    "P0-NAV",
+    "P0-NET",
+    "P0-CONTENT",
+    "P0-CONTRACTS"
+  ],
+  "requirements": [],
+  "acceptance_test_ids": [],
+  "experiment_ids": [
+    "GATE-P0"
+  ],
+  "allowed_paths": [
+    "development/reports/tasks/P0-DECISIONS-001.md",
+    "docs/architecture/decisions/ADR-011-technology-stack.md",
+    "docs/architecture/decisions/ADR-012-contract-freeze.md"
+  ],
+  "excluded_paths": [
+    "game/",
+    "native/",
+    "server/",
+    "development/state/",
+    "docs/testing/",
+    "docs/architecture/common_contracts.md"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "47d3a40d74f75fd5e809176adc6d4635ecd00a19",
+  "worktree": "D:/work/game/recollection",
+  "scope": "整合真实实验；选择精确引擎/主语言/工具版本、构建/测试/CI、性能目标、核心契约与内容管线，形成 ADR-011/012。",
+  "non_goals": [
+    "P1 产品实现、技栈批准与正式模块/AT 验收均另行授权。"
+  ],
+  "acceptance": [
+    "全套关键证据完整，用户书面批准 ADR-011 / 012，版本与基线已锁定。"
+  ],
+  "status": "DONE"
+}
