@@ -14,7 +14,6 @@ class Fighter:
 	var pos: Vector3
 	var target: int
 	var hp := 5
-	var down_until := 0
 	var action := 0
 	var attack_start := -90
 	var next_decision := 0
@@ -54,6 +53,17 @@ var spawned := 0
 var action_counts := [0, 0, 0, 0]
 var sampled_initial: Array
 var min_active: int
+var min_visible_humans: int
+var min_visible_horses: int
+var peak_corpses := 0
+var min_skinned := 0
+var max_skinned := 0
+var population: Array = []
+var role_counts := [0, 0, 0]
+var corpses: Array[Skeleton3D] = []
+var expire_ticks: Array[int] = []
+var free_corpses: Array[Skeleton3D] = []
+var teams: Array[StandardMaterial3D] = []
 var human_rig: Rig
 var horse_rig: Rig
 
@@ -74,10 +84,13 @@ func _ready():
 	pid_file.close()
 	half = count / 2
 	min_active = count
+	min_visible_humans = count
+	min_visible_horses = count / 5
+	min_skinned = count * 10
 	rng.seed = SEED_VALUE
 	human_rig = Rig.new(false)
 	horse_rig = Rig.new(true)
-	var teams := [material(Color("9e302b")), material(Color("32699b"))]
+	teams.assign([material(Color("9e302b")), material(Color("32699b"))])
 	var coat := material(Color("704124"))
 	for i in count:
 		var u := Fighter.new()
@@ -86,6 +99,7 @@ func _ready():
 		u.role = 0 if slot % 10 < 5 else (1 if slot % 10 < 8 else 2)
 		var width := 25 if count == 500 else 40
 		var sign_z := 1 if u.side == 0 else -1
+		role_counts[u.role] += 1
 		u.origin = Vector3((slot % width - width * .5) * 1.3 + rng.randf_range(-.15,.15),
 			0, sign_z * (2.2 + (slot / width) * 1.15))
 		u.pos = u.origin
@@ -123,7 +137,7 @@ func _ready():
 	RenderingServer.viewport_set_measure_render_time(get_viewport().get_viewport_rid(), true)
 
 func move_camera():
-	camera.position = Vector3(6.0 * sin(tick * DT * .4), 32, 40)
+	camera.position = Vector3(6.0 * sin(tick * DT * .4), 38, 45)
 	camera.look_at(Vector3(0, .5, 0))
 
 func select_target(i: int):
@@ -149,8 +163,63 @@ func damage(j: int):
 		return
 	u.hp -= 1
 	if u.hp == 0:
-		u.down_until = tick + 18
 		downs += 1
+
+func renew_front_line():
+	# Keep defeated proxies for 18 ticks; the reserve owns a separate, live skeleton.
+	for index in range(corpses.size()-1, -1, -1):
+		if tick >= expire_ticks[index]:
+			corpses[index].visible = false
+			free_corpses.append(corpses[index])
+			corpses.remove_at(index)
+			expire_ticks.remove_at(index)
+	for u in units:
+		if u.hp > 0:
+			continue
+		var body := u.human
+		body.rotation.z = PI*.5
+		body.position = u.pos + Vector3.UP*.22
+		corpses.append(body)
+		expire_ticks.append(tick + 18)
+		if free_corpses.is_empty():
+			u.human = human_rig.spawn(self, teams[u.side])
+		else:
+			u.human = free_corpses.pop_back()
+			u.human.reset_bone_poses()
+			u.human.get_child(0).material_override = teams[u.side]
+			u.human.visible = true
+		u.hp = 5
+		u.pos = u.origin
+		u.attack_start = -90
+		u.next_decision = tick + 1
+		u.human.rotation = Vector3(0, 0 if u.side == 0 else PI, 0)
+		u.human.position = u.pos + Vector3.UP * (1.02 if u.horse else 0.0)
+		if u.horse:
+			u.horse.position = u.pos
+		reserves += 1
+
+func measure_population():
+	var alive := 0
+	var visible_humans := 0
+	var visible_horses := 0
+	for u in units:
+		if u.hp > 0:
+			alive += 1
+		if u.human.is_visible_in_tree() and camera.is_position_in_frustum(u.human.position + Vector3.UP):
+			visible_humans += 1
+		if u.horse and u.horse.is_visible_in_tree() and camera.is_position_in_frustum(u.horse.position + Vector3.UP):
+			visible_horses += 1
+	min_active = mini(min_active, alive)
+	min_visible_humans = mini(min_visible_humans, visible_humans)
+	min_visible_horses = mini(min_visible_horses, visible_horses)
+	var visible_skeletons := visible_humans + visible_horses
+	for body in corpses:
+		if body.is_visible_in_tree() and camera.is_position_in_frustum(body.position):
+			visible_skeletons += 1
+	min_skinned = mini(min_skinned, visible_skeletons)
+	max_skinned = maxi(max_skinned, visible_skeletons)
+	peak_corpses = maxi(peak_corpses, corpses.size())
+	population = [alive, visible_humans, visible_horses, corpses.size(), visible_skeletons]
 
 func shoot(u: Fighter):
 	var a := Arrow.new()
@@ -202,10 +271,6 @@ func step_arrows():
 
 func update_unit(i: int):
 	var u := units[i]
-	if u.hp <= 0 and tick >= u.down_until:
-		u.pos = u.origin
-		u.hp = 5
-		reserves += 1
 	if u.hp > 0:
 		if tick >= u.next_decision:
 			select_target(i)
@@ -225,9 +290,27 @@ func update_unit(i: int):
 		if tick - u.attack_start == 10 and enemy.hp > 0:
 			if u.role == 1:
 				shoot(u)
-			elif distance < reach + .45:
-				damage(u.target)
-				melee_hits += 1
+			elif distance > .01:
+				var forward := delta_pos / distance
+				var side := forward.cross(Vector3.UP)
+				var shoulder := u.pos + Vector3.UP * 1.22
+				var tip := shoulder + forward * 1.52
+				var start_tip := tip - side * .76
+				var end_tip := tip + side * .76
+				match u.action:
+					1:
+						start_tip = tip + side * .76
+						end_tip = tip - side * .76
+					2:
+						start_tip = tip + Vector3.UP * .78
+						end_tip = tip - Vector3.UP * .48
+					3:
+						start_tip = shoulder + forward * .48
+						end_tip = shoulder + forward * 1.82
+				var center := enemy.pos + Vector3.UP * 1.2
+				if Geometry3D.get_closest_point_to_segment(center, start_tip, end_tip).distance_squared_to(center) <= .68*.68:
+					damage(u.target)
+					melee_hits += 1
 	var stride := sin(u.phase + tick * (.16 if u.horse else .12))
 	var yaw := 0.0 if u.side == 0 else PI
 	var human := u.human
@@ -237,8 +320,20 @@ func update_unit(i: int):
 	human.set_bone_pose_rotation(6, Quaternion(Vector3.RIGHT, -stride*.38))
 	var stage := clampf((tick-u.attack_start)/22.0, 0, 1)
 	var swing := sin(stage*PI)
-	var axis: Vector3 = [Vector3.RIGHT, Vector3.LEFT, Vector3.BACK, Vector3.FORWARD][u.action]
-	human.set_bone_pose_rotation(4, Quaternion(axis, swing*1.7+stride*.1))
+	var shoulder_rest := human.get_bone_rest(4).origin
+	var arm := Quaternion(Vector3.RIGHT, .22 * stride)
+	match u.action:
+		0, 1:
+			var twist := (1 if u.action == 0 else -1) * swing
+			arm = Quaternion(Vector3.UP, twist*1.25) * Quaternion(Vector3.RIGHT, 1.1*swing)
+		2:
+			arm = Quaternion(Vector3.RIGHT, swing*2.0)
+		3:
+			# A thrust extends the weapon forward; retract before the next attack.
+			arm = Quaternion(Vector3.RIGHT, swing*1.45)
+			shoulder_rest.z -= .30 * swing
+	human.set_bone_pose_position(4, shoulder_rest)
+	human.set_bone_pose_rotation(4, arm)
 	human.set_bone_pose_rotation(3, Quaternion(Vector3.RIGHT, -stride*.25))
 	if u.horse:
 		u.horse.position = u.pos
@@ -254,20 +349,19 @@ func _physics_process(_delta: float):
 		return
 	var begin := Time.get_ticks_usec()
 	tick += 1
-	var alive := 0
 	for i in count:
 		update_unit(i)
-		if units[i].hp > 0:
-			alive += 1
 	step_arrows()
+	renew_front_line()
 	move_camera()
+	if tick > WARM:
+		measure_population()
 	var end := Time.get_ticks_usec()
 	if tick == WARM:
 		start = end
 		sampled_initial = counters()
 	elif tick > WARM:
-		ticks.append([tick, end-begin, end-start])
-		min_active = mini(min_active, alive)
+		ticks.append([tick, end-begin, end-start] + population)
 		peak_arrows = maxi(peak_arrows, arrows.size())
 
 func _process(_delta: float):
@@ -293,7 +387,8 @@ func _process(_delta: float):
 			moved += 1
 	var data := {"frames":frames, "ticks":ticks, "activity":activity, "min_active":min_active,
 		"peak_arrows":peak_arrows, "moved_units":moved, "count":count, "seed":SEED_VALUE,
-		"roles":[count/2, count*3/10, count/5], "skeletons":count+count/5,
+		"roles":role_counts, "min_visible_humans":min_visible_humans, "min_visible_horses":min_visible_horses,
+		"peak_corpses":peak_corpses, "min_visible_skeletons":min_skinned, "max_visible_skeletons":max_skinned,
 		"human_bones":7, "horse_bones":7,
 		"human_triangles":human_rig.mesh.surface_get_array_index_len(0)/3,
 		"horse_triangles":horse_rig.mesh.surface_get_array_index_len(0)/3,

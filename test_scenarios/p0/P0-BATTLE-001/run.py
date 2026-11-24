@@ -83,8 +83,14 @@ def summarize(data, rss):
             or data["vsync"] != 0 or data["renderer"] != "forward_plus" or data["driver"] != "vulkan"):
         errors.append("render configuration")
     if (data["peak_arrows"] <= 0 or min(data["activity"]) <= 0 or data["moved_units"] <= 0
-            or metrics["draw_calls_peak"] <= 0 or metrics["primitives_peak"] <= 0):
+            or metrics["draw_calls_peak"] <= 0 or metrics["primitives_peak"] < n * data["human_triangles"]):
         errors.append("mixed field activity")
+    if (data["min_active"] != n or data["min_visible_humans"] != n
+            or data["min_visible_horses"] != n // 5 or data["peak_corpses"] <= 0
+            or data["min_visible_skeletons"] < n + n // 5
+            or data["roles"] != [n // 2, n * 3 // 10, n // 5]
+            or data["activity"][3] != data["activity"][4]):
+        errors.append("full active and visible battle population")
     if min(rss, metrics["viewport_gpu_p95_ms"], metrics["renderer_video_bytes_peak"]) <= 0:
         errors.append("missing profile measurements")
     if metrics["fps"] < FPS_TARGET[n] or metrics["frame_p95_ms"] > P95_TARGET[n]:
