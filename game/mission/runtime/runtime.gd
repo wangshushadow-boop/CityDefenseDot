@@ -197,21 +197,30 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 	var attempted := []
 	var retry_wave := false
 	_busy = true
-	if _field != null and staged.active_sources < _spec.battle_limit and staged.spawned.size() < staged.reserved_count:
-		var opening := _tick == 0 and staged.active_sources == 0
-		if opening or _retry_wave or tick % _field.cooldown == 0:
-			var limit: int = _spec.battle_limit if opening else mini(_field.wave_size,_spec.battle_limit-staged.active_sources)
-			var wave: Dictionary = _field.auto_wave(staged,limit,_engine,_mission,_clear_sites)
-			if not wave.ok:
-				if opening or wave.error.code not in ["Unavailable","StaleVersion"]:
-					return _abort_tick(wave,attempted)
-				retry_wave = true
-			else:
-				if opening and wave.value.handles.is_empty():
-					return _abort_tick(R.fail("Unavailable","deployment.spawn_site"),attempted)
-				staged = wave.value.entities
+	var opening := _field != null and _tick == 0 and staged.active_sources == 0
+	if opening:
+		var initial: Dictionary = _field.auto_wave(staged,_spec.battle_limit,_engine,_mission,_clear_sites)
+		if not initial.ok:
+			return _abort_tick(initial,attempted)
+		if initial.value.handles.is_empty():
+			return _abort_tick(R.fail("Unavailable","deployment.spawn_site"),attempted)
+		staged = initial.value.entities
 	var context := _make_view(staged)
+	var ending := false
 	for phase: String in PHASES:
+		# Ordinary reinforcements enter after this tick's damage, retirement
+		# and objective checks. Their first movement and action run next tick.
+		if phase == "snapshot" and _field != null and not opening and not ending and (_retry_wave or tick % _field.cooldown == 0):
+			if staged.active_sources < _spec.battle_limit and staged.spawned.size() < staged.reserved_count:
+				var limit := mini(_field.wave_size,_spec.battle_limit-staged.active_sources)
+				var wave: Dictionary = _field.auto_wave(staged,limit,_engine,_mission,_clear_sites)
+				if not wave.ok:
+					if wave.error.code not in ["Unavailable","StaleVersion"]:
+						return _abort_tick(wave,attempted)
+					retry_wave = true
+				else:
+					staged = wave.value.entities
+					context = _make_view(staged)
 		for id in ids:
 			var system: Dictionary = _systems[id]
 			if system.phase != phase:
@@ -231,6 +240,8 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 				return _abort_tick(report,attempted)
 			if not C.encode(report.get("value")).ok:
 				return _abort_tick(R.fail("InvalidArgument","system.value"),attempted)
+			if phase == "objectives" and typeof(report.get("value")) == TYPE_DICTIONARY and report.value.get("outcome") != null:
+				ending = true
 			if system.can_retire:
 				var payload: Variant = report.get("value")
 				if typeof(payload) != TYPE_DICTIONARY or typeof(payload.get("retire_handles",[])) != TYPE_ARRAY:
