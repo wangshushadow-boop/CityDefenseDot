@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "P1-CON-002",
+  "kind": "EXECUTION",
+  "parent": "P1-CON",
+  "stage": "P1",
+  "module_id": "CON",
+  "title": "战场、联网与 MOD v1 端口形状及版本入口",
+  "spec": "docs/systems/game/contracts/README.md",
+  "depends_on": [
+    "GATE-P0"
+  ],
+  "requirements": [
+    "BAT-03",
+    "NET-05",
+    "SAV-03"
+  ],
+  "acceptance_test_ids": [
+    "T-CON-02"
+  ],
+  "allowed_paths": [
+    "game/contracts/ports/",
+    "game/tests/p1/ports/",
+    "development/reports/tasks/P1-CON-002.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "b639e2e5828e409cf309aed83cf04a3a699c598b",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-ports",
+  "scope": "以已批准 ADR-011/012 和三类 SDD 定义可复用的纯数据/抽象调用边界。实际 NET/SDK 在后续阶段，兼容与拒绝样例现在可运行。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "三个已有 SDD 接口可由生产消费者直接接入，接口面版本化；验证重复/不合法输入与兼容拒绝。"
+  ],
+  "status": "REVIEW"
+}

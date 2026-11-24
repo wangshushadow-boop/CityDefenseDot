@@ -28,7 +28,8 @@
   "excluded_paths": [
     "development/state/",
     "docs/architecture/",
-    "game/project.godot"
+    "game/project.godot",
+    "game/contracts/ports/"
   ],
   "contract_changes": "forbidden",
   "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",

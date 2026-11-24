@@ -15,6 +15,24 @@
       "excluded_paths": [
         "development/state/",
         "docs/architecture/",
+        "game/project.godot",
+        "game/contracts/ports/"
+      ]
+    },
+    {
+      "task_id": "P1-CON-002",
+      "owner": "ports",
+      "branch": "detached",
+      "base_commit": "b639e2e5828e409cf309aed83cf04a3a699c598b",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-ports",
+      "allowed_paths": [
+        "game/contracts/ports/",
+        "game/tests/p1/ports/",
+        "development/reports/tasks/P1-CON-002.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
         "game/project.godot"
       ]
     }

@@ -167,7 +167,8 @@
       "integrated_commit": null,
       "evidence": [],
       "child_ids": [
-        "P1-CON-001"
+        "P1-CON-001",
+        "P1-CON-002"
       ]
     },
     "P1-CORE": {
@@ -1257,6 +1258,18 @@
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
+      "child_ids": []
+    },
+    "P1-CON-002": {
+      "status": "REVIEW",
+      "owner": "ports",
+      "base_commit": "b639e2e5828e409cf309aed83cf04a3a699c598b",
+      "candidate_commit": "33f36b878b0bad8013d62e9b9c933c769298b8d2",
+      "integrated_commit": null,
+      "evidence": [
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md"
+      ],
       "child_ids": []
     }
   },
@@ -2707,6 +2720,48 @@
       "reason": "主 Agent 分配隔离任务",
       "evidence": [],
       "commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T20:54:20+08:00",
+      "reason": "三类 SDD 端口约定、互斥路径与基线已登记",
+      "evidence": [],
+      "commit": "b639e2e5828e409cf309aed83cf04a3a699c598b"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T20:54:20+08:00",
+      "reason": "按输入规格实现现有端口，ADR 需签核后冻结",
+      "evidence": [],
+      "commit": "b639e2e5828e409cf309aed83cf04a3a699c598b"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:01:47+08:00",
+      "reason": "端口候选与开发自测就绪",
+      "evidence": [
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md"
+      ],
+      "commit": "33f36b8"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:01:47+08:00",
+      "reason": "独立 QA 和 Reviewer 核对源代码与运行结果",
+      "evidence": [
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md"
+      ],
+      "commit": "33f36b8"
     }
   ]
 }
