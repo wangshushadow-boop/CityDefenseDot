@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3]
+
+[sub_resource type="BoxShape3D" id="Wall"]
+size = Vector3(0.16,4.2,0.12)
+
+[sub_resource type="BoxShape3D" id="Person"]
+size = Vector3(0.6,1.86,0.44)
+
+[sub_resource type="BoxShape3D" id="Backdrop"]
+size = Vector3(9,5,0.15)
+
+[sub_resource type="BoxShape3D" id="Roof"]
+size = Vector3(3,0.2,3)
+
+[node name="CameraArena" type="Node3D"]
+
+[node name="Own" type="StaticBody3D" parent="."]
+position = Vector3(0,0.93,0)
+collision_layer = 3
+metadata/entity_handle = "player"
+
+[node name="Shape" type="CollisionShape3D" parent="Own"]
+shape = SubResource("Person")
+
+[node name="GrazingWall" type="StaticBody3D" parent="."]
+position = Vector3(0.195,1.70,2.1)
+metadata/entity_handle = "wall"
+
+[node name="Shape" type="CollisionShape3D" parent="GrazingWall"]
+shape = SubResource("Wall")
+
+[node name="AuthorizedTarget" type="StaticBody3D" parent="."]
+position = Vector3(0,0.93,-4.2)
+collision_layer = 2
+metadata/entity_handle = "soldier"
+
+[node name="Shape" type="CollisionShape3D" parent="AuthorizedTarget"]
+shape = SubResource("Person")
+
+[node name="Terrain" type="StaticBody3D" parent="."]
+position = Vector3(0,1.8,-7)
+metadata/entity_handle = "terrain"
+
+[node name="Shape" type="CollisionShape3D" parent="Terrain"]
+shape = SubResource("Backdrop")
+
+[node name="Ceiling" type="StaticBody3D" parent="."]
+position = Vector3(10,1.48,0)
+metadata/entity_handle = "roof"
+
+[node name="Shape" type="CollisionShape3D" parent="Ceiling"]
+shape = SubResource("Roof")
