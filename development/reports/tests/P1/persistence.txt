@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PERSIST_RACE ["ok", "Unavailable"]
+T-PERSIST-02 PASS
+T-PERSIST-01_SLICE PASS
+T-PERSIST-03_SLICE PASS
+T-PERSIST-04 NOT_RUN (requires real 50 Mission transitions)
+PERSIST_CHECKS errors=0 child_processes=27
+exit=0

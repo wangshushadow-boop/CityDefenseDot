@@ -56,8 +56,8 @@
     "game/campaign/world/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "dd832adc93a2206196aab105ae8024a6994d59d6",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-campaign",
   "scope": "战略运行时壳、分相调度、注册与只读快照；不伪造经济/政治。 空/最小世界、固定相位、跨预算步进、安全快照与销毁；不模拟后续领域。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -66,5 +66,5 @@
     "空/最小合法世界运行、提交及释放验证。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

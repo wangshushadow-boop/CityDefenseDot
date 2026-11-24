@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS T-INV-01
+PASS T-INV-02
+PASS T-INV-03
+PASS T-INV-04
+PASS P1-INV-PAGES
+exit=0

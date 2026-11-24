@@ -1,10 +1,10 @@
-﻿test_id,module,requirement,given,when,then,status,evidence,document_path,code_paths
+test_id,module,requirement,given,when,then,status,evidence,document_path,code_paths
 T-BOOT-01,BOOT,§20.2,两个模块互相 requires,启动,拒绝并显示环路且未构造 Session,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
 T-BOOT-02,BOOT,§19.1 / NET-01,headless 配置、无显示设备,启动专服,不加载 UI/音频且 Mission 端口可运行,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
 T-BOOT-03,BOOT,§20.3,内容载入错误,启动,逆序释放已建服务，返回可诊断报告,NOT_RUN,,docs/systems/game/bootstrap/README.md,game/bootstrap/
-T-CORE-01,CORE,WLD-02,固定种子、相同事件和不同 worker 数,重复运行纯逻辑,相位顺序、随机状态与哈希一致,NOT_RUN,,docs/systems/game/core/README.md,game/core/
-T-CORE-02,CORE,BAT-05,旧 Mission 作业延迟返回,销毁并新建 Mission,旧结果被拒绝，无跨任务写入,NOT_RUN,,docs/systems/game/core/README.md,game/core/
-T-CORE-03,CORE,§3.3,事件订阅不断生成后续命令,执行,达到预算，后续可诊断，不无限递归,NOT_RUN,,docs/systems/game/core/README.md,game/core/
+T-CORE-01,CORE,WLD-02,固定种子、相同事件和不同 worker 数,重复运行纯逻辑,相位顺序、随机状态与哈希一致,PASS,development/reports/tests/P1/core.txt,docs/systems/game/core/README.md,game/core/
+T-CORE-02,CORE,BAT-05,旧 Mission 作业延迟返回,销毁并新建 Mission,旧结果被拒绝，无跨任务写入,PASS,development/reports/tests/P1/core.txt,docs/systems/game/core/README.md,game/core/
+T-CORE-03,CORE,§3.3,事件订阅不断生成后续命令,执行,达到预算，后续可诊断，不无限递归,PASS,development/reports/tests/P1/core.txt,docs/systems/game/core/README.md,game/core/
 T-CON-01,CON,BAT-03,结果中的 source_slot 重复或版本错误,验证,拒绝并定位字段，世界无写入,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
 T-CON-02,CON,NET-05,客户端协议主版本或内容哈希不符,握手,拒绝并说明兼容版本,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
 T-CON-03,CON,SAV-03,旧字段版本及未知关键字段,解码,迁移受支持版本，否则明确拒绝,PASS,development/reports/tests/P1/contract-candidate.txt,docs/systems/game/contracts/README.md,game/contracts/
@@ -32,16 +32,16 @@ T-PARTY-02,PARTY,ARM-02,库存少于当日粮耗并拖欠工资,日结,不负库
 T-PARTY-03,PARTY,ARM-03,有普通俘虏和英雄俘虏,赎回、转化、逃脱,英雄位置唯一，正确移除名册,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
 T-PARTY-04,PARTY,ARM-04,同一 Party 已在 Army A,加入 B 或解散 A,拒绝重复成员，解散释放控制,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
 T-PARTY-05,PARTY,ARM-05 / BAT-02,兵力已预留且部分未上场,尝试转移并结算,拒绝预留转移；未入场归原队伍,NOT_RUN,,docs/systems/game/campaign/party/README.md,game/campaign/party/
-T-INV-01,INV,ARM-05 / ECO-03,一方货物或金钱不足,提交交换,双方余额、库存、流水不变,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
-T-INV-02,INV,CHR-02,同一装备被两个槽位引用,交换或校验,拒绝重复持有,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
-T-INV-03,INV,ECO-03,重复交易 ID、不同 payload,提交,相同返回原回执，不同 Conflict,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
-T-INV-04,INV,§22.3,随机资源流水,属性测试,总量等于初始+合法产生-合法消耗,NOT_RUN,,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
-T-DEF-01,DEF,ARM-01,兵种升级形成环,编译,拒绝并显示路径,NOT_RUN,,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
-T-DEF-02,DEF,EXT-01,新增原创兵种、装备、文化,编译加载,不改核心代码即可查询,NOT_RUN,,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
+T-INV-01,INV,ARM-05 / ECO-03,一方货物或金钱不足,提交交换,双方余额、库存、流水不变,PASS,development/reports/tests/P1/inventory.txt,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-INV-02,INV,CHR-02,同一装备被两个槽位引用,交换或校验,拒绝重复持有,PASS,development/reports/tests/P1/inventory.txt,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-INV-03,INV,ECO-03,重复交易 ID、不同 payload,提交,相同返回原回执，不同 Conflict,PASS,development/reports/tests/P1/inventory.txt,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-INV-04,INV,§22.3,随机资源流水,属性测试,总量等于初始+合法产生-合法消耗,PASS,development/reports/tests/P1/inventory.txt,docs/systems/game/shared/inventory/README.md,game/shared/inventory/
+T-DEF-01,DEF,ARM-01,兵种升级形成环,编译,拒绝并显示路径,PASS,development/reports/tests/P1/definitions.txt,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
+T-DEF-02,DEF,EXT-01,新增原创兵种、装备、文化,编译加载,不改核心代码即可查询,PASS,development/reports/tests/P1/definitions.txt,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
 T-DEF-03,DEF,SAV-03 / ECO-05,锻造动态物品写入存档,重载,ID、部件、规则快照可解析,NOT_RUN,,docs/systems/game/shared/definitions/README.md,game/shared/definitions/
-T-SHRULE-01,SHRULE,CHR-01,互斥或不同作用域天赋,计算效果,仅合法组生效，分项可解释,NOT_RUN,,docs/systems/game/shared/rules/README.md,game/shared/rules/
-T-SHRULE-02,SHRULE,ECO-03,买卖价格为小数,计算报价,买向上卖向下，金额整数,NOT_RUN,,docs/systems/game/shared/rules/README.md,game/shared/rules/
-T-SHRULE-03,SHRULE,COM-03,护甲值与输入越界,计算规则,显式拒绝或限幅，无 NaN,NOT_RUN,,docs/systems/game/shared/rules/README.md,game/shared/rules/
+T-SHRULE-01,SHRULE,CHR-01,互斥或不同作用域天赋,计算效果,仅合法组生效，分项可解释,PASS,development/reports/tests/P1/rules.txt,docs/systems/game/shared/rules/README.md,game/shared/rules/
+T-SHRULE-02,SHRULE,ECO-03,买卖价格为小数,计算报价,买向上卖向下，金额整数,PASS,development/reports/tests/P1/rules.txt,docs/systems/game/shared/rules/README.md,game/shared/rules/
+T-SHRULE-03,SHRULE,COM-03,护甲值与输入越界,计算规则,显式拒绝或限幅，无 NaN,PASS,development/reports/tests/P1/rules.txt,docs/systems/game/shared/rules/README.md,game/shared/rules/
 T-ECO-01,ECO,ECO-01,村产原料、工坊配方、城镇需求,逐日模拟,货物有来源去向，生产运输消费形成循环,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
 T-ECO-02,ECO,ECO-02,围城切断商路,观察库存与恢复,供给下降、价格变化，解围后可恢复,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
 T-ECO-03,ECO,ECO-03,报价之后他人买走库存,提交旧报价,StaleVersion/重新报价，不扣款,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
@@ -144,17 +144,17 @@ T-AUD-01,AUD,AUD-01,500 人战斗、大量命中和命令语音,播放,音源预
 T-AUD-02,AUD,ACC-01,关闭音效或开启字幕,完成战斗,信息仍可访问,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
 T-AUD-03,AUD,BAT-05,结束 Mission,释放音源,无残留跨场景播放,NOT_RUN,,docs/systems/game/presentation/audio/README.md,game/presentation/audio/
 T-PERSIST-01,PERSIST,SAV-01,多槽、世界多年状态和 RNG,保存加载,规范化领域快照一致,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
-T-PERSIST-02,PERSIST,SAV-02 / BAT-03,写前/中/提交标记后模拟断电或磁盘满,恢复重试,读有效前/后版本，结果恰好一次,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
+T-PERSIST-02,PERSIST,SAV-02 / BAT-03,写前/中/提交标记后模拟断电或磁盘满,恢复重试,读有效前/后版本，结果恰好一次,PASS,development/reports/tests/P1/persistence.txt,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-PERSIST-03,PERSIST,SAV-03,旧 schema、动态锻造物品、缺 MOD,加载,逐级迁移或明确拒绝，原档保留,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-PERSIST-04,PERSIST,§22.2 / AT-15,50 次 Mission 切换和存档,循环,无泄漏、存档可载入,NOT_RUN,,docs/systems/game/infrastructure/persistence/README.md,game/infrastructure/persistence/
 T-INF-CONTENT-01,INF-CONTENT,EXT-01 / MOD-05,新增文化/兵种/装备/规则/任务/场景/AI MOD,编译加载,通过公开扩展点不改核心,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
-T-INF-CONTENT-02,INF-CONTENT,EXT-02,循环依赖、补丁冲突、危险路径、多人哈希不符,验证,拒绝并定位包,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
+T-INF-CONTENT-02,INF-CONTENT,EXT-02,循环依赖、补丁冲突、危险路径、多人哈希不符,验证,拒绝并定位包,PASS,development/reports/tests/P1/content.txt,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
 T-INF-CONTENT-03,INF-CONTENT,EXT-03,发布包 API 版本和许可证齐全,编译发布,输出可复现哈希和报告,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
-T-INF-CONTENT-04,INF-CONTENT,MIS-03,场景缺出生/目标引用,校验,构建阻断,NOT_RUN,,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
-T-INF-ENGINE-01,INF-ENGINE,NAV-01,请求开门后引擎尚未同步,查询,旧 nav_revision 明确，不能返回错误路径,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
-T-INF-ENGINE-02,INF-ENGINE,COM-02,高速弹体连续扫掠,碰撞适配,返回稳定候选，不漏穿越,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-INF-CONTENT-04,INF-CONTENT,MIS-03,场景缺出生/目标引用,校验,构建阻断,PASS,development/reports/tests/P1/content.txt,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
+T-INF-ENGINE-01,INF-ENGINE,NAV-01,请求开门后引擎尚未同步,查询,旧 nav_revision 明确，不能返回错误路径,PASS,development/reports/tests/P1/engine.txt,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-INF-ENGINE-02,INF-ENGINE,COM-02,高速弹体连续扫掠,碰撞适配,返回稳定候选，不漏穿越,PASS,development/reports/tests/P1/engine.txt,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
 T-INF-ENGINE-03,INF-ENGINE,NET-01,headless 环境,运行同 Mission,同规则，不依赖渲染,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
-T-INF-ENGINE-04,INF-ENGINE,§19.4,50 次任务加载/取消/销毁,循环,租约释放，记录真实性能,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-INF-ENGINE-04,INF-ENGINE,§19.4,50 次任务加载/取消/销毁,循环,租约释放，记录真实性能,PASS,development/reports/tests/P1/engine.txt,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
 T-NET-01,NET,NET-03,150 ms RTT、30 ms 抖动、3% 丢包及乱序,运行战斗、重连,状态收敛，无持续漂移,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/
 T-NET-02,NET,NET-04 / COM-06,客户端伪造伤害/他人编队和旧序号,发送,拒绝或去重，无权威变更,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/
 T-NET-03,NET,NET-05,内容版本/基线错误,重连,拒绝不兼容或请求全量基线,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/

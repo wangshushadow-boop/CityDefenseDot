@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-INF-ENGINE-01 PASS
+T-INF-ENGINE-02 PASS hits=[{ "query_index": 0, "entity_handle": "near", "fraction_ppm": 399000, "point_mm": [-2020, 1000, 0], "normal_ppm": [-1000000, 0, 0], "region": "body" }, { "query_index": 0, "entity_handle": "far", "fraction_ppm": 699000, "point_mm": [3980, 1000, 0], "normal_ppm": [-1000000, 0, 0], "region": "body" }, { "query_index": 1, "entity_handle": "near", "fraction_ppm": 395508, "point_mm": [-2020, 1000, 150], "normal_ppm": [-572602, 0, 819833], "region": "body" }, { "query_index": 1, "entity_handle": "far", "fraction_ppm": 695313, "point_mm": [3980, 1000, 150], "normal_ppm": [-593542, 0, 804803], "region": "body" }]
+P1-ENGINE-HEADLESS-SLICE PASS
+T-INF-ENGINE-04 PASS loops=50 median_us=3981 p95_us=4109 max_us=4552
+ENGINE failures=0
+exit=0

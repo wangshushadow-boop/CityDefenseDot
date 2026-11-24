@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1-TELEM-BOUNDARY PASS T-TELEM-01/02/03 slices
+exit=0

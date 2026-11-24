@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1-HARNESS PASS seed=241124 draws=64 digest=93453943df5953ac2377dfc52d48f4a49ecf3907db418701e0ae55059fdb20e2
+exit=0

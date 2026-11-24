@@ -40,5 +40,5 @@
     "scope/tick/ID 可追踪、隐私最小化、真实采样。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

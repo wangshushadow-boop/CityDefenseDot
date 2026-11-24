@@ -11,13 +11,20 @@
       "evidence": []
     },
     "CORE": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "VERIFIED",
       "work_package_ids": [
         "P0-CONTRACTS",
         "P1-CORE"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-CORE-01",
+        "T-CORE-02",
+        "T-CORE-03"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "CON": {
       "status": "VERIFIED",
@@ -95,28 +102,49 @@
       "evidence": []
     },
     "INV": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "VERIFIED",
       "work_package_ids": [
         "P1-INV"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-INV-01",
+        "T-INV-02",
+        "T-INV-03",
+        "T-INV-04"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-INV-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "DEF": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P1-DEF"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-DEF-01",
+        "T-DEF-02"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "SHRULE": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "VERIFIED",
       "work_package_ids": [
         "P1-SHRULE"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-SHRULE-01",
+        "T-SHRULE-02",
+        "T-SHRULE-03"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-SHRULE-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "ECO": {
       "status": "NOT_IMPLEMENTED",
@@ -368,7 +396,7 @@
       "evidence": []
     },
     "PERSIST": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-CONTRACTS",
         "P1-PERSIST-CORE",
@@ -377,29 +405,47 @@
         "P5-SINGLE-INTEGRATION",
         "P7-POLISH"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-PERSIST-02"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-PERSIST-CORE-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "INF-CONTENT": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-CONTENT",
         "P1-INF-CONTENT-CORE",
         "P6-INF-CONTENT-SDK"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-INF-CONTENT-02",
+        "T-INF-CONTENT-04"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-INF-CONTENT-CORE-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "INF-ENGINE": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-BATTLE",
         "P0-NAV",
         "P1-INF-ENGINE-PORTS",
         "P7-POLISH"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-INF-ENGINE-01",
+        "T-INF-ENGINE-02",
+        "T-INF-ENGINE-04"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-INF-ENGINE-PORTS-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "NET": {
       "status": "NOT_IMPLEMENTED",
@@ -412,14 +458,17 @@
       "evidence": []
     },
     "TELEM": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-CRITERIA",
         "P1-TELEM",
         "P7-POLISH"
       ],
       "verified_test_ids": [],
-      "evidence": []
+      "evidence": [
+        "development/reports/tasks/P1-TELEM-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "MP": {
       "status": "NOT_IMPLEMENTED",
@@ -517,7 +566,7 @@
       "evidence": []
     },
     "TEST": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-CRITERIA",
         "P1-TEST-HARNESS",
@@ -528,7 +577,10 @@
         "P7-TEST-RELEASE"
       ],
       "verified_test_ids": [],
-      "evidence": []
+      "evidence": [
+        "development/reports/tasks/P1-TEST-HARNESS-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "CI": {
       "status": "NOT_IMPLEMENTED",

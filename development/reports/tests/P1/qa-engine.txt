@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+
+QA-INITIAL-OVERLAP { "ok": true, "value": [{ "query_index": 0, "entity_handle": "near", "fraction_ppm": 0, "point_mm": [-2000, 1000, 0], "normal_ppm": [0, 0, 0], "region": "body" }, { "query_index": 0, "entity_handle": "far", "fraction_ppm": 496094, "point_mm": [3980, 1000, 0], "normal_ppm": [-1000000, 0, 0], "region": "body" }] }
+
+QA-ENGINE checks=10 failures=0

@@ -1,0 +1,5 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+
+QA-PERSIST first=true retry=true conflict=true content=true strict_version=true
