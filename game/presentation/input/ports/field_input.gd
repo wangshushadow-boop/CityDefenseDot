@@ -47,6 +47,7 @@ var _layout := 0
 var _sequence := 0
 var _last_tick := -1
 var _last_result := {}
+var _last_order_revisions := []
 var _stepping := false
 var _feedback_label: Label
 var _last_feedback := {}
@@ -91,6 +92,14 @@ func set_control(actor_handle: Dictionary, control_revision: int) -> Dictionary:
 		if not checked.ok: return checked
 	if _actor != actor_handle or _revision != control_revision:
 		_flush()
+		# Old grant packets must never be retried using the new control context.
+		if _pending_delivery():
+			var frame: Dictionary = _last_result.value
+			if _retryable(frame.batch_receipt):
+				frame.batch_receipt = R.fail("StaleVersion","control_revision")
+			for outgoing in frame.orders:
+				if _retryable(outgoing.receipt):
+					outgoing.receipt = R.fail("StaleVersion","control_revision")
 		_edges.clear()
 		_sent_attack = ""
 		_sent_guard = ""
@@ -262,7 +271,7 @@ func _joy_connection(device: int, connected: bool) -> void:
 func _input(event: InputEvent) -> void:
 	var button_release: bool = (event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton) and not event.pressed
 	if button_release or get_viewport().gui_get_focus_owner() != null:
-		handle_event(event)
+		if handle_event(event): get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if handle_event(event): get_viewport().set_input_as_handled()
@@ -299,7 +308,7 @@ func handle_event(event: InputEvent) -> bool:
 	return _button(source,token,1.0 if event.pressed else 0.0,event is InputEventWithModifiers and event.shift_pressed)
 
 func _button(source: String, token: String, strength: float, additive: bool) -> bool:
-	if strength > 0 and is_inside_tree() and get_viewport().gui_get_focus_owner() != null:
+	if strength > 0 and is_inside_tree() and get_viewport().gui_get_focus_owner() != null and _profile.bindings.menu.get(Profile.family(token)) != _fallback_token(token):
 		_blocked[source] = true
 		return false
 	if _blocked.has(source):
@@ -349,6 +358,8 @@ func _block_intent(held: bool, direction: String) -> Dictionary:
 
 func _action(action: String, pressed: bool, additive: bool, source: String) -> void:
 	if action == "menu" and pressed:
+		if _mode == "ui" and is_inside_tree():
+			get_viewport().gui_release_focus()
 		set_context(_before_menu if _mode == "ui" else "ui")
 		return
 	if action == "command_mode" and pressed and _mode in ["battle","command"]:
@@ -395,7 +406,13 @@ func _action(action: String, pressed: bool, additive: bool, source: String) -> v
 	elif pressed:
 		match action:
 			"cancel_attack":
-				if not _attack.is_empty(): _edges.append(_attack_intent("cancel",_attack))
+				if not _queued_release.is_empty():
+					var cancel := _queued_release.duplicate()
+					cancel.input_phase = "cancel"
+					_edges.append(cancel)
+					_queued_release = {}
+				elif not _attack.is_empty():
+					_edges.append(_attack_intent("cancel",_attack))
 				_attack = ""
 			"equip_melee","equip_ranged":
 				var slot := 0 if action == "equip_melee" else 1
@@ -436,9 +453,47 @@ func _call(port: Callable, args: Array) -> Dictionary:
 		return R.fail("InvalidState","input_port")
 	return result
 
+static func _retryable(receipt: Dictionary) -> bool:
+	return not receipt.ok and is_same(receipt.error.get("retryable"),true)
+
+func _pending_delivery() -> bool:
+	if _last_result.is_empty(): return false
+	var frame: Dictionary = _last_result.value
+	return _retryable(frame.batch_receipt) or frame.orders.any(func(row): return _retryable(row.receipt))
+
+## Port receipts are independent. Within the order stream we must confirm older
+## sequences before sending newer ones, even when the preceding ACK was lost.
+func _deliver() -> void:
+	_stepping = true
+	var frame: Dictionary = _last_result.value
+	if _retryable(frame.batch_receipt):
+		frame.batch_receipt = _call(_send_batch,[frame.batch]).duplicate(true)
+		if not frame.batch_receipt.ok:
+			_feedback(frame.batch_receipt)
+			if not _retryable(frame.batch_receipt):
+				_sent_attack = ""
+				_sent_guard = ""
+				# Edges sampled since this frame belong to the next tick.
+				if not _edges.any(func(i): return i.get("input_phase") == "start"):
+					_attack = ""
+					_queued_release = {}
+					_edges = _edges.filter(func(i): return not i.has("input_phase"))
+				if not _edges.any(func(i): return is_same(i.get("held"),true)):
+					_guard = ""
+					_edges = _edges.filter(func(i): return not i.has("held"))
+	for i in frame.orders.size():
+		var row: Dictionary = frame.orders[i]
+		if not _retryable(row.receipt): continue
+		row.receipt = _call(_send_order,[row.order,_last_order_revisions[i]]).duplicate(true)
+		_feedback(row.receipt)
+		if _retryable(row.receipt): break
+	_stepping = false
+
 func step(tick: int) -> Dictionary:
 	if _stepping or _mission.is_empty() or not V.integer(tick,1) or tick < _last_tick: return R.fail("StaleVersion","source_tick")
+	if _pending_delivery(): _deliver()
 	if tick == _last_tick: return _last_result.duplicate(true)
+	if _pending_delivery(): return R.fail("Unavailable","previous_input_tick")
 	var inputs := _edges.duplicate()
 	if not _queued_release.is_empty():
 		var phase: Variant = _combat_view().get("phase")
@@ -462,22 +517,23 @@ func step(tick: int) -> Dictionary:
 		inputs.append({"actor_handle":_actor,"desired_direction":[roundi(world.x*1000000),0,roundi(world.z*1000000)],"speed_fraction":minf(1.0,move.length()),"stance":stance})
 	var batch := S.validate_shape("IntentBatch",{"mission_id":_mission,"source_tick":tick,"control_revision":_revision,"inputs":inputs})
 	if not batch.ok: return _feedback(batch)
-	_stepping = true
-	var result := _call(_send_batch,[batch.value])
-	var sent_orders := []
-	if not result.ok: _feedback(result)
+	var outgoing := []
+	_last_order_revisions.clear()
 	for pending in _orders:
 		var order: Dictionary = pending.order.duplicate()
 		order.issued_tick = tick
-		var receipt := _call(_send_order,[order,pending.revisions])
-		_feedback(receipt)
-		sent_orders.append({"order":order,"receipt":receipt})
-	_sent_attack = _queued_release.get("direction",_attack) if result.ok else ""
-	_sent_guard = _guard if result.ok else ""
+		order.make_read_only()
+		pending.revisions.make_read_only()
+		outgoing.append({"order":order,"receipt":R.fail("Unavailable","prior_order_pending")})
+		_last_order_revisions.append(pending.revisions)
 	_edges.clear()
 	_orders.clear()
 	_mouse = Vector2.ZERO
 	_last_tick = tick
-	_last_result = R.ok({"batch":batch.value,"batch_receipt":result,"orders":sent_orders})
-	_stepping = false
+	_last_result = R.ok({"batch":batch.value,"batch_receipt":R.fail("Unavailable","pending_batch"),"orders":outgoing})
+	# A transient failure may be a lost ACK. A focus change must still neutralize
+	# the sampled controls if this exact frame later succeeds.
+	_sent_attack = _queued_release.get("direction",_attack)
+	_sent_guard = _guard
+	_deliver()
 	return _last_result.duplicate(true)

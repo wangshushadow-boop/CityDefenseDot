@@ -33,6 +33,22 @@ python development/check_project.py
 
 开发过程中，一次新加的 Godot 事件类型推导导致脚本编译错误，该轮即使进程退出 0 也记为失败。已指定 bool 类型并补上关键场景走到结尾的断言。快速点按测试第一次在 COM 恢复完成前取样，退出 1，现取完整权威恢复窗口并查状态。所有表中通过数据取自最终源码复跑。[可执行测试](../../../game/tests/p2/input/run.gd)
 
+## 独立审查首次退修
+
+开发者在主 Agent 固化的 `69764b68d17edb10cd9b4a6a2bef7f5a6a2c6383` 上原样复现了独立审查的三个问题。快速按放后，COM 正处于 Windup，玩家按 X 却仍产生 release。Button 获得焦点后，保留的 Escape 没有退出 UI。提交端首次返回可重试 Unavailable 后，同 tick 一直读到失败回执，下一步直接提交 hold。原审查脚本退出 1。
+
+退修后，取消操作会撤去等待 COM 合法释放窗口的指令，并把原方向与槽位送入 cancel。保留菜单键在 GUI 处理前生效，关闭菜单时释放焦点。提交按固定帧保存意图、命令序号、权限修订及每个端口的实际回执，仅对标注可重试的失败重发原载荷。后一编队序号等待前一序号确认。旧帧仍未恢复时，下一 tick 收到明确的 Unavailable，设备新边沿保留。控制权移交则使未确认的旧版本失效。
+
+| 复核入口 | 实测结果 |
+|---|---|
+| 原审查 `out/p2-review/input3_edges.gd` | 修复后退出 0。Windup 后只有 cancel；Button 持焦时 Escape 恢复 battle；同 tick 重投得到成功回执，接收方先收到 tick 1 的 start，再收到 tick 2 的 hold。 |
+| 原 QA `out/p2-qa/input-69764b6/qa-input-controls.gd` | 13/13，退出 0。失焦后超出窗口的取消没有引发攻击，恢复后的显式操作只释放一次。不同手柄的轴独立解除。 |
+| 新增 `res://tests/p2/input/retry_cases.gd` | 49 项断言通过，退出 0。包括双端口分别成功/失败、保序重投、终态拒绝不重试、版本移交、保留后续输入、Escape 和手柄菜单键以及真实 COM 的取消。 |
+| 原 `res://tests/p2/input/run.gd` | headless 379/379、RTX 3090 Windows 窗口 380/380，均退出 0。 |
+| P1/P2 及依赖 | P1 15 套退出 0，标签 `INPUT-001-rework1`。FORM 66,499 可达端点、COM 两种回放频率及真实场景查询通过，生产依赖问题 0。 |
+
+上述脚本均用前文 Godot 命令的对应 `--script` 路径执行。原审查和 QA 文件保持原样。退修改动为输入门面、新增的回归脚本和本报告。实体手柄热拔插、远端 ENet 场景和整场野战仍待对应验收。[提交与输入门面](../../../game/presentation/input/ports/field_input.gd) · [新增退修用例](../../../game/tests/p2/input/retry_cases.gd)
+
 ## 交接与待验证
 
 变更仅限输入 README、`field_profile.gd`、`ports/field_input.gd`、`game/tests/p2/input/run.gd` 和本报告。最后一次实际比较采用生产输入节点的反馈 Label；完整桌面 HUD、真实手柄手感/热拔插、联网冗余和整场野战入口留待相应组装及验收。战斗结果与移动/交互执行由接收域决定，本任务只对上述具体已运行入口作出判定。独立审查、QA 和集成复测由主 Agent 记录。
