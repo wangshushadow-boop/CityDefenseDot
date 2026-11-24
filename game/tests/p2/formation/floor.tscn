@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://tests/p2/formation/floor.gd" id="1"]
+
+[node name="FormationFloor" type="Node3D"]
+
+[node name="Walkable" type="NavigationRegion3D" parent="."]
+script = ExtResource("1")
