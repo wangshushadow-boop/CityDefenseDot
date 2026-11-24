@@ -133,6 +133,58 @@ func transactions() -> void:
 	check(closed.apply_move_intent(stage,input,ai).error.code=="Unauthorized","no resolver fails closed")
 	closed.rollback_step(stage)
 
+func commit_authority() -> void:
+	var field := Field.new(meter,SCOPE,authorize)
+	for i in 2: field.spawn(handle(i),Vector3(-26,0,4+i*2))
+	var roster: RefCounted = field.bind_roster([handle(0),handle(1)]).value
+	var before := field.read_poses(roster)
+	var stage: RefCounted = field.begin_step(0).value
+	check(field.apply_move_intent(stage,move(0),ai).ok and field.apply_move_intent(stage,move(1),player).ok,"two separately authorized drivers")
+	check(field.stage_step(0,DT,stage).ok and field.read_poses(roster,stage)!=before,"both candidate poses advance")
+	player_index = 0
+	var rejected := field.commit_step(stage)
+	check(not rejected.ok and rejected.error.code=="Unauthorized" and field.read_poses(roster)==before,"last driver revoked; whole committed roster is unchanged")
+	check(not field.read_poses(roster,stage).ok and not field.commit_step(stage).ok,"denied publication discards the candidate")
+	player_index = -1
+	check(commit(field,0,move(1),player),"a fresh same-tick submission succeeds")
+
+	var audit := {"checks":0,"reject":true}
+	var resolver := func(_scope: String,_actor: Dictionary,_context: Variant,tick: int):
+		if tick!=1: return true
+		audit.checks+=1
+		return not (audit.reject and audit.checks==2)
+	var retained := Field.new(meter,SCOPE,resolver)
+	retained.spawn(handle(0),Vector3(-28,0,8))
+	check(commit(retained,0,move(0),player),"establish an authorized held input")
+	var saved := retained.view(handle(0))
+	var failed := retained.step(1,DT)
+	check(not failed.ok and failed.error.code=="Unauthorized" and retained.view(handle(0))==saved,"step propagates the publication error and rolls back")
+	audit.reject = false
+	check(retained.step(1,DT).ok and retained.view(handle(0)).value.position.x>saved.value.position.x,"step can retry the rejected tick")
+
+func actor_colliders() -> void:
+	var field := Field.new(meter,SCOPE,authorize)
+	var origin := Vector3(-20,0,-6)
+	field.spawn(handle(0),origin)
+	field.spawn(handle(1),origin+Vector3.RIGHT*2)
+	var body := StaticBody3D.new()
+	body.collision_layer = 2
+	var shape := CollisionShape3D.new()
+	var capsule := CapsuleShape3D.new()
+	capsule.height = 1.8
+	capsule.radius = .32
+	shape.shape = capsule
+	body.add_child(shape)
+	body.position = origin+Vector3.UP*.9
+	get_first_node_in_group("ai_test_wall").get_parent().add_child(body)
+	await physics_frame
+	await physics_frame
+	check(commit(field,0,move(0),player),"real own hurtbox accepts movement")
+	for tick in range(1,65): check(field.step(tick,DT).ok,"actor-space movement")
+	var actor := field.view(handle(0)).value as Dictionary
+	check(actor.position.x>origin.x+1 and actor.position.distance_to(field.view(handle(1)).value.position)>=.56 and actor.blocked=="yield","own capsule is ignored; a neighbouring actor still stops movement")
+	body.free()
+
 func wall_and_horse() -> void:
 	var wall := Field.new(meter,SCOPE,authorize)
 	wall.spawn(handle(0),Vector3(-3,0,0))
@@ -251,6 +303,8 @@ func run() -> void:
 	meter.engine = engine
 	if await arena("res://tests/p2/ai/arena.tscn"):
 		transactions()
+		commit_authority()
+		await actor_colliders()
 		await wall_and_horse()
 		for n in [500,1000]: load_drives(n)
 		engine.release_scope(SCOPE)

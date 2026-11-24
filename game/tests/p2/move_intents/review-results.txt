@@ -1,0 +1,148 @@
+[commit and slot cache / BAI-1] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2836 ai_p95_us=3253 ai_p99_us=3455 combined_p95_us=6250 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=162.1 schedule=325.775 decisions=2389.23333333333 los_inclusive=775.208333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=443.816666666667 mov_step=1880.53333333333 project_mov=58.2083333333333 com_fork=32.2583333333333 com_step=340.941666666667 commit_and_publish=48.7333333333333
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5812 ai_p95_us=6599 ai_p99_us=7757 combined_p95_us=12994 cpu_budget=PASS
+BAI_MEAN_US people=1000 publish=362.541666666667 schedule=604.133333333333 decisions=4936.15833333333 los_inclusive=1555.6 cache_hits=167 scouts=196 group_contacts=396 mov_begin=940.358333333333 mov_step=3870.08333333333 project_mov=123.608333333333 com_fork=79.4333333333333 com_step=734.291666666667 commit_and_publish=110.591666666667
+FIELD_AI errors=0
+
+[commit and slot cache / BAI-2] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2997 ai_p95_us=3451 ai_p99_us=4217 combined_p95_us=6616 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=184.375 schedule=347.45 decisions=2537.18333333333 los_inclusive=812.741666666667 cache_hits=130 scouts=196 group_contacts=396 mov_begin=473.441666666667 mov_step=1938.79166666667 project_mov=65.325 com_fork=38.1166666666667 com_step=377.383333333333 commit_and_publish=56.7333333333333
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5768 ai_p95_us=6700 ai_p99_us=7745 combined_p95_us=13228 cpu_budget=PASS
+BAI_MEAN_US people=1000 publish=360.266666666667 schedule=603.85 decisions=4925.80833333333 los_inclusive=1552.4 cache_hits=167 scouts=196 group_contacts=396 mov_begin=921.033333333333 mov_step=3862.86666666667 project_mov=119.616666666667 com_fork=80.9333333333333 com_step=725.308333333333 commit_and_publish=95.25
+FIELD_AI errors=0
+
+[commit and slot cache / BAI-3] exit=1
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3137 ai_p95_us=3659 ai_p99_us=4553 combined_p95_us=7049 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=201.875 schedule=377.225 decisions=2628.13333333333 los_inclusive=836.208333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=516.791666666667 mov_step=1960.475 project_mov=62.25 com_fork=45.2416666666667 com_step=398.2 commit_and_publish=59.1833333333333
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6637 ai_p95_us=8557 ai_p99_us=9494 combined_p95_us=17152 cpu_budget=FAIL
+BAI_MEAN_US people=1000 publish=532.233333333333 schedule=716.341666666667 decisions=5499.575 los_inclusive=1682.49166666667 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1207.95 mov_step=4267.275 project_mov=134.208333333333 com_fork=119.308333333333 com_step=859.133333333333 commit_and_publish=132.016666666667
+FAIL 1000 combined fixed-step P95 <= 16.667ms
+FIELD_AI errors=1
+
+[commit and slot cache / intents] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOVE_JOLT wall_x=-0.50449436903 rider_v=4.50004577636719 braking_v=4.36672210693359
+MOVE_INTENT_LOAD n=500 moved=500 paths=500 peak=8 staged_intake_us=4085 simulate_p95_us=4861
+MOVE_INTENT_LOAD n=1000 moved=1000 paths=1000 peak=8 staged_intake_us=8018 simulate_p95_us=9723
+MOVE_NAV closed_x=0.0 restored_x=14.9899673461914 restricted_rider_x=-2.00036668777466
+MOVE_INTENTS checks=4541 failures=0
+
+[commit and slot cache / formation_motion] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-MOV-01 PASS links=3 reopen_close=true
+MOV_LOAD agents=500 corridors=20 ticks=5 max_per_tick=4 elapsed_us=4921 errors=0
+MOV_LOAD agents=1000 corridors=20 ticks=5 max_per_tick=4 elapsed_us=9790 errors=0
+MOV_BURST agents=500 distinct=500 ticks=125 peak_queued=24
+MOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24
+T-MOV-04 PASS shared_requests=1500 distinct_requests=1500
+MOV_FAILED_ACCESS tick1=8 attempts_by_tick2=16
+T-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327
+T-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true
+MOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2785
+MOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8
+MOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3839
+MOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8
+MOV_QUEUE_CHECKS errors=0 display=headless
+
+[commit and slot cache / transactions] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOV_STAGE_CHOKE arrived=48 ticks=861 downstream_rollbacks=5 divergent_frames=0
+MOV_BATCH people=500 moved=500 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=1252 packed_positions=51 packed_poses=94 stage=3534 direct_plus_scalar=4133 stage_read_commit=3637
+MOV_BATCH people=1000 moved=1000 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=2545 packed_positions=101 packed_poses=150 stage=7487 direct_plus_scalar=8794 stage_read_commit=7658
+P2-BAI-002 PASS checks=3359 failures=0
+
+[final grid and commit / intents] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOVE_JOLT wall_x=-0.50449436903 rider_v=4.50004577636719 braking_v=4.36672210693359
+MOVE_INTENT_LOAD n=500 moved=500 paths=500 peak=8 staged_intake_us=4234 simulate_p95_us=4663
+MOVE_INTENT_LOAD n=1000 moved=1000 paths=1000 peak=8 staged_intake_us=8645 simulate_p95_us=9808
+MOVE_NAV closed_x=0.0 restored_x=14.9899673461914 restricted_rider_x=-2.00036668777466
+MOVE_INTENTS checks=4541 failures=0
+
+[final grid and commit / formation_motion] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-MOV-01 PASS links=3 reopen_close=true
+MOV_LOAD agents=500 corridors=20 ticks=5 max_per_tick=4 elapsed_us=4836 errors=0
+MOV_LOAD agents=1000 corridors=20 ticks=5 max_per_tick=4 elapsed_us=9392 errors=0
+MOV_BURST agents=500 distinct=500 ticks=125 peak_queued=24
+MOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24
+T-MOV-04 PASS shared_requests=1500 distinct_requests=1500
+MOV_FAILED_ACCESS tick1=8 attempts_by_tick2=16
+T-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327
+T-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true
+MOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2725
+MOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8
+MOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3444
+MOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8
+MOV_QUEUE_CHECKS errors=0 display=headless
+
+[final grid and commit / transactions] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOV_STAGE_CHOKE arrived=48 ticks=861 downstream_rollbacks=5 divergent_frames=0
+MOV_BATCH people=500 moved=500 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=1331 packed_positions=54 packed_poses=108 stage=3286 direct_plus_scalar=3946 stage_read_commit=3417
+MOV_BATCH people=1000 moved=1000 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=2902 packed_positions=127 packed_poses=320 stage=8213 direct_plus_scalar=9893 stage_read_commit=8555
+P2-BAI-002 PASS checks=3359 failures=0
+
+[final grid and commit / BAI-1] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3054 ai_p95_us=3814 ai_p99_us=4439 combined_p95_us=6982 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=191.975 schedule=359.991666666667 decisions=2579.05 los_inclusive=827.391666666667 cache_hits=130 scouts=196 group_contacts=396 mov_begin=594.4 mov_step=1516.375 project_mov=64.0166666666667 com_fork=40.2083333333333 com_step=393.5 commit_and_publish=56.125
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6352 ai_p95_us=7874 ai_p99_us=9151 combined_p95_us=14056 cpu_budget=PASS
+BAI_MEAN_US people=1000 publish=458.383333333333 schedule=669.925 decisions=5298.625 los_inclusive=1625.21666666667 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1328.81666666667 mov_step=3212.575 project_mov=134.841666666667 com_fork=104.875 com_step=834.675 commit_and_publish=121.525
+FIELD_AI errors=0
+
+[final grid and commit / BAI-2] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2972 ai_p95_us=3610 ai_p99_us=4897 combined_p95_us=6440 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=175.7 schedule=340.75 decisions=2549.58333333333 los_inclusive=824.383333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=563.35 mov_step=1500.15833333333 project_mov=63.5 com_fork=37.3583333333333 com_step=369.125 commit_and_publish=58.3333333333333
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=6019 ai_p95_us=7230 ai_p99_us=7789 combined_p95_us=12970 cpu_budget=PASS
+BAI_MEAN_US people=1000 publish=392.441666666667 schedule=641.958333333333 decisions=5090.15 los_inclusive=1577.225 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1207.55 mov_step=3032.19166666667 project_mov=133.891666666667 com_fork=87.95 com_step=764.6 commit_and_publish=115.541666666667
+FIELD_AI errors=0
+
+[final grid and commit / BAI-3] exit=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2979 ai_p95_us=3597 ai_p99_us=3834 combined_p95_us=6312 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=174.208333333333 schedule=345.566666666667 decisions=2520.39166666667 los_inclusive=811.933333333333 cache_hits=130 scouts=196 group_contacts=396 mov_begin=596.408333333333 mov_step=1492.95833333333 project_mov=60.725 com_fork=38.7916666666667 com_step=380.991666666667 commit_and_publish=58.6166666666667
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5953 ai_p95_us=7654 ai_p99_us=8553 combined_p95_us=13960 cpu_budget=PASS
+BAI_MEAN_US people=1000 publish=408.691666666667 schedule=631.075 decisions=5110.94166666667 los_inclusive=1597.625 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1276.5 mov_step=3052.85 project_mov=129.983333333333 com_fork=94.025 com_step=777.5 commit_and_publish=114.183333333333
+FIELD_AI errors=0
