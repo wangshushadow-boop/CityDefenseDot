@@ -2,4 +2,4 @@
 
 项目：`recollection`。模块：`INF-ENGINE`。
 
-**状态：目录骨架，未实现。** 本目录 README 仅作为导航；正式设计见 [模块规格](../../../docs/systems/game/infrastructure/engine/README.md)。实际文件及测试在对应任务获准后建立，不在这里重复设计，不将目录存在当作功能完成。
+场景租约、物理扫掠和导航版本的入口为 [adapter.gd](adapter.gd)。参见[模块规格](../../../docs/systems/game/infrastructure/engine/README.md)和[引擎回归](../../tests/p1/engine/run.gd)。
