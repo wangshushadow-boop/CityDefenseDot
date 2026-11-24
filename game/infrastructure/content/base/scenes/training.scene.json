@@ -1,0 +1,22 @@
+{
+  "markers": [
+    {
+      "id": "bank",
+      "kind": "spawn",
+      "position_mm": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "flag",
+      "kind": "objective",
+      "position_mm": [
+        0,
+        0,
+        -12000
+      ]
+    }
+  ]
+}

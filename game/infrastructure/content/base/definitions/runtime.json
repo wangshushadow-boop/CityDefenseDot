@@ -1,0 +1,28 @@
+[
+  {
+    "id": "base:culture/river",
+    "schema_version": 1,
+    "name": "河原",
+    "tags": [
+      "river"
+    ]
+  },
+  {
+    "id": "base:ruleset/standard",
+    "schema_version": 1,
+    "name": "常规演练",
+    "mode": "training"
+  },
+  {
+    "id": "base:scene/training",
+    "schema_version": 1,
+    "name": "河滩练兵场",
+    "asset_ref": "scenes/training.scene.json",
+    "spawn_zones": [
+      "bank"
+    ],
+    "objectives": [
+      "flag"
+    ]
+  }
+]
