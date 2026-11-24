@@ -5,6 +5,7 @@ const V = preload("res://contracts/values.gd")
 const S = preload("res://contracts/schema.gd")
 const C = preload("res://contracts/canonical.gd")
 const Entities = preload("res://mission/runtime/entities.gd")
+const FieldDeployment = preload("res://mission/runtime/field_deployment.gd")
 const PHASES := ["input","ai","movement","action","damage","objectives","snapshot"]
 
 var _core: RefCounted
@@ -22,6 +23,9 @@ var _busy := false
 var _reports := []
 var _outcome := {}
 var _result := {}
+var _field: RefCounted
+var _clear_sites := Callable()
+var _retry_wave := false
 
 func _init(core: RefCounted, engine: RefCounted, mission_key: String, result_builder: Callable = Callable(),
 		instance_id: String = "") -> void:
@@ -52,6 +56,12 @@ func prepare(spec: Dictionary, scene: Dictionary, ruleset: Dictionary) -> Dictio
 		return checked
 	if scene.get("id") != spec.scene_def_id or ruleset.get("id") != spec.ruleset_id:
 		return R.fail("InvalidArgument","definitions")
+	var field: RefCounted
+	if spec.ruleset_id == "base:ruleset/field_battle" or ruleset.get("battle_mode") == "field":
+		var indexed := FieldDeployment.build(checked.value,scene,ruleset)
+		if not indexed.ok:
+			return indexed
+		field = indexed.value
 	var teams := {}
 	for side in spec.sides:
 		if teams.has(side.team_key):
@@ -72,6 +82,7 @@ func prepare(spec: Dictionary, scene: Dictionary, ruleset: Dictionary) -> Dictio
 		return _undo_prepare(loaded)
 	_spec = checked.value
 	_entities = Entities.new(_spec.reserved_sources)
+	_field = field
 	_phase = "Deployment"
 	return R.ok(view())
 
@@ -82,9 +93,20 @@ func _undo_prepare(error: Dictionary) -> Dictionary:
 	return error
 
 func view() -> Dictionary:
-	return Entities.freeze({"mission_id":_mission,"mission_key":_key,"phase":_phase,"tick":_tick,
+	return _make_view(_entities)
+
+func _make_view(entities: Entities) -> Dictionary:
+	# Rows, specification and reports are immutable from the time they are published.
+	# A snapshot can share them across ticks and still outlive the Mission.
+	var reports: Array = _reports
+	reports.make_read_only()
+	var spec: Dictionary = _spec
+	spec.make_read_only()
+	var snapshot := {"mission_id":_mission,"mission_key":_key,"phase":_phase,"tick":_tick,
 		"scene_def_id":_spec.get("scene_def_id"),"ruleset_id":_spec.get("ruleset_id"),
-		"encounter_spec":_spec,"entities":_entities.rows(),"spawned_slots":_entities.spawned_slots(),"system_reports":_reports})
+		"encounter_spec":spec,"entities":entities.rows(),"spawned_slots":entities.spawned_slots(),"system_reports":reports}
+	snapshot.make_read_only()
+	return snapshot
 
 func register_system(phase: String, system: Dictionary) -> Dictionary:
 	if _busy or _phase != "Deployment":
@@ -94,7 +116,22 @@ func register_system(phase: String, system: Dictionary) -> Dictionary:
 		return R.fail("InvalidArgument","system")
 	if _systems.has(id):
 		return R.fail("Conflict","system.id")
-	_systems[id] = {"phase":phase,"run":system.run}
+	for key in ["commit","rollback"]:
+		if system.has(key) and (typeof(system[key]) != TYPE_CALLABLE or not system[key].is_valid()):
+			return R.fail("InvalidArgument","system."+key)
+	if system.has("commit") != system.has("rollback"):
+		return R.fail("InvalidArgument","system.transaction")
+	if typeof(system.get("can_retire",false)) != TYPE_BOOL or (system.get("can_retire",false) and phase not in ["damage","objectives"]):
+		return R.fail("InvalidArgument","system.can_retire")
+	_systems[id] = {"phase":phase,"run":system.run,"commit":system.get("commit",Callable()),
+		"rollback":system.get("rollback",Callable()),"can_retire":system.get("can_retire",false)}
+	return R.ok()
+
+# BOOT installs the trusted live occupancy/visibility query for this Mission.
+func bind_field_clearance(query: Callable) -> Dictionary:
+	if _busy or _phase not in ["New","Deployment"] or not query.is_valid():
+		return R.fail("InvalidState","field.spawn_clearance")
+	_clear_sites = query
 	return R.ok()
 
 func _active() -> bool:
@@ -103,11 +140,21 @@ func _active() -> bool:
 func allocate_entity(source_slot: Variant, components: Dictionary) -> Dictionary:
 	if not _active():
 		return R.fail("InvalidState","phase")
+	if _field != null and (source_slot != null or components.get("type") not in ["mount","projectile","siege_engine"]):
+		return R.fail("Unauthorized","field.deployment")
 	return _entities.allocate(source_slot,components,_spec.battle_limit)
 
 func apply_deployment(orders: Array) -> Dictionary:
 	if _busy or _phase != "Deployment":
 		return R.fail("InvalidState","phase")
+	if _field != null:
+		_busy = true
+		var deployed: Dictionary = _field.deploy(_entities,orders,_engine,_mission,_clear_sites)
+		_busy = false
+		if not deployed.ok:
+			return deployed
+		_entities = deployed.value.entities
+		return R.ok(deployed.value.handles)
 	var staged: Entities = _entities.fork()
 	var handles := []
 	for order in orders:
@@ -146,29 +193,81 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 	var ids := _systems.keys()
 	ids.sort()
 	var reports := []
-	var context := view()
+	var staged: Entities = _entities
+	var attempted := []
+	var retry_wave := false
 	_busy = true
+	if _field != null and staged.active_sources < _spec.battle_limit and staged.spawned.size() < staged.reserved_count:
+		var opening := _tick == 0 and staged.active_sources == 0
+		if opening or _retry_wave or tick % _field.cooldown == 0:
+			var limit: int = _spec.battle_limit if opening else mini(_field.wave_size,_spec.battle_limit-staged.active_sources)
+			var wave: Dictionary = _field.auto_wave(staged,limit,_engine,_mission,_clear_sites)
+			if not wave.ok:
+				if opening or wave.error.code not in ["Unavailable","StaleVersion"]:
+					return _abort_tick(wave,attempted)
+				retry_wave = true
+			else:
+				if opening and wave.value.handles.is_empty():
+					return _abort_tick(R.fail("Unavailable","deployment.spawn_site"),attempted)
+				staged = wave.value.entities
+	var context := _make_view(staged)
 	for phase: String in PHASES:
 		for id in ids:
 			var system: Dictionary = _systems[id]
 			if system.phase != phase:
 				continue
-			var report: Variant = system.run.call(context,batch.value)
+			var phase_context := context
+			if _field != null:
+				phase_context = context.duplicate()
+				var current := reports.duplicate()
+				current.make_read_only()
+				phase_context["phase_reports"] = current
+				phase_context.make_read_only()
+			attempted.append(system)
+			var report: Variant = system.run.call(phase_context,batch.value)
 			if typeof(report) != TYPE_DICTIONARY or typeof(report.get("ok")) != TYPE_BOOL:
-				_busy = false
-				return R.fail("InvalidArgument","system.result")
+				return _abort_tick(R.fail("InvalidArgument","system.result"),attempted)
 			if not report.ok:
-				_busy = false
-				return report
+				return _abort_tick(report,attempted)
 			if not C.encode(report.get("value")).ok:
-				_busy = false
-				return R.fail("InvalidArgument","system.value")
-			reports.append({"id":id,"phase":phase,"value":Entities.freeze(report.get("value"))})
-	_busy = false
+				return _abort_tick(R.fail("InvalidArgument","system.value"),attempted)
+			if system.can_retire:
+				var payload: Variant = report.get("value")
+				if typeof(payload) != TYPE_DICTIONARY or typeof(payload.get("retire_handles",[])) != TYPE_ARRAY:
+					return _abort_tick(R.fail("InvalidArgument","system.retire_handles"),attempted)
+				var retiring: Array = payload.get("retire_handles",[])
+				if not retiring.is_empty():
+					if staged == _entities:
+						staged = staged.fork()
+					for handle in retiring:
+						if typeof(handle) != TYPE_DICTIONARY:
+							return _abort_tick(R.fail("InvalidArgument","system.retire_handles"),attempted)
+						var removed := staged.remove(_mission,handle,_mission)
+						if not removed.ok:
+							return _abort_tick(removed,attempted)
+					context = _make_view(staged)
+			var entry := {"id":id,"phase":phase,"value":Entities.freeze(report.get("value"))}
+			entry.make_read_only()
+			reports.append(entry)
+	# All fallible work precedes commit. Registered commit hooks publish a
+	# prevalidated domain candidate and may not query or produce fallible work.
+	for system in attempted:
+		if system.commit.is_valid():
+			system.commit.call()
+	_entities = staged
+	_retry_wave = retry_wave
 	_reports = reports
 	_tick = tick
 	_phase = "Running"
+	_busy = false
 	return R.ok(view())
+
+func _abort_tick(failure: Dictionary, attempted: Array) -> Dictionary:
+	for i in range(attempted.size()-1,-1,-1):
+		if attempted[i].rollback.is_valid():
+			attempted[i].rollback.call()
+	_busy = false
+	return failure
 
 func submit_worker(stable_key: String, work: Callable) -> Dictionary:
 	if not _active():
@@ -248,6 +347,8 @@ func dispose() -> Dictionary:
 	_result = {}
 	_outcome = {}
 	_builder = Callable()
+	_clear_sites = Callable()
+	_field = null
 	_core = null
 	_engine = null
 	return R.ok({"phase":_phase,"workers":barrier,"engine":released})

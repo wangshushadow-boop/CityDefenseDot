@@ -142,5 +142,6 @@ func run() -> void:
 	check(visit.request_end({"outcome":"completed"}).ok and visit.finalize().ok, "civilian supplies no slot outcome")
 	visit.dispose()
 	check(adapter.counts() == {"scopes":0,"requests":0,"leases":0}, "all mission scopes released")
+	failures += await preload("res://tests/p2/mission/field_cases.gd").new().run(self)
 	print("P2-MISSION-SOURCE ", "PASS" if failures == 0 else "FAIL", " failures=", failures)
 	quit(0 if failures == 0 else 1)
