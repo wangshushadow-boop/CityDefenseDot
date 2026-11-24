@@ -26,9 +26,13 @@ def integer(value, lower=0, upper=MAX_EXACT):
 
 
 def typed_id(value, kind):
+    require(type(value) is str)
     scope, sep, raw = value.partition("/")
     require(scope == kind and sep == "/")
-    parsed = UUID(raw)
+    try:
+        parsed = UUID(raw)
+    except ValueError as exc:
+        raise ValueError("InvalidArgument") from exc
     require(str(parsed) == raw and parsed.version == 4)
     return parsed
 
@@ -74,22 +78,28 @@ def millimeters(meters):
 def resolve_agent(mission, index, generation, current_mission, generations):
     integer(index, 0, MAX_U32)
     integer(generation, 1, MAX_U32)
+    require(type(mission) is str)
     require(mission == current_mission and generations.get(index) == generation, "NotFound")
 
 
 def check_result(encounter, result):
-    require(result["schema_version"] == encounter["schema_version"] == 1, "StaleVersion")
+    require(integer(result["schema_version"]) == integer(encounter["schema_version"]) == 1, "StaleVersion")
     typed_id(encounter["encounter_id"], "encounter")
+    typed_id(result["encounter_id"], "encounter")
     require(result["encounter_id"] == encounter["encounter_id"], "NotFound")
-    require(result["reservation_revision"] == encounter["reservation_revision"], "StaleVersion")
+    require(integer(result["reservation_revision"]) == integer(encounter["reservation_revision"]), "StaleVersion")
     require(result["integrity_hash"] == result_hash(result), "Conflict")
     intervals = []
     for source in encounter["reserved_sources"]:
-        start, stop = source["source_slot_range"]
+        bounds = source["source_slot_range"]
+        require(type(bounds) is list and len(bounds) == 2)
+        start, stop = bounds
         integer(start, 0, MAX_U32)
         integer(stop, 1, MAX_U32 + 1)
         require(integer(source["count"], 1) == stop - start)
-        require(source["hero_id"] is None or source["count"] == 1)
+        if source["hero_id"] is not None:
+            typed_id(source["hero_id"], "hero")
+            require(source["count"] == 1)
         intervals.append((start, stop))
     intervals.sort()
     require(all(first[1] <= second[0] for first, second in zip(intervals, intervals[1:])), "Conflict")
@@ -103,17 +113,23 @@ def check_result(encounter, result):
             require(reported[offset] == slot, "Conflict")
             offset += 1
     for entry in outcomes:
+        integer(entry["xp"])
+        require(type(entry["wounded"]) is bool)
         require(entry["end_status"] in ("alive", "wounded", "dead", "captured", "withdrawn", "not_spawned"))
         require(entry["end_status"] != "not_spawned" or (entry["xp"] == 0 and entry["wounded"] is False))
 
 
 def check_order(order, mission, issuer, owned, current_tick):
+    require(type(order["mission_id"]) is str and type(order["issuer_id"]) is str)
     require(order["mission_id"] == mission, "NotFound")
     require(order["issuer_id"] == issuer, "Unauthorized")
     forms = order["formation_ids"]
-    require(bool(forms) and len(forms) == len(set(forms)))
+    require(type(forms) is list and bool(forms))
+    for form in forms:
+        integer(form, 0, MAX_U32)
+    require(len(forms) == len(set(forms)))
     require(set(forms) <= owned, "Unauthorized")
-    require(integer(order["issued_tick"]) <= current_tick, "StaleVersion")
+    require(integer(order["issued_tick"]) <= integer(current_tick), "StaleVersion")
 
 
 def migrate_sample(record):
@@ -128,13 +144,19 @@ def migrate_sample(record):
 
 
 def negotiate(expected, remote):
-    for field in ("protocol_version", "content_api_version", "content_hash"):
-        require(remote[field] == expected[field], "StaleVersion")
+    for field in ("protocol_version", "content_api_version"):
+        require(integer(remote[field]) == integer(expected[field]), "StaleVersion")
+    digest = remote["content_hash"]
+    require(type(digest) is str and re.fullmatch(r"[0-9a-f]{64}", digest))
+    require(digest == expected["content_hash"], "StaleVersion")
 
 
 def replay_receipt(command, principal, committed):
     """Lookup after authentication. None means this ID has no committed command."""
+    require(all(type(command[key]) is str and command[key] for key in ("actor_ref", "scope_id", "command_id")))
     require(command["actor_ref"] == principal, "Unauthorized")
+    if command.get("expected_revision") is not None:
+        integer(command["expected_revision"])
     key = (command["scope_id"], principal, command["command_id"])
     if key not in committed:
         return None
@@ -158,19 +180,29 @@ class ContractVectors(unittest.TestCase):
         self.assertEqual(str(typed_id("party/" + UID, "party")), UID)
         with self.assertRaisesRegex(ValueError, "InvalidArgument"):
             typed_id("hero/" + UID, "party")
+        for invalid in (True, 7, None, "party/not-a-uuid"):
+            with self.subTest(value=invalid), self.assertRaisesRegex(ValueError, "InvalidArgument"):
+                typed_id(invalid, "party")
         for text, expected in [("-0.0005", -1), ("1.2345", 1235), ("0", 0)]:
             self.assertEqual(millimeters(Decimal(text)), expected)
         with self.assertRaises(ValueError):
             millimeters(Decimal("2147483.648"))
+        self.assertEqual(millimeters(Decimal("-2147483.648")), -(2**31))
+        with self.assertRaises(ValueError):
+            millimeters(Decimal("-2147483.649"))
         self.assertNotEqual(canonical(None), canonical(0))
         with self.assertRaises(ValueError):
             integer(False)
 
     def test_generation_and_scope(self):
         resolve_agent("mission-A", 4, 2, "mission-A", {4: 2})
+        resolve_agent("mission-A", MAX_U32, MAX_U32, "mission-A", {MAX_U32: MAX_U32})
         for mission, generation in [("mission-A", 1), ("mission-B", 2)]:
             with self.assertRaisesRegex(ValueError, "NotFound"):
                 resolve_agent(mission, 4, generation, "mission-A", {4: 2})
+        for index, generation in [(True, 1), (0, True), (-1, 1), (0, 0), (MAX_U32 + 1, 1), (0, MAX_U32 + 1)]:
+            with self.subTest(index=index, generation=generation), self.assertRaisesRegex(ValueError, "InvalidArgument"):
+                resolve_agent("mission-A", index, generation, "mission-A", {0: 1, 1: 1})
 
     def test_encounter_result(self):
         encounter = {"schema_version": 1, "encounter_id": "encounter/" + UID, "reservation_revision": 9,
@@ -184,6 +216,10 @@ class ContractVectors(unittest.TestCase):
         for update, error in [({"slot_outcomes": [rows[0], rows[0]]}, "Conflict"),
                               ({"slot_outcomes": rows[:1]}, "Conflict"),
                               ({"reservation_revision": 10}, "StaleVersion"),
+                              ({"reservation_revision": True}, "InvalidArgument"),
+                              ({"schema_version": True}, "InvalidArgument"),
+                              ({"slot_outcomes": [rows[0], rows[1] | {"xp": False}]}, "InvalidArgument"),
+                              ({"slot_outcomes": [rows[0] | {"wounded": 1}, rows[1]]}, "InvalidArgument"),
                               ({"slot_outcomes": [rows[0], rows[1] | {"xp": 1}]}, "InvalidArgument")]:
             bad = result | update
             bad["integrity_hash"] = result_hash(bad)
@@ -197,6 +233,12 @@ class ContractVectors(unittest.TestCase):
         def check(value):
             check_order(decode(canonical(value)), "mission-A", "player-A", {1, 2}, 7)
         check(order)
+        for key, value in [("formation_ids", [True]), ("formation_ids", [-1]),
+                           ("formation_ids", [MAX_U32 + 1]), ("issued_tick", True), ("issued_tick", MAX_EXACT + 1)]:
+            with self.subTest(key=key, value=value), self.assertRaisesRegex(ValueError, "InvalidArgument"):
+                check_order(order | {key: value}, "mission-A", "player-A", {1, 2}, 7)
+        check_order(order | {"formation_ids": [0, MAX_U32], "issued_tick": MAX_EXACT},
+                    "mission-A", "player-A", {0, MAX_U32}, MAX_EXACT)
         for update, error in [({"issuer_id": "other"}, "Unauthorized"), ({"formation_ids": [3]}, "Unauthorized"),
                               ({"mission_id": "mission-B"}, "NotFound"), ({"issued_tick": 8}, "StaleVersion")]:
             with self.subTest(update=update), self.assertRaisesRegex(ValueError, error):
@@ -214,6 +256,8 @@ class ContractVectors(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unauthorized"):
             replay_receipt(cmd, "other", committed)
         self.assertIsNone(replay_receipt(cmd | {"command_id": "two"}, "issuer", committed))
+        with self.assertRaisesRegex(ValueError, "InvalidArgument"):
+            replay_receipt(cmd | {"command_id": "two", "expected_revision": False}, "issuer", committed)
 
     def test_migration_without_mutation(self):
         original = b'{"minutes":12,"schema_version":0}'
@@ -231,6 +275,10 @@ class ContractVectors(unittest.TestCase):
         negotiate(expected, decode(canonical(expected)))
         for key, value in [("protocol_version", 2), ("content_api_version", 2), ("content_hash", "00" * 32)]:
             with self.subTest(field=key), self.assertRaisesRegex(ValueError, "StaleVersion"):
+                negotiate(expected, expected | {key: value})
+        for key, value in [("protocol_version", True), ("content_api_version", True), ("protocol_version", -1),
+                           ("content_api_version", MAX_EXACT + 1), ("content_hash", 1), ("content_hash", "A" * 64)]:
+            with self.subTest(key=key, value=value), self.assertRaisesRegex(ValueError, "InvalidArgument"):
                 negotiate(expected, expected | {key: value})
 
 
