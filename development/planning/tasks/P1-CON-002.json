@@ -38,5 +38,5 @@
   "acceptance": [
     "三个已有 SDD 接口可由生产消费者直接接入，接口面版本化；验证重复/不合法输入与兼容拒绝。"
   ],
-  "status": "BLOCKED"
+  "status": "DONE"
 }

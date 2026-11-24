@@ -160,15 +160,19 @@
       }
     },
     "P1-CON": {
-      "status": "BLOCKED",
+      "status": "DONE",
       "owner": "contract",
       "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
       "candidate_commit": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
-      "integrated_commit": null,
+      "integrated_commit": "214b04b10d8facd499d24c49a9b125785ce0af49",
       "evidence": [
         "development/reports/stages/P1.md",
         "development/reports/tests/P1/contract-candidate.txt",
-        "development/reports/reviews/P1.md"
+        "development/reports/reviews/P1.md",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md",
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
       ],
       "child_ids": [
         "P1-CON-001",
@@ -1130,15 +1134,19 @@
       "child_ids": []
     },
     "P1-CON-001": {
-      "status": "BLOCKED",
+      "status": "DONE",
       "owner": "contract",
       "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
       "candidate_commit": "c5e61b929176e9fe2086d968b66d714b2b1b703f",
-      "integrated_commit": null,
+      "integrated_commit": "214b04b10d8facd499d24c49a9b125785ce0af49",
       "evidence": [
         "development/reports/stages/P1.md",
         "development/reports/tests/P1/contract-candidate.txt",
-        "development/reports/reviews/P1.md"
+        "development/reports/reviews/P1.md",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md",
+        "development/reports/tasks/P1-CON-001.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
       ],
       "child_ids": []
     },
@@ -1269,16 +1277,19 @@
       "child_ids": []
     },
     "P1-CON-002": {
-      "status": "BLOCKED",
+      "status": "DONE",
       "owner": "ports",
       "base_commit": "b639e2e5828e409cf309aed83cf04a3a699c598b",
       "candidate_commit": "33f36b878b0bad8013d62e9b9c933c769298b8d2",
-      "integrated_commit": null,
+      "integrated_commit": "214b04b10d8facd499d24c49a9b125785ce0af49",
       "evidence": [
         "development/reports/reviews/P1.md",
         "development/reports/tests/P1/README.md",
         "development/reports/stages/P1.md",
-        "development/reports/tests/P1/contract-candidate.txt"
+        "development/reports/tests/P1/contract-candidate.txt",
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md",
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/integration/P1.md"
       ],
       "child_ids": []
     }
@@ -2863,6 +2874,234 @@
         "development/reports/reviews/P1.md"
       ],
       "commit": "f37b8f4"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "BLOCKED",
+      "new": "READY",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "项目负责人按默认 1A+2A 批准",
+      "evidence": [
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "恢复签核候选并核对合并结果",
+      "evidence": [],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "BLOCKED",
+      "new": "READY",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "项目负责人按默认 1A+2A 批准",
+      "evidence": [
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "恢复签核候选并核对合并结果",
+      "evidence": [],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "BLOCKED",
+      "new": "READY",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "项目负责人按默认 1A+2A 批准",
+      "evidence": [
+        "docs/architecture/decisions/ADR-013-p1-ports-and-save.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "恢复签核候选并核对合并结果",
+      "evidence": [],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-CON-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-CON-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-CON-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-CON-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
+    },
+    {
+      "task_id": "P1-CON",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T21:20:57+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-CON-002.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "214b04b10d8facd499d24c49a9b125785ce0af49"
     }
   ]
 }

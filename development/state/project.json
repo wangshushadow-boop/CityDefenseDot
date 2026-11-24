@@ -5,7 +5,7 @@
   "active_stage": "P1",
   "stage_status": {
     "P0": "DONE",
-    "P1": "BLOCKED",
+    "P1": "IN_PROGRESS",
     "P2": "PLANNED",
     "P3": "PLANNED",
     "P4": "PLANNED",
@@ -16,7 +16,7 @@
   },
   "authorized_by": "项目负责人，本次会话授权开始 P1",
   "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
-  "integrated_commit": "ab8099511aed0c4cd6a952464188ff2c81325aac",
+  "integrated_commit": "214b04b10d8facd499d24c49a9b125785ce0af49",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",
@@ -25,7 +25,8 @@
     "test_framework": "Godot headless 显式失败码 + Python 3.12.14 标准库 unittest/CLI",
     "approved_adrs": [
       "ADR-011",
-      "ADR-012"
+      "ADR-012",
+      "ADR-013"
     ],
     "approval": {
       "by": "项目负责人",
@@ -38,7 +39,17 @@
     }
   },
   "updated_at": "2026-11-24",
-  "note": "P1 已授权。首批联合候选 f37b8f4 完成验证，等待 ADR-013 签核后集成并解锁 CORE/DEF。",
+  "note": "ADR-013 与内容预算口径已批准；P1 开发中。",
   "last_completed_stage": "P0",
-  "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2"
+  "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
+  "p1_decisions": {
+    "by": "项目负责人",
+    "date": "2026-11-24",
+    "reply": "按照默认来完成",
+    "selection": [
+      "1A",
+      "2A"
+    ],
+    "candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2"
+  }
 }

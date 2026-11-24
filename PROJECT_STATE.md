@@ -1,6 +1,10 @@
+## 2026-11-24 签核及恢复
+
+负责人选择 1A、2A，ADR-013 已批准，§1.3 全部内容目标按实测产能滚动预算。合入 214b04b 后重新运行两套契约互操作与 QA 入口，全部退出 0。P1 继续执行。
+
 # recollection 项目状态
 
-**P1 已获授权，公共契约候选已通过测试，等待 ADR-013 签核。** 2026-11-24；P0 已按实测范围验收，GATE-P1 尚未通过，P2–P8 为 PLANNED。[P1 阶段记录](development/reports/stages/P1.md) · [P0 签核报告](development/reports/stages/P0.md)
+**首批候选记录。** 2026-11-24；P0 已按实测范围验收，GATE-P1 尚未通过，P2–P8 为 PLANNED。[P1 阶段记录](development/reports/stages/P1.md) · [P0 签核报告](development/reports/stages/P0.md)
 
 | 项目 | 最新状态 |
 |---|---|
