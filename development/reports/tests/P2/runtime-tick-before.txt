@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Mission-only count=500 n=120 inputs=0 tick_us p50=4631 p95=5601 max=7444
+Mission-only count=500 n=120 inputs=25 tick_us p50=5576 p95=7288 max=10439
+Mission-only count=1000 n=120 inputs=0 tick_us p50=9359 p95=11120 max=12509
+Mission-only count=1000 n=120 inputs=50 tick_us p50=11667 p95=13533 max=18492
+MISSION-ONLY PASS

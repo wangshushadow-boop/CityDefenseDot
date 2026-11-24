@@ -10,4 +10,4 @@
 | spear_soldier.glb | Polyfork · [Spear Soldier](https://polyfork.dev/asset/spear-soldier-dcfb4b) |
 | crossbowman.glb | Polyfork · [Crossbowman](https://polyfork.dev/asset/crossbowman-4bf6b1) |
 
-源工程未发现坐骑 GLB，Quaternius 的动画马可作为 CC0 候选，尚未导入测试。[作者发布页](https://quaternius.itch.io/lowpoly-animated-animals) · [具体模型](https://poly.pizza/m/qvTrSG9pZF)
+骑兵采用 Quaternius 发布的 CC0 Horse 作为临时候选，模型 1,108,124 字节。Godot 实际加载出一具 50 骨骨架和一个蒙皮网格，Idle、Walk、Gallop 均可播放，各 48 条轨道。下载内容留在本地 out 缓存；生产内容按 VIS 任务再接入。复跑导入命令附加 `--horse <horse.glb>`。[作者的许可与原包](https://quaternius.itch.io/lowpoly-animated-animals) · [模型发布页](https://poly.pizza/m/qvTrSG9pZF) · [GLB](https://static.poly.pizza/d37dbc87-ca61-4b2c-a2da-d2f0c4240bef.glb) · [导入结果和 SHA-256](horse-import.txt)

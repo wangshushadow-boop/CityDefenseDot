@@ -1,0 +1,13 @@
+general.glb 1468800 848e6d94c3f0bda60fb28176d41061b4771b4923bab0f63ce95898f4f7ea19b5
+spear_soldier.glb 1461876 9d69862625b97ef0074887d81c317a76ecc63295ca3edb000931792f2c64033d
+crossbowman.glb 1466792 f177bd6c582d8578929cb6b710cb1a61575a69bcd539d9b8c87dd620efdb1bb8
+p2-horse-quaternius.glb 1108124 fae7a7ec91e0d6a33554efb896fac9c4e8c632644183bcb8cc962f673d3ce609
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+--editor exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+P2_ART {"animation_tracks":{"Idle":22,"Run":22,"Walk":22},"asset":"general","bones":22,"skinned_meshes":12}
+P2_ART {"animation_tracks":{"Idle":22,"Run":22,"Walk":22},"asset":"spear_soldier","bones":22,"skinned_meshes":12}
+P2_ART {"animation_tracks":{"Idle":22,"Run":22,"Walk":22},"asset":"crossbowman","bones":22,"skinned_meshes":12}
+P2_ART {"animation_tracks":{"Gallop":48,"Idle":48,"Walk":48},"asset":"horse","bones":50,"skinned_meshes":1}
+P2_ART_IMPORT PASS
+--script exit 0

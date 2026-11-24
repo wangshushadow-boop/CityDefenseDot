@@ -12,6 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True, type=Path)
     parser.add_argument("--source", required=True, type=Path)
+    parser.add_argument("--horse", type=Path, help="Optional Quaternius CC0 Horse GLB")
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="recollection-p2-art-") as tmp:
         base = Path(tmp)
@@ -19,9 +20,11 @@ def main():
         project.mkdir()
         (project / "project.godot").write_text("config_version=5\n", encoding="utf8")
         shutil.copyfile(Path(__file__).with_name("inspect.gd"), project / "inspect.gd")
-        for name in ("general", "spear_soldier", "crossbowman"):
-            src = args.source / (name + ".glb")
-            target = project / src.name
+        models = {name: args.source / (name + ".glb") for name in ("general", "spear_soldier", "crossbowman")}
+        if args.horse is not None:
+            models["horse"] = args.horse
+        for name, src in models.items():
+            target = project / (name + ".glb")
             shutil.copyfile(src, target)
             print(src.name, target.stat().st_size, hashlib.sha256(target.read_bytes()).hexdigest(), flush=True)
         env = os.environ | {"APPDATA": tmp, "LOCALAPPDATA": tmp}

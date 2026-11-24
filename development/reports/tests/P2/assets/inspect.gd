@@ -2,7 +2,10 @@ extends SceneTree
 
 func _initialize() -> void:
 	var failures := 0
-	for file in ["general", "spear_soldier", "crossbowman"]:
+	var models := ["general", "spear_soldier", "crossbowman"]
+	if ResourceLoader.exists("res://horse.glb"):
+		models.append("horse")
+	for file in models:
 		var packed := load("res://%s.glb" % file) as PackedScene
 		if not packed:
 			failures += 1
@@ -19,7 +22,7 @@ func _initialize() -> void:
 		var tracks := {}
 		if not players.is_empty():
 			var player: AnimationPlayer = players[0]
-			for clip in ["Idle","Walk","Run"]:
+			for clip in ["Idle","Walk","Gallop" if file == "horse" else "Run"]:
 				if player.has_animation(clip):
 					player.play(clip)
 					player.advance(0.2)
