@@ -9,7 +9,7 @@ const CUES := {
 	"mount_impact":["Effects",51,60,83], "hoofbeat":["Effects",25,35,100], "dismounted":["Effects",43,40,120],
 	"downed":["Effects",48,45,102], "routed":["Effects",64,60,440], "regrouped":["Effects",65,60,510],
 	"ambience":["Ambience",8,80,90], "ui":["UI",70,0,700],
-	"victory":["UI",110,0,740], "defeat":["UI",110,0,220]
+	"victory":["Music",110,0,740], "defeat":["Music",110,0,220]
 }
 const MELODIES := {
 	"map":[262,330,392,330,294,262,196,0], "battle":[196,196,294,262,196,294,330,262],

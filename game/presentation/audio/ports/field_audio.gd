@@ -261,6 +261,9 @@ func play_event(event: Dictionary, listener_position: Vector3 = Vector3.ZERO) ->
 			return R.ok({"status":"scope_closed"})
 	if _mix.master <= 0 or _mix[category.to_lower()] <= 0:
 		return R.ok({"status":"muted","subtitle_key":key})
+	if category == "Music":
+		# The crossfade deck already owns the score for this outcome.
+		return R.ok({"status":"played","subtitle_key":key})
 	var score: int = int(cue[1])*1000 - roundi(distance*8) if spatial else int(cue[1])*1000
 	if spatial and occluded:
 		score -= 10000

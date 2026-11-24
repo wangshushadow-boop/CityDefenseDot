@@ -154,6 +154,10 @@ func exercise() -> bool:
 	check(mission.request_end({"outcome":"victory"}).ok and mission.finalize().value.outcome=="victory","finish the Mission")
 	var win := output.play_event(envelope("end","victory",{},6))
 	check(win.value.status=="muted" and output.diagnostics().track=="victory" and subs[-1][0]=="audio.victory" and output.diagnostics().caption=="获得胜利","silent victory event and localized subtitle")
+	check(output.set_mixer({"music":0.0,"ui":1.0,"master":1.0}).ok,"mute only music")
+	var losing := output.play_event(envelope("music-check","defeat",{},6))
+	check(losing.value.status=="muted" and output.diagnostics().track=="defeat","outcome respects dedicated music bus")
+	check(output.set_mixer({"master":0.0}).ok,"restore silent accessibility scenario")
 	check(output.transition_music("silent").ok,"fade to silence")
 	await create_timer(0.45).timeout
 	check(output.find_children("*","AudioStreamPlayer",false,false).all(func(n): return not n.playing),"all music decks finish fade")

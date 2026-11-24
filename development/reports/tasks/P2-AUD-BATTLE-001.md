@@ -23,3 +23,5 @@ Windows，Godot 4.7.2 Standard ed1daf0bf，Dummy 混音驱动，种子 42。用�
 受影响回归以相同 Godot 命令运行 `res://tests/p2/combat/run.gd`、`res://tests/p2/formation/run.gd`、`res://tests/p1/mission/run.gd` 和 `res://tests/p1/bootstrap/run.gd`，均退出 0。编队和战斗原有 500/1000 微基准通过，专服引导 T-BOOT-02 保持无音频节点。静态依赖检查 `python ci/gates.py dependencies` 输出 `dependencies PASS issues=0`。
 
 早期版本测试曾因脚本类型推断、三参数 maxf、并发断言和默认沙盒用户目录不可写失败。修正后采用项目既有隔离 APPDATA 测法。预算按同时活跃音源及路由总量断言，保留抢占已播放低优先级声音的行为。捕获 PCM 证明了引擎实际混音。真实设备的 TTS/扬声器、硬件听感验收和整场视听性能仍待集成。开发者未更新任务状态或创建提交。
+
+主 Agent 据独立审查修复了胜败曲在 Music 与 UI 总线重复播放的问题。仅关闭 Music、保持 UI 与主音量开启时，胜败字幕仍可见，结算音乐由唯一的音乐轨处理。已重跑 500 人音频测试和 P1 Mission，均退出 0。
