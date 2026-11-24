@@ -9,6 +9,7 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 [audio]
 
 general/text_to_speech=true
+general/text_to_speech.windows=false
 
 [display]
 window/size/viewport_width=960
