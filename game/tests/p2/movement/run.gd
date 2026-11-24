@@ -166,5 +166,8 @@ func run() -> void:
 	var ticket := queue.request_path([0,0,0], [100,0,0], "foot")
 	engine.release_scope(SCOPE)
 	check(rejected(queue.poll_path(ticket.value), "NotFound"), "released scope cannot serve path")
+	var field_cases := preload("res://tests/p2/movement/field_cases.gd").new()
+	errors += await field_cases.run(self,engine)
+	check(field_cases.completed, "field cases reached completion")
 	print("MOV_QUEUE_CHECKS errors=", errors, " display=", DisplayServer.get_name())
 	quit(1 if errors else 0)
