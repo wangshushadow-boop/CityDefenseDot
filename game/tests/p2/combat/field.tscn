@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="BoxShape3D" id="Thin"]
+size = Vector3(0.08, 1.0, 1.0)
+
+[node name="Field" type="Node3D"]
+
+[node name="Body" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 0, 0)
+metadata/entity_handle = "foe"
+metadata/region = "body"
+
+[node name="Shape" type="CollisionShape3D" parent="Body"]
+shape = SubResource("Thin")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+position = Vector3(1.7, 0, 3)
+metadata/entity_handle = "wall"
+metadata/region = "stone"
+
+[node name="Shape" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("Thin")
+
+[node name="Behind" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 0, 3)
+metadata/entity_handle = "foe"
+metadata/region = "body"
+
+[node name="Shape" type="CollisionShape3D" parent="Behind"]
+shape = SubResource("Thin")
+
+[node name="Shield" type="StaticBody3D" parent="."]
+position = Vector3(2.2, 0, 6)
+metadata/entity_handle = "foe"
+metadata/region = "shield"
+
+[node name="Shape" type="CollisionShape3D" parent="Shield"]
+shape = SubResource("Thin")
+
+[node name="Guarded" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 0, 6)
+metadata/entity_handle = "foe"
+metadata/region = "body"
+
+[node name="Shape" type="CollisionShape3D" parent="Guarded"]
+shape = SubResource("Thin")
+
+[node name="Head" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 0, 9)
+metadata/entity_handle = "foe"
+metadata/region = "head"
+
+[node name="Shape" type="CollisionShape3D" parent="Head"]
+shape = SubResource("Thin")
+
+[node name="Melee" type="StaticBody3D" parent="."]
+position = Vector3(1, 0, 12)
+metadata/entity_handle = "foe"
+metadata/region = "body"
+
+[node name="Shape" type="CollisionShape3D" parent="Melee"]
+shape = SubResource("Thin")
+
+[node name="Mount" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 0, 15)
+metadata/entity_handle = "mounted_horse"
+metadata/region = "body"
+
+[node name="Shape" type="CollisionShape3D" parent="Mount"]
+shape = SubResource("Thin")
