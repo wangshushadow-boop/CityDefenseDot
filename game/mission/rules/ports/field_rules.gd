@@ -11,6 +11,7 @@ var _exits := {}
 var _authorize: Callable
 var _condition: Callable
 var _position: Callable
+var _resolve_actor: Callable
 var _last_tick := 0
 var _last_rows: Variant
 var _last_slots: Variant
@@ -18,17 +19,19 @@ var _counts := {}
 var _entered := {}
 var _runners := []
 var _status := {}
-var _pending: Variant = null
+var _pending := {}
+var _withdrawn := {}
 var _candidate := {}
 var _busy := false
 var _commander: Variant = null
 var _commander_team: Variant = null
 var _mode_request := ""
+var _mode_context: Variant = null
 
 static func _point(p: Variant) -> bool:
 	return typeof(p)==TYPE_ARRAY and p.size()==3 and V.integer(p[0],-2147483648,2147483647) and V.integer(p[1],-2147483648,2147483647) and V.integer(p[2],-2147483648,2147483647)
 
-static func build(scope: String, encounter: Dictionary, exit_zones: Array, authorize: Callable, condition: Callable, position: Callable) -> Dictionary:
+static func build(scope: String, encounter: Dictionary, exit_zones: Array, authorize: Callable, condition: Callable, position: Callable, resolve_actor: Callable = Callable()) -> Dictionary:
 	if scope.is_empty() or not authorize.is_valid() or not condition.is_valid() or not position.is_valid():
 		return R.fail("InvalidArgument","field_rules")
 	var source := Sources.build(encounter)
@@ -40,6 +43,7 @@ static func build(scope: String, encounter: Dictionary, exit_zones: Array, autho
 	rules._authorize = authorize
 	rules._condition = condition
 	rules._position = position
+	rules._resolve_actor = resolve_actor
 	for side in encounter.sides:
 		var total := 0
 		for a in side.roster_allocations:
@@ -65,6 +69,22 @@ func watch_commander(handle: Dictionary, team: Variant) -> Dictionary:
 		return R.fail("InvalidState","commander")
 	if not _totals.has(team):
 		return R.fail("NotFound","team_key")
+	var source_slot: Variant = null
+	if _resolve_actor.is_valid():
+		var resolved: Variant = _resolve_actor.call(handle)
+		if typeof(resolved)!=TYPE_DICTIONARY or not is_same(resolved.get("ok"),true):
+			return R.fail("NotFound","commander")
+		source_slot = resolved.value.get("source_slot")
+	elif _last_rows!=null:
+		for row in _last_rows:
+			if row.handle==handle:
+				source_slot = row.source_slot
+				break
+	if source_slot==null:
+		return R.fail("NotFound","commander")
+	var owner: Dictionary = _index.team_for_slot(source_slot)
+	if not owner.ok or not is_same(owner.value,team):
+		return R.fail("Unauthorized","commander.team_key")
 	_commander = handle.duplicate()
 	_commander_team = team
 	_last_rows = null
@@ -83,6 +103,7 @@ func request_downed_mode(team: Variant, mode: String, context: Variant) -> Dicti
 	if not is_same(permission,true):
 		return R.fail("Unauthorized","commander")
 	_mode_request = mode
+	_mode_context = context
 	return R.ok()
 
 func request_withdrawal(team: Variant, context: Variant) -> Dictionary:
@@ -95,9 +116,8 @@ func request_withdrawal(team: Variant, context: Variant) -> Dictionary:
 	_busy = false
 	if not is_same(auth,true):
 		return R.fail("Unauthorized","withdraw")
-	if _pending!=null and not is_same(_pending,team):
-		return R.fail("Conflict","withdraw")
-	_pending = team
+	if not _withdrawn.has(team):
+		_pending[team] = context
 	return R.ok()
 
 func _has_changes(reports: Array) -> bool:
@@ -181,7 +201,28 @@ func _evaluate(context: Dictionary, tick: int) -> Dictionary:
 	var retire := []
 	var slot_events := []
 	var routed := {}
+	var withdrawn := _withdrawn.duplicate()
+	var leaving := {}
+	for team in _pending:
+		if not withdrawn.has(team) and is_same(_authorize.call(_pending[team],team,"withdraw"),true):
+			withdrawn[team] = true
+			leaving[team] = true
+	if not leaving.is_empty():
+		for row in rows:
+			if row.source_slot==null or not leaving.has(row.components.team_key):
+				continue
+			var health: Variant = _condition.call(row.handle)
+			if not health is Dictionary or not is_same(health.get("ok"),true) or not health.get("value") is Dictionary or not V.integer(health.value.get("hp")):
+				return R.fail("Unavailable","combat.read_view")
+			retire.append(row.handle)
+			var fact := {"source_slot_id":row.source_slot,"end_status":"withdrawn"}
+			if health.value.hp == 0:
+				fact.end_status = "wounded"
+				fact["wounded"] = true
+			slot_events.append(fact)
 	for runner in runners:
+		if withdrawn.has(runner.components.team_key):
+			continue
 		var away := _exited(runner)
 		if not away.ok:
 			return away
@@ -195,27 +236,30 @@ func _evaluate(context: Dictionary, tick: int) -> Dictionary:
 	var summaries := []
 	for team in _totals:
 		var reserve: int = _totals[team]-entered.get(team,0)
-		var ready: int = counts.get(team,0)
-		summaries.append({"team_key":team,"ready":ready,"routed":routed.get(team,0),"reserve":reserve})
-		if ready+reserve>0 and (_pending==null or not is_same(team,_pending)):
+		var ready: int = 0 if withdrawn.has(team) else counts.get(team,0)
+		summaries.append({"team_key":team,"ready":ready,"routed":routed.get(team,0),"reserve":reserve,"withdrawn":withdrawn.has(team)})
+		if not withdrawn.has(team) and ready+reserve>0:
 			contenders.append(team)
 	var outcome: Variant = null
-	if _pending!=null:
-		outcome = _outcome("withdrawn",contenders if contenders.size()==1 else [],"ordered_withdrawal")
-		outcome["withdrawn_team_key"] = _pending
+	if not leaving.is_empty() and contenders.size()==1:
+		outcome = _outcome("withdrawn",contenders,"ordered_withdrawal")
+		if leaving.size()==1:
+			outcome["withdrawn_team_key"] = leaving.keys()[0]
 	elif contenders.size()==1:
 		outcome = _outcome("victory",contenders,"no_opposing_force")
 	elif contenders.is_empty():
 		outcome = _outcome("draw",[],"no_fighting_force")
-	var options := ["spectate","delegate","withdraw"] if commander_down and outcome==null else []
-	var control: String = "direct" if not commander_down else (_mode_request if not _mode_request.is_empty() else _status.control_mode)
+	var options := ["spectate","delegate","withdraw"] if commander_down and outcome==null and not withdrawn.has(_commander_team) else []
+	var control: String = "direct" if not commander_down else _status.control_mode
+	if commander_down and not _mode_request.is_empty() and is_same(_authorize.call(_mode_context,_commander_team,_mode_request),true):
+		control = _mode_request
 	if commander_down and control=="direct":
 		control = "spectate"
 	var status := {"tick":tick,"teams":summaries,"outcome":outcome,"commander_downed":commander_down,
 		"control_mode":control,"commander_options":options}
-	_candidate = {"rows":rows,"slots":slots,"counts":counts,"runners":runners,"entered":entered,"status":status}
+	_candidate = {"withdrawn":withdrawn,"rows":rows,"slots":slots,"counts":counts,"runners":runners,"entered":entered,"status":status}
 	return R.ok({"outcome":outcome.duplicate(true) if outcome!=null else null,
-		"retire_handles":retire.duplicate(true),"slot_events":slot_events,"commander_downed":commander_down,"teams":summaries.duplicate(true)})
+		"withdrawn_team_keys":withdrawn.keys(),"retire_handles":retire.duplicate(true),"slot_events":slot_events,"commander_downed":commander_down,"teams":summaries.duplicate(true)})
 
 func stage(context: Dictionary, batch: Dictionary) -> Dictionary:
 	if _busy or not _candidate.is_empty() or _status.outcome!=null:
@@ -239,12 +283,14 @@ func commit() -> void:
 	_entered = _candidate.entered
 	_status = _candidate.status
 	_last_tick = _status.tick
-	_pending = null
+	_withdrawn = _candidate.withdrawn
+	_pending.clear()
 	_mode_request = ""
+	_mode_context = null
 	_candidate = {}
 
 func rollback() -> void:
 	_candidate = {}
 
 func system() -> Dictionary:
-	return {"id":"field.rules","run":stage,"commit":commit,"rollback":rollback,"can_retire":true}
+	return {"id":"field.rules","run":stage,"commit":commit,"rollback":rollback,"can_retire":true,"can_gate_waves":true}

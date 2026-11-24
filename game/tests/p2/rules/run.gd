@@ -114,7 +114,8 @@ func setup() -> bool:
 				break
 	combat = Combat.new()
 	movement = Move.new(engine,scope)
-	var built := Rules.build(scope,encounter,exits,func(who,team,_action):return is_same(who,login) and is_same(team,0),status_of,position_of)
+	var built := Rules.build(scope,encounter,exits,func(who,team,_action):return is_same(who,login) and is_same(team,0),status_of,position_of,
+		func(handle):return mission.resolve_entity(scope,handle))
 	if not built.ok:
 		return false
 	rules = built.value
@@ -164,6 +165,7 @@ func run() -> void:
 	mission.dispose()
 	check(engine.counts().scopes==0,"all scopes released")
 	commander_and_reserves()
+	ordinary_captains()
 	print("P2-RULES-FIELD ","PASS" if failed==0 else "FAIL"," assertions=",checks," physical_contacts=",physics_hits)
 	quit(0 if failed==0 else 1)
 
@@ -177,10 +179,12 @@ func commander_and_reserves() -> void:
 	for team in [0,"0"]:
 		exits.append({"team_key":team,"min_mm":[0,0,0],"max_mm":[0,0,0]})
 	var b := Rules.build("test",spec,exits,func(who,team,_act):return is_same(who,login) and is_same(team,0),
-		func(h):return R.ok({"hp":0 if h.index==0 else 10,"routing":false}),func(_h):return R.ok([0,0,0]))
+		func(h):return R.ok({"hp":0 if h.index==0 else 10,"routing":false}),func(_h):return R.ok([0,0,0]),
+		func(h):return R.ok({"source_slot":0 if h.index==0 else 2}))
 	check(b.ok,"commander rule initialization")
 	var ruleset: RefCounted = b.value
 	var commander := {"index":0,"generation":1}
+	check(not ruleset.watch_commander(commander,"0").ok,"typed owner validated using the authoritative source")
 	check(ruleset.watch_commander(commander,0).ok,"watch local commander")
 	var ctx := {"mission_id":"test","tick":0,"spawned_slots":[0,2],"entities":[
 		{"source_slot":0,"handle":commander,"components":{"team_key":0}},
@@ -198,3 +202,48 @@ func commander_and_reserves() -> void:
 	check(ruleset.view().control_mode=="spectate" and ruleset.stage(ctx,pkt).ok,"failed tick cannot move control")
 	ruleset.commit()
 	check(ruleset.view().control_mode=="delegate","delegation publishes only with tick")
+
+func ordinary_captains() -> void:
+	var encounter := make_spec()
+	var keys := [0,"0",2]
+	var exits := []
+	var rows := []
+	encounter.sides.clear()
+	encounter.reserved_sources[0].count = 6
+	encounter.reserved_sources[0].source_slot_range=[0,6]
+	var permission := {0:true,"0":true,2:true}
+	var entered := [0,1,2,4]
+	for i in keys.size():
+		encounter.sides.append({"team_key":keys[i],"faction_id":"river","commander_hero_id":null,"roster_allocations":[{"source_slot_range":[2*i,2*i+2]}]})
+		exits.append({"team_key":keys[i],"min_mm":[0,0,0],"max_mm":[0,0,0]})
+	for slot in entered:
+		rows.append({"handle":{"index":slot,"generation":1},"source_slot":slot,"components":{"team_key":keys[slot>>1]}})
+	var built := Rules.build("captains",encounter,exits,func(who,team,_act):return is_same(who,login) and permission.has(team) and permission[team],
+		func(h):return R.ok({"hp":0 if h.index==0 else 10,"routing":false}),func(_h):return R.ok([0,0,0]))
+	check(built.ok,"ordinary captains initialization")
+	if not built.ok:
+		return
+	var candidate_rules: RefCounted = built.value
+	var ctx := {"mission_id":"captains","tick":0,"entities":rows,"spawned_slots":entered}
+	var batch := {"mission_id":"captains","source_tick":1}
+	check(candidate_rules.request_withdrawal(0,login).ok,"ordinary request")
+	var staged: Dictionary = candidate_rules.stage(ctx,batch)
+	check(staged.ok and staged.value.outcome==null and staged.value.withdrawn_team_keys==[0] and staged.value.retire_handles.size()==2,"only the requesting team retires")
+	check(staged.value.slot_events==[{"source_slot_id":0,"end_status":"wounded","wounded":true},{"source_slot_id":1,"end_status":"withdrawn"}],"keep incapacity and source facts")
+	candidate_rules.rollback()
+	permission[0]=false
+	var retried: Dictionary = candidate_rules.stage(ctx,batch)
+	check(retried.ok and retried.value.withdrawn_team_keys.is_empty() and retried.value.retire_handles.is_empty(),"revocation between same tick attempts")
+	candidate_rules.rollback()
+	permission[0]=true
+	check(candidate_rules.stage(ctx,batch).ok,"ordinary request remains retryable")
+	candidate_rules.commit()
+	ctx.entities=rows.slice(2)
+	ctx.tick=1
+	batch.source_tick=2
+	var steady: Dictionary = candidate_rules.stage(ctx,batch)
+	check(steady.ok and steady.value.outcome==null and steady.value.withdrawn_team_keys==[0] and steady.value.slot_events.is_empty(),"ongoing wave eligibility without duplicate slot facts")
+	candidate_rules.rollback()
+	check(candidate_rules.request_withdrawal("0",login).ok and candidate_rules.request_withdrawal(2,login).ok,"independently authorized simultaneous withdrawals")
+	var draw: Dictionary = candidate_rules.stage(ctx,batch)
+	check(draw.ok and draw.value.outcome.outcome=="draw" and draw.value.outcome.winner_team_keys.is_empty(),"all remaining parties retire")
