@@ -10,6 +10,7 @@ func _initialize():
 	var args=OS.get_cmdline_user_args()
 	var pack=PCKPacker.new()
 	assert(pack.pck_start(args[0])==OK)
+	assert(pack.add_file("res://project.godot",ProjectSettings.globalize_path("res://project.godot"))==OK)
 	for item in args.slice(2):
 		assert(pack.add_file("res://"+item,args[1].path_join(item))==OK)
 	assert(pack.flush()==OK)
@@ -23,7 +24,7 @@ def main():
     parser.add_argument("--path", default="game", type=Path)
     args = parser.parse_args()
     game = args.path.resolve()
-    files = ["project.godot", "tests/p1/persistence/worker.gd"]
+    files = ["tests/p1/persistence/worker.gd"]
     for folder in ["contracts", "infrastructure/persistence"]:
         files.extend(p.relative_to(game).as_posix() for p in (game / folder).rglob("*.gd"))
     with tempfile.TemporaryDirectory() as temp:
