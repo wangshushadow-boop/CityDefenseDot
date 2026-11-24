@@ -1,0 +1,251 @@
+extends SceneTree
+const Field = preload("res://presentation/input/ports/field_input.gd")
+const Combat = preload("res://mission/combat/ports/field_combat.gd")
+const Form = preload("res://mission/formation/ports/field_formation.gd")
+const S = preload("res://contracts/schema.gd")
+const R = preload("res://contracts/result.gd")
+const H := {"index":7,"generation":1}
+var failures := 0
+var checks := 0
+var batches := []
+var submitted := []
+var combat: Combat
+var form: Form
+var actor_token := RefCounted.new()
+var profile_name := "qa_input_" + str(Time.get_ticks_usec())
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok:
+		failures += 1
+		printerr("FAIL ",message)
+
+func _initialize() -> void:
+	run.call_deferred()
+
+func key(code: int, on: bool = true, shift: bool = false) -> InputEventKey:
+	var e := InputEventKey.new()
+	e.physical_keycode = code
+	e.pressed = on
+	e.shift_pressed = shift
+	return e
+
+func joy(button: int, on: bool = true) -> InputEventJoypadButton:
+	var e := InputEventJoypadButton.new()
+	e.button_index = button
+	e.device = 17
+	e.pressed = on
+	return e
+
+func axis(index: int, value: float) -> InputEventJoypadMotion:
+	var e := InputEventJoypadMotion.new()
+	e.axis = index
+	e.axis_value = value
+	e.device = 17
+	return e
+
+func mouse(button: int, on: bool = true) -> InputEventMouseButton:
+	var e := InputEventMouseButton.new()
+	e.button_index = button
+	e.pressed = on
+	return e
+
+func mouse_look(x: int,y: int) -> InputEventMouseMotion:
+	var e := InputEventMouseMotion.new()
+	e.relative = Vector2(x,y)
+	return e
+
+func auth(ctx: Variant) -> Dictionary:
+	return R.ok("player") if is_same(ctx,actor_token) else R.fail("Unauthorized")
+
+func submit_batch(batch: Dictionary) -> Dictionary:
+	batches.append(batch)
+	var wire := S.encode_value("IntentBatch",batch)
+	check(wire.ok and S.decode_value("IntentBatch",wire.value).ok,"canonical batch roundtrip")
+	if combat == null: return R.ok()
+	var actions: Array = batch.inputs.filter(func(i): return i.has("input_phase") or i.has("held") or i.has("slot"))
+	var result := combat.step(batch.source_tick,actions)
+	check(result.ok and result.value.receipts.all(func(r): return r.ok),"true COM action receipts on tick %s"%batch.source_tick)
+	return result
+
+func submit_order(order: Dictionary, revisions: Dictionary) -> Dictionary:
+	submitted.append(order)
+	check(S.encode_value("FormationOrder",order).ok,"canonical FormationOrder")
+	return form.issue_order(order,actor_token,revisions)
+
+func fresh_field() -> Field:
+	var input := Field.new(profile_name)
+	root.add_child(input)
+	check(input.configure("mission/input","player",H,4,submit_batch,submit_order).ok,"configure input")
+	batches.clear()
+	submitted.clear()
+	return input
+
+func device_case(pad: bool, direction: String) -> Array:
+	combat = Combat.new()
+	check(combat.enlist(H,{"team":0,"role":"infantry"}).ok,"true combat roster")
+	var field := fresh_field()
+	var offsets := {"up":Vector2i(0,-8),"thrust":Vector2i(0,8),"left":Vector2i(-8,0),"right":Vector2i(8,0)}
+	var d: Vector2i = offsets[direction]
+	if pad: field.handle_event(axis(2 if d.x else 3,signi(d.x if d.x else d.y)))
+	else: field.handle_event(mouse_look(d.x,d.y))
+	field.handle_event(axis(5,1) if pad else mouse(1))
+	var stream := []
+	for tick in range(1,10):
+		if tick == 2:
+			# A later look change does not change the charged direction.
+			field.handle_event(axis(3,0) if pad else mouse_look(0,0))
+		if tick == 4: field.handle_event(axis(5,0) if pad else mouse(1,false))
+		var outcome := field.step(tick)
+		check(outcome.ok,"step")
+		stream.append_array(outcome.value.batch.inputs.filter(func(i): return i.has("input_phase")))
+	check(stream.map(func(i):return i.input_phase)==["start","hold","hold","release"] and stream.all(func(i):return i.direction==direction and i.target_hint==null),"phase edges and locked direction " + direction)
+	field.handle_event(axis(4,1) if pad else mouse(2))
+	var guard := field.step(10)
+	check(guard.value.batch.inputs.any(func(i):return i.get("held",false)) and combat.view(H).value.phase == "Guard","block reaches combat")
+	field.handle_event(axis(4,0) if pad else mouse(2,false))
+	var unblock := field.step(11)
+	check(combat.view(H).value.phase=="Ready","unblock reaches combat")
+	stream.append_array(guard.value.batch.inputs.filter(func(i):return i.has("held")))
+	stream.append_array(unblock.value.batch.inputs.filter(func(i):return i.has("held")))
+	field.free()
+	combat = null
+	return stream
+
+func quick_click() -> bool:
+	combat = Combat.new()
+	check(combat.enlist(H,{"team":0,"role":"infantry"}).ok,"quick-click actor")
+	var field := fresh_field()
+	field.bind_combat_view(combat.view)
+	field.handle_event(mouse(1))
+	field.handle_event(mouse(1,false))
+	var phases := []
+	for tick in range(1,13):
+		var frame := field.step(tick)
+		check(frame.ok,"quick-click step")
+		for item in frame.value.batch.inputs:
+			if item.has("input_phase"): phases.append(item.input_phase)
+	check(phases==["start","release"] and combat.view(H).value.phase=="Ready","tap releases once at the legal COM phase")
+	field.free()
+	combat = null
+	return true
+
+func formation_case() -> bool:
+	form = Form.new("mission/input",auth,func(_id,_point): return true)
+	check(form.add_formation(4,0,"player",[H]).ok and form.add_formation(9,"0","other",[{"index":8,"generation":1}]).ok,"two real independently controlled formations")
+	var field := fresh_field()
+	var label := Label.new()
+	label.position = Vector2(12,12)
+	label.size = Vector2(360,40)
+	root.add_child(label)
+	field.bind_feedback(label)
+	check(field.set_formations([4,9],{4:0,9:0}).ok,"list")
+	field.handle_event(key(KEY_TAB))
+	field.handle_event(key(KEY_TAB,false))
+	field.handle_event(key(KEY_2))
+	field.handle_event(key(KEY_2,false))
+	field.handle_event(key(KEY_H))
+	field.handle_event(key(KEY_H,false))
+	var denied := field.step(1)
+	check(denied.value.orders.size()==1 and denied.value.orders[0].receipt.error.code=="Unauthorized" and label.is_visible_in_tree() and label.text=="你没有此项指挥权限","T-INPUT-03 real authority feedback on mounted Label")
+	if DisplayServer.get_name() != "headless":
+		await RenderingServer.frame_post_draw
+		var area := Rect2i(label.get_rect())
+		var visible := root.get_texture().get_image().get_region(area)
+		label.hide()
+		await RenderingServer.frame_post_draw
+		var background := root.get_texture().get_image().get_region(area)
+		check(not visible.is_empty() and visible.get_data()!=background.get_data(),"rendered denial label differs from background")
+		label.show()
+		print("INPUT authority feedback rendered with ",DisplayServer.get_name())
+	check(form.advance(1).ok and form.view(9).value.active==null,"foreign order unchanged")
+	field.handle_event(key(KEY_1))
+	field.handle_event(key(KEY_1,false))
+	field.set_target([100,0,-500],9)
+	field.handle_event(joy(JOY_BUTTON_A))
+	field.handle_event(joy(JOY_BUTTON_A,false))
+	field.handle_event(key(KEY_F))
+	field.handle_event(key(KEY_F,false))
+	field.set_delegate_candidate("captain")
+	field.handle_event(key(KEY_G))
+	field.handle_event(key(KEY_G,false))
+	var accepted := field.step(2)
+	check(accepted.value.orders.size()==3 and accepted.value.orders.all(func(i):return i.receipt.ok) and form.advance(2).ok,"three allowed kinds")
+	var view: Dictionary = form.view(4).value
+	check(view.active.target_position==[100,0,-500] and view.layout=="shield_wall" and view.delegate=="captain","world target, shape, delegation")
+	check(field.step(2)==accepted and submitted.size()==4,"stable retry")
+	check(field.step(1).error.code=="StaleVersion","stale tick")
+	field.handle_event(key(KEY_0))
+	field.handle_event(key(KEY_0,false))
+	field.handle_event(key(KEY_R))
+	field.handle_event(key(KEY_R,false))
+	var both := field.step(3)
+	check(both.value.orders[0].order.formation_ids==[4,9] and both.value.orders[0].order.target_formation_id==9 and both.value.orders[0].receipt.error.code=="Unauthorized" and form.advance(3).ok,"all-selection cannot gain authority")
+	field.free()
+	label.free()
+	return true
+
+func events_and_settings() -> bool:
+	var field := fresh_field()
+	check(field.rebind("move_forward",key(KEY_I)).ok and field.rebind("block",joy(JOY_BUTTON_RIGHT_SHOULDER)).ok,"desktop/controller rebind")
+	check(field.rebind("attack",key(KEY_ESCAPE)).error.code=="Conflict" and field.rebind("menu",key(KEY_Z)).error.code=="Unauthorized","menu alternative protected")
+	check(field.rebind("move_back",key(KEY_I)).error.code=="Conflict" and not field.set_options({"deadzone_percent":100}).ok,"conflicting mapping and invalid deadzone")
+	check(field.set_options({"toggle_block":true,"invert_y":true,"deadzone_percent":20}).ok,"accessibility settings persist")
+	field.free()
+	field = fresh_field()
+	check(field.profile_view().options.toggle_block and field.profile_view().options.invert_y,"reopened local profile")
+	check(not field.handle_event(key(KEY_W)) and not field.handle_event(key(KEY_W,false)),"old binding removed")
+	Input.parse_input_event(key(KEY_I))
+	Input.flush_buffered_events()
+	await process_frame
+	var moved := field.step(1)
+	check(moved.value.batch.inputs.back().speed_fraction==1 and moved.value.batch.inputs.back().desired_direction==[0,0,-1000000],"real Godot input dispatch after restart")
+	field.set_context("ui")
+	check(field.step(2).value.batch.inputs.back().speed_fraction==0,"focus flushes movement")
+	field.set_context("battle")
+	field.handle_event(key(KEY_I,false))
+	field.handle_event(axis(0,0.19))
+	check(field.step(3).value.batch.inputs.back().speed_fraction==0,"stick below deadzone")
+	field.handle_event(axis(0,0.60))
+	var half := field.step(4)
+	check(is_equal_approx(half.value.batch.inputs.back().speed_fraction,0.5),"analogue deadzone remap")
+	field.handle_event(joy(JOY_BUTTON_RIGHT_SHOULDER))
+	field.handle_event(joy(JOY_BUTTON_RIGHT_SHOULDER,false))
+	check(field.step(5).value.batch.inputs.any(func(i):return i.get("held",false)),"toggle block holds after button release")
+	field.handle_event(key(KEY_I))
+	Input.joy_connection_changed.emit(17,false)
+	var cleared := field.step(6)
+	check(cleared.value.batch.inputs.any(func(i):return i.has("held") and not i.held) and cleared.value.batch.inputs.back().desired_direction==[0,0,-1000000],"device disconnection clears pad axis and latched block, preserves keyboard")
+	field.handle_event(key(KEY_I,false))
+	field.handle_event(mouse_look(0,5))
+	check(field.step(7).value.batch.inputs.any(func(i):return i.get("pitch",0)>0),"inverted look sampled")
+	var edit := LineEdit.new()
+	root.add_child(edit)
+	edit.grab_focus()
+	field.handle_event(key(KEY_I))
+	check(field.step(8).value.batch.inputs.back().speed_fraction==0,"focused GUI suppresses gameplay")
+	edit.release_focus()
+	edit.free()
+	check(field.set_control({"index":7,"generation":2},8).ok,"authority handoff")
+	var changed := field.step(9)
+	check(changed.value.batch.control_revision==8 and changed.value.batch.inputs.all(func(i):return i.actor_handle.generation==2),"handoff flushes old generation")
+	field.free()
+	return true
+
+func run() -> void:
+	var before := failures
+	for direction in ["up","left","right","thrust"]:
+		var desktop := device_case(false,direction)
+		var pad := device_case(true,direction)
+		check(desktop.size()==6 and desktop==pad,"T-INPUT-02 directional device equivalence " + direction)
+	check(quick_click(),"short press and release reached completion")
+	print("T-INPUT-02 ", "PASS" if failures==before else "FAIL")
+	before = failures
+	check(await formation_case(),"formation scenario reached final check")
+	print("T-INPUT-03 ", "PASS" if failures==before else "FAIL")
+	before = failures
+	check(await events_and_settings(),"device scenario reached final check")
+	print("T-INPUT-01-AUTOMATED ", "PASS" if failures==before else "FAIL")
+	print("P2-INPUT-001 ", "PASS" if failures==0 else "FAIL"," checks=",checks," failures=",failures," physical_pads=",Input.get_connected_joypads().size())
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://"+profile_name+".json"))
+	quit(0 if failures==0 else 1)
