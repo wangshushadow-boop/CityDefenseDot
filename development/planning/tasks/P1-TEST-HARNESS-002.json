@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P1-TEST-HARNESS-002",
+  "kind": "EXECUTION",
+  "parent": "P1-TEST-HARNESS",
+  "stage": "P1",
+  "module_id": "TEST",
+  "title": "隔离 PCK 测试工程与产品主场景配置",
+  "spec": "docs/systems/game/tests/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CORE",
+    "P1-DEF"
+  ],
+  "requirements": [
+    "BAI-06",
+    "BAT-03",
+    "NET-06",
+    "SAV-02"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01"
+  ],
+  "allowed_paths": [
+    "game/tests/p1/content/pck.py",
+    "game/tests/p1/persistence/pack_smoke.py",
+    "development/reports/tasks/P1-TEST-HARNESS-002.md"
+  ],
+  "excluded_paths": [
+    "game/project.godot",
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "31092feca7b9b0cde1ad719d7f6a38eb70b8be1b",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-pack-fixtures",
+  "scope": "真实生产入口配置 run/main_scene 后，两个只拷贝模块的测试工程仍须独立 PCK 导出并在无源码目录重载。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "复现临时工程缺主场景失败；使用测试专用配置后两份 PCK 实际导入、导出和独立运行通过。"
+  ],
+  "status": "DONE"
+}

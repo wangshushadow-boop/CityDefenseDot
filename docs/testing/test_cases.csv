@@ -12,9 +12,9 @@ T-APP-01,APP,BAT-03,结果已提交但回执丢失,重复提交同 result_id,返
 T-APP-02,APP,BAT-04 / MOD-03,加载已有战役后进入自定义战斗,完成并退出,战役快照哈希不变,NOT_RUN,,docs/systems/game/application/README.md,game/application/
 T-APP-03,APP,BAT-05,Mission 资源加载失败,返回地图,恢复旧状态、预留释放且无旧回调,NOT_RUN,,docs/systems/game/application/README.md,game/application/
 T-APP-04,APP,MOD-01 / MOD-02,创建剧情或沙盒,进入地图,正确注册模式规则，沙盒无强制主线,NOT_RUN,,docs/systems/game/application/README.md,game/application/
-T-CAMP-01,CAMP,WLD-02,日结执行到一半预算耗尽,下一帧继续,所有 day_id 阶段一次完成且最终账本一致,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
+T-CAMP-01,CAMP,WLD-02,日结执行到一半预算耗尽,下一帧继续,所有 day_id 阶段一次完成且最终账本一致,PASS,development/reports/tests/P1/campaign.txt,docs/systems/game/campaign/README.md,game/campaign/
 T-CAMP-02,CAMP,WLD-04,战役进入访问或战斗,结束返回,时间按规则推进、远方状态不丢失,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
-T-CAMP-03,CAMP,WLD-05,同内容、种子和开局,创建两次,规范化初始状态哈希一致,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
+T-CAMP-03,CAMP,WLD-05,同内容、种子和开局,创建两次,规范化初始状态哈希一致,PASS,development/reports/tests/P1/campaign.txt,docs/systems/game/campaign/README.md,game/campaign/
 T-CAMP-04,CAMP,SAI-03 / ECO-06,20 固定种子无玩家仿真十年,每日检查,无非法资源/孤儿引用，输出软指标轨迹,NOT_RUN,,docs/systems/game/campaign/README.md,game/campaign/
 T-WORLD-01,WORLD,WLD-01,两支相向队伍跨越接触半径,三种速度推进,均发生一次接触，不跳过遭遇,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
 T-WORLD-02,WORLD,WLD-03,敌军离开观察范围,查询和 AI 规划,只得到旧情报，不泄漏实时坐标,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
@@ -80,7 +80,7 @@ T-SAI-P-02,SAI-P,ECO-04 / SAI-03,利润为负且补给低,运行行为,返回补
 T-SAI-P-03,SAI-P,ARM-04,军团任务结束,更新,队伍恢复自身合法目标,NOT_RUN,,docs/systems/game/campaign/strategic_ai/party/README.md,game/campaign/strategic_ai/party/
 T-MIS-RT-01,MIS-RT,BAT-01,双方兵力已预留、规则野战,部署并战斗到结束,胜负和结果正确，源槽完整,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
 T-MIS-RT-02,MIS-RT,BAT-02,总兵力 1000、同屏上限 500,多波增援、撤退,无重复生成，未入场保留,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
-T-MIS-RT-03,MIS-RT,BAT-05,50 次创建销毁且有在途任务,切换场景,无跨 Mission 回调或单调资源泄漏,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
+T-MIS-RT-03,MIS-RT,BAT-05,50 次创建销毁且有在途任务,切换场景,无跨 Mission 回调或单调资源泄漏,PASS,development/reports/tests/P1/mission.txt,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
 T-MIS-RT-04,MIS-RT,MIS-02,访问规则无 Combat,启动并退出,仍能移动交互，无战斗系统副作用,NOT_RUN,,docs/systems/game/mission/runtime/README.md,game/mission/runtime/
 T-COM-01,COM,COM-01,四向攻击、格挡、蓄力与取消窗口,逐 tick 输入,合法转换，超时取消拒绝，多骨骼接触一次伤害,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
 T-COM-02,COM,COM-02,高速弹体和障碍、空弹药,射击,不穿墙/跳过命中，空弹药拒绝,NOT_RUN,,docs/systems/game/mission/combat/README.md,game/mission/combat/
@@ -153,7 +153,7 @@ T-INF-CONTENT-03,INF-CONTENT,EXT-03,发布包 API 版本和许可证齐全,编�
 T-INF-CONTENT-04,INF-CONTENT,MIS-03,场景缺出生/目标引用,校验,构建阻断,PASS,development/reports/tests/P1/content.txt,docs/systems/game/infrastructure/content/README.md,game/infrastructure/content/
 T-INF-ENGINE-01,INF-ENGINE,NAV-01,请求开门后引擎尚未同步,查询,旧 nav_revision 明确，不能返回错误路径,PASS,development/reports/tests/P1/engine.txt,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
 T-INF-ENGINE-02,INF-ENGINE,COM-02,高速弹体连续扫掠,碰撞适配,返回稳定候选，不漏穿越,PASS,development/reports/tests/P1/engine.txt,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
-T-INF-ENGINE-03,INF-ENGINE,NET-01,headless 环境,运行同 Mission,同规则，不依赖渲染,NOT_RUN,,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
+T-INF-ENGINE-03,INF-ENGINE,NET-01,headless 环境,运行同 Mission,同规则，不依赖渲染,PASS,development/reports/tests/P1/mission.txt,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
 T-INF-ENGINE-04,INF-ENGINE,§19.4,50 次任务加载/取消/销毁,循环,租约释放，记录真实性能,PASS,development/reports/tests/P1/engine.txt,docs/systems/game/infrastructure/engine/README.md,game/infrastructure/engine/
 T-NET-01,NET,NET-03,150 ms RTT、30 ms 抖动、3% 丢包及乱序,运行战斗、重连,状态收敛，无持续漂移,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/
 T-NET-02,NET,NET-04 / COM-06,客户端伪造伤害/他人编队和旧序号,发送,拒绝或去重，无权威变更,NOT_RUN,,docs/systems/game/infrastructure/network/README.md,game/infrastructure/network/

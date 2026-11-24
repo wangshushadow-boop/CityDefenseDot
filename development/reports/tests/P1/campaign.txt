@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS T-CAMP-01
+PASS T-CAMP-03
+PASS P1-CAMP-FREEZE-TRADE
+PASS P1-CAMP-20-SEED-SLICE
+exit=0

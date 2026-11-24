@@ -1,0 +1,7 @@
+commit 9241b38, Godot Windows graphical process exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090
+
+P1-MISSION-REPLAY profile=client display=Windows digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373
+T-MIS-RT-03 PASS switches=50 live_nodes=1
+MISSION failures=0

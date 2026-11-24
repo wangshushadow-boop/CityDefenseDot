@@ -58,7 +58,7 @@
       "evidence": []
     },
     "CAMP": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P1-CAMP-RUNTIME",
         "P3-CAMP-DOMAINS",
@@ -66,8 +66,14 @@
         "P5-SINGLE-INTEGRATION",
         "P7-POLISH"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-CAMP-01",
+        "T-CAMP-03"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-CAMP-RUNTIME-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "WORLD": {
       "status": "NOT_IMPLEMENTED",
@@ -231,14 +237,19 @@
       "evidence": []
     },
     "MIS-RT": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P0-BATTLE",
         "P1-MIS-RT-PORTS",
         "P2-MIS-RT-BATTLE"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-MIS-RT-03"
+      ],
+      "evidence": [
+        "development/reports/tasks/P1-MIS-RT-PORTS-001.md",
+        "development/reports/stages/P1.md"
+      ]
     },
     "COM": {
       "status": "NOT_IMPLEMENTED",
@@ -440,6 +451,7 @@
       "verified_test_ids": [
         "T-INF-ENGINE-01",
         "T-INF-ENGINE-02",
+        "T-INF-ENGINE-03",
         "T-INF-ENGINE-04"
       ],
       "evidence": [

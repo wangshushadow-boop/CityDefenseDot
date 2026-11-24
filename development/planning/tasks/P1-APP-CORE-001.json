@@ -39,8 +39,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "98a64dd017cca657992c2680dad7e4f2dd45f6b3",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-application",
   "scope": "Session、路由、用例/事务协调、跨域端口；先接真实基础能力。 唯一 Session 承接 CAMP/MIS/INV/PERSIST，合法用例、幂等提交与安全恢复的 AT-10 基础切片。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -52,5 +52,5 @@
     "用真实 CAMP、INV 和 PERSIST 验证交易余额与回执同一提交；写前和提交标记后断点的重启、重发不会多发或丢失。",
     "Mission 结果按模式路由，经真实公共接口完成并校验输入，战役与自定义/多人状态隔离。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

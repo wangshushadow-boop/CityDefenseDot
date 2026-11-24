@@ -2,56 +2,20 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P1-MIS-RT-PORTS-001",
-      "owner": "p1-mission",
+      "task_id": "P1-APP-CORE-001",
+      "owner": "p1-application",
       "branch": "detached",
-      "base_commit": "3ef1cb6cb93d2e769f6bbdbaabfa379876b02996",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-mission",
+      "base_commit": "98a64dd017cca657992c2680dad7e4f2dd45f6b3",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-application",
       "allowed_paths": [
-        "game/mission/runtime/",
-        "game/tests/p1/mission/",
-        "development/reports/tasks/P1-MIS-RT-PORTS-001.md"
+        "game/application/",
+        "game/tests/p1/application/",
+        "development/reports/tasks/P1-APP-CORE-001.md"
       ],
       "excluded_paths": [
         "development/state/",
         "docs/architecture/",
         "game/project.godot"
-      ]
-    },
-    {
-      "task_id": "P1-CAMP-RUNTIME-001",
-      "owner": "p1-campaign",
-      "branch": "detached",
-      "base_commit": "dd832adc93a2206196aab105ae8024a6994d59d6",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-campaign",
-      "allowed_paths": [
-        "game/campaign/runtime.gd",
-        "game/campaign/runtime.gd.uid",
-        "game/tests/p1/campaign/",
-        "development/reports/tasks/P1-CAMP-RUNTIME-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/project.godot",
-        "game/campaign/character/",
-        "game/campaign/clan/",
-        "game/campaign/economy/",
-        "game/campaign/encounter/",
-        "game/campaign/party/",
-        "game/campaign/politics/",
-        "game/campaign/quest/",
-        "game/campaign/settlement/",
-        "game/campaign/strategic_ai/",
-        "game/campaign/strategic_ai/army/",
-        "game/campaign/strategic_ai/clan/",
-        "game/campaign/strategic_ai/evaluation/",
-        "game/campaign/strategic_ai/kingdom/",
-        "game/campaign/strategic_ai/party/",
-        "game/campaign/strategic_ai/perception/",
-        "game/campaign/strategic_ai/planning/",
-        "game/campaign/strategic_ai/scheduler/",
-        "game/campaign/world/"
       ]
     }
   ],
