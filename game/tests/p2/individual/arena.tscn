@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://tests/p2/ai/arena.tscn" id="arena"]
+[sub_resource type="BoxShape3D" id="target"]
+size = Vector3(0.16,2.0,1.6)
+
+[node name="IndividualField" instance=ExtResource("arena")]
+
+[node name="MeleeTarget" type="StaticBody3D" parent="."]
+position = Vector3(-3,0.7,8)
+collision_layer = 2
+metadata/entity_handle = "defender"
+metadata/region = "body"
+
+[node name="HitBox" type="CollisionShape3D" parent="MeleeTarget"]
+shape = SubResource("target")
+
+[node name="RangedTarget" type="StaticBody3D" parent="."]
+position = Vector3(6,0.7,15)
+collision_layer = 2
+metadata/entity_handle = "defender"
+metadata/region = "body"
+
+[node name="HitBox" type="CollisionShape3D" parent="RangedTarget"]
+shape = SubResource("target")
