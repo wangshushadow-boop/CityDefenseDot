@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="BoxShape3D" id="GroundShape"]
+size = Vector3(20, 0.2, 20)
+
+[node name="Simulation" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.1, 0)
+metadata/entity_handle = "ground"
+metadata/region = "surface"
+
+[node name="Collision" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("GroundShape")

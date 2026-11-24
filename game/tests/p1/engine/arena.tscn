@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="BoxShape3D" id="Thin"]
+size = Vector3(0.04, 1, 0.3)
+
+[sub_resource type="NavigationMesh" id="Islands"]
+vertices = PackedVector3Array(-6,0,-2, -6,0,2, 0,0,2, 0,0,-2, 2,0,-2, 2,0,2, 6,0,2, 6,0,-2)
+polygons = [PackedInt32Array(0,1,2,3), PackedInt32Array(4,5,6,7)]
+
+[node name="Arena" type="Node3D"]
+
+[node name="Near" type="StaticBody3D" parent="."]
+position = Vector3(-2,1,0)
+metadata/entity_handle = "near"
+
+[node name="Shape" type="CollisionShape3D" parent="Near"]
+shape = SubResource("Thin")
+
+[node name="Far" type="StaticBody3D" parent="."]
+position = Vector3(4,1,0)
+metadata/entity_handle = "far"
+
+[node name="Shape" type="CollisionShape3D" parent="Far"]
+shape = SubResource("Thin")
+
+[node name="Islands" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("Islands")
+
+[node name="Gate" type="NavigationLink3D" parent="."]
+enabled = false
+start_position = Vector3(-0.1,0,0)
+end_position = Vector3(2.1,0,0)
+metadata/link_id = "gate"
