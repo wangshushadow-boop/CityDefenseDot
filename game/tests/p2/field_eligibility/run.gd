@@ -74,6 +74,12 @@ func run() -> void:
 		var entered: Array = retry.value.spawned_slots
 		check(entered.size()==5 and entered.has(1) and entered.has(5) and not entered.has(3),"numeric and text team never alias")
 	game.dispose()
+	var arena := Mission.new(core,bridge,"arena")
+	check(arena.prepare(spec("custom",[]),SCENE,RULE).ok,"non-field scenario")
+	arena.register_system("objectives",{"id":"score","run":func(_c,_b):return R.ok({"withdrawn_team_keys":[0],"objective":"arena-score"})})
+	var scored := arena.step_fixed(1,[])
+	check(scored.ok and scored.value.system_reports[0].value.objective=="arena-score","other modes keep free report fields")
+	arena.dispose()
 	check(bridge.counts().scopes==0,"all scopes released")
 	print("P2-WAVE-ELIGIBILITY failures=",failures)
 	quit(1 if failures else 0)

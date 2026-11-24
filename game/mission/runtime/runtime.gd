@@ -246,7 +246,7 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 				return _abort_tick(R.fail("InvalidArgument","system.value"),attempted)
 			if phase == "objectives" and typeof(report.get("value")) == TYPE_DICTIONARY and report.value.get("outcome") != null:
 				ending = true
-			if typeof(report.get("value")) == TYPE_DICTIONARY and report.value.has("withdrawn_team_keys"):
+			if _field != null and typeof(report.get("value")) == TYPE_DICTIONARY and report.value.has("withdrawn_team_keys"):
 				if not system.can_gate_waves:
 					return _abort_tick(R.fail("Unauthorized","system.wave_eligibility"),attempted)
 				var filtered: Dictionary = _field.exclude_teams(report.value.withdrawn_team_keys,excluded_teams)
