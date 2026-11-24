@@ -150,10 +150,6 @@ static func decide(task: Variant, intel: Dictionary, form: Dictionary, ground: D
 				reason = "fire_restricted"
 			elif behavior == "Regroup":
 				reason = "charge_recovery"
-			elif task.completion == "arrived" and task.position != null and center.distance_to(task.position) <= ARRIVAL and task.goal != "flank":
-				status = "completed"
-				reason = "arrived"
-				behavior = "Hold"
 			elif task.completion == "executed" and behavior in ["Hold", "Fire"] and (task.goal == "hold" or behavior == "Fire"):
 				status = "completed"
 				reason = "executed"
@@ -161,6 +157,11 @@ static func decide(task: Variant, intel: Dictionary, form: Dictionary, ground: D
 	# can actually clear the passage while reforming.
 	var passage_move: bool = behavior == "Regroup" and narrow and intent_task and task.position != null and center.distance_to(task.position) > ARRIVAL
 	var recovering_charge := reason == "charge_recovery"
+	if intent_task and not form.routing and own.count > 0 and tick < task.timeout and task.completion == "arrived" and task.position != null and center.distance_to(task.position) <= ARRIVAL:
+		status = "completed"
+		reason = "arrived"
+		if behavior in ["Move","Advance","Retreat"]:
+			behavior = "Hold"
 	var retry_after: int = old.get("retry_after",0) if recovering_charge and old.get("recovery") == "charge" else (tick + 8 if recovering_charge else 0)
 	if recovering_charge and not contact.is_empty() and center.distance_to(goal) <= ARRIVAL:
 		goal = center - center.direction_to(contact.position) * RANGED_NEAR

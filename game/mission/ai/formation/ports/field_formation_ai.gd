@@ -27,7 +27,85 @@ func _init(scope: String, issuer: String, ai_formation_view: Callable, formation
 	_collect = collect_job
 
 func view(id: int) -> Dictionary:
-	return R.ok(_states[id].duplicate(true)) if _states.has(id) else R.fail("NotFound","formation_brain")
+	if not _states.has(id):
+		return R.fail("NotFound","formation_brain")
+	if _reading or not _formation.is_valid() or not _intel.is_valid():
+		return R.fail("InvalidState","formation_brain")
+	_reading = true
+	var result := _current_view(id,_states[id])
+	_reading = false
+	return R.fail("InvalidState","formation_brain") if _closed else result
+
+static func _order_key(order: Variant) -> Array:
+	return [] if order == null else [order.issuer_id,order.order_id]
+
+static func _authority(f: Dictionary, order: Variant) -> Dictionary:
+	return {"order":_order_key(order),"control":f.control_revision,"members":f.members_revision,
+		"routing":f.routing,"distance":f.distance_mm,"terrain":f.terrain_feedback}
+
+func _ally_center(active: Variant, stamp: Dictionary) -> Variant:
+	if active == null or active.order_type != "follow":
+		return null
+	var ally: Dictionary = _intel.call(active.target_formation_id)
+	if ally.ok and not ally.value.own_units.is_empty() and is_same(ally.value.own_units[0].team_key,_team) and ally.value.stamp.tick == stamp.tick and ally.value.stamp.instance == stamp.instance:
+		return Behavior.aggregate(ally.value.own_units).center
+	return null
+
+## FORM may activate a different order between granted L2 jobs. Project that
+## winner without issuing a new command or advancing brain memory.
+func _current_view(id: int, published: Dictionary) -> Dictionary:
+	var read: Dictionary = _formation.call(id)
+	if not read.ok or _closed:
+		return read
+	var form: Dictionary = read.value
+	if form.id != id or not is_same(form.team_key,_team):
+		return R.fail("Unauthorized","formation_team")
+	var state: Dictionary = published.state.duplicate(true)
+	if published.authority == _authority(form,form.active):
+		if form.fire_mode == "hold_fire":
+			state.member_constraint.fire_allowed = false
+			if state.behavior == "Fire":
+				state.behavior = "Hold"
+				state.member_constraint.engage_allowed = false
+				if state.feedback != null:
+					state.feedback.merge({"status":"blocked","reason":"fire_restricted","progress":0.0},true)
+			if not state.member_constraint.engage_allowed:
+				state.member_constraint.focus_target = null
+		return R.ok(state)
+	var intel: Dictionary = _intel.call(id)
+	if not intel.ok:
+		return intel
+	if _closed or intel.value.stamp.scope_id != _scope or intel.value.own_units.is_empty() or not is_same(intel.value.own_units[0].team_key,_team) or not _same_roster(form.members,intel.value.own_units):
+		return R.fail("StaleVersion","formation_roster")
+	var active: Variant = form.active
+	var current_ground: Dictionary = published.ground.duplicate()
+	current_ground.reachable = form.terrain_feedback.is_empty()
+	var effective := Behavior.decide(null,intel.value,form,current_ground,state,_issuer,_ally_center(active,intel.value.stamp))
+	# Changes in terrain or membership do not remove a still-active task's restrictions.
+	if active != null and active.issuer_id == _issuer and _order_key(active) == published.authority.order and form.control_revision == state.control_revision:
+		for key in ["engage_allowed","fire_allowed"]:
+			effective.member_constraint[key] = effective.member_constraint[key] and state.member_constraint[key]
+		effective.member_constraint.movement_limit = minf(effective.member_constraint.movement_limit,state.member_constraint.movement_limit)
+	for key in ["behavior","local_goal","member_constraint","slot_request","recovery","retry_after","count"]:
+		state[key] = effective[key]
+	state.control_revision = form.control_revision
+	state.order_revision = intel.value.stamp.order_revision
+	if effective.behavior != published.state.behavior:
+		state.started_tick = active.issued_tick if active != null else form.feedback.get("tick",state.tick)
+	if state.feedback != null:
+		var reason: String = form.feedback.get("reason","")
+		if active != null and active.issuer_id != _issuer:
+			reason = "player_order"
+		elif form.routing:
+			reason = "routing"
+		elif _issuer not in [form.owner,form.delegate]:
+			reason = "not_delegated"
+		elif active == null and form.feedback.get("state") == "Completed" and _order_key(form.feedback) == published.authority.order and state.feedback.status == "completed":
+			return R.ok(state)
+		elif reason.is_empty():
+			reason = "order_changed" if active != null else "order_inactive"
+		state.feedback.merge({"status":"blocked","reason":reason,"progress":0.0},true)
+	return R.ok(state)
 
 func close() -> void:
 	_closed = true
@@ -81,12 +159,10 @@ func _inputs(job: Dictionary, for_decision := false) -> Dictionary:
 	var active: Variant = form.value.active
 	if for_decision and active != null and active.order_type == "follow":
 		_reading = true
-		var ally: Dictionary = _intel.call(active.target_formation_id)
+		ally_position = _ally_center(active,stamp)
 		_reading = false
 		if _closed:
 			return R.fail("InvalidState","formation_brain")
-		if ally.ok and not ally.value.own_units.is_empty() and is_same(ally.value.own_units[0].team_key,_team) and ally.value.stamp.tick == stamp.tick and ally.value.stamp.instance == stamp.instance:
-			ally_position = Behavior.aggregate(ally.value.own_units).center
 	return R.ok({"intel":intel.value,"form":form.value,"ally_position":ally_position})
 
 static func _guard(f: Dictionary) -> Array:
@@ -96,7 +172,7 @@ static func _guard(f: Dictionary) -> Array:
 
 func _orders(d: Dictionary, form: Dictionary, job: Dictionary, sequence: int) -> Dictionary:
 	if not d.command:
-		return R.ok([])
+		return R.ok({"orders":[],"expected":form.active})
 	var kind: String = {"Move":"move","Follow":"follow","Charge":"charge","Advance":"advance","Retreat":"retreat"}.get(d.behavior,"hold")
 	if d.regroup_move or (kind == "advance" and d.positioned):
 		kind = "move"
@@ -113,7 +189,7 @@ func _orders(d: Dictionary, form: Dictionary, job: Dictionary, sequence: int) ->
 	# 'advance' every time a budgeted L2 job fires.
 	for o: Variant in [form.active] + form.queued:
 		if o != null and o.issuer_id == _issuer and o.order_type == kind and o.target_position == pos and o.target_formation_id == target:
-			return R.ok([])
+			return R.ok({"orders":[],"expected":o})
 	var params := {}
 	if kind == "advance" and form.active != null:
 		# FORM's append default would leave an earlier completed recovery hold active.
@@ -121,7 +197,7 @@ func _orders(d: Dictionary, form: Dictionary, job: Dictionary, sequence: int) ->
 	var order := {"mission_id":_scope, "issuer_id":_issuer, "client_sequence":sequence, "issued_tick":job.stamp.tick+1,
 		"order_id":"l2/%d/%d/%d"%[job.subject,job.stamp.tick,sequence], "formation_ids":[job.subject],
 		"order_type":kind,"target_position":pos,"target_formation_id":target,"parameters":params}
-	return R.ok([order])
+	return R.ok({"orders":[order],"expected":order})
 
 ## terrain is the current MOV/FORM read side: clear_width, spacing, slot_error
 ## (metres), yaw (radians), reachable, optional current FORM compressed flag.
@@ -131,7 +207,14 @@ func stage(job: Dictionary, task: Variant, terrain: Dictionary, next_sequence: i
 	if not read.ok:
 		return read
 	var id: int = job.subject
-	var old: Dictionary = _states.get(id,{})
+	var previous: Dictionary = _states.get(id,{})
+	var old: Dictionary = previous.get("state",{})
+	if not previous.is_empty():
+		var live: Variant = read.value.form.active
+		if _order_key(live) != previous.authority.order:
+			# Rejected movement cannot start the cavalry recovery timer.
+			old = old.duplicate()
+			old.merge({"behavior":"","recovery":"","retry_after":0},true)
 	if _pending.has(id) or job.stamp.tick <= old.get("tick",-1):
 		return R.fail("Conflict","formation_tick")
 	if not V.integer(next_sequence) or not Behavior.valid_ground(terrain):
@@ -153,16 +236,18 @@ func stage(job: Dictionary, task: Variant, terrain: Dictionary, next_sequence: i
 	var commands := _orders(d, read.value.form, job, next_sequence)
 	if not commands.ok:
 		return commands
+	var orders: Array = commands.value.orders
 	var state := {"formation_id":id,"tick":job.stamp.tick, "count":d.count,"behavior":d.behavior,"task_id":d.task_id,
 		"control_revision":job.stamp.control_revision, "order_revision":job.stamp.order_revision, "local_goal":d.local_goal,
-		"last_order_id":old.get("last_order_id") if commands.value.is_empty() else commands.value[0].order_id,
+		"last_order_id":old.get("last_order_id") if orders.is_empty() else orders[0].order_id,
 		"started_tick":old.started_tick if old.get("behavior") == d.behavior and old.get("task_id") == d.task_id else job.stamp.tick,
 		"retry_after":d.retry_after, "recovery":d.recovery, "member_constraint":d.member_constraint, "feedback":d.feedback, "slot_request":d.slot_request}
 	var ticket := RefCounted.new()
 	_tokens[ticket] = id
-	_pending[id] = {"ticket":ticket, "job":job,"guard":_guard(read.value.form),"state":state,"orders":commands.value}
+	var published := {"state":state,"authority":_authority(read.value.form,commands.value.expected),"ground":terrain.duplicate()}
+	_pending[id] = {"ticket":ticket, "job":job,"guard":_guard(read.value.form),"published":published,"orders":orders}
 	var result := state.duplicate(true)
-	result.orders = commands.value.duplicate(true)
+	result.orders = orders.duplicate(true)
 	result.token = ticket
 	return R.ok(result)
 
@@ -219,7 +304,7 @@ func commit(token: Variant, drained_row: Dictionary) -> Dictionary:
 	if not checked.ok:
 		return checked
 	var id: int = drained_row.job.subject
-	_states[id] = _pending[id].state
+	_states[id] = _pending[id].published
 	_pending.erase(id)
 	_tokens.erase(token)
 	_accepted.erase(id)

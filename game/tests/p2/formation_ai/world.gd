@@ -104,6 +104,7 @@ func publish(t: int) -> Dictionary:
 	for job: Dictionary in scheduled.value.jobs:
 		if job.layer == "formation" and job.subject == 0: selected.formation = job
 		if job.layer == "tactical" and job.subject == 0: selected.tactical = job
+		if job.layer == "individual" and job.subject == groups[0][0]: selected.individual = job
 	verify.call(selected.has("formation"),"own formation job due")
 	return selected
 
@@ -170,7 +171,9 @@ func decide(job: Dictionary, task_value: Variant) -> Dictionary:
 	if not result.ok: return {}
 	var d: Dictionary = result.value
 	finish(d,collect(job,d))
-	return d
+	var effective: Dictionary = brain.view(job.subject).value
+	effective.orders = d.orders
+	return effective
 
 func shoot(attacker: int, victim: int) -> void:
 	var poses := {}

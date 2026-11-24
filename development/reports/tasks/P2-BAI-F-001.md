@@ -9,7 +9,7 @@
 1. 每 Mission、每队创建一个 `new(mission_id, issuer_id, ai.formation_view, form.view, team_key, ai.collect)`。组合层从同一 Mission 的 L1 已提交计划取本编队任务，以 BAI 已授予的 `formation` job 调用 `stage(job, task_or_null, terrain, next_sequence)`。给同一个 issuer 的所有命令生产者统一分配递增序号。任务站点用米，超时为绝对 tick。地形读侧给出当前 `clear_width/spacing/slot_error`（米）、`yaw`（弧度）、`reachable`，可附当前 FORM 槽位结果的 `compressed`。
 2. stage 返回 token、orders、behavior、local_goal、member_constraint、slot_request 和 feedback。每次授予最多生成一个冻结 v1 订单。编队成员共用一份冻结字段形状的约束。玩家的有效持令、停火和跟随优先。AI 有权行进时，窄道中保留可达目的地并收紧编队，伤亡后使用 FORM 的剩余成员与新投影继续通过。
 3. 对候选调用 `collect(token)`。它内部使用绑定的唯一 `BAI.collect`，检查 job、权限并消费一次。之后由组合层统一 `BAI.drain()`，保留与该 job 匹配的行。先对各域预检，L2 用 `validate(token,row)` 重查当前快照、控制权与实际 FORM 状态。跨域失败时 `rollback(token)` 不发布脑状态、命令或反馈。若已经 drain，保留该行；同一有效 job 的同等订单重做 collect 复用授权。新 job、变更订单和旧 token 不能复用旧回执。
-4. 在不再回滚的帧发布段，按稳定顺序经 `FORM.issue_order(order,authenticated_actor,control_revision)` 送入与玩家相同的权威入口。订单的 issued_tick 为观测 tick + 1，重复发送保留同一 order_id、序号和载荷。L2 在 FORM.advance 前用 `commit(token,row)` 提交。组合层读取已提交 `view(id)`，提供 `member_constraint` 给 L3，并把 `feedback` 送到 L1 的下次已授予 job。FORM.advance 决定最终权威回执、玩家优先和冲突处理。FORM.build_slot_targets 接收 slot_request 的参数与导航投影函数，将成功的槽位传给 MOV.assign，共享走廊遵循有效 FORM 订单和 local_goal。Mission 销毁调用 close。
+4. 在不再回滚的帧发布段，按稳定顺序经 `FORM.issue_order(order,authenticated_actor,control_revision)` 送入与玩家相同的权威入口。订单的 issued_tick 为观测 tick + 1，重复发送保留同一 order_id、序号和载荷。L2 在 FORM.advance 前用 `commit(token,row)` 提交候选。FORM.advance 决定最终权威回执、玩家优先和冲突处理。在 FORM.advance 之后，组合层每个编队读取一次 `brain.view(id)`，把该次有效 `member_constraint` 分发给本编队已授予的 L3 jobs，将有效 `feedback` 送入下一个 L1 job。若读取失败，该批暂停分发并重取。stage 返回的候选不能代替仲裁后的读模。FORM.build_slot_targets 接收 slot_request 的参数与导航投影函数，将成功的槽位传给 MOV.assign，共享走廊遵循有效 FORM 订单和 local_goal。Mission 销毁调用 close。
 
 ## 实测
 
@@ -30,4 +30,21 @@
 | `python game/tests/p1/harness/suite.py --godot D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe` | 15 套 PASS，各自退出 0。 |
 | `python ci/gates.py dependencies`、`python development/check_project.py` | 均退出 0。只作依赖与工程结构检查。 |
 
-早期测试复用了大尺度 FORM 场景，从窄道到所选终点的真实导航返回不可达，MOV 无路径，T-BAI-F-02 当次失败。改用专属小尺度导航夹具后，真实成员穿过同宽窄道并恢复横队。L1 并行开发期间的构造器和授权回调改变曾令 T-BAI-F-03 失败，随后按最终真实接口修正并重新运行。尚未执行本任务在正式 bootstrap 的整局装配、L3 生产消费及 8 GiB 硬件验收。
+早期测试复用了大尺度 FORM 场景，从窄道到所选终点的真实导航返回不可达，MOV 无路径，T-BAI-F-02 当次失败。改用专属小尺度导航夹具后，真实成员穿过同宽窄道并恢复横队。L1 并行开发期间的构造器和授权回调改变曾令 T-BAI-F-03 失败，随后按最终真实接口修正并重新运行。首轮未执行正式 bootstrap 的整局装配、L3 生产消费及 8 GiB 硬件验收。L3 生产消费已在下列退修中实测。
+
+## 独审退修
+
+修复起点为 `b0f8b86`，正式 L1 使用并行工作树 `8c33aed`，实际 L3 消费使用 `d2c578d`。独审两个未修改的探针在修改前分别退出 1。第一个探针中，FORM 裁定 `hold` 生效、AI 回执为 `Replaced/player_priority`，脑读模仍允许进攻、移动 6 m。第二个探针中，L1 实际派发的 `flank/arrived` 已抵达目标，L2 回馈仍为 `running/0`。
+
+修复后，L3 从 `view(id)` 读取 FORM 当前生效订单对应的行为与约束。候选尚待仲裁、被玩家覆盖、完成或控制权变化时，查询直接按当前有效令和本编队的 BAI 可见视图派生结果。查询不消费新的决策额度。命令未实际生效时不会触发下一次决策的骑兵恢复。任务抵达的回馈按有效任务的目标点、当前中心和到达容差独立判断；抵达侧翼位置后可以在 FORM 执行已获授权的冲锋，同时向 L1 回报 `completed/arrived/1.0`。
+
+| 退修验证 | 结果 |
+|---|---|
+| 主树 `out/p2-review/l2/order.gd` 原样重跑 | 退出 0。FORM 仍判 `Replaced/player_priority`，公开脑读模返回 Hold、engage_allowed=false、movement_limit=0。 |
+| 主树 `out/p2-review/l2/arrived.gd` 原样重跑 | 退出 0。实际 L1 站点和编队中心均为 (0,0,-8)，FORM 执行 charge，L2 同时回报 completed、arrived 和 1.0。 |
+| `res://tests/p2/formation_ai/run.gd` | 退出 0，4877 次断言、0 失败，T-BAI-F-01/02/03 全通过。将同一真实 L3 job 分别使用旧冲锋约束和仲裁后的约束，观察到 Approach → Hold；实际提交 Hold 时没有移动或攻击意图，BAI 和 L3 均接收回执。 |
+| 500 / 1000 成员单编队 | 权威路径 20 样本 P95 分别为 3096 / 5640 µs。另计一次仲裁后有效公开查询 P95 为 167 / 380 µs，同编队共享这次查询。该数据不包括整场渲染。 |
+
+退修回归另行实跑 P1 的 15 套测试以及 FORM 的 66499 个可达槽位样本，均退出 0。依赖和结构检查均退出 0。
+
+沿用上文 Godot 命令，在 `--script` 后给出探针的绝对路径，两个环境变量分别指向 `p2-tactical/game/mission/ai/tactical/ports/field_tactics.gd` 和 `p2-individual/game/mission/ai/individual/ports/field_individual.gd`（`RECOLLECTION_TEST_L1`、`RECOLLECTION_TEST_L3`）。集成后测试优先加载工程内生产入口。只有缺少 L3 源文件时，附加 L3 消费切片输出 NOT_RUN。正式 bootstrap 整局与 8 GiB 设备验收仍未执行。

@@ -159,9 +159,12 @@ func role_and_order_modes() -> bool:
 	return true
 
 func load_l1() -> Script:
-	if ResourceLoader.exists(L1):
-		return load(L1)
-	var path := OS.get_environment("RECOLLECTION_TEST_L1")
+	return _layer_script(L1,"RECOLLECTION_TEST_L1")
+
+func _layer_script(resource_path: String, source_env: String) -> Script:
+	if ResourceLoader.exists(resource_path):
+		return load(resource_path)
+	var path := OS.get_environment(source_env)
 	if path.is_empty() or not FileAccess.file_exists(path): return null
 	var script := GDScript.new()
 	script.source_code = FileAccess.get_file_as_string(path)
@@ -175,6 +178,62 @@ func tactics(w: World) -> RefCounted:
 			return R.ok({"reachable":w.reachable(id,World.mm(to)),"line":contact!=null}),
 		func(team):return w.ai.team_view(team).value,
 		func(job):return w.ai.collect(job,[]))
+
+func published_orders() -> bool:
+	var w := World.new(adapter,nav,check)
+	var p := Vector3(0,0,-8)
+	w.deploy(0,[0],[p],"cavalry",0)
+	w.deploy(1,[1],[p+Vector3.RIGHT*6],"infantry",0)
+	var jobs := w.publish(1)
+	var planner := tactics(w)
+	var plan: Dictionary=planner.stage(jobs.tactical,w.ai.team_view(0).value,[{"id":"flank","position":p}])
+	check(plan.ok and planner.commit().ok,"authorized production flank task")
+	w.ai.drain()
+	var task: Dictionary = planner.view().formation_tasks[0]
+	check(task.goal=="flank" and task.completion=="arrived","L1 completion contract")
+	var charged := w.decide(jobs.formation,task)
+	var arrived: Dictionary = w.brain.view(0).value
+	check(w.form.view(0).value.active.order_type=="charge" and arrived.behavior=="Charge","reaching the site retains the tactical action")
+	check(arrived.feedback.status=="completed" and arrived.feedback.reason=="arrived" and arrived.feedback.progress==1.0,"acknowledge exact L1 destination")
+
+	# A second granted task is a distinct proposal at the same position. The
+	# owner and delegate submit for the same next tick before FORM arbitrates.
+	var fresh := w.publish(7)
+	var pending := w.task("retreat","cavalry",p)
+	var d: Dictionary = w.brain.stage(fresh.formation,pending,w.ground(),w.sequence+1).value
+	var row := w.collect(fresh.formation,d)
+	var player := {"mission_id":World.SCOPE,"issuer_id":"player","order_id":"immediate-hold","client_sequence":1,"issued_tick":8,
+		"formation_ids":[0],"order_type":"hold","target_position":null,"target_formation_id":null,"parameters":{}}
+	check(w.form.issue_order(player,w.player,1).ok and w.brain.validate(d.token,row).ok,"queue player order before L2 publication")
+	check(w.form.issue_order(row.intents[0],w.captain,1).ok and w.brain.commit(d.token,row).ok,"publish candidate before FORM resolution")
+	check(w.brain.view(0).value.behavior=="Charge","before arbitration only earlier effective command permits a charge")
+	w.to_tick(8)
+	var effective: Dictionary = w.brain.view(0).value
+	var receipt: Dictionary = w.form.order_status("captain",row.intents[0].order_id).value[0]
+	check(receipt.state=="Replaced" and receipt.reason=="player_priority","authority rejects delegate on execution tick")
+	check(effective.behavior=="Hold" and effective.local_goal==p and not effective.member_constraint.engage_allowed and effective.member_constraint.movement_limit==0.0,"read effective player hold before next L2 job")
+	check(effective.feedback.status=="blocked" and effective.feedback.reason=="player_order","losing candidate does not publish task success")
+	check(w.brain.view(0).value==effective,"effective query is side-effect free")
+
+	var script := _layer_script("res://mission/ai/individual/ports/field_individual.gd","RECOLLECTION_TEST_L3")
+	if script==null:
+		print("L3 consumer cross-suite NOT_RUN (set RECOLLECTION_TEST_L3 or integrate L3)")
+		return true
+	w.revision+=1
+	var after := w.publish(9)
+	var job: Dictionary=after.individual
+	var soldier: RefCounted=script.new(World.SCOPE,w.ai.get_instance_id())
+	var perception: Dictionary=w.ai.sense(job.subject).value
+	var com: Dictionary=w.combat.field_view(World.SCOPE,[job.subject],0).value.actors[0]
+	var local_state := {"slot_position":p,"heading":Vector3.FORWARD,"nav_revision":nav,"weapons":["melee"],"reload_until":0,
+		"can_travel":func(_from,to,_rev): return w.reachable(0,World.mm(to))}
+	var stale: Dictionary=soldier.decide(job,perception,com,charged.member_constraint,local_state)
+	check(stale.ok and stale.value.intents.any(func(i): return i.get("speed_fraction",0)>0),"same L3 job would physically advance on superseded charge")
+	var held: Dictionary=soldier.decide(job,perception,com,w.brain.view(0).value.member_constraint,local_state)
+	check(held.ok and held.value.mode=="Hold" and held.value.intents.is_empty(),"production L3 immediately holds; no movement/attack to execute")
+	check(w.ai.collect(job,held.value.intents).ok and soldier.accept(w.ai.drain().value[0],held.value,R.ok()).ok,"real L3 grant and final receipt")
+	print("L3 priority at tick 9 ",stale.value.mode," -> ",held.value.mode)
+	return true
 
 func spent_or_late() -> bool:
 	if l1_script==null:
@@ -240,15 +299,24 @@ func layer_cost() -> bool:
 		var task := w.task("advance","infantry",Vector3(8,0,-4))
 		var ground := w.ground()
 		var samples := PackedInt64Array()
+		var reads := PackedInt64Array()
 		for trial in 21:
 			var job: Dictionary = w.publish(1+trial*5).formation
 			var begin := Time.get_ticks_usec()
 			var d: Dictionary = w.brain.stage(job,task,ground,trial+1).value
 			var row := w.collect(job,d)
+			for order in row.intents:
+				check(w.form.issue_order(order,w.captain,1).ok,"publish measured order")
 			check(w.brain.validate(d.token,row).ok and w.brain.commit(d.token,row).ok,"timed read, grant, preflight and commit")
 			if trial>0: samples.append(Time.get_ticks_usec()-begin)
+			w.to_tick(w.tick+1)
+			var read_start := Time.get_ticks_usec()
+			var public_state: Dictionary = w.brain.view(0)
+			if trial>0: reads.append(Time.get_ticks_usec()-read_start)
+			check(public_state.ok and public_state.value.behavior=="Advance","one effective formation view for L3 dispatch")
 		samples.sort()
-		print("L2_ONE_FORMATION members=",people," samples=",samples.size()," p50_us=",samples[9]," p95_us=",samples[18])
+		reads.sort()
+		print("L2_ONE_FORMATION members=",people," samples=",samples.size()," p50_us=",samples[9]," p95_us=",samples[18]," effective_view_p95_us=",reads[18])
 	return true
 
 func _initialize() -> void:
@@ -274,6 +342,7 @@ func run() -> void:
 		return
 	check(role_and_order_modes(),"role and active order modes complete")
 	l1_script=load_l1()
+	check(l1_script!=null and published_orders(),"authoritative order read and arrival feedback")
 	var tests: Array[Callable]=[owner_hold,bottleneck,spent_or_late]
 	for i in tests.size():
 		var before := failures
