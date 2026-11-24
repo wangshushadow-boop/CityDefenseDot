@@ -3,6 +3,7 @@ extends RefCounted
 const R = preload("res://contracts/result.gd")
 const V = preload("res://contracts/values.gd")
 const C = preload("res://contracts/canonical.gd")
+const HISTORY_PAGE_SIZE := 256
 
 var _locations := {}
 var _initial: Array = []
@@ -297,8 +298,8 @@ func _evaluate(request: Dictionary, historical: bool = false, base_revision: int
 		return R.fail("StaleVersion", "base_revision")
 	if request.expected_revision != -1 and request.expected_revision != _state.revision:
 		return R.fail("StaleVersion", "expected_revision")
-	if _state.ledger.size() >= C.MAX_ITEMS:
-		return R.fail("InvalidState", "snapshot.ledger")
+	if _state.revision >= V.MAX_INTEGER:
+		return R.fail("InvalidState", "revision")
 	var writes := _writes()
 	for i in request.lines.size():
 		var checked := _line(writes, request.lines[i], request.txn_id, i, historical)
@@ -367,8 +368,9 @@ func _commit(plan: Dictionary, durable: Callable) -> Dictionary:
 	if durable != Callable():
 		if not durable.is_valid():
 			return R.fail("Unavailable", "durable")
-		var candidate := snapshot()
-		_publish(candidate.state, change.duplicate(true))
+		var candidate_state := _state.duplicate(true)
+		_publish(candidate_state, change.duplicate(true))
+		var candidate := _export(candidate_state)
 		var ack: Variant = durable.call(candidate, change.fact.receipt.duplicate(true))
 		if typeof(ack) != TYPE_DICTIONARY or typeof(ack.get("ok")) != TYPE_BOOL:
 			return R.fail("Unavailable", "durable")
@@ -379,8 +381,60 @@ func _commit(plan: Dictionary, durable: Callable) -> Dictionary:
 
 
 func snapshot() -> Dictionary:
+	return _export(_state.duplicate(true))
+
+
+# The in-memory ID index stays flat. Only an isolated save projection is packed.
+func _export(state: Dictionary, keep_legacy_flat: bool = false) -> Dictionary:
+	if state.ledger.size() > HISTORY_PAGE_SIZE and not keep_legacy_flat:
+		var pages := []
+		for first in range(0, state.ledger.size(), HISTORY_PAGE_SIZE):
+			var records: Array = state.ledger.slice(first, first + HISTORY_PAGE_SIZE)
+			var facts := {}
+			for record in records:
+				var id: String = record.request.txn_id
+				facts[id] = state.applied[id]
+			pages.append({"ledger": records, "applied": facts})
+		# Bound the page directory too when an archive outgrows one canonical array.
+		while pages.size() > C.MAX_ITEMS:
+			var groups := []
+			for first in range(0, pages.size(), C.MAX_ITEMS):
+				groups.append(pages.slice(first, first + C.MAX_ITEMS))
+			pages = groups
+		state.erase("ledger")
+		state.erase("applied")
+		state["history_pages"] = pages
 	return {"schema_version": 1, "locations": _locations.duplicate(true), "initial": _initial.duplicate(true),
-		"state": _state.duplicate(true)}
+		"state": state}
+
+
+func _replay_records(records: Array) -> Dictionary:
+	for record in records:
+		if typeof(record) != TYPE_DICTIONARY or typeof(record.get("request")) != TYPE_DICTIONARY:
+			return R.fail("InvalidArgument", "ledger")
+		var checked := _evaluate(record.request, true)
+		if not checked.ok:
+			return checked
+		if checked.value.has("replay"):
+			return R.fail("Conflict", "ledger")
+		_publish(_state, checked.value)
+	return R.ok()
+
+
+func _replay_pages(pages: Array) -> Dictionary:
+	if pages.is_empty():
+		return R.fail("InvalidArgument", "history_pages")
+	for page in pages:
+		var replayed: Dictionary
+		if C.is_json_array(page):
+			replayed = _replay_pages(page)
+		elif typeof(page) == TYPE_DICTIONARY and C.is_json_array(page.get("ledger")) and page.ledger.size() <= HISTORY_PAGE_SIZE and typeof(page.get("applied")) == TYPE_DICTIONARY:
+			replayed = _replay_records(page.ledger)
+		else:
+			return R.fail("InvalidArgument", "history_pages")
+		if not replayed.ok:
+			return replayed
+	return R.ok()
 
 
 ## Restore is a trusted load path. PERSIST checks the container and replay verifies derived facts.
@@ -389,23 +443,23 @@ func restore(saved: Dictionary, authorize: Callable = Callable()) -> Dictionary:
 		return R.fail("InvalidState", "restore")
 	if not V.integer(saved.get("schema_version"), 1, 1):
 		return R.fail("StaleVersion", "schema_version")
-	if not C.encode(saved).ok or typeof(saved.get("locations")) != TYPE_DICTIONARY or not C.is_json_array(saved.get("initial")) or typeof(saved.get("state")) != TYPE_DICTIONARY or not C.is_json_array(saved.state.get("ledger")):
+	if not C.encode(saved).ok or typeof(saved.get("locations")) != TYPE_DICTIONARY or not C.is_json_array(saved.get("initial")) or typeof(saved.get("state")) != TYPE_DICTIONARY:
 		return R.fail("InvalidArgument", "snapshot")
 	var rebuilt = get_script().new()
 	var checked: Dictionary = rebuilt.initialize(saved.locations, saved.initial,
 		_authorize if authorize == Callable() else authorize)
 	if not checked.ok:
 		return checked
-	for record in saved.state.ledger:
-		if typeof(record) != TYPE_DICTIONARY or typeof(record.get("request")) != TYPE_DICTIONARY:
-			return R.fail("InvalidArgument", "ledger")
-		checked = rebuilt._evaluate(record.request, true)
-		if not checked.ok:
-			return checked
-		if checked.value.has("replay"):
-			return R.fail("Conflict", "ledger")
-		_publish(rebuilt._state, checked.value.duplicate(true))
-	if rebuilt.snapshot() != saved:
+	var flat: bool = not saved.state.has("history_pages")
+	if flat and C.is_json_array(saved.state.get("ledger")):
+		checked = rebuilt._replay_records(saved.state.ledger)
+	elif not flat and C.is_json_array(saved.state.history_pages):
+		checked = rebuilt._replay_pages(saved.state.history_pages)
+	else:
+		return R.fail("InvalidArgument", "history")
+	if not checked.ok:
+		return checked
+	if rebuilt._export(rebuilt._state.duplicate(true), flat) != saved:
 		return R.fail("Conflict", "snapshot")
 	_locations = rebuilt._locations
 	_initial = rebuilt._initial

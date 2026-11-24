@@ -182,8 +182,80 @@ func conservation() -> bool:
 	return true
 
 
+func history_lines(index: int) -> Array:
+	var src := "buyer" if index % 2 == 0 else "seller"
+	var dst := "seller" if index % 2 == 0 else "buyer"
+	return [line(src, dst, COIN, 1)]
+
+
+func history_pages() -> bool:
+	var bank := fixture()
+	for i in Inv.HISTORY_PAGE_SIZE:
+		expect(tx(bank, str(i), history_lines(i)).ok, "fill first history page")
+	var before := bank.snapshot()
+	expect(before.state.ledger.size() == Inv.HISTORY_PAGE_SIZE, "small v1 snapshot stays flat")
+	var plan := bank.prepare_exchange("cross", history_lines(0)).value as Dictionary
+	var refuse := func(candidate: Dictionary, receipt: Dictionary):
+		var pages: Array = candidate.state.history_pages
+		expect(pages.size() == 2 and pages[0].ledger.size() == Inv.HISTORY_PAGE_SIZE, "bounded durable pages")
+		expect(pages[1].applied.cross.receipt == receipt, "durable candidate includes receipt on new page")
+		return R.fail("Unavailable", "disk")
+	expect(rejected(bank.commit(plan, refuse), "Unavailable") and bank.snapshot() == before, "failed page rollover is atomic")
+	var persist := func(candidate: Dictionary, _receipt: Dictionary):
+		saved = candidate.duplicate(true)
+		return R.ok()
+	var accepted := bank.commit(plan, persist)
+	expect(accepted.ok, "subsequent rollover commits")
+	var paged := bank.snapshot()
+	expect(paged == saved, "durably published page projection equals live save")
+	var encoded := C.encode(paged)
+	var loaded := Inv.new()
+	expect(encoded.ok and loaded.restore(C.decode(encoded.value).value).ok, "paged canonical encoding and restore")
+	expect(loaded.commit(plan) == accepted and loaded.snapshot() == paged, "page rollover retry is idempotent")
+	expect(tx(loaded, "0", history_lines(0)).value.committed_revision == 1, "first page returns original receipt")
+	expect(rejected(tx(loaded, "0", history_lines(1)), "Conflict"), "old-page ID rejects changed payload")
+	var corrupt := paged.duplicate(true)
+	corrupt.state.history_pages.reverse()
+	expect(not loaded.restore(corrupt).ok and loaded.snapshot() == paged, "reject reordered pages atomically")
+	corrupt = paged.duplicate(true)
+	corrupt.state.history_pages[0].ledger.reverse()
+	expect(not loaded.restore(corrupt).ok and loaded.snapshot() == paged, "reject reordered records")
+	corrupt = paged.duplicate(true)
+	corrupt.state.history_pages[0].applied.erase("0")
+	expect(not loaded.restore(corrupt).ok and loaded.snapshot() == paged, "reject a missing old receipt")
+	var legacy := paged.duplicate(true)
+	legacy.state["ledger"] = []
+	legacy.state["applied"] = {}
+	for page in legacy.state.history_pages:
+		legacy.state.ledger.append_array(page.ledger)
+		legacy.state.applied.merge(page.applied)
+	legacy.state.erase("history_pages")
+	expect(loaded.restore(legacy).ok and loaded.snapshot() == paged, "old flat v1 archive opens and repacks")
+	var next := tx(loaded, "next", history_lines(1))
+	expect(next.ok and next.value.committed_revision == Inv.HISTORY_PAGE_SIZE + 2, "restored ledger accepts next transaction")
+	return true
+
+
+func long_history() -> bool:
+	var bank := fixture()
+	for i in C.MAX_ITEMS + 1:
+		var receipt := tx(bank, str(i), history_lines(i))
+		if not receipt.ok or receipt.value.committed_revision != i + 1:
+			return false
+	expect(bank.ledger_for("0").ok and bank.ledger_for(str(C.MAX_ITEMS)).ok, "long history both ends indexed")
+	expect(tx(bank,"0",history_lines(0)).value.committed_revision == 1, "long history early retry")
+	expect(rejected(tx(bank,"0",history_lines(1)), "Conflict"), "long history old ID conflict")
+	var snapshot := bank.snapshot()
+	var pages: Array = snapshot.state.history_pages
+	expect(pages.size() == ceili(float(C.MAX_ITEMS+1) / Inv.HISTORY_PAGE_SIZE) and pages.back().ledger.size() == 1, "65,537 genuine receipts retained")
+	return true
+
+
 func _initialize() -> void:
-	for suite in [["T-INV-01",failure_atomicity],["T-INV-02",equipment],["T-INV-03",durability],["T-INV-04",conservation]]:
+	var suites := [["T-INV-01",failure_atomicity],["T-INV-02",equipment],["T-INV-03",durability],["T-INV-04",conservation],["P1-INV-PAGES",history_pages]]
+	if "--long-history" in OS.get_cmdline_user_args():
+		suites.append(["P1-INV-65537", long_history])
+	for suite in suites:
 		var before := failures
 		expect(suite[1].call() == true, suite[0] + " completed")
 		if failures == before:
