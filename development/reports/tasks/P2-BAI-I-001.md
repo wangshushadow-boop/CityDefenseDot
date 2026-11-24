@@ -41,3 +41,17 @@ Windows，Godot 4.7.2 Standard `ed1daf0bf`，Core Ultra 9 285K，headless。下�
 `python ci/gates.py dependencies`、`python docs/architecture/check_mirror.py`、`python development/check_project.py` 和 `git diff --check` 均退出 0。
 
 仅新增 L3 端口、三个专属测试/场景和本报告；无全局写入、数据格式或网络契约变更。候选由主 Agent 固化、独立审查和集成。
+
+## f9764b0 独立审查退修
+
+审查探针在初始候选上原样复现：tick 1 换近战，tick 2 开始挥击，tick 3 敌我距离从 1 m 增至 8 m。COM 持续处于 Hold，至 tick 61 仍在槽 0，全程仅两条动作。原脚本 Godot 退出 1。修复后原脚本退出 0，tick 3 处于有效取消窗并成功取消，tick 4 换弓，最后槽 1 持续正常开火及恢复，累计 29 条动作。
+
+L3 在期望槽与已蓄力的武器不一致时先读取当前武器相位。取消窗内通过原 COM cancel 意图收势；晚于取消窗，仅在当前武器获准且目标当下可见有效时完成已开始的动作，然后换装。被遮挡、已经击倒或指挥端禁止当前武器时禁止释放。COM 原本不允许在 Hold 阶段取消，持弓时可等到合法目标和火控权限恢复。新增 [交战距离与目标变化测试](../../../game/tests/p2/individual/transition_cases.gd)，沿用现有真实物理场景。近到远与远到近均测试取消窗内外，另外实测遮挡后重新出现，以及第三名单位真实击倒目标、退场、索引换代后重新交战。
+
+| 退修复测 | 实际结果 |
+|---|---|
+| 原样独审脚本 `out/p2-review/current/l3_fsm.gd` | 同一入口修复前退出 1、修复后退出 0。 |
+| `Godot --headless --path game --script res://tests/p2/individual/run.gd` | 3 轮各退出 0，910/910。保持 1000 人加 500 坐骑、120 个 60 Hz 步、10120 个实际 job、113/113 个紧急反应、最大积压 0。3909 个真实 COM 动作被接受。L3 耗时 P95 为 4.233 / 4.077 / 4.155 ms。整段 P95 为 31.986 / 31.370 / 32.114 ms，仍超过 16.667 ms。 |
+| `Godot --headless --path <合成工程>/game --script res://tests/p2/individual/move_integration.gd` | 与 MOV 开发者最终冻结目录合成，步兵、骑射共计 957/957，退出 0；步兵终点误差 0.042 m，骑射 0.195 m。已用 Git 核对 field_movement.gd `e6af949573e532ed5cb24be3ab7547635817af84`、intent_route.gd `f8313aaa8af2075365598460031be08afcf4af5f` 及 path_queue.gd `dfee516e1de8513464f1133c2b34d32deb97d699`。 |
+
+本次退修仅更新 L3 领域脚本、专属测试与本报告。

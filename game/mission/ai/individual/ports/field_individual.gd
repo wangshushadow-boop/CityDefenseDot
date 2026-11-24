@@ -118,6 +118,10 @@ static func _move(own: Dictionary, destination: Vector3, local: Dictionary, rule
 	return {"actor_handle":own.handle,"desired_direction":[roundi(d.x*1000000),0,roundi(d.z*1000000)],"speed_fraction":fraction,"stance":"sprint" if speed>=1.0 else "walk"}
 
 
+static func _cancel(own: Dictionary, combat: Dictionary) -> Dictionary:
+	return {"actor_handle":own.handle,"input_phase":"cancel","direction":combat.direction,"weapon_slot":combat.weapon_slot,"target_hint":null}
+
+
 static func _attack(own: Dictionary, combat: Dictionary, target: Dictionary, tick: int) -> Dictionary:
 	if combat.phase == "Guard":
 		return {"actor_handle":own.handle,"direction":combat.direction,"held":false}
@@ -178,6 +182,7 @@ func decide(job: Dictionary, perception: Dictionary, combat: Dictionary, rules: 
 		return R.fail("InvalidArgument","reload_until")
 	var mounted: bool = combat.mount_handle != null
 	var ranged: bool = weapons.size()>1 and combat.ammo>0
+	var current_attack_allowed: bool = rules.engage_allowed if combat.weapon_slot==0 else rules.fire_allowed
 	var break_until: int = old.get("break_until",-1)
 	if combat.hp==0 or combat.phase=="Downed" or combat.role=="mount":
 		mode = "Incapacitated"
@@ -216,11 +221,18 @@ func decide(job: Dictionary, perception: Dictionary, combat: Dictionary, rules: 
 			mode = "MoveToSlot"
 			move = _move(own,local.slot_position,local,rules,1.0,mounted)
 		elif not target.is_empty() and (rules.engage_allowed or (ranged and rules.fire_allowed)):
-			var use_ranged: bool = ranged and rules.fire_allowed and (distance > 2.7 or not rules.engage_allowed or (combat.weapon_slot!=0 and combat.phase in ["Windup","Hold"]))
+			var use_ranged: bool = ranged and rules.fire_allowed and (distance > 2.7 or not rules.engage_allowed)
 			var slot := 1 if use_ranged else 0
 			if combat.weapon_slot != slot and combat.phase in ["Ready","Guard"]:
 				mode = "Equip"
 				action = {"actor_handle":own.handle,"slot":slot,"item_ref":weapons[slot]}
+			elif combat.weapon_slot != slot and combat.phase in ["Windup","Hold"]:
+				# Resolve the action on the equipped weapon before switching to the new range.
+				mode = "Recover"
+				if combat.phase=="Windup" and tick-combat.since<2:
+					action = _cancel(own,combat)
+				elif current_attack_allowed:
+					action = _attack(own,combat,target,tick)
 			elif mounted and tick<break_until and not use_ranged:
 				mode = "Disengage"
 				move = _move(own,own.position+side*3.0-forward,local,rules,1.0,mounted)
@@ -244,8 +256,8 @@ func decide(job: Dictionary, perception: Dictionary, combat: Dictionary, rules: 
 				look = {"actor_handle":own.handle,"yaw":roundi(atan2(-forward.x,-forward.z)*1000000),"pitch":0}
 		if action.is_empty() and combat.phase=="Guard" and not threatened:
 			action = {"actor_handle":own.handle,"direction":combat.direction,"held":false}
-		elif action.is_empty() and combat.phase=="Windup" and tick-combat.since<2 and (target.is_empty() or (combat.weapon_slot==0 and not rules.engage_allowed) or (combat.weapon_slot!=0 and not rules.fire_allowed)):
-			action = {"actor_handle":own.handle,"input_phase":"cancel","direction":combat.direction,"weapon_slot":combat.weapon_slot,"target_hint":null}
+		elif action.is_empty() and combat.phase=="Windup" and tick-combat.since<2 and (target.is_empty() or not current_attack_allowed):
+			action = _cancel(own,combat)
 	if not action.is_empty() and old.get("rejected") == action and tick<old.get("retry_tick",-1):
 		action = {}
 		break_until = old.get("break_until",-1)

@@ -481,6 +481,7 @@ func run() -> void:
 	constraints_and_authority()
 	target_lock()
 	worker_lifecycle()
+	preload("res://tests/p2/individual/transition_cases.gd").run(self)
 	check(errors==0,"T-BAI-I-02 visibility, rollback, rejection")
 	stress()
 	engine.release_scope(SCOPE)
