@@ -28,3 +28,7 @@ python -X utf8 game/tests/p1/content/pck.py --godot $godot
 基础内容 SHA-256 为 `fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579`。首轮编译因 Variant 的局部类型推断失败退出 1，显式标注 String 后 Godot 回归退出 0。首次空 export options 节导致编辑器返回 0 同时报告错误，验证器据此失败。填写 x86_64 选项后成功。[Godot 测试](../../../game/tests/p1/content/run.gd) · [PCK 复现入口](../../../game/tests/p1/content/pck.py)
 
 变更范围为本报告、`game/infrastructure/content/` 和 `game/tests/p1/content/`。没有写入共享引擎入口、状态或其他模块。独立审查、QA、集成提交及阶段结论由主 Agent 汇总。
+
+复审复现 NUL 文本以可写 PackedStringArray 进入已发布配置，元素变化后摘要仍指向旧值。修正为用 CON 的不可变 NUL 文本表示重建所有发布容器。回归覆盖顶层和嵌套字段只读、改原输入后已发布字节一致、同一文本两种主机表示摘要一致、文本变更时摘要变化，以及拒绝用普通数组替代文本。基础包摘要保持上述值。
+
+QA 发现负数 battle_limit 可进入编译快照。现在校验配置从包注入和会话覆盖的两个入口，与 EncounterSpec 的正整数约束一致。负数、零和布尔值均返回 InvalidArgument 并定位来源和字段，1 通过。

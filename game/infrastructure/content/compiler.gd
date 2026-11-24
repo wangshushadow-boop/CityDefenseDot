@@ -68,15 +68,22 @@ func resolve_packages(selection: Array, game_api: int) -> Dictionary:
 	return Result.ok(order)
 
 
-static func _freeze(value: Variant) -> void:
-	if typeof(value) == TYPE_ARRAY and not value.is_read_only():
+static func _immutable(value: Variant) -> Variant:
+	if C.is_nul_text(value):
+		return C.nul_text(value)
+	if typeof(value) == TYPE_ARRAY:
+		var entries := []
 		for item in value:
-			_freeze(item)
-		value.make_read_only()
-	elif typeof(value) == TYPE_DICTIONARY and not value.is_read_only():
-		for item in value.values():
-			_freeze(item)
-		value.make_read_only()
+			entries.append(_immutable(item))
+		entries.make_read_only()
+		return entries
+	if typeof(value) == TYPE_DICTIONARY:
+		var result := {}
+		for key in value:
+			result[key] = _immutable(value[key])
+		result.make_read_only()
+		return result
+	return value
 
 
 static func _read_entries(pack: Dictionary, rows: Dictionary, patch_set: RefCounted) -> Dictionary:
@@ -153,11 +160,19 @@ static func _config(values: Variant, source: String, config: Dictionary, sources
 	if typeof(values) != TYPE_DICTIONARY or not C.encode(values).ok:
 		return F.fail("InvalidArgument",source,"config")
 	for key in values:
-		if (declared and not config.has(key)) or (config.has(key) and typeof(config[key]) != typeof(values[key])):
+		if key == "battle_limit" and not V.integer(values[key], 1):
+			return F.fail("InvalidArgument",source,key)
+		if declared and not config.has(key):
+			return F.fail("InvalidArgument",source,key)
+		if config.has(key) and _config_kind(config[key]) != _config_kind(values[key]):
 			return F.fail("InvalidArgument",source,key)
 		config[key] = values[key]
 		sources[key] = source
 	return Result.ok()
+
+
+static func _config_kind(value: Variant) -> int:
+	return TYPE_STRING if C.is_text(value) else typeof(value)
 
 
 func compile(order: Array, overrides: Dictionary) -> Dictionary:
@@ -204,8 +219,7 @@ func compile(order: Array, overrides: Dictionary) -> Dictionary:
 		return digest
 	var compiled := {"game_api_version":VERSION,"packages":packages,"registry":registry,"resources":resources,
 		"hash":digest.value,"content_hash":digest.value,"config":config,"config_provenance":sources,"extension_points":keys}
-	_freeze(compiled)
-	return Result.ok(compiled)
+	return Result.ok(_immutable(compiled))
 
 
 func _register_trusted_extension(key: String, implementation: Variant) -> Dictionary:

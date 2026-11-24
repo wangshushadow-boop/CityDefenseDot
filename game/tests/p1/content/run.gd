@@ -87,6 +87,12 @@ func _initialize() -> void:
 	var outside := create("outer",{"entrypoints":{"definitions":["../delta/defs.json"]}})
 	expect(not assemble([outside]).ok,"directory escape")
 	expect(not assemble([Compiler.BASE_PACKAGE],{"missing":1}).ok,"unknown config")
+	for limit in [-1,0,true]:
+		var invalid_limit := assemble([Compiler.BASE_PACKAGE],{"battle_limit":limit})
+		expect(not invalid_limit.ok and invalid_limit.error.code == "InvalidArgument" and invalid_limit.error.detail == "battle_limit","invalid battle limit")
+	expect(assemble([Compiler.BASE_PACKAGE],{"battle_limit":1}).ok,"smallest positive battle limit")
+	var bad_limit := create("badlimit",{"config":{"battle_limit":-1}})
+	expect(not assemble([bad_limit]).ok,"invalid package battle_limit")
 	expect(not service.check_save_or_network_compatibility({"game_api_version":1,"content_hash":"0".repeat(64)},snapshot).ok,"different content hash")
 	expect(service.check_save_or_network_compatibility({"game_api_version":1,"packages":snapshot.packages,"content_hash":snapshot.hash},snapshot).ok,"compatible")
 	print("T-INF-CONTENT-02 ","PASS" if before == errors else "FAIL")
@@ -94,6 +100,25 @@ func _initialize() -> void:
 	var again := assemble([Compiler.BASE_PACKAGE,mod],{"battle_limit":250})
 	expect(again.ok and snapshot.hash == again.value.hash,"reproducible hash")
 	expect(snapshot.hash != assemble([mod,Compiler.BASE_PACKAGE],{"battle_limit":100}).value.hash,"content-affecting config digest")
+	var text_pack := create("textpack",{"config":{"note":"x","nested":{}}})
+	var segments := PackedStringArray(["river","bank"])
+	var options := {"note":segments,"nested":{"labels":[segments]}}
+	var text_content := assemble([text_pack],options)
+	expect(text_content.ok,"NUL text overrides ordinary text")
+	if text_content.ok:
+		var cfg: Dictionary = text_content.value.config
+		var visible: Variant = cfg.note
+		var nested: Variant = cfg.nested.labels[0]
+		expect(Codec.is_nul_text(visible) and typeof(visible) == TYPE_ARRAY and visible.is_read_only(),"published NUL text read only")
+		expect(Codec.is_nul_text(nested) and typeof(nested) == TYPE_ARRAY and nested.is_read_only(),"nested NUL text read only")
+		var canonical_cfg := Codec.encode(cfg).value as PackedByteArray
+		options.note[0] = "field"
+		options.nested.labels[0][0] = "path"
+		expect(Codec.encode(cfg).value == canonical_cfg,"published bytes detached from source")
+		var repeated := assemble([text_pack],{"note":Codec.nul_text(["river","bank"]),"nested":{"labels":[Codec.nul_text(["river","bank"])]}})
+		expect(repeated.ok and repeated.value.hash == text_content.value.hash,"equivalent host forms hash equally")
+		expect(assemble([text_pack],options).value.hash != text_content.value.hash,"changed NUL text changes content hash")
+	expect(not assemble([text_pack],{"note":["river","bank"]}).ok,"ordinary array cannot impersonate NUL text")
 	var unlicensed := create("unlicensed",{"license":""})
 	expect(not assemble([unlicensed]).ok,"license required")
 	print("T-INF-CONTENT-03-SLICE ","PASS" if before == errors else "FAIL")
