@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P1-SHRULE-001",
+  "kind": "EXECUTION",
+  "parent": "P1-SHRULE",
+  "stage": "P1",
+  "module_id": "SHRULE",
+  "title": "公共规则、数值与效果计算",
+  "spec": "docs/systems/game/shared/rules/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CORE",
+    "P1-DEF"
+  ],
+  "requirements": [
+    "CHR-01",
+    "COM-03",
+    "ECO-03"
+  ],
+  "acceptance_test_ids": [
+    "T-SHRULE-01",
+    "T-SHRULE-02",
+    "T-SHRULE-03"
+  ],
+  "allowed_paths": [
+    "game/shared/rules/",
+    "game/tests/p1/rules/",
+    "development/reports/tasks/P1-SHRULE-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "公共数值规则、效果堆叠、可注入随机、配置解释。 整数比例、买卖方向取整、作用域和互斥效果；可解释明细。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "纯函数与边界测试，不写业务状态。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "PLANNED"
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "P1-TELEM-001",
+  "kind": "EXECUTION",
+  "parent": "P1-TELEM",
+  "stage": "P1",
+  "module_id": "TELEM",
+  "title": "日志、指标、诊断与崩溃报告",
+  "spec": "docs/systems/game/infrastructure/telemetry/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CORE"
+  ],
+  "requirements": [
+    "NET-06"
+  ],
+  "acceptance_test_ids": [
+    "T-TELEM-01",
+    "T-TELEM-02",
+    "T-TELEM-03"
+  ],
+  "allowed_paths": [
+    "game/infrastructure/telemetry/",
+    "game/tests/p1/telemetry/",
+    "development/reports/tasks/P1-TELEM-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "统一日志、指标、运行环境与性能采样。 脱敏结构化日志、scope/tick、采样分位与本地导出。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "scope/tick/ID 可追踪、隐私最小化、真实采样。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "PLANNED"
+}

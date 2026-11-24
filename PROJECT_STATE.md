@@ -1,6 +1,6 @@
 # recollection 项目状态
 
-**P0 已验收，当前没有执行中的阶段。** 2026-11-24，项目负责人批准 ADR-011、ADR-012 和按已测范围验收 P0。P1–P8 为 PLANNED。[阶段报告](development/reports/stages/P0.md)
+**P1 公共运行时与工程基础正在执行。** 2026-11-24，项目负责人批准 ADR-011、ADR-012 和按已测范围验收 P0。P1 已获本次会话授权，P2–P8 为 PLANNED。[阶段报告](development/reports/stages/P0.md)
 
 | 项目 | 最新状态 |
 |---|---|

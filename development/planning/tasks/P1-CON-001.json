@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P1-CON-001",
+  "kind": "EXECUTION",
+  "parent": "P1-CON",
+  "stage": "P1",
+  "module_id": "CON",
+  "title": "公共契约与版本管理",
+  "spec": "docs/systems/game/contracts/README.md",
+  "depends_on": [
+    "GATE-P0"
+  ],
+  "requirements": [
+    "BAT-03",
+    "NET-05",
+    "SAV-03"
+  ],
+  "acceptance_test_ids": [
+    "T-CON-01",
+    "T-CON-02",
+    "T-CON-03"
+  ],
+  "allowed_paths": [
+    "game/contracts/",
+    "game/tests/p1/contracts/",
+    "development/reports/tasks/P1-CON-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-con",
+  "scope": "按批准 ADR 实现稳定值类型、命令/查询/事件/意图、版本、错误、跨域契约与编解码样例。 ADR-012 v1 实现、完整 NFC 约束、纯数据契约及握手/迁移，不照搬 P0 限定字符集。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "契约向量、边界/版本/ID 测试通过。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "IN_PROGRESS"
+}

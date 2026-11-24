@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "P1-INF-ENGINE-PORTS-001",
+  "kind": "EXECUTION",
+  "parent": "P1-INF-ENGINE-PORTS",
+  "stage": "P1",
+  "module_id": "INF-ENGINE",
+  "title": "引擎适配、物理、导航与资源端口（PORTS）",
+  "spec": "docs/systems/game/infrastructure/engine/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CORE",
+    "P1-CON"
+  ],
+  "requirements": [
+    "COM-02",
+    "NAV-01",
+    "NET-01"
+  ],
+  "acceptance_test_ids": [
+    "T-INF-ENGINE-01",
+    "T-INF-ENGINE-02",
+    "T-INF-ENGINE-03",
+    "T-INF-ENGINE-04"
+  ],
+  "allowed_paths": [
+    "game/infrastructure/engine/",
+    "game/tests/p1/engine/",
+    "development/reports/tasks/P1-INF-ENGINE-PORTS-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "选定引擎的资源、场景、物理、导航与线程适配端口，先验证基本调用和生命周期。 真实 Godot 资源及场景租约、导航同步和连续扫掠，作用域释放。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "实际引擎适配 smoke test；核心无场景依赖。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "PLANNED"
+}

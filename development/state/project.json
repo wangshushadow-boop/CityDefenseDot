@@ -2,10 +2,10 @@
   "schema_version": 1,
   "project": "recollection",
   "delivery_version": "0.3",
-  "active_stage": null,
+  "active_stage": "P1",
   "stage_status": {
     "P0": "DONE",
-    "P1": "PLANNED",
+    "P1": "IN_PROGRESS",
     "P2": "PLANNED",
     "P3": "PLANNED",
     "P4": "PLANNED",
@@ -14,8 +14,8 @@
     "P7": "PLANNED",
     "P8": "PLANNED"
   },
-  "authorized_by": "项目负责人，本次会话 2026-11-24",
-  "base_commit": "eea39fae2885e1b54be1f5efaea9da8299c4e243",
+  "authorized_by": "项目负责人，本次会话授权开始 P1",
+  "base_commit": "f72d1cbd700228a4b2b70098fa0308364393f9f4",
   "integrated_commit": "ab8099511aed0c4cd6a952464188ff2c81325aac",
   "technical_stack": {
     "status": "APPROVED",
@@ -38,6 +38,6 @@
     }
   },
   "updated_at": "2026-11-24",
-  "note": "P0 已按实测范围验收并结束。integrated_commit 是签核和技术成果集成点，随后提交状态与报告。P1 尚未授权。",
+  "note": "P1 公共运行时与工程基础执行中。",
   "last_completed_stage": "P0"
 }

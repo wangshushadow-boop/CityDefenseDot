@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "P1-CAMP-RUNTIME-001",
+  "kind": "EXECUTION",
+  "parent": "P1-CAMP-RUNTIME",
+  "stage": "P1",
+  "module_id": "CAMP",
+  "title": "战略世界运行时（RUNTIME）",
+  "spec": "docs/systems/game/campaign/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CORE",
+    "P1-INV",
+    "P1-DEF"
+  ],
+  "requirements": [
+    "ECO-06",
+    "SAI-03",
+    "WLD-02",
+    "WLD-04",
+    "WLD-05"
+  ],
+  "acceptance_test_ids": [
+    "T-CAMP-01",
+    "T-CAMP-02",
+    "T-CAMP-03",
+    "T-CAMP-04"
+  ],
+  "allowed_paths": [
+    "game/campaign/runtime.gd",
+    "game/campaign/runtime.gd.uid",
+    "game/tests/p1/campaign/",
+    "development/reports/tasks/P1-CAMP-RUNTIME-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot",
+    "game/campaign/character/",
+    "game/campaign/clan/",
+    "game/campaign/economy/",
+    "game/campaign/encounter/",
+    "game/campaign/party/",
+    "game/campaign/politics/",
+    "game/campaign/quest/",
+    "game/campaign/settlement/",
+    "game/campaign/strategic_ai/",
+    "game/campaign/strategic_ai/army/",
+    "game/campaign/strategic_ai/clan/",
+    "game/campaign/strategic_ai/evaluation/",
+    "game/campaign/strategic_ai/kingdom/",
+    "game/campaign/strategic_ai/party/",
+    "game/campaign/strategic_ai/perception/",
+    "game/campaign/strategic_ai/planning/",
+    "game/campaign/strategic_ai/scheduler/",
+    "game/campaign/world/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "战略运行时壳、分相调度、注册与只读快照；不伪造经济/政治。 空/最小世界、固定相位、跨预算步进、安全快照与销毁；不模拟后续领域。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "空/最小合法世界运行、提交及释放验证。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "PLANNED"
+}

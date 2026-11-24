@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P1-DEF-001",
+  "kind": "EXECUTION",
+  "parent": "P1-DEF",
+  "stage": "P1",
+  "module_id": "DEF",
+  "title": "定义数据与引用注册",
+  "spec": "docs/systems/game/shared/definitions/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CON"
+  ],
+  "requirements": [
+    "ARM-01",
+    "ECO-05",
+    "EXT-01",
+    "SAV-03"
+  ],
+  "acceptance_test_ids": [
+    "T-DEF-01",
+    "T-DEF-02",
+    "T-DEF-03"
+  ],
+  "allowed_paths": [
+    "game/shared/definitions/",
+    "game/tests/p1/definitions/",
+    "development/reports/tasks/P1-DEF-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "定义注册、不可变快照、稳定 ID/引用及 schema 校验。 验证类型化 DefId、重复、引用、升级图，返回只读副本。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "重复/失效 ID、升级 DAG、合法定义测试。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "PLANNED"
+}

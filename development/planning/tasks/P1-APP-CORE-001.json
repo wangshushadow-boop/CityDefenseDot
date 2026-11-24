@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "P1-APP-CORE-001",
+  "kind": "EXECUTION",
+  "parent": "P1-APP-CORE",
+  "stage": "P1",
+  "module_id": "APP",
+  "title": "应用层、GameSession 与事务（CORE）",
+  "spec": "docs/systems/game/application/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CAMP-RUNTIME",
+    "P1-MIS-RT-PORTS",
+    "P1-PERSIST-CORE",
+    "P1-INV"
+  ],
+  "requirements": [
+    "BAT-03",
+    "BAT-04",
+    "BAT-05",
+    "MOD-01",
+    "MOD-02",
+    "MOD-03"
+  ],
+  "acceptance_test_ids": [
+    "T-APP-01",
+    "T-APP-02",
+    "T-APP-03",
+    "T-APP-04"
+  ],
+  "allowed_paths": [
+    "game/application/",
+    "game/tests/p1/application/",
+    "development/reports/tasks/P1-APP-CORE-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "Session、路由、用例/事务协调、跨域端口；先接真实基础能力。 唯一 Session 承接 CAMP/MIS/INV/PERSIST，合法用例、幂等提交与安全恢复的 AT-10 基础切片。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "状态转移/失败回退、事务与模式边界测试。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "PLANNED"
+}

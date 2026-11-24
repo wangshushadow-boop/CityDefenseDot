@@ -1,0 +1,9 @@
+; recollection / Godot 4.7 Standard
+config_version=5
+
+[application]
+config/name="recollection"
+config/features=PackedStringArray("4.7", "Forward Plus")
+
+[rendering]
+renderer/rendering_method="forward_plus"

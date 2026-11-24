@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "P1-MIS-RT-PORTS-001",
+  "kind": "EXECUTION",
+  "parent": "P1-MIS-RT-PORTS",
+  "stage": "P1",
+  "module_id": "MIS-RT",
+  "title": "Mission 运行时、实体与增援（PORTS）",
+  "spec": "docs/systems/game/mission/runtime/README.md",
+  "depends_on": [
+    "GATE-P0",
+    "P1-CORE",
+    "P1-DEF",
+    "P1-INF-ENGINE-PORTS"
+  ],
+  "requirements": [
+    "BAT-01",
+    "BAT-02",
+    "BAT-05",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-01",
+    "T-MIS-RT-02",
+    "T-MIS-RT-03",
+    "T-MIS-RT-04"
+  ],
+  "allowed_paths": [
+    "game/mission/runtime/",
+    "game/tests/p1/mission/",
+    "development/reports/tasks/P1-MIS-RT-PORTS-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/project.godot"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "Mission 生命周期、实体存储、generation、固定 tick、系统注册与结果端口；战斗阶段实现留 P2。 状态机、系统和句柄代际/作用域生命周期，固定步与释放，复用公开入口。",
+  "non_goals": [
+    "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
+  ],
+  "acceptance": [
+    "创建/销毁、scope 隔离、tick 与异步取消验证。",
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+  ],
+  "status": "PLANNED"
+}
