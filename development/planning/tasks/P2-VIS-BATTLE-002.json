@@ -31,9 +31,9 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
-  "scope": "视觉代理、骨骼/动画、动作标记、装备/LOD，真实战斗与地图基础。 临时 GLB 保留来源、声明和许可，独立资源导入和引用。",
+  "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field_assets",
+  "scope": "视觉代理、骨骼/动画、动作标记、装备/LOD，真实战斗与地图基础。 临时 GLB 保留来源、声明和许可，独立资源导入和引用。 随资源提供可由既有编译器加载的本阶段场景、规则与步骑远程兵种定义及其资源映射。",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
   ],
@@ -41,5 +41,5 @@
     "动画/权威窗口同步，LOD/蒙皮性能。",
     "临时 GLB 保留来源、声明和许可，独立资源导入和引用。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

@@ -1,0 +1,84 @@
+[
+  {
+    "module": "movement2",
+    "suite": "p2/movement",
+    "display": "headless",
+    "sha": "df50ea8269853e1f2ee3a0b0bf4758c3149c4a94",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "MOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3674",
+      "MOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8",
+      "MOV_QUEUE_CHECKS errors=0 display=headless"
+    ]
+  },
+  {
+    "module": "movement2",
+    "suite": "p1/engine",
+    "display": "headless",
+    "sha": "df50ea8269853e1f2ee3a0b0bf4758c3149c4a94",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-ENGINE-HEADLESS-SLICE PASS",
+      "T-INF-ENGINE-04 PASS loops=50 median_us=3995 p95_us=4110 max_us=4318",
+      "ENGINE failures=0"
+    ]
+  },
+  {
+    "module": "movement2",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-mov2.gd",
+    "display": "headless",
+    "sha": "df50ea8269853e1f2ee3a0b0bf4758c3149c4a94",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "CHOKE bidi=false n=64 arrived=64 ticks=1750 unchanged_final_300=39 still_in_gate=0 outside=0 max_step=0.1133351996541",
+      "CHOKE bidi=true n=64 arrived=64 ticks=1040 unchanged_final_300=0 still_in_gate=0 outside=0 max_step=0.11333427578211",
+      "INDEPENDENT_MOV PASS errors=0"
+    ],
+    "probe_sha256": "ace67c05059445d2e4aaf61517ec0bc1bed101fb74c0602f0e067d4433af32da"
+  },
+  {
+    "module": "movement2",
+    "suite": "D:/work/game/recollection/out/p2-review/movement2_gap.gd",
+    "display": "headless",
+    "sha": "df50ea8269853e1f2ee3a0b0bf4758c3149c4a94",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "",
+      "native close={ \"ok\": true, \"value\": { \"requested_revision\": 3, \"applied_revision\": 2, \"status\": \"pending\" } }",
+      "MOV_DISCONNECTED closed_nav_ready=true member_reachable=false group_reachable=true step_ok=true actual_position=(-8.0, 0.0, 0.0) arrived=false"
+    ],
+    "probe_sha256": "0bef4c2cf00f9dbc76aefbaa4731b97ecddb35428d83b777224b1eba74e85d0b"
+  },
+  {
+    "module": "movement2",
+    "suite": "D:/work/game/recollection/out/p2-review/movement2_retry.gd",
+    "display": "headless",
+    "sha": "df50ea8269853e1f2ee3a0b0bf4758c3149c4a94",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "MOV_RETRY result={ \"ok\": false, \"error\": { \"code\": \"Unavailable\", \"field\": \"navigation_sync\", \"detail\": <null>, \"message_key\": \"error.unavailable\", \"retryable\": true } } speeds previous/rejected/retried/control=2.66666460037231/2.66666460037231/2.79999709129334/2.79999709129334 positions retry/control=(1.026667, 0.0, 0.0)/(1.026667, 0.0, 0.0)"
+    ],
+    "probe_sha256": "bcc394e90b295fb5ad1654c6a8f7fe58737be2ac2c1f783085dfab56c74c8303"
+  },
+  {
+    "module": "movement2",
+    "suite": "D:/work/game/recollection/out/p2-review/movement2_failed_budget.gd",
+    "display": "headless",
+    "sha": "df50ea8269853e1f2ee3a0b0bf4758c3149c4a94",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "MOV_ATTEMPT_BUDGET tick=1 retries=5 nav_queries=8"
+    ],
+    "probe_sha256": "8be026ca0d2e6498b13b9c253ca69d1dcd123de57efa920b281d613928687f82"
+  }
+]

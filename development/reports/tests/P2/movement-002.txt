@@ -1,0 +1,26 @@
+Godot --headless --path game --script res://tests/p2/movement/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-MOV-01 PASS links=3 reopen_close=true
+MOV_LOAD agents=500 corridors=20 ticks=5 max_per_tick=4 elapsed_us=4664 errors=0
+MOV_LOAD agents=1000 corridors=20 ticks=5 max_per_tick=4 elapsed_us=9242 errors=0
+MOV_BURST agents=500 distinct=500 ticks=125 peak_queued=24
+MOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24
+T-MOV-04 PASS shared_requests=1500 distinct_requests=1500
+MOV_FAILED_ACCESS tick1=8 attempts_by_tick2=16
+T-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327
+T-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true
+MOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2590
+MOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8
+MOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3470
+MOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8
+MOV_QUEUE_CHECKS errors=0 display=headless
+
+Godot --headless --path game --script res://tests/p1/engine/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-INF-ENGINE-01 PASS
+T-INF-ENGINE-02 PASS hits=[{ "query_index": 0, "entity_handle": "near", "fraction_ppm": 399000, "point_mm": [-2020, 1000, 0], "normal_ppm": [-1000000, 0, 0], "region": "body" }, { "query_index": 0, "entity_handle": "far", "fraction_ppm": 699000, "point_mm": [3980, 1000, 0], "normal_ppm": [-1000000, 0, 0], "region": "body" }, { "query_index": 1, "entity_handle": "near", "fraction_ppm": 395508, "point_mm": [-2020, 1000, 150], "normal_ppm": [-572602, 0, 819833], "region": "body" }, { "query_index": 1, "entity_handle": "far", "fraction_ppm": 695313, "point_mm": [3980, 1000, 150], "normal_ppm": [-593542, 0, 804803], "region": "body" }]
+P1-ENGINE-HEADLESS-SLICE PASS
+T-INF-ENGINE-04 PASS loops=50 median_us=3996 p95_us=4127 max_us=4568
+ENGINE failures=0

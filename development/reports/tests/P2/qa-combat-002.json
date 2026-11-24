@@ -1,0 +1,82 @@
+[
+  {
+    "module": "combat2",
+    "suite": "p2/combat",
+    "display": "headless",
+    "sha": "41b59d4865f66673bbba4fe5d98c4a668bbb062e",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=1266 max_us=9146",
+      "COM field physics batches=44 queries=46",
+      "P2-COM-002 PASS errors=0"
+    ]
+  },
+  {
+    "module": "combat2",
+    "suite": "p1/engine",
+    "display": "headless",
+    "sha": "41b59d4865f66673bbba4fe5d98c4a668bbb062e",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-ENGINE-HEADLESS-SLICE PASS",
+      "T-INF-ENGINE-04 PASS loops=50 median_us=3967 p95_us=4056 max_us=4085",
+      "ENGINE failures=0"
+    ]
+  },
+  {
+    "module": "combat2",
+    "suite": "p1/mission",
+    "display": "headless",
+    "sha": "41b59d4865f66673bbba4fe5d98c4a668bbb062e",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  },
+  {
+    "module": "combat2",
+    "suite": "p1/rules",
+    "display": "headless",
+    "sha": "41b59d4865f66673bbba4fe5d98c4a668bbb062e",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "T-SHRULE-02 PASS",
+      "T-SHRULE-03 PASS",
+      "P1-RULES-RNG PASS"
+    ]
+  },
+  {
+    "module": "combat2",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-com2.gd",
+    "display": "headless",
+    "sha": "41b59d4865f66673bbba4fe5d98c4a668bbb062e",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "COM_EXTRA PASS checks=2184 failures=0 real_sweep_queries=300 real_shape_hits=250 digest=0f0044cf83cf4762f34efc03631e0279b0b35d8a14819b0b4c20e1ea7e9e0b68"
+    ],
+    "probe_sha256": "b3c3c53608159e2e2d8224c3ddbf4b33f71f4842bdc1ece1b0d42b07a2e73d0e"
+  },
+  {
+    "module": "combat2",
+    "suite": "D:/work/game/recollection/out/p2-review/combat2_morale_charge.gd",
+    "display": "headless",
+    "sha": "41b59d4865f66673bbba4fe5d98c4a668bbb062e",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "",
+      "initial_morale=0 routing=true action_receipt={ \"ok\": false, \"error\": { \"code\": \"InvalidState\", \"field\": \"actor\", \"detail\": <null>, \"message_key\": \"error.invalid_state\", \"retryable\": false } }",
+      "unarmed_mount_crossing sweep_batches=10 target_hp=92 events=0"
+    ],
+    "probe_sha256": "26999f53b82074c71b30adb062e511a76f79afae1b07f5955eadfbd66b509163"
+  }
+]

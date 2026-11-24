@@ -51,5 +51,5 @@
     "COM-01–05、士气与实际动作测试；多人 COM-06 后续复验。",
     "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

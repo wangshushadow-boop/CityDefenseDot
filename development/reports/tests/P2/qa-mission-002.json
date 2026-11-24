@@ -1,0 +1,96 @@
+[
+  {
+    "module": "mission2",
+    "suite": "p2/mission",
+    "display": "headless",
+    "sha": "bfa735258e4e63f6d8f929a26802a954ed892bb1",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "WAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100",
+      "P2-MISSION-FIELD PASS checks=1038 failures=0",
+      "P2-MISSION-SOURCE PASS failures=0"
+    ]
+  },
+  {
+    "module": "mission2",
+    "suite": "p2/field_sources",
+    "display": "headless",
+    "sha": "bfa735258e4e63f6d8f929a26802a954ed892bb1",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "FIELD_SOURCES checks=45 failures=0"
+    ]
+  },
+  {
+    "module": "mission2",
+    "suite": "p1/mission",
+    "display": "headless",
+    "sha": "bfa735258e4e63f6d8f929a26802a954ed892bb1",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  },
+  {
+    "module": "mission2",
+    "suite": "p1/application",
+    "display": "headless",
+    "sha": "bfa735258e4e63f6d8f929a26802a954ed892bb1",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "T-APP-03 PASS",
+      "T-APP-04-SLICE PASS",
+      "APP_CHECKS errors=0"
+    ]
+  },
+  {
+    "module": "mission2",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-mis2.gd",
+    "display": "headless",
+    "sha": "bfa735258e4e63f6d8f929a26802a954ed892bb1",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "MIS_QA PASS checks=40 failures=0 typed_teams={ 0: 2, \"0\": 1, \"ally\": 1 }"
+    ],
+    "probe_sha256": "7ffe66415adadadf931c1cba102afe6b52e6fab88b633052d310f4e529ebfd09"
+  },
+  {
+    "module": "mission2",
+    "suite": "D:/work/game/recollection/out/p2-review/mission2_phase.gd",
+    "display": "headless",
+    "sha": "bfa735258e4e63f6d8f929a26802a954ed892bb1",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "MISSION_WAVE_PHASE inputs_valid=true read_by_objectives=[[1, 2, 2], [2, 1, 2]] tick2_published=2 ever_entered=[0, 1, 2] old_snapshot_ever=[0, 2]"
+    ],
+    "probe_sha256": "44766cc39bbbdb55e6bbaf1050a3748be3c894a5645d0a501ce69821cf4e63ec"
+  },
+  {
+    "module": "mission2",
+    "suite": "D:/work/game/recollection/out/p2-review/mission2_ingress.gd",
+    "display": "headless",
+    "sha": "bfa735258e4e63f6d8f929a26802a954ed892bb1",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+      "",
+      "MIS_DRAINED_BUFFER prepared=true nav observations=[[3, 1, false], [4, 1, false], [5, 2, true]] returned={ \"ok\": true, \"value\": [{ \"index\": 0, \"generation\": 1 }] } published=[0]"
+    ],
+    "probe_sha256": "6bbbec48d59a477ca5b1fbb96f200fa28b662395d19056e3c80daecb2129ae26"
+  }
+]

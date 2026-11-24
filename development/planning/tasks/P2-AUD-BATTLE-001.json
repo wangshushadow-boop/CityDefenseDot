@@ -32,8 +32,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-audio",
   "scope": "命令、命中、音源预算、混音和战斗音乐。 消费已确认事件，音源池与优先级",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -42,5 +42,5 @@
     "声音与权威事件一致、并发预算及可访问性。",
     "消费已确认事件，音源池与优先级"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

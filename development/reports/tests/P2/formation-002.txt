@@ -1,0 +1,20 @@
+Godot --headless --path game --script res://tests/p2/formation/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-FORM-GEOMETRY count=500 kinds=7 elapsed_us=251582
+P2-FORM-GEOMETRY count=1000 kinds=7 elapsed_us=550662
+P2-FORM-ROLLBACK exercised
+T-FORM-01 PASS
+T-FORM-02 PASS
+T-FORM-03-READ-MODEL PASS
+T-FORM-04-AUTHORITY PASS
+P2-FORM-002 PASS
+T-FORM-02-LAYOUT PASS
+P2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124
+
+Godot --headless --path game --script res://tests/p1/mission/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373
+T-MIS-RT-03 PASS switches=50 live_nodes=1
+MISSION failures=0

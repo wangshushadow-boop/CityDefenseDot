@@ -1,0 +1,42 @@
+[
+  {
+    "module": "formation2",
+    "suite": "p2/formation",
+    "display": "headless",
+    "sha": "ed921091d46a8c8e98552090f8923c93979024da",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P2-FORM-002 PASS",
+      "T-FORM-02-LAYOUT PASS",
+      "P2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124"
+    ]
+  },
+  {
+    "module": "formation2",
+    "suite": "p1/mission",
+    "display": "headless",
+    "sha": "ed921091d46a8c8e98552090f8923c93979024da",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "P1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373",
+      "T-MIS-RT-03 PASS switches=50 live_nodes=1",
+      "MISSION failures=0"
+    ]
+  },
+  {
+    "module": "formation2",
+    "suite": "D:/work/game/recollection/out/p2-qa/qa-form2.gd",
+    "display": "headless",
+    "sha": "ed921091d46a8c8e98552090f8923c93979024da",
+    "exit": 0,
+    "pass_mark": true,
+    "tail": [
+      "AFTER_GRANT owner={ \"order_id\": \"player1\", \"issuer_id\": \"player\", \"state\": \"Active\", \"reason\": \"\", \"tick\": 1 } delegated={ \"order_id\": \"ai1\", \"issuer_id\": \"ai\", \"state\": \"Failed\", \"reason\": \"player_priority\", \"tick\": 2 }",
+      "FAILED_SOURCE owner={ \"order_id\": \"player1\", \"issuer_id\": \"player\", \"state\": \"Failed\", \"reason\": \"member_handle\", \"tick\": 1 } delegated={ \"order_id\": \"ai1\", \"issuer_id\": \"ai\", \"state\": \"Active\", \"reason\": \"\", \"tick\": 1 }",
+      "QA_FORM PASS checks=19 failures=0"
+    ],
+    "probe_sha256": "5e7c593fbca5117c82be67a9bc316db65262e6c4afe4b81a92a7b98a6d8bb4d5"
+  }
+]

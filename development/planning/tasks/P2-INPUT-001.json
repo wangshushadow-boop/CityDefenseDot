@@ -34,8 +34,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "d5725c7b695ae5a1765af9590cb9c513b99884e5",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-input",
   "scope": "输入映射、移动/视角/攻击/格挡/指挥与手柄。 映射设备输入、控制修订和确认回执",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -44,5 +44,5 @@
     "玩家/AI 意图同语义、权限、重映射。",
     "映射设备输入、控制修订和确认回执"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

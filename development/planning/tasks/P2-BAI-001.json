@@ -50,8 +50,8 @@
     "game/mission/ai/tactical/strategies/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "6e399f2dbc754a494424c7d544d911fcda8e3775",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-ai",
   "scope": "战场共同感知、快照/黑板、调度、优先级与预算；排除 tactical/formation/individual 独立实现。 感知快照、预算和过期决策处理",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -60,5 +60,5 @@
     "可见性、旧意图拒绝、scope 生命周期、分层调度与性能。",
     "感知快照、预算和过期决策处理"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

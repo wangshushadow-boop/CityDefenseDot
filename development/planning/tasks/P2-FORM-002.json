@@ -45,5 +45,5 @@
     "权限、阵型、槽位与伤亡重组；玩家/AI 共用接口。",
     "真实 Godot 入口、独立审查及 QA、候选与合并态验证；完整 Given/When/Then 与切片分项。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }
