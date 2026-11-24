@@ -8,6 +8,8 @@ const MODES := ["first","third","mounted","deployment","spectator"]
 const SETTINGS := "user://field-camera.json"
 const ARM_RADIUS_MM := 160
 var _scope := ""
+# A callback can publish another view or rebind the same scope name before it returns.
+var _revision := 0
 var _mode := ""
 var _target := {}
 var _read_pose: Callable
@@ -36,6 +38,7 @@ func open_field(scope: String, pose_reader: Callable, permission_reader: Callabl
 	var loaded := _load_options()
 	if not loaded.ok: return loaded
 	_scope = scope
+	_revision += 1
 	_read_pose = pose_reader
 	_permit = permission_reader
 	_sweep = sweep_reader
@@ -47,8 +50,11 @@ func open_field(scope: String, pose_reader: Callable, permission_reader: Callabl
 static func _handle(value: Variant) -> bool:
 	return value is Dictionary and value.size()==2 and V.integer(value.get("index"),0,V.MAX_U32) and V.integer(value.get("generation"),1,V.MAX_U32)
 
-func _allowed(mode: String, handle: Dictionary) -> bool:
-	return _permit.is_valid() and is_same(_permit.call(_scope,mode,handle.duplicate()),true)
+func _grant(revision: int, mode: String, handle: Dictionary) -> Dictionary:
+	if revision!=_revision: return R.fail("InvalidState","camera_changed")
+	var permitted := _permit.is_valid() and is_same(_permit.call(_scope,mode,handle.duplicate()),true)
+	if revision!=_revision: return R.fail("InvalidState","camera_changed")
+	return R.ok() if permitted else R.fail("Unauthorized","camera_target")
 
 func _anchor(mode: String, handle: Dictionary) -> Dictionary:
 	if mode=="deployment":
@@ -60,7 +66,7 @@ func _anchor(mode: String, handle: Dictionary) -> Dictionary:
 	var pose: Dictionary = read.value
 	var at: Variant = pose.get("position")
 	var heading: Variant = pose.get("heading",Vector3.ZERO)
-	var mounted: Variant = pose.get("mounted",mode=="mounted")
+	var mounted: Variant = pose.get("mounted",false)
 	var ignored: Variant = pose.get("collision_handles",[])
 	if not at is Vector3 or not at.is_finite() or not heading is Vector3 or not heading.is_finite() or not mounted is bool:
 		return R.fail("InvalidArgument","camera_pose")
@@ -70,17 +76,37 @@ func _anchor(mode: String, handle: Dictionary) -> Dictionary:
 	if mounted and pose.has("mount_position"):
 		at = pose.mount_position
 		if not at is Vector3 or not at.is_finite(): return R.fail("InvalidArgument","mount_position")
-	return R.ok({"feet":at,"pivot":at+Vector3.UP*(2.45 if mounted else 1.65),"heading":heading,"ignore":ignored})
+	return R.ok({"feet":at,"pivot":at+Vector3.UP*(2.45 if mounted else 1.65),"heading":heading,"ignore":ignored.duplicate()})
+
+func _authorized_pose(revision: int, mode: String, handle: Dictionary) -> Dictionary:
+	var grant := _grant(revision,mode,handle)
+	if not grant.ok: return grant
+	var pose := _anchor(mode,handle)
+	if revision!=_revision: return R.fail("InvalidState","camera_changed")
+	if not pose.ok: return pose
+	if mode!="deployment":
+		grant = _grant(revision,mode,handle)
+		if not grant.ok: return grant
+	return pose
+
+func _confirm_view(revision: int, pose: Dictionary) -> Dictionary:
+	var latest := _authorized_pose(revision,_mode,_target)
+	if not latest.ok: return latest
+	if latest.value!=pose: return R.fail("InvalidState","camera_pose_changed")
+	return R.ok()
 
 func set_mode(scope: String, mode: String, handle: Dictionary = {}) -> Dictionary:
 	if scope!=_scope or _scope.is_empty(): return R.fail("NotFound","camera_scope")
-	if not _mode.is_empty() and not _allowed(_mode,_target):
-		_recover(maxi(0,_last_tick))
-	if mode not in MODES or not (handle.is_empty() if mode=="deployment" else _handle(handle)):
-		return R.fail("InvalidArgument","camera_mode")
-	if not _allowed(mode,handle): return R.fail("Unauthorized","camera_target")
-	var read := _anchor(mode,handle)
-	if not read.ok: return read
+	var revision := _revision
+	handle = handle.duplicate()
+	var read := R.fail("InvalidArgument","camera_mode")
+	if mode in MODES and (handle.is_empty() if mode=="deployment" else _handle(handle)):
+		read = _authorized_pose(revision,mode,handle)
+	if not read.ok:
+		if revision==_revision and not _mode.is_empty():
+			var prior := _authorized_pose(revision,_mode,_target)
+			if not prior.ok and revision==_revision: _recover(maxi(0,_last_tick))
+		return read
 	if mode==_mode and handle==_target: return R.ok()
 	var heading: Vector3 = read.value.heading
 	if _target!=handle and Vector2(heading.x,heading.z).length_squared()>.000001:
@@ -96,8 +122,10 @@ static func _mm(p: Vector3) -> Array:
 
 func _ray(a: Vector3,b: Vector3,radius_mm: int,mask: int,tick: int,ignore: Array) -> Dictionary:
 	if not _sweep.is_valid(): return R.fail("Unavailable","camera_query")
+	var revision := _revision
 	var sample: Variant = _sweep.call([{"from":_mm(a),"to":_mm(b),"radius_mm":radius_mm,"mask":mask,
 		"ignored_handles":ignore.duplicate()}],{"scope_id":_scope,"tick":tick})
+	if revision!=_revision: return R.fail("InvalidState","camera_changed")
 	if not sample is Dictionary or not is_same(sample.get("ok"),true) or not sample.get("value") is Array:
 		return R.fail("Unavailable","camera_query")
 	if sample.value.is_empty(): return R.ok(null)
@@ -105,7 +133,7 @@ func _ray(a: Vector3,b: Vector3,radius_mm: int,mask: int,tick: int,ignore: Array
 	var hit: Variant = sample.value[0]
 	if not hit is Dictionary or not V.integer(hit.get("fraction_ppm"),0,1000000):
 		return R.fail("InvalidArgument","camera_hit")
-	return R.ok(hit)
+	return R.ok(hit.duplicate(true))
 
 func _safe_length(origin: Vector3, offset: Vector3, tick: int, ignore: Array) -> Dictionary:
 	var result := _ray(origin,origin+offset,ARM_RADIUS_MM,1,tick,ignore)
@@ -116,20 +144,27 @@ func _safe_length(origin: Vector3, offset: Vector3, tick: int, ignore: Array) ->
 
 func update_view(scope: String, tick: int, dt: float, look := Vector2.ZERO, zoom := 0.0, impact := 0.0) -> Dictionary:
 	if scope!=_scope or _scope.is_empty() or _mode.is_empty(): return R.fail("InvalidState","camera_scope")
-	if not _allowed(_mode,_target):
-		_recover(maxi(0,_last_tick))
-		return R.fail("Unauthorized","camera_target")
+	var revision := _revision
+	var read := _authorized_pose(revision,_mode,_target)
+	if not read.ok:
+		if revision==_revision: _recover(maxi(0,_last_tick))
+		return read
 	if tick<0 or tick<_last_tick or not is_finite(dt) or dt<0 or not look.is_finite() or not is_finite(zoom) or not is_finite(impact):
 		return R.fail("InvalidArgument","camera_frame")
-	var read := _anchor(_mode,_target)
-	if not read.ok:
-		_recover(tick)
-		return read
 	var result := _place(read.value,tick,dt,look,zoom,impact)
-	if not result.ok: _hide_view()
+	if not result.ok and revision==_revision:
+		if result.error.field in ["camera_query","camera_hit","camera_pivot_obstructed"]:
+			var confirmed := _confirm_view(revision,read.value)
+			if confirmed.ok:
+				_hide_view()
+			elif revision==_revision:
+				_recover(tick)
+		else:
+			_recover(tick)
 	return result
 
 func _place(pose: Dictionary,tick: int,dt: float,look: Vector2,zoom: float,impact: float) -> Dictionary:
+	var revision := _revision
 	var yaw := wrapf(_yaw+look.x,-PI,PI)
 	var pitch := clampf(_pitch+look.y,-1.40,1.35)
 	var distance := clampf(_distance+zoom,1.0,20.0)
@@ -152,6 +187,8 @@ func _place(pose: Dictionary,tick: int,dt: float,look: Vector2,zoom: float,impac
 		var safe := _safe_length(pivot,view_basis.z*extent,tick,pose.ignore)
 		if not safe.ok: return safe
 		wanted = safe.value
+	var confirmed := _confirm_view(revision,pose)
+	if not confirmed.ok: return confirmed
 	# Retract immediately; smooth only travel inside the checked segment.
 	_arm = minf(wanted,move_toward(_arm,wanted,45*minf(dt,.15)))
 	var roll := clampf(impact,-1,1)*.018 if _shake else 0.0
@@ -161,26 +198,35 @@ func _place(pose: Dictionary,tick: int,dt: float,look: Vector2,zoom: float,impac
 	_distance = distance
 	_last_tick = tick
 	_ready_view = true
+	_revision += 1
 	cull_mask = _layers
 	make_current()
 	return R.ok(state())
 
 func pick(scope: String, screen_point: Vector2, max_distance := 300.0) -> Dictionary:
 	if scope!=_scope or _scope.is_empty() or not _ready_view: return R.fail("InvalidState","camera_scope")
-	if not _allowed(_mode,_target):
-		_recover(_last_tick)
-		return R.fail("Unauthorized","camera_target")
-	var anchor := _anchor(_mode,_target)
+	var revision := _revision
+	var anchor := _authorized_pose(revision,_mode,_target)
 	if not anchor.ok:
-		_recover(_last_tick)
+		if revision==_revision: _recover(_last_tick)
 		return anchor
 	if not screen_point.is_finite() or not get_viewport().get_visible_rect().has_point(screen_point) or not is_finite(max_distance) or max_distance<.001 or max_distance>2000:
 		return R.fail("InvalidArgument","pick")
 	var start := project_ray_origin(screen_point)
 	var hit := _ray(start,start+project_ray_normal(screen_point)*max_distance,0,0xffffffff,_last_tick,anchor.value.ignore)
+	if revision!=_revision: return R.fail("InvalidState","camera_changed")
+	var confirmed := _confirm_view(revision,anchor.value)
+	if not confirmed.ok:
+		if revision==_revision: _recover(_last_tick)
+		return confirmed
 	if not hit.ok or hit.value==null: return hit
 	if not _pick_entity.is_valid(): return R.fail("Unavailable","camera_visibility")
 	var permitted: Variant = _pick_entity.call(_scope,hit.value.get("entity_handle"))
+	if revision!=_revision: return R.fail("InvalidState","camera_changed")
+	confirmed = _confirm_view(revision,anchor.value)
+	if not confirmed.ok:
+		if revision==_revision: _recover(_last_tick)
+		return confirmed
 	# A hidden foremost contact reveals neither a position nor an object behind it.
 	if not permitted is Dictionary or not is_same(permitted.get("ok"),true) or not permitted.has("value"): return R.ok(null)
 	var picked: Variant = permitted.get("value")
@@ -228,6 +274,7 @@ func _load_options() -> Dictionary:
 	return R.ok()
 
 func _hide_view() -> void:
+	_revision += 1
 	_ready_view = false
 	cull_mask = 0
 	clear_current(false)
@@ -239,10 +286,11 @@ func _recover(tick: int) -> void:
 	_arm = 0.0
 	_last_tick = maxi(_last_tick,tick)
 	global_transform = Transform3D(Basis.IDENTITY,_focus)
-	if _allowed("deployment",{}):
+	var revision := _revision
+	var fallback := _authorized_pose(revision,"deployment",{})
+	if fallback.ok:
 		_mode = "deployment"
-		var fallback := _anchor("deployment",{})
-		if not _place(fallback.value,tick,.15,Vector2.ZERO,0,0).ok:
+		if not _place(fallback.value,tick,.15,Vector2.ZERO,0,0).ok and revision==_revision:
 			_mode = ""
 
 func release_scope(scope: String) -> void:
