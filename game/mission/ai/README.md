@@ -1,5 +1,5 @@
 # game/mission/ai/
 
-项目：`recollection`。模块：`BAI`。
+公共感知与调度的进程内入口见 [field_ai.gd](ports/field_ai.gd)。组合层注册权威快照并注入视线查询，再将已校验的意图交给所属领域。独立决策层使用只读感知和调度任务。
 
-**状态：目录骨架，未实现。** 本目录 README 仅作为导航；正式设计见 [模块规格](../../../docs/systems/game/mission/ai/README.md)。实际文件及测试在对应任务获准后建立，不在这里重复设计，不将目录存在当作功能完成。
+[权威模块设计](../../../docs/systems/game/mission/ai/README.md) · [Godot 集成和负载测试](../../tests/p2/ai/run.gd)
