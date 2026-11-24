@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "P2-RESULTS-001",
+  "kind": "EXECUTION",
+  "parent": "P2-RESULTS",
+  "stage": "P2",
+  "module_id": "RESULTS",
+  "title": "来源追踪、战斗结果与统计",
+  "spec": "docs/systems/game/mission/results/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-MIS-RT-BATTLE",
+    "P2-COM",
+    "P2-RULES-FIELD"
+  ],
+  "requirements": [
+    "ARM-05",
+    "BAT-02",
+    "BAT-03",
+    "BAT-04",
+    "SGE-03"
+  ],
+  "acceptance_test_ids": [
+    "T-RESULTS-01",
+    "T-RESULTS-02",
+    "T-RESULTS-03",
+    "T-RESULTS-04"
+  ],
+  "allowed_paths": [
+    "game/mission/results/",
+    "game/tests/p2/results/",
+    "development/reports/tasks/P2-RESULTS-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "来源槽、伤亡/俘虏候选、经验/战利品意图及结果完整性。 来源全覆盖、完整摘要，区分观察和结算",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "每槽唯一终态、未入场明确、结果稳定、无战役写入。",
+    "来源全覆盖、完整摘要，区分观察和结算"
+  ],
+  "status": "PLANNED"
+}

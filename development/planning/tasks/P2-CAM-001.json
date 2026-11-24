@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "P2-CAM-001",
+  "kind": "EXECUTION",
+  "parent": "P2-CAM",
+  "stage": "P2",
+  "module_id": "CAM",
+  "title": "相机、视角、选取与观战",
+  "spec": "docs/systems/game/presentation/camera/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-INPUT",
+    "P2-MOV"
+  ],
+  "requirements": [
+    "ACC-01",
+    "NET-04",
+    "UX-02"
+  ],
+  "acceptance_test_ids": [
+    "T-CAM-01",
+    "T-CAM-02",
+    "T-CAM-03"
+  ],
+  "allowed_paths": [
+    "game/presentation/camera/",
+    "game/tests/p2/camera/",
+    "development/reports/tasks/P2-CAM-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "一/三人称、骑乘、碰撞、选取、部署和观战相机。 跟随、选中与观战，同一会话的视图",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "相机不改变权威结果、合法视角。",
+    "跟随、选中与观战，同一会话的视图"
+  ],
+  "status": "PLANNED"
+}

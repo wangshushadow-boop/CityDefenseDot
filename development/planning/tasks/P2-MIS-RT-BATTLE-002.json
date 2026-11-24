@@ -9,7 +9,8 @@
   "spec": "docs/systems/game/mission/runtime/README.md",
   "depends_on": [
     "GATE-P1",
-    "P2-MIS-RT-BATTLE-001"
+    "P2-MIS-RT-BATTLE-001",
+    "P2-MIS-RT-BATTLE-003"
   ],
   "requirements": [
     "BAT-01",

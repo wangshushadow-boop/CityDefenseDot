@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "P2-UI-BATTLE-001",
+  "kind": "EXECUTION",
+  "parent": "P2-UI-BATTLE",
+  "stage": "P2",
+  "module_id": "UI",
+  "title": "界面、ReadModel 与交互流程（BATTLE）",
+  "spec": "docs/systems/game/presentation/ui/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-FORM",
+    "P2-RULES-FIELD",
+    "P2-INPUT"
+  ],
+  "requirements": [
+    "ACC-01",
+    "UX-01",
+    "UX-02",
+    "UX-03"
+  ],
+  "acceptance_test_ids": [
+    "T-UI-01",
+    "T-UI-02",
+    "T-UI-03",
+    "T-UI-04"
+  ],
+  "allowed_paths": [
+    "game/presentation/ui/",
+    "game/tests/p2/ui/",
+    "development/reports/tasks/P2-UI-BATTLE-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "战斗 HUD、部署/编队/指令、目标和结果预览。 部署、命令、可辨反馈及战果读取",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "战斗可读性、权限/错误反馈与操作测试。",
+    "部署、命令、可辨反馈及战果读取"
+  ],
+  "status": "PLANNED"
+}

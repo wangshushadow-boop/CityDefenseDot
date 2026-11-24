@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "P2-VIS-BATTLE-001",
+  "kind": "EXECUTION",
+  "parent": "P2-VIS-BATTLE",
+  "stage": "P2",
+  "module_id": "VIS",
+  "title": "地图与战场视觉代理、动画、LOD（BATTLE）",
+  "spec": "docs/systems/game/presentation/visuals/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM",
+    "P2-MOV"
+  ],
+  "requirements": [
+    "BAI-06",
+    "COM-05",
+    "VIS-01"
+  ],
+  "acceptance_test_ids": [
+    "T-VIS-01",
+    "T-VIS-02",
+    "T-VIS-03"
+  ],
+  "allowed_paths": [
+    "game/presentation/visuals/",
+    "game/tests/p2/visuals/",
+    "development/reports/tasks/P2-VIS-BATTLE-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "视觉代理、骨骼/动画、动作标记、装备/LOD，真实战斗与地图基础。 实际蒙皮、近远级别、可见性和固定轨迹",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "动画/权威窗口同步，LOD/蒙皮性能。",
+    "实际蒙皮、近远级别、可见性和固定轨迹"
+  ],
+  "status": "PLANNED"
+}

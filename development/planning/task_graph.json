@@ -719,7 +719,8 @@
       "kind": "PACKAGE",
       "title": "Mission 运行时、实体与增援（BATTLE）",
       "module_ids": [
-        "MIS-RT"
+        "MIS-RT",
+        "CON"
       ],
       "depends_on": [
         "GATE-P1"
@@ -728,7 +729,8 @@
       "acceptance": "战场部署/增援及 generation、旧 scope、结果边界测试。",
       "approval_required": false,
       "spec_paths": [
-        "docs/systems/game/mission/runtime/README.md"
+        "docs/systems/game/mission/runtime/README.md",
+        "docs/systems/game/contracts/README.md"
       ],
       "candidate_test_ids": [
         "T-MIS-RT-01",
@@ -1100,7 +1102,8 @@
       "kind": "PACKAGE",
       "title": "地图与战场视觉代理、动画、LOD（BATTLE）",
       "module_ids": [
-        "VIS"
+        "VIS",
+        "BASE"
       ],
       "depends_on": [
         "GATE-P1",
@@ -1111,7 +1114,8 @@
       "acceptance": "动画/权威窗口同步，LOD/蒙皮性能。",
       "approval_required": false,
       "spec_paths": [
-        "docs/systems/game/presentation/visuals/README.md"
+        "docs/systems/game/presentation/visuals/README.md",
+        "docs/systems/game/content/base/README.md"
       ],
       "candidate_test_ids": [
         "T-VIS-01",
@@ -1193,7 +1197,11 @@
       "kind": "PACKAGE",
       "title": "混合战场端到端集成与性能",
       "module_ids": [
-        "TEST"
+        "TEST",
+        "BOOT",
+        "APP",
+        "INF-ENGINE",
+        "CI"
       ],
       "depends_on": [
         "P2-MIS-RT-BATTLE",
@@ -1211,7 +1219,11 @@
       "acceptance": "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
       "approval_required": false,
       "spec_paths": [
-        "docs/systems/game/tests/README.md"
+        "docs/systems/game/tests/README.md",
+        "docs/systems/game/bootstrap/README.md",
+        "docs/systems/game/application/README.md",
+        "docs/systems/game/infrastructure/engine/README.md",
+        "docs/systems/ci/README.md"
       ],
       "candidate_test_ids": [
         "T-TEST-01",

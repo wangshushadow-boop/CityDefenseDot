@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "P2-RULES-FIELD-001",
+  "kind": "EXECUTION",
+  "parent": "P2-RULES-FIELD",
+  "stage": "P2",
+  "module_id": "RULES",
+  "title": "Mission 规则、目标与玩法组合（FIELD）",
+  "spec": "docs/systems/game/mission/rules/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-MIS-RT-BATTLE",
+    "P2-FORM",
+    "P2-COM"
+  ],
+  "requirements": [
+    "BAT-01",
+    "BAT-04",
+    "MIS-01",
+    "MIS-02",
+    "MOD-03",
+    "MOD-04",
+    "NET-02",
+    "SGE-02"
+  ],
+  "acceptance_test_ids": [
+    "T-RULES-01",
+    "T-RULES-02",
+    "T-RULES-03",
+    "T-RULES-04",
+    "T-RULES-05"
+  ],
+  "allowed_paths": [
+    "game/mission/rules/",
+    "game/tests/p2/rules/",
+    "development/reports/tasks/P2-RULES-FIELD-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "野战规则、目标、撤退、结束、击倒处理；保留可组合模式接口。 合法部署、运行、目标及终局与退场",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "真实野战胜败、撤退、增援和模式隔离；其他规则在 P4–P6。",
+    "合法部署、运行、目标及终局与退场"
+  ],
+  "status": "PLANNED"
+}

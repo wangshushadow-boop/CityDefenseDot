@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "P2-INPUT-001",
+  "kind": "EXECUTION",
+  "parent": "P2-INPUT",
+  "stage": "P2",
+  "module_id": "INPUT",
+  "title": "输入设备、控制映射与玩家命令",
+  "spec": "docs/systems/game/presentation/input/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM",
+    "P2-FORM"
+  ],
+  "requirements": [
+    "ACC-01",
+    "BAI-01",
+    "COM-05",
+    "NET-04",
+    "UX-01"
+  ],
+  "acceptance_test_ids": [
+    "T-INPUT-01",
+    "T-INPUT-02",
+    "T-INPUT-03"
+  ],
+  "allowed_paths": [
+    "game/presentation/input/",
+    "game/tests/p2/input/",
+    "development/reports/tasks/P2-INPUT-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "输入映射、移动/视角/攻击/格挡/指挥与手柄。 映射设备输入、控制修订和确认回执",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "玩家/AI 意图同语义、权限、重映射。",
+    "映射设备输入、控制修订和确认回执"
+  ],
+  "status": "PLANNED"
+}

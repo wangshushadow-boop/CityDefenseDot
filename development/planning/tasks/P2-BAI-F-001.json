@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-BAI-F-001",
+  "kind": "EXECUTION",
+  "parent": "P2-BAI-F",
+  "stage": "P2",
+  "module_id": "BAI-F",
+  "title": "L2 编队 AI：执行战术任务",
+  "spec": "docs/systems/game/mission/ai/formation/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-BAI"
+  ],
+  "requirements": [
+    "BAI-01",
+    "BAI-02",
+    "BAI-04"
+  ],
+  "acceptance_test_ids": [
+    "T-BAI-F-01",
+    "T-BAI-F-02",
+    "T-BAI-F-03"
+  ],
+  "allowed_paths": [
+    "game/mission/ai/formation/",
+    "game/tests/p2/formation_ai/",
+    "development/reports/tasks/P2-BAI-F-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "编队行为、推进/防守/射击/冲锋/撤退/重组，输出目标而不写执行状态。 通过 FORM 合法命令执行任务与反馈",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "保持与失效命令、队形与战术约束。",
+    "通过 FORM 合法命令执行任务与反馈"
+  ],
+  "status": "PLANNED"
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-VIS-BATTLE-002",
+  "kind": "EXECUTION",
+  "parent": "P2-VIS-BATTLE",
+  "stage": "P2",
+  "module_id": "BASE",
+  "title": "野战临时模型与授权归档",
+  "spec": "docs/systems/game/content/base/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM",
+    "P2-MOV"
+  ],
+  "requirements": [
+    "BAI-06",
+    "COM-05",
+    "VIS-01"
+  ],
+  "acceptance_test_ids": [
+    "T-VIS-01",
+    "T-VIS-03"
+  ],
+  "allowed_paths": [
+    "game/content/base/field/",
+    "game/tests/p2/field_assets/",
+    "development/reports/tasks/P2-VIS-BATTLE-002.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "视觉代理、骨骼/动画、动作标记、装备/LOD，真实战斗与地图基础。 临时 GLB 保留来源、声明和许可，独立资源导入和引用。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "动画/权威窗口同步，LOD/蒙皮性能。",
+    "临时 GLB 保留来源、声明和许可，独立资源导入和引用。"
+  ],
+  "status": "PLANNED"
+}

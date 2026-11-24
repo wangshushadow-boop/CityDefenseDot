@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-001",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "TEST",
+  "title": "最终混合野战与性能验收",
+  "spec": "docs/systems/game/tests/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-RESULTS",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I",
+    "P2-VIS-BATTLE",
+    "P2-AUD-BATTLE",
+    "P2-CAM",
+    "P2-UI-BATTLE",
+    "P2-FIELD-INTEGRATION-002",
+    "P2-FIELD-INTEGRATION-003",
+    "P2-FIELD-INTEGRATION-004",
+    "P2-FIELD-INTEGRATION-005"
+  ],
+  "requirements": [
+    "BAI-06",
+    "BAT-03",
+    "NET-06",
+    "SAV-02"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01",
+    "T-TEST-02",
+    "T-TEST-03",
+    "T-TEST-04"
+  ],
+  "allowed_paths": [
+    "game/tests/p2/field/",
+    "test_scenarios/p2/field/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "真实 500/1000 混合野战、真实动作/AI/导航/动画、玩家命令与结果；P2 后续任务完整收口。 GDD §19.4 和 AT-04 的真实窗口、完整动画/AI、玩家切换、胜负及固定步开销；另验 1000 人和 AT-05 战场分波。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
+    "GDD §19.4 和 AT-04 的真实窗口、完整动画/AI、玩家切换、胜负及固定步开销；另验 1000 人和 AT-05 战场分波。"
+  ],
+  "status": "PLANNED"
+}

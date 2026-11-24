@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "id": "P2-BAI-001",
+  "kind": "EXECUTION",
+  "parent": "P2-BAI",
+  "stage": "P2",
+  "module_id": "BAI",
+  "title": "战场 AI 共同基础、感知与调度",
+  "spec": "docs/systems/game/mission/ai/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-FORM",
+    "P2-MOV",
+    "P2-COM"
+  ],
+  "requirements": [
+    "BAI-01",
+    "BAI-05",
+    "BAI-06",
+    "BAT-05"
+  ],
+  "acceptance_test_ids": [
+    "T-BAI-01",
+    "T-BAI-02",
+    "T-BAI-03",
+    "T-BAI-04"
+  ],
+  "allowed_paths": [
+    "game/mission/ai/",
+    "game/tests/p2/ai/",
+    "development/reports/tasks/P2-BAI-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/mission/ai/formation/",
+    "game/mission/ai/formation/behaviors/",
+    "game/mission/ai/formation/controller/",
+    "game/mission/ai/formation/evaluation/",
+    "game/mission/ai/individual/",
+    "game/mission/ai/individual/behaviors/",
+    "game/mission/ai/individual/controller/",
+    "game/mission/ai/individual/decision/",
+    "game/mission/ai/individual/roles/",
+    "game/mission/ai/individual/targeting/",
+    "game/mission/ai/tactical/",
+    "game/mission/ai/tactical/commander/",
+    "game/mission/ai/tactical/evaluation/",
+    "game/mission/ai/tactical/planning/",
+    "game/mission/ai/tactical/strategies/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "战场共同感知、快照/黑板、调度、优先级与预算；排除 tactical/formation/individual 独立实现。 感知快照、预算和过期决策处理",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "可见性、旧意图拒绝、scope 生命周期、分层调度与性能。",
+    "感知快照、预算和过期决策处理"
+  ],
+  "status": "PLANNED"
+}

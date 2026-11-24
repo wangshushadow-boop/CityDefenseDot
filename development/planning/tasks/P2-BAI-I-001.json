@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "P2-BAI-I-001",
+  "kind": "EXECUTION",
+  "parent": "P2-BAI-I",
+  "stage": "P2",
+  "module_id": "BAI-I",
+  "title": "L3 个体 AI：士兵感知、目标与动作意图",
+  "spec": "docs/systems/game/mission/ai/individual/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-BAI"
+  ],
+  "requirements": [
+    "BAI-03",
+    "BAI-05",
+    "BAI-06",
+    "COM-05"
+  ],
+  "acceptance_test_ids": [
+    "T-BAI-I-01",
+    "T-BAI-I-02",
+    "T-BAI-I-03",
+    "T-BAI-I-04"
+  ],
+  "allowed_paths": [
+    "game/mission/ai/individual/",
+    "game/tests/p2/individual/",
+    "development/reports/tasks/P2-BAI-I-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "个体感知、FSM/Utility、目标、近战/远程/骑兵/骑射、紧急反应。 通过 COM、MOV 合法意图控制不同游戏兵种",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "四兵种、有限感知、目标锁定、命令与实际动作接口。",
+    "通过 COM、MOV 合法意图控制不同游戏兵种"
+  ],
+  "status": "PLANNED"
+}

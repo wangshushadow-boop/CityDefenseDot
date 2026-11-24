@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "P2-BAI-T-001",
+  "kind": "EXECUTION",
+  "parent": "P2-BAI-T",
+  "stage": "P2",
+  "module_id": "BAI-T",
+  "title": "L1 战术 AI：全军计划",
+  "spec": "docs/systems/game/mission/ai/tactical/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-BAI"
+  ],
+  "requirements": [
+    "BAI-01",
+    "BAI-04"
+  ],
+  "acceptance_test_ids": [
+    "T-BAI-T-01",
+    "T-BAI-T-02",
+    "T-BAI-T-03"
+  ],
+  "allowed_paths": [
+    "game/mission/ai/tactical/",
+    "game/tests/p2/tactical/",
+    "development/reports/tasks/P2-BAI-T-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "全军战术计划、候选评分、阶段、编队任务与回退。 按公共任务与预算向下游提交游戏内战术任务",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "地形/兵力/目标与可达性、退却改计划、命令授权。",
+    "按公共任务与预算向下游提交游戏内战术任务"
+  ],
+  "status": "PLANNED"
+}

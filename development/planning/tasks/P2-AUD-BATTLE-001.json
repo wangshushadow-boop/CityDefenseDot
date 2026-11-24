@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "P2-AUD-BATTLE-001",
+  "kind": "EXECUTION",
+  "parent": "P2-AUD-BATTLE",
+  "stage": "P2",
+  "module_id": "AUD",
+  "title": "音频、战斗语音与音乐（BATTLE）",
+  "spec": "docs/systems/game/presentation/audio/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM",
+    "P2-FORM"
+  ],
+  "requirements": [
+    "ACC-01",
+    "AUD-01",
+    "BAT-05"
+  ],
+  "acceptance_test_ids": [
+    "T-AUD-01",
+    "T-AUD-02",
+    "T-AUD-03"
+  ],
+  "allowed_paths": [
+    "game/presentation/audio/",
+    "game/tests/p2/audio/",
+    "development/reports/tasks/P2-AUD-BATTLE-001.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "命令、命中、音源预算、混音和战斗音乐。 消费已确认事件，音源池与优先级",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "声音与权威事件一致、并发预算及可访问性。",
+    "消费已确认事件，音源池与优先级"
+  ],
+  "status": "PLANNED"
+}

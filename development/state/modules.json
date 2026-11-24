@@ -5,7 +5,8 @@
       "status": "PARTIAL",
       "work_package_ids": [
         "P1-BOOT",
-        "P6-NET-INTEGRATION"
+        "P6-NET-INTEGRATION",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-BOOT-01",
@@ -37,7 +38,8 @@
       "status": "VERIFIED",
       "work_package_ids": [
         "P0-CONTRACTS",
-        "P1-CON"
+        "P1-CON",
+        "P2-MIS-RT-BATTLE"
       ],
       "verified_test_ids": [
         "T-CON-01",
@@ -59,7 +61,8 @@
         "P1-APP-CORE",
         "P3-APP-CAMPAIGN",
         "P4-SOCIETY-INTEGRATION",
-        "P5-SINGLE-INTEGRATION"
+        "P5-SINGLE-INTEGRATION",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-APP-01",
@@ -461,7 +464,8 @@
         "P0-BATTLE",
         "P0-NAV",
         "P1-INF-ENGINE-PORTS",
-        "P7-POLISH"
+        "P7-POLISH",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-INF-ENGINE-01",
@@ -519,7 +523,8 @@
       "work_package_ids": [
         "P0-CONTENT",
         "P5-BASE-INITIAL",
-        "P7-BASE-FULL"
+        "P7-BASE-FULL",
+        "P2-VIS-BATTLE"
       ],
       "verified_test_ids": [],
       "evidence": []
@@ -616,7 +621,8 @@
       "work_package_ids": [
         "P1-CI-CORE",
         "P6-NET-INTEGRATION",
-        "P7-CI-RELEASE"
+        "P7-CI-RELEASE",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-CI-01",

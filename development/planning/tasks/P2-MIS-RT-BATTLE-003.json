@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-MIS-RT-BATTLE-003",
+  "kind": "EXECUTION",
+  "parent": "P2-MIS-RT-BATTLE",
+  "stage": "P2",
+  "module_id": "CON",
+  "title": "按已批准的决定实现野战阵营归属校验",
+  "spec": "docs/systems/game/contracts/README.md",
+  "depends_on": [
+    "GATE-P1"
+  ],
+  "requirements": [
+    "BAT-01",
+    "BAT-02",
+    "BAT-05",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-01",
+    "T-MIS-RT-02"
+  ],
+  "allowed_paths": [
+    "game/contracts/field_sources.gd",
+    "game/contracts/field_sources.gd.uid",
+    "game/tests/p2/field_sources/",
+    "development/reports/tasks/P2-MIS-RT-BATTLE-003.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "落实部署、波次、增援、规则 tick 相位、实体生命周期。 需先签核 ADR-014，再按批准方案校验新野战输入并回归原 v1。若选择新版本则按签核范围重新细化白名单。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "战场部署/增援及 generation、旧 scope、结果边界测试。",
+    "需先签核 ADR-014，再按批准方案校验新野战输入并回归原 v1。若选择新版本则按签核范围重新细化白名单。"
+  ],
+  "status": "PLANNED"
+}
