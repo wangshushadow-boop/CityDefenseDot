@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="NavigationMesh" id="Field"]
+vertices = PackedVector3Array(-100,0,-90, -100,0,90, 100,0,90, 100,0,-90)
+polygons = [PackedInt32Array(0,1,2,3)]
+
+[node name="Field" type="Node3D"]
+
+[node name="Region" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("Field")

@@ -11,6 +11,8 @@ var active_sources := 0
 var next_index := 0
 var reserved_count := 0
 var _slot_boundaries := PackedInt64Array()
+var _row_view: Variant
+var _spawned_view: Variant
 
 func _init(sources: Array = []) -> void:
 	# EncounterSpec already guarantees disjoint half-open ranges.
@@ -34,6 +36,8 @@ func fork():
 	copy.next_index = next_index
 	copy.reserved_count = reserved_count
 	copy._slot_boundaries = _slot_boundaries
+	copy._row_view = _row_view
+	copy._spawned_view = _spawned_view
 	return copy
 
 static func freeze(value: Variant) -> Variant:
@@ -79,8 +83,10 @@ func allocate(slot: Variant, components: Dictionary, battle_limit: int) -> Dicti
 	var handle := {"index":index,"generation":generations[index]}
 	handle.make_read_only()
 	occupied[index] = freeze({"handle":handle,"source_slot":slot,"components":components})
+	_row_view = null
 	if slot != null:
 		spawned[slot] = true
+		_spawned_view = null
 		active_sources += 1
 	return R.ok(handle)
 
@@ -97,20 +103,29 @@ func remove(scope: String, handle: Dictionary, current: String) -> Dictionary:
 	if checked.value.source_slot != null:
 		active_sources -= 1
 	occupied.erase(handle.index)
+	_row_view = null
 	if handle.generation < V.MAX_U32:
 		generations[handle.index] += 1
 		free_indices.append(handle.index)
 	return R.ok()
 
 func rows() -> Array:
+	if _row_view != null:
+		return _row_view
 	var result := []
 	var keys := occupied.keys()
 	keys.sort()
 	for key in keys:
 		result.append(occupied[key])
+	result.make_read_only()
+	_row_view = result
 	return result
 
 func spawned_slots() -> Array:
+	if _spawned_view != null:
+		return _spawned_view
 	var keys := spawned.keys()
 	keys.sort()
+	keys.make_read_only()
+	_spawned_view = keys
 	return keys
