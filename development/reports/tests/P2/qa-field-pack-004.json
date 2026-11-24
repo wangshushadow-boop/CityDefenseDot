@@ -1,0 +1,258 @@
+{
+  "task": "P2-VIS-BATTLE-004",
+  "candidate": "79832d52ea63b91e2f9c8f604d1bfdf835a7a2c1",
+  "runner": "independent QA",
+  "environment": "Windows x64 / Godot 4.7.2 Standard ed1daf0bf / headless unless specified; deterministic fixtures",
+  "results": [
+    {
+      "test": "independent cold build #1 including GUI",
+      "command": "python -B .worktrees/p2-field_pack/ci/build.py --godot GODOT --out out/p2-qa/field-pack/cold",
+      "exit": 1,
+      "status": "FAIL",
+      "detail": "test_gates.py and dependencies PASS, 15/15 Godot P1 modules PASS, client/server exported, client stamp read. P1 GUI smoke exited 3221225477 (0xC0000005) after Vulkan device at startup; cold tool's temporary outputs removed."
+    },
+    {
+      "test": "independent bone pose and raw asset check client",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-stable1\\79832d52ea63-de3e527afcc9\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\tmp_8b5hghc\\godot.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\mesh_pose.gd"
+      ],
+      "exit": 1,
+      "status": "FAIL",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nSCRIPT ERROR: Parse Error: Cannot infer the type of \"hash_ok\" variable because the value doesn't have a set type.\n   at: GDScript::reload (D:/work/game/recollection/out/p2-qa/field-pack/mesh_pose.gd:30)\nERROR: Failed to load script \"D:/work/game/recollection/out/p2-qa/field-pack/mesh_pose.gd\" with error \"Parse error\".\n   at: load (modules/gdscript/gdscript_resource_format.cpp:46)\n",
+      "test_kind": "QA probe preparation",
+      "detail": "A QA probe variable needed explicit bool; a corrected probe immediately followed and ran on both targets."
+    },
+    {
+      "test": "independent bone pose and raw asset check server",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-stable1\\79832d52ea63-de3e527afcc9\\server.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\tmp8_3kdzcu\\godot.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\mesh_pose.gd"
+      ],
+      "exit": 1,
+      "status": "FAIL",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nSCRIPT ERROR: Parse Error: Cannot infer the type of \"hash_ok\" variable because the value doesn't have a set type.\n   at: GDScript::reload (D:/work/game/recollection/out/p2-qa/field-pack/mesh_pose.gd:30)\nERROR: Failed to load script \"D:/work/game/recollection/out/p2-qa/field-pack/mesh_pose.gd\" with error \"Parse error\".\n   at: load (modules/gdscript/gdscript_resource_format.cpp:46)\n",
+      "test_kind": "QA probe preparation",
+      "detail": "A QA probe variable needed explicit bool; a corrected probe immediately followed and ran on both targets."
+    },
+    {
+      "test": "independent bone pose and raw asset check client",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-stable1\\79832d52ea63-de3e527afcc9\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\tmpijumkpun\\godot.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\mesh_pose.gd"
+      ],
+      "exit": 0,
+      "status": "PASS",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nMODEL general bones=22 clips=3 moved=true hash_ok=true\nMODEL spear_soldier bones=22 clips=3 moved=true hash_ok=true\nMODEL crossbowman bones=22 clips=3 moved=true hash_ok=true\nMODEL horse bones=50 clips=26 moved=true hash_ok=true\nQA_COLD_MODELS errors=0 credits_sha=fca7c340a14753051d4c2d961803317fb465ede07e7066b68e2746f4129517ec\n"
+    },
+    {
+      "test": "independent bone pose and raw asset check server",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-stable1\\79832d52ea63-de3e527afcc9\\server.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\tmpa8kgvwdq\\godot.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\mesh_pose.gd"
+      ],
+      "exit": 0,
+      "status": "PASS",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nMODEL general bones=22 clips=3 moved=true hash_ok=true\nMODEL spear_soldier bones=22 clips=3 moved=true hash_ok=true\nMODEL crossbowman bones=22 clips=3 moved=true hash_ok=true\nMODEL horse bones=50 clips=26 moved=true hash_ok=true\nQA_COLD_MODELS errors=0 credits_sha=fca7c340a14753051d4c2d961803317fb465ede07e7066b68e2746f4129517ec\n"
+    },
+    {
+      "test": "Independent byte comparison of two baseline cold builds plus every ZIP entry vs Git",
+      "status": "PASS",
+      "git_commit": "79832d52ea63b91e2f9c8f604d1bfdf835a7a2c1",
+      "compared": [
+        "D:\\work\\game\\recollection\\out\\p2-field-stable1\\79832d52ea63-de3e527afcc9",
+        "D:\\work\\game\\recollection\\out\\p2-field-stable2\\79832d52ea63-a3bcf25d6124"
+      ],
+      "matches_reported_artifact_sha256": {
+        "client.pck": [
+          "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+          "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee"
+        ],
+        "server.pck": [
+          "f70aca5ade220a7852261d131b849feff705c9a377be921857dba0e6c7526d9d",
+          "f70aca5ade220a7852261d131b849feff705c9a377be921857dba0e6c7526d9d"
+        ],
+        "base.zip": [
+          "e9216f7513a203ed9246780292efbc51a38afb005a05375e819e2fdd33c9df43",
+          "e9216f7513a203ed9246780292efbc51a38afb005a05375e819e2fdd33c9df43"
+        ]
+      },
+      "verified_zip_entries_against_git": 13,
+      "all_field_compiler_hashes": {
+        "source": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+        "client": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+        "server": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+        "zip": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1"
+      },
+      "base_protocol": 1
+    },
+    {
+      "test": "Independent cold rebuild #2, two other cold builds, every raw ZIP entry against Git",
+      "command": "python -B .worktrees/p2-field_pack/ci/build.py --godot GODOT --out out/p2-qa/field-pack/rebuild",
+      "exit": 0,
+      "p1": [
+        "application",
+        "bootstrap",
+        "campaign",
+        "content",
+        "contracts",
+        "core",
+        "definitions",
+        "engine",
+        "harness",
+        "inventory",
+        "mission",
+        "persistence",
+        "ports",
+        "rules",
+        "telemetry"
+      ],
+      "status": "PASS",
+      "git_commit": "79832d52ea63b91e2f9c8f604d1bfdf835a7a2c1",
+      "compared": [
+        "D:\\work\\game\\recollection\\out\\p2-field-stable1\\79832d52ea63-de3e527afcc9",
+        "D:\\work\\game\\recollection\\out\\p2-field-stable2\\79832d52ea63-a3bcf25d6124",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\rebuild\\79832d52ea63-e611e3499d34"
+      ],
+      "matches_reported_artifact_sha256": {
+        "client.pck": [
+          "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+          "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+          "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee"
+        ],
+        "server.pck": [
+          "f70aca5ade220a7852261d131b849feff705c9a377be921857dba0e6c7526d9d",
+          "f70aca5ade220a7852261d131b849feff705c9a377be921857dba0e6c7526d9d",
+          "f70aca5ade220a7852261d131b849feff705c9a377be921857dba0e6c7526d9d"
+        ],
+        "base.zip": [
+          "e9216f7513a203ed9246780292efbc51a38afb005a05375e819e2fdd33c9df43",
+          "e9216f7513a203ed9246780292efbc51a38afb005a05375e819e2fdd33c9df43",
+          "e9216f7513a203ed9246780292efbc51a38afb005a05375e819e2fdd33c9df43"
+        ]
+      },
+      "verified_zip_entries_against_git": 13,
+      "all_field_compiler_hashes": {
+        "source": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+        "client": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+        "server": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+        "zip": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1"
+      },
+      "base_protocol": 1
+    },
+    {
+      "test": "independent bone pose and raw asset check client",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\rebuild\\79832d52ea63-e611e3499d34\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\tmp7rrgh7h_\\godot.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\mesh_pose.gd"
+      ],
+      "exit": 0,
+      "status": "PASS",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nMODEL general bones=22 clips=3 moved=true hash_ok=true\nMODEL spear_soldier bones=22 clips=3 moved=true hash_ok=true\nMODEL crossbowman bones=22 clips=3 moved=true hash_ok=true\nMODEL horse bones=50 clips=26 moved=true hash_ok=true\nQA_COLD_MODELS errors=0 credits_sha=fca7c340a14753051d4c2d961803317fb465ede07e7066b68e2746f4129517ec\n"
+    },
+    {
+      "test": "independent bone pose and raw asset check server",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\rebuild\\79832d52ea63-e611e3499d34\\server.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\tmpo9n9prey\\godot.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\mesh_pose.gd"
+      ],
+      "exit": 0,
+      "status": "PASS",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nMODEL general bones=22 clips=3 moved=true hash_ok=true\nMODEL spear_soldier bones=22 clips=3 moved=true hash_ok=true\nMODEL crossbowman bones=22 clips=3 moved=true hash_ok=true\nMODEL horse bones=50 clips=26 moved=true hash_ok=true\nQA_COLD_MODELS errors=0 credits_sha=fca7c340a14753051d4c2d961803317fb465ede07e7066b68e2746f4129517ec\n"
+    }
+  ],
+  "not_run": [
+    "AT-04",
+    "AT-05",
+    "8 GiB reference GPU",
+    "independent standalone Windows EXE",
+    "Linux native clients"
+  ],
+  "status": "PASS with initial GUI startup failure recorded",
+  "initial_gui_exit": "0xc0000005 at Vulkan startup in first independent cold build, no cause isolated",
+  "independent_cold_manifest": "D:\\work\\game\\recollection\\out\\p2-qa\\field-pack\\rebuild\\79832d52ea63-e611e3499d34\\manifest.json",
+  "client_probe": {
+    "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+    "display": "Windows",
+    "event": "stopped",
+    "exit_code": 0,
+    "failed_module": "",
+    "mission_tick": 3,
+    "presentation_loaded": true,
+    "profile": "client",
+    "protocol_version": 1,
+    "release_order": [
+      "session",
+      "persistence",
+      "engine",
+      "core",
+      "content",
+      "compiler",
+      "telemetry"
+    ],
+    "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+  },
+  "server_probe": {
+    "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+    "display": "headless",
+    "event": "stopped",
+    "exit_code": 0,
+    "failed_module": "",
+    "mission_tick": 3,
+    "presentation_loaded": false,
+    "profile": "headless",
+    "protocol_version": 1,
+    "release_order": [
+      "session",
+      "persistence",
+      "engine",
+      "core",
+      "content",
+      "compiler",
+      "telemetry"
+    ],
+    "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+  },
+  "build_targets_sha256": {
+    "client.pck": "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+    "server.pck": "f70aca5ade220a7852261d131b849feff705c9a377be921857dba0e6c7526d9d",
+    "base.zip": "e9216f7513a203ed9246780292efbc51a38afb005a05375e819e2fdd33c9df43",
+    "domain-tests.json": "85c2dd3fde63dde980d9c4f1e0de7d2ccfa995873bb1729a14caa60368cbd759"
+  }
+}

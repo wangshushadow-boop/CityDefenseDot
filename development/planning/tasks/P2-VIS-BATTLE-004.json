@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "P2-VIS-BATTLE-004",
+  "kind": "EXECUTION",
+  "parent": "P2-VIS-BATTLE",
+  "stage": "P2",
+  "module_id": "CI",
+  "title": "冷交付包保留完整可验证的野战素材和署名",
+  "spec": "docs/systems/ci/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM",
+    "P2-MOV",
+    "P2-VIS-BATTLE-002"
+  ],
+  "requirements": [
+    "VIS-01"
+  ],
+  "acceptance_test_ids": [
+    "T-CI-03",
+    "T-VIS-01"
+  ],
+  "allowed_paths": [
+    "ci/",
+    "game/tests/p2/field_pack/",
+    "development/reports/tasks/P2-VIS-BATTLE-004.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "152e1f43decd11b17b6f3aacf2d027569e4cb8b4",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field_pack",
+  "scope": "修复已在 152e1f4 的发行资源 PCK 复现的问题。客户端/专服/原始 ZIP 提供被内容编译器验签的真实 field 包字节（含4个GLB、署名许可），独立干净目录实测 PCK 冷载与源码同摘要；旧 base 单独加载和发布检查仍有效。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "重现出错的原样 content paths 与 15 个 P1 套件。客户端/专服 PCK 与原始 ZIP 的 field 摘要均与源码相同。模型仍可冷实例化。"
+  ],
+  "status": "DONE"
+}

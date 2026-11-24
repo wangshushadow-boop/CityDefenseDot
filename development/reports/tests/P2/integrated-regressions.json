@@ -1,0 +1,160 @@
+{
+  "sha": "847890eed355815e60e21be2a6817a9dc11877b9",
+  "engine": "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+  "results": [
+    {
+      "test": "import",
+      "script": null,
+      "exit": 0,
+      "ok": true,
+      "log": "导入场景中...\u001b[39m\u001b[0m\n[   1% ] \u001b[90m\u001b[1mimport\u001b[22m | 执行自定义脚本...\u001b[39m\u001b[0m\n[  99% ] \u001b[90m\u001b[1mimport\u001b[22m | 保存中...\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mimport\u001b[22m\n\u001b[0m\n[  80% ] \u001b[90m\u001b[1mreimport\u001b[22m | 正在结束资产导入……\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mreimport\u001b[22m\n\u001b[0m\n[   0% ] \u001b[90m\u001b[1mreimport\u001b[22m | Started 正在导入或重新导入资产 (4 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mreimport\u001b[22m | 正在执行重新导入的后置操作……\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mreimport\u001b[22m\n\u001b[0m\n[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Started 正在加载编辑器 (5 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | 正在加载编辑器布局……\u001b[39m\u001b[0m\n[  16% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | 正在加载停靠面板……\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mloading_editor_layout\u001b[22m\n\u001b[0m\n"
+    },
+    {
+      "test": "ai",
+      "script": "res://tests/p2/ai/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0\nT-BAI-04 threaded_late_result_rejected=true\nT-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true\nBAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]\nBAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=3123 ai_p95_us=3732 ai_p99_us=4542 combined_p95_us=6819 cpu_budget=PASS\nBAI_MEAN_US people=500 publish=203.883333333333 schedule=374.5 decisions=2625.54166666667 los_inclusive=836.716666666667 cache_hits=130 scouts=196 group_contacts=396 mov_begin=613.416666666667 mov_step=1556.125 project_mov=64.325 com_fork=43.55 com_step=391.475 commit_and_publish=62.6333333333333\nBAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5911 ai_p95_us=6574 ai_p99_us=8002 combined_p95_us=12675 cpu_budget=PASS\nBAI_MEAN_US people=1000 publish=381.525 schedule=603.508333333333 decisions=4991.14166666667 los_inclusive=1551.09166666667 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1145.03333333333 mov_step=3023.14166666667 project_mov=132.075 com_fork=79.6333333333333 com_step=761.75 commit_and_publish=109.816666666667\nFIELD_AI errors=0\n"
+    },
+    {
+      "test": "audio",
+      "script": "res://tests/p2/audio/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-AUD-01-AUTO PASS actors=500 confirmed_hits=250 budget=12 peak=10 dropped=185 voice_pcm_frames=12288 pcm_peak=0.08142338693142 human_intelligibility=NOT_RUN\nT-AUD-02 PASS silent_victory_caption=audio.defeat\nT-AUD-03 PASS remaining_audio_buses=0\nP2-AUD-BATTLE-001 PASS errors=0\n"
+    },
+    {
+      "test": "camera",
+      "script": "res://tests/p2/camera/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nCAMERA_RESULT {\"cases\":{\"T-CAM-01\":{\"grazing_arm_m\":1.90859496593475,\"pass\":true,\"update_p95_us\":54,\"updates\":60},\"T-CAM-03\":{\"pass\":true}},\"checks\":94,\"failures\":0,\"queries\":76,\"stage\":\"main\"}\n"
+    },
+    {
+      "test": "combat",
+      "script": "res://tests/p2/combat/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1\nCOM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea\nCOM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=196 max_us=1196\nCOM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=388 max_us=2439\nCOM field physics batches=44 queries=46\nP2-COM-002 PASS errors=0\n"
+    },
+    {
+      "test": "combat_batch",
+      "script": "res://tests/p2/combat_batch/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-BAI-003 PASS assertions=58 errors=0\n"
+    },
+    {
+      "test": "field_assets",
+      "script": "res://tests/p2/field_assets/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nFIELD_RIG general bones=22 meshes=12 moving=20\nFIELD_RIG spear_soldier bones=22 meshes=12 moving=19\nFIELD_RIG crossbowman bones=22 meshes=12 moving=19\nFIELD_RIG horse bones=50 meshes=1 moving=32\nFIELD_CONTENT hash=aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1\nP2-FIELD-ASSETS PASS failures=0\n"
+    },
+    {
+      "test": "field_eligibility",
+      "script": "res://tests/p2/field_eligibility/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-WAVE-ELIGIBILITY failures=0\n"
+    },
+    {
+      "test": "field_profile",
+      "script": "res://tests/p2/field_profile/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-FIELD-PROFILE PASS shadow=2048 renderer=forward_plus windows=true device_tts=false\n"
+    },
+    {
+      "test": "field_sources",
+      "script": "res://tests/p2/field_sources/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nFIELD_SOURCES checks=45 failures=0\n"
+    },
+    {
+      "test": "formation",
+      "script": "res://tests/p2/formation/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-FORM-GEOMETRY count=500 kinds=7 elapsed_us=230930\nP2-FORM-GEOMETRY count=1000 kinds=7 elapsed_us=530987\nP2-FORM-ROLLBACK exercised\nT-FORM-01 PASS\nT-FORM-02 PASS\nT-FORM-03-READ-MODEL PASS\nT-FORM-04-AUTHORITY PASS\nP2-FORM-002 PASS\nT-FORM-02-LAYOUT PASS\nP2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124\n"
+    },
+    {
+      "test": "formation_ai",
+      "script": "res://tests/p2/formation_ai/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3 priority at tick 9 Approach -> Hold\nT-BAI-F-01 PASS\nnavigation projections=25 survivors=2 center=(5.87243, 0.0, -7.980291)\nT-BAI-F-02 PASS\nL1 feedback ammo_depleted -> Adapt task=-9223371978956601831/0/1/15\nL1 feedback timeout -> Adapt task=-9223371977715087833/0/1/489\nT-BAI-F-03 PASS\nL2_ONE_FORMATION members=500 samples=20 p50_us=2314 p95_us=3039 effective_view_p95_us=164\nL2_ONE_FORMATION members=1000 samples=20 p50_us=4811 p95_us=5692 effective_view_p95_us=302\nP2-BAI-F-001 PASS assertions=4877 failures=0\n"
+    },
+    {
+      "test": "individual",
+      "script": "res://tests/p2/individual/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3_ROLE role=infantry weapon= starts=[1, 11, 21] hits=3 modes=[\"Melee\"]\nL3_ROLE role=archer weapon=bow starts=[1, 13] hits=2 modes=[\"Aim\", \"Approach\", \"Equip\"]\nL3_ROLE role=archer weapon=crossbow starts=[1, 21] hits=1 modes=[\"Aim\", \"Approach\"]\nL3_ROLE role=cavalry weapon= starts=[1, 23] hits=1 modes=[\"MountedStrike\", \"Disengage\"]\nL3_ROLE role=mounted_archer weapon=bow starts=[2, 14] hits=2 modes=[\"Equip\", \"MountedArchery\", \"Charge\"]\nL3_TRANSITION outgoing switch=3 old=cancel new_strike=true unavailable_ticks=0\nL3_TRANSITION outgoing switch=5 old=release new_strike=true unavailable_ticks=0\nL3_TRANSITION incoming switch=2 old=cancel new_strike=true unavailable_ticks=0\nL3_TRANSITION incoming switch=5 old=release new_strike=true unavailable_ticks=0\nL3_TRANSITION hidden switch=2 old=cancel new_strike=true unavailable_ticks=8\nL3_TRANSITION hidden switch=5 old=release new_strike=true unavailable_ticks=5\nL3_TRANSITION casualty switch=5 old=release new_strike=true unavailable_ticks=5\nL3_LOAD_DOMAINS_US movement_p95=3927 pose_read_and_dict_p95=1644 combat_inclusive_p95=10460\nL3_LOAD confirmed_COM_actions=3909 eligible_emergencies=113 real_MOV_displaced=true instrumented_workload_p95_us=27571\nT-BAI-I-04 humans=1000 additional_mounts=500 ticks=120 jobs=10120 successful_reactions=113 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=4089\nP2-BAI-I-001 PASS checks=910 errors=0 paths=446 los=20596 sweeps=151\n"
+    },
+    {
+      "test": "input",
+      "script": "res://tests/p2/input/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-INPUT-02 PASS\nT-INPUT-03 PASS\nT-INPUT-01-AUTOMATED PASS\nP2-INPUT-001 PASS checks=379 failures=0 physical_pads=0\n"
+    },
+    {
+      "test": "mission",
+      "script": "res://tests/p2/mission/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nWAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100\nP2-MISSION-FIELD PASS checks=1038 failures=0\nP2-MISSION-SOURCE PASS failures=0\n"
+    },
+    {
+      "test": "motion_batch",
+      "script": "res://tests/p2/motion_batch/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nMOV_STAGE_CHOKE arrived=48 ticks=861 downstream_rollbacks=5 divergent_frames=0\nMOV_BATCH people=500 moved=500 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=1295 packed_positions=52 packed_poses=118 stage=3223 direct_plus_scalar=3913 stage_read_commit=3350\nMOV_BATCH people=1000 moved=1000 samples=70 ticks=210 budget_peak=8 p95_us scalar_poses=2569 packed_positions=106 packed_poses=230 stage=7216 direct_plus_scalar=8168 stage_read_commit=7448\nP2-BAI-002 PASS checks=3359 failures=0\n"
+    },
+    {
+      "test": "move_intents",
+      "script": "res://tests/p2/move_intents/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nMOVE_JOLT wall_x=-0.50449436903 rider_v=4.50004577636719 braking_v=4.36672210693359\nMOVE_INTENT_LOAD n=500 moved=500 paths=500 peak=8 staged_intake_us=3938 simulate_p95_us=4581\nMOVE_INTENT_LOAD n=1000 moved=1000 paths=1000 peak=8 staged_intake_us=8114 simulate_p95_us=9608\nMOVE_NAV closed_x=0.0 restored_x=14.9899673461914 restricted_rider_x=-2.00036668777466\nMOVE_INTENTS checks=4541 failures=0\n"
+    },
+    {
+      "test": "movement",
+      "script": "res://tests/p2/movement/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-MOV-01 PASS links=3 reopen_close=true\nMOV_LOAD agents=500 corridors=20 ticks=5 max_per_tick=4 elapsed_us=4943 errors=0\nMOV_LOAD agents=1000 corridors=20 ticks=5 max_per_tick=4 elapsed_us=9405 errors=0\nMOV_BURST agents=500 distinct=500 ticks=125 peak_queued=24\nMOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24\nT-MOV-04 PASS shared_requests=1500 distinct_requests=1500\nMOV_FAILED_ACCESS tick1=8 attempts_by_tick2=16\nT-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327\nT-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true\nMOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2528\nMOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8\nMOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3199\nMOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8\nMOV_QUEUE_CHECKS errors=0 display=headless\n"
+    },
+    {
+      "test": "tactical",
+      "script": "res://tests/p2/tactical/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-BAI-T-01 deck=deck cavalry=lateral infantry=objective rider=harass first_stage_commit_us=852\nT-BAI-T-02 fallback=better phase=Retreat blocked_paths=hold\nT-BAI-T-03 player_order=hold0 stale_scope_rejected=true\nTACTICS_LOAD roster=500 own=250 decisions=20 assignments=200 terrain_queries=680 physics_los=2126 stage_commit_p50_us=2934 p95_us=3823 max_us=3963\nTACTICS_LOAD roster=1000 own=500 decisions=20 assignments=200 terrain_queries=692 physics_los=2139 stage_commit_p50_us=4652 p95_us=6727 max_us=7115\nFIELD_TACTICS errors=0 nav_queries=1576 physical_los=4593\n"
+    },
+    {
+      "test": "visuals",
+      "script": "res://tests/p2/visuals/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nVIS_FUNCTIONAL failures=0\n"
+    },
+    {
+      "test": "audio/recorded_voices.gd",
+      "script": "res://tests/p2/audio/recorded_voices.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nRECORDED_VOICE zh_CN pcm_frames=7680 peak=0.50477993488312\nRECORDED_VOICE en_US pcm_frames=7680 peak=0.71526229381561\nRECORDED_VOICES PASS samples=48 peak_sources=1 errors=0\n"
+    },
+    {
+      "test": "individual/move_integration.gd",
+      "script": "res://tests/p2/individual/move_integration.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3_MOV_INTEGRATION profile=foot PASS checks=344 errors=0 commands=6 unsampled_movement_ticks=55 final=(-10.958, 0.0, 8.0)\nL3_MOV_INTEGRATION profile=mounted PASS checks=957 errors=0 commands=12 unsampled_movement_ticks=122 final=(-10.80537, 0.0, 8.0)\n"
+    }
+  ]
+}

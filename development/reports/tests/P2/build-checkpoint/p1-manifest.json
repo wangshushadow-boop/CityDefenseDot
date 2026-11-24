@@ -1,0 +1,87 @@
+{
+  "git_commit": "152e1f43decd11b17b6f3aacf2d027569e4cb8b4",
+  "engine_version": "4.7.2.stable.official.ed1daf0bf",
+  "language": "GDScript",
+  "protocol_version": 1,
+  "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+  "channel": "development",
+  "artifacts": {
+    "client.pck": {
+      "size": 1843848,
+      "sha256": "c4e7936ecec0ed7bfbcbd917f779f81d296665739b0a731d67013e454afc9dc2"
+    },
+    "server.pck": {
+      "size": 1843848,
+      "sha256": "6a4b10a83f785d1a5bc488506156c669aaeccb05ce0f499a5d27303c242a5d57"
+    },
+    "base.zip": {
+      "size": 1251,
+      "sha256": "64af7f39bf393fe1e95efec4faf4482e2304563ca97f6b1537098efd77a8c5aa"
+    },
+    "domain-tests.json": {
+      "size": 5948,
+      "sha256": "e7d71bd00decdb3d7913231dbaa13e75c72a073736858751b01c4bf1540982d9"
+    }
+  },
+  "smokes": {
+    "client": {
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "Windows",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 3,
+      "presentation_loaded": true,
+      "profile": "client",
+      "protocol_version": 1,
+      "release_order": [
+        "session",
+        "persistence",
+        "engine",
+        "core",
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+    },
+    "server": {
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "headless",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 3,
+      "presentation_loaded": false,
+      "profile": "headless",
+      "protocol_version": 1,
+      "release_order": [
+        "session",
+        "persistence",
+        "engine",
+        "core",
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+    },
+    "base": {
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "headless",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 0,
+      "presentation_loaded": false,
+      "profile": "tool",
+      "protocol_version": 1,
+      "release_order": [
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": ""
+    }
+  }
+}

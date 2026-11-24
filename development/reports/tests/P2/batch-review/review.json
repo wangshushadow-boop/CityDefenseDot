@@ -1,0 +1,135 @@
+{
+  "role": "p2_batch_review",
+  "outcome": [
+    {
+      "task": "P2-BAI-T-001",
+      "first": "6d14d80",
+      "candidate": "8c33aed",
+      "status": "PASS",
+      "checks": [
+        "same-tick team int 0 vs String 0 from real BAI grants now distinct plan IDs",
+        "after true BAI admit revocation commit StaleVersion"
+      ],
+      "probes": [
+        "l1_ids.gd",
+        "admission.gd"
+      ],
+      "exit_codes": [
+        0,
+        0
+      ]
+    },
+    {
+      "task": "P2-VIS-BATTLE-004",
+      "candidate": "79832d5",
+      "status": "PASS",
+      "checks": [
+        "same-commit stable1/stable2 client.pck, server.pck, base.zip byte-for-byte equal",
+        "ZIP field entries equal Git working source",
+        "client/server independent cold load, four raw SHAs/credits and animated bones all valid"
+      ],
+      "probe": "check_pack.py",
+      "exit_code": 0
+    },
+    {
+      "task": "P2-BAI-I-001",
+      "status": "CHANGES_REQUIRED",
+      "checks": [
+        "archer begins melee at 1 m then target retreats to 8 m",
+        "tick 61 Aim with no action, COM Hold melee slot; 59 following ticks without legal resolution"
+      ],
+      "probe": "l3_fsm.gd",
+      "log": "l3-original.log",
+      "exit_code": 1
+    },
+    {
+      "task": "P2-BAI-I-002",
+      "candidate": "c75ea0c",
+      "status": "CHANGES_REQUIRED",
+      "checks": [
+        "revocation after stage ignored by commit: 0.056667 m",
+        "own Jolt layer 2 capsule blocks accepted direct input for 10 steps, movement 0 with reason scene"
+      ],
+      "probe": "move_commit.gd",
+      "log": "move-original.log",
+      "exit_code": 1
+    },
+    {
+      "task": "P2-BAI-I-001",
+      "candidate": "d2c578d",
+      "status": "PASS",
+      "review_probes": {
+        "l3_fsm": 0,
+        "outgoing-late": 0,
+        "incoming-early": 0,
+        "incoming-late": 0,
+        "lost-return": 0
+      },
+      "production_suite": {
+        "checks": 910,
+        "errors": 0,
+        "transitions": 7,
+        "log": "l3-fixed-suite.log"
+      }
+    },
+    {
+      "task": "P2-BAI-I-002",
+      "candidate": "f3976a0",
+      "status": "PASS",
+      "ports_blob": "3629c921f726c047520d7f9dd180a71da509fe6a",
+      "original_repro_exit": 0,
+      "grid_probe": "grid.gd",
+      "baseline": "c75ea0c",
+      "ticks": 150,
+      "compared_poses": 3600,
+      "rollbacks": 32,
+      "yield_actor_ticks": 188,
+      "reused_index_new_generation": true
+    },
+    {
+      "task": "P2-VIS-BATTLE-006",
+      "candidate": "cb39215",
+      "root_config": "fe301c6",
+      "status": "PASS",
+      "independent_live_window_boots": 6,
+      "failures": 0,
+      "evidence": "desktop-cold.json",
+      "windows_device_tts": false,
+      "renderer": "forward_plus",
+      "shadow_size": 2048
+    },
+    {
+      "task": "P2-VIS-BATTLE-005",
+      "candidate": "11c9ade",
+      "status": "PASS",
+      "checks": [
+        "both eSpeak NG 1.52.0 authored banks regenerate byte-for-byte",
+        "48 unique WAVs selected for en and zh via Voice bus in Godot",
+        "duplicate suppression, priority, mute, replacement, end-of-scope node and bus count",
+        "external script cold-reloads both language banks from PCK"
+      ],
+      "combined_config": "fe301c6",
+      "evidence": [
+        "voice-combined.log",
+        "voices-capture.log",
+        "voices-from-pack.log"
+      ],
+      "bus_frames": [
+        7680,
+        7680
+      ],
+      "max_overlapping_speech": 1,
+      "not_run": [
+        "human listening",
+        "physical speaker",
+        "non-Windows native speech",
+        "complete field scene"
+      ]
+    }
+  ],
+  "not_run": [
+    "whole live AT-04 and AT-05",
+    "independent release Windows EXE; task tests PCK",
+    "final L2 assessment assigned to another reviewer"
+  ]
+}

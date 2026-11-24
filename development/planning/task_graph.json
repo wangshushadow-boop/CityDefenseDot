@@ -1112,7 +1112,9 @@
       "module_ids": [
         "VIS",
         "BASE",
-        "BOOT"
+        "BOOT",
+        "CI",
+        "AUD"
       ],
       "depends_on": [
         "GATE-P1",
@@ -1125,7 +1127,9 @@
       "spec_paths": [
         "docs/systems/game/presentation/visuals/README.md",
         "docs/systems/game/content/base/README.md",
-        "docs/systems/game/bootstrap/README.md"
+        "docs/systems/game/bootstrap/README.md",
+        "docs/systems/ci/README.md",
+        "docs/systems/game/presentation/audio/README.md"
       ],
       "candidate_test_ids": [
         "T-VIS-01",

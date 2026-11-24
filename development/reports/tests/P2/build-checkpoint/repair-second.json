@@ -1,0 +1,101 @@
+{
+  "git_commit": "79832d52ea63b91e2f9c8f604d1bfdf835a7a2c1",
+  "engine_version": "4.7.2.stable.official.ed1daf0bf",
+  "language": "GDScript",
+  "protocol_version": 1,
+  "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+  "channel": "development",
+  "artifacts": {
+    "client.pck": {
+      "size": 7351444,
+      "sha256": "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee"
+    },
+    "server.pck": {
+      "size": 7351444,
+      "sha256": "f70aca5ade220a7852261d131b849feff705c9a377be921857dba0e6c7526d9d"
+    },
+    "base.zip": {
+      "size": 1402688,
+      "sha256": "e9216f7513a203ed9246780292efbc51a38afb005a05375e819e2fdd33c9df43"
+    },
+    "domain-tests.json": {
+      "size": 5945,
+      "sha256": "ed3c95be2c3a527f4a0967b6202fda643375e0b2029c368d63902c9413e952be"
+    }
+  },
+  "smokes": {
+    "client": {
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "Windows",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 3,
+      "presentation_loaded": true,
+      "profile": "client",
+      "protocol_version": 1,
+      "release_order": [
+        "session",
+        "persistence",
+        "engine",
+        "core",
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+    },
+    "server": {
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "headless",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 3,
+      "presentation_loaded": false,
+      "profile": "headless",
+      "protocol_version": 1,
+      "release_order": [
+        "session",
+        "persistence",
+        "engine",
+        "core",
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+    },
+    "base": {
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "headless",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 0,
+      "presentation_loaded": false,
+      "profile": "tool",
+      "protocol_version": 1,
+      "release_order": [
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": ""
+    }
+  },
+  "field": {
+    "content_hashes": {
+      "source": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+      "client": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+      "server": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1",
+      "zip": "aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1"
+    },
+    "models": [
+      "models/general.glb",
+      "models/spear_soldier.glb",
+      "models/crossbowman.glb",
+      "models/horse.glb"
+    ]
+  }
+}

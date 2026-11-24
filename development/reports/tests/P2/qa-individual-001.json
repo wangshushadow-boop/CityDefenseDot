@@ -1,0 +1,126 @@
+{
+  "task": "P2-BAI-I-001",
+  "candidate": "d2c578d68cda06bd2165d05fa38fc46b02c84f90",
+  "runner": "independent QA",
+  "environment": "Windows x64 / Godot 4.7.2 Standard ed1daf0bf / headless unless specified; deterministic fixtures",
+  "results": [
+    {
+      "test": "res://tests/p2/individual/run.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-individual\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmpo7e9oc0w\\engine.log",
+        "--script",
+        "res://tests/p2/individual/run.gd"
+      ],
+      "duration_s": 4.42,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3_ROLE role=infantry weapon= starts=[1, 11, 21] hits=3 modes=[\"Melee\"]\nL3_ROLE role=archer weapon=bow starts=[1, 13] hits=2 modes=[\"Aim\", \"Approach\", \"Equip\"]\nL3_ROLE role=archer weapon=crossbow starts=[1, 21] hits=1 modes=[\"Aim\", \"Approach\"]\nL3_ROLE role=cavalry weapon= starts=[1, 23] hits=1 modes=[\"MountedStrike\", \"Disengage\"]\nL3_ROLE role=mounted_archer weapon=bow starts=[2, 14] hits=2 modes=[\"Equip\", \"MountedArchery\", \"Charge\"]\nL3_LOAD_DOMAINS_US movement_p95=5501 pose_read_and_dict_p95=1773 combat_inclusive_p95=11068\nL3_LOAD confirmed_COM_actions=3717 eligible_emergencies=113 real_MOV_displaced=true instrumented_workload_p95_us=30740\nT-BAI-I-04 humans=1000 additional_mounts=500 ticks=120 jobs=10120 successful_reactions=113 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=4213\nP2-BAI-I-001 PASS checks=628 errors=0 paths=206 los=20344 sweeps=76",
+      "candidate": "f9764b08a926c25fc3e940bf7bdb91b31996cb6b"
+    },
+    {
+      "test": "pre-repair range transitions",
+      "status": "FAIL",
+      "exit": 1,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmp26fazm50\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmpqfdzyry9\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\transition.gd"
+      ],
+      "duration_s": 0.53,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_SWITCH 1 hold_fire=false equip=[[1, 0], [2, 1]] bow=true phases=[\"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\"]\nQA_SWITCH 2 hold_fire=false equip=[[1, 0]] bow=false phases=[\"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\"]\nQA_SWITCH 2 hold_fire=true equip=[[1, 0]] bow=false phases=[\"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\"]\nQA_SWITCH_RESULT checks=307 errors=2\n\nFAIL released obsolete attack and switched after range change\nFAIL released obsolete attack and switched after range change",
+      "candidate": "f9764b08a926c25fc3e940bf7bdb91b31996cb6b"
+    },
+    {
+      "test": "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\transition.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-individual\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmpg62iczsc\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\transition.gd"
+      ],
+      "duration_s": 0.44,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_SWITCH 1 hold_fire=false equip=[[1, 0], [2, 1]] bow=true phases=[\"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\"]\nQA_SWITCH 2 hold_fire=false equip=[[1, 0], [4, 1]] bow=true phases=[\"Ready\", \"Windup\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\"]\nQA_SWITCH 2 hold_fire=true equip=[[1, 0], [23, 1]] bow=true phases=[\"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\", \"Ready\", \"Windup\", \"Windup\", \"Windup\", \"Hold\", \"Active\", \"Active\", \"Recovery\", \"Recovery\", \"Recovery\", \"Ready\"]\nQA_SWITCH_RESULT checks=307 errors=0",
+      "candidate": "d2c578d68cda06bd2165d05fa38fc46b02c84f90"
+    },
+    {
+      "test": "res://tests/p2/individual/run.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-individual\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmptw0pmx4v\\engine.log",
+        "--script",
+        "res://tests/p2/individual/run.gd"
+      ],
+      "duration_s": 4.05,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3_ROLE role=infantry weapon= starts=[1, 11, 21] hits=3 modes=[\"Melee\"]\nL3_ROLE role=archer weapon=bow starts=[1, 13] hits=2 modes=[\"Aim\", \"Approach\", \"Equip\"]\nL3_ROLE role=archer weapon=crossbow starts=[1, 21] hits=1 modes=[\"Aim\", \"Approach\"]\nL3_ROLE role=cavalry weapon= starts=[1, 23] hits=1 modes=[\"MountedStrike\", \"Disengage\"]\nL3_ROLE role=mounted_archer weapon=bow starts=[2, 14] hits=2 modes=[\"Equip\", \"MountedArchery\", \"Charge\"]\nL3_TRANSITION outgoing switch=3 old=cancel new_strike=true unavailable_ticks=0\nL3_TRANSITION outgoing switch=5 old=release new_strike=true unavailable_ticks=0\nL3_TRANSITION incoming switch=2 old=cancel new_strike=true unavailable_ticks=0\nL3_TRANSITION incoming switch=5 old=release new_strike=true unavailable_ticks=0\nL3_TRANSITION hidden switch=2 old=cancel new_strike=true unavailable_ticks=8\nL3_TRANSITION hidden switch=5 old=release new_strike=true unavailable_ticks=5\nL3_TRANSITION casualty switch=5 old=release new_strike=true unavailable_ticks=5\nL3_LOAD_DOMAINS_US movement_p95=5093 pose_read_and_dict_p95=1582 combat_inclusive_p95=9887\nL3_LOAD confirmed_COM_actions=3909 eligible_emergencies=113 real_MOV_displaced=true instrumented_workload_p95_us=28571\nT-BAI-I-04 humans=1000 additional_mounts=500 ticks=120 jobs=10120 successful_reactions=113 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=3754\nP2-BAI-I-001 PASS checks=910 errors=0 paths=446 los=20596 sweeps=151",
+      "candidate": "d2c578d68cda06bd2165d05fa38fc46b02c84f90"
+    },
+    {
+      "test": "actual player/L3 movement parity",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmphav_p6mc\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmpxkq8b9l4\\engine.log",
+        "--script",
+        "res://tests/p2/individual/move_integration.gd"
+      ],
+      "duration_s": 0.55,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3_MOV_INTEGRATION profile=foot PASS checks=344 errors=0 commands=6 unsampled_movement_ticks=55 final=(-10.958, 0.0, 8.0)\nL3_MOV_INTEGRATION profile=mounted PASS checks=957 errors=0 commands=12 unsampled_movement_ticks=122 final=(-10.80537, 0.0, 8.0)",
+      "candidate": "d2c578d",
+      "movement_candidate": "c75ea0cb9ce5dfd99213ac8dce2d1eda91329008",
+      "detail": "Both actual MOV profile identifiers are foot and mounted; L3 roster role for the second is mounted_archer."
+    },
+    {
+      "test": "actual player/L3 movement parity",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmpjgefmk06\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\individual\\tmp25my_919\\engine.log",
+        "--script",
+        "res://tests/p2/individual/move_integration.gd"
+      ],
+      "duration_s": 0.53,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3_MOV_INTEGRATION profile=foot PASS checks=344 errors=0 commands=6 unsampled_movement_ticks=55 final=(-10.958, 0.0, 8.0)\nL3_MOV_INTEGRATION profile=mounted PASS checks=957 errors=0 commands=12 unsampled_movement_ticks=122 final=(-10.80537, 0.0, 8.0)",
+      "candidate": "d2c578d68cda06bd2165d05fa38fc46b02c84f90",
+      "movement_candidate": "f3976a00faef9771eedd393c7253cbaa6a94ef0b"
+    }
+  ],
+  "not_run": [
+    "AT-04",
+    "AT-05",
+    "8 GiB reference GPU"
+  ],
+  "original_candidate": "f9764b08a926c25fc3e940bf7bdb91b31996cb6b",
+  "status": "All four L3 functional cases and final MOV parity PASS; 50-percent-rider diagnostic combined P95 28.571ms exceeds 16.667ms."
+}

@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+baseline_grid_matches ticks=150 roster=24 compared_poses=3600 rollback_attempts=32 yield_actor_ticks=188 new_birth_seen=true errors=0

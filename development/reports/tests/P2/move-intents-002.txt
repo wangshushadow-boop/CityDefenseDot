@@ -1,0 +1,21 @@
+Godot --headless --path game --script res://tests/p2/move_intents/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOVE_JOLT wall_x=-0.50449436903 rider_v=4.50004577636719 braking_v=4.36672210693359
+MOVE_INTENT_LOAD n=500 moved=500 paths=500 peak=8 staged_intake_us=3944 simulate_p95_us=4516
+MOVE_INTENT_LOAD n=1000 moved=1000 paths=1000 peak=8 staged_intake_us=8544 simulate_p95_us=9336
+MOVE_NAV closed_x=0.0 restored_x=14.9899673461914 restricted_rider_x=-2.00036668777466
+MOVE_INTENTS checks=4541 failures=0
+
+Godot --headless --path game --script res://tests/p2/ai/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0
+T-BAI-04 threaded_late_result_rejected=true
+T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true
+BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]
+BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2962 ai_p95_us=3429 ai_p99_us=3567 combined_p95_us=6173 cpu_budget=PASS
+BAI_MEAN_US people=500 publish=176.85 schedule=339.191666666667 decisions=2492.75833333333 los_inclusive=798.116666666667 cache_hits=130 scouts=196 group_contacts=396 mov_begin=565.925 mov_step=1493.33333333333 project_mov=64.5416666666667 com_fork=39.0666666666667 com_step=379.983333333333 commit_and_publish=54.1333333333333
+BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ "tactical": 4, "formation": 192, "individual": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5825 ai_p95_us=6438 ai_p99_us=6744 combined_p95_us=11914 cpu_budget=PASS
+BAI_MEAN_US people=1000 publish=355.041666666667 schedule=592.475 decisions=4939.06666666667 los_inclusive=1542.925 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1114.2 mov_step=2955.31666666667 project_mov=138.866666666667 com_fork=78.525 com_step=727.958333333333 commit_and_publish=108.008333333333
+FIELD_AI errors=0

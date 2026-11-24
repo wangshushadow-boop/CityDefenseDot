@@ -1,0 +1,227 @@
+[
+  {
+    "source": "p1-build",
+    "trial": 1,
+    "pck_sha256": "794d62566d89df16213c4d0c5a7112016dc87ee2c9bd5d7f3deb85aebadd1cd4",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 1443862254752",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-checkpoint-build",
+    "trial": 1,
+    "pck_sha256": "c4e7936ecec0ed7bfbcbd917f779f81d296665739b0a731d67013e454afc9dc2",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2462472490688",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-field-stable1",
+    "trial": 1,
+    "pck_sha256": "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+    "exit": 3221226356,
+    "boot": false,
+    "tail": [
+      "Shader cache miss for SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/b600e18e20b53d8932999d48838b29553c586934",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2839458614352",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p1-build",
+    "trial": 2,
+    "pck_sha256": "794d62566d89df16213c4d0c5a7112016dc87ee2c9bd5d7f3deb85aebadd1cd4",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2113346299920",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-checkpoint-build",
+    "trial": 2,
+    "pck_sha256": "c4e7936ecec0ed7bfbcbd917f779f81d296665739b0a731d67013e454afc9dc2",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2125459160304",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-field-stable1",
+    "trial": 2,
+    "pck_sha256": "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2574588149616",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p1-build",
+    "trial": 3,
+    "pck_sha256": "794d62566d89df16213c4d0c5a7112016dc87ee2c9bd5d7f3deb85aebadd1cd4",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2942832904144",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-checkpoint-build",
+    "trial": 3,
+    "pck_sha256": "c4e7936ecec0ed7bfbcbd917f779f81d296665739b0a731d67013e454afc9dc2",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2801474062848",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-field-stable1",
+    "trial": 3,
+    "pck_sha256": "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2768468997056",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p1-build",
+    "trial": 4,
+    "pck_sha256": "794d62566d89df16213c4d0c5a7112016dc87ee2c9bd5d7f3deb85aebadd1cd4",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2250912992336",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-checkpoint-build",
+    "trial": 4,
+    "pck_sha256": "c4e7936ecec0ed7bfbcbd917f779f81d296665739b0a731d67013e454afc9dc2",
+    "exit": 3221226356,
+    "boot": false,
+    "tail": [
+      "Shader cache miss for SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/b600e18e20b53d8932999d48838b29553c586934",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 1604202089840",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-field-stable1",
+    "trial": 4,
+    "pck_sha256": "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+    "exit": 3221226356,
+    "boot": false,
+    "tail": [
+      "Shader cache miss for SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/b600e18e20b53d8932999d48838b29553c586934",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2307959862544",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p1-build",
+    "trial": 5,
+    "pck_sha256": "794d62566d89df16213c4d0c5a7112016dc87ee2c9bd5d7f3deb85aebadd1cd4",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2425909741184",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-checkpoint-build",
+    "trial": 5,
+    "pck_sha256": "c4e7936ecec0ed7bfbcbd917f779f81d296665739b0a731d67013e454afc9dc2",
+    "exit": 3221225477,
+    "boot": false,
+    "tail": [
+      "Shader cache miss for TexBlitShaderRD/fd9c885eab1da0d330a04ebfd7796019cde57f82208202f3bfc96cae74155212/1e8995c9eb0e9b0b053035999de68595c521a33e",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 2132514705488",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  },
+  {
+    "source": "p2-field-stable1",
+    "trial": 5,
+    "pck_sha256": "6993b0a960cf4d65018fe2946aebf5150a22d3ea905d8750c22e200ad87cf4ee",
+    "exit": 0,
+    "boot": true,
+    "tail": [
+      "Updated PSO cache (4.2 MiB)",
+      "WARNING: GENERAL - Message Id Number: 0 | Message Id Name: Loader Message",
+      "\twindows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.",
+      "\tObjects - 1",
+      "\t\tObject[0] - VK_OBJECT_TYPE_INSTANCE, Handle 1203884124096",
+      "   at: _debug_messenger_callback (drivers/vulkan/rendering_context_driver_vulkan.cpp:654)"
+    ]
+  }
+]

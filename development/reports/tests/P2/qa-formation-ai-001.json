@@ -1,0 +1,147 @@
+{
+  "task": "P2-BAI-F-001",
+  "candidate": "13f6f0c923d0939f2e3f4c2bcc484c26bafb1f0e",
+  "runner": "independent QA",
+  "environment": "Windows x64 / Godot 4.7.2 Standard ed1daf0bf / headless unless specified; deterministic fixtures",
+  "results": [
+    {
+      "test": "formation/l1",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-formation_ai\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmpsdmxwq_e\\engine.log",
+        "--script",
+        "res://tests/p2/formation_ai/run.gd"
+      ],
+      "duration_s": 1.45,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-BAI-F-01 PASS\nnavigation projections=25 survivors=2 center=(5.87243, 0.0, -7.980291)\nT-BAI-F-02 PASS\nL1 feedback ammo_depleted -> Adapt task=-9223371982127495662/0/1/15\nL1 feedback timeout -> Adapt task=-9223371980919536094/0/1/489\nT-BAI-F-03 PASS\nL2_ONE_FORMATION members=500 samples=20 p50_us=2720 p95_us=3303\nL2_ONE_FORMATION members=1000 samples=20 p50_us=5760 p95_us=8810\nP2-BAI-F-001 PASS assertions=4780 failures=0",
+      "candidate": "b0f8b8606b1f282c0b60643538939a6f3d8b3069"
+    },
+    {
+      "test": "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\after_drain.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-formation_ai\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmpxxy5zuri\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\after_drain.gd"
+      ],
+      "duration_s": 0.44,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_L2_CHANGE roster { \"ok\": false, \"error\": { \"code\": \"StaleVersion\", \"field\": \"formation_order\", \"detail\": <null>, \"message_key\": \"error.stale_version\", \"retryable\": false } }\nQA_L2_CHANGE delegate { \"ok\": false, \"error\": { \"code\": \"StaleVersion\", \"field\": \"formation_stamp\", \"detail\": <null>, \"message_key\": \"error.stale_version\", \"retryable\": false } }\nQA_L2 errors=0 checks=35",
+      "candidate": "b0f8b8606b1f282c0b60643538939a6f3d8b3069"
+    },
+    {
+      "test": "with repaired L1",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-formation_ai\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmpen6uj_si\\engine.log",
+        "--script",
+        "res://tests/p2/formation_ai/run.gd"
+      ],
+      "duration_s": 1.19,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-BAI-F-01 PASS\nnavigation projections=25 survivors=2 center=(5.87243, 0.0, -7.980291)\nT-BAI-F-02 PASS\nL1 feedback ammo_depleted -> Adapt task=-9223371982077164014/0/1/15\nL1 feedback timeout -> Adapt task=-9223371980869204446/0/1/489\nT-BAI-F-03 PASS\nL2_ONE_FORMATION members=500 samples=20 p50_us=2302 p95_us=2750\nL2_ONE_FORMATION members=1000 samples=20 p50_us=4630 p95_us=6465\nP2-BAI-F-001 PASS assertions=4780 failures=0",
+      "candidate": "b0f8b8606b1f282c0b60643538939a6f3d8b3069"
+    },
+    {
+      "test": "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\effective_order.gd",
+      "status": "FAIL",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmp6yguf4hr\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmp96h8zk9g\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\effective_order.gd"
+      ],
+      "duration_s": 0.62,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_PREEMPT moving=(0.34, 0.0, -8.0) stop={ \"actor_handle\": { \"index\": 0, \"generation\": 1 }, \"desired_direction\": [0, 0, 0], \"speed_fraction\": 0.0, \"stance\": \"walk\" } endpoint=(0.34, 0.0, -8.0) speed=0.0 arrived={ \"status\": \"completed\", \"reason\": \"arrived\", \"formation_id\": 0, \"task_id\": \"-9223371997226990068/0/1/1\", \"progress\": 1.0 }\nL3 priority at tick 9 Approach -> Hold\nP2-BAI-F-001 PASS assertions=73 failures=0\n\nWARNING: 54 ObjectDB instances were leaked at exit (run with `--verbose` for details).\n   at: cleanup (core/object/object.cpp:2536)\nERROR: 15 resources still in use at exit (run with --verbose for details).\n   at: clear (core/io/resource.cpp:822)",
+      "candidate": "13f6f0c923d0939f2e3f4c2bcc484c26bafb1f0e",
+      "test_kind": "QA probe preparation",
+      "detail": "The probe closure retained its own world via w.mov; captured the credential alone and reran identical 73 assertions with no leaked resources."
+    },
+    {
+      "test": "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\after_drain.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmp6yguf4hr\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmpv7itkpfx\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\after_drain.gd"
+      ],
+      "duration_s": 0.44,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_L2_CHANGE roster { \"ok\": false, \"error\": { \"code\": \"StaleVersion\", \"field\": \"formation_order\", \"detail\": <null>, \"message_key\": \"error.stale_version\", \"retryable\": false } }\nQA_L2_CHANGE delegate { \"ok\": false, \"error\": { \"code\": \"StaleVersion\", \"field\": \"formation_stamp\", \"detail\": <null>, \"message_key\": \"error.stale_version\", \"retryable\": false } }\nQA_L2 errors=0 checks=35",
+      "candidate": "13f6f0c923d0939f2e3f4c2bcc484c26bafb1f0e"
+    },
+    {
+      "test": "real previous MOV charge superseded by player Hold",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmpuknui_a1\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmpap1pe8ut\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\effective_order.gd"
+      ],
+      "duration_s": 0.62,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_PREEMPT moving=(0.34, 0.0, -8.0) stop={ \"actor_handle\": { \"index\": 0, \"generation\": 1 }, \"desired_direction\": [0, 0, 0], \"speed_fraction\": 0.0, \"stance\": \"walk\" } endpoint=(0.34, 0.0, -8.0) speed=0.0 arrived={ \"status\": \"completed\", \"reason\": \"arrived\", \"formation_id\": 0, \"task_id\": \"-9223371997176658420/0/1/1\", \"progress\": 1.0 }\nL3 priority at tick 9 Approach -> Hold\nP2-BAI-F-001 PASS assertions=73 failures=0",
+      "candidate": "13f6f0c923d0939f2e3f4c2bcc484c26bafb1f0e"
+    },
+    {
+      "test": "Final frozen complete L2 and L1/L3 suite",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmp22of3hlx\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\formation-ai\\tmpjyw50i7m\\engine.log",
+        "--script",
+        "res://tests/p2/formation_ai/run.gd"
+      ],
+      "duration_s": 1.45,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nL3 priority at tick 9 Approach -> Hold\nT-BAI-F-01 PASS\nnavigation projections=25 survivors=2 center=(5.87243, 0.0, -7.980291)\nT-BAI-F-02 PASS\nL1 feedback ammo_depleted -> Adapt task=-9223371978939824615/0/1/15\nL1 feedback timeout -> Adapt task=-9223371977698310617/0/1/489\nT-BAI-F-03 PASS\nL2_ONE_FORMATION members=500 samples=20 p50_us=2315 p95_us=3782 effective_view_p95_us=160\nL2_ONE_FORMATION members=1000 samples=20 p50_us=4678 p95_us=5465 effective_view_p95_us=311\nP2-BAI-F-001 PASS assertions=4877 failures=0",
+      "candidate": "13f6f0c923d0939f2e3f4c2bcc484c26bafb1f0e"
+    }
+  ],
+  "not_run": [
+    "AT-04",
+    "AT-05",
+    "8 GiB reference GPU"
+  ],
+  "tactical_candidate": "8c33aed0895530c83c3f480b2669a18972eae0f5",
+  "previous_tactical_candidate": "6d14d803a0349d5606d100378215413fec94b418",
+  "status": "PASS",
+  "old_candidate": "b0f8b8606b1f282c0b60643538939a6f3d8b3069",
+  "individual_candidate": "d2c578d68cda06bd2165d05fa38fc46b02c84f90",
+  "movement_candidate": "f3976a00faef9771eedd393c7253cbaa6a94ef0b"
+}

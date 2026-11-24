@@ -1,0 +1,26 @@
+[
+  {
+    "surface": "source",
+    "probe": "content",
+    "exit": 0,
+    "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP1_BOOT {\"content_hash\":\"aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1\",\"display\":\"headless\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":0,\"presentation_loaded\":false,\"profile\":\"tool\",\"protocol_version\":1,\"release_order\":[\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"\"}"
+  },
+  {
+    "surface": "source",
+    "probe": "files",
+    "exit": 0,
+    "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nRAW models/general.glb present=true\nRAW models/crossbowman.glb present=true\nRAW models/spear_soldier.glb present=true\nRAW models/horse.glb present=true\nRAW CREDITS.md present=true\nRAW river_plain.tscn present=true"
+  },
+  {
+    "surface": "pck",
+    "probe": "content",
+    "exit": 1,
+    "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP1_BOOT {\"content_hash\":\"\",\"display\":\"headless\",\"error\":{\"code\":\"NotFound\",\"detail\":\"CREDITS.md\",\"field\":\"field\",\"message_key\":\"error.not_found\",\"retryable\":false},\"event\":\"failed\",\"exit_code\":1,\"failed_module\":\"content\",\"mission_tick\":0,\"presentation_loaded\":false,\"profile\":\"tool\",\"protocol_version\":1,\"release_order\":[\"compiler\",\"telemetry\"],\"state_hash\":\"\"}"
+  },
+  {
+    "surface": "pck",
+    "probe": "files",
+    "exit": 0,
+    "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nRAW models/general.glb present=false\nRAW models/crossbowman.glb present=false\nRAW models/spear_soldier.glb present=false\nRAW models/horse.glb present=false\nRAW CREDITS.md present=false\nRAW river_plain.tscn present=true"
+  }
+]

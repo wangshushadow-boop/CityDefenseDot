@@ -1,6 +1,8 @@
 # recollection 项目状态
 
-**P2 实时战争开发中。** 9/16 个工作包已集成。兵源分波、动作、移动、编队、AI 公共层、输入、相机、视觉和音频已验收。千人固定步的独立三轮 P95 为 13.035–15.062 ms。三层策略正在开发。ADR-014 采用负责人批准的方案 A。三支以上敌对部队中整场主持人是否可随本队撤退终止其余各方，等待 ADR-015 决定。AT-04 与 AT-05 战场切片仍待整场入口验证。[P2 工作批次](development/planning/P2.md) · [阶段报告与测试边界](development/reports/stages/P2.md)
+**P2 已验收 12/16 个工作包，阶段等待负责人决定 ADR-015。** 兵源分波、战斗、移动、编队和三层 AI 已集成，输入、相机、视觉与音频通过本批独立验收。三方撤退、战果、战斗 UI 和整场集成尚待完成。AT-04 与 AT-05 战场切片未执行。[待决撤退规则](docs/architecture/decisions/ADR-015-multiside-withdrawal.md) · [阶段验收记录](development/reports/stages/P2.md)
+
+本批运行代码为 `847890e`。Windows 冷开发交付有客户端、专服和内容 ZIP。四份野战模型、署名以及 48 条中英命令和警告均已验证；两个 PCK 分别捕获到每句真实声音。最终客户端在六个干净用户目录启动成功。P2 的 19 个模块测试入口及两项跨域/音频补充入口、P1 的 15 套回归均通过。20% 骑乘的 L3 夹具在 500 人时三轮固定步 P95 为 9.786–10.802 ms，1000 人为 21.559–22.890 ms，超出 16.667 ms。8 GiB 设备与人工听辨尚未实测。[构建清单](development/reports/tests/P2/build-checkpoint/final-manifest.json) · [P2 回归](development/reports/tests/P2/integrated-regressions.json) · [20% 骑乘原数](development/reports/tests/P2/l3-mixed-20pct-integrated.json)
 
 P0、P1 已验收。P2 从 P1 最终提交 `005d777` 分支，本阶段开发与集成记录在 `codex/p2-field`。下面的构建与启动入口属于最近一次已验收的 P1 版本。
 

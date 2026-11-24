@@ -1,0 +1,9 @@
+Godot --headless --path game --script res://tests/p2/tactical/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-BAI-T-01 deck=deck cavalry=lateral infantry=objective rider=harass first_stage_commit_us=891
+T-BAI-T-02 fallback=better phase=Retreat blocked_paths=hold
+T-BAI-T-03 player_order=hold0 stale_scope_rejected=true
+TACTICS_LOAD roster=500 own=250 decisions=20 assignments=200 terrain_queries=680 physics_los=2126 stage_commit_p50_us=3144 p95_us=3435 max_us=4766
+TACTICS_LOAD roster=1000 own=500 decisions=20 assignments=200 terrain_queries=692 physics_los=2139 stage_commit_p50_us=4904 p95_us=5300 max_us=5335
+FIELD_TACTICS errors=0 nav_queries=1576 physical_los=4593

@@ -1,0 +1,4 @@
+Godot --headless --path game --script res://tests/p2/field_profile/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-FIELD-PROFILE PASS shadow=2048 renderer=forward_plus windows=true device_tts=false

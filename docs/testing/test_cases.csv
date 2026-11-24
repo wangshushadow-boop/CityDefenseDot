@@ -97,16 +97,16 @@ T-BAI-01,BAI,BAI-01,玩家与 AI 同时控制编队,执行同命令接口,授权
 T-BAI-02,BAI,BAI-05,敌方被遮挡、旧快照返回,AI 查询与提交,只读取许可情报，旧意图拒绝,PASS,development/reports/tests/P2/ai-001.txt,docs/systems/game/mission/ai/README.md,game/mission/ai/
 T-BAI-03,BAI,BAI-06,500/1000 混合战场,记录调度性能,符合 §19.4 待验证预算，无持续积压,NOT_RUN,,docs/systems/game/mission/ai/README.md,game/mission/ai/
 T-BAI-04,BAI,BAT-05,Mission 销毁时 worker 正计算,创建新 Mission,旧意图不能写入,PASS,development/reports/tests/P2/ai-001.txt,docs/systems/game/mission/ai/README.md,game/mission/ai/
-T-BAI-T-01,BAI-T,BAI-04,兵种混合且存在可达高地/平地,选择战术,评分体现地形、有效射线与兵种适配,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
-T-BAI-T-02,BAI-T,BAI-04,任务不可达或增援改变力量比,更新,触发回退/重分配或撤退,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
-T-BAI-T-03,BAI-T,BAI-01,玩家未委派自己的编队,AI 分配任务,不覆盖玩家订单,NOT_RUN,,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
-T-BAI-F-01,BAI-F,BAI-01,玩家命令保持且 AI 认为冲锋高分,决策,保留保持约束,NOT_RUN,,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
-T-BAI-F-02,BAI-F,BAI-02,队形遭遇窄门和伤亡,更新行为,申请可行队形，重组后恢复,NOT_RUN,,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
-T-BAI-F-03,BAI-F,BAI-04,弹药不足或任务超时,反馈,合法回退且 L1 得到原因,NOT_RUN,,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
-T-BAI-I-01,BAI-I,BAI-03,四类兵种和各自合法装备,运行交战,角色决策不同、意图统一,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
-T-BAI-I-02,BAI-I,BAI-05,敌人被遮挡或目标 handle 失效,决策,不继续非法攻击，重选有限候选,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
-T-BAI-I-03,BAI-I,COM-05,同一动作玩家与 AI 发起,执行,由同一 COM 校验，结果语义一致,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
-T-BAI-I-04,BAI-I,BAI-06,千人压力且出现紧急威胁,运行,紧急反应可执行，低频不冻结移动,NOT_RUN,,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-BAI-T-01,BAI-T,BAI-04,兵种混合且存在可达高地/平地,选择战术,评分体现地形、有效射线与兵种适配,PASS,development/reports/tests/P2/tactical-001.txt,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
+T-BAI-T-02,BAI-T,BAI-04,任务不可达或增援改变力量比,更新,触发回退/重分配或撤退,PASS,development/reports/tests/P2/tactical-001.txt,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
+T-BAI-T-03,BAI-T,BAI-01,玩家未委派自己的编队,AI 分配任务,不覆盖玩家订单,PASS,development/reports/tests/P2/tactical-001.txt,docs/systems/game/mission/ai/tactical/README.md,game/mission/ai/tactical/
+T-BAI-F-01,BAI-F,BAI-01,玩家命令保持且 AI 认为冲锋高分,决策,保留保持约束,PASS,development/reports/tests/P2/formation-ai-001.txt,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
+T-BAI-F-02,BAI-F,BAI-02,队形遭遇窄门和伤亡,更新行为,申请可行队形，重组后恢复,PASS,development/reports/tests/P2/formation-ai-001.txt,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
+T-BAI-F-03,BAI-F,BAI-04,弹药不足或任务超时,反馈,合法回退且 L1 得到原因,PASS,development/reports/tests/P2/formation-ai-001.txt,docs/systems/game/mission/ai/formation/README.md,game/mission/ai/formation/
+T-BAI-I-01,BAI-I,BAI-03,四类兵种和各自合法装备,运行交战,角色决策不同、意图统一,PASS,development/reports/tests/P2/individual-001.txt,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-BAI-I-02,BAI-I,BAI-05,敌人被遮挡或目标 handle 失效,决策,不继续非法攻击，重选有限候选,PASS,development/reports/tests/P2/individual-001.txt,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-BAI-I-03,BAI-I,COM-05,同一动作玩家与 AI 发起,执行,由同一 COM 校验，结果语义一致,PASS,development/reports/tests/P2/individual-001.txt,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
+T-BAI-I-04,BAI-I,BAI-06,千人压力且出现紧急威胁,运行,紧急反应可执行，低频不冻结移动,PASS,development/reports/tests/P2/individual-001.txt,docs/systems/game/mission/ai/individual/README.md,game/mission/ai/individual/
 T-MOV-01,MOV,NAV-01,门关闭后破坏、梯启用、缺口产生,查询路径,正确等待版本并使用新可达链接,PASS,development/reports/tests/P2/movement-001.txt,docs/systems/game/mission/movement/README.md,game/mission/movement/
 T-MOV-02,MOV,BAI-02 / NAV-01,大量士兵通过窄门,运行编队,有分流/回退，无永久停滞或瞬移,PASS,development/reports/tests/P2/movement-002.txt,docs/systems/game/mission/movement/README.md,game/mission/movement/
 T-MOV-03,MOV,COM-04,高速骑兵转向进入窄梯,运动,合法转向限制，禁止进入不适用 profile,PASS,development/reports/tests/P2/movement-002.txt,docs/systems/game/mission/movement/README.md,game/mission/movement/

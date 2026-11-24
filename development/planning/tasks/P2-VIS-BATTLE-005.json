@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "P2-VIS-BATTLE-005",
+  "kind": "EXECUTION",
+  "parent": "P2-VIS-BATTLE",
+  "stage": "P2",
+  "module_id": "AUD",
+  "title": "野战内容包的本地中英文命令语音",
+  "spec": "docs/systems/game/presentation/audio/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM",
+    "P2-MOV",
+    "P2-AUD-BATTLE"
+  ],
+  "requirements": [
+    "ACC-01",
+    "AUD-01"
+  ],
+  "acceptance_test_ids": [
+    "T-AUD-01",
+    "T-AUD-02"
+  ],
+  "allowed_paths": [
+    "game/presentation/audio/",
+    "game/tests/p2/audio/",
+    "development/reports/tasks/P2-VIS-BATTLE-005.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "81aa05b201bc909f78f756d684ef90d1223e958d",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-voice_assets",
+  "scope": "本机 Windows 原生朗读初始化对照 2/8 进程崩溃，关闭该启动选项 0/8。为现有本地化命令和警告提供可随包交付的实际声音，经过原 Voice 声道、预算、音量、取消和字幕。授权在工具上离线生成原文语音，不引入运行时依赖。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "本机 Windows 原生朗读初始化对照 2/8 进程崩溃，关闭该启动选项 0/8。为现有本地化命令和警告提供可随包交付的实际声音，经过原 Voice 声道、预算、音量、取消和字幕。授权在工具上离线生成原文语音，不引入运行时依赖。"
+  ],
+  "status": "DONE"
+}

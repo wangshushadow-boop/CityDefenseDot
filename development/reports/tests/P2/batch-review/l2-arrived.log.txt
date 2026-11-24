@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+L1goal=flank required=arrived destination=(0.0, 0.0, -8.0) actual=(0.0, 0.0, -8.0) L2=Charge feedback={ "status": "running", "reason": "", "formation_id": 0, "task_id": "-9223371995096283629/0/1/1", "progress": 0.0 }
+FAIL uncontested L1 arrival condition acknowledged
+T-BAI-F-01 FAIL
+navigation projections=25 survivors=2 center=(5.87243, 0.0, -7.980291)
+T-BAI-F-02 PASS
+L1 feedback ammo_depleted -> Adapt task=-9223371983570336231/0/1/15
+L1 feedback timeout -> Adapt task=-9223371982362376669/0/1/489
+T-BAI-F-03 PASS
+P2-BAI-F-001 FAIL assertions=1249 failures=1

@@ -1,0 +1,408 @@
+{
+  "task": "P2-VIS-BATTLE-006",
+  "candidate": "cb3921598d457789ebef164058b71065b6417832",
+  "runner": "independent QA",
+  "environment": "Windows x64 / Godot 4.7.2 Standard ed1daf0bf / headless unless specified; deterministic fixtures",
+  "results": [
+    {
+      "test": "Six genuinely fresh Windows source-client startups",
+      "command": "python -B .worktrees/p2-desktop_profile/game/tests/p2/field_profile/cold_start.py --godot GODOT --project .worktrees/p2-desktop_profile/game --trials 6 --evidence out/p2-qa/desktop-profile/sources.json",
+      "exit": 0,
+      "status": "PASS",
+      "trials": [
+        {
+          "trial": 1,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 2,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 3,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 4,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 5,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 6,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        }
+      ]
+    },
+    {
+      "test": "Windows override profile",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-desktop_profile\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\desktop-profile\\tmp1tix_e6s\\engine.log",
+        "--script",
+        "res://tests/p2/field_profile/run.gd"
+      ],
+      "duration_s": 0.17,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-FIELD-PROFILE PASS shadow=2048 renderer=forward_plus windows=true device_tts=false"
+    },
+    {
+      "test": "actual final packed Windows settings client",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-delivery-final\\847890eed355-3c65c99cfea7\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\desktop-profile\\tmpoojnroo_\\gd.log",
+        "--script",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-desktop_profile\\game\\tests\\p2\\field_profile\\run.gd"
+      ],
+      "exit": 0,
+      "status": "PASS",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-FIELD-PROFILE PASS shadow=2048 renderer=forward_plus windows=true device_tts=false\n",
+      "pck_sha256": "a2ff6e7a61b2c517bf148e96ab40ee64184e9a43d23647f47be114cb94f36f8c"
+    },
+    {
+      "test": "actual final packed Windows settings server",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-delivery-final\\847890eed355-3c65c99cfea7\\server.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\desktop-profile\\tmpd9_fe7s6\\gd.log",
+        "--script",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-desktop_profile\\game\\tests\\p2\\field_profile\\run.gd"
+      ],
+      "exit": 0,
+      "status": "PASS",
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-FIELD-PROFILE PASS shadow=2048 renderer=forward_plus windows=true device_tts=false\n",
+      "pck_sha256": "f9e95fed58ba97cfed45c27776af814e44d65e2540e532d5ef00e109376bca1c"
+    },
+    {
+      "test": "Final shipped client.pck, six actual isolated Windows Vulkan cold starts",
+      "command": "python -B .worktrees/p2-desktop_profile/game/tests/p2/field_profile/cold_start.py --godot GODOT --pack out/p2-delivery-final/847890eed355-3c65c99cfea7/client.pck --trials 6 --evidence out/p2-qa/desktop-profile/packed.json",
+      "exit": 0,
+      "status": "PASS",
+      "trials": [
+        {
+          "trial": 1,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 2,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 3,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 4,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 5,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        },
+        {
+          "trial": 6,
+          "exit": 0,
+          "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\nVulkan 1.4.325 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3090\r\n\r\nP1_BOOT {\"content_hash\":\"fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":3,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029\"}\r\n",
+          "boot": {
+            "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+            "display": "Windows",
+            "event": "stopped",
+            "exit_code": 0,
+            "failed_module": "",
+            "mission_tick": 3,
+            "presentation_loaded": true,
+            "profile": "client",
+            "protocol_version": 1,
+            "release_order": [
+              "session",
+              "persistence",
+              "engine",
+              "core",
+              "content",
+              "compiler",
+              "telemetry"
+            ],
+            "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+          },
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "not_run": [
+    "AT-04",
+    "AT-05",
+    "8 GiB reference GPU",
+    "other OS native-speech initialization"
+  ],
+  "status": "PASS",
+  "delivery_commit": "847890eed355815e60e21be2a6817a9dc11877b9",
+  "manifest": "D:\\work\\game\\recollection\\out\\p2-delivery-final\\847890eed355-3c65c99cfea7\\manifest.json"
+}

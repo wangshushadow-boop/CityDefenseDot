@@ -43,5 +43,5 @@
   "acceptance": [
     "相同意图无论玩家还是 AI 均产生相同位姿和拒绝原因。真实导航含断桥/障碍、步骑/停止、死亡或旧句柄、撤权与回滚，原 MOV 与 BAI 性能复验。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

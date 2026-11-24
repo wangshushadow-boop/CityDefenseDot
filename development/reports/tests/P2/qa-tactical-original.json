@@ -1,0 +1,64 @@
+{
+  "task": "P2-BAI-T-001",
+  "candidate": "6d14d803a0349d5606d100378215413fec94b418",
+  "runner": "independent QA",
+  "environment": "Windows x64 / Godot 4.7.2 Standard ed1daf0bf / headless unless specified; deterministic fixtures",
+  "results": [
+    {
+      "test": "res://tests/p2/tactical/run.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-tactical\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\tactical\\tmpy11zbplq\\engine.log",
+        "--script",
+        "res://tests/p2/tactical/run.gd"
+      ],
+      "duration_s": 0.81,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-BAI-T-01 deck=deck cavalry=lateral infantry=objective rider=harass first_stage_commit_us=869\nT-BAI-T-02 fallback=better phase=Retreat blocked_paths=hold\nT-BAI-T-03 player_order=hold0 stale_scope_rejected=true\nTACTICS_LOAD roster=500 own=250 decisions=20 assignments=200 terrain_queries=680 physics_los=2126 stage_commit_p50_us=2846 p95_us=3264 max_us=3532\nTACTICS_LOAD roster=1000 own=500 decisions=20 assignments=200 terrain_queries=692 physics_los=2139 stage_commit_p50_us=4539 p95_us=5181 max_us=5200\nFIELD_TACTICS errors=0 nav_queries=1576 physical_los=4590"
+    },
+    {
+      "test": "D:\\work\\game\\recollection\\out\\p2-qa\\tactical\\admission.gd",
+      "status": "FAIL",
+      "exit": 1,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-tactical\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\tactical\\tmpixnhj8wu\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\tactical\\admission.gd"
+      ],
+      "duration_s": 0.16,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\n\nSCRIPT ERROR: Parse Error: Cannot infer the type of \"receipt\" variable because the value doesn't have a set type.\n   at: GDScript::reload (D:/work/game/recollection/out/p2-qa/tactical/admission.gd:11)\nERROR: Failed to load script \"D:/work/game/recollection/out/p2-qa/tactical/admission.gd\" with error \"Parse error\".\n   at: load (modules/gdscript/gdscript_resource_format.cpp:46)"
+    },
+    {
+      "test": "D:\\work\\game\\recollection\\out\\p2-qa\\tactical\\admission.gd",
+      "status": "FAIL",
+      "exit": 1,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-tactical\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\tactical\\tmpzzefzra6\\engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\tactical\\admission.gd"
+      ],
+      "duration_s": 0.36,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_ADMIT {\"commit\":{\"ok\":true,\"value\":null},\"delegate\":\"\",\"tasks\":1}\nFIELD_TACTICS errors=1 nav_queries=32 physical_los=34\n\nFAIL delegation revoked inside receipt must not publish a new plan"
+    }
+  ],
+  "not_run": [
+    "AT-04",
+    "AT-05",
+    "8 GiB reference GPU"
+  ]
+}

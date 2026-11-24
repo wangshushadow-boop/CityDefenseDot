@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+after revoke commit_ok=false candidate_x=-18.9433326721191 committed_distance=0.0
+self hurtbox accepted=true displacement=0.56667327880859 reason=

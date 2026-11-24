@@ -1,0 +1,19 @@
+Godot --headless --path game --script res://tests/p2/individual/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+L3_ROLE role=infantry weapon= starts=[1, 11, 21] hits=3 modes=["Melee"]
+L3_ROLE role=archer weapon=bow starts=[1, 13] hits=2 modes=["Aim", "Approach", "Equip"]
+L3_ROLE role=archer weapon=crossbow starts=[1, 21] hits=1 modes=["Aim", "Approach"]
+L3_ROLE role=cavalry weapon= starts=[1, 23] hits=1 modes=["MountedStrike", "Disengage"]
+L3_ROLE role=mounted_archer weapon=bow starts=[2, 14] hits=2 modes=["Equip", "MountedArchery", "Charge"]
+L3_TRANSITION outgoing switch=3 old=cancel new_strike=true unavailable_ticks=0
+L3_TRANSITION outgoing switch=5 old=release new_strike=true unavailable_ticks=0
+L3_TRANSITION incoming switch=2 old=cancel new_strike=true unavailable_ticks=0
+L3_TRANSITION incoming switch=5 old=release new_strike=true unavailable_ticks=0
+L3_TRANSITION hidden switch=2 old=cancel new_strike=true unavailable_ticks=8
+L3_TRANSITION hidden switch=5 old=release new_strike=true unavailable_ticks=5
+L3_TRANSITION casualty switch=5 old=release new_strike=true unavailable_ticks=5
+L3_LOAD_DOMAINS_US movement_p95=3762 pose_read_and_dict_p95=1503 combat_inclusive_p95=10128
+L3_LOAD confirmed_COM_actions=3909 eligible_emergencies=113 real_MOV_displaced=true instrumented_workload_p95_us=26791
+T-BAI-I-04 humans=1000 additional_mounts=500 ticks=120 jobs=10120 successful_reactions=113 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=3922
+P2-BAI-I-001 PASS checks=910 errors=0 paths=445 los=20596 sweeps=151

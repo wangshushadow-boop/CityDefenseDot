@@ -1,0 +1,6 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+general sha-match=true skeletons=1 animplayers=1 moved=true
+spear_soldier sha-match=true skeletons=1 animplayers=1 moved=true
+crossbowman sha-match=true skeletons=1 animplayers=1 moved=true
+horse sha-match=true skeletons=1 animplayers=1 moved=true

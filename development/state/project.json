@@ -6,7 +6,7 @@
   "stage_status": {
     "P0": "DONE",
     "P1": "DONE",
-    "P2": "IN_PROGRESS",
+    "P2": "BLOCKED",
     "P3": "PLANNED",
     "P4": "PLANNED",
     "P5": "PLANNED",
@@ -16,7 +16,7 @@
   },
   "authorized_by": "项目负责人本次会话明确授权“开始p2的工作”",
   "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-  "integrated_commit": "c9a3b199dd55ecd35dc5861ce73a6ee1bb0531ac",
+  "integrated_commit": "847890eed355815e60e21be2a6817a9dc11877b9",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",
@@ -40,7 +40,7 @@
     }
   },
   "updated_at": "2026-11-25",
-  "note": "P2 实时战争开发中；野战来源语义已签核。",
+  "note": "P2 已验收 12/16 包，26/35 执行任务 DONE。等待 ADR-015 批准以收口多方撤退及其下游。正式野战整场未验，L3 千人专项仍超 60 Hz 固定步预算。",
   "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
   "p1_decisions": {

@@ -324,31 +324,50 @@
       ]
     },
     "BAI-T": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-BAI-T",
         "P4-BAI-SIEGE"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-BAI-T-01",
+        "T-BAI-T-02",
+        "T-BAI-T-03"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/tactical-001.txt"
+      ]
     },
     "BAI-F": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-BAI-F",
         "P4-BAI-SIEGE"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-BAI-F-01",
+        "T-BAI-F-02",
+        "T-BAI-F-03"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/formation-ai-001.txt"
+      ]
     },
     "BAI-I": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-BAI-I",
         "P4-BAI-SIEGE"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-BAI-I-01",
+        "T-BAI-I-02",
+        "T-BAI-I-03",
+        "T-BAI-I-04"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/individual-001.txt"
+      ]
     },
     "MOV": {
       "status": "PARTIAL",
@@ -468,7 +487,8 @@
       "work_package_ids": [
         "P2-AUD-BATTLE",
         "P5-SINGLE-INTEGRATION",
-        "P7-POLISH"
+        "P7-POLISH",
+        "P2-VIS-BATTLE"
       ],
       "verified_test_ids": [
         "T-AUD-02",
@@ -677,7 +697,8 @@
         "P1-CI-CORE",
         "P6-NET-INTEGRATION",
         "P7-CI-RELEASE",
-        "P2-FIELD-INTEGRATION"
+        "P2-FIELD-INTEGRATION",
+        "P2-VIS-BATTLE"
       ],
       "verified_test_ids": [
         "T-CI-01",

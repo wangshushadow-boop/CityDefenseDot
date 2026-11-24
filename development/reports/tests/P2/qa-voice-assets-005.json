@@ -1,0 +1,463 @@
+{
+  "task": "P2-VIS-BATTLE-005",
+  "candidate": "11c9adeb58817f7d8b4e5508805d417262791bad",
+  "runner": "independent QA",
+  "environment": "Windows x64 / Godot 4.7.2 Standard ed1daf0bf / headless unless specified; deterministic fixtures",
+  "results": [
+    {
+      "test": "Regenerate independently from frozen captions, compare all 48 exact PCM clips and serialized banks to Git",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmpf6v2gmrf\\game\\tests\\p2\\audio\\generate_voices.py",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-voice_assets\\out\\voice-tool\\extracted\\espeakng_loader\\espeak-ng.dll"
+      ],
+      "generator_sha256": "a2aad7a0885d30259bb05c110df679bef6ec4a7f3ac65740edb5da6a6a0dbb04",
+      "native_authoring_library_sha256": "646d387acbc7ac2aa45e3625aa00a6835ae5d446ff8b0748298c3900b4dde258",
+      "exit": 0,
+      "status": "PASS",
+      "log": "eSpeak NG 1.52.0 22050 Hz\norders_zh.tres 24 6376aa3e86238187173fe1c3b00c5f921e9e68df31eddceb482e0ad59613872b\norders_en.tres 24 b2f3f6995d2d827bc4f90e0ffee67ae795006c2580c6c9b434bf03103aa1b69a\n",
+      "clips": {
+        "zh": {
+          "audio.order.move": {
+            "text": "向目标移动！",
+            "sha256": "4832516c35b82e2e1683a5dd963f0fbb704eb50e333e9b368859f5728a8bf715",
+            "frames": 29465,
+            "duration_s": 1.336,
+            "rms": 4487.72
+          },
+          "audio.order.follow": {
+            "text": "跟随我！",
+            "sha256": "3948007bc5a390cf4c6bf8d4fa37850e28a8b8bc93170685280bb85d7eb93c2d",
+            "frames": 17061,
+            "duration_s": 0.774,
+            "rms": 4646.77
+          },
+          "audio.order.hold": {
+            "text": "坚守阵地！",
+            "sha256": "cea4d7903ed280ad26e326ac821d888bb21fb2d6004f154c9c26f2ceca4e4bd8",
+            "frames": 23501,
+            "duration_s": 1.066,
+            "rms": 2861.45
+          },
+          "audio.order.advance": {
+            "text": "全军前进！",
+            "sha256": "83e0c69add4da5975ae802cf4f3c457091a555e515bc6f4d272e15d121e9a1c4",
+            "frames": 31205,
+            "duration_s": 1.415,
+            "rms": 3099.9
+          },
+          "audio.order.retreat": {
+            "text": "撤退！",
+            "sha256": "9a069222245ac15d415aae00955512d7ef58d3bd168ed842052b7b3180769233",
+            "frames": 11873,
+            "duration_s": 0.538,
+            "rms": 4816.87
+          },
+          "audio.order.charge": {
+            "text": "冲锋！",
+            "sha256": "998f1ad7584241e34a05e73ecf6da57a47e705328e3ec3eb00b251582e2b819e",
+            "frames": 15939,
+            "duration_s": 0.723,
+            "rms": 4525.42
+          },
+          "audio.order.free_attack": {
+            "text": "自由攻击！",
+            "sha256": "46035b26b26d98679e4d25f09af8691d5a8a6c3d5fd4c537a9e5f4831b21a5d0",
+            "frames": 24219,
+            "duration_s": 1.098,
+            "rms": 4430.98
+          },
+          "audio.order.cancel": {
+            "text": "取消命令。",
+            "sha256": "2c7f79595b3870eea69f3cbfc2ede5b38c579d36467a2950905dc5aea4f698c5",
+            "frames": 26621,
+            "duration_s": 1.207,
+            "rms": 4084.66
+          },
+          "audio.order.face": {
+            "text": "转向！",
+            "sha256": "5673260890847fb1985a55c6e458e34095f64335bb2157869550168b12d95244",
+            "frames": 16252,
+            "duration_s": 0.737,
+            "rms": 3263.03
+          },
+          "audio.order.face_enemy": {
+            "text": "面向敌军！",
+            "sha256": "6967bcaad3a5fbd5ed4ec281751be5905c0162bbe0ae1852a234a9e176aa0f3a",
+            "frames": 25998,
+            "duration_s": 1.179,
+            "rms": 3055.13
+          },
+          "audio.order.layout": {
+            "text": "变换阵形！",
+            "sha256": "49ac7f2f2232582a4a10ea8b89ec8ac21d82941c8bee652922498bc3135ef52b",
+            "frames": 30268,
+            "duration_s": 1.373,
+            "rms": 3323.57
+          },
+          "audio.order.fire_at_will": {
+            "text": "自由射击！",
+            "sha256": "c311a65c65d98838b33d6da0a540c2f9a29a31593e54831c182d006975c46a2f",
+            "frames": 22518,
+            "duration_s": 1.021,
+            "rms": 3590.33
+          },
+          "audio.order.hold_fire": {
+            "text": "停止射击！",
+            "sha256": "f8cf3eac6e86dbbd7525611f6ad585f3f62172ab2e49c035d20eed2a1329b584",
+            "frames": 23847,
+            "duration_s": 1.081,
+            "rms": 3335.92
+          },
+          "audio.order.use_ranged": {
+            "text": "准备远射！",
+            "sha256": "e7227254291ad0ab40a32a7e7891f7ad056e88bd51c71a710e2b03e60210b65e",
+            "frames": 24834,
+            "duration_s": 1.126,
+            "rms": 3215.66
+          },
+          "audio.order.mount": {
+            "text": "上马！",
+            "sha256": "16e2bb45baa4e614379a82883a8b2c3619a7fd1a6b60ebb7c6383e4be778a47e",
+            "frames": 12596,
+            "duration_s": 0.571,
+            "rms": 4484.15
+          },
+          "audio.order.dismount": {
+            "text": "下马！",
+            "sha256": "903b5fef48fa4db08693fb3b7580053ffbdd75a1cb85bfa7a151fc3db5735b3d",
+            "frames": 11178,
+            "duration_s": 0.507,
+            "rms": 4279.3
+          },
+          "audio.order.keep_distance": {
+            "text": "保持间距！",
+            "sha256": "fad1b3e682880395ad42d1eb45daad2a63de465e2dbf30abd31166583ef20e72",
+            "frames": 24440,
+            "duration_s": 1.108,
+            "rms": 3647.63
+          },
+          "audio.order.assign_members": {
+            "text": "重新编组！",
+            "sha256": "ad293db31276050114fa5f03c0e2de69c878cc8bf50d2cd791760bb7a038e10e",
+            "frames": 28125,
+            "duration_s": 1.276,
+            "rms": 3795.89
+          },
+          "audio.order.split": {
+            "text": "分队！",
+            "sha256": "cb4401be7825d0ae572f1512430f423df05aa14fd5e10e3e18249c0ee8de78d8",
+            "frames": 11270,
+            "duration_s": 0.511,
+            "rms": 4794.85
+          },
+          "audio.order.merge": {
+            "text": "合队！",
+            "sha256": "f7720e498df5d13720b4a6345e3c4fb077b11dc4d23c3244de61e7d6f1007915",
+            "frames": 10777,
+            "duration_s": 0.489,
+            "rms": 5090.9
+          },
+          "audio.order.delegate": {
+            "text": "委任指挥！",
+            "sha256": "2630c36a7b3fcdba1f5506ef7aaa26d54bdf214fda794c7770f44621791d1ac1",
+            "frames": 22843,
+            "duration_s": 1.036,
+            "rms": 4149.33
+          },
+          "audio.order.appoint_captain": {
+            "text": "任命队长！",
+            "sha256": "3991f993867fe22859d673e43ea6d9283cc99fb3565221e69cd5ff2a9a21a3b4",
+            "frames": 25734,
+            "duration_s": 1.167,
+            "rms": 4022.84
+          },
+          "audio.order.command": {
+            "text": "得令！",
+            "sha256": "74d8adb414335c8b76c320ea2a6eb670a596285a642e01567afe3f12db02c1d3",
+            "frames": 10191,
+            "duration_s": 0.462,
+            "rms": 3754.39
+          },
+          "audio.warning": {
+            "text": "当心！",
+            "sha256": "c3af8eacc81baac9ae662b97362f248b42fb3944cea9ac8cbbcf801791e259e6",
+            "frames": 14304,
+            "duration_s": 0.649,
+            "rms": 4162.84
+          }
+        },
+        "en": {
+          "audio.order.move": {
+            "text": "Move to the marker!",
+            "sha256": "643aa0a4ea9efcc7a43c871d45070af057de05995b3adf308b5c905509d419c9",
+            "frames": 21453,
+            "duration_s": 0.973,
+            "rms": 2881.12
+          },
+          "audio.order.follow": {
+            "text": "Follow me!",
+            "sha256": "1a6dbecae50ead87a720fee26669b5967948b2175448d233509d23e504f9308a",
+            "frames": 12961,
+            "duration_s": 0.588,
+            "rms": 3174.81
+          },
+          "audio.order.hold": {
+            "text": "Hold position!",
+            "sha256": "db1c2e65f6ae2269fdef78f971c02af27a95ec584218b9226b1068df19166910",
+            "frames": 20626,
+            "duration_s": 0.935,
+            "rms": 3217.68
+          },
+          "audio.order.advance": {
+            "text": "Advance!",
+            "sha256": "aad7b230c5597fee75b0c8c90a9b214db206ab0bad8e20261943224bfd47a597",
+            "frames": 14126,
+            "duration_s": 0.641,
+            "rms": 2401.75
+          },
+          "audio.order.retreat": {
+            "text": "Fall back!",
+            "sha256": "054c24b17e9e58045d1d71d108df35974e7b09d7163321f43de014dede20c49e",
+            "frames": 14392,
+            "duration_s": 0.653,
+            "rms": 3563.64
+          },
+          "audio.order.charge": {
+            "text": "Charge!",
+            "sha256": "ad61f36448a5549b26a30921459d59f569c1b723bd377c59890704abc84717cb",
+            "frames": 11734,
+            "duration_s": 0.532,
+            "rms": 3021.52
+          },
+          "audio.order.free_attack": {
+            "text": "Attack at will!",
+            "sha256": "1addba44a6c07158439f6f36f15e5013f556634fed8dc91d01ce27fe2958faf5",
+            "frames": 19168,
+            "duration_s": 0.869,
+            "rms": 3227.29
+          },
+          "audio.order.cancel": {
+            "text": "Cancel the order.",
+            "sha256": "a2be20cbc3bcebe2c223bbd5e1a7e9b8ed20cb0a81ed772800909e0a14af70e0",
+            "frames": 21004,
+            "duration_s": 0.953,
+            "rms": 3112.93
+          },
+          "audio.order.face": {
+            "text": "Turn!",
+            "sha256": "2dae13ce983ddc4d57241ecee9451c88f7695890ed84a888b8be8349d945aa02",
+            "frames": 9000,
+            "duration_s": 0.408,
+            "rms": 2433.54
+          },
+          "audio.order.face_enemy": {
+            "text": "Face the enemy!",
+            "sha256": "6c7387cc6d18919e848da611ac27e6ebf02241bb9d492e420975712fc4e43f78",
+            "frames": 17118,
+            "duration_s": 0.776,
+            "rms": 3062.49
+          },
+          "audio.order.layout": {
+            "text": "Change formation!",
+            "sha256": "928554fae3d4251195e6e4f9dd942478dbc0d16c0cdaacc63c748f05d95a6379",
+            "frames": 23918,
+            "duration_s": 1.085,
+            "rms": 2845.18
+          },
+          "audio.order.fire_at_will": {
+            "text": "Fire at will!",
+            "sha256": "29c36e7847eac305bb9f9336c70ac9a375e2e99d40d13f6e4bb6578df3e38cdc",
+            "frames": 18378,
+            "duration_s": 0.833,
+            "rms": 3442.0
+          },
+          "audio.order.hold_fire": {
+            "text": "Hold fire!",
+            "sha256": "39a921e80f6adfc9495f37bfabf365ffcc47d091e036f8b6761c23d68408c18f",
+            "frames": 17656,
+            "duration_s": 0.801,
+            "rms": 3191.16
+          },
+          "audio.order.use_ranged": {
+            "text": "Ready ranged weapons!",
+            "sha256": "b7a9ab239f1ff825ac9dec39952b14d94168e90e4185c94ce88dd93e76b12ff8",
+            "frames": 27180,
+            "duration_s": 1.233,
+            "rms": 3042.31
+          },
+          "audio.order.mount": {
+            "text": "Mount up!",
+            "sha256": "ba0e18f5597c5f9389e6225aaf3ab54fe62d49f091cad293a688402a05ded9ae",
+            "frames": 13729,
+            "duration_s": 0.623,
+            "rms": 3355.02
+          },
+          "audio.order.dismount": {
+            "text": "Dismount!",
+            "sha256": "2aaa2a9f6e385792122b2580e2edbacb5b09baee58fccdc0c18d4148d2ba7018",
+            "frames": 12788,
+            "duration_s": 0.58,
+            "rms": 2853.01
+          },
+          "audio.order.keep_distance": {
+            "text": "Keep distance!",
+            "sha256": "e576ac4a67e94928c9b4875aea61ae4fbc52c7952535a3dd21f50d5e7bf8c85d",
+            "frames": 19215,
+            "duration_s": 0.871,
+            "rms": 2747.91
+          },
+          "audio.order.assign_members": {
+            "text": "Reassign troops!",
+            "sha256": "ab15ba33c9a1f91d453b43c313245214d0f312960e08dbdc4ffe1b0cbcfc8898",
+            "frames": 22482,
+            "duration_s": 1.02,
+            "rms": 2975.52
+          },
+          "audio.order.split": {
+            "text": "Split formation!",
+            "sha256": "e223718c20a94d8644edcf1c6b9ddfea27bd35f64598378a93ebd3800e29b091",
+            "frames": 21761,
+            "duration_s": 0.987,
+            "rms": 2978.11
+          },
+          "audio.order.merge": {
+            "text": "Merge formations!",
+            "sha256": "ff605bb0a395254799f204c3b770ff72230145373a54d9e91ce57aa12d83a76b",
+            "frames": 24713,
+            "duration_s": 1.121,
+            "rms": 2609.93
+          },
+          "audio.order.delegate": {
+            "text": "Delegate command!",
+            "sha256": "f760493bfc3417ed4aa9533ba0cf8ec9e71cbed2e7bace0c6102706a2c2ef0e3",
+            "frames": 21617,
+            "duration_s": 0.98,
+            "rms": 2948.66
+          },
+          "audio.order.appoint_captain": {
+            "text": "Appoint a captain!",
+            "sha256": "1119601b18187e9b72dff64f00c5a0a244d214235412dc0723478f06f028f286",
+            "frames": 24024,
+            "duration_s": 1.09,
+            "rms": 3150.83
+          },
+          "audio.order.command": {
+            "text": "Order acknowledged!",
+            "sha256": "92150664cc8f76d75d90ce0e1f3ff0b69542f224a6bf32b4e71900eaf172d39c",
+            "frames": 21464,
+            "duration_s": 0.973,
+            "rms": 3430.96
+          },
+          "audio.warning": {
+            "text": "Watch out!",
+            "sha256": "989b8c94cda3b408a044e5016c834b3ae4da4a8b692c2275ee4164d769dce41f",
+            "frames": 13068,
+            "duration_s": 0.593,
+            "rms": 3927.52
+          }
+        }
+      }
+    },
+    {
+      "test": "res://tests/p2/audio/recorded_voices.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmpf6v2gmrf\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmplqyf9hvv\\engine.log",
+        "--script",
+        "res://tests/p2/audio/recorded_voices.gd"
+      ],
+      "duration_s": 4.98,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nRECORDED_VOICE zh_CN pcm_frames=7680 peak=0.50477993488312\nRECORDED_VOICE en_US pcm_frames=7680 peak=0.71526229381561\nRECORDED_VOICES PASS samples=48 peak_sources=1 errors=0"
+    },
+    {
+      "test": "res://tests/p2/audio/run.gd",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmpf6v2gmrf\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmpv6esc94p\\engine.log",
+        "--script",
+        "res://tests/p2/audio/run.gd"
+      ],
+      "duration_s": 1.45,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-AUD-01-AUTO PASS actors=500 confirmed_hits=250 budget=12 peak=10 dropped=185 voice_pcm_frames=12288 pcm_peak=0.43687245249748 human_intelligibility=NOT_RUN\nT-AUD-02 PASS silent_victory_caption=audio.defeat\nT-AUD-03 PASS remaining_audio_buses=0\nP2-AUD-BATTLE-001 PASS errors=0"
+    },
+    {
+      "test": "All 48 tracks separately through the actual Voice capture bus, isolated minimum export",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-voice_assets\\out\\voice-tool\\cold.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmppj9xnup9\\voice.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\per_clip.gd"
+      ],
+      "pck_sha256": "fea295d04af75b8e9c92086cc7610a3a3e3875ec947aee4310458c7324f11e5a",
+      "exit": 0,
+      "status": "PASS",
+      "observed_cues": 48,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_CLIP zh_CN audio.order.move samples=7680 energy=79.2593762841871\nQA_CLIP zh_CN audio.order.follow samples=7680 energy=141.981836976456\nQA_CLIP zh_CN audio.order.hold samples=7680 energy=82.7067180895385\nQA_CLIP zh_CN audio.order.advance samples=7680 energy=35.4799729270605\nQA_CLIP zh_CN audio.order.retreat samples=7680 energy=72.3481539085086\nQA_CLIP zh_CN audio.order.charge samples=7680 energy=122.177579794853\nQA_CLIP zh_CN audio.order.free_attack samples=7680 energy=52.9829361966022\nQA_CLIP zh_CN audio.order.cancel samples=7680 energy=43.132939617338\nQA_CLIP zh_CN audio.order.face samples=7680 energy=99.7202526835634\nQA_CLIP zh_CN audio.order.face_enemy samples=7680 energy=165.245238661742\nQA_CLIP zh_CN audio.order.layout samples=7680 energy=149.601472870015\nQA_CLIP zh_CN audio.order.fire_at_will samples=7680 energy=51.4903043307895\nQA_CLIP zh_CN audio.order.hold_fire samples=7680 energy=269.551246833824\nQA_CLIP zh_CN audio.order.use_ranged samples=7680 energy=78.9124670145419\nQA_CLIP zh_CN audio.order.mount samples=7680 energy=233.809162532583\nQA_CLIP zh_CN audio.order.dismount samples=7680 energy=92.3752703772424\nQA_CLIP zh_CN audio.order.keep_distance samples=7680 energy=494.871969105783\nQA_CLIP zh_CN audio.order.assign_members samples=7680 energy=77.5381012431312\nQA_CLIP zh_CN audio.order.split samples=7680 energy=172.061043162449\nQA_CLIP zh_CN audio.order.merge samples=7680 energy=106.578283403566\nQA_CLIP zh_CN audio.order.delegate samples=7680 energy=213.488851877944\nQA_CLIP zh_CN audio.order.appoint_captain samples=7680 energy=125.222806545376\nQA_CLIP zh_CN audio.order.command samples=7680 energy=110.202773287611\nQA_CLIP zh_CN audio.warning samples=7680 energy=449.458890670638\nRECORDED_VOICE zh_CN pcm_frames=7680 peak=0.19093523919582\nQA_CLIP en_US audio.order.move samples=7680 energy=194.341739376571\nQA_CLIP en_US audio.order.follow samples=7680 energy=187.054280543463\nQA_CLIP en_US audio.order.hold samples=7680 energy=227.98441531477\nQA_CLIP en_US audio.order.advance samples=7680 energy=60.4496469965753\nQA_CLIP en_US audio.order.retreat samples=7680 energy=332.250471936973\nQA_CLIP en_US audio.order.charge samples=7680 energy=131.501452761216\nQA_CLIP en_US audio.order.free_attack samples=7680 energy=121.569153343359\nQA_CLIP en_US audio.order.cancel samples=7680 energy=167.340670757902\nQA_CLIP en_US audio.order.face samples=7680 energy=81.6860032636523\nQA_CLIP en_US audio.order.face_enemy samples=7680 energy=184.070701487819\nQA_CLIP en_US audio.order.layout samples=7680 energy=159.856209619976\nQA_CLIP en_US audio.order.fire_at_will samples=7680 energy=206.171371542185\nQA_CLIP en_US audio.order.hold_fire samples=7680 energy=220.822110924594\nQA_CLIP en_US audio.order.use_ranged samples=7680 energy=293.013229404759\nQA_CLIP en_US audio.order.mount samples=7680 energy=285.306279868644\nQA_CLIP en_US audio.order.dismount samples=7680 energy=75.3267481764301\nQA_CLIP en_US audio.order.keep_distance samples=7680 energy=150.285910280705\nQA_CLIP en_US audio.order.assign_members samples=7680 energy=155.402174650059\nQA_CLIP en_US audio.order.split samples=7680 energy=35.5596707735098\nQA_CLIP en_US audio.order.merge samples=7680 energy=172.244256932731\nQA_CLIP en_US audio.order.delegate samples=7680 energy=240.435418701454\nQA_CLIP en_US audio.order.appoint_captain samples=7680 energy=255.371048453353\nQA_CLIP en_US audio.order.command samples=7680 energy=435.187466062192\nQA_CLIP en_US audio.warning samples=7680 energy=416.658424351729\nRECORDED_VOICE en_US pcm_frames=7680 peak=0.63158053159714\nRECORDED_VOICES PASS samples=48 peak_sources=1 errors=0\n"
+    },
+    {
+      "test": "All 48 individual Voice bus waveforms in final client.pck",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-delivery-final\\847890eed355-3c65c99cfea7\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmpsr9i1wkh\\voice.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\per_clip.gd"
+      ],
+      "pck_sha256": "a2ff6e7a61b2c517bf148e96ab40ee64184e9a43d23647f47be114cb94f36f8c",
+      "exit": 0,
+      "status": "PASS",
+      "observed_cues": 48,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_CLIP zh_CN audio.order.move samples=4096 energy=6.591932947687\nQA_CLIP zh_CN audio.order.follow samples=7680 energy=131.391023723283\nQA_CLIP zh_CN audio.order.hold samples=7680 energy=81.6970317676046\nQA_CLIP zh_CN audio.order.advance samples=7680 energy=35.4799729270605\nQA_CLIP zh_CN audio.order.retreat samples=7680 energy=78.8255061990589\nQA_CLIP zh_CN audio.order.charge samples=7680 energy=124.675678870557\nQA_CLIP zh_CN audio.order.free_attack samples=7680 energy=52.9829361966022\nQA_CLIP zh_CN audio.order.cancel samples=7680 energy=46.341047178863\nQA_CLIP zh_CN audio.order.face samples=7680 energy=96.3864794123499\nQA_CLIP zh_CN audio.order.face_enemy samples=7680 energy=165.245238661742\nQA_CLIP zh_CN audio.order.layout samples=7680 energy=150.098908762249\nQA_CLIP zh_CN audio.order.fire_at_will samples=7680 energy=51.4903043307895\nQA_CLIP zh_CN audio.order.hold_fire samples=7680 energy=266.924923171311\nQA_CLIP zh_CN audio.order.use_ranged samples=7680 energy=78.205115803975\nQA_CLIP zh_CN audio.order.mount samples=7680 energy=233.809162532583\nQA_CLIP zh_CN audio.order.dismount samples=7680 energy=80.9587915692552\nQA_CLIP zh_CN audio.order.keep_distance samples=7680 energy=498.745149703161\nQA_CLIP zh_CN audio.order.assign_members samples=7680 energy=77.5381012431312\nQA_CLIP zh_CN audio.order.split samples=7680 energy=125.691515421591\nQA_CLIP zh_CN audio.order.merge samples=7680 energy=106.578283403566\nQA_CLIP zh_CN audio.order.delegate samples=7680 energy=218.008107203833\nQA_CLIP zh_CN audio.order.appoint_captain samples=7680 energy=122.852518588748\nQA_CLIP zh_CN audio.order.command samples=7680 energy=110.202773287611\nQA_CLIP zh_CN audio.warning samples=7680 energy=449.458890670638\nRECORDED_VOICE zh_CN pcm_frames=7680 peak=0.63326668739319\nQA_CLIP en_US audio.order.move samples=7680 energy=211.611414324286\nQA_CLIP en_US audio.order.follow samples=7680 energy=187.255909978838\nQA_CLIP en_US audio.order.hold samples=7680 energy=219.343904597855\nQA_CLIP en_US audio.order.advance samples=7680 energy=60.4496469965753\nQA_CLIP en_US audio.order.retreat samples=7680 energy=324.099194800699\nQA_CLIP en_US audio.order.charge samples=7680 energy=126.968181945422\nQA_CLIP en_US audio.order.free_attack samples=7680 energy=121.569153343359\nQA_CLIP en_US audio.order.cancel samples=7680 energy=176.602391010004\nQA_CLIP en_US audio.order.face samples=7680 energy=81.6860032636523\nQA_CLIP en_US audio.order.face_enemy samples=7680 energy=180.873960595894\nQA_CLIP en_US audio.order.layout samples=7680 energy=160.347898504596\nQA_CLIP en_US audio.order.fire_at_will samples=7680 energy=206.171371542185\nQA_CLIP en_US audio.order.hold_fire samples=7680 energy=219.442887700561\nQA_CLIP en_US audio.order.use_ranged samples=7680 energy=294.840751227623\nQA_CLIP en_US audio.order.mount samples=7680 energy=285.306279868644\nQA_CLIP en_US audio.order.dismount samples=7680 energy=72.0038662447253\nQA_CLIP en_US audio.order.keep_distance samples=7680 energy=130.207805428488\nQA_CLIP en_US audio.order.assign_members samples=7680 energy=155.402174650059\nQA_CLIP en_US audio.order.split samples=7680 energy=44.4922388177799\nQA_CLIP en_US audio.order.merge samples=7680 energy=193.056335072251\nQA_CLIP en_US audio.order.delegate samples=7680 energy=240.435418701454\nQA_CLIP en_US audio.order.appoint_captain samples=7680 energy=258.758744191402\nQA_CLIP en_US audio.order.command samples=7680 energy=435.187466062192\nQA_CLIP en_US audio.warning samples=7680 energy=416.658424351729\nRECORDED_VOICE en_US pcm_frames=7680 peak=0.63158053159714\nRECORDED_VOICES PASS samples=48 peak_sources=1 errors=0\n"
+    },
+    {
+      "test": "All 48 individual Voice bus waveforms in final server.pck",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-delivery-final\\847890eed355-3c65c99cfea7\\server.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\tmp2q9gmno9\\voice.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\voice-assets\\per_clip.gd"
+      ],
+      "pck_sha256": "f9e95fed58ba97cfed45c27776af814e44d65e2540e532d5ef00e109376bca1c",
+      "exit": 0,
+      "status": "PASS",
+      "observed_cues": 48,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_CLIP zh_CN audio.order.move samples=4096 energy=6.591932947687\nQA_CLIP zh_CN audio.order.follow samples=7680 energy=131.391023723283\nQA_CLIP zh_CN audio.order.hold samples=7680 energy=81.6970317676046\nQA_CLIP zh_CN audio.order.advance samples=7680 energy=35.4799729270605\nQA_CLIP zh_CN audio.order.retreat samples=7680 energy=78.8255061990589\nQA_CLIP zh_CN audio.order.charge samples=7680 energy=124.675678870557\nQA_CLIP zh_CN audio.order.free_attack samples=7680 energy=52.9829361966022\nQA_CLIP zh_CN audio.order.cancel samples=7680 energy=46.341047178863\nQA_CLIP zh_CN audio.order.face samples=7680 energy=96.3864794123499\nQA_CLIP zh_CN audio.order.face_enemy samples=7680 energy=165.245238661742\nQA_CLIP zh_CN audio.order.layout samples=7680 energy=150.098908762249\nQA_CLIP zh_CN audio.order.fire_at_will samples=7680 energy=51.4903043307895\nQA_CLIP zh_CN audio.order.hold_fire samples=7680 energy=266.924923171311\nQA_CLIP zh_CN audio.order.use_ranged samples=7680 energy=78.205115803975\nQA_CLIP zh_CN audio.order.mount samples=7680 energy=233.809162532583\nQA_CLIP zh_CN audio.order.dismount samples=7680 energy=80.9587915692552\nQA_CLIP zh_CN audio.order.keep_distance samples=7680 energy=494.871969105783\nQA_CLIP zh_CN audio.order.assign_members samples=7680 energy=86.7234787052789\nQA_CLIP zh_CN audio.order.split samples=7680 energy=125.691515421591\nQA_CLIP zh_CN audio.order.merge samples=7680 energy=106.578283403566\nQA_CLIP zh_CN audio.order.delegate samples=7680 energy=218.008107203833\nQA_CLIP zh_CN audio.order.appoint_captain samples=7680 energy=122.852518588748\nQA_CLIP zh_CN audio.order.command samples=7680 energy=110.202773287611\nQA_CLIP zh_CN audio.warning samples=7680 energy=449.458890670638\nRECORDED_VOICE zh_CN pcm_frames=7680 peak=0.63326668739319\nQA_CLIP en_US audio.order.move samples=7680 energy=211.611414324286\nQA_CLIP en_US audio.order.follow samples=7680 energy=187.255909978838\nQA_CLIP en_US audio.order.hold samples=7680 energy=219.343904597855\nQA_CLIP en_US audio.order.advance samples=7680 energy=60.4496469965753\nQA_CLIP en_US audio.order.retreat samples=7680 energy=324.099194800699\nQA_CLIP en_US audio.order.charge samples=7680 energy=126.968181945422\nQA_CLIP en_US audio.order.free_attack samples=7680 energy=121.569153343359\nQA_CLIP en_US audio.order.cancel samples=7680 energy=176.602391010004\nQA_CLIP en_US audio.order.face samples=7680 energy=81.6860032636523\nQA_CLIP en_US audio.order.face_enemy samples=7680 energy=180.873960595894\nQA_CLIP en_US audio.order.layout samples=7680 energy=160.347898504596\nQA_CLIP en_US audio.order.fire_at_will samples=7680 energy=206.171371542185\nQA_CLIP en_US audio.order.hold_fire samples=7680 energy=219.442887700561\nQA_CLIP en_US audio.order.use_ranged samples=7680 energy=294.840751227623\nQA_CLIP en_US audio.order.mount samples=7680 energy=285.306279868644\nQA_CLIP en_US audio.order.dismount samples=7680 energy=72.0038662447253\nQA_CLIP en_US audio.order.keep_distance samples=7680 energy=130.207805428488\nQA_CLIP en_US audio.order.assign_members samples=7680 energy=155.402174650059\nQA_CLIP en_US audio.order.split samples=7680 energy=44.4922388177799\nQA_CLIP en_US audio.order.merge samples=7680 energy=193.056335072251\nQA_CLIP en_US audio.order.delegate samples=7680 energy=240.435418701454\nQA_CLIP en_US audio.order.appoint_captain samples=7680 energy=258.758744191402\nQA_CLIP en_US audio.order.command samples=7680 energy=435.187466062192\nQA_CLIP en_US audio.warning samples=7680 energy=416.658424351729\nRECORDED_VOICE en_US pcm_frames=4096 peak=0.63158053159714\nRECORDED_VOICES PASS samples=48 peak_sources=1 errors=0\n"
+    }
+  ],
+  "not_run": [
+    "AT-04",
+    "AT-05",
+    "8 GiB reference GPU",
+    "human Mandarin and English intelligibility listening panel",
+    "physical speaker sound pressure and headphone checks"
+  ],
+  "status": "PASS",
+  "source_pcm_format": "mono signed PCM 16-bit, 22050 Hz",
+  "delivery_commit": "847890eed355815e60e21be2a6817a9dc11877b9",
+  "delivery_manifest": "D:\\work\\game\\recollection\\out\\p2-delivery-final\\847890eed355-3c65c99cfea7\\manifest.json"
+}

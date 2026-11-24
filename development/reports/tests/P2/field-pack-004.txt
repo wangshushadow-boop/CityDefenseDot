@@ -1,0 +1,29 @@
+python ci/build.py --godot D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe --out out/p2-delivery-final
+test_dependency_edges (__main__.Gates.test_dependency_edges) ... ok
+test_release_fail_closed (__main__.Gates.test_release_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.203s
+
+OK
+T-CI-01 production dependency graph PASS
+application PASS exit 0
+bootstrap PASS exit 0
+campaign PASS exit 0
+content PASS exit 0
+contracts PASS exit 0
+core PASS exit 0
+definitions PASS exit 0
+engine PASS exit 0
+harness PASS exit 0
+inventory PASS exit 0
+mission PASS exit 0
+persistence PASS exit 0
+ports PASS exit 0
+rules PASS exit 0
+telemetry PASS exit 0
+T-CI-03 PASS D:\work\game\recollection\out\p2-delivery-final\847890eed355-3c65c99cfea7\manifest.json
+exit 0
+实测四份内容摘要 {'source': 'aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1', 'client': 'aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1', 'server': 'aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1', 'zip': 'aec256b449a3ebadc8d8b24ba75ff773a72523f70898f112a4d06faea6cc13a1'}
+客户端/专服各自成功加载 ['models/general.glb', 'models/spear_soldier.glb', 'models/crossbowman.glb', 'models/horse.glb']。
+T-CI-03 PASS

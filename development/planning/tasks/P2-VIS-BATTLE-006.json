@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "P2-VIS-BATTLE-006",
+  "kind": "EXECUTION",
+  "parent": "P2-VIS-BATTLE",
+  "stage": "P2",
+  "module_id": "BOOT",
+  "title": "验证 Windows 正常图形启动与离线语音配置",
+  "spec": "docs/systems/game/bootstrap/README.md",
+  "depends_on": [
+    "GATE-P1",
+    "P2-COM",
+    "P2-MOV",
+    "P2-AUD-BATTLE"
+  ],
+  "requirements": [
+    "ACC-01",
+    "AUD-01"
+  ],
+  "acceptance_test_ids": [
+    "T-AUD-02",
+    "T-CI-03"
+  ],
+  "allowed_paths": [
+    "game/tests/p2/field_profile/",
+    "development/reports/tasks/P2-VIS-BATTLE-006.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "fe301c6b7a942ee4952db9364d6fd0fa3f66936a",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-desktop_profile",
+  "scope": "在已锁引擎的 Windows 上默认加载随包语音；不同系统可用原有设备朗读。共享项目启动配置仍由主集成人落盘。使用原启动路径进行多次 Windows 冷启动，保留既有 2048 阴影、Forward+、有声命令与字幕。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "在已锁引擎的 Windows 上默认加载随包语音；不同系统可用原有设备朗读。共享项目启动配置仍由主集成人落盘。使用原启动路径进行多次 Windows 冷启动，保留既有 2048 阴影、Forward+、有声命令与字幕。"
+  ],
+  "status": "DONE"
+}

@@ -1,0 +1,84 @@
+{
+  "source_commit": "279b778393964187a2739603b48e53f869b0d9af",
+  "driver": "P2-BAI-I-001 stress() with headcount and role ratios 50% foot / 30% archer / 10% cavalry / 10% mounted archer, 120 samples; no rendering or L1/L2; static walls",
+  "samples": [
+    {
+      "humans": 500,
+      "mounts": 100,
+      "trial": 1,
+      "exit_code": 0,
+      "ok": true,
+      "output": [
+        "L3_LOAD_DOMAINS_US movement_p95=1837 pose_read_and_dict_p95=657 combat_inclusive_p95=2056",
+        "L3_LOAD confirmed_COM_actions=1024 eligible_emergencies=114 real_MOV_displaced=true instrumented_workload_p95_us=10802",
+        "T-BAI-I-04 humans=500 additional_mounts=100 ticks=120 jobs=5120 successful_reactions=114 backlog=0 max_jobs_tick=43 L3_decide_accept_p95_us=2221",
+        "P2-BAI-I-001 PASS checks=910 errors=0 paths=445 los=10688 sweeps=151"
+      ]
+    },
+    {
+      "humans": 500,
+      "mounts": 100,
+      "trial": 2,
+      "exit_code": 0,
+      "ok": true,
+      "output": [
+        "L3_LOAD_DOMAINS_US movement_p95=1634 pose_read_and_dict_p95=640 combat_inclusive_p95=2095",
+        "L3_LOAD confirmed_COM_actions=1024 eligible_emergencies=114 real_MOV_displaced=true instrumented_workload_p95_us=9786",
+        "T-BAI-I-04 humans=500 additional_mounts=100 ticks=120 jobs=5120 successful_reactions=114 backlog=0 max_jobs_tick=43 L3_decide_accept_p95_us=1853",
+        "P2-BAI-I-001 PASS checks=910 errors=0 paths=446 los=10688 sweeps=151"
+      ]
+    },
+    {
+      "humans": 500,
+      "mounts": 100,
+      "trial": 3,
+      "exit_code": 0,
+      "ok": true,
+      "output": [
+        "L3_LOAD_DOMAINS_US movement_p95=1710 pose_read_and_dict_p95=771 combat_inclusive_p95=2471",
+        "L3_LOAD confirmed_COM_actions=1024 eligible_emergencies=114 real_MOV_displaced=true instrumented_workload_p95_us=10626",
+        "T-BAI-I-04 humans=500 additional_mounts=100 ticks=120 jobs=5120 successful_reactions=114 backlog=0 max_jobs_tick=43 L3_decide_accept_p95_us=1925",
+        "P2-BAI-I-001 PASS checks=910 errors=0 paths=445 los=10688 sweeps=151"
+      ]
+    },
+    {
+      "humans": 1000,
+      "mounts": 200,
+      "trial": 1,
+      "exit_code": 0,
+      "ok": true,
+      "output": [
+        "L3_LOAD_DOMAINS_US movement_p95=3676 pose_read_and_dict_p95=1832 combat_inclusive_p95=5482",
+        "L3_LOAD confirmed_COM_actions=2365 eligible_emergencies=112 real_MOV_displaced=true instrumented_workload_p95_us=22890",
+        "T-BAI-I-04 humans=1000 additional_mounts=200 ticks=120 jobs=10120 successful_reactions=112 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=3888",
+        "P2-BAI-I-001 PASS checks=910 errors=0 paths=447 los=20581 sweeps=151"
+      ]
+    },
+    {
+      "humans": 1000,
+      "mounts": 200,
+      "trial": 2,
+      "exit_code": 0,
+      "ok": true,
+      "output": [
+        "L3_LOAD_DOMAINS_US movement_p95=3611 pose_read_and_dict_p95=1557 combat_inclusive_p95=5268",
+        "L3_LOAD confirmed_COM_actions=2365 eligible_emergencies=112 real_MOV_displaced=true instrumented_workload_p95_us=21559",
+        "T-BAI-I-04 humans=1000 additional_mounts=200 ticks=120 jobs=10120 successful_reactions=112 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=3917",
+        "P2-BAI-I-001 PASS checks=910 errors=0 paths=445 los=20581 sweeps=151"
+      ]
+    },
+    {
+      "humans": 1000,
+      "mounts": 200,
+      "trial": 3,
+      "exit_code": 0,
+      "ok": true,
+      "output": [
+        "L3_LOAD_DOMAINS_US movement_p95=3570 pose_read_and_dict_p95=1717 combat_inclusive_p95=5554",
+        "L3_LOAD confirmed_COM_actions=2365 eligible_emergencies=112 real_MOV_displaced=true instrumented_workload_p95_us=22736",
+        "T-BAI-I-04 humans=1000 additional_mounts=200 ticks=120 jobs=10120 successful_reactions=112 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=3897",
+        "P2-BAI-I-001 PASS checks=910 errors=0 paths=446 los=20581 sweeps=151"
+      ]
+    }
+  ]
+}
