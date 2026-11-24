@@ -36,6 +36,19 @@ func owner_hold() -> bool:
 	var hidden: Dictionary = w.brain.stage(job,unseen,w.ground(),1).value
 	check(hidden.feedback.reason=="target_not_visible" and hidden.member_constraint.focus_target==null,"no scouting hidden formation by task ID")
 	check(w.brain.rollback(hidden.token).ok,"discard hidden candidate")
+	var during := {"token":null,"attempted":false}
+	var guarded = World.Brain.new(World.SCOPE,"captain",w.ai.formation_view,w.form.view,0,func(candidate,orders):
+		var rollback_result: Dictionary = during.brain.rollback(during.token)
+		during.attempted=not rollback_result.ok
+		return w.ai.collect(candidate,orders))
+	during.brain=guarded
+	# A wrong grant intentionally leaves the real grant available for the owner scenario.
+	var guarded_result: Dictionary=guarded.stage(forged,flank,w.ground(),1).value
+	during.token=guarded_result.token
+	check(not guarded.collect(during.token).ok and during.attempted,"reentrant rollback rejected during collection")
+	check(guarded.rollback(during.token).ok,"ordinary rollback available after callback")
+	guarded.close()
+	during.clear()
 	var eager: Dictionary = w.brain.stage(job,flank,w.ground(),1).value
 	check(eager.behavior=="Charge" and eager.orders[0].order_type=="charge","eligible cavalry at site really selects charge")
 	var row := w.collect(job,eager)
@@ -103,6 +116,9 @@ func role_and_order_modes() -> bool:
 	w.deploy(0,[0],[p],"archer",2)
 	w.deploy(1,[1],[enemy],"infantry",0)
 	var job: Dictionary = w.publish(1).formation
+	check(w.form.assign_members(0,[World.h(99)]).ok,"FORM mutates same-size membership before decision")
+	check(not w.brain.stage(job,null,w.ground(),1).ok,"stale roster with same count, control and order revisions")
+	check(w.form.assign_members(0,[World.h(0)]).ok,"restore original fixture membership")
 	var site := p+Vector3.BACK*3
 	for row in [["hold","infantry",site,"Move"],["advance","infantry",null,"Advance"],
 			["cover","archer",p,"Fire"],["harass","mounted_archer",p,"Fire"],["retreat","infantry",site,"Retreat"]]:

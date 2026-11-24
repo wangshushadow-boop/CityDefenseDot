@@ -36,7 +36,23 @@ func close() -> void:
 	_tokens.clear()
 	_accepted.clear()
 
-func _inputs(job: Dictionary) -> Dictionary:
+static func _same_roster(handles: Array, units: Array) -> bool:
+	if handles.size() != units.size():
+		return false
+	for i in handles.size():
+		if handles[i] == units[i].handle:
+			continue
+		# BAI publish order is independent of FORM's sorted display order.
+		var generations := {}
+		for handle in handles:
+			generations[handle.index] = handle.generation
+		for unit in units:
+			if generations.get(unit.handle.index) != unit.handle.generation:
+				return false
+		break
+	return true
+
+func _inputs(job: Dictionary, for_decision := false) -> Dictionary:
 	if _closed or _reading or _issuer.is_empty() or not _intel.is_valid() or not _formation.is_valid():
 		return R.fail("InvalidState","formation_brain")
 	var stamp: Variant = job.get("stamp")
@@ -59,9 +75,11 @@ func _inputs(job: Dictionary) -> Dictionary:
 		return R.fail("StaleVersion","formation_stamp")
 	if form.value.id != id or not is_same(form.value.team_key, _team) or intel.value.own_units.is_empty() or not is_same(intel.value.own_units[0].team_key, _team):
 		return R.fail("Unauthorized","formation_team")
+	if for_decision and not _same_roster(form.value.members,intel.value.own_units):
+		return R.fail("StaleVersion","formation_roster")
 	var ally_position: Variant = null
 	var active: Variant = form.value.active
-	if active != null and active.order_type == "follow":
+	if for_decision and active != null and active.order_type == "follow":
 		_reading = true
 		var ally: Dictionary = _intel.call(active.target_formation_id)
 		_reading = false
@@ -109,7 +127,7 @@ func _orders(d: Dictionary, form: Dictionary, job: Dictionary, sequence: int) ->
 ## (metres), yaw (radians), reachable, optional current FORM compressed flag.
 ## next_sequence is reserved by the issuer.
 func stage(job: Dictionary, task: Variant, terrain: Dictionary, next_sequence: int) -> Dictionary:
-	var read := _inputs(job)
+	var read := _inputs(job,true)
 	if not read.ok:
 		return read
 	var id: int = job.subject
@@ -208,6 +226,8 @@ func commit(token: Variant, drained_row: Dictionary) -> Dictionary:
 	return R.ok()
 
 func rollback(token: Variant) -> Dictionary:
+	if _reading:
+		return R.fail("InvalidState","formation_callback")
 	if _tokens.has(token):
 		_pending.erase(_tokens[token])
 		_tokens.erase(token)
