@@ -46,7 +46,7 @@ def main():
             src = Path(source)
             for name in ("contracts", "shared/definitions", "infrastructure/content", "tests/p1/content"):
                 shutil.copytree(GAME / name, src / name)
-            shutil.copy(GAME / "project.godot", src / "project.godot")
+            (src / "project.godot").write_text("config_version=5\n", encoding="utf8")
             (src / "export_presets.cfg").write_text(PRESET, encoding="utf8")
             run(["--editor", "--path", src, "--import"], src)
             run(["--path", src, "--export-pack", "Content", pack], src)
