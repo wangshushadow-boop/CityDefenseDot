@@ -36,15 +36,16 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-persistence",
   "scope": "存档核心快照、迁移、原子提交与恢复端口；完整战役状态后续接入。 实际文件原子提交、上个安全版本、完整性、兼容和逐级迁移，各故障边界实跑。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
   ],
   "acceptance": [
     "基础快照往返、损坏/写入故障、逐级迁移通过。",
-    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
+    "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。",
+    "ADR-013 的旧/新提交在真实文件上有一致 checksum，加/断电等测试在独立进程复开；重复回执随快照同一提交。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

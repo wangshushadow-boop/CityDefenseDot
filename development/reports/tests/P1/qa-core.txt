@@ -1,0 +1,22 @@
+== 1 exit 0 ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+
+QA-CORE 76 checks, failures=0
+
+
+== 2 exit 0 ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+
+QA-CORE 76 checks, failures=0
+
+
+== 3 exit 0 ==
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+
+QA-CORE 76 checks, failures=0

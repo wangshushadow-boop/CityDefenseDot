@@ -34,8 +34,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-engine",
   "scope": "选定引擎的资源、场景、物理、导航与线程适配端口，先验证基本调用和生命周期。 真实 Godot 资源及场景租约、导航同步和连续扫掠，作用域释放。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -44,5 +44,5 @@
     "实际引擎适配 smoke test；核心无场景依赖。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

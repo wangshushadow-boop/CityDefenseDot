@@ -2,15 +2,15 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P1-CORE-001",
-      "owner": "p1core",
+      "task_id": "P1-INF-ENGINE-PORTS-001",
+      "owner": "p1-engine",
       "branch": "detached",
-      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-core",
+      "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-engine",
       "allowed_paths": [
-        "game/core/",
-        "game/tests/p1/core/",
-        "development/reports/tasks/P1-CORE-001.md"
+        "game/infrastructure/engine/",
+        "game/tests/p1/engine/",
+        "development/reports/tasks/P1-INF-ENGINE-PORTS-001.md"
       ],
       "excluded_paths": [
         "development/state/",
@@ -19,15 +19,99 @@
       ]
     },
     {
-      "task_id": "P1-DEF-001",
-      "owner": "p1def",
+      "task_id": "P1-TELEM-001",
+      "owner": "p1-telemetry",
       "branch": "detached",
-      "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
-      "worktree": "D:/work/game/recollection/.worktrees/p1-definitions",
+      "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-telemetry",
       "allowed_paths": [
-        "game/shared/definitions/",
-        "game/tests/p1/definitions/",
-        "development/reports/tasks/P1-DEF-001.md"
+        "game/infrastructure/telemetry/",
+        "game/tests/p1/telemetry/",
+        "development/reports/tasks/P1-TELEM-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    },
+    {
+      "task_id": "P1-INV-001",
+      "owner": "p1-inventory",
+      "branch": "detached",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-inventory",
+      "allowed_paths": [
+        "game/shared/inventory/",
+        "game/tests/p1/inventory/",
+        "development/reports/tasks/P1-INV-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-001",
+      "owner": "p1-persistence",
+      "branch": "detached",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-persistence",
+      "allowed_paths": [
+        "game/infrastructure/persistence/",
+        "game/tests/p1/persistence/",
+        "development/reports/tasks/P1-PERSIST-CORE-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    },
+    {
+      "task_id": "P1-INF-CONTENT-CORE-001",
+      "owner": "p1-content",
+      "branch": "detached",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-content",
+      "allowed_paths": [
+        "game/infrastructure/content/",
+        "game/tests/p1/content/",
+        "development/reports/tasks/P1-INF-CONTENT-CORE-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    },
+    {
+      "task_id": "P1-TEST-HARNESS-001",
+      "owner": "p1-harness",
+      "branch": "detached",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-harness",
+      "allowed_paths": [
+        "game/tests/p1/harness/",
+        "development/reports/tasks/P1-TEST-HARNESS-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/project.godot"
+      ]
+    },
+    {
+      "task_id": "P1-SHRULE-001",
+      "owner": "p1-rules",
+      "branch": "detached",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+      "worktree": "D:/work/game/recollection/.worktrees/p1-rules",
+      "allowed_paths": [
+        "game/shared/rules/",
+        "game/tests/p1/rules/",
+        "development/reports/tasks/P1-SHRULE-001.md"
       ],
       "excluded_paths": [
         "development/state/",

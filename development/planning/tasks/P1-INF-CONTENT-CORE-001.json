@@ -36,8 +36,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-content",
   "scope": "内容解析/编译、manifest、依赖/冲突、版本与资源引用；P6 完整 SDK/发布。 真实目录 manifest 与定义编译、依赖补丁、冲突/路径及内容摘要。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -46,5 +46,5 @@
     "合法/非法样例编译，内容 hash 稳定。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

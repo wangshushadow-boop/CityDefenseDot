@@ -34,8 +34,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-harness",
   "scope": "选定测试框架、fixture、运行脚本、证据输出、契约和领域初始测试；暂不宣称完整 AT。 CLI 按目录运行独立 SceneTree 套件；验证失败非零，记种子及 NOT_RUN。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -44,5 +44,5 @@
     "可真实运行并报告失败、跳过和种子；用一组正常与失败样例验证框架。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

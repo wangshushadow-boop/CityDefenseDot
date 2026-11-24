@@ -9,3 +9,7 @@
 ## 第一批合并态复验
 
 联合候选 `f37b8f4`：独立 13,390 样本零差异，46/46 形状断言通过。Godot T-CON-01/02/03、P1-CON-BOUNDARY 和 P1-PORTS-V1 均通过；第二套 oracle 的 34,155 个 NFC 样本和 14 组规范字节向量通过。另一个审查入口覆盖 24 种 schema，双向 24/24 通过。主 Agent 从同一个合并态 game/ 复跑全部入口退出 0。首轮失败与未运行项见[QA 复测明细](contracts/README.md)、[合并态原始输出](contract-candidate.txt)和[双向摘要](contract-oracle.txt)。
+
+CORE 首轮三次独立进程重放的 SHA-256 均为 35230c81dc693bc55bfe1acd788d4f120e5f2c707df773421f612d938b5f2171。DEF 独立确认 DAG 合流、循环路径、顺序无关的索引、只读视图等 19 项通过；加入布尔值冒充 troop.role 后 20 项有 1 项失败，退出 1，保留此回归记录。
+
+修订 CORE 在三次独立进程重复通过 76/76 断言；1 与 3 个 worker 结果相同，最终重放摘要 ef175296753b220567b00855d3cf0cfffe3e0308de4b842d37c9184442705f15。已回归跨运行时令牌、缺戳、分数 tick/revision、及已缓存 RNG 在恢复后的身份。DEF 修订独立通过 22/22 类型和引用断言。

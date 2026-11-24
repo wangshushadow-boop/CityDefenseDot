@@ -180,31 +180,41 @@
       ]
     },
     "P1-CORE": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1core",
       "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "a2f43744abd84ece4ad585ac52f86ce0ecec45ef",
+      "integrated_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": [
         "P1-CORE-001"
       ]
     },
     "P1-DEF": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1def",
       "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "4d64ee67299f3c6bc1bcefbb95691697a049d128",
+      "integrated_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": [
         "P1-DEF-001"
       ]
     },
     "P1-TEST-HARNESS": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-harness",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -213,9 +223,9 @@
       ]
     },
     "P1-SHRULE": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-rules",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -224,9 +234,9 @@
       ]
     },
     "P1-INV": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-inventory",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -235,9 +245,9 @@
       ]
     },
     "P1-INF-CONTENT-CORE": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-content",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -246,9 +256,9 @@
       ]
     },
     "P1-PERSIST-CORE": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-persistence",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -257,9 +267,9 @@
       ]
     },
     "P1-INF-ENGINE-PORTS": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-engine",
+      "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -268,9 +278,9 @@
       ]
     },
     "P1-TELEM": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-telemetry",
+      "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -1151,81 +1161,91 @@
       "child_ids": []
     },
     "P1-CORE-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1core",
       "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "a2f43744abd84ece4ad585ac52f86ce0ecec45ef",
+      "integrated_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": []
     },
     "P1-DEF-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p1def",
       "base_commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "4d64ee67299f3c6bc1bcefbb95691697a049d128",
+      "integrated_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
       "child_ids": []
     },
     "P1-TEST-HARNESS-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-harness",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P1-SHRULE-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-rules",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P1-INV-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-inventory",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P1-INF-CONTENT-CORE-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-content",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P1-PERSIST-CORE-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-persistence",
+      "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P1-INF-ENGINE-PORTS-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-engine",
+      "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P1-TELEM-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "p1-telemetry",
+      "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -3174,6 +3194,482 @@
       "reason": "主 Agent 分配隔离任务",
       "evidence": [],
       "commit": "042d1dd17741e6b7bf9ad5330c4f2d215b70dfb2"
+    },
+    {
+      "task_id": "P1-CORE-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-CORE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-CORE-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-CORE-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-CORE",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-CORE",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-CORE",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-CORE",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T21:28:15+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-CORE-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-INF-ENGINE-PORTS",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-INF-ENGINE-PORTS",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-INF-ENGINE-PORTS-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-INF-ENGINE-PORTS-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-TELEM",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-TELEM",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-TELEM-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-TELEM-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:28:16+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "93318670efd71234cade98bceb24c1ed45ad33d7"
+    },
+    {
+      "task_id": "P1-DEF-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:29:23+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-DEF-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:29:23+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-DEF-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T21:29:23+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-DEF-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T21:29:23+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-DEF",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-24T21:29:24+08:00",
+      "reason": "候选已自测",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-DEF",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-24T21:29:24+08:00",
+      "reason": "独立审查与 QA 核验",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-DEF",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-24T21:29:24+08:00",
+      "reason": "按白名单集成和重跑",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-DEF",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-24T21:29:24+08:00",
+      "reason": "阶段内任务验收满足",
+      "evidence": [
+        "development/reports/tasks/P1-DEF-001.md",
+        "development/reports/reviews/P1.md",
+        "development/reports/tests/P1/README.md",
+        "development/reports/integration/P1.md"
+      ],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INV",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INV",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INV-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INV-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-PERSIST-CORE-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INF-CONTENT-CORE",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INF-CONTENT-CORE",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INF-CONTENT-CORE-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-INF-CONTENT-CORE-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-TEST-HARNESS",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-TEST-HARNESS",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-TEST-HARNESS-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-TEST-HARNESS-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-SHRULE",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-SHRULE",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-SHRULE-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-24T21:29:27+08:00",
+      "reason": "前置已验收、检查任务写范围",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
+    },
+    {
+      "task_id": "P1-SHRULE-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-24T21:29:28+08:00",
+      "reason": "主 Agent 分配隔离任务",
+      "evidence": [],
+      "commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca"
     }
   ]
 }

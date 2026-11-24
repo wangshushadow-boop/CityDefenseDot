@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-CORE-01 PASS digest=ef175296753b220567b00855d3cf0cfffe3e0308de4b842d37c9184442705f15
+T-CORE-02 PASS
+T-CORE-03 PASS
+CORE failures=0
+exit=0

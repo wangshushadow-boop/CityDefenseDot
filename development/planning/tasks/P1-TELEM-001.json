@@ -30,8 +30,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "93318670efd71234cade98bceb24c1ed45ad33d7",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-telemetry",
   "scope": "统一日志、指标、运行环境与性能采样。 脱敏结构化日志、scope/tick、采样分位与本地导出。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -40,5 +40,5 @@
     "scope/tick/ID 可追踪、隐私最小化、真实采样。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

@@ -33,8 +33,8 @@
     "game/project.godot"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "a41de0689eabbf5793ceb3de4051c1321e0f07ca",
+  "worktree": "D:/work/game/recollection/.worktrees/p1-rules",
   "scope": "公共数值规则、效果堆叠、可注入随机、配置解释。 整数比例、买卖方向取整、作用域和互斥效果；可解释明细。",
   "non_goals": [
     "后续阶段完整玩法、正式跨阶段 AT 及未经批准的公开协议变化。"
@@ -43,5 +43,5 @@
     "纯函数与边界测试，不写业务状态。",
     "运行正式入口及任务独立测试，逐项区分完整用例和未覆盖的切片。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }
