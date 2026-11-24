@@ -8,6 +8,7 @@ const NEIGHBOURS := 48
 const QUERIES_PER_TICK := 8
 
 class Body:
+	var birth: RefCounted
 	var generation: int
 	var profile: String
 	var position: Vector3
@@ -29,6 +30,29 @@ class Body:
 	var courtesy := Vector3.ZERO
 	var courtesy_time := 0.0
 
+	func copy_from(other: Body) -> void:
+		birth = other.birth
+		generation = other.generation
+		profile = other.profile
+		position = other.position
+		velocity = other.velocity
+		heading = other.heading
+		radius = other.radius
+		group = other.group
+		offset = other.offset
+		revision = other.revision
+		cursor = other.cursor
+		arrived = other.arrived
+		blocked = other.blocked
+		wait = other.wait
+		path = other.path
+		ticket = other.ticket
+		access_version = other.access_version
+		join_index = other.join_index
+		passages = other.passages
+		courtesy = other.courtesy
+		courtesy_time = other.courtesy_time
+
 class Corridor:
 	var origin: Vector3
 	var goal: Vector3
@@ -38,6 +62,24 @@ class Corridor:
 	var reachable := false
 	var version := -1
 
+class Roster:
+	var weak_token: WeakRef
+	var indices := PackedInt64Array()
+	var births: Array[RefCounted] = []
+	var stamps: Array = [null,null]
+	var rows: Array = [[],[]]
+
+# Logical lineup is shared by equal rosters; a stamp names one exact body
+# buffer. Rebuilding a buffer after rollback must invalidate its cached rows.
+var _lineup := RefCounted.new()
+var _buffer_stamp := RefCounted.new()
+var _buffer_slot := 0
+var _bindings := {}
+var _stage: RefCounted
+var _stage_tick := -1
+var _stage_ready := false
+var _busy := false
+var _draft: Variant
 var _engine: RefCounted
 var _scope: String
 var _queue: RefCounted
@@ -75,30 +117,44 @@ static func _point_ok(p: Vector3) -> bool:
 static func _mm(p: Vector3) -> Array:
 	return [roundi(p.x * 1000), roundi(p.y * 1000), roundi(p.z * 1000)]
 
-func spawn(handle: Dictionary, position: Vector3, profile: String = "foot", heading: Vector3 = Vector3.FORWARD) -> Dictionary:
+func spawn(handle: Dictionary, position: Vector3, profile: String = "foot", heading: Vector3 = Vector3.FORWARD, stage: Variant = null) -> Dictionary:
+	if stage != null or _stage != null or _busy:
+		if not _editable(stage): return R.fail("InvalidState","movement_stage")
+		return _draft.spawn(handle,position,profile,heading)
 	var flat := Vector3(heading.x, 0, heading.z)
 	if not _valid_handle(handle) or not _point_ok(position) or profile not in ["foot","mounted"] or not heading.is_finite() or flat.is_zero_approx():
 		return R.fail("InvalidArgument", "movement_spawn")
 	if _bodies.has(handle.index) or handle.generation <= _retired.get(handle.index, 0):
 		return R.fail("Conflict", "movement_handle")
 	var b := Body.new()
+	b.birth = RefCounted.new()
 	b.generation = handle.generation
 	b.profile = profile
 	b.radius = 0.47 if profile == "mounted" else 0.28
 	b.position = position
 	b.heading = flat.normalized()
 	_bodies[handle.index] = b
+	_lineup = b.birth
+	_buffer_stamp = _lineup
 	return R.ok()
 
-func despawn(handle: Dictionary) -> Dictionary:
+func despawn(handle: Dictionary, stage: Variant = null) -> Dictionary:
+	if stage != null or _stage != null or _busy:
+		if not _editable(stage): return R.fail("InvalidState","movement_stage")
+		return _draft.despawn(handle)
 	if _body(handle) == null:
 		return R.fail("NotFound", "movement_handle")
 	_retired[handle.index] = handle.generation
 	_bodies.erase(handle.index)
+	_lineup = RefCounted.new()
+	_buffer_stamp = _lineup
 	return R.ok()
 
 ## Authored bounds of a bottleneck. The short horizontal axis is its width.
-func set_terrain(zones: Array) -> Dictionary:
+func set_terrain(zones: Array, stage: Variant = null) -> Dictionary:
+	if stage != null or _stage != null or _busy:
+		if not _editable(stage): return R.fail("InvalidState","movement_stage")
+		return _draft.set_terrain(zones)
 	for zone in zones:
 		if typeof(zone) != TYPE_DICTIONARY or typeof(zone.get("bounds")) != TYPE_AABB or typeof(zone.get("profiles")) != TYPE_ARRAY:
 			return R.fail("InvalidArgument", "terrain")
@@ -114,7 +170,10 @@ func set_terrain(zones: Array) -> Dictionary:
 		b.access_version = -1
 	return R.ok()
 
-func set_corridor(group: String, origin: Vector3, goal: Vector3, profile: String = "foot") -> Dictionary:
+func set_corridor(group: String, origin: Vector3, goal: Vector3, profile: String = "foot", stage: Variant = null) -> Dictionary:
+	if stage != null or _stage != null or _busy:
+		if not _editable(stage): return R.fail("InvalidState","movement_stage")
+		return _draft.set_corridor(group,origin,goal,profile)
 	if group.is_empty() or not _point_ok(origin) or not _point_ok(goal) or profile not in ["foot","mounted"]:
 		return R.fail("InvalidArgument", "corridor")
 	var old: Corridor = _routes.get(group)
@@ -130,7 +189,10 @@ func set_corridor(group: String, origin: Vector3, goal: Vector3, profile: String
 	_routes[group] = route
 	return R.ok()
 
-func assign(handle: Dictionary, group: String, slot_offset: Vector3 = Vector3.ZERO) -> Dictionary:
+func assign(handle: Dictionary, group: String, slot_offset: Vector3 = Vector3.ZERO, stage: Variant = null) -> Dictionary:
+	if stage != null or _stage != null or _busy:
+		if not _editable(stage): return R.fail("InvalidState","movement_stage")
+		return _draft.assign(handle,group,slot_offset)
 	var b := _body(handle)
 	var route: Corridor = _routes.get(group)
 	if b == null or route == null:
@@ -145,12 +207,173 @@ func assign(handle: Dictionary, group: String, slot_offset: Vector3 = Vector3.ZE
 		b.arrived = false
 	return R.ok()
 
-func view(handle: Dictionary) -> Dictionary:
+func view(handle: Dictionary, stage: Variant = null) -> Dictionary:
+	if stage != null:
+		if _busy or not is_same(stage,_stage): return R.fail("InvalidState","movement_stage")
+		return _draft.view(handle)
 	var b := _body(handle)
 	if b == null:
 		return R.fail("NotFound", "movement_handle")
 	return R.ok({"position":b.position, "velocity":b.velocity, "heading":b.heading,
 		"profile":b.profile, "arrived":b.arrived, "blocked":b.blocked})
+
+## Tickets bind each index to a particular spawn, including abandoned draft births.
+func bind_roster(handles: Array, stage: Variant = null) -> Dictionary:
+	if stage != null and (_busy or not is_same(stage,_stage)):
+		return R.fail("InvalidState","movement_stage")
+	var bodies: Dictionary = _bodies if stage == null else _draft._bodies
+	var seen := {}
+	var roster := Roster.new()
+	for handle in handles:
+		if typeof(handle) != TYPE_DICTIONARY or not _valid_handle(handle):
+			return R.fail("InvalidArgument","movement_handle")
+		var b: Body = bodies.get(handle.index)
+		if b == null or b.generation != handle.generation: return R.fail("NotFound","movement_handle")
+		if seen.has(handle.index): return R.fail("Conflict","movement_handle")
+		seen[handle.index] = true
+		roster.indices.append(handle.index)
+		roster.births.append(b.birth)
+	for id in _bindings.keys():
+		if _bindings[id].weak_token.get_ref() == null: _bindings.erase(id)
+	var token := RefCounted.new()
+	roster.weak_token = weakref(token)
+	_bindings[token.get_instance_id()] = roster
+	return R.ok(token)
+
+func read_positions(token: Variant, stage: Variant = null) -> Dictionary:
+	return _read_roster(token,stage,false)
+
+func read_poses(token: Variant, stage: Variant = null) -> Dictionary:
+	return _read_roster(token,stage,true)
+
+func _read_roster(token: Variant, stage: Variant, full: bool) -> Dictionary:
+	if stage != null and (_busy or not is_same(stage,_stage)): return R.fail("InvalidState","movement_stage")
+	if not token is RefCounted or not is_instance_valid(token): return R.fail("NotFound","roster")
+	var roster: Roster = _bindings.get(token.get_instance_id())
+	if roster == null or not is_same(roster.weak_token.get_ref(),token): return R.fail("NotFound","roster")
+	var slot: int = _buffer_slot if stage == null else _draft._buffer_slot
+	var stamp: RefCounted = _buffer_stamp if stage == null else _draft._buffer_stamp
+	var count := roster.indices.size()
+	if not is_same(roster.stamps[slot],stamp):
+		var bodies: Dictionary = _bodies if stage == null else _draft._bodies
+		var resolved: Array[Body] = []
+		for i in count:
+			var b: Body = bodies.get(roster.indices[i])
+			if b == null or not is_same(b.birth,roster.births[i]): return R.fail("NotFound","movement_handle")
+			resolved.append(b)
+		roster.rows[slot] = resolved
+		roster.stamps[slot] = stamp
+	var rows: Array = roster.rows[slot]
+	var positions := PackedVector3Array()
+	var velocities := PackedVector3Array()
+	var headings := PackedVector3Array()
+	positions.resize(count)
+	if full:
+		velocities.resize(count)
+		headings.resize(count)
+	for i in count:
+		var b: Body = rows[i]
+		positions[i] = b.position
+		if full:
+			velocities[i] = b.velocity
+			headings[i] = b.heading
+	return R.ok({"positions":positions,"velocities":velocities,"headings":headings}) if full else R.ok(positions)
+
+func _editable(stage: Variant) -> bool:
+	return _stage != null and is_same(stage,_stage) and not _stage_ready and not _busy
+
+## Early phases can deploy and assign into this stage before the movement phase.
+func begin_step(tick: int) -> Dictionary:
+	if _busy or _stage != null: return R.fail("InvalidState","movement_stage")
+	if tick < 0 or tick <= _tick: return R.fail("StaleVersion","tick")
+	if _draft == null: _draft = get_script().new(_engine,_scope)
+	var available: Dictionary = _draft._bodies
+	_draft._buffer_slot = 1-_buffer_slot
+	if is_same(_draft._lineup,_lineup):
+		for id in _bodies:
+			var copy: Body = available[id]
+			copy.copy_from(_bodies[id])
+	else:
+		# Preserve insertion order for avoidance. Reuse body objects; path data
+		# is shared read-only until the path changes.
+		var next := {}
+		for id in _bodies:
+			var copy: Body = available.get(id)
+			if copy == null: copy = Body.new()
+			copy.copy_from(_bodies[id])
+			next[id] = copy
+		_draft._bodies = next
+		_draft._lineup = _lineup
+		_draft._buffer_stamp = RefCounted.new()
+	_draft._routes = {}
+	for key in _routes:
+		var from: Corridor = _routes[key]
+		var route := Corridor.new()
+		route.origin = from.origin
+		route.goal = from.goal
+		route.profile = from.profile
+		route.ticket = from.ticket
+		route.points = from.points
+		route.reachable = from.reachable
+		route.version = from.version
+		_draft._routes[key] = route
+	_draft._retired = _retired.duplicate()
+	_draft._zones = _zones
+	_draft._revision = _revision
+	_draft._serial = _serial
+	_draft._tick = _tick
+	_draft._queue = _queue.fork()
+	_draft._access = _access.fork()
+	_stage = RefCounted.new()
+	_stage_tick = tick
+	return R.ok(_stage)
+
+func stage_step(tick: int, dt: float, stage: Variant = null) -> Dictionary:
+	if _busy or _stage_ready or (stage != null and not is_same(stage,_stage)):
+		return R.fail("InvalidState","movement_stage")
+	if _stage == null:
+		var start := begin_step(tick)
+		if not start.ok: return start
+	if tick != _stage_tick: return R.fail("StaleVersion","tick")
+	_busy = true
+	var result: Dictionary = _draft._run_step(tick,dt)
+	_busy = false
+	if not result.ok:
+		rollback_step(_stage)
+		return result
+	_stage_ready = true
+	result.value["stage_token"] = _stage
+	return result
+
+func commit_step(stage: Variant) -> Dictionary:
+	if _busy or not _stage_ready or not is_same(stage,_stage): return R.fail("InvalidState","movement_stage")
+	var previous := _bodies
+	_bodies = _draft._bodies
+	_draft._bodies = previous
+	var old_lineup := _lineup
+	var old_stamp := _buffer_stamp
+	_lineup = _draft._lineup
+	_buffer_stamp = _draft._buffer_stamp
+	_buffer_slot = _draft._buffer_slot
+	_draft._lineup = old_lineup
+	_draft._buffer_stamp = old_stamp
+	_routes = _draft._routes
+	_retired = _draft._retired
+	_zones = _draft._zones
+	_revision = _draft._revision
+	_serial = _draft._serial
+	_tick = _draft._tick
+	_queue = _draft._queue
+	_access = _draft._access
+	_stage = null
+	_stage_ready = false
+	return R.ok(_tick)
+
+func rollback_step(stage: Variant) -> Dictionary:
+	if _busy or _stage == null or not is_same(stage,_stage): return R.fail("InvalidState","movement_stage")
+	_stage = null
+	_stage_ready = false
+	return R.ok()
 
 func _remaining_queries(tick: int) -> int:
 	return QUERIES_PER_TICK - _queue.attempts_at(tick) - _access.attempts_at(tick)
@@ -187,7 +410,7 @@ func _prepare(tick: int) -> Dictionary:
 			elif result.error.code != "Unavailable":
 				return result
 			continue
-		route.points.clear()
+		route.points = PackedVector3Array()
 		for point in result.value.points:
 			route.points.append(Vector3(point[0],point[1],point[2]) * 0.001)
 		route.reachable = result.value.reachable and not route.points.is_empty()
@@ -248,7 +471,7 @@ func _members(tick: int, remaining: int) -> Dictionary:
 			continue
 		var route: Corridor = _routes[b.group]
 		var points: Array = result.value.points
-		b.path.clear()
+		b.path = PackedVector3Array()
 		b.revision = route.version
 		if not result.value.reachable or points.is_empty():
 			continue
@@ -271,7 +494,7 @@ func _set_path(b: Body, route: Corridor, approach: PackedVector3Array) -> void:
 		b.path.append(point)
 	b.revision = route.version
 	b.cursor = 0
-	b.passages.clear()
+	b.passages = []
 	var start := b.position
 	for zone in _zones:
 		var bounds: AABB = zone.bounds
@@ -452,6 +675,13 @@ func _move(b: Body, route: Corridor, dt: float) -> void:
 		_put(new_cell,b)
 
 func step(tick: int, dt: float) -> Dictionary:
+	if _busy or _stage != null: return R.fail("InvalidState","movement_stage")
+	_busy = true
+	var result := _run_step(tick,dt)
+	_busy = false
+	return result
+
+func _run_step(tick: int, dt: float) -> Dictionary:
 	if _engine == null or tick < 0 or not is_finite(dt) or dt <= 0 or dt > 0.1:
 		return R.fail("InvalidArgument", "movement_step")
 	if tick <= _tick:
