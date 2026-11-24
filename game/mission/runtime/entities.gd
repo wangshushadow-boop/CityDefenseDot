@@ -9,6 +9,20 @@ var free_indices: Array[int] = []
 var spawned := {}
 var active_sources := 0
 var next_index := 0
+var reserved_count := 0
+var _slot_boundaries := PackedInt64Array()
+
+func _init(sources: Array = []) -> void:
+	# EncounterSpec already guarantees disjoint half-open ranges.
+	for source in sources:
+		_slot_boundaries.append(source.source_slot_range[0])
+		_slot_boundaries.append(source.source_slot_range[1])
+		reserved_count += source.count
+	_slot_boundaries.sort()
+
+func has_reserved_slot(slot: int) -> bool:
+	# An odd number of boundaries at or below the slot puts it inside a range.
+	return _slot_boundaries.bsearch(slot, false) % 2 == 1
 
 func fork():
 	var copy = get_script().new()
@@ -18,6 +32,8 @@ func fork():
 	copy.spawned = spawned.duplicate()
 	copy.active_sources = active_sources
 	copy.next_index = next_index
+	copy.reserved_count = reserved_count
+	copy._slot_boundaries = _slot_boundaries
 	return copy
 
 static func freeze(value: Variant) -> Variant:
@@ -37,20 +53,17 @@ static func freeze(value: Variant) -> Variant:
 		return data
 	return value
 
-func allocate(slot: Variant, components: Dictionary, spec: Dictionary) -> Dictionary:
+func allocate(slot: Variant, components: Dictionary, battle_limit: int) -> Dictionary:
 	if slot != null:
 		if not V.integer(slot,0,V.MAX_U32):
 			return R.fail("InvalidArgument","source_slot")
-		var reserved := false
-		for source in spec.reserved_sources:
-			if source.source_slot_range[0] <= slot and slot < source.source_slot_range[1]:
-				reserved = true
-				break
-		if not reserved:
+		if components.get("type") in ["mount", "projectile", "siege_engine"]:
+			return R.fail("InvalidArgument","source_slot")
+		if not has_reserved_slot(slot):
 			return R.fail("NotFound","source_slot")
 		if spawned.has(slot):
 			return R.fail("Conflict","source_slot")
-		if active_sources >= spec.battle_limit:
+		if active_sources >= battle_limit:
 			return R.fail("Unavailable","battle_limit")
 	if not C.encode(components).ok:
 		return R.fail("InvalidArgument","components")

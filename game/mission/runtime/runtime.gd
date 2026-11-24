@@ -71,6 +71,7 @@ func prepare(spec: Dictionary, scene: Dictionary, ruleset: Dictionary) -> Dictio
 		_engine.release_scope(_mission)
 		return _undo_prepare(loaded)
 	_spec = checked.value
+	_entities = Entities.new(_spec.reserved_sources)
 	_phase = "Deployment"
 	return R.ok(view())
 
@@ -102,7 +103,7 @@ func _active() -> bool:
 func allocate_entity(source_slot: Variant, components: Dictionary) -> Dictionary:
 	if not _active():
 		return R.fail("InvalidState","phase")
-	return _entities.allocate(source_slot,components,_spec)
+	return _entities.allocate(source_slot,components,_spec.battle_limit)
 
 func apply_deployment(orders: Array) -> Dictionary:
 	if _busy or _phase != "Deployment":
@@ -112,7 +113,7 @@ func apply_deployment(orders: Array) -> Dictionary:
 	for order in orders:
 		if typeof(order) != TYPE_DICTIONARY or not order.has("source_slot") or typeof(order.get("components")) != TYPE_DICTIONARY:
 			return R.fail("InvalidArgument","deployment")
-		var allocated := staged.allocate(order.source_slot,order.components,_spec)
+		var allocated := staged.allocate(order.source_slot,order.components,_spec.battle_limit)
 		if not allocated.ok:
 			return allocated
 		handles.append(allocated.value)
@@ -212,7 +213,11 @@ func finalize() -> Dictionary:
 	var result: Dictionary = checked.value
 	if result.mission_id != _mission or result.duration_ticks != _tick or result.outcome != _outcome.outcome:
 		return R.fail("Conflict","mission_result")
+	if result.slot_outcomes.size() != _entities.reserved_count:
+		return R.fail("Conflict","slot_outcomes")
 	for row in result.slot_outcomes:
+		if not _entities.has_reserved_slot(row.source_slot_id):
+			return R.fail("Conflict","slot_outcomes.source_slot_id")
 		if (row.end_status == "not_spawned") == _entities.spawned.has(row.source_slot_id):
 			return R.fail("Conflict","slot_outcomes.end_status")
 	if _spec.mode == "campaign":
