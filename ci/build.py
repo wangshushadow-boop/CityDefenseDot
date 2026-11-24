@@ -108,7 +108,7 @@ def build(engine, out):
             tree = Path(tree)
             with tarfile.open(archive) as tar:
                 tar.extractall(tree, filter="data")
-            for file in ("build.py", "gates.py", "inspect_pack.gd", "inspect_field.gd",
+            for file in ("build.py", "gates.py", "inspect_pack.gd", "inspect_field.gd", "stabilize_field.gd",
                          "field_export/plugin.cfg", "field_export/plugin.gd"):
                 at_commit = tree / "ci" / file
                 if not at_commit.is_file() or (ROOT / "ci" / file).read_text("utf-8") != at_commit.read_text("utf-8"):
@@ -170,6 +170,7 @@ def build(engine, out):
                 (game / "export_presets.cfg").write_text(PRESET.format(target=target), encoding="utf-8")
                 (game / "build_info.json").write_bytes(json_bytes(stamp | {"target": target}))
                 godot(engine, ["--editor", "--path", game, "--import"], cold, env)
+                godot(engine, ["--path", game, "--script", tree / "ci/stabilize_field.gd"], cold, env)
                 godot(engine, ["--path", game, "--export-pack", "Recollection", stage / (target + ".pck")], cold, env)
         # The source resource root is gone. Cold processes see only the exported files.
         smokes = {}
