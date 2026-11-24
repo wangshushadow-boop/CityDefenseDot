@@ -97,7 +97,7 @@ static func evaluate(rule_key: String, input: Dictionary, config: Dictionary, rn
 		return apply_effects(input.get("base"),input.modifiers,input.scope,config)
 	if rng == null or typeof(rng) != TYPE_OBJECT or not rng.has_method("next_u32"):
 		return R.fail("InvalidArgument","rng")
-	var roll: int = rng.next_u32()
-	if roll < 0 or roll > 0xffffffff:
+	var roll: Variant = rng.next_u32()
+	if not V.integer(roll,0,0xffffffff):
 		return R.fail("InvalidState","rng")
 	return R.ok(float(roll) / 4294967296.0 < float(config.numerator) / config.denominator)

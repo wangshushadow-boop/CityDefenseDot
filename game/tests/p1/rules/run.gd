@@ -1,6 +1,10 @@
 extends SceneTree
 const Rules = preload("res://shared/rules/numeric_policy.gd")
 const Runtime = preload("res://core/runtime.gd")
+class InvalidStream extends RefCounted:
+	func next_u32() -> float:
+		return 0.5
+
 var errors := 0
 
 func check(value: bool, id: String) -> void:
@@ -28,5 +32,5 @@ func _initialize() -> void:
 	var state := stream.snapshot()
 	var a := Rules.evaluate("chance",{},{"numerator":1,"denominator":3},stream)
 	stream.restore(state)
-	check(a.ok and Rules.evaluate("chance",{},{"numerator":1,"denominator":3},stream) == a and not Rules.round_money(true,"buy").ok,"P1-RULES-RNG")
+	check(a.ok and Rules.evaluate("chance",{},{"numerator":1,"denominator":3},stream) == a and not Rules.evaluate("chance",{},{"numerator":1,"denominator":3},InvalidStream.new()).ok and not Rules.round_money(true,"buy").ok,"P1-RULES-RNG")
 	quit(1 if errors else 0)
