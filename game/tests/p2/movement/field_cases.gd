@@ -113,6 +113,8 @@ func large_field(engine: RefCounted, population: int) -> bool:
 	var samples: Array[int] = []
 	var queries := 0
 	var checks := 0
+	var member_queries := 0
+	var peak_all_queries := 0
 	for tick in 24:
 		var before := Time.get_ticks_usec()
 		var receipt: Dictionary = field.step(tick,DT)
@@ -120,11 +122,29 @@ func large_field(engine: RefCounted, population: int) -> bool:
 		if not receipt.ok:
 			return false
 		queries += receipt.value.queried
+		member_queries += receipt.value.member_queried
+		peak_all_queries = maxi(peak_all_queries,receipt.value.total_queried)
 		checks = maxi(checks,receipt.value.neighbour_checks)
 	samples.sort()
 	var moved := first.distance_to(field.view(handle(0)).value.position)
 	print("MOV_ACTIVE people=",population," ticks=24 queries=",queries," first_m=",moved,
 		" max_neighbour_checks=",checks," tick_p95_us=",samples[22])
+	# Admission is sliced across ticks. Check the last actors too, and meter the
+	# total native queries including both formation and member access corridors.
+	for tick in range(24,180):
+		var receipt: Dictionary = field.step(tick,DT)
+		if not receipt.ok:
+			return false
+		member_queries += receipt.value.member_queried
+		peak_all_queries = maxi(peak_all_queries,receipt.value.total_queried)
+	var moving := 0
+	for i in population:
+		var origin := Vector3(-53+(i%40)*0.9,0,-9+floori(i/40.0)*0.72)
+		if origin.distance_to(field.view(handle(i)).value.position) > 0.01:
+			moving += 1
+	print("MOV_JOIN people=",population," moved=",moving," member_queries=",member_queries," max_total_per_tick=",peak_all_queries)
+	if moving != population or peak_all_queries > 8:
+		return false
 	return queries == 20 and moved > 0.01 and checks <= population * 48 * 3
 
 func live_close(tree: SceneTree, engine: RefCounted) -> bool:
@@ -133,15 +153,21 @@ func live_close(tree: SceneTree, engine: RefCounted) -> bool:
 	field.spawn(actor,Vector3(-8,0,0))
 	field.set_corridor("bridge",Vector3(-8,0,0),Vector3(12,0,0))
 	field.assign(actor,"bridge")
+	var straggler := handle(1)
+	field.spawn(straggler,Vector3(-9,0,-1.2))
+	field.set_corridor("far_bank",Vector3(4,0,0),Vector3(12,0,0))
+	field.assign(straggler,"far_bank")
 	if not field.step(0,DT).ok:
 		return false
 	var old_position: Vector3 = field.view(actor).value.position
+	var straggler_start: Vector3 = field.view(straggler).value.position
 	for enabled in [false,true]:
 		if not engine.apply_nav_links([{"link_id":"bridge","enabled":enabled}],SCOPE).ok:
 			return false
 		var next_tick := 2 if enabled else 1
+		var published: Dictionary = field.view(actor).value
 		var pending: Dictionary = field.step(next_tick,DT)
-		if pending.ok or pending.error.code != "Unavailable" or field.view(actor).value.position != old_position:
+		if pending.ok or pending.error.code != "Unavailable" or field.view(actor).value != published:
 			return false
 		var ready := false
 		for frame in 120:
@@ -154,7 +180,9 @@ func live_close(tree: SceneTree, engine: RefCounted) -> bool:
 		var pose: Dictionary = field.view(actor).value
 		if not enabled and (pose.position != old_position or pose.blocked != "no_route" or pose.velocity != Vector3.ZERO):
 			return false
-	return field.view(actor).value.position.x > old_position.x
+		if not enabled and field.view(straggler).value.position != straggler_start:
+			return false
+	return field.view(actor).value.position.x > old_position.x and field.view(straggler).value.position.x > straggler_start.x
 
 func run(tree: SceneTree, engine: RefCounted) -> int:
 	var token: Dictionary = engine.open_scope(SCOPE)

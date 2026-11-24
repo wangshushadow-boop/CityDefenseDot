@@ -73,7 +73,7 @@ static func _comes_first(left: Dictionary, right: Dictionary) -> bool:
 		return left.priority > right.priority
 	return left.ticket.request_id < right.ticket.request_id
 
-func process_budget(tick: int) -> Dictionary:
+func process_budget(tick: int, remaining: int = 2147483647) -> Dictionary:
 	if tick < 0 or tick < _tick:
 		return R.fail("StaleVersion", "tick")
 	var sync := _sync()
@@ -82,7 +82,7 @@ func process_budget(tick: int) -> Dictionary:
 	if tick != _tick:
 		_tick = tick
 		_spent = 0
-	var count := mini(_per_tick - _spent, _pending.size())
+	var count := mini(mini(_per_tick - _spent, maxi(remaining,0)), _pending.size())
 	if count == 0:
 		return R.ok({"queried":0, "pending":_pending.size(), "nav_revision":_revision})
 	var jobs := _pending.values()
@@ -91,7 +91,6 @@ func process_budget(tick: int) -> Dictionary:
 	for index in count:
 		var route: Array = jobs[index].key
 		batch.append({"from":route[0], "to":route[1]})
-	_spent += count
 	var solved: Dictionary = _engine.query_path_batch(batch, _revision, _scope)
 	if not solved.ok:
 		return solved
@@ -100,6 +99,7 @@ func process_budget(tick: int) -> Dictionary:
 	for row in solved.value:
 		if typeof(row) != TYPE_DICTIONARY or row.get("nav_revision") != _revision or typeof(row.get("reachable")) != TYPE_BOOL or typeof(row.get("points")) != TYPE_ARRAY:
 			return R.fail("InvalidState", "path_query")
+	_spent += count
 	for index in count:
 		var job: Dictionary = jobs[index]
 		var id: int = job.ticket.request_id
