@@ -172,6 +172,69 @@ func _commands_and_transfers() -> void:
 	var ally := _order("player",14,6,"follow",{},2)
 	_ok(_submit(f,ally,1).ok and f.advance(6).ok and _state(f,ally).reason == "invalid_target", "follow requires friendly target")
 
+func _failed_owner_arbitration(reverse: bool) -> void:
+	for kind in ["split","merge","assign_members","delegate"]:
+		var f := Field.new(MID, _auth, _reachable)
+		var h := {"index":1,"generation":1}
+		var second := {"index":2,"generation":1}
+		var foreign := {"index":3,"generation":1}
+		_ok(f.add_formation(1,0,"player",[h,second]).ok, "numeric team")
+		_ok(f.add_formation(2,"0","player",[foreign]).ok, "text team")
+		_ok(f.set_delegate(1,"captain",_tokens.player,0).ok, "captain")
+		var parameters := {"split":{"new_formation_id":3,"members":[{"index":1,"generation":2}]},
+			"merge":{"source_id":2}, "assign_members":{"source_id":2,"members":[foreign]}, "delegate":{"actor":"player"}}
+		var bad := _order("player",1,1,kind,parameters[kind])
+		var good := _order("captain",1,1,"retreat")
+		for o in ([good,bad] if reverse else [bad,good]):
+			_ok(_submit(f,o,1).ok, "admit conflicting requests " + kind)
+		_ok(f.advance(1).ok and _state(f,bad).state == "Failed" and _state(f,good).state == "Active", "only successful owner orders claim " + kind)
+		_ok(f.view(1).value.active == good and f.member_formation(h).value == 1 and f.member_formation(foreign).value == 2 and not f.view(3).ok, "failed organization keeps indices " + kind)
+		var charge := _order("player",2,2,"charge",{},2)
+		var follow := _order("player",3,3,"follow",{},2)
+		_ok(_submit(f,charge,1).ok and f.advance(2).ok and _state(f,charge).state == "Active", "0 and text 0 are distinct enemies")
+		_ok(_submit(f,follow,1).ok and f.advance(3).ok and _state(f,follow).reason == "invalid_target" and f.view(1).value.active == charge, "mixed-key hostile group cannot be followed")
+
+func _standing_owner() -> void:
+	for cancel in [false,true]:
+		var f := _new()
+		var hold := _order("player",1,1,"hold")
+		var retreat := _order("captain",1,2,"retreat")
+		_ok(_submit(f,hold).ok and f.advance(1).ok and f.set_delegate(1,"captain",_tokens.player,0).ok, "grant after active hold")
+		_ok(_submit(f,retreat,1).ok and f.advance(2).ok and f.view(1).value.active == hold and _state(f,retreat).reason == "player_priority", "standing owner survives new grant")
+		var tick := 3
+		if cancel:
+			_ok(_submit(f,_order("player",2,tick,"cancel"),1).ok and f.advance(tick).ok, "owner cancels")
+			tick += 1
+		else:
+			_ok(f.complete_active(1,"player",hold.order_id,"executed").ok, "owner completed")
+		var next := _order("captain",2,tick,"retreat")
+		_ok(_submit(f,next,1).ok and f.advance(tick).ok and f.view(1).value.active == next, "delegate moves after explicit release")
+
+func _same_tick_roster_change() -> void:
+	var f := _new()
+	var a := {"index":8,"generation":1}
+	_ok(f.add_formation(3,"allies","player",[a,{"index":9,"generation":1}]).ok and f.set_delegate(3,"captain",_tokens.player,0).ok, "second owned group")
+	var first := _order("player",1,1,"split",{"new_formation_id":4,"members":[{"index":1,"generation":1}]})
+	var second := _order("player",2,1,"split",{"new_formation_id":4,"members":[a]},null,[3])
+	var ai := _order("captain",1,1,"hold",{},null,[3])
+	_ok(_submit(f,ai,1).ok and _submit(f,first).ok and _submit(f,second,1).ok and f.advance(1).ok, "two competing split commits")
+	_ok(_state(f,first).state == "Completed" and _state(f,second,3).state == "Failed" and f.member_formation(a).value == 3 and f.view(3).value.active == ai, "late split conflict does not suppress delegate")
+	# The player owns group 1 and acts as a delegate on group 2. With a third
+	# issuer owning group 2, group 1 remains available to its own delegate.
+	_ok(f.set_delegate(2,"player",_tokens.enemy,0).ok and f.set_delegate(1,"captain",_tokens.player,0).ok, "mixed authority")
+	var mixed := _order("player",3,2,"retreat",{},null,[1,2])
+	var enemy := _order("enemy",1,2,"hold",{},null,[2])
+	var free := _order("captain",2,2,"advance")
+	for o in [free,mixed,enemy]:
+		_ok(_submit(f,o,1).ok, "multi-target arbitration")
+	_ok(f.advance(2).ok and _state(f,mixed).reason == "player_priority" and f.view(1).value.active == free and f.view(2).value.active == enemy, "rejected mixed scope leaves other delegate available")
+	_ok(f.complete_active(2,"enemy",enemy.order_id,"executed").ok and f.set_delegate(1,"enemy",_tokens.player,1).ok, "release for mutual delegation")
+	var enemy_mixed := _order("enemy",2,3,"advance",{},null,[1,2])
+	var player_mixed := _order("player",4,3,"hold",{},null,[1,2])
+	for o in [player_mixed,enemy_mixed]:
+		_ok(f.issue_order(o,_tokens[o.issuer_id],{1:2,2:1}).ok, "mutual mixed scopes")
+	_ok(f.advance(3).ok and f.view(1).value.active == enemy_mixed and f.view(2).value.active == enemy_mixed and _state(f,player_mixed).reason == "player_priority", "mutual dependency resolves in stable order")
+
 func _through_orders() -> void:
 	var f := _new()
 	var roster := []
@@ -201,4 +264,8 @@ func run() -> void:
 	_queue()
 	_organization()
 	_commands_and_transfers()
+	_failed_owner_arbitration(false)
+	_failed_owner_arbitration(true)
+	_standing_owner()
+	_same_tick_roster_change()
 	_through_orders()

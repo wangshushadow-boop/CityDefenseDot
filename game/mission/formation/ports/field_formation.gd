@@ -94,7 +94,7 @@ func assign_members(id: int, members: Array) -> Dictionary:
 ## explicitly so a destination-only order cannot silently remove another roster.
 func _assign_deployed(g: Dictionary, parameters: Dictionary) -> Dictionary:
 	var source: Dictionary = _groups[parameters.get("source_id", g.id)]
-	if source.team_key != g.team_key or source.owner != g.owner:
+	if not is_same(source.team_key, g.team_key) or source.owner != g.owner:
 		return R.fail("Unauthorized", "source_id")
 	var checked := _members(parameters.members, source.id)
 	if not checked.ok:
@@ -157,7 +157,7 @@ func merge(into: int, source: int, context: Variant, expected_into: int, expecte
 func _merge(g: Dictionary, other: Dictionary, expected_into: int, expected_source: int) -> Dictionary:
 	var into: int = g.id
 	var source: int = other.id
-	if into == source or g.team_key != other.team_key:
+	if into == source or not is_same(g.team_key, other.team_key):
 		return R.fail("InvalidArgument", "formation_ids")
 	if expected_into != g.control_revision or expected_source != other.control_revision:
 		return R.fail("Conflict", "control_revision")
@@ -195,7 +195,7 @@ func _delegate(g: Dictionary, actor_or_empty: String, expected_revision: int) ->
 ## Auth and all selected scopes are checked even for a previously admitted order ID.
 func issue_order(order: Dictionary, context: Variant, expected_control_revision: Variant) -> Dictionary:
 	var actor := _actor(context)
-	if actor.is_empty() or actor != order.get("issuer_id") or _mission != order.get("mission_id"):
+	if actor.is_empty() or not is_same(actor, order.get("issuer_id")) or not is_same(_mission, order.get("mission_id")):
 		return R.fail("Unauthorized", "issuer")
 	var shape := S.validate_shape("FormationOrder", order)
 	if not shape.ok:
@@ -262,7 +262,7 @@ func _clear(g: Dictionary, state: String, reason: String) -> void:
 	if g.active != null:
 		_finish(g, g.active, state, reason)
 
-func _failure(g: Dictionary, job: Dictionary, check_navigation: bool = true) -> String:
+func _failure(g: Dictionary, job: Dictionary) -> String:
 	var o: Dictionary = job.order
 	var committed_owner: bool = is_same(g.active, job) and o.issuer_id == g.owner
 	if not _controlled(g, o.issuer_id) or (g.control_revision != job.revisions[g.id] and not committed_owner):
@@ -272,17 +272,20 @@ func _failure(g: Dictionary, job: Dictionary, check_navigation: bool = true) -> 
 	if job.source_revision >= 0:
 		if not _groups.has(o.parameters.source_id) or _groups[o.parameters.source_id].control_revision != job.source_revision:
 			return "invalid_source"
-	if o.issuer_id != g.owner and g.active != null and g.active.order.issuer_id == g.owner and g.active.revisions[g.id] == g.control_revision and Orders.policy(o) == "replace":
-		return "player_priority"
+	if o.issuer_id != g.owner and not is_same(g.active, job) and Orders.policy(o) == "replace":
+		if g.active != null and g.active.order.issuer_id == g.owner:
+			return "player_priority"
+		if g.queued.any(func(queued): return queued.order.issuer_id == g.owner):
+			return "player_priority"
 	if o.order_type == "cancel":
 		return ""
 	if g.routing:
 		return "routing"
 	if o.target_formation_id != null:
 		var target: Variant = _groups.get(o.target_formation_id)
-		if target == null or target.id == g.id or target.members.is_empty() or ((target.team_key == g.team_key) != (o.order_type == "follow")):
+		if target == null or target.id == g.id or target.members.is_empty() or (is_same(target.team_key, g.team_key) != (o.order_type == "follow")):
 			return "invalid_target"
-	if check_navigation and o.target_position != null:
+	if o.target_position != null:
 		if not _reachable.is_valid():
 			return "unreachable"
 		_in_callback = true
@@ -360,51 +363,61 @@ func advance(tick: int) -> Dictionary:
 			if not reason.is_empty():
 				_finish(g, g.active, "Failed", reason)
 		_pump(g)
-	# Preflight once so a failed player order cannot displace a valid delegated one.
-	var claims := {}
-	var eligible := []
+	# Owner orders run before orders delegated on the same formation. Only an actual
+	# dispatch can claim priority: organization can still fail on roster changes.
+	var owners_left := {}
+	var claimed := {}
 	for job in _pending:
-		var failure := ""
 		for id in job.order.formation_ids:
-			failure = _failure(_groups[id], job) if _groups.has(id) else "formation_merged"
-			if failure != "":
-				break
-		if failure != "":
-			for id in job.order.formation_ids:
-				_mark(job, id, "Failed", failure)
-				if _groups.has(id):
-					_groups[id].feedback = job.states[id]
-			continue
-		eligible.append(job)
-		for id in job.order.formation_ids:
-			if _groups[id].owner == job.order.issuer_id:
-				claims[id] = true
-	eligible.sort_custom(func(a, b):
+			if _used_ids[id] == job.order.issuer_id:
+				owners_left[id] = owners_left.get(id, 0) + 1
+	_pending.sort_custom(func(a, b):
 		if a.order.issuer_id != b.order.issuer_id:
 			return a.order.issuer_id < b.order.issuer_id
 		return a.order.client_sequence < b.order.client_sequence)
-	for job in eligible:
-		var loses := false
-		for id in job.order.formation_ids:
-			if claims.has(id) and _groups.has(id) and job.order.issuer_id != _groups[id].owner:
-				loses = true
-		# Recheck identities affected by an earlier same-tick organization order.
-		var reason := ""
-		for id in job.order.formation_ids:
-			reason = _failure(_groups[id], job, false) if _groups.has(id) else "formation_merged"
-			if reason != "":
-				break
-		for id in job.order.formation_ids:
-			if loses:
-				_mark(job, id, "Replaced", "player_priority")
-			elif reason != "":
-				_mark(job, id, "Failed", reason)
-				if _groups.has(id):
-					_groups[id].feedback = job.states[id]
+	while not _pending.is_empty():
+		var waiting := []
+		var waiting_issuers := {}
+		for job in _pending:
+			var actor: String = job.order.issuer_id
+			if waiting_issuers.has(actor) or job.order.formation_ids.any(func(id): return _used_ids[id] != actor and owners_left.get(id, 0) > 0):
+				waiting_issuers[actor] = true
+				waiting.append(job)
 			else:
-				_dispatch(_groups[id], job)
-	_pending.clear()
+				_apply_pending(job, owners_left, claimed)
+		if waiting.size() == _pending.size():
+			# Mutually delegated multi-selects can wait on one another. Resolve the
+			# first in stable issuer/sequence order; each command stays atomic.
+			_apply_pending(waiting.pop_front(), owners_left, claimed)
+		_pending = waiting
 	return R.ok(tick)
+
+func _apply_pending(job: Dictionary, owners_left: Dictionary, claimed: Dictionary) -> void:
+	var order: Dictionary = job.order
+	var superseded := false
+	for id in order.formation_ids:
+		if _used_ids[id] == order.issuer_id:
+			owners_left[id] -= 1
+		elif claimed.has(id):
+			superseded = true
+	if superseded:
+		for id in order.formation_ids:
+			_mark(job, id, "Replaced", "player_priority")
+		return
+	var failure := ""
+	for id in order.formation_ids:
+		failure = _failure(_groups[id], job) if _groups.has(id) else "formation_merged"
+		if not failure.is_empty():
+			break
+	for id in order.formation_ids:
+		if not failure.is_empty():
+			_mark(job, id, "Failed", failure)
+			if _groups.has(id):
+				_groups[id].feedback = job.states[id]
+		else:
+			_dispatch(_groups[id], job)
+			if _used_ids[id] == order.issuer_id and job.states[id].state != "Failed":
+				claimed[id] = true
 
 ## Mission executor signals arrival or explicit completion. Stale acknowledgments cannot
 ## complete a newer order since the issuer and order ID must both match.

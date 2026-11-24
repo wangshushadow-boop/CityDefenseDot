@@ -34,6 +34,25 @@ python docs/architecture/check_mirror.py
 
 一次新增测试对动态读模使用了静态类型推导，Godot 报解析失败。终止该次进程后补齐 Dictionary 类型，完整入口重新运行通过。验收依据取自完成标志和错误日志。[测试入口](../../../game/tests/p2/formation/run.gd) · [订单与导航用例](../../../game/tests/p2/formation/field_cases.gd)
 
+## 首次独立审查与 QA 退修
+
+主 Agent 固化首轮候选 `2f35ed66079f986aa74698544ddf500323480318` 后，独立审查与 QA 均要求修复。开发者在该提交上原样复现并修正以下行为。
+
+- 玩家跨队合并、用旧代际拆分等组织订单可能在真实提交时失败。固定步现在按所选编队依次解决所有者和受托者的争用，仅成功执行或排队的所有者指令能占用当步优先权。同一 tick 的先行拆分改变了成员表或编队编号时，后续订单读提交后的状态。多选仍整批裁决。相互委派形成循环时，按稳定的发起人和序号决定先后。
+- 使用 Godot 的严格同值比较判断队键。整数 `0` 和字符串 `"0"` 在目标关系、合并、调拨三个路径都作为不同阵营处理。已执行的玩家移动指令持续受保护，之后授予队长权限也不会将其替换。玩家取消或执行者确认完成后，已获准的队长可以在下一步接管。
+- 模块回归新增非法合并、代际失效拆分、跨队调拨、无效委派在两种抵达顺序下的正反断言，另行验证在场成员索引、同 tick 争抢新编队编号、跨队 charge/follow、有效玩家指令的取消/完成及多选冲突。
+
+以下命令均在独立工作树、同一套 Godot 4.7.2 Standard 下运行。开发者使用未修改的独立脚本，未覆盖审查员和 QA 的原始日志。
+
+| 原样命令或入口 | 修复前 | 修复后 |
+|---|---|---|
+| `& $godot --headless --path game --script D:/work/game/recollection/out/p2-review/formation2_conflicts.gd` | 退出 1，玩家合并失败后，合法队长令被取代，活动订单为空。 | 退出 0。合并 Failed/formation_ids，队长 hold 成为 Active。 |
+| `& $godot --headless --path game --script D:/work/game/recollection/out/p2-qa/qa-form2.gd` | 退出 1，19 项中 5 失败，出现 String/int 比较脚本错误。 | 退出 0，`QA_FORM PASS checks=19 failures=0`，无脚本错误。 |
+| 本文编队 Godot 入口及新增回归 | 首轮用例已通过，缺少上述反例。 | 退出 0，T-FORM-01/02、03-READ-MODEL、04-AUTHORITY 通过，66,499 个可达槽位端点。 |
+| 本文 P1 harness，构建标签 `FORM-002-rework1` | 首轮 15 套通过。 | 15/15 套退出 0。生产依赖门禁 `dependencies PASS issues=0`。 |
+
+退修改动只涉及 `ports/field_formation.gd`、`field_cases.gd` 和本报告。最终独立审查、QA 和主树集成态待主 Agent 确认。实际 HUD 和跨 ENet 场景仍未运行。
+
 ## 交接
 
 变更位于编队 README、`order_rules.gd`、`ports/field_formation.gd`、编队测试 `run.gd` 和 `field_cases.gd`，以及本报告。测试使用生产引擎导航适配器和专属导航场景。未修改公共契约、引擎配置、状态或追踪表。实际 HUD、端到端战斗入口、全军动态运动/战斗表现、64/128 客户端及帧时预算均未在本任务验证。独立审查、QA、主树集成态由主 Agent 记录。
