@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="SphereShape3D" id="Sphere"]
+radius = 0.15
+
+[node name="Regions" type="Node3D"]
+
+[node name="Rig" type="Skeleton3D" parent="."]
+bones/0/name = "first"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(-0.4, 0, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "second"
+bones/1/parent = -1
+bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0.4, 0, 0)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
+
+[node name="First" type="BoneAttachment3D" parent="Rig"]
+bone_name = "first"
+bone_idx = 0
+
+[node name="Body" type="StaticBody3D" parent="Rig/First"]
+metadata/entity_handle = "registered_target"
+metadata/region = "first"
+
+[node name="Shape" type="CollisionShape3D" parent="Rig/First/Body"]
+shape = SubResource("Sphere")
+
+[node name="Second" type="BoneAttachment3D" parent="Rig"]
+bone_name = "second"
+bone_idx = 1
+
+[node name="Body" type="StaticBody3D" parent="Rig/Second"]
+metadata/entity_handle = "registered_target"
+metadata/region = "second"
+
+[node name="Shape" type="CollisionShape3D" parent="Rig/Second/Body"]
+shape = SubResource("Sphere")

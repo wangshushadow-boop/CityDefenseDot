@@ -2,4 +2,4 @@
 
 项目：`recollection`。模块：`COM`。
 
-**状态：目录骨架，未实现。** 本目录 README 仅作为导航；正式设计见 [模块规格](../../../docs/systems/game/mission/combat/README.md)。实际文件及测试在对应任务获准后建立，不在这里重复设计，不将目录存在当作功能完成。
+[近战固定步执行](melee.gd)处理四向动作、格挡和权威碰撞候选。[模块验收入口](../../tests/p2/combat/run.gd)覆盖真实碰撞体与确定性重放。[模块规格](../../../docs/systems/game/mission/combat/README.md)
