@@ -3,6 +3,24 @@ const Field = preload("res://mission/movement/ports/field_movement.gd")
 const SCOPE := "moving-field"
 const DT := 1.0 / 30.0
 const COUNT := 48
+const R = preload("res://contracts/result.gd")
+
+class RejectAccess:
+	extends RefCounted
+	var reject := true
+	var attempts := 0
+
+	func sync_navigation(_scope: String) -> Dictionary:
+		return R.ok({"status":"applied","applied_revision":1})
+
+	func query_path_batch(batch: Array, revision: int, _scope: String) -> Dictionary:
+		attempts += batch.size()
+		if reject and batch[0].from[2] != 0:
+			return R.fail("Unavailable","injected_member_query")
+		var rows := []
+		for item in batch:
+			rows.append({"nav_revision":revision,"points":[item.from,item.to],"reachable":true})
+		return R.ok(rows)
 
 var errors := 0
 var completed := false
@@ -184,6 +202,27 @@ func live_close(tree: SceneTree, engine: RefCounted) -> bool:
 			return false
 	return field.view(actor).value.position.x > old_position.x and field.view(straggler).value.position.x > straggler_start.x
 
+func failed_access_budget() -> bool:
+	var nav := RejectAccess.new()
+	var field := Field.new(nav,"failed-member")
+	field.set_corridor("A",Vector3.ZERO,Vector3(15,0,0))
+	for i in 8:
+		field.spawn(handle(i),Vector3(i,0,2))
+		field.assign(handle(i),"A")
+	var before: Dictionary = field.view(handle(0)).value
+	var failed := field.step(1,DT)
+	if failed.ok or nav.attempts != 8 or field.view(handle(0)).value != before:
+		return false
+	nav.reject = false
+	var waiting := field.step(1,DT)
+	if not waiting.ok or waiting.value.queried != 1 or waiting.value.member_queried != 7 or nav.attempts != 8:
+		return false
+	if field.view(handle(0)).value.position != before.position or field.step(1,DT).ok:
+		return false
+	var resumed := field.step(2,DT)
+	print("MOV_FAILED_ACCESS tick1=8 attempts_by_tick2=",nav.attempts)
+	return resumed.ok and resumed.value.total_queried == 8 and nav.attempts == 16 and field.view(handle(0)).value.position != before.position
+
 func run(tree: SceneTree, engine: RefCounted) -> int:
 	var token: Dictionary = engine.open_scope(SCOPE)
 	if not token.ok or not engine.load_scene({"id":"base:scene/moving_field","simulation_scene":"res://tests/p2/movement/field.tscn"},token.value).ok:
@@ -198,6 +237,7 @@ func run(tree: SceneTree, engine: RefCounted) -> int:
 				ready = true
 				break
 	if ready:
+		expect(failed_access_budget(),"failed shared/member requests conserve the tick budget and recover next tick")
 		expect(crowd(engine),"T-MOV-02 completed")
 		expect(horse(engine),"T-MOV-03 completed")
 		expect(large_field(engine,500),"500 active mixed agents")

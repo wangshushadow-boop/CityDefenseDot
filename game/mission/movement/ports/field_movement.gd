@@ -5,6 +5,7 @@ const V = preload("res://contracts/values.gd")
 const Queue = preload("res://mission/movement/path_queue.gd")
 const CELL := 1.2
 const NEIGHBOURS := 48
+const QUERIES_PER_TICK := 8
 
 class Body:
 	var generation: int
@@ -52,8 +53,6 @@ var _serial := 0
 var _checks := 0
 var _yields := 0
 var _blocker: Body
-var _budget_tick := -1
-var _shared_spent := 0
 
 func _init(engine: RefCounted, mission_id: String) -> void:
 	_engine = engine
@@ -153,6 +152,9 @@ func view(handle: Dictionary) -> Dictionary:
 	return R.ok({"position":b.position, "velocity":b.velocity, "heading":b.heading,
 		"profile":b.profile, "arrived":b.arrived, "blocked":b.blocked})
 
+func _remaining_queries(tick: int) -> int:
+	return QUERIES_PER_TICK - _queue.attempts_at(tick) - _access.attempts_at(tick)
+
 func _prepare(tick: int) -> Dictionary:
 	var sync: Dictionary = _engine.sync_navigation(_scope)
 	if not sync.ok:
@@ -172,7 +174,7 @@ func _prepare(tick: int) -> Dictionary:
 		elif q.error.code != "Unavailable":
 			return q
 	_revision = revision
-	var spent: Dictionary = _queue.process_budget(tick)
+	var spent: Dictionary = _queue.process_budget(tick, _remaining_queries(tick))
 	if not spent.ok:
 		return spent
 	for route: Corridor in _routes.values():
@@ -457,11 +459,7 @@ func step(tick: int, dt: float) -> Dictionary:
 	var ready := _prepare(tick)
 	if not ready.ok:
 		return ready
-	if _budget_tick != tick:
-		_budget_tick = tick
-		_shared_spent = 0
-	_shared_spent += ready.value.queried
-	var joins := _members(tick, 8-_shared_spent)
+	var joins := _members(tick, _remaining_queries(tick))
 	if not joins.ok:
 		return joins
 	_tick = tick
@@ -472,6 +470,8 @@ func step(tick: int, dt: float) -> Dictionary:
 		_put(_cell(b.position),b)
 	for b: Body in _bodies.values():
 		_move(b, _routes.get(b.group), dt)
-	return R.ok({"queried":_shared_spent,"member_queried":joins.value.queried,
-		"total_queried":_shared_spent+joins.value.queried,"nav_revision":_revision,
+	var shared: int = _queue.attempts_at(tick)
+	var members: int = _access.attempts_at(tick)
+	return R.ok({"queried":shared,"member_queried":members,
+		"total_queried":shared+members,"nav_revision":_revision,
 		"neighbour_checks":_checks,"yielding":_yields})

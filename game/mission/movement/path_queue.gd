@@ -73,6 +73,9 @@ static func _comes_first(left: Dictionary, right: Dictionary) -> bool:
 		return left.priority > right.priority
 	return left.ticket.request_id < right.ticket.request_id
 
+func attempts_at(tick: int) -> int:
+	return _spent if _tick == tick else 0
+
 func process_budget(tick: int, remaining: int = 2147483647) -> Dictionary:
 	if tick < 0 or tick < _tick:
 		return R.fail("StaleVersion", "tick")
@@ -91,6 +94,8 @@ func process_budget(tick: int, remaining: int = 2147483647) -> Dictionary:
 	for index in count:
 		var route: Array = jobs[index].key
 		batch.append({"from":route[0], "to":route[1]})
+	# A rejected or malformed response still used the native path service.
+	_spent += count
 	var solved: Dictionary = _engine.query_path_batch(batch, _revision, _scope)
 	if not solved.ok:
 		return solved
@@ -99,7 +104,6 @@ func process_budget(tick: int, remaining: int = 2147483647) -> Dictionary:
 	for row in solved.value:
 		if typeof(row) != TYPE_DICTIONARY or row.get("nav_revision") != _revision or typeof(row.get("reachable")) != TYPE_BOOL or typeof(row.get("points")) != TYPE_ARRAY:
 			return R.fail("InvalidState", "path_query")
-	_spent += count
 	for index in count:
 		var job: Dictionary = jobs[index]
 		var id: int = job.ticket.request_id
