@@ -1,0 +1,3 @@
+# These scene bytes are inputs to the compiled package content hash.
+*.tscn text eol=lf
+*.glb binary
