@@ -3,9 +3,19 @@ extends RefCounted
 const R = preload("res://contracts/result.gd")
 const V = preload("res://contracts/values.gd")
 const Queue = preload("res://mission/movement/path_queue.gd")
+const IntentRoute = preload("res://mission/movement/intent_route.gd")
+const Schema = preload("res://contracts/schema.gd")
 const CELL := 1.2
 const NEIGHBOURS := 48
 const QUERIES_PER_TICK := 8
+# Layer 2 holds actor hurtboxes. MOV's spatial grid already resolves agent bodies.
+const SCENERY_MASK := 0xfffffffd
+
+class Drive:
+	var handle: Dictionary
+	var context: Variant
+	var direction: Vector3
+	var fraction: float
 
 class Body:
 	var birth: RefCounted
@@ -29,29 +39,46 @@ class Body:
 	var passages: Array = []
 	var courtesy := Vector3.ZERO
 	var courtesy_time := 0.0
+	var drive: Drive
+	var leg: IntentRoute
+	var leg_cursor := 0
+	var revoked := false
+	var scene_travel := 0.0
+	var assignment_stamp: RefCounted
+	var grid_cell := Vector2i.ZERO
+	var grid_order := 0
 
-	func copy_from(other: Body) -> void:
-		birth = other.birth
-		generation = other.generation
-		profile = other.profile
+	func copy_from(other: Body, with_drives: bool) -> void:
+		var new_birth := not is_same(birth,other.birth)
+		if new_birth:
+			birth = other.birth
+			generation = other.generation
+			profile = other.profile
+			radius = other.radius
+		if new_birth or not is_same(assignment_stamp,other.assignment_stamp):
+			assignment_stamp = other.assignment_stamp
+			group = other.group
+			offset = other.offset
+			revision = other.revision
+			path = other.path
+			ticket = other.ticket
+			access_version = other.access_version
+			join_index = other.join_index
+			passages = other.passages
 		position = other.position
 		velocity = other.velocity
 		heading = other.heading
-		radius = other.radius
-		group = other.group
-		offset = other.offset
-		revision = other.revision
 		cursor = other.cursor
 		arrived = other.arrived
 		blocked = other.blocked
 		wait = other.wait
-		path = other.path
-		ticket = other.ticket
-		access_version = other.access_version
-		join_index = other.join_index
-		passages = other.passages
 		courtesy = other.courtesy
 		courtesy_time = other.courtesy_time
+		if with_drives:
+			drive = other.drive
+			leg = other.leg
+			leg_cursor = other.leg_cursor
+			revoked = other.revoked
 
 class Corridor:
 	var origin: Vector3
@@ -84,11 +111,20 @@ var _engine: RefCounted
 var _scope: String
 var _queue: RefCounted
 var _access: RefCounted
+var _direct: RefCounted
+var _authorize: Callable
+var _drivers := {}
+var _had_drives := false
+var _members_ready := false
+var _next_driver := 0
+var _exact_sweeps_until := -1
 var _bodies := {}
 var _retired := {}
 var _routes := {}
 var _zones: Array = []
 var _cells := {}
+var _cells_lineup: RefCounted
+var _unsorted_cells := {}
 var _tick := -1
 var _revision := -1
 var _serial := 0
@@ -96,11 +132,13 @@ var _checks := 0
 var _yields := 0
 var _blocker: Body
 
-func _init(engine: RefCounted, mission_id: String) -> void:
+func _init(engine: RefCounted, mission_id: String, move_authority := Callable()) -> void:
 	_engine = engine
 	_scope = mission_id
 	_queue = Queue.new(engine, mission_id)
 	_access = Queue.new(engine, mission_id)
+	_direct = Queue.new(engine,mission_id)
+	_authorize = move_authority
 
 static func _valid_handle(handle: Dictionary) -> bool:
 	return handle.size() == 2 and V.integer(handle.get("index"), 0, V.MAX_U32) and V.integer(handle.get("generation"), 1, V.MAX_U32)
@@ -146,6 +184,7 @@ func despawn(handle: Dictionary, stage: Variant = null) -> Dictionary:
 		return R.fail("NotFound", "movement_handle")
 	_retired[handle.index] = handle.generation
 	_bodies.erase(handle.index)
+	_drivers.erase(handle.index)
 	_lineup = RefCounted.new()
 	_buffer_stamp = _lineup
 	return R.ok()
@@ -165,9 +204,13 @@ func set_terrain(zones: Array, stage: Variant = null) -> Dictionary:
 			if profile not in ["foot", "mounted"]:
 				return R.fail("InvalidArgument", "terrain_profile")
 	_zones = zones.duplicate(true)
+	_members_ready = false
+	var stamp := RefCounted.new()
 	for b: Body in _bodies.values():
+		b.assignment_stamp = stamp
 		b.revision = -1
 		b.access_version = -1
+		b.leg = null
 	return R.ok()
 
 func set_corridor(group: String, origin: Vector3, goal: Vector3, profile: String = "foot", stage: Variant = null) -> Dictionary:
@@ -200,6 +243,8 @@ func assign(handle: Dictionary, group: String, slot_offset: Vector3 = Vector3.ZE
 	if b.profile != route.profile or not _point_ok(slot_offset) or not is_zero_approx(slot_offset.y):
 		return R.fail("InvalidArgument", "movement_slot")
 	if b.group != group or b.offset != slot_offset:
+		_members_ready = false
+		b.assignment_stamp = RefCounted.new()
 		b.group = group
 		b.offset = slot_offset
 		b.revision = -1
@@ -282,17 +327,73 @@ func _read_roster(token: Variant, stage: Variant, full: bool) -> Dictionary:
 func _editable(stage: Variant) -> bool:
 	return _stage != null and is_same(stage,_stage) and not _stage_ready and not _busy
 
+## Both controllers use a composition-owned authority reader; the caller's context
+## is only a credential. Movement reuse is permitted only for the same actor birth.
+func apply_move_intent(stage: Variant, intent: Dictionary, context: Variant) -> Dictionary:
+	if not _editable(stage): return R.fail("InvalidState","movement_stage")
+	# The local MOV hot path consumes the v1 domain value directly. Only the four
+	# typed fields below are accepted, so no wire encoding or deep freeze is needed.
+	if intent.size()!=4 or not intent.has("stance") or not intent.get("actor_handle") is Dictionary or not _valid_handle(intent.actor_handle):
+		return R.fail("InvalidArgument","MoveIntent")
+	for key in intent:
+		if typeof(key)!=TYPE_STRING: return R.fail("InvalidArgument","MoveIntent")
+	for key in intent.actor_handle:
+		if typeof(key)!=TYPE_STRING: return R.fail("InvalidArgument","actor_handle")
+	var vector: Variant = intent.get("desired_direction")
+	var speed: Variant = intent.get("speed_fraction")
+	if not vector is Array or vector.size()!=3 or not V.integer(vector[0],-2147483648,2147483647) or not V.integer(vector[1],0,0) or not V.integer(vector[2],-2147483648,2147483647):
+		return R.fail("InvalidArgument","desired_direction")
+	if typeof(speed) not in [TYPE_FLOAT,TYPE_INT] or not is_finite(speed) or speed<0 or speed>1:
+		return R.fail("InvalidArgument","speed_fraction")
+	var stance: Variant = intent.stance
+	if stance!=null and (typeof(stance)!=TYPE_STRING or stance not in ["walk","sprint","crouch"]):
+		return R.fail("InvalidArgument","stance")
+	var b: Body = _draft._body(intent.actor_handle)
+	if b==null: return R.fail("NotFound","movement_handle")
+	var direction := Vector3(vector[0],0,vector[2]).normalized()
+	var quantized := roundi(speed*Schema.SPEED_SCALE)
+	if direction==Vector3.ZERO and quantized>0: return R.fail("InvalidArgument","movement_direction")
+	var drive := Drive.new()
+	drive.handle = intent.actor_handle.duplicate()
+	drive.handle.make_read_only()
+	_busy = true
+	var permitted := _authorized(drive.handle,context,_stage_tick)
+	_busy = false
+	if not permitted: return R.fail("Unauthorized","movement_control")
+	drive.context = context
+	drive.direction = direction
+	var gait := .45 if stance=="crouch" else (.75 if stance=="walk" else 1.0)
+	drive.fraction = quantized/float(Schema.SPEED_SCALE)*gait
+	if b.drive==null:
+		b.passages = []
+		b.assignment_stamp = RefCounted.new()
+	_draft._had_drives = true
+	b.drive = drive
+	b.revoked = false
+	_draft._drivers[drive.handle.index] = true
+	return R.ok()
+
+func _authorized(handle: Dictionary, context: Variant, tick: int) -> bool:
+	return _authorize.is_valid() and is_same(_authorize.call(_scope,handle,context,tick),true)
+
 ## Early phases can deploy and assign into this stage before the movement phase.
 func begin_step(tick: int) -> Dictionary:
 	if _busy or _stage != null: return R.fail("InvalidState","movement_stage")
 	if tick < 0 or tick <= _tick: return R.fail("StaleVersion","tick")
-	if _draft == null: _draft = get_script().new(_engine,_scope)
+	if _draft == null: _draft = get_script().new(_engine,_scope,_authorize)
 	var available: Dictionary = _draft._bodies
+	var with_drives: bool = _had_drives or _draft._had_drives
+	_draft._had_drives = _had_drives
+	_draft._members_ready = _members_ready
 	_draft._buffer_slot = 1-_buffer_slot
 	if is_same(_draft._lineup,_lineup):
+		var grid_ready := is_same(_cells_lineup,_lineup) and is_same(_draft._cells_lineup,_lineup)
+		if not grid_ready: _draft._cells_lineup = null
 		for id in _bodies:
 			var copy: Body = available[id]
-			copy.copy_from(_bodies[id])
+			var source: Body = _bodies[id]
+			copy.copy_from(source,with_drives)
+			if grid_ready and copy.grid_cell!=source.grid_cell: _draft._relocate(copy,source.grid_cell)
 	else:
 		# Preserve insertion order for avoidance. Reuse body objects; path data
 		# is shared read-only until the path changes.
@@ -300,9 +401,10 @@ func begin_step(tick: int) -> Dictionary:
 		for id in _bodies:
 			var copy: Body = available.get(id)
 			if copy == null: copy = Body.new()
-			copy.copy_from(_bodies[id])
+			copy.copy_from(_bodies[id],with_drives)
 			next[id] = copy
 		_draft._bodies = next
+		_draft._cells_lineup = null
 		_draft._lineup = _lineup
 		_draft._buffer_stamp = RefCounted.new()
 	_draft._routes = {}
@@ -324,6 +426,10 @@ func begin_step(tick: int) -> Dictionary:
 	_draft._tick = _tick
 	_draft._queue = _queue.fork()
 	_draft._access = _access.fork()
+	_draft._direct = _direct.fork()
+	_draft._drivers = _drivers.duplicate()
+	_draft._next_driver = _next_driver
+	_draft._exact_sweeps_until = _exact_sweeps_until
 	_stage = RefCounted.new()
 	_stage_tick = tick
 	return R.ok(_stage)
@@ -347,9 +453,28 @@ func stage_step(tick: int, dt: float, stage: Variant = null) -> Dictionary:
 
 func commit_step(stage: Variant) -> Dictionary:
 	if _busy or not _stage_ready or not is_same(stage,_stage): return R.fail("InvalidState","movement_stage")
+	# The control snapshot can change after staging. Check every active drive
+	# before the first published write, blocking nested stage edits from readers.
+	_busy = true
+	for id in _draft._drivers:
+		var b: Body = _draft._bodies[id]
+		if not _authorized(b.drive.handle,b.drive.context,_stage_tick):
+			_busy = false
+			rollback_step(stage)
+			return R.fail("Unauthorized","movement_control")
+	_busy = false
 	var previous := _bodies
 	_bodies = _draft._bodies
 	_draft._bodies = previous
+	var old_cells := _cells
+	var old_cells_lineup := _cells_lineup
+	var old_unsorted := _unsorted_cells
+	_cells = _draft._cells
+	_cells_lineup = _draft._cells_lineup
+	_unsorted_cells = _draft._unsorted_cells
+	_draft._cells = old_cells
+	_draft._cells_lineup = old_cells_lineup
+	_draft._unsorted_cells = old_unsorted
 	var old_lineup := _lineup
 	var old_stamp := _buffer_stamp
 	_lineup = _draft._lineup
@@ -365,6 +490,12 @@ func commit_step(stage: Variant) -> Dictionary:
 	_tick = _draft._tick
 	_queue = _draft._queue
 	_access = _draft._access
+	_direct = _draft._direct
+	_drivers = _draft._drivers
+	_had_drives = _draft._had_drives
+	_members_ready = _draft._members_ready
+	_next_driver = _draft._next_driver
+	_exact_sweeps_until = _draft._exact_sweeps_until
 	_stage = null
 	_stage_ready = false
 	return R.ok(_tick)
@@ -376,7 +507,7 @@ func rollback_step(stage: Variant) -> Dictionary:
 	return R.ok()
 
 func _remaining_queries(tick: int) -> int:
-	return QUERIES_PER_TICK - _queue.attempts_at(tick) - _access.attempts_at(tick)
+	return QUERIES_PER_TICK - _queue.attempts_at(tick) - _access.attempts_at(tick) - _direct.attempts_at(tick)
 
 func _prepare(tick: int) -> Dictionary:
 	var sync: Dictionary = _engine.sync_navigation(_scope)
@@ -416,17 +547,133 @@ func _prepare(tick: int) -> Dictionary:
 		route.reachable = result.value.reachable and not route.points.is_empty()
 		_serial += 1
 		route.version = _serial
+		_members_ready = false
 	return spent
+
+func _needs_leg(b: Body) -> bool:
+	return b.leg==null or b.leg.revision!=_revision or (b.drive.fraction>0 and (
+		(b.leg.direction.dot(b.drive.direction)<.99985 and not _braking_turn(b)) or (b.leg_cursor>=b.leg.points.size() and b.leg.continues)))
+
+func _braking_turn(b: Body) -> bool:
+	return b.profile=="mounted" and b.velocity.length_squared()>.000001 and b.leg_cursor<b.leg.points.size() and b.leg.direction.dot(b.drive.direction)<.99985
+
+func _prepare_drives(tick: int) -> Dictionary:
+	var ids := _drivers.keys()
+	var jobs := []
+	var available := _remaining_queries(tick)
+	var unused := available
+	var replay: bool = _direct.attempts_at(tick)>0
+	for offset in ids.size():
+		if jobs.size()>=QUERIES_PER_TICK or (unused<=0 and not replay): break
+		var index := (_next_driver+offset)%ids.size()
+		var b: Body = _bodies[ids[index]]
+		if b.drive.fraction<=0 or not _needs_leg(b): continue
+		var goal := b.position+b.drive.direction*IntentRoute.RANGE
+		var origin_mm := _mm(b.position)
+		var goal_mm := _mm(goal)
+		if not replay or not _direct.has_answer(tick,_revision,origin_mm,goal_mm,b.profile):
+			if unused<=0: continue
+			unused -= 1
+		var ticket: Dictionary = _direct.request_path(origin_mm,goal_mm,b.profile)
+		if not ticket.ok: return ticket
+		jobs.append({"body":b,"ticket":ticket.value,"index":index})
+	if jobs.is_empty(): return R.ok()
+	var spent: Dictionary = _direct.process_budget(tick,available)
+	if not spent.ok: return spent
+	for job in jobs:
+		var solved: Dictionary = _direct.poll_path(job.ticket)
+		if not solved.ok:
+			if solved.error.code=="Unavailable": continue
+			return solved
+		var b: Body = job.body
+		var leg := IntentRoute.new()
+		leg.revision = _revision
+		leg.direction = b.drive.direction
+		var checked := leg.from_path(b.position,solved.value)
+		if not checked.ok: return checked
+		b.leg = leg
+		b.leg_cursor = 0
+		_next_driver = (job.index+1)%ids.size()
+	return R.ok()
+
+static func _scene_cell(p: Vector3) -> Vector3i:
+	return Vector3i(floori(p.x/8),floori(p.y/2),floori(p.z/8))
+
+func _occupied_scene_cells(tick: int) -> Dictionary:
+	if _drivers.size()<64 or tick<_exact_sweeps_until: return R.ok(null)
+	var cells := {}
+	for id in _drivers:
+		var b: Body = _bodies[id]
+		cells[_scene_cell(b.position)] = true
+	var keys := cells.keys()
+	if keys.size()*3>=_drivers.size():
+		_exact_sweeps_until = tick+30
+		return R.ok(null)
+	var queries := []
+	for key: Vector3i in keys:
+		var center := Vector3(key)*Vector3(8,2,8)+Vector3(4,1,4)
+		# The sphere encloses the entire 8x2x8 cell, the tallest probe lift,
+		# mounted radius and the largest allowed step (9 m/s for 0.1 s).
+		queries.append({"from":_mm(center),"to":_mm(center+Vector3.UP*.01),"radius_mm":7650,"mask":SCENERY_MASK})
+	var hits: Dictionary = _engine.query_sweep_batch(queries,{"scope_id":_scope,"tick":tick})
+	if not hits.ok: return hits
+	cells.clear()
+	for hit in hits.value:
+		if not V.integer(hit.get("query_index"),0,keys.size()-1): return R.fail("InvalidState","movement_sweep")
+		cells[keys[hit.query_index]] = true
+	# On collider-covered ground the broad test rarely saves work.
+	if cells.size()*2>=keys.size(): _exact_sweeps_until = tick+30
+	return R.ok(cells)
+
+func _scene_clearances(tick: int, dt: float) -> Dictionary:
+	var broad := _occupied_scene_cells(tick)
+	if not broad.ok: return broad
+	var requests := []
+	var actors: Array[Body] = []
+	var lengths := PackedFloat32Array()
+	for id in _drivers:
+		var b: Body = _bodies[id]
+		if broad.value!=null and not broad.value.has(_scene_cell(b.position)):
+			b.scene_travel = INF
+			continue
+		b.scene_travel = 0.0
+		if _needs_leg(b) or b.leg_cursor>=b.leg.points.size(): continue
+		if b.drive.fraction<=0 and (b.profile=="foot" or b.velocity.is_zero_approx()): continue
+		var delta := b.leg.points[b.leg_cursor]-b.position
+		if delta.length_squared()<.000001: continue
+		var extent := minf(delta.length(),(9.0 if b.profile=="mounted" else 3.4)*dt)
+		var origin := b.position+Vector3.UP*(b.radius+.04)
+		var probe := maxf(extent,.003)
+		var end := origin+delta.normalized()*probe
+		requests.append({"from":_mm(origin),"to":_mm(end),"radius_mm":roundi(b.radius*1000),"mask":SCENERY_MASK})
+		actors.append(b)
+		lengths.append(probe)
+		b.scene_travel = extent
+	if requests.is_empty(): return R.ok()
+	# A door or a new collision-only scene can change without changing the nav map.
+	var hits: Dictionary = _engine.query_sweep_batch(requests,{"scope_id":_scope,"tick":tick})
+	if not hits.ok: return hits
+	for hit in hits.value:
+		if not V.integer(hit.get("query_index"),0,actors.size()-1) or not V.integer(hit.get("fraction_ppm"),0,1000000):
+			return R.fail("InvalidState","movement_sweep")
+		var index: int = hit.query_index
+		var b := actors[index]
+		b.scene_travel = minf(b.scene_travel,maxf(0,lengths[index]*hit.fraction_ppm*.000001-.025))
+	return R.ok()
 
 # Admission to a shared corridor must start on the member's own island. Solve
 # only at assignment/revision changes, with the remainder of the same tick budget.
 func _members(tick: int, remaining: int) -> Dictionary:
+	if _members_ready: return R.ok()
 	var pending: Array[Body] = []
 	var full := false
+	var stamp := RefCounted.new()
 	for b: Body in _bodies.values():
+		if b.drive!=null or b.revoked: continue
 		var route: Corridor = _routes.get(b.group)
 		if route == null or route.version < 0 or not route.reachable or b.revision == route.version:
 			continue
+		b.assignment_stamp = stamp
 		if b.access_version != route.version:
 			b.ticket = {}
 			b.access_version = route.version
@@ -461,9 +708,11 @@ func _members(tick: int, remaining: int) -> Dictionary:
 	var spent: Dictionary = _access.process_budget(tick,remaining)
 	if not spent.ok:
 		return spent
+	_members_ready = not full and spent.value.pending==0
 	for b in pending:
 		var result: Dictionary = _access.poll_path(b.ticket)
 		if not result.ok:
+			_members_ready = false
 			if result.error.code == "NotFound":
 				b.ticket = {}
 			elif result.error.code != "Unavailable":
@@ -521,11 +770,38 @@ func _put(cell: Vector2i, b: Body) -> void:
 		_cells[cell] = []
 	_cells[cell].append(b)
 
+func _relocate(b: Body, cell: Vector2i) -> void:
+	var old: Array = _cells[b.grid_cell]
+	old.erase(b)
+	if old.is_empty(): _cells.erase(b.grid_cell)
+	_put(cell,b)
+	if _cells[cell].size()>1: _unsorted_cells[cell] = true
+	b.grid_cell = cell
+
+static func _spawn_order(a: Body,b: Body) -> bool:
+	return a.grid_order<b.grid_order
+
+func _prepare_grid(bodies: Array) -> void:
+	if not is_same(_cells_lineup,_lineup):
+		_cells.clear()
+		for i in bodies.size():
+			var b: Body = bodies[i]
+			b.grid_order = i
+			b.grid_cell = _cell(b.position)
+			_put(b.grid_cell,b)
+		_cells_lineup = _lineup
+	else:
+		# Match the previous full rebuild's spawn order for equal-cell blockers.
+		for cell in _unsorted_cells:
+			if _cells.has(cell): _cells[cell].sort_custom(_spawn_order)
+	_unsorted_cells.clear()
+
 func _clear_step(b: Body, candidate: Vector3) -> bool:
 	_blocker = null
 	for zone in _zones:
 		var bounds: AABB = zone.bounds
-		if not zone.profiles.has(b.profile) and (bounds.has_point(b.position) or bounds.intersects_segment(b.position, candidate) != null):
+		var too_narrow := minf(bounds.size.x,bounds.size.z)<2*b.radius
+		if (too_narrow or not zone.profiles.has(b.profile)) and (bounds.has_point(b.position) or bounds.intersects_segment(b.position, candidate) != null):
 			return false
 		if bounds.has_point(candidate):
 			var x_long := bounds.size.x >= bounds.size.z
@@ -606,35 +882,59 @@ func _move(b: Body, route: Corridor, dt: float) -> void:
 		b.blocked = "no_route"
 		return
 	b.arrived = false
-	var target := _waypoint(b,b.path[b.cursor],b.cursor+1 == b.path.size())
+	var target := b.path[b.cursor]
+	if not _zones.is_empty(): target = _waypoint(b,target,b.cursor+1==b.path.size())
 	while b.position.distance_to(target) < 0.36 and b.cursor+1 < b.path.size():
 		b.cursor += 1
-		target = _waypoint(b,b.path[b.cursor],b.cursor+1 == b.path.size())
+		target = b.path[b.cursor]
+		if not _zones.is_empty(): target = _waypoint(b,target,b.cursor+1==b.path.size())
+	_advance(b,target,dt,1.0,false)
+
+func _move_direct(b: Body, dt: float) -> void:
+	b.arrived = false
+	b.blocked = ""
+	if b.drive==null or _needs_leg(b) or b.leg_cursor>=b.leg.points.size():
+		b.velocity = Vector3.ZERO
+		b.blocked = "control_revoked" if b.revoked else ("no_route" if b.drive.fraction>0 else "")
+		return
+	var target := b.leg.points[b.leg_cursor]
+	var fraction := 0.0 if _braking_turn(b) else b.drive.fraction
+	_advance(b,target,dt,fraction,true)
+	if b.position.distance_squared_to(target)<.000001: b.leg_cursor += 1
+
+func _advance(b: Body, target: Vector3, dt: float, fraction: float, direct: bool) -> void:
 	var delta := target - b.position
-	if b.courtesy_time > 0.0:
+	if not direct and b.courtesy_time > 0.0:
 		b.courtesy_time -= dt
 		delta = b.courtesy
 		b.arrived = false
 	var distance := delta.length()
-	if distance < 0.06 and b.cursor+1 == b.path.size():
+	if not direct and distance < 0.06 and b.cursor+1 == b.path.size():
 		b.arrived = true
 		b.velocity = Vector3.ZERO
 		return
 	var direction := delta.normalized()
 	var flat := Vector3(direction.x,0,direction.z).normalized()
-	var speed := 3.4
+	var speed := 3.4*fraction
 	if b.profile == "mounted":
 		var previous_speed := b.velocity.length()
 		var angle := b.heading.signed_angle_to(flat, Vector3.UP) if not flat.is_zero_approx() else 0.0
 		var limit := 3.0 * dt / (1.0 + 0.22 * previous_speed)
 		b.heading = b.heading.rotated(Vector3.UP,clampf(angle,-limit,limit)).normalized()
-		var desired_speed := minf(9.0, sqrt(2.0 * 8.0 * distance))
+		var desired_speed := minf(9.0*fraction, sqrt(2.0 * 8.0 * distance))
 		desired_speed *= maxf(0.0, b.heading.dot(flat))
 		speed = move_toward(previous_speed, desired_speed, (8.0 if previous_speed > desired_speed else 4.0) * dt)
-		direction = (b.heading * Vector2(direction.x,direction.z).length() + Vector3.UP * direction.y).normalized()
+		if direct:
+			# Turn on the certified strip; a turning arc outside it has no navigation proof.
+			if b.heading.dot(flat)<.999: speed = 0
+		else:
+			direction = (b.heading * Vector2(direction.x,direction.z).length() + Vector3.UP * direction.y).normalized()
 	elif not flat.is_zero_approx():
 		b.heading = flat
 	var travel := minf(distance, speed*dt)
+	if direct and travel>b.scene_travel:
+		travel = b.scene_travel
+		b.blocked = "scene"
 	var candidate := b.position + direction * travel
 	for passage in b.passages:
 		var box: AABB = passage.bounds
@@ -651,7 +951,7 @@ func _move(b: Body, route: Corridor, dt: float) -> void:
 		_yields += 1
 		candidate = b.position
 		var obstruction := _blocker
-		if b.profile == "foot" and b.wait > 0.20:
+		if not direct and b.profile == "foot" and b.wait > 0.20:
 			var right := direction.cross(Vector3.UP).normalized()
 			if obstruction != null and obstruction.profile == "foot" and obstruction.courtesy_time <= 0.0 and (b.cursor+1 == b.path.size() or b.heading.dot(obstruction.heading) < -0.5):
 				# Settled ranks also yield. The recipient moves on its own bounded step.
@@ -666,16 +966,20 @@ func _move(b: Body, route: Corridor, dt: float) -> void:
 					break
 	else:
 		b.wait = 0.0
-	var old_cell := _cell(b.position)
 	b.velocity = (candidate-b.position) / dt
 	b.position = candidate
 	var new_cell := _cell(b.position)
-	if old_cell != new_cell:
-		_cells[old_cell].erase(b)
-		_put(new_cell,b)
+	if b.grid_cell != new_cell: _relocate(b,new_cell)
 
 func step(tick: int, dt: float) -> Dictionary:
 	if _busy or _stage != null: return R.fail("InvalidState","movement_stage")
+	if not _drivers.is_empty():
+		var staged := stage_step(tick,dt)
+		if not staged.ok: return staged
+		var published := commit_step(staged.value.stage_token)
+		if not published.ok: return published
+		staged.value.erase("stage_token")
+		return staged
 	_busy = true
 	var result := _run_step(tick,dt)
 	_busy = false
@@ -692,16 +996,33 @@ func _run_step(tick: int, dt: float) -> Dictionary:
 	var joins := _members(tick, _remaining_queries(tick))
 	if not joins.ok:
 		return joins
+	if not _drivers.is_empty():
+		var drives := _prepare_drives(tick)
+		if not drives.ok: return drives
+		var clearances := _scene_clearances(tick,dt)
+		if not clearances.ok: return clearances
 	_tick = tick
 	_checks = 0
 	_yields = 0
-	_cells.clear()
-	for b: Body in _bodies.values():
-		_put(_cell(b.position),b)
-	for b: Body in _bodies.values():
-		_move(b, _routes.get(b.group), dt)
+	var bodies := _bodies.values()
+	_prepare_grid(bodies)
+	if not _had_drives:
+		for b: Body in bodies:
+			_move(b, _routes.get(b.group), dt)
+	else:
+		for b: Body in bodies:
+			if b.drive!=null and not _authorized(b.drive.handle,b.drive.context,tick):
+				_drivers.erase(b.drive.handle.index)
+				b.drive = null
+				b.leg = null
+				b.revoked = true
+			if b.drive!=null or b.revoked:
+				_move_direct(b,dt)
+			else:
+				_move(b, _routes.get(b.group), dt)
 	var shared: int = _queue.attempts_at(tick)
 	var members: int = _access.attempts_at(tick)
-	return R.ok({"queried":shared,"member_queried":members,
-		"total_queried":shared+members,"nav_revision":_revision,
+	var direct: int = _direct.attempts_at(tick)
+	return R.ok({"queried":shared,"member_queried":members,"intent_queried":direct,
+		"total_queried":shared+members+direct,"nav_revision":_revision,
 		"neighbour_checks":_checks,"yielding":_yields})
