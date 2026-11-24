@@ -1,0 +1,31 @@
+{
+  "id": "field",
+  "version": "1.0.0",
+  "game_api_version": 1,
+  "license": "Recollection content; Polyfork CC BY 4.0; Quaternius CC0 1.0 — see CREDITS.md",
+  "requires": [
+    {
+      "id": "base",
+      "version": "1.0.0"
+    }
+  ],
+  "conflicts": [],
+  "load_after": [],
+  "entrypoints": {
+    "definitions": [
+      "field.json"
+    ],
+    "resources": [
+      "river_plain.scene.json",
+      "river_plain.tscn",
+      "assets.json",
+      "CREDITS.md",
+      "models/general.glb",
+      "models/spear_soldier.glb",
+      "models/crossbowman.glb",
+      "models/horse.glb"
+    ],
+    "patches": []
+  },
+  "config": {}
+}

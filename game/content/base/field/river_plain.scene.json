@@ -1,0 +1,49 @@
+{
+  "markers": [
+    {
+      "id": "west",
+      "kind": "spawn",
+      "position_mm": [
+        -52000,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "east",
+      "kind": "spawn",
+      "position_mm": [
+        52000,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "line",
+      "kind": "objective",
+      "position_mm": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "west_edge",
+      "kind": "exit",
+      "position_mm": [
+        -118000,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "east_edge",
+      "kind": "exit",
+      "position_mm": [
+        118000,
+        0,
+        0
+      ]
+    }
+  ]
+}

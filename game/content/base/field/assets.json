@@ -1,0 +1,34 @@
+{
+  "general": {
+    "file": "models/general.glb",
+    "author": "Polyfork",
+    "source": "https://polyfork.dev/asset/general-2ddbba",
+    "license": "CC-BY-4.0",
+    "changes": "阵营服色、待机与移动动画绑定。",
+    "sha256": "848e6d94c3f0bda60fb28176d41061b4771b4923bab0f63ce95898f4f7ea19b5"
+  },
+  "spear_soldier": {
+    "file": "models/spear_soldier.glb",
+    "author": "Polyfork",
+    "source": "https://polyfork.dev/asset/spear-soldier-dcfb4b",
+    "license": "CC-BY-4.0",
+    "changes": "步兵外观，应用阵营色与角色比例。",
+    "sha256": "9d69862625b97ef0074887d81c317a76ecc63295ca3edb000931792f2c64033d"
+  },
+  "crossbowman": {
+    "file": "models/crossbowman.glb",
+    "author": "Polyfork",
+    "source": "https://polyfork.dev/asset/crossbowman-4bf6b1",
+    "license": "CC-BY-4.0",
+    "changes": "远程兵外观，应用阵营色与角色比例。",
+    "sha256": "f177bd6c582d8578929cb6b710cb1a61575a69bcd539d9b8c87dd620efdb1bb8"
+  },
+  "horse": {
+    "file": "models/horse.glb",
+    "author": "Quaternius",
+    "source": "https://poly.pizza/m/qvTrSG9pZF",
+    "license": "CC0-1.0",
+    "changes": "原 GLB，未修改。",
+    "sha256": "fae7a7ec91e0d6a33554efb896fac9c4e8c632644183bcb8cc962f673d3ce609"
+  }
+}

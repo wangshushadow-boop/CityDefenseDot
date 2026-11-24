@@ -1,0 +1,98 @@
+[
+  {
+    "id": "field:ruleset/field_battle",
+    "name": "野战",
+    "mode": "field",
+    "parameters": {
+      "wave_size": 64,
+      "wave_cooldown_ticks": 120
+    },
+    "schema_version": 1
+  },
+  {
+    "id": "field:scene/river_plain",
+    "name": "河原渡口",
+    "asset_ref": "river_plain.scene.json",
+    "spawn_zones": [
+      "west",
+      "east"
+    ],
+    "objectives": [
+      "line"
+    ],
+    "nav_profiles": [
+      "foot",
+      "mounted"
+    ],
+    "exit_zones": [
+      "west_edge",
+      "east_edge"
+    ],
+    "metadata": {
+      "simulation_scene": "res://content/base/field/river_plain.tscn",
+      "spacing_mm": 1450,
+      "spawn_columns": 24
+    },
+    "schema_version": 1
+  },
+  {
+    "id": "field:troop/infantry",
+    "name": "河原长枪兵",
+    "culture_id": "base:culture/river",
+    "tier": 1,
+    "role": "infantry",
+    "equipment_set_ids": [],
+    "skills": {},
+    "wage_per_day": 0,
+    "recruit_cost": 0,
+    "upgrade_edges": [],
+    "tags": [
+      "field"
+    ],
+    "metadata": {
+      "model": "models/spear_soldier.glb",
+      "mount_model": ""
+    },
+    "schema_version": 1
+  },
+  {
+    "id": "field:troop/archer",
+    "name": "河原弩手",
+    "culture_id": "base:culture/river",
+    "tier": 1,
+    "role": "archer",
+    "equipment_set_ids": [],
+    "skills": {},
+    "wage_per_day": 0,
+    "recruit_cost": 0,
+    "upgrade_edges": [],
+    "tags": [
+      "field"
+    ],
+    "metadata": {
+      "model": "models/crossbowman.glb",
+      "mount_model": ""
+    },
+    "schema_version": 1
+  },
+  {
+    "id": "field:troop/cavalry",
+    "name": "河原骑士",
+    "culture_id": "base:culture/river",
+    "tier": 1,
+    "role": "cavalry",
+    "equipment_set_ids": [],
+    "skills": {},
+    "wage_per_day": 0,
+    "recruit_cost": 0,
+    "upgrade_edges": [],
+    "tags": [
+      "field"
+    ],
+    "metadata": {
+      "model": "models/general.glb",
+      "mount_model": "models/horse.glb"
+    },
+    "schema_version": 1
+  }
+]
