@@ -2,4 +2,4 @@
 
 项目：`recollection`。模块：`MIS-RT`。
 
-**状态：目录骨架，未实现。** 本目录 README 仅作为导航；正式设计见 [模块规格](../../../docs/systems/game/mission/runtime/README.md)。实际文件及测试在对应任务获准后建立，不在这里重复设计，不将目录存在当作功能完成。
+固定步和场景生命周期入口为 [runtime.gd](runtime.gd)，参见[模块规格](../../../docs/systems/game/mission/runtime/README.md)和[运行时验证](../../tests/p1/mission/run.gd)。
