@@ -187,9 +187,14 @@ func _drop(p: Proxy) -> void:
 		p.figure = null
 	_near.erase(p.index)
 
-func consume_view_events(scope_id: String, tick: int, events: Array) -> void:
-	if scope_id != _scope or tick < _tick-1 or _scope.is_empty():
-		return
+## Send the committed snapshot first. An early batch may be retried with the same event IDs.
+func consume_view_events(scope_id: String, tick: int, events: Array) -> Dictionary:
+	if scope_id != _scope or _scope.is_empty():
+		return R.fail("NotFound","visual_scope")
+	if tick < 0 or tick < _tick-1:
+		return R.fail("StaleVersion","tick")
+	if tick > _tick:
+		return R.fail("Unavailable","visual_snapshot")
 	for e: Variant in events:
 		if not e is Dictionary or e.get("confirmed") != true or e.get("type") not in ["hit","downed"]:
 			continue
@@ -205,7 +210,6 @@ func consume_view_events(scope_id: String, tick: int, events: Array) -> void:
 		var at: Variant = e.get("position",p.position if p != null else null)
 		if not _finite(at):
 			continue
-		_seen_events[id] = tick
 		if e.type == "downed":
 			var role: Variant = p.role if p != null else e.get("role")
 			if role not in Models.FILES: continue
@@ -215,9 +219,12 @@ func consume_view_events(scope_id: String, tick: int, events: Array) -> void:
 		else:
 			if _impacts.size() == HIT_LIMIT: _impacts.pop_front()
 			_impacts.append({"at":Vector3(at)+Vector3.UP*1.1,"until":tick+10})
+		_seen_events[id] = tick
 	for key in _seen_events.keys():
 		if _seen_events[key] < tick-180:
 			_seen_events.erase(key)
+
+	return R.ok()
 
 func _select_near(eye: Vector3, radius: float) -> void:
 	var possible: Array[Proxy] = []

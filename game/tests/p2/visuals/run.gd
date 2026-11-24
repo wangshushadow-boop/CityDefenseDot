@@ -45,6 +45,9 @@ func controls() -> void:
 	check(fig(2).position.x==4 and fig(0).position.y==0,"interpolation and dismount")
 	vis.render_interpolated(1,Vector3.ZERO)
 	check(not crossbow.visible,"melee slot hides ranged weapon")
+	var early := {"type":"hit","actor_handle":A,"event_id":"early","confirmed":true,"position":Vector3.ZERO}
+	var deferred_hit := vis.consume_view_events("test",3,[early])
+	check(not deferred_hit.ok and deferred_hit.error.retryable and vis.report().impacts==0,"future effect waits for its snapshot")
 	var before := vis.report()
 	check(not vis.apply_snapshot({"scope_id":"other","tick":3,"actors":[]}).ok,"foreign scope")
 	check(not vis.apply_snapshot({"scope_id":"test","tick":2,"actors":[]}).ok,"stale snapshot")
@@ -57,6 +60,8 @@ func controls() -> void:
 	check(vis.report().impacts==1 and vis.report().corpses==1,"bounded confirmed effects deduplication")
 	vis.render_interpolated(1,Vector3(300,0,0))
 	check(vis.report().far_animated_instances==3 and vis.report().near_skeletons==0,"distance switches to shared mesh poses")
+	check(vis.apply_snapshot({"scope_id":"test","tick":3,"actors":[ra,rb,rc]}).ok,"publish next snapshot")
+	check(vis.consume_view_events("test",3,[early,early]).ok and vis.report().impacts==2,"retried effect applied once")
 	check(vis.apply_snapshot({"scope_id":"test","tick":190,"actors":[]}).ok,"release actors")
 	vis.render_interpolated(1,Vector3.ZERO)
 	check(vis.report().corpses==0 and vis.report().impacts==0,"visual lifetimes")
