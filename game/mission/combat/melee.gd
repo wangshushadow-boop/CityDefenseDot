@@ -173,12 +173,13 @@ static func _contacts(states: Dictionary, candidates: Array) -> Dictionary:
 	for c in candidates:
 		if typeof(c) != TYPE_DICTIONARY or typeof(c.get("attack_id")) != TYPE_STRING or not V.integer(c.get("contact_order")):
 			return R.fail("InvalidArgument", "contact")
-		if typeof(c.get("projectile", false)) != TYPE_BOOL or typeof(c.get("region", "body")) != TYPE_STRING:
+		if typeof(c.get("projectile", false)) != TYPE_BOOL or typeof(c.get("mount_impact",false)) != TYPE_BOOL or typeof(c.get("region", "body")) != TYPE_STRING:
 			return R.fail("InvalidArgument", "contact")
 		if not V.integer(c.get("charge_bonus", 0), 0, 5) or typeof(c.get("guard_facing",true)) != TYPE_BOOL:
 			return R.fail("InvalidArgument", "contact")
-		if c.get("projectile", false) and (not V.integer(c.get("power"), 1, 100000) or not V.integer(c.get("team"), 0, V.MAX_U32)):
-			return R.fail("InvalidArgument", "projectile")
+		if c.get("projectile", false) or c.get("mount_impact",false):
+			if not V.integer(c.get("power"), 1, 100000) or not V.integer(c.get("team"), 0, V.MAX_U32):
+				return R.fail("InvalidArgument", "contact_power")
 		for field: String in ["attacker", "target"]:
 			if not S.validate_shape("AgentHandle", c.get(field)).ok:
 				return R.fail("InvalidArgument", "contact." + field)
@@ -191,9 +192,13 @@ static func _contacts(states: Dictionary, candidates: Array) -> Dictionary:
 		var attacker: Dictionary = states.get(c.attacker.index, {})
 		var target: Dictionary = states.get(c.target.index, {})
 		var projectile: bool = c.get("projectile", false) == true
+		var impact: bool = c.get("mount_impact",false)
+		var weapon := not projectile and not impact
 		if target.is_empty() or target.handle != c.target or target.phase == "Downed" or c.attacker == c.target:
 			continue
-		if not projectile and (attacker.is_empty() or attacker.handle != c.attacker or attacker.phase != "Active" or attacker.attack_id != c.attack_id):
+		if impact and (attacker.get("handle") != c.attacker or attacker.get("rider_handle") == null or attacker.phase == "Downed"):
+			continue
+		if weapon and (attacker.is_empty() or attacker.handle != c.attacker or attacker.phase != "Active" or attacker.attack_id != c.attack_id):
 			continue
 		if target.has("team") and target.team == c.get("team",attacker.get("team")):
 			continue
@@ -205,20 +210,22 @@ static func _contacts(states: Dictionary, candidates: Array) -> Dictionary:
 				continue
 			applied_projectiles[c.attack_id] = true
 		var target_key := "%d:%d" % [c.target.index, c.target.generation]
-		if not projectile:
+		if weapon:
 			if attacker.hit_set.has(target_key) or attacker.hit_set.size() >= attacker.max_targets:
 				continue
 			attacker = attacker.duplicate()
 			attacker.hit_set = attacker.hit_set.duplicate()
 			attacker.hit_set[target_key] = true
 			states[c.attacker.index] = attacker
-		var raw: int = c["power"] if projectile else 10 + attacker.charge + clampi(c.get("charge_bonus", 0), 0, 5)
+		var raw: int = 10 + attacker.charge + c.get("charge_bonus",0) if weapon else c.power
 		var shield_block: bool = target.phase == "Guard" and region == "shield" and target.get("shield",0) > 0
-		var blocked: bool = shield_block or (not projectile and target.phase == "Guard" and target.direction == attacker.direction and c.get("guard_facing",true))
+		var blocked: bool = shield_block or (weapon and target.phase == "Guard" and target.direction == attacker.direction and c.get("guard_facing",true))
 		var armor: int = target.get("armor", {}).get(region, 0)
 		var weighted: int = raw * (2 if region == "head" else 1)
 		var damage: int = 0 if blocked else roundi(weighted * 100.0 / (100 + armor))
 		var info := {"attack_id":c.attack_id, "attacker":c.attacker, "target":target.handle, "blocked":blocked, "damage":damage}
+		if impact:
+			info["kind"] = "mount_impact"
 		if target.has("armor"):
 			info["breakdown"] = {"raw":raw,"zone":region,"zone_total":weighted,"armor":armor,"mitigated":weighted-damage,
 				"mount_bonus":c.get("charge_bonus",0),"blocked":blocked,"actual":damage}
@@ -278,7 +285,7 @@ func step(tick: Variant, intents: Array, query_contacts: Callable = Callable()) 
 					swing.merge({"weapon":state.weapons[state.weapon_slot],"released":state.since,"charge":state.charge,"team":state.team})
 				active.append(swing)
 		active.sort_custom(func(a, b): return a.attacker.index < b.attacker.index)
-		if not active.is_empty() or has_pending_projectiles():
+		if not active.is_empty() or _needs_sweep():
 			_querying = true
 			var result: Variant = _query_active(tick, active, next, query_contacts)
 			_querying = false
@@ -305,6 +312,10 @@ func step(tick: Variant, intents: Array, query_contacts: Callable = Callable()) 
 
 func has_pending_projectiles() -> bool:
 	return false
+
+
+func _needs_sweep() -> bool:
+	return has_pending_projectiles()
 
 
 func _query_active(tick: int, active: Array, _states: Dictionary, query: Callable) -> Variant:

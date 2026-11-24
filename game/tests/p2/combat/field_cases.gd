@@ -37,6 +37,8 @@ func physics(requests: Array, tick: int) -> Dictionary:
 		var hit := {"query_index":shape.query_index, "fraction_ppm":shape.fraction_ppm, "region":shape.region}
 		if shape.entity_handle == "foe":
 			hit.target = target
+		elif shape.entity_handle == "mounted_horse":
+			hit.target = M
 		hits.append(hit)
 	hits.reverse() # Physics backend traversal order must not change occlusion.
 	return R.ok(hits)
@@ -157,6 +159,84 @@ func cavalry() -> bool:
 	return true
 
 
+func mounted_field() -> RefCounted:
+	var sim := Field.new()
+	sim.enlist(A,{"team":1,"role":"cavalry"})
+	sim.enlist(M,{"team":1,"role":"mount","hp":10})
+	sim.enlist(B,{"team":2,"role":"infantry"})
+	check.call(sim.mount(A,M).ok,"impact rider attached")
+	return sim
+
+
+func mounted_poses(x: int) -> Dictionary:
+	var map := poses(12000)
+	map[0].position_mm = [0,0,12000]
+	map[1].position_mm = [1000,0,12000]
+	map[2] = {"position_mm":[x,0,12000],"facing_ppm":[1000000,0,0]}
+	return map
+
+
+func mount_impact() -> bool:
+	var sim := mounted_field()
+	sim.step_field(1,[],mounted_poses(0),physics)
+	var rejected: Dictionary = sim.step_field(2,[],mounted_poses(850),func(_q,_t): return R.fail("Unavailable","test"))
+	check.call(not rejected.ok and sim.view(B).value.hp == 100,"failed mount sweep rolls back motion")
+	var branch: RefCounted = sim.fork()
+	var r: Dictionary = sim.step_field(2,[],mounted_poses(850),physics)
+	check.call(r.ok and r.value.hits.size() == 1 and r.value.hits[0].kind == "mount_impact" and r.value.hits[0].attacker == M and sim.view(B).value.hp == 84,"horse body hits with no attack intent")
+	var replay: Dictionary = branch.step_field(2,[],mounted_poses(850),physics)
+	check.call(replay == r,"independent fork reproduces mount impact")
+	var positions := [930,930,1090,1500,2400,-1000,920]
+	for i in positions.size():
+		var step: Dictionary = sim.step_field(i+3,[],mounted_poses(positions[i]),physics)
+		check.call(step.ok and step.value.hits.size() == (1 if i == 6 else 0), "ongoing contact deduplicates; reentry after separation rearms")
+	check.call(sim.view(B).value.hp == 68,"exactly two separate impacts")
+	for route in [[1200,800],[700,740],[900,900]]:
+		var quiet := mounted_field()
+		quiet.step_field(1,[],mounted_poses(route[0]),physics)
+		var second: Dictionary = quiet.step_field(2,[],mounted_poses(route[1]),physics)
+		check.call(second.ok and second.value.hits.is_empty() and quiet.view(B).value.hp == 100,"backwards, below threshold or stationary movement")
+	var together := mounted_field()
+	for tick in range(1,5):
+		var inp := [attack("start",0)] if tick == 1 else ([attack("release",0)] if tick == 4 else [])
+		var step: Dictionary = together.step_field(tick,inp,mounted_poses(850 if tick == 4 else 0),physics)
+		if tick == 4:
+			check.call(step.value.hits.size() == 2 and together.view(B).value.hp == 74,"weapon swing and body impact independently resolve in one tick")
+	var mutual := mounted_field()
+	var archer := {"index":3,"generation":1}
+	mutual.enlist(archer,{"team":2,"role":"archer","ranged":"crossbow"})
+	for tick in range(1,5):
+		var state := mounted_poses(850 if tick == 4 else 0)
+		state[3] = {"position_mm":[0,0,15000],"facing_ppm":[1000000,0,0]}
+		var inputs := []
+		if tick == 1 or tick == 4:
+			var cmd := attack("start" if tick == 1 else "release")
+			cmd.actor_handle = archer
+			inputs.append(cmd)
+		var step: Dictionary = mutual.step_field(tick,inputs,state,physics)
+		if tick == 4:
+			check.call(step.value.hits.size() == 2 and mutual.view(M).value.phase == "Downed" and mutual.view(A).value.mount_handle == null and mutual.view(B).value.hp == 84,"horse can collide on same tick it falls")
+	return true
+
+
+func initial_morale() -> bool:
+	for value in [0,25,26]:
+		var sim := Field.new()
+		sim.enlist(A,{"team":1,"role":"infantry","morale":value})
+		sim.enlist(B,{"team":1,"role":"infantry"})
+		check.call(sim.view(A).value.routing == (value <= 25),"initial route threshold")
+		var one: Dictionary = sim.step_field(1,[attack("start",0)],poses(0),physics)
+		check.call(one.value.receipts[0].ok == (value > 25),"initially routed actor cannot attack")
+		var routed: Array = one.value.events.filter(func(e): return e.type=="routed")
+		check.call(routed.size() == (1 if value <= 25 else 0) and sim.view(B).value.morale == (64 if value <= 25 else 70),"initial route announced and propagated exactly once")
+		if value <= 25:
+			var two: Dictionary = sim.step_field(2,[],poses(0),physics,[{"actor_handle":A,"delta":54-value}])
+			check.call(sim.view(A).value.routing and two.value.events.is_empty(),"54 retains routed state")
+			var three: Dictionary = sim.step_field(3,[],poses(0),physics,[{"actor_handle":A,"delta":1}])
+			check.call(not sim.view(A).value.routing and three.value.events[0].type == "regrouped","55 regroups")
+	return true
+
+
 func authority_replay(render_hz: int, from_ai: bool) -> String:
 	var sim := field("crossbow",1)
 	var history := []
@@ -259,7 +339,7 @@ func run(tree: SceneTree, engine: RefCounted, assert_fn: Callable) -> bool:
 	check.call(token.ok and adapter.load_scene({"id":"test:scene/field", "simulation_scene":"res://tests/p2/combat/field.tscn"},token.value).ok,"load real field")
 	await tree.physics_frame
 	await tree.physics_frame
-	for test: Callable in [missiles, protection, cavalry, authority, morale, crowd]:
+	for test: Callable in [missiles, protection, cavalry, mount_impact, initial_morale, authority, morale, crowd]:
 		check.call(test.call() == true, "completed field case " + str(test.get_method()))
 	adapter.release_scope(SCOPE)
 	print("COM field physics batches=",batches," queries=",queries)

@@ -6,6 +6,8 @@ const V = preload("res://contracts/values.gd")
 const RANGE_PER_TICK := {"bow":1700, "crossbow":2800, "throw":1100}
 const POWER := {"bow":16, "crossbow":20, "throw":12}
 const LIFETIME := 90
+const MOUNT_RADIUS_MM := 240
+const MOUNT_IMPACT_MIN_MM_TICK := 80
 
 
 static func vector(value: Variant, limit: int) -> bool:
@@ -38,7 +40,70 @@ static func _hit_less(a: Dictionary, b: Dictionary) -> bool:
 	return str(a.get("region","")) < str(b.get("region",""))
 
 
-static func collect(tick: int, active: Array, states: Dictionary, poses: Dictionary, sweep: Callable, flights: Dictionary, events: Array) -> Dictionary:
+static func _ride_queries(tick: int, states: Dictionary, poses: Dictionary, rides: Dictionary, queries: Array, owners: Array) -> Dictionary:
+	for index in rides:
+		var horse: Dictionary = states[index]
+		var source: int = index if poses.has(index) else horse.rider_handle.index
+		var pose: Variant = poses.get(source)
+		if pose == null:
+			rides[index] = {}
+			continue
+		if typeof(pose) != TYPE_DICTIONARY or not vector(pose.get("position_mm"),1000000000) or not vector(pose.get("facing_ppm"),1000000):
+			return R.fail("InvalidArgument","mount_pose")
+		var previous: Dictionary = rides[index]
+		var end: Array = pose.position_mm
+		var touching := {}
+		rides[index] = {"source":source,"position":end.duplicate(),"touching":touching}
+		if previous.get("source") != source:
+			continue
+		var begin: Array = previous.position
+		var travel := v3(end) - v3(begin)
+		var facing := v3(pose.facing_ppm)
+		facing.y = 0
+		facing = facing.normalized()
+		var planar := Vector3(travel.x,0,travel.z)
+		var approach := planar.dot(facing)
+		var fast := approach >= MOUNT_IMPACT_MIN_MM_TICK and approach >= planar.length()*0.7
+		# A short overlap sweep keeps an existing contact until actual separation.
+		if not fast and previous.touching.is_empty():
+			continue
+		var probe_end := end if begin != end else [end[0]+1,end[1],end[2]]
+		queries.append(_query(begin,probe_end,MOUNT_RADIUS_MM))
+		var swing := {"attacker":horse.handle,"team":horse.team,"attack_id":"mount:%d:%d:%d" % [tick,index,horse.handle.generation]}
+		owners.append({"swing":swing,"projectile":false,"mount":true,"fast":fast,
+			"forward":facing,"begin":v3(begin),"approach":approach,"previous":previous.touching,"touching":touching})
+	return R.ok()
+
+
+static func _mount_contact(owner: Dictionary, victim: Dictionary, region: String, poses: Dictionary, contacts: Array) -> void:
+	if region == "shield":
+		return
+	var index: int = victim.handle.index
+	var generation: int = victim.handle.generation
+	if owner.touching.get(index) == generation:
+		return
+	if owner.previous.get(index) == generation:
+		owner.touching[index] = generation
+		return
+	if not owner.fast:
+		return
+	var approach: float = owner.approach
+	var target_pose: Variant = poses.get(index)
+	if typeof(target_pose) == TYPE_DICTIONARY and vector(target_pose.get("position_mm"),1000000000):
+		var ahead := v3(target_pose.position_mm) - Vector3(owner.begin)
+		if ahead.dot(owner.forward) < 0:
+			return
+		if vector(target_pose.get("facing_ppm"),1000000) and V.integer(target_pose.get("speed_mm_tick"),0,1000000):
+			approach -= v3(target_pose.facing_ppm).normalized().dot(owner.forward) * target_pose.speed_mm_tick
+	if approach < MOUNT_IMPACT_MIN_MM_TICK:
+		return
+	owner.touching[index] = generation
+	var swing: Dictionary = owner.swing
+	contacts.append({"attacker":swing.attacker,"target":victim.handle,"attack_id":swing.attack_id,"team":swing.team,
+		"region":"body","mount_impact":true,"power":clampi(4+floori(approach/40),4,16),"contact_order":contacts.size()})
+
+
+static func collect(tick: int, active: Array, states: Dictionary, poses: Dictionary, sweep: Callable, flights: Dictionary, events: Array, rides: Dictionary) -> Dictionary:
 	var queries := []
 	var owners := []
 	for swing: Dictionary in active:
@@ -85,6 +150,9 @@ static func collect(tick: int, active: Array, states: Dictionary, poses: Diction
 		moved.position = end
 		moved.velocity = [shot.velocity[0], shot.velocity[1] - 3, shot.velocity[2]]
 		flights[id] = moved
+	var charge_queries := _ride_queries(tick,states,poses,rides,queries,owners)
+	if not charge_queries.ok:
+		return charge_queries
 	if queries.is_empty():
 		return R.ok([])
 	if not sweep.is_valid():
@@ -125,6 +193,12 @@ static func collect(tick: int, active: Array, states: Dictionary, poses: Diction
 		if victim.get("rider_handle") == swing.attacker or victim.get("mount_handle") == swing.attacker:
 			continue
 		var region: String = hit.get("region","body")
+		if owner.get("mount",false):
+			if victim.team == swing.team:
+				stopped[q] = true
+			else:
+				_mount_contact(owner,victim,region,poses,contacts)
+			continue
 		var facing := true
 		if victim.phase == "Guard":
 			var guard_pose: Variant = poses.get(hit.target.index)

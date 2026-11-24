@@ -60,3 +60,11 @@ metadata/region = "body"
 
 [node name="Shape" type="CollisionShape3D" parent="Melee"]
 shape = SubResource("Thin")
+
+[node name="Mount" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 0, 15)
+metadata/entity_handle = "mounted_horse"
+metadata/region = "body"
+
+[node name="Shape" type="CollisionShape3D" parent="Mount"]
+shape = SubResource("Thin")

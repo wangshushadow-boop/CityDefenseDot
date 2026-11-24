@@ -5,7 +5,10 @@ const MAX_NEIGHBORS := 4
 const NEIGHBOR_MM := 8000
 const MAX_SOURCES := 16
 const SPREAD_TICKS := 15
+const ROUTE_AT := 25
+const REGROUP_AT := 55
 var _shots := {}
+var _ride_paths := {}
 var _pending_spread := {}
 var _sampling := {}
 
@@ -13,6 +16,7 @@ var _sampling := {}
 func fork():
 	var copy = super.fork()
 	copy._shots = _shots.duplicate()
+	copy._ride_paths = _ride_paths.duplicate()
 	copy._pending_spread = _pending_spread.duplicate()
 	return copy
 
@@ -49,9 +53,13 @@ func enlist(handle: Dictionary, profile: Dictionary) -> Dictionary:
 	var result := super.add_actor(handle, profile.get("hp",100), 1 if role == "archer" else 0, profile.get("max_targets",1))
 	if not result.ok:
 		return result
+	var morale: int = profile.get("morale",70)
+	var routing: bool = role != "mount" and morale <= ROUTE_AT
 	_actors[handle.index].merge({"team":profile.team, "role":role, "weapons":weapons, "shield":profile.get("shield",0),
 		"ammo":profile.get("ammo",8), "armor":armor.duplicate(), "reload_until":0, "mount_handle":null, "rider_handle":null,
-		"morale":profile.get("morale",70), "routing":false, "commander":profile.get("commander",false), "last_spread":-SPREAD_TICKS})
+		"morale":morale, "routing":routing, "commander":profile.get("commander",false), "last_spread":-SPREAD_TICKS})
+	if routing:
+		_pending_spread[handle.index] = {"handle":_actors[handle.index].handle, "initial":true}
 	return R.ok()
 
 
@@ -72,6 +80,7 @@ func mount(rider: Dictionary, horse: Dictionary) -> Dictionary:
 	b.rider_handle = a.handle
 	_actors[rider.index] = a
 	_actors[horse.index] = b
+	_ride_paths[horse.index] = {}
 	return R.ok()
 
 
@@ -84,6 +93,7 @@ func _unlink(rider: Dictionary, horse: Dictionary, fallen: bool) -> void:
 		_enter(a, "Stagger", _tick)
 	_actors[rider.index] = a
 	_actors[horse.index] = b
+	_ride_paths.erase(horse.index)
 
 
 func dismount(rider: Dictionary) -> Dictionary:
@@ -113,6 +123,10 @@ func has_pending_projectiles() -> bool:
 	return not _shots.is_empty()
 
 
+func _needs_sweep() -> bool:
+	return super._needs_sweep() or not _ride_paths.is_empty()
+
+
 func _query_active(tick: int, active: Array, states: Dictionary, query: Callable) -> Variant:
 	_sampling = states
 	var result: Variant = super._query_active(tick, active, states, query)
@@ -132,11 +146,13 @@ func step_field(tick: Variant, intents: Array, poses: Dictionary, sweep: Callabl
 			return R.fail("NotFound","morale_event")
 		morale[state.handle.index] = clampi(morale.get(state.handle.index,0) + event.delta,-100,100)
 	var flights := _shots.duplicate()
+	var rides := _ride_paths.duplicate()
 	var events := []
-	var result := step(tick, intents, func(t, active): return Sweeps.collect(t,active,_sampling,poses,sweep,flights,events))
+	var result := step(tick, intents, func(t, active): return Sweeps.collect(t,active,_sampling,poses,sweep,flights,events,rides))
 	if not result.ok:
 		return result
 	_shots = flights
+	_ride_paths = rides
 	var downed := {}
 	for hit: Dictionary in result.value.hits:
 		var victim: Dictionary = _actors[hit.target.index]
@@ -164,7 +180,7 @@ func _change_morale(index: int, delta: int, events: Array) -> bool:
 	if state.phase == "Downed" or state.role == "mount":
 		return false
 	var value := clampi(state.morale + delta, 0, 100)
-	var routing: bool = value <= 25 or (state.routing and value < 55)
+	var routing: bool = value <= ROUTE_AT or (state.routing and value < REGROUP_AT)
 	if state.morale == value and state.routing == routing:
 		return false
 	var changed: bool = state.routing != routing
@@ -193,8 +209,11 @@ func _resolve_morale(tick: int, morale: Dictionary, downed: Dictionary, poses: D
 			sources[index] = true
 	for index in _pending_spread:
 		var state: Dictionary = _actors.get(index,{})
-		if state.get("handle") == _pending_spread[index] and (state.routing or state.phase == "Downed"):
+		var pending: Dictionary = _pending_spread[index]
+		if state.get("handle") == pending.handle and (state.routing or state.phase == "Downed"):
 			sources[index] = true
+			if pending.get("initial",false) and state.routing:
+				events.append({"type":"routed","actor_handle":state.handle,"morale":state.morale})
 	_pending_spread = {}
 	sources.merge(downed)
 	if sources.is_empty():
@@ -215,7 +234,7 @@ func _resolve_morale(tick: int, morale: Dictionary, downed: Dictionary, poses: D
 	var ordered := sources.keys()
 	ordered.sort()
 	for index in ordered.slice(MAX_SOURCES):
-		_pending_spread[index] = _actors[index].handle
+		_pending_spread[index] = {"handle":_actors[index].handle}
 	for index in ordered.slice(0, MAX_SOURCES):
 		if not positions.has(index):
 			continue
@@ -238,7 +257,7 @@ func _resolve_morale(tick: int, morale: Dictionary, downed: Dictionary, poses: D
 			ally.last_spread = tick
 			_actors[other] = ally
 			if _change_morale(other,-12 if source.commander else -6,events):
-				_pending_spread[other] = ally.handle
+				_pending_spread[other] = {"handle":ally.handle}
 			events.append({"type":"morale_spread","actor_handle":ally.handle,"source":source.handle})
 			count += 1
 			if count == MAX_NEIGHBORS:
