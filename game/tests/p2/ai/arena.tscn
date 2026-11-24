@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="NavigationMesh" id="Ground"]
+vertices = PackedVector3Array(-65,0,-45, -65,0,45, 65,0,45, 65,0,-45)
+polygons = [PackedInt32Array(0,1,2,3)]
+
+[sub_resource type="BoxShape3D" id="Block"]
+size = Vector3(0.4,4,6)
+
+[node name="Arena" type="Node3D"]
+
+[node name="Ground" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("Ground")
+
+[node name="Wall" type="StaticBody3D" parent="." groups=["ai_test_wall"]]
+position = Vector3(0,1,0)
+collision_layer = 4
+metadata/entity_handle = "arena_wall"
+
+[node name="Shape" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("Block")
