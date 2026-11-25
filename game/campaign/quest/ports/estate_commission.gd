@@ -2,15 +2,15 @@ extends RefCounted
 ## An estate commission retains the first committed ledger of its term.
 const R = preload("res://contracts/result.gd")
 const V = preload("res://contracts/values.gd")
+const C = preload("res://contracts/canonical.gd")
+const Governance = preload("res://campaign/settlement/ports/governance.gd")
 const TERM_DAYS := 3
 const ACTOR_LOST := "承办人已离任或身故。"
 const ISSUER_LOST := "发布者已离任，无法签结这份庄簿。"
 const LEDGER_LOST := "未取得约定日期的在任庄簿。"
 const TIME_UP := "已过回报期限。"
 const KEYS := ["schema_version","status","actor_id","issuer_id","settlement_id","accepted_day",
-	"deadline_day","ledger","ended_day","reason","rewarded"]
-const LEDGER_KEYS := ["day","governor_id","prosperity_before","prosperity_base","prosperity_bonus",
-	"prosperity_after","loyalty_before","loyalty_base","loyalty_bonus","loyalty_after"]
+	"deadline_day","ledger","ledger_hash","ended_day","reason","rewarded"]
 
 static func reward_source(state: Dictionary) -> String:
 	if state.is_empty():
@@ -45,6 +45,7 @@ static func reconcile(state: Dictionary, facts: Dictionary) -> Dictionary:
 		var ready := state.duplicate(true)
 		ready.status = "ready"
 		ready.ledger = report.duplicate(true)
+		ready.ledger_hash = C.hash_value(report).value
 		state = ready
 	if facts.day > state.deadline_day:
 		return _closed(state, "expired", state.deadline_day + 1, TIME_UP)
@@ -73,7 +74,7 @@ static func _answers(ledger: Dictionary) -> Array:
 
 static func view(state: Dictionary, facts: Dictionary) -> Dictionary:
 	var speaker: Variant = _speaker(facts)
-	var visit: bool = facts.can_visit and speaker != null
+	var visit: bool = facts.can_visit and speaker != null and V.integer(facts.get("opened_day"),0,facts.day)
 	var status: String = state.get("status", "none")
 	var original_actor: bool = facts.player_id != null and facts.player_id == state.get("actor_id")
 	var report: bool = visit and status == "ready" and original_actor and speaker.id == state.issuer_id and facts.day <= state.deadline_day
@@ -108,7 +109,7 @@ static func plan(state: Dictionary, op: String, args: Dictionary, facts: Diction
 		return R.ok({"schema_version":1, "status":"active", "actor_id":facts.player_id,
 			"issuer_id":facts.governor_id, "settlement_id":facts.settlement_id,
 			"accepted_day":facts.day, "deadline_day":facts.day+TERM_DAYS,
-			"ledger":{}, "ended_day":null, "reason":"", "rewarded":false})
+			"ledger":{}, "ledger_hash":"", "ended_day":null, "reason":"", "rewarded":false})
 	if not options.can_report:
 		return R.fail("InvalidState", "visit.report")
 	if not V.integer(args.answer) or args.answer != _delta(state.ledger):
@@ -116,22 +117,21 @@ static func plan(state: Dictionary, op: String, args: Dictionary, facts: Diction
 	return R.ok(_closed(state, "completed", facts.day, ""))
 
 static func _ledger_valid(ledger: Dictionary, state: Dictionary, facts: Dictionary) -> bool:
-	if ledger.size()!=LEDGER_KEYS.size() or not ledger.has_all(LEDGER_KEYS):
+	if ledger.is_empty():
+		return state.ledger_hash==""
+	var day: int = state.accepted_day+1
+	if day>facts.day or ledger.get("governor_id")!=state.issuer_id:
 		return false
-	if not V.integer(ledger.day, state.accepted_day+1, state.accepted_day+1) or ledger.day>facts.day or ledger.governor_id!=state.issuer_id:
+	var digest := C.hash_value(ledger)
+	if not digest.ok or digest.value!=state.ledger_hash:
 		return false
-	# If SET still retains this day, its public ledger must be byte-for-byte equivalent.
-	if facts.last_report.get("day")==ledger.day and facts.last_report!=ledger:
+	if not Governance.validate_daily_report(ledger,day,facts.opened_day,facts.members[state.issuer_id]).ok:
 		return false
-	for key in ["prosperity","loyalty"]:
-		var base: int = 1 if key == "prosperity" else -1
-		var before: Variant = ledger[key+"_before"]
-		var bonus: Variant = ledger[key+"_bonus"]
-		var after: Variant = ledger[key+"_after"]
-		if not V.integer(before,0,1000) or not V.integer(after,0,1000) or not V.integer(ledger[key+"_base"],base,base) or not V.integer(bonus,1):
-			return false
-		if after != clampi(before+base+bonus,0,1000):
-			return false
+	var latest: Dictionary = facts.last_report
+	if latest.get("day")==day:
+		return latest==ledger
+	if latest.get("day")==day+1:
+		return latest.prosperity_before==ledger.prosperity_after and latest.loyalty_before==ledger.loyalty_after
 	return true
 
 static func validate(state: Dictionary, facts: Dictionary) -> Dictionary:
@@ -146,13 +146,13 @@ static func validate(state: Dictionary, facts: Dictionary) -> Dictionary:
 	for id in [state.actor_id,state.issuer_id]:
 		if not V.typed_id(id,"hero") or not facts.members.has(id):
 			return R.fail("InvalidArgument", "visit.person")
-	if state.actor_id==state.issuer_id or not V.integer(state.accepted_day,0,mini(facts.day,V.MAX_INTEGER-TERM_DAYS-1)):
+	if not V.integer(facts.get("opened_day"),0,facts.day) or state.actor_id==state.issuer_id or not V.integer(state.accepted_day,facts.opened_day,mini(facts.day,V.MAX_INTEGER-TERM_DAYS-1)):
 		return R.fail("InvalidArgument", "visit.origin")
 	var deadline: int = state.accepted_day+TERM_DAYS
 	if not V.integer(state.deadline_day,deadline,deadline):
 		return R.fail("InvalidArgument", "visit.deadline")
 	var ledger: Dictionary = state.ledger
-	if not ledger.is_empty() and not _ledger_valid(ledger,state,facts):
+	if not _ledger_valid(ledger,state,facts):
 		return R.fail("InvalidArgument", "visit.ledger")
 	if state.rewarded and state.status!="completed":
 		return R.fail("InvalidState", "visit.rewarded")
