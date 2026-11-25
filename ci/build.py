@@ -97,7 +97,7 @@ def build(engine, out):
             home = scratch / key
             home.mkdir()
             env[key] = str(home)
-        for key in ("RECOLLECTION_PROFILE", "RECOLLECTION_LOG_LEVEL"):
+        for key in ("RECOLLECTION_PROFILE", "RECOLLECTION_LOG_LEVEL", "RECOLLECTION_VERIFY_FAST_CLOSE", "RECOLLECTION_FIELD_SCREENSHOT"):
             env.pop(key, None)
         archive = scratch / "sources.tar"
         subprocess.run(["git", "archive", "-o", archive, commit, "game", "ci", "development/state/project.json"],
@@ -128,6 +128,7 @@ def build(engine, out):
             if version != expected:
                 raise ValueError(f"engine mismatch: expected {expected}, got {version}")
             print(run([sys.executable, "-B", game / "tests/p1/ci/test_gates.py"], cold, env).strip(), flush=True)
+            print(run([sys.executable, "-B", game / "tests/p2/field_ci/test_scope.py"], cold, env).strip(), flush=True)
             errors = dependencies(game)
             if errors:
                 raise ValueError("\n".join(errors))
@@ -192,6 +193,14 @@ def build(engine, out):
             if field_log.splitlines().count(marker) != 1:
                 raise ValueError(f"{target} field match did not finish: {field_log}")
             matches[target] = marker
+            if target == "client":
+                closing = godot(engine, match_args, cold, env | {"RECOLLECTION_VERIFY_FAST_CLOSE": "1"}, desktop=True)
+                stopped = [json.loads(line[8:]) for line in closing.splitlines() if line.startswith("P1_BOOT ")]
+                if (not re.search(r"^FIELD_FAST_CLOSE voices=[1-9][0-9]*$", closing, re.M)
+                        or len(stopped) != 2 or stopped[-1].get("event") != "stopped"
+                        or stopped[-1].get("audio_pending") != 0):
+                    raise ValueError(f"client process did not retire field playback: {closing}")
+                matches["client_close"] = "playing voices retired"
             field_smokes[target] = field_content(engine, cold, env, ["--main-pack", pack], paths)
             model_log = godot(engine, ["--main-pack", pack, "--script", field_inspector], cold, env)
             model_rows = [json.loads(line.removeprefix("FIELD_MODELS ")) for line in model_log.splitlines()
