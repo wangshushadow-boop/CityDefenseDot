@@ -118,6 +118,11 @@ def build(engine, out):
             field_inspector = scratch / "inspect_field.gd"
             shutil.copyfile(tree / "ci/inspect_field.gd", field_inspector)
             game = tree / "game"
+            field_probes = {}
+            for target, name in (("client", "desktop.gd"), ("server", "run.gd")):
+                dst = scratch / ("field-" + target + ".gd")
+                shutil.copyfile(game / "tests/p2/field_boot" / name, dst)
+                field_probes[target] = dst
             expected = json.loads((tree / "development/state/project.json").read_bytes())["technical_stack"]["engine_version"]
             version = run([engine, "--version"], cold, env).strip()
             if version != expected:
@@ -174,10 +179,19 @@ def build(engine, out):
                 godot(engine, ["--path", game, "--export-pack", "Recollection", stage / (target + ".pck")], cold, env)
         # The source resource root is gone. Cold processes see only the exported files.
         smokes = {}
+        matches = {}
         for target, profile in (("client", "client"), ("server", "headless")):
             pack = stage / (target + ".pck")
             check_runtime_pack(engine, cold, env, pack, stamp | {"target": target}, inspector)
             smokes[target] = boot(engine, cold, env, ["--main-pack", pack], profile)
+            match_args = ["--main-pack", pack, "--script", field_probes[target]]
+            if target == "client":
+                match_args.extend(["--", "--battle-limit=20"])
+            field_log = godot(engine, match_args, cold, env, desktop=target == "client")
+            marker = "FIELD_DESKTOP PASS result_slots=20" if target == "client" else "FIELD_BOOT errors=0 people=20 slots=40"
+            if field_log.splitlines().count(marker) != 1:
+                raise ValueError(f"{target} field match did not finish: {field_log}")
+            matches[target] = marker
             field_smokes[target] = field_content(engine, cold, env, ["--main-pack", pack], paths)
             model_log = godot(engine, ["--main-pack", pack, "--script", field_inspector], cold, env)
             model_rows = [json.loads(line.removeprefix("FIELD_MODELS ")) for line in model_log.splitlines()
@@ -204,7 +218,7 @@ def build(engine, out):
                             "sha256": hashlib.sha256((stage / name).read_bytes()).hexdigest()}
                      for name in ("client.pck", "server.pck", "base.zip", "domain-tests.json")}
         (stage / "manifest.json").write_bytes(json_bytes(stamp | {"channel": "development", "artifacts": artifacts, "smokes": smokes,
-                                                              "field": {"content_hashes": field_smokes, "models": expected_models}}))
+                                                              "field": {"content_hashes": field_smokes, "models": expected_models, "matches": matches}}))
         # Every successful invocation publishes a complete, distinct directory.
         destination = out / (commit[:12] + "-" + uuid.uuid4().hex[:12])
         stage.rename(destination)

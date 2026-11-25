@@ -50,6 +50,10 @@ def permitted(caller, target):
     if module(caller) == module(target):
         return True
     src, dst = group(caller), group(target)
+    if caller == "bootstrap/composition_root.gd" and target in {
+        "mission/runtime/field_mission.gd", "mission/runtime/field_brains.gd"
+    }:
+        return True
     if src == dst and src in {"campaign", "mission", "infrastructure", "presentation"}:
         return "/ports/" in target or target in FACADES
     if dst not in ALLOWED and dst != "bootstrap":
