@@ -58,7 +58,10 @@ func run()->void:
 	var fork:=Hero.apply(selected.value,"perk",{"perk":"one_handed_lead"},2)
 	check(not fork.ok,"exclusive branch")
 	var projection:=Hero.view(selected.value)
+	check(Canon.encode(Hero.view(h)).ok and Canon.encode(projection).ok,"canonical projection with and without perks")
 	check(projection.can_join and projection.effects.self.one_handed=={"bonus":2,"sources":["one_handed_hand"]},"effect scope and provenance")
+	check(Hero.effective_skill(selected.value,"one_handed")==projection.skills.one_handed.level+projection.effects.self.one_handed.bonus,"domain uses projected self skill")
+	check(Hero.effective_skill({"skills":{"riding":{"level":3}}},"riding")==3,"equipment can read a base skill without perks")
 	check(not projection.effects.has("captain") and not projection.has("sources"),"projection boundary")
 	projection.skills.one_handed.level=300
 	check(selected.value.skills.one_handed.level==3,"independent projection")
@@ -79,6 +82,26 @@ func run()->void:
 	check(not Hero.apply(captured.value,"retire",{},4).ok,"no voluntary retirement in captivity")
 	var rested:=Hero.apply(captured.value,"rest",{},5)
 	check(rested.ok and rested.value.wounds<40 and rested.value.wounds>0 and rested.value.captive,"medic recovery while captive")
+	var captive_rest:=Hero.apply(captured.value,"rest",{"resting":true},5)
+	check(captive_rest.ok and captive_rest.value.wounds==rested.value.wounds,"captivity precludes active rest bonus")
+	var automatic:=Hero.apply(wounded.value,"rest",{},5)
+	var active:=Hero.apply(wounded.value,"rest",{"resting":true},5)
+	check(automatic.ok and active.ok and automatic.value.wounds-active.value.wounds==defs.health.rest_bonus,"free hero gets extra recovery only while resting")
+	check(not Hero.apply(wounded.value,"rest",{"resting":1},5).ok,"reject non-boolean active rest")
+	var physician:=Hero.create(ID,{"occupation":"healer"},0)
+	var doctor:Dictionary=Hero.apply(physician.value,"perk",{"perk":"medicine_hand"},0).value
+	var army_doctor:Dictionary=Hero.apply(physician.value,"perk",{"perk":"medicine_lead"},0).value
+	var self_med:int=Hero.effective_skill(doctor,"medicine")
+	check(self_med==Hero.effective_skill(physician.value,"medicine")+2 and Hero.effective_skill(army_doctor,"medicine")==physician.value.skills.medicine.level,"only self medicine aids this hero")
+	var baseline:Dictionary=Hero.apply(physician.value,"outcome",wound,0).value
+	var treated:Dictionary=Hero.apply(doctor,"outcome",wound,0).value
+	var scoped:Dictionary=Hero.apply(army_doctor,"outcome",wound,0).value
+	var base_day:Dictionary=Hero.apply(baseline,"rest",{},4).value
+	var healed:Dictionary=Hero.apply(treated,"rest",{},4).value
+	check(base_day.wounds-healed.wounds==2 and Hero.apply(scoped,"rest",{},4).value.wounds==base_day.wounds,"healing authority applies effective medicine, excludes other scopes")
+	for d in range(1,5):
+		treated=Hero.apply(treated,"rest",{},d).value
+	check(treated==healed,"fractional medicine is consistent across daily and batched recovery")
 	var repeat:=Hero.apply(rested.value,"rest",{},5)
 	check(repeat.ok and repeat.value==rested.value,"once per day")
 	check(not Hero.apply(rested.value,"rest",{},4).ok,"no time travel")

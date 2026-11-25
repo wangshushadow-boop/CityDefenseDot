@@ -209,6 +209,28 @@ static func _perk_eligible(h: Dictionary, id: String) -> bool:
 		if _rules.perks[old].group==p.group: return false
 	return true
 
+static func _resolved_skill(hero: Dictionary, skill: String, scope: String) -> Dictionary:
+	if _rules.is_empty() and catalog().is_empty():return R.fail("Unavailable","hero_rules")
+	var skills: Variant=hero.get("skills",{})
+	if not skills is Dictionary or not _rules.skills.has(skill) or scope not in SCOPES:
+		return R.fail("InvalidArgument","skill")
+	var progress: Variant=skills.get(skill)
+	if not progress is Dictionary or not V.integer(progress.get("level"),0,_rules.learning.skill_max):
+		return R.fail("InvalidArgument","skill_level")
+	var perks: Variant=hero.get("perks",[])
+	if not C.is_json_array(perks):return R.fail("InvalidArgument","perks")
+	var modifiers: Array=[]
+	for id in perks:
+		if not _rules.perks.has(id):return R.fail("InvalidArgument","perk")
+		var p: Dictionary=_rules.perks[id]
+		if p.effect==skill:
+			modifiers.append({"source_id":id,"scope":p.scope,"group":p.group,"priority":1,"operation":"add","value":p.bonus})
+	return Numeric.apply_effects(progress.level,modifiers,scope)
+
+static func effective_skill(hero: Dictionary, skill: String, scope: String="self") -> int:
+	var resolved:=_resolved_skill(hero,skill,scope)
+	return int(resolved.value.final) if resolved.ok else 0
+
 static func _terminal(h: Dictionary, status: String, cause: String) -> void:
 	h.life_status=status
 	h.captive=false
@@ -301,11 +323,18 @@ static func apply(hero: Dictionary, op: String, args: Dictionary, day: int) -> D
 				_advance(h,args.skill,_rules.learning.practice_units,1<<count)
 				h.practice_counts[args.skill]=count+1
 		"rest":
-			if not args.is_empty():return R.fail("InvalidArgument","rest")
+			if not args.is_empty() and not (_shape(args,["resting"]) and is_same(args.resting,true)):
+				return R.fail("InvalidArgument","rest")
 			var elapsed: int=mini(day-h.recovery_day,100)
-			var rate: int=_rules.health.base_recovery+floori(float(h.skills.medicine.level)/_rules.health.medicine_divisor)
-			if not h.captive: rate+=_rules.health.rest_bonus
-			h.wounds=maxi(0,h.wounds-elapsed*rate)
+			var rate: int=_rules.health.base_recovery
+			if args.get("resting",false) and not h.captive:rate+=_rules.health.rest_bonus
+			var medicine:=effective_skill(h,"medicine")
+			var divisor: int=_rules.health.medicine_divisor
+			# Measure fractional healing on world-day boundaries, so small perks count across days.
+			var remainder: int=(((day-elapsed)%divisor)*medicine)%divisor
+			@warning_ignore("integer_division")
+			var healing: int=elapsed*rate+(elapsed*medicine+remainder)/divisor
+			h.wounds=maxi(0,h.wounds-healing)
 			h.recovery_day=day
 			if h.wounds==0: h.cause=""
 			h.life_status=_active_status(h)
@@ -328,28 +357,24 @@ static func view(hero: Dictionary) -> Dictionary:
 	var result:=hero.duplicate(true)
 	result.erase("sources")
 	result.erase("practice_counts")
-	result.can_fight=hero.life_status=="Healthy"
-	result.can_join=result.can_fight and not V.typed_id(hero.location_ref,"party")
-	result.available_perks=[]
-	result.effects={}
+	result["can_fight"]=hero.life_status=="Healthy"
+	result["can_join"]=result.can_fight and not V.typed_id(hero.location_ref,"party")
+	result["available_perks"]=[]
+	result["effects"]={}
 	for skill in result.skills:
 		var row: Dictionary=result.skills[skill]
-		row.next_xp=_threshold(row.level)
-		row.soft_cap=_cap(hero,skill)
+		row["next_xp"]=_threshold(row.level)
+		row["soft_cap"]=_cap(hero,skill)
 	for perk in _rules.perks:
 		if hero.life_status not in ["Dead","Retired"] and _perk_eligible(hero,perk):result.available_perks.append(perk)
-	# Resolve separately per stat; unrelated perks must never inflate each other.
-	var modifiers: Dictionary={}
+	# Show the same scoped skill calculation used by equipment and recovery.
 	for id in hero.perks:
 		var p: Dictionary=_rules.perks[id]
-		if not modifiers.has(p.effect): modifiers[p.effect]=[]
-		modifiers[p.effect].append({"source_id":id,"scope":p.scope,"group":p.group,"priority":1,"operation":"add","value":p.bonus})
-	for stat in modifiers:
-		for scope in SCOPES:
-			var resolved:=Numeric.apply_effects(0,modifiers[stat],scope)
-			if not resolved.ok or resolved.value.steps.is_empty():continue
-			var sources: Array=[]
-			for step in resolved.value.steps:sources.append(step.source_id)
-			if not result.effects.has(scope):result.effects[scope]={}
-			result.effects[scope][stat]={"bonus":int(resolved.value.final),"sources":sources}
+		if not result.effects.has(p.scope):result.effects[p.scope]={}
+		if result.effects[p.scope].has(p.effect):continue
+		var resolved:=_resolved_skill(hero,p.effect,p.scope)
+		if not resolved.ok:continue
+		var sources: Array=[]
+		for step in resolved.value.steps:sources.append(step.source_id)
+		result.effects[p.scope][p.effect]={"bonus":int(resolved.value.final-resolved.value.base),"sources":sources}
 	return result
