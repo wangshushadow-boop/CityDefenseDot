@@ -16,7 +16,8 @@
       ],
       "evidence": [
         "development/reports/tasks/P1-BOOT-001.md",
-        "development/reports/stages/P1.md"
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P2/field-desktop-final.txt"
       ]
     },
     "CORE": {
@@ -72,7 +73,8 @@
       ],
       "evidence": [
         "development/reports/tasks/P1-APP-CORE-001.md",
-        "development/reports/stages/P1.md"
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P2/merged-field-session.txt"
       ]
     },
     "CAMP": {
@@ -270,7 +272,8 @@
       "evidence": [
         "development/reports/tasks/P1-MIS-RT-PORTS-001.md",
         "development/reports/stages/P1.md",
-        "development/reports/tests/P2/mission-002.txt"
+        "development/reports/tests/P2/mission-002.txt",
+        "development/reports/tests/P2/field-revision-final.txt"
       ]
     },
     "COM": {
@@ -391,7 +394,8 @@
       ],
       "evidence": [
         "development/reports/tasks/P2-MOV-001.md",
-        "development/reports/tests/P2/movement-002.txt"
+        "development/reports/tests/P2/movement-002.txt",
+        "development/reports/tests/P2/field-sweep-final.txt"
       ]
     },
     "SIEGE": {
@@ -460,7 +464,8 @@
         "T-INPUT-03"
       ],
       "evidence": [
-        "development/reports/tests/P2/input-001.txt"
+        "development/reports/tests/P2/input-001.txt",
+        "development/reports/tests/P2/merged-input-heading.txt"
       ]
     },
     "CAM": {
@@ -492,7 +497,8 @@
         "T-VIS-02"
       ],
       "evidence": [
-        "development/reports/tests/P2/visuals-001.txt"
+        "development/reports/tests/P2/visuals-001.txt",
+        "development/reports/tests/P2/merged-mounted-visual.txt"
       ]
     },
     "AUD": {
@@ -509,7 +515,8 @@
         "T-AUD-03"
       ],
       "evidence": [
-        "development/reports/tests/P2/audio-001.txt"
+        "development/reports/tests/P2/audio-001.txt",
+        "development/reports/tests/P2/field-audio-final.txt"
       ]
     },
     "PERSIST": {
@@ -703,7 +710,8 @@
       ],
       "evidence": [
         "development/reports/tasks/P1-TEST-HARNESS-001.md",
-        "development/reports/stages/P1.md"
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P2/field-benchmark-validation.txt"
       ]
     },
     "CI": {
@@ -722,7 +730,8 @@
       ],
       "evidence": [
         "development/reports/tasks/P1-CI-CORE-001.md",
-        "development/reports/stages/P1.md"
+        "development/reports/stages/P1.md",
+        "development/reports/tests/P2/field-ci-final.txt"
       ]
     }
   }

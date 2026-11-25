@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-020",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "MOV",
+  "title": "同一批直控路径在结果缓存满载时继续移动",
+  "spec": "docs/systems/game/mission/movement/README.md",
+  "depends_on": [
+    "P2-FIELD-INTEGRATION-014",
+    "P2-FIELD-INTEGRATION-019"
+  ],
+  "requirements": [
+    "BAI-06"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01",
+    "T-MIS-RT-02"
+  ],
+  "allowed_paths": [
+    "game/mission/movement/ports/field_movement.gd",
+    "game/mission/movement/path_queue.gd",
+    "game/tests/p2/field_path_retention/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-020.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "game/contracts/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "6887ebdad8e095f88f842b7bf4db51ab70774179",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field-route-retention",
+  "scope": "原千槽冲锋场第 4371 步 NotFound/path_ticket。修复同批结果在领取前被挤出的问题，保持查询预算、结果身份、事务回滚及队列上限。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "同批新路径及最老缓存命中同时消费；原场连续完成及真实旧票拒绝。"
+  ],
+  "status": "DONE"
+}

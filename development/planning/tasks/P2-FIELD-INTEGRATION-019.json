@@ -41,5 +41,5 @@
   "acceptance": [
     "保留原始失败、短回归与实际可重现的交战通过，并接受独立复审复测。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

@@ -1,0 +1,23 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_STAGE progress tick=240 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=480 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=720 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=961 seen_targets=1 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=1201 seen_targets=1 shots=17 hits=9 downed=3 captured_candidates=0 entered=503
+FIELD_STAGE progress tick=1441 seen_targets=1 shots=32 hits=17 downed=4 captured_candidates=0 entered=504
+FIELD_STAGE progress tick=1682 seen_targets=2 shots=34 hits=17 downed=4 captured_candidates=0 entered=504
+FIELD_STAGE progress tick=1922 seen_targets=2 shots=39 hits=18 downed=5 captured_candidates=0 entered=505
+FIELD_STAGE progress tick=2162 seen_targets=2 shots=54 hits=18 downed=5 captured_candidates=0 entered=505
+FIELD_STAGE progress tick=2402 seen_targets=2 shots=68 hits=24 downed=5 captured_candidates=0 entered=505
+FIELD_STAGE progress tick=2642 seen_targets=2 shots=102 hits=39 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=2882 seen_targets=2 shots=161 hits=48 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=3122 seen_targets=2 shots=174 hits=48 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=3362 seen_targets=2 shots=246 hits=55 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=3602 seen_targets=2 shots=345 hits=68 downed=8 captured_candidates=0 entered=508
+FIELD_STAGE progress tick=3842 seen_targets=2 shots=379 hits=79 downed=8 captured_candidates=0 entered=508
+FIELD_STAGE progress tick=4082 seen_targets=2 shots=399 hits=84 downed=11 captured_candidates=0 entered=511
+FIELD_STAGE progress tick=4322 seen_targets=2 shots=433 hits=92 downed=13 captured_candidates=0 entered=513
+FAIL fixed tick 4371 { "code": "NotFound", "field": "path_ticket", "detail": <null>, "message_key": "error.not_found", "retryable": false }
+FIELD_STAGE {}
+FIELD_ACCEPTANCE checks=8801 failures=1

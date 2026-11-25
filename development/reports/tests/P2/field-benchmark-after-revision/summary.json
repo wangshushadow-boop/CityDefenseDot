@@ -1,0 +1,611 @@
+[
+  {
+    "count": 500,
+    "trial": 1,
+    "engine_exit": 0,
+    "metrics": {
+      "fps": 2.1749531333848973,
+      "low_1pct_fps": 1.8994434630653219,
+      "frame_ms": {
+        "p50": 456.463,
+        "p95": 501.287,
+        "p99": 526.47
+      },
+      "frame_worst_ms": 526.47,
+      "simulation_p95_ms": 46.635,
+      "render_cpu_p95_ms": 0.460999995470047,
+      "gpu_p95_ms": 10.9490003585815,
+      "draw_peak": 204,
+      "primitives_peak": 2889848,
+      "renderer_video_bytes_peak": 217813232,
+      "process_rss_peak_bytes": 772214784,
+      "wall_debt_ms_each_second": [
+        2394.96,
+        4872.681,
+        7462.549000000001,
+        9913.603,
+        12400.768,
+        14855.055
+      ],
+      "sustained_backlog": true,
+      "frame_samples": 45,
+      "fixed_samples": 360,
+      "near_peak": 2,
+      "far_peak": 600,
+      "submitted_mounts_peak": 100,
+      "submitted_projectiles_peak": 6,
+      "submitted_corpses_peak": 5,
+      "in_frustum_skinned_peak": 2,
+      "in_frustum_projectiles_peak": 6,
+      "projectiles_after_fixed_step_peak": 7
+    },
+    "field": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "approach_ticks": 977,
+      "authority_first_us": 123957,
+      "contact_tick": 977,
+      "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "count": 500,
+      "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+      "display": "Windows",
+      "driver": "vulkan",
+      "end_view": {
+        "humans": 500,
+        "humans_in_frustum": 476,
+        "mounts": 100,
+        "mounts_in_frustum": 85
+      },
+      "engage_order": true,
+      "engine": "4.7.2-stable (official)",
+      "events": {
+        "downed": 5,
+        "morale_spread": 53,
+        "projectile_launched": 73,
+        "projectile_obstructed": 3,
+        "routed": 9
+      },
+      "failure": "",
+      "final_tick": 1457,
+      "fov": 60.0,
+      "hits": 53,
+      "input_trace": "flanks",
+      "max_humans": 500,
+      "measure_from": 1097,
+      "min_humans": 497,
+      "msaa_samples": 2,
+      "opening_roles": {
+        "field:troop/archer": 150,
+        "field:troop/cavalry": 50,
+        "field:troop/infantry": 250,
+        "field:troop/mounted_archer": 50,
+        "mount": 100
+      },
+      "pixels": [
+        1920,
+        1080
+      ],
+      "player_order": true,
+      "probe": false,
+      "probe_close_rigs_in_frustum": null,
+      "renderer": "forward_plus",
+      "reserve": 500,
+      "seed": 241124,
+      "shadow_px": 2048,
+      "spawn_retries": 3,
+      "vsync": 0,
+      "sha256_uncompressed": "5bdbd1cbfc30e7376aac6b492eca8816c29b8887f6044083c7a7fa264c2ef7ad"
+    },
+    "failed_checks": [
+      "frame_budget",
+      "tick_budget",
+      "no_sustained_backlog"
+    ]
+  },
+  {
+    "count": 500,
+    "trial": 2,
+    "engine_exit": 0,
+    "metrics": {
+      "fps": 2.277020606581085,
+      "low_1pct_fps": 2.000592175283884,
+      "frame_ms": {
+        "p50": 437.291,
+        "p95": 477.995,
+        "p99": 499.852
+      },
+      "frame_worst_ms": 499.852,
+      "simulation_p95_ms": 46.425,
+      "render_cpu_p95_ms": 0.453999996185303,
+      "gpu_p95_ms": 11.0310001373291,
+      "draw_peak": 204,
+      "primitives_peak": 2889848,
+      "renderer_video_bytes_peak": 217809840,
+      "process_rss_peak_bytes": 769581056,
+      "wall_debt_ms_each_second": [
+        2297.676,
+        4638.999,
+        6947.987999999999,
+        9177.04,
+        11694.109,
+        13923.405999999999
+      ],
+      "sustained_backlog": true,
+      "frame_samples": 45,
+      "fixed_samples": 360,
+      "near_peak": 2,
+      "far_peak": 600,
+      "submitted_mounts_peak": 100,
+      "submitted_projectiles_peak": 6,
+      "submitted_corpses_peak": 5,
+      "in_frustum_skinned_peak": 2,
+      "in_frustum_projectiles_peak": 6,
+      "projectiles_after_fixed_step_peak": 7
+    },
+    "field": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "approach_ticks": 977,
+      "authority_first_us": 128533,
+      "contact_tick": 977,
+      "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "count": 500,
+      "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+      "display": "Windows",
+      "driver": "vulkan",
+      "end_view": {
+        "humans": 500,
+        "humans_in_frustum": 476,
+        "mounts": 100,
+        "mounts_in_frustum": 85
+      },
+      "engage_order": true,
+      "engine": "4.7.2-stable (official)",
+      "events": {
+        "downed": 5,
+        "morale_spread": 53,
+        "projectile_launched": 73,
+        "projectile_obstructed": 3,
+        "routed": 9
+      },
+      "failure": "",
+      "final_tick": 1457,
+      "fov": 60.0,
+      "hits": 53,
+      "input_trace": "flanks",
+      "max_humans": 500,
+      "measure_from": 1097,
+      "min_humans": 497,
+      "msaa_samples": 2,
+      "opening_roles": {
+        "field:troop/archer": 150,
+        "field:troop/cavalry": 50,
+        "field:troop/infantry": 250,
+        "field:troop/mounted_archer": 50,
+        "mount": 100
+      },
+      "pixels": [
+        1920,
+        1080
+      ],
+      "player_order": true,
+      "probe": false,
+      "probe_close_rigs_in_frustum": null,
+      "renderer": "forward_plus",
+      "reserve": 500,
+      "seed": 241124,
+      "shadow_px": 2048,
+      "spawn_retries": 3,
+      "vsync": 0,
+      "sha256_uncompressed": "8507e515e5b44cf86312555b85d102f8877d2fa1f371c10a2b58274c634b429f"
+    },
+    "failed_checks": [
+      "frame_budget",
+      "tick_budget",
+      "no_sustained_backlog"
+    ]
+  },
+  {
+    "count": 500,
+    "trial": 3,
+    "engine_exit": 0,
+    "metrics": {
+      "fps": 2.463415811779266,
+      "low_1pct_fps": 2.0892659781838847,
+      "frame_ms": {
+        "p50": 400.401,
+        "p95": 458.27,
+        "p99": 478.637
+      },
+      "frame_worst_ms": 478.637,
+      "simulation_p95_ms": 44.395,
+      "render_cpu_p95_ms": 0.472000002861023,
+      "gpu_p95_ms": 10.4469995498657,
+      "draw_peak": 204,
+      "primitives_peak": 2889384,
+      "renderer_video_bytes_peak": 217810288,
+      "process_rss_peak_bytes": 764850176,
+      "wall_debt_ms_each_second": [
+        2074.167,
+        4438.703,
+        6403.451999999999,
+        8329.551,
+        10447.89,
+        12411.832999999999
+      ],
+      "sustained_backlog": true,
+      "frame_samples": 45,
+      "fixed_samples": 360,
+      "near_peak": 2,
+      "far_peak": 600,
+      "submitted_mounts_peak": 100,
+      "submitted_projectiles_peak": 6,
+      "submitted_corpses_peak": 5,
+      "in_frustum_skinned_peak": 2,
+      "in_frustum_projectiles_peak": 6,
+      "projectiles_after_fixed_step_peak": 7
+    },
+    "field": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "approach_ticks": 977,
+      "authority_first_us": 121802,
+      "contact_tick": 977,
+      "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "count": 500,
+      "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+      "display": "Windows",
+      "driver": "vulkan",
+      "end_view": {
+        "humans": 500,
+        "humans_in_frustum": 476,
+        "mounts": 100,
+        "mounts_in_frustum": 85
+      },
+      "engage_order": true,
+      "engine": "4.7.2-stable (official)",
+      "events": {
+        "downed": 5,
+        "morale_spread": 53,
+        "projectile_launched": 73,
+        "projectile_obstructed": 3,
+        "routed": 9
+      },
+      "failure": "",
+      "final_tick": 1457,
+      "fov": 60.0,
+      "hits": 53,
+      "input_trace": "flanks",
+      "max_humans": 500,
+      "measure_from": 1097,
+      "min_humans": 497,
+      "msaa_samples": 2,
+      "opening_roles": {
+        "field:troop/archer": 150,
+        "field:troop/cavalry": 50,
+        "field:troop/infantry": 250,
+        "field:troop/mounted_archer": 50,
+        "mount": 100
+      },
+      "pixels": [
+        1920,
+        1080
+      ],
+      "player_order": true,
+      "probe": false,
+      "probe_close_rigs_in_frustum": null,
+      "renderer": "forward_plus",
+      "reserve": 500,
+      "seed": 241124,
+      "shadow_px": 2048,
+      "spawn_retries": 3,
+      "vsync": 0,
+      "sha256_uncompressed": "17657317c053a2c7bd665ee7f189215aae4093f6a73e288892e6363b665ea4ab"
+    },
+    "failed_checks": [
+      "frame_budget",
+      "tick_budget",
+      "no_sustained_backlog"
+    ]
+  },
+  {
+    "count": 1000,
+    "trial": 1,
+    "engine_exit": 0,
+    "metrics": {
+      "fps": 1.0206282347819624,
+      "low_1pct_fps": 0.896542573220632,
+      "frame_ms": {
+        "p50": 991.299,
+        "p95": 1076.68,
+        "p99": 1115.396
+      },
+      "frame_worst_ms": 1115.396,
+      "simulation_p95_ms": 110.605,
+      "render_cpu_p95_ms": 0.808000028133392,
+      "gpu_p95_ms": 14.6230001449585,
+      "draw_peak": 534,
+      "primitives_peak": 5639792,
+      "renderer_video_bytes_peak": 221646608,
+      "process_rss_peak_bytes": 797974528,
+      "wall_debt_ms_each_second": [
+        6590.507,
+        13023.416,
+        19408.099,
+        25631.487,
+        32230.072999999997,
+        38952.928
+      ],
+      "sustained_backlog": true,
+      "frame_samples": 45,
+      "fixed_samples": 360,
+      "near_peak": 17,
+      "far_peak": 1200,
+      "submitted_mounts_peak": 200,
+      "submitted_projectiles_peak": 6,
+      "submitted_corpses_peak": 10,
+      "in_frustum_skinned_peak": 17,
+      "in_frustum_projectiles_peak": 6,
+      "projectiles_after_fixed_step_peak": 6
+    },
+    "field": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "approach_ticks": 917,
+      "authority_first_us": 251727,
+      "contact_tick": 917,
+      "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "count": 1000,
+      "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+      "display": "Windows",
+      "driver": "vulkan",
+      "end_view": {
+        "humans": 996,
+        "humans_in_frustum": 898,
+        "mounts": 200,
+        "mounts_in_frustum": 127
+      },
+      "engage_order": true,
+      "engine": "4.7.2-stable (official)",
+      "events": {
+        "downed": 13,
+        "morale_spread": 96,
+        "projectile_launched": 107,
+        "routed": 11
+      },
+      "failure": "",
+      "final_tick": 1397,
+      "fov": 60.0,
+      "hits": 59,
+      "input_trace": "flanks",
+      "max_humans": 1000,
+      "measure_from": 1037,
+      "min_humans": 994,
+      "msaa_samples": 2,
+      "opening_roles": {
+        "field:troop/archer": 300,
+        "field:troop/cavalry": 100,
+        "field:troop/infantry": 500,
+        "field:troop/mounted_archer": 100,
+        "mount": 200
+      },
+      "pixels": [
+        1920,
+        1080
+      ],
+      "player_order": true,
+      "probe": false,
+      "probe_close_rigs_in_frustum": null,
+      "renderer": "forward_plus",
+      "reserve": 1000,
+      "seed": 241124,
+      "shadow_px": 2048,
+      "spawn_retries": 3,
+      "vsync": 0,
+      "sha256_uncompressed": "6227cb7eb80180a12c0131cda09cfe65c6320116490bb91323bb96106537c86d"
+    },
+    "failed_checks": [
+      "frame_budget",
+      "tick_budget",
+      "no_sustained_backlog"
+    ]
+  },
+  {
+    "count": 1000,
+    "trial": 2,
+    "engine_exit": 0,
+    "metrics": {
+      "fps": 1.0264750497789075,
+      "low_1pct_fps": 0.8976185282826135,
+      "frame_ms": {
+        "p50": 979.543,
+        "p95": 1060.529,
+        "p99": 1114.059
+      },
+      "frame_worst_ms": 1114.059,
+      "simulation_p95_ms": 112.009,
+      "render_cpu_p95_ms": 0.824000000953674,
+      "gpu_p95_ms": 14.6379995346069,
+      "draw_peak": 534,
+      "primitives_peak": 5639792,
+      "renderer_video_bytes_peak": 221646608,
+      "process_rss_peak_bytes": 790208512,
+      "wall_debt_ms_each_second": [
+        6525.193,
+        13071.421,
+        19404.883,
+        25822.051,
+        32201.534,
+        38682.792
+      ],
+      "sustained_backlog": true,
+      "frame_samples": 45,
+      "fixed_samples": 360,
+      "near_peak": 17,
+      "far_peak": 1200,
+      "submitted_mounts_peak": 200,
+      "submitted_projectiles_peak": 6,
+      "submitted_corpses_peak": 10,
+      "in_frustum_skinned_peak": 17,
+      "in_frustum_projectiles_peak": 6,
+      "projectiles_after_fixed_step_peak": 6
+    },
+    "field": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "approach_ticks": 917,
+      "authority_first_us": 268306,
+      "contact_tick": 917,
+      "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "count": 1000,
+      "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+      "display": "Windows",
+      "driver": "vulkan",
+      "end_view": {
+        "humans": 996,
+        "humans_in_frustum": 898,
+        "mounts": 200,
+        "mounts_in_frustum": 127
+      },
+      "engage_order": true,
+      "engine": "4.7.2-stable (official)",
+      "events": {
+        "downed": 13,
+        "morale_spread": 96,
+        "projectile_launched": 107,
+        "routed": 11
+      },
+      "failure": "",
+      "final_tick": 1397,
+      "fov": 60.0,
+      "hits": 59,
+      "input_trace": "flanks",
+      "max_humans": 1000,
+      "measure_from": 1037,
+      "min_humans": 994,
+      "msaa_samples": 2,
+      "opening_roles": {
+        "field:troop/archer": 300,
+        "field:troop/cavalry": 100,
+        "field:troop/infantry": 500,
+        "field:troop/mounted_archer": 100,
+        "mount": 200
+      },
+      "pixels": [
+        1920,
+        1080
+      ],
+      "player_order": true,
+      "probe": false,
+      "probe_close_rigs_in_frustum": null,
+      "renderer": "forward_plus",
+      "reserve": 1000,
+      "seed": 241124,
+      "shadow_px": 2048,
+      "spawn_retries": 3,
+      "vsync": 0,
+      "sha256_uncompressed": "53399421cba18d44fdcabecb48c136df858649aec9cce5a50a837c1340f95bfa"
+    },
+    "failed_checks": [
+      "frame_budget",
+      "tick_budget",
+      "no_sustained_backlog"
+    ]
+  },
+  {
+    "count": 1000,
+    "trial": 3,
+    "engine_exit": 0,
+    "metrics": {
+      "fps": 1.0934460713491057,
+      "low_1pct_fps": 0.9824186360885592,
+      "frame_ms": {
+        "p50": 920.373,
+        "p95": 990.708,
+        "p99": 1017.896
+      },
+      "frame_worst_ms": 1017.896,
+      "simulation_p95_ms": 104.597,
+      "render_cpu_p95_ms": 0.819999992847443,
+      "gpu_p95_ms": 14.2469997406006,
+      "draw_peak": 534,
+      "primitives_peak": 5639792,
+      "renderer_video_bytes_peak": 221646608,
+      "process_rss_peak_bytes": 796815360,
+      "wall_debt_ms_each_second": [
+        6105.449,
+        12051.846,
+        18116.836,
+        24026.821,
+        29996.511,
+        35967.593
+      ],
+      "sustained_backlog": true,
+      "frame_samples": 45,
+      "fixed_samples": 360,
+      "near_peak": 17,
+      "far_peak": 1200,
+      "submitted_mounts_peak": 200,
+      "submitted_projectiles_peak": 6,
+      "submitted_corpses_peak": 10,
+      "in_frustum_skinned_peak": 17,
+      "in_frustum_projectiles_peak": 6,
+      "projectiles_after_fixed_step_peak": 6
+    },
+    "field": {
+      "adapter": "NVIDIA GeForce RTX 3090",
+      "approach_ticks": 917,
+      "authority_first_us": 265084,
+      "contact_tick": 917,
+      "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "count": 1000,
+      "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+      "display": "Windows",
+      "driver": "vulkan",
+      "end_view": {
+        "humans": 996,
+        "humans_in_frustum": 898,
+        "mounts": 200,
+        "mounts_in_frustum": 127
+      },
+      "engage_order": true,
+      "engine": "4.7.2-stable (official)",
+      "events": {
+        "downed": 13,
+        "morale_spread": 96,
+        "projectile_launched": 107,
+        "routed": 11
+      },
+      "failure": "",
+      "final_tick": 1397,
+      "fov": 60.0,
+      "hits": 59,
+      "input_trace": "flanks",
+      "max_humans": 1000,
+      "measure_from": 1037,
+      "min_humans": 994,
+      "msaa_samples": 2,
+      "opening_roles": {
+        "field:troop/archer": 300,
+        "field:troop/cavalry": 100,
+        "field:troop/infantry": 500,
+        "field:troop/mounted_archer": 100,
+        "mount": 200
+      },
+      "pixels": [
+        1920,
+        1080
+      ],
+      "player_order": true,
+      "probe": false,
+      "probe_close_rigs_in_frustum": null,
+      "renderer": "forward_plus",
+      "reserve": 1000,
+      "seed": 241124,
+      "shadow_px": 2048,
+      "spawn_retries": 3,
+      "vsync": 0,
+      "sha256_uncompressed": "924ef7c5a241090662f56210e3b83ac62ca654fbdb0eba8b1732cb0d3a6914e1"
+    },
+    "failed_checks": [
+      "frame_budget",
+      "tick_budget",
+      "no_sustained_backlog"
+    ]
+  }
+]

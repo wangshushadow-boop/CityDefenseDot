@@ -2,21 +2,19 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P2-FIELD-INTEGRATION-019",
-      "owner": "mission-revision-dev",
+      "task_id": "P2-FIELD-INTEGRATION-001",
+      "owner": "stage-acceptance",
       "branch": "detached",
-      "base_commit": "867fb810890ab8804ff41eb916ad63a837152b6f",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-field-revision",
+      "base_commit": "6887ebdad8e095f88f842b7bf4db51ab70774179",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-stage-accept",
       "allowed_paths": [
-        "game/mission/runtime/field_pipeline.gd",
-        "game/mission/runtime/field_brains.gd",
-        "game/tests/p2/field_revision/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-019.md"
+        "game/tests/p2/field/",
+        "test_scenarios/p2/field/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md"
       ],
       "excluded_paths": [
         "development/state/",
-        "docs/architecture/",
-        "game/contracts/"
+        "docs/architecture/"
       ]
     }
   ],

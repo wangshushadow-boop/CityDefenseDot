@@ -1,0 +1,327 @@
+{
+  "task": "P2-FIELD-INTEGRATION-001",
+  "base": "6887ebdad8e095f88f842b7bf4db51ab70774179",
+  "seed": 241124,
+  "engine": "Godot 4.7.2.stable.official.ed1daf0bf; Windows headless",
+  "run_sha256": "4b5db2e7621227e5b6af3437e3e31f8a77b0e80695c49560e86f1251dbd34a89",
+  "capture_sha256": "0404cf94a0236dd0a889d201760bee4bbc056dcec82401403a79bbf229a110b0",
+  "overlay": {
+    "game/mission/movement/path_queue.gd": "8f97526f99f6dd50f862cafef07a691e79dc537747f49c608948a8791d796028",
+    "game/mission/movement/ports/field_movement.gd": "c69ebe51b7350577de86daee398f4875248000e2c2a8eb554cbee8b701f57fa1"
+  },
+  "trials": [
+    {
+      "case": "before 019",
+      "log": "first-failure.log",
+      "sha256": "2d8a4bffbd82284a542aa5fa84dde2a06c6209e8423c753e207abf7a10f79e3e",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 2625,
+      "note": "tick 1304 StaleVersion/formation_revision"
+    },
+    {
+      "case": "before 019 correct tracing and two same-tick retries",
+      "log": "trace-correct.log",
+      "sha256": "f91ca9c75d9b4b5384c63505cf7f8e101b8262c1c30c06909ef01c3c28e4237b",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 2625,
+      "note": "same formation #7 order_revision 2 -> 1"
+    },
+    {
+      "case": "019 original end condition",
+      "log": "candidate/original.log",
+      "sha256": "2d8bdd369ae5a304b5c7d1a49e150eb54d3c91e06a0092f927a1542f4fb5a53a",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 7026,
+      "note": "actual march had zero losing-side incapacitations"
+    },
+    {
+      "case": "019 enhanced end condition",
+      "log": "candidate/enhanced.log",
+      "sha256": "836191922cf7b4b585ee9cd8e5bc93023aa37987280250aae2ced820e185ef68",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 7061,
+      "note": "actual march had zero losing-side incapacitations"
+    },
+    {
+      "case": "019 charge",
+      "log": "candidate/final-assault.log",
+      "sha256": "4c5b63a224c70926ef017c281bec2248e3810ecc23ddb52b6204a9131c69e539",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 8801,
+      "note": "tick 4371 NotFound/path_ticket"
+    },
+    {
+      "case": "020 march",
+      "log": "fixed020/march.log",
+      "sha256": "7832785d04f3f59cdadc18e16412e16dea3bd184e763fb2acfd877c4427ebc67",
+      "status": "PASS",
+      "exit": 0,
+      "checks": 11071,
+      "note": "3503 ticks; explicit zero-capture case"
+    },
+    {
+      "case": "020 charge",
+      "log": "fixed020/assault.log",
+      "sha256": "095f9132124b0ccacc4ce2bdb9abd6abdf92a6b7700108087f859417ce11a274",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 15091,
+      "note": "5503 ticks; every slot matched but no western source was downed to create the required positive capture"
+    },
+    {
+      "case": "natural three-source field",
+      "log": "fixed020/capture.log",
+      "sha256": "ccb042421082c30e899469fda1ea17d0b86ed16de6d6faff3a696a5b1ee68ca1",
+      "status": "PASS",
+      "exit": 0,
+      "checks": 594,
+      "note": "actual knockdown, reserve, rout, victory and capture"
+    },
+    {
+      "case": "existing result provenance suite",
+      "log": "candidate/small-capture.log",
+      "sha256": "e2554703ff25549bb38caab06826cbee4fa4886abe78fbe20b6ea7429afc612a",
+      "status": "PASS",
+      "exit": 0,
+      "checks": 147,
+      "note": "6 real hit contacts; wounded evacuation and legal capture"
+    },
+    {
+      "case": "20-player direct crossing",
+      "log": "candidate/small-player-walk.log",
+      "sha256": "9c5b84522ce9c326311aec4e862b4da30f64272009b4743b20afc4dc1f106c51",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 0,
+      "note": "4800 steps, character returned alive"
+    },
+    {
+      "case": "20-player direct approach to opponent",
+      "log": "candidate/small-in-melee.log",
+      "sha256": "b418deb2428ac8dea405f5d01cfd566ba551e88c65c304631ddab48d6008e146",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 0,
+      "note": "4800 steps, character returned alive"
+    },
+    {
+      "case": "two-source adjacent fixture",
+      "log": "fixed020/natural-capture.log",
+      "sha256": "b6bcf51ba1db3af5c58bff592b575cf506d2d8b290e8d4669e2dbd961e7a7d4a",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 74,
+      "note": "early natural victory by rout before a knockout"
+    },
+    {
+      "case": "restricted reinforcement location",
+      "log": "fixed020/natural-capture-wave.log",
+      "sha256": "3de8c39c12cf60d2aeffb7b704fd8a5221c77a8e0036274cee939a5583467b21",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 566,
+      "note": "reinforcement spawn not clear"
+    }
+  ],
+  "march": {
+    "damaging_hits": 41,
+    "delegate": "field-captain-0",
+    "downed": 7,
+    "entered": 507,
+    "exit_facts": 250,
+    "first_reinforcement_tick": 1200,
+    "hits_by_role": {
+      "archer": 24,
+      "mounted_archer": 17
+    },
+    "horses": 100,
+    "integrity_hash": "89b111e499e48877b6189dbf38dee787015d18aa55baf075bdb269e2206716a7",
+    "layout": "shield_wall",
+    "mix": {
+      "archer": 150,
+      "cavalry": 50,
+      "infantry": 250,
+      "mounted_archer": 50
+    },
+    "mounted_roles": [
+      "cavalry",
+      "mounted_archer"
+    ],
+    "observed_travel_m": {
+      "archer": 90.0003204345703,
+      "cavalry": 93.4164352416992,
+      "infantry": 105.869071960449,
+      "mounted_archer": 89.3208770751953
+    },
+    "outcomes": {
+      "alive": 246,
+      "not_spawned": 493,
+      "withdrawn": 250,
+      "wounded": 11
+    },
+    "routes": 4,
+    "scenario": "march",
+    "shots": 164,
+    "shots_by_role": {
+      "archer": 96,
+      "mounted_archer": 68
+    },
+    "targets": [
+      5,
+      6
+    ],
+    "ticks": 3503,
+    "verified_capture_candidates": 0,
+    "winners": [
+      1
+    ],
+    "wound_flags": 11
+  },
+  "assault": {
+    "damaging_hits": 120,
+    "delegate": "field-captain-0",
+    "downed": 17,
+    "entered": 517,
+    "exit_facts": 250,
+    "first_reinforcement_tick": 1200,
+    "hits_by_role": {
+      "archer": 53,
+      "cavalry": 7,
+      "infantry": 6,
+      "mounted_archer": 54
+    },
+    "horses": 100,
+    "integrity_hash": "2c33f5df1e55994dde307b74936204984997975c9b918653d7ca2be38c1833a1",
+    "layout": "shield_wall",
+    "mix": {
+      "archer": 150,
+      "cavalry": 50,
+      "infantry": 250,
+      "mounted_archer": 50
+    },
+    "mounted_roles": [
+      "cavalry",
+      "mounted_archer"
+    ],
+    "observed_travel_m": {
+      "archer": 103.121658325195,
+      "cavalry": 93.4174575805664,
+      "infantry": 102.741218566895,
+      "mounted_archer": 96.6059951782227
+    },
+    "outcomes": {
+      "alive": 216,
+      "not_spawned": 483,
+      "withdrawn": 250,
+      "wounded": 51
+    },
+    "routes": 15,
+    "scenario": "assault",
+    "shots": 606,
+    "shots_by_role": {
+      "archer": 368,
+      "mounted_archer": 238
+    },
+    "targets": [
+      5,
+      6
+    ],
+    "ticks": 5503,
+    "verified_capture_candidates": 0,
+    "winners": [
+      1
+    ],
+    "wound_flags": 51
+  },
+  "small": {
+    "player_hits": 12,
+    "slots": [
+      {
+        "captor_team_key": null,
+        "end_status": "alive",
+        "source_slot_id": 0,
+        "wounded": false,
+        "xp": 12
+      },
+      {
+        "captor_team_key": 0,
+        "end_status": "wounded",
+        "source_slot_id": 1,
+        "wounded": true,
+        "xp": 0
+      },
+      {
+        "captor_team_key": null,
+        "end_status": "wounded",
+        "source_slot_id": 2,
+        "wounded": true,
+        "xp": 0
+      }
+    ],
+    "tick": 293,
+    "winners": [
+      0
+    ]
+  },
+  "by_side": {
+    "march": {
+      "downed": {
+        "1/archer": 2,
+        "1/cavalry": 1,
+        "1/infantry": 4
+      },
+      "hits": {
+        "0/archer": 24,
+        "0/mounted_archer": 17
+      },
+      "routed": {
+        "1/cavalry": 1,
+        "1/infantry": 3
+      },
+      "shots": {
+        "0/archer": 56,
+        "0/mounted_archer": 32,
+        "1/archer": 40,
+        "1/mounted_archer": 36
+      },
+      "tick": 3503
+    },
+    "assault": {
+      "downed": {
+        "1/archer": 2,
+        "1/cavalry": 1,
+        "1/infantry": 14
+      },
+      "hits": {
+        "0/archer": 53,
+        "0/cavalry": 7,
+        "0/infantry": 6,
+        "0/mounted_archer": 54
+      },
+      "routed": {
+        "1/cavalry": 1,
+        "1/infantry": 14
+      },
+      "shots": {
+        "0/archer": 328,
+        "0/mounted_archer": 190,
+        "1/archer": 40,
+        "1/mounted_archer": 48
+      },
+      "tick": 5503
+    }
+  },
+  "not_run": [
+    "8 GiB hardware test",
+    "human gamepad and listening",
+    "cross-network full match",
+    "campaign settlement from the standalone field",
+    "T-TEST-01 full matrix",
+    "T-TEST-02 multi-year simulation"
+  ]
+}

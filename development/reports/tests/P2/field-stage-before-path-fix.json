@@ -1,0 +1,176 @@
+{
+  "source": {
+    "git_commit": "6887ebdad8e095f88f842b7bf4db51ab70774179",
+    "server_pck": "D:\\work\\game\\recollection\\out\\p2-field-delivery\\6887ebdad8e0-f1203071fc0c\\server.pck",
+    "server_pck_sha256": "23e4bd21d573935ffb58bc62a3f043a7483eeed102675228c902e0d8042dafbe",
+    "manifest_sha256": "64b0e3a2e3cc625323ec82fbc680d73e9f1f8ea9cd9913b73854f7c64fa0adc6",
+    "engine": "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+    "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+    "probe_source": ".worktrees\\p2-stage-accept\\game\\tests\\p2\\field\\run.gd",
+    "probe_sha256": "fe5173a1499e2942981d5907512bb782e91ebb534b61691b917b6671ab6dc829",
+    "started": "2026-11-25T19:37:05.675139+08:00"
+  },
+  "runs": [
+    {
+      "name": "march",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-delivery\\6887ebdad8e0-f1203071fc0c\\server.pck",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-001-pck\\frozen-probe.gd",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-001-pck\\march-engine.log"
+      ],
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\phase-001-pck\\empty-cwd",
+      "cwd_contains_no_game_sources": true,
+      "duration_s": 180.578,
+      "exit_code": 0,
+      "status": "PASS",
+      "checks": 11070,
+      "failed_assertions": 0,
+      "engine_diagnostics": [],
+      "ledger": {
+        "ledger_rows": 1000,
+        "checked_unique_rows_and_entire_id_range": true,
+        "row_status_and_wound_from_facts": true,
+        "all_captor_values_checked": true,
+        "total_entered": 507,
+        "replacements": 7,
+        "terminal_categories": {
+          "alive": 246,
+          "not_spawned": 493,
+          "withdrawn": 250,
+          "wounded": 11
+        },
+        "observed_capture_candidates": 0,
+        "positive_capture": "NOT_OBSERVED"
+      },
+      "summary": {
+        "damaging_hits": 41,
+        "delegate": "field-captain-0",
+        "downed": 7,
+        "entered": 507,
+        "exit_facts": 250,
+        "first_reinforcement_tick": 1200,
+        "hits_by_role": {
+          "archer": 24,
+          "mounted_archer": 17
+        },
+        "horses": 100,
+        "integrity_hash": "245a5b324c077036efc89e2ecdecac6d8e17363fe5e45636208a50cddd7521e5",
+        "layout": "shield_wall",
+        "mix": {
+          "archer": 150,
+          "cavalry": 50,
+          "infantry": 250,
+          "mounted_archer": 50
+        },
+        "mounted_roles": [
+          "cavalry",
+          "mounted_archer"
+        ],
+        "observed_travel_m": {
+          "archer": 90.0003204345703,
+          "cavalry": 93.4164352416992,
+          "infantry": 105.869071960449,
+          "mounted_archer": 89.3208770751953
+        },
+        "outcomes": {
+          "alive": 246,
+          "not_spawned": 493,
+          "withdrawn": 250,
+          "wounded": 11
+        },
+        "routes": 4,
+        "scenario": "march",
+        "shots": 164,
+        "shots_by_role": {
+          "archer": 96,
+          "mounted_archer": 68
+        },
+        "targets": [
+          5,
+          6
+        ],
+        "ticks": 3503,
+        "verified_capture_candidates": 0,
+        "winners": [
+          1
+        ],
+        "wound_flags": 11
+      },
+      "log_sha256": "b408554a0654e202efb0d053f0dad633e378d99e704bf07cb62819c2d6070bad",
+      "terminal_checks": {
+        "all_1000_unique_rows_expected_state_wound_and_captor_checked": true,
+        "source_quota_and_reserve_count": true,
+        "observed_live_waves": true,
+        "four_mix_and_actual_mounts": true,
+        "player_target_switch_and_team_outcome": true,
+        "real_combat_and_result_digest": true,
+        "engine_warning_error": false
+      },
+      "classification": "Cold server PCK PASS under this exact command path and seed."
+    },
+    {
+      "name": "assault",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-delivery\\6887ebdad8e0-f1203071fc0c\\server.pck",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-001-pck\\frozen-probe.gd",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-001-pck\\assault-engine.log",
+        "--",
+        "--assault"
+      ],
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\phase-001-pck\\empty-cwd",
+      "cwd_contains_no_game_sources": true,
+      "duration_s": 233.672,
+      "exit_code": 1,
+      "status": "FAIL",
+      "checks": 8801,
+      "failed_assertions": 1,
+      "engine_diagnostics": [
+        "FAIL fixed tick 4371 { \"code\": \"NotFound\", \"field\": \"path_ticket\", \"detail\": <null>, \"message_key\": \"error.not_found\", \"retryable\": false }"
+      ],
+      "ledger": {
+        "status": "NOT_RUN",
+        "ledger_rows": null,
+        "total_entered_at_terminal": null,
+        "terminal_categories": null,
+        "observed_capture_candidates_at_terminal": null,
+        "positive_capture": "UNKNOWN",
+        "last_progress_tick": 4322,
+        "last_progress": {
+          "entered": 513,
+          "shots": 433,
+          "hits": 92,
+          "downed": 13,
+          "captured_candidates_so_far": 0
+        }
+      },
+      "summary": {},
+      "log_sha256": "ba894693ca904c46091ca6c0b4875e6805336c85e746dec1b7848a1417488381",
+      "terminal_checks": {
+        "status": "NOT_RUN",
+        "reason": "Fixed tick 4371 returned NotFound(path_ticket) before the player could withdraw or the session could finalize the match."
+      },
+      "classification": "FAIL in real Mission at tick 4371; final outcome and final captor truth are unavailable."
+    }
+  ],
+  "status": "FAIL",
+  "not_run": [
+    "Graphical performance and human controls are outside this server PCK QA."
+  ],
+  "scope": "Only the observed battle facts and per-slot outcomes; a positive lower-level fixture is not substituted for a missing full-size capture.",
+  "cross_run_ledger": {
+    "default_trajectory": "PASS, all 1000",
+    "assault_trajectory": "NOT_RUN after gameplay failure",
+    "full_size_positive_capture": "No full-size positive in the completed march. Final assault result unknown.",
+    "small_real_fixture": "Outside this independent report."
+  }
+}

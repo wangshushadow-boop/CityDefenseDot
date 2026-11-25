@@ -1,0 +1,4 @@
+生产场景原第 1304 步的修订倒退已修复，3502 个权威步连续完成。
+Godot --headless --path <Git 6887ebd 冷导入>/game --script res://tests/p2/field_revision/run.gd | exit 0
+FIELD_REVISION checks=16 failures=0
+同一短场的原产品 12 项中 2 失败。修订候选另跑 9 项真正过期版本拒绝与回滚。原 500/1000 战术轨迹未产生己方正俘获来源，完整原例退出 1，单列保留。

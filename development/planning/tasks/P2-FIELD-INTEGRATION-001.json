@@ -55,8 +55,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "6887ebdad8e095f88f842b7bf4db51ab70774179",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-stage-accept",
   "scope": "真实 500/1000 混合野战、真实动作/AI/导航/动画、玩家命令与结果；P2 后续任务完整收口。 GDD §19.4 和 AT-04 的真实窗口、完整动画/AI、玩家切换、胜负及固定步开销；另验 1000 人和 AT-05 战场分波。",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -65,5 +65,5 @@
     "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
     "GDD §19.4 和 AT-04 的真实窗口、完整动画/AI、玩家切换、胜负及固定步开销；另验 1000 人和 AT-05 战场分波。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

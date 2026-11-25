@@ -1,0 +1,401 @@
+{
+  "commit": "6887ebdad8e095f88f842b7bf4db51ab70774179",
+  "normal_game_session": {
+    "cap": 40,
+    "reserved": 80,
+    "trace": "flat-map river_plain seed 241124, confirmed four-flank movement orders on west and free_attack when enemy formation perceived or tick 900, east AI as normal",
+    "ticks": 2100,
+    "total_effective_hits_including_melee": 81,
+    "teams": {
+      "0": {
+        "shots": 62,
+        "outcomes": {
+          "ally_intercept": 24,
+          "enemy_body": 30,
+          "terrain": 8
+        },
+        "positive_damage": 30,
+        "example": {
+          "launch": {
+            "handle": 22,
+            "id": "919:22:1",
+            "kind": "launch",
+            "nearest": 45,
+            "nearest_distance_mm": 2839.57470703125,
+            "nearest_lateral_mm": 418.2451171875,
+            "origin": [
+              -943,
+              1000,
+              2864
+            ],
+            "projection_mm": 2808.60375976563,
+            "team": 0,
+            "tick": 919,
+            "v": [
+              954,
+              0,
+              -2632
+            ]
+          },
+          "last": {
+            "at": [
+              11,
+              1000,
+              232
+            ],
+            "id": "919:22:1",
+            "kind": "body",
+            "region": "body",
+            "target": 45,
+            "target_team": 1,
+            "team": 0,
+            "tick": 919
+          },
+          "receipt": {
+            "attack_id": "919:22:1",
+            "attacker": {
+              "generation": 1,
+              "index": 22
+            },
+            "blocked": false,
+            "breakdown": {
+              "actual": 24,
+              "armor": 0,
+              "blocked": false,
+              "mitigated": 0,
+              "mount_bonus": 0,
+              "raw": 24,
+              "zone": "body",
+              "zone_total": 24
+            },
+            "damage": 24,
+            "target": {
+              "generation": 1,
+              "index": 45
+            }
+          }
+        }
+      },
+      "1": {
+        "shots": 16,
+        "outcomes": {
+          "enemy_body": 1,
+          "terrain": 4,
+          "ally_intercept": 11
+        },
+        "positive_damage": 1,
+        "example": {
+          "launch": {
+            "handle": 37,
+            "id": "994:37:1",
+            "kind": "launch",
+            "nearest": 20,
+            "nearest_distance_mm": 2965.14697265625,
+            "nearest_lateral_mm": 801.361450195313,
+            "origin": [
+              -379,
+              1800,
+              81
+            ],
+            "projection_mm": 2854.8056640625,
+            "team": 1,
+            "tick": 994,
+            "v": [
+              951,
+              0,
+              1409
+            ]
+          },
+          "last": {
+            "at": [
+              1523,
+              1797,
+              2899
+            ],
+            "id": "994:37:1",
+            "kind": "body",
+            "region": "head",
+            "target": 20,
+            "target_team": 0,
+            "team": 1,
+            "tick": 995
+          },
+          "receipt": {
+            "attack_id": "994:37:1",
+            "attacker": {
+              "generation": 1,
+              "index": 37
+            },
+            "blocked": false,
+            "breakdown": {
+              "actual": 40,
+              "armor": 0,
+              "blocked": false,
+              "mitigated": 0,
+              "mount_bonus": 0,
+              "raw": 20,
+              "zone": "head",
+              "zone_total": 40
+            },
+            "damage": 40,
+            "target": {
+              "generation": 1,
+              "index": 20
+            }
+          }
+        }
+      }
+    },
+    "projectile_intercept_times": {
+      "0": {
+        "ally_intercept": {
+          "count": 24,
+          "ticks_to_contact": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            11
+          ],
+          "distance_to_nearest_at_launch_m_range": [
+            2.876734375,
+            16.2766630859375
+          ]
+        },
+        "enemy_body": {
+          "count": 30,
+          "ticks_to_contact": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            9,
+            9,
+            10,
+            11,
+            11,
+            11
+          ],
+          "distance_to_nearest_at_launch_m_range": [
+            1.95552807617188,
+            17.998408203125
+          ]
+        },
+        "terrain": {
+          "count": 8,
+          "ticks_to_contact": [
+            26,
+            34,
+            34,
+            34,
+            34,
+            34,
+            34,
+            35
+          ],
+          "distance_to_nearest_at_launch_m_range": [
+            2.8415439453125,
+            17.887830078125
+          ]
+        }
+      },
+      "1": {
+        "ally_intercept": {
+          "count": 11,
+          "ticks_to_contact": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distance_to_nearest_at_launch_m_range": [
+            4.58353564453125,
+            16.786671875
+          ]
+        },
+        "enemy_body": {
+          "count": 1,
+          "ticks_to_contact": [
+            1
+          ],
+          "distance_to_nearest_at_launch_m_range": [
+            2.96514697265625,
+            2.96514697265625
+          ]
+        },
+        "terrain": {
+          "count": 4,
+          "ticks_to_contact": [
+            34,
+            34,
+            34,
+            35
+          ],
+          "distance_to_nearest_at_launch_m_range": [
+            3.32399877929688,
+            14.941650390625
+          ]
+        }
+      }
+    }
+  },
+  "mirrored_com_jolt_controls": [
+    {
+      "east_hp": 84,
+      "hits": [
+        {
+          "attack_id": "4:7:1",
+          "attacker": {
+            "generation": 1,
+            "index": 7
+          },
+          "blocked": false,
+          "breakdown": {
+            "actual": 16,
+            "armor": 0,
+            "blocked": false,
+            "mitigated": 0,
+            "mount_bonus": 0,
+            "raw": 16,
+            "zone": "body",
+            "zone_total": 16
+          },
+          "damage": 16,
+          "target": {
+            "generation": 1,
+            "index": 48
+          }
+        },
+        {
+          "attack_id": "4:48:1",
+          "attacker": {
+            "generation": 1,
+            "index": 48
+          },
+          "blocked": false,
+          "breakdown": {
+            "actual": 16,
+            "armor": 0,
+            "blocked": false,
+            "mitigated": 0,
+            "mount_bonus": 0,
+            "raw": 16,
+            "zone": "body",
+            "zone_total": 16
+          },
+          "damage": 16,
+          "target": {
+            "generation": 1,
+            "index": 7
+          }
+        }
+      ],
+      "mirrored": false,
+      "west_hp": 84
+    },
+    {
+      "east_hp": 84,
+      "hits": [
+        {
+          "attack_id": "4:7:1",
+          "attacker": {
+            "generation": 1,
+            "index": 7
+          },
+          "blocked": false,
+          "breakdown": {
+            "actual": 16,
+            "armor": 0,
+            "blocked": false,
+            "mitigated": 0,
+            "mount_bonus": 0,
+            "raw": 16,
+            "zone": "body",
+            "zone_total": 16
+          },
+          "damage": 16,
+          "target": {
+            "generation": 1,
+            "index": 48
+          }
+        },
+        {
+          "attack_id": "4:48:1",
+          "attacker": {
+            "generation": 1,
+            "index": 48
+          },
+          "blocked": false,
+          "breakdown": {
+            "actual": 16,
+            "armor": 0,
+            "blocked": false,
+            "mitigated": 0,
+            "mount_bonus": 0,
+            "raw": 16,
+            "zone": "body",
+            "zone_total": 16
+          },
+          "damage": 16,
+          "target": {
+            "generation": 1,
+            "index": 7
+          }
+        }
+      ],
+      "mirrored": true,
+      "west_hp": 84
+    }
+  ],
+  "exits": {
+    "mirrored_game": 0,
+    "full_game": 0
+  },
+  "not_run": "No new long 500-player scenario. Archived aggregate lacks shot-to-obstruction records for that exact 76-shot run."
+}

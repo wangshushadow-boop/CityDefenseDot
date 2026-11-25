@@ -1,0 +1,10 @@
+{
+  "game_commit": "1d0f1fb4355c8f79c1059d2281d0a81c65a1d580",
+  "game_tree": "5fc8a6895b84eda76bc42110c9b5d38806c7b67e",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "hardware": "Core Ultra 9 285K, Windows 11, RTX 3090 24 GiB, 591.86",
+  "command": "python game/tests/p2/field_benchmark/benchmark.py --godot <Godot-console> --project <cold checkout>/game --out <new directory>",
+  "seed": 241124,
+  "aggregate_exit": 1,
+  "conditions": "含精确球扫复用，早于 019。单进程依次实跑六次，部分时段同时有其他开发回归或短窗，保留共享主机采样条件。"
+}

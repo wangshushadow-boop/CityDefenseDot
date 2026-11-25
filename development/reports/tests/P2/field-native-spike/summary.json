@@ -1,0 +1,141 @@
+{
+  "base": "1d0f1fb4355c8f79c1059d2281d0a81c65a1d580",
+  "godot": "Godot 4.7.2 Standard Windows x86_64 single precision",
+  "toolchain": "MSVC 2022 17.14.27, cl /O2 /fp:precise, engine-local API C ABI, no godot-cpp",
+  "capture": {
+    "seed": 241124,
+    "opening_people": 1000,
+    "opening_horses": 200,
+    "contact": 917,
+    "tick": 1038,
+    "rows": 1197,
+    "mounted_riders": 200,
+    "ints_compared": 8379,
+    "result_digest_sha256_of_hex": "abae76acd4a09ff39f7c016cfefe4bdb033bc98e5c722a84823431277762dc0e"
+  },
+  "profiling": {
+    "units": "microseconds, median and nearest-rank P95",
+    "samples": 160,
+    "warmup": 35,
+    "processes": 3,
+    "variants_per_iteration": "rotate order each iteration",
+    "time": "within-engine wall time. Measures original, packed script and C++ kernels, packing, unpacking, both end-to-end conversions, empty call; same captured live frame; excludes file reads and registration."
+  },
+  "results": [
+    {
+      "current": [
+        1785.5,
+        2209.0
+      ],
+      "gd_full": [
+        1656.0,
+        2083.0
+      ],
+      "gd_packed": [
+        265.0,
+        317.0
+      ],
+      "native_empty": [
+        0.28,
+        0.31
+      ],
+      "native_full": [
+        1463.0,
+        1945.0
+      ],
+      "native_packed": [
+        79.0,
+        102.0
+      ],
+      "pack": [
+        427.0,
+        585.0
+      ],
+      "unpack": [
+        945.0,
+        1386.0
+      ]
+    },
+    {
+      "current": [
+        1813.5,
+        2266.0
+      ],
+      "gd_full": [
+        1659.0,
+        2129.0
+      ],
+      "gd_packed": [
+        266.5,
+        309.0
+      ],
+      "native_empty": [
+        0.26,
+        0.3
+      ],
+      "native_full": [
+        1464.5,
+        1974.0
+      ],
+      "native_packed": [
+        79.0,
+        87.0
+      ],
+      "pack": [
+        429.5,
+        625.0
+      ],
+      "unpack": [
+        966.0,
+        1275.0
+      ]
+    },
+    {
+      "current": [
+        1850.0,
+        2294.0
+      ],
+      "gd_full": [
+        1677.0,
+        2185.0
+      ],
+      "gd_packed": [
+        266.5,
+        330.0
+      ],
+      "native_empty": [
+        0.27,
+        0.3
+      ],
+      "native_full": [
+        1491.5,
+        1941.0
+      ],
+      "native_packed": [
+        79.0,
+        94.0
+      ],
+      "pack": [
+        426.5,
+        612.0
+      ],
+      "unpack": [
+        977.5,
+        1357.0
+      ]
+    }
+  ],
+  "sha256": {
+    "pose.cpp": "4d10c86b9165b167909a75102985cb846d3d7c6c8a6c7e76132de99ac89577bb",
+    "pose.dll": "48f715618a70e7337e4de65c81e4e87da6efbacad4fc2582f4d583961320601f",
+    "gdextension_interface.h": "640b48188708ba0016f8d7ace9e0e1d3279a41fa1226c59ff3193b15538bd254",
+    "snapshot.bin": "cf8a61989ac1aa3f3ad007b5927e53218884a3f15de55c0e686889df3c0739ff",
+    "test/bench.gd": "561287cbe13a07b5dac2e396227868b67031871821aa5cea6fb34b07fe35f858",
+    "compile.cmd": "f9e1ea8d0241099e222575216b0ee22ab9e6635282c46dbccf09ee7fec2367f9"
+  },
+  "status": "PASS mathematical equivalence on captured frame plus small signed rounding, bad-size and empty vectors. Full AT-04 and all-platform/8 GiB NOT_RUN by this spike.",
+  "initial_failures": [
+    "first C++ compile missing initializer_list include (exit 1), corrected",
+    "first 3-vector toy DLL call requested an incorrectly spelled engine ABI name and exited 0xC0000005; corrected symbol from engine dump; toy and three formal processes clean."
+  ]
+}

@@ -1,0 +1,4 @@
+同批使用旧路径和新路径的生命周期修复通过。旧版卡在冲锋第 4371 步，修订后独立原场 5503 步正常结算。
+Godot --headless --path <31eca5d 冷导入>/game --script res://tests/p2/field_path_retention/run.gd | exit 0
+PATH_RETENTION checks=167 failures=0
+独立复核原基线 153 检查、1失败。修订正式167项，额外11项覆盖旧/伪票拒绝、同次缓存结果身份、回滚及预算。原冲锋强制正俘覆盖仍有一次断言失败。
