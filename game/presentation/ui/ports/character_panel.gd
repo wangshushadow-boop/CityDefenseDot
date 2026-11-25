@@ -241,6 +241,10 @@ func _render() -> void:
 func _restore_body_focus(previous: StringName) -> void:
 	if previous==&"": return
 	var target:=_body.find_child(previous,true,false) as Button
+	if _section=="visit" and (target==null or target.disabled):
+		for name_hint in ["AcceptCommission","ReportAnswer0","WaitForLedger","ClaimCommission","ReturnCommission","MeetGovernor","AskCommission","VisitJournal","VisitRoster"]:
+			target=_body.find_child(name_hint,true,false) as Button
+			if target!=null and not target.disabled: break
 	if target==null or target.disabled:
 		for control: Button in _body.find_children("*","Button",true,false):
 			if not control.disabled:
@@ -342,6 +346,7 @@ func _render_visit(visit: Dictionary) -> void:
 	var portrait_column:=VBoxContainer.new()
 	conversation.add_child(portrait_column)
 	_preview(portrait_column,speaker.appearance)
+	_portrait.custom_minimum_size=Vector2(216,256)
 	var lines:=VBoxContainer.new()
 	lines.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	lines.add_theme_constant_override("separation",10)
@@ -354,7 +359,9 @@ func _render_visit(visit: Dictionary) -> void:
 	elif _visit_page=="commission":
 		if visit.can_accept:
 			_label(lines,"「劳烦你替我核对明日庄簿，看看繁荣实增多少。三日之内来报，我教你些理账的本事。」")
-			_button(lines,"接下核账委托",_submit.bind("visit_accept",target,"已接下「核对庄簿」。")).name="AcceptCommission"
+			var accept:=_button(lines,"接下核账委托",_submit.bind("visit_accept",target,"已接下「核对庄簿」。"))
+			accept.name="AcceptCommission"
+			accept.size_flags_horizontal=Control.SIZE_SHRINK_BEGIN
 		elif visit.can_report:
 			_label(lines,"「第 %d 日的簿册就在案上。你算算，这一日繁荣实增多少？」"%visit.ledger.day)
 			_visit_ledger(lines,visit.ledger)
@@ -362,7 +369,8 @@ func _render_visit(visit: Dictionary) -> void:
 			for answer: int in visit.answers:
 				var args:=target.duplicate()
 				args["answer"]=answer
-				_button(choices,"%+.1f 点"%(answer/10.0),_submit.bind("visit_report",args,"总督签结了这份庄簿。"))
+				var choice:=_button(choices,"%+.1f 点"%(answer/10.0),_submit.bind("visit_report",args,"总督签结了这份庄簿。"))
+				choice.name="ReportAnswer%d"%(choices.get_child_count()-1)
 		elif visit.status=="active":
 			_label(lines,"「首笔日账还没结。明日再来，你我对着庄簿核一遍。」")
 			_button(lines,"休养一日",_submit.bind("rest",{},"次日的庄簿已经结算。")).name="WaitForLedger"

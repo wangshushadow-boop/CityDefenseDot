@@ -81,6 +81,7 @@ func scenario() -> void:
 	if not await press("任命"+str(heir.name),true) or not await press("拜访庄署",true) or not await press(call_on): return
 	check(model().visit.speaker.id==heir.id and visible_text("总督　"+str(heir.name)),"meeting bound to actual appointed member")
 	if not await press("问庄中近况") or not await press("谈核对庄簿"): return
+	check(root.gui_get_focus_owner()==button("接下核账委托"),"keyboard focus enters the new dialogue choices")
 	check(main.find_child("AppearancePreview",true,false)!=null and not main.find_children("*","MeshInstance3D",true,false).is_empty(),"3D character at audience")
 	await screenshot()
 	# The authority changes after the offer is already displayed.
