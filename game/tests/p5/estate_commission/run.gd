@@ -18,13 +18,14 @@ func ck(ok: bool, label: String) -> bool:
 
 func facts(day: int = 7) -> Dictionary:
 	return {"world_id":"world/liuxi", "day":day, "player_id":H, "can_visit":true, "settlement_id":FIEF,
-		"governor_id":G, "last_report":{}, "members":{
+		"governor_id":G, "opened_day":1, "last_report":{}, "members":{
 			H:{"name":"温知","life_status":"Healthy","appearance":"reed"},
-			G:{"name":"石安","life_status":"Healthy","appearance":"pine"}}}
+			G:{"name":"石安","life_status":"Healthy","appearance":"pine","stewardship":10,"leadership":4}}}
 
-func ledger(day: int, before := 550) -> Dictionary:
+func ledger(day: int, before := 550, prior_loyalty := 500) -> Dictionary:
 	return {"day":day,"governor_id":G, "prosperity_before":before,"prosperity_base":1,"prosperity_bonus":11,
-		"prosperity_after":mini(1000,before+12),"loyalty_before":500,"loyalty_base":-1,"loyalty_bonus":5,"loyalty_after":504}
+		"prosperity_after":mini(1000,before+12),"loyalty_before":prior_loyalty,
+		"loyalty_base":-1,"loyalty_bonus":5,"loyalty_after":prior_loyalty+4}
 
 func submit(state: Dictionary, answer: Variant, f: Dictionary) -> Dictionary:
 	var args := TARGET.duplicate()
@@ -56,6 +57,7 @@ func exercise() -> void:
 	if not ck(start.ok,"accept"):return
 	var active: Dictionary=start.value
 	ck(Q.validate(active,f).ok and active.accepted_day==7 and active.deadline_day==10,"accept pins actor and deadline")
+	ck(active.get("ledger_hash")=="","commission has no receipt before first ledger")
 	ck(not Q.plan(active,"visit_accept",TARGET,f).ok and not Q.view(active,f).can_report,"already pending")
 	ck(Q.reconcile(active,f)==active and Q.reconcile(active,tomorrow)==active,"same day and temporary absence keep commission")
 	var no_officer:=Q.reconcile(active,removed)
@@ -66,6 +68,7 @@ func exercise() -> void:
 	ck(Q.view(no_officer,day8).can_accept and Q.plan(no_officer,"visit_accept",TARGET,day8).ok,"next day may accept another commission after failure")
 	var ready:=Q.reconcile(active,day8)
 	ck(active.status=="active" and ready.status=="ready" and Q.validate(ready,day8).ok,"normal first day locks record without altering original")
+	ck(ready.get("ledger_hash")==C.hash_value(day8.last_report).value,"first committed ledger stores a canonical receipt")
 	var cold: Dictionary=C.decode(C.encode(ready).value).value
 	ck(cold==ready and Q.validate(cold,day8).ok,"canonical cold roundtrip")
 	var model:=Q.view(ready,day8)
@@ -77,8 +80,19 @@ func exercise() -> void:
 	ck(not submit(ready,12,day8).ok and submit(ready,12,day8).error.field=="visit.answer","wrong response cannot claim theoretical change")
 	ck(not submit(ready,3.0,day8).ok and not submit(ready,true,day8).ok,"canonical integer answer only")
 	var day9:=facts(9)
-	day9.last_report=ledger(9)
+	day9.last_report=ledger(9,1000,504)
 	ck(Q.reconcile(ready,day9)==ready and Q.view(ready,day9).answers==Q.view(ready,day8).answers,"later day cannot replace chosen ledger")
+	var altered:=ready.duplicate(true)
+	altered.ledger.prosperity_before=998
+	ck(not Q.validate(altered,day9).ok,"historical edit consistent with cap and following day still breaks original hash")
+	var disconnected:=day9.duplicate(true)
+	disconnected.last_report=ledger(9,990,504)
+	ck(not Q.validate(ready,disconnected).ok,"next day's opening prosperity must match the retained closing balance")
+	disconnected.last_report=ledger(9,1000,503)
+	ck(not Q.validate(ready,disconnected).ok,"next day's opening loyalty must match the retained closing balance")
+	var earlier:=day9.duplicate(true)
+	earlier.opened_day=8
+	ck(not Q.validate(ready,earlier).ok,"commission cannot predate family estate")
 	var sick:=day9.duplicate(true)
 	sick.members[H].life_status="Wounded"
 	sick.can_visit=false
@@ -110,10 +124,14 @@ func exercise() -> void:
 	ck(not Q.plan(paid,"visit_claim",{},lost).ok and not Q.plan(paid,"visit_accept",TARGET,day9).ok,"paid commission cannot mint another opportunity")
 	ck(Q.reward_source(paid)==Q.reward_source(active) and Q.reward_source(paid).begins_with("quest/liuxi/"),"stable reward source")
 	var day10:=facts(10)
-	day10.last_report=ledger(10)
+	day10.last_report=ledger(10,1000,508)
+	altered=ready.duplicate(true)
+	altered.ledger.prosperity_bonus=99
+	altered["ledger_hash"]=C.hash_value(altered.ledger).value
+	ck(not Q.validate(altered,day10).ok,"recomputed hash cannot exceed actual governor skill on older day")
 	ck(Q.reconcile(ready,day10)==ready and submit(ready,3,day10).ok,"last day inclusive")
 	var day11:=facts(11)
-	day11.last_report=ledger(11)
+	day11.last_report=ledger(11,1000,512)
 	var expired:=Q.reconcile(ready,day11)
 	ck(expired.status=="expired" and expired.ended_day==11 and Q.validate(expired,day11).ok,"expires on fourth day")
 	ck(not Q.plan(expired,"visit_accept",TARGET,day11).ok and Q.plan(expired,"visit_accept",TARGET,facts(12)).ok,"expiry cooldown ends following day")
