@@ -18,9 +18,7 @@ static func prepare(envelope: Dictionary) -> Dictionary:
 		"field.input":
 			if raw.size()!=2:
 				return R.fail("InvalidArgument","field.input")
-			var encoded := C.encode(raw.get("batch"))
-			if not encoded.ok:
-				encoded = S.encode_value("IntentBatch",raw.get("batch"))
+			var encoded := S.encode_value("IntentBatch",raw.get("batch"))
 			if not encoded.ok:
 				return encoded
 			var decoded := S.decode_value("IntentBatch",encoded.value)

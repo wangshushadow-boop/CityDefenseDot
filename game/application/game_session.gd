@@ -79,8 +79,18 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 func finish_mission(outcome: Dictionary) -> Dictionary:
 	return _call(_finish,[outcome])
 
-func route_result(result: Dictionary) -> Dictionary:
+func route_result(result: Variant = null) -> Dictionary:
+	if result==null:
+		return _call(_resume_persisted_result)
+	if not result is Dictionary:
+		return R.fail("InvalidArgument","result")
 	return _call(_route,[result])
+
+func _resume_persisted_result() -> Dictionary:
+	if _phase!="Results" or _mission!=null or _spec.get("mode")!="campaign" or _final.is_empty():
+		return R.fail("InvalidState","pending.result")
+	# _load published this result only after checking the committed snapshot and reservation.
+	return _route(_final)
 
 func dispose_mission() -> Dictionary:
 	return _call(_dispose_mission)
@@ -332,6 +342,10 @@ func _dispatch_field(envelope: Dictionary, context: Variant) -> Dictionary:
 	var digest:=Book.key(cmd)
 	var replay: Variant=Book.replay(_field_receipts,cmd.command_id,digest)
 	if replay!=null:
+		if replay.ok and operation=="field.order":
+			var grant: Dictionary=_field_gateway.call("field.check_order",parsed.value.local,context)
+			if not grant.ok:
+				return grant
 		return replay
 	if _phase!="Mission" or _ended or _paused:
 		return R.fail("InvalidState","field.command")

@@ -19,13 +19,18 @@ func authorize(context: Variant, operation: String, _command: Dictionary) -> Dic
 
 func field_gateway(op: String, payload: Dictionary, context: Variant) -> Dictionary:
 	calls[op] = calls.get(op,0)+1
-	if payload.scope_id != scope or not is_same(context,login):
+	var can_issue: bool=is_same(context,other) and op in ["field.order","field.check_order"]
+	if payload.scope_id!=scope or (not is_same(context,login) and not can_issue):
 		return R.fail("Unauthorized","scope")
 	var live: Dictionary=mission.view()
 	if op=="field.view":
 		if retry_view:
 			check(not app.dispatch(command("recursive",{"type":"field.withdraw"}),login).ok,"query callback cannot mutate Session")
 		return R.ok({"scope_id":scope,"revision":live.tick,"projection":payload.projection})
+	if op=="field.check_order":
+		if not form.order_status(payload.order.issuer_id,payload.order.order_id).ok:
+			return R.fail("NotFound","order")
+		return form.issue_order(payload.order,context,payload.get("revisions",0))
 	if payload.revision!=live.tick:
 		return R.fail("StaleVersion","revision")
 	match op:
@@ -59,6 +64,20 @@ func new_app() -> RefCounted:
 	return F.App.new(durable,func():return F.Camp.new(),fresh,authorize,func(_s,_r):return R.ok([]),
 		func(_r):network_receipts+=1;return R.ok(),field_gateway)
 
+func cold_processes() -> void:
+	var path:=ProjectSettings.globalize_path("user://cold-field-"+Crypto.new().generate_random_bytes(8).hex_encode())
+	check(DirAccess.make_dir_recursive_absolute(path)==OK,"create fresh save directory")
+	for mode in ["write","recover","verify"]:
+		var output: Array=[]
+		var args:=PackedStringArray(["--headless","--path",ProjectSettings.globalize_path("res://"),
+			"--log-file",path.path_join(mode+".log"),"--script","res://tests/p2/field_session/cold.gd","--",mode,path])
+		var code:=OS.execute(OS.get_executable_path(),args,output,true)
+		var log: String="".join(output)
+		print(log.strip_edges())
+		check(code==0 and log.contains("COLD_FIELD "+mode+" pid=") and log.contains("failures=0") and not log.contains("ERROR:"),"independent Godot process "+mode)
+		if code!=0:
+			break
+
 func run() -> void:
 	core=Core.new("1234567890abcdef")
 	engine=Adapter.new(root,true)
@@ -87,15 +106,21 @@ func run() -> void:
 	invalid.payload.batch.inputs[0].actor_handle.index=1
 	check(not app.dispatch(invalid,login).ok,"gateway enforces actor binding")
 	check(not app.step_fixed(1,[act]).ok and mission.view().tick==0,"unchecked direct inputs rejected")
+	var full:=move.duplicate(true)
+	full.command_id="full"
+	full.payload.batch.inputs[0].speed_fraction=1
+	check(app.dispatch(full,login).ok and admitted.inputs[0].speed_fraction==1.0,"native integer one means full speed")
 	var accepted: Dictionary=app.dispatch(move,login)
 	check(accepted.ok and S.validate_shape("CommandReceipt",accepted.value).ok and admitted.inputs[0].speed_fraction==0.625,"native fractional control admitted")
 	var visits: int=calls["field.input"]
 	var wire_move:=move.duplicate(true)
-	wire_move.payload.batch.inputs[0].speed_fraction=625000
-	check(app.dispatch(wire_move,login)==accepted and calls["field.input"]==visits,"canonical fixed-point input replays native receipt")
-	var bad_wire:=wire_move.duplicate(true)
-	bad_wire.payload.batch.inputs[0].speed_fraction=1000001
-	check(not app.dispatch(bad_wire,login).ok,"out-of-range wire fraction")
+	var packet:=S.encode_value("IntentBatch",move.payload.batch)
+	var received:=S.decode_value("IntentBatch",packet.value)
+	wire_move.payload.batch=received.value
+	check(app.dispatch(wire_move,login)==accepted and calls["field.input"]==visits,"decoded wire packet replays native receipt")
+	var raw_wire:=move.duplicate(true)
+	raw_wire.payload.batch=C.decode(packet.value).value
+	check(not app.dispatch(raw_wire,login).ok,"undecoded fixed-point wire data does not enter native field dispatch")
 	check(app.dispatch(move,login)==accepted and calls["field.input"]==visits,"replay idempotent")
 	check(not app.dispatch(move,other).ok,"same command denied under other credential")
 	invalid=move.duplicate(true)
@@ -117,6 +142,21 @@ func run() -> void:
 	check(app.dispatch(wire_order,login).ok and calls["field.order"]==issue_calls,"canonical formation keys replay native receipt")
 	wire_order.payload.revisions={0:0,"0":0}
 	check(not app.dispatch(wire_order,login).ok,"ambiguous revision keys rejected")
+	require(form.add_formation(1,0,"player",[{"index":1,"generation":1}]),"second real formation")
+	require(form.set_delegate(1,"visitor",login,0),"grant formation to visitor")
+	var delegated_order:=order.duplicate()
+	delegated_order.merge({"order_id":"visitor-hold","issuer_id":"visitor","formation_ids":[1],"issued_tick":2},true)
+	var delegated:=command("visitor-order",{"type":"field.order","order":delegated_order,"revisions":{1:1}})
+	delegated.actor_ref="visitor"
+	var first: Dictionary=app.dispatch(delegated,other)
+	check(first.ok and form.advance(2).ok,"delegate acts under original grant")
+	var held: Dictionary=form.order_status("visitor","visitor-hold").value
+	issue_calls=calls["field.order"]
+	check(app.dispatch(delegated,other)==first and form.order_status("visitor","visitor-hold").value==held,"lost ACK within same delegation")
+	require(form.set_delegate(1,"",login,1),"revoke delegated command")
+	check(not app.dispatch(delegated,other).ok,"revoked delegate cannot obtain old ACK")
+	require(form.set_delegate(1,"visitor",login,2),"give visitor a fresh grant")
+	check(not app.dispatch(delegated,other).ok and calls["field.order"]==issue_calls and calls["field.check_order"]>=4,"regrant rejects old receipt with no new dispatch")
 	var early := {"outcome":"withdrawn","winner_team_keys":["0"],"objective_results":[]}
 	check(not app.finish_mission(early).ok and mission.view().phase=="Deployment","early outcome cannot freeze live Mission")
 	check(app.dispatch(command("deploy",{"type":"field.deploy","placements":[]}),login).ok,"route deployment to authoritative Mission")
@@ -153,7 +193,7 @@ func run() -> void:
 	check(not app.finish_mission(altered).ok and not app.route_result(altered).ok,"changed typed winner with original digest rejected")
 	var forged:=rehash(altered)
 	check(not app.finish_mission(forged).ok and not app.route_result(forged).ok,"changed typed winner with new digest rejected")
-	require(app.route_result(done.value),"cold route verified result")
+	require(app.route_result(),"cold route obtains verified result from Session")
 	require(app.dispose_mission(),"return to campaign")
 	check(not app.dispatch(move,login).ok and not app.query("field",{"context":login,"projection":"input"}).ok,"released field has no command/view access")
 	var old_scope:=scope
@@ -162,5 +202,6 @@ func run() -> void:
 		check(app.query("field",{"context":login,"projection":"hud"}).value.scope_id==scope,"fresh scope visible")
 		require(app.dispose_mission(),"discard new custom battle")
 	require(app.close_session(),"close")
+	cold_processes()
 	print("FIELD_SESSION checks=",checks," failures=",failed)
 	quit(0 if failed==0 else 1)
