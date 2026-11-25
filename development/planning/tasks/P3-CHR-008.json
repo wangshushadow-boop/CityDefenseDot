@@ -28,7 +28,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "base_commit": "1396c417511f9fefe02b0eec10330c29f2cad2e0",
   "worktree": "D:\\work\\game\\recollection",
   "scope": "本次人物退休所需的家族成员及合法继承条件",
   "non_goals": [
@@ -37,5 +37,5 @@
   "acceptance": [
     "通过 T-CHR-04 中本任务对应部分，合并后实际验证完整人物流程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

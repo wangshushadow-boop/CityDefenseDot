@@ -1,0 +1,34 @@
+{
+  "game_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+  "old_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "results": [
+    {
+      "name": "p2-old-fixture",
+      "command": "Godot --headless --path game --script res://tests/p3/session_character/legacy.gd -- <legacy-save-root>",
+      "ok": true,
+      "exit": 0,
+      "marker": "LEGACY_CHARACTER_FIXTURE PASS"
+    },
+    {
+      "name": "new-session-test",
+      "command": "Godot --headless --path game --script res://tests/p3/session_character/run.gd",
+      "ok": true,
+      "exit": 0,
+      "marker": "SESSION_CHARACTER checks=28 failures=0"
+    },
+    {
+      "name": "migrated-session-test",
+      "command": "Godot --headless --path game --script res://tests/p3/session_character/run.gd -- <legacy-save-root>",
+      "ok": true,
+      "exit": 0,
+      "marker": "SESSION_CHARACTER checks=30 failures=0"
+    },
+    {
+      "name": "desktop",
+      "command": "Godot --path game --script res://tests/p3/character_desktop/run.gd",
+      "ok": false,
+      "exit": 0,
+      "marker": "CHARACTER_DESKTOP checks=88 failures=0"
+    }
+  ]
+}

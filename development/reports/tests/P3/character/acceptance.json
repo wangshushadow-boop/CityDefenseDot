@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "game_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "results": [
+    {
+      "id": "T-CHR-01",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "创建、使用经验、专精、天赋互斥及作用域；靶场命中、同来源重放、失败零经验。",
+      "evidence": [
+        "qa.json",
+        "review.md",
+        "integration-logs.zip",
+        "p1-regressions.json"
+      ]
+    },
+    {
+      "id": "T-CHR-02",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "换装预览与原子交换、双手、骑术、马具、预留及持久后唯一物品守恒。",
+      "evidence": [
+        "qa.json",
+        "review.md",
+        "integration-logs.zip",
+        "p1-regressions.json"
+      ]
+    },
+    {
+      "id": "T-CHR-03",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "受伤与囚禁独立、不同恢复条件、拒绝不合格入队、死亡终态与旧命令重试。",
+      "evidence": [
+        "qa.json",
+        "review.md",
+        "integration-logs.zip",
+        "p1-regressions.json"
+      ]
+    },
+    {
+      "id": "T-CHR-04",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "已退休者失去控制，合法成年同族继任，家产移交、私人物归原主，保存重载一致。",
+      "evidence": [
+        "qa.json",
+        "review.md",
+        "integration-logs.zip",
+        "p1-regressions.json"
+      ]
+    },
+    {
+      "id": "CHR-01",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "角色与成长按 T-CHR-01 及原有 T-SHRULE-01 复验。",
+      "evidence": [
+        "qa.json",
+        "review.md",
+        "integration-logs.zip",
+        "p1-regressions.json"
+      ]
+    },
+    {
+      "id": "CHR-02",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "换装按 T-CHR-02 与 T-INV-02 复验。",
+      "evidence": [
+        "qa.json",
+        "review.md",
+        "integration-logs.zip",
+        "p1-regressions.json"
+      ]
+    },
+    {
+      "id": "CHR-03",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "生命与身份按 T-CHR-03 复验。",
+      "evidence": [
+        "qa.json",
+        "review.md",
+        "integration-logs.zip",
+        "p1-regressions.json"
+      ]
+    }
+  ],
+  "not_run": [
+    "P2 性能与 8 GiB 目标硬件按负责人决定延期",
+    "真人手柄、读屏与主观体验",
+    "完整 AT-01、AT-05、AT-09、AT-10；完整家族、军队、政治与任务继承等对应阶段功能"
+  ]
+}

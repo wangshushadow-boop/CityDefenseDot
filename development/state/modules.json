@@ -18,7 +18,8 @@
       "evidence": [
         "development/reports/tasks/P1-BOOT-001.md",
         "development/reports/stages/P1.md",
-        "development/reports/tests/P2/field-desktop-final.txt"
+        "development/reports/tests/P2/field-desktop-final.txt",
+        "development/reports/stages/P3-character.md"
       ]
     },
     "CORE": {
@@ -76,7 +77,8 @@
       "evidence": [
         "development/reports/tasks/P1-APP-CORE-001.md",
         "development/reports/stages/P1.md",
-        "development/reports/tests/P2/merged-field-session.txt"
+        "development/reports/tests/P2/merged-field-session.txt",
+        "development/reports/stages/P3-character.md"
       ]
     },
     "CAMP": {
@@ -95,7 +97,8 @@
       ],
       "evidence": [
         "development/reports/tasks/P1-CAMP-RUNTIME-001.md",
-        "development/reports/stages/P1.md"
+        "development/reports/stages/P1.md",
+        "development/reports/stages/P3-character.md"
       ]
     },
     "WORLD": {
@@ -107,21 +110,30 @@
       "evidence": []
     },
     "CHR": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "VERIFIED",
       "work_package_ids": [
         "P3-CHR"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-CHR-01",
+        "T-CHR-02",
+        "T-CHR-03",
+        "T-CHR-04"
+      ],
+      "evidence": [
+        "development/reports/stages/P3-character.md"
+      ]
     },
     "CLAN": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P3-CLAN",
         "P3-CHR"
       ],
       "verified_test_ids": [],
-      "evidence": []
+      "evidence": [
+        "development/reports/stages/P3-character.md"
+      ]
     },
     "PARTY": {
       "status": "NOT_IMPLEMENTED",
@@ -145,7 +157,8 @@
       ],
       "evidence": [
         "development/reports/tasks/P1-INV-001.md",
-        "development/reports/stages/P1.md"
+        "development/reports/stages/P1.md",
+        "development/reports/stages/P3-character.md"
       ]
     },
     "DEF": {
@@ -451,7 +464,7 @@
       ]
     },
     "UI": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-UI-BATTLE",
         "P3-UI-CAMPAIGN",
@@ -462,7 +475,9 @@
         "P3-CHR"
       ],
       "verified_test_ids": [],
-      "evidence": []
+      "evidence": [
+        "development/reports/stages/P3-character.md"
+      ]
     },
     "INPUT": {
       "status": "PARTIAL",

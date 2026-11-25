@@ -20,10 +20,10 @@ T-WORLD-01,WORLD,WLD-01,两支相向队伍跨越接触半径,三种速度推进,
 T-WORLD-02,WORLD,WLD-03,敌军离开观察范围,查询和 AI 规划,只得到旧情报，不泄漏实时坐标,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
 T-WORLD-03,WORLD,WLD-04,道路关闭、天气变化,移动中更新,路线版本失效并合法重算或停留,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
 T-WORLD-04,WORLD,WLD-05,同种子与定义,创建地图与初始单位,拓扑/初始位置一致,NOT_RUN,,docs/systems/game/campaign/world/README.md,game/campaign/world/
-T-CHR-01,CHR,CHR-01,角色技能经验跨升级阈值,重复提交同来源,升级一次，互斥天赋不能同时选取,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
-T-CHR-02,CHR,CHR-02,装备需双手或骑乘且库存不足,换装,拒绝或原子交换，无物品复制,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
-T-CHR-03,CHR,CHR-03,英雄已被俘且受伤,恢复、入队、死亡,主状态和位置合法，死亡不可复活,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
-T-CHR-04,CHR,CLN-03,玩家英雄退休,执行继承,新的玩家控制器绑定合法继承人，装备按归属迁移,NOT_RUN,,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CHR-01,CHR,CHR-01,角色技能经验跨升级阈值,重复提交同来源,升级一次，互斥天赋不能同时选取,PASS,development/reports/tests/P3/character/acceptance.json,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CHR-02,CHR,CHR-02,装备需双手或骑乘且库存不足,换装,拒绝或原子交换，无物品复制,PASS,development/reports/tests/P3/character/acceptance.json,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CHR-03,CHR,CHR-03,英雄已被俘且受伤,恢复、入队、死亡,主状态和位置合法，死亡不可复活,PASS,development/reports/tests/P3/character/acceptance.json,docs/systems/game/campaign/character/README.md,game/campaign/character/
+T-CHR-04,CHR,CLN-03,玩家英雄退休,执行继承,新的玩家控制器绑定合法继承人，装备按归属迁移,PASS,development/reports/tests/P3/character/acceptance.json,docs/systems/game/campaign/character/README.md,game/campaign/character/
 T-CLAN-01,CLAN,CLN-01,同伴名额已满或人物在另一队伍任互斥角色,招募/任命,拒绝且原职责不变,NOT_RUN,,docs/systems/game/campaign/clan/README.md,game/campaign/clan/
 T-CLAN-02,CLAN,CLN-02,多年婚育、衰老与死亡,逐日推进,谱系无环，成年和继承引用有效,NOT_RUN,,docs/systems/game/campaign/clan/README.md,game/campaign/clan/
 T-CLAN-03,CLAN,CLN-03 / AT-09,玩家领袖死亡且有两候选,选择继承人,玩家可继续，所有资产/任务有合法归属,NOT_RUN,,docs/systems/game/campaign/clan/README.md,game/campaign/clan/

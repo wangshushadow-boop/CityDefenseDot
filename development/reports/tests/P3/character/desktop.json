@@ -1,0 +1,12 @@
+{
+  "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+  "exit": 0,
+  "marker": "CHARACTER_DESKTOP checks=88 failures=0",
+  "screens": {
+    "aim.png": "9d50be4bdb76a3f8d6bf93aa5af37cfc34c3dd33f7cf34c43cbd045aebe45a86",
+    "create.png": "004a8440af9b4622d6b9865add2edb519a26c921664948a80c8bbd1f311c9bfe",
+    "ended.png": "a3a49c06057c408a4a2101fb7e4abca3ab0c437882451d74f90222d1c78acbb4",
+    "equipment.png": "24a5123e83e050ac130350752dbec5f096bee436bc279a089470bb1ba2ee0241",
+    "growth.png": "2447bc010140463ebb152ac939a2893166fc888af7e320542a5a75027079f6b6"
+  }
+}

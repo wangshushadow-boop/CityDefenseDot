@@ -31,7 +31,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "base_commit": "8945db41f4f618684f4e0bd1cdb57f45070d3f00",
   "worktree": "D:\\work\\game\\recollection\\.worktrees\\p3-hero",
   "scope": "英雄创建、六属性与使用成长、生命状态",
   "non_goals": [
@@ -40,5 +40,5 @@
   "acceptance": [
     "通过 T-CHR-01, T-CHR-03 中本任务对应部分，合并后实际验证完整人物流程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

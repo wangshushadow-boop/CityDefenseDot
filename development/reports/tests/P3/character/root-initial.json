@@ -1,0 +1,83 @@
+{
+  "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+  "engine": "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+  "results": [
+    {
+      "name": "import",
+      "command": "Godot --headless --path game --editor --import",
+      "exit": 0,
+      "ok": true,
+      "log": "or_layout\u001b[22m | 正在加载编辑器布局……\u001b[39m\u001b[0m\n[  16% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | 正在加载停靠面板……\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mloading_editor_layout\u001b[22m\n\u001b[0m\n"
+    },
+    {
+      "name": "hero",
+      "command": "Godot --headless --path game --script res://tests/p3/hero/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP3_HERO checks=125 failures=0\n"
+    },
+    {
+      "name": "gear",
+      "command": "Godot --headless --path game --script res://tests/p3/gear/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP3_GEAR checks=40 failures=0\n"
+    },
+    {
+      "name": "gear_inventory",
+      "command": "Godot --headless --path game --script res://tests/p3/gear_inventory/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP3_GEAR_INVENTORY checks=19 failures=0\n"
+    },
+    {
+      "name": "character_flow",
+      "command": "Godot --headless --path game --script res://tests/p3/character_flow/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nCHARACTER_FLOW checks=68 failures=0\n"
+    },
+    {
+      "name": "campaign_character",
+      "command": "Godot --headless --path game --script res://tests/p3/campaign_character/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nCAMPAIGN_CHARACTER checks=30 failures=0\n"
+    },
+    {
+      "name": "session_character",
+      "command": "Godot --headless --path game --script res://tests/p3/session_character/run.gd",
+      "exit": 0,
+      "ok": false,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nSESSION_CHARACTER checks=28 failures=0\n"
+    },
+    {
+      "name": "p2/field_boot",
+      "command": "Godot --headless --path game --script res://tests/p2/field_boot/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nFIELD_BOOT errors=0 people=20 slots=40\n"
+    },
+    {
+      "name": "p2/field_revision",
+      "command": "Godot --headless --path game --script res://tests/p2/field_revision/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nFIELD_REVISION checks=16 failures=0\n"
+    },
+    {
+      "name": "p2/field_path_retention",
+      "command": "Godot --headless --path game --script res://tests/p2/field_path_retention/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nPATH_RETENTION checks=167 failures=0\n"
+    },
+    {
+      "name": "p2/field_session",
+      "command": "Godot --headless --path game --script res://tests/p2/field_session/run.gd",
+      "exit": 0,
+      "ok": true,
+      "log": "s=0\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nCOLD_FIELD verify pid=28832 checks=7 failures=0\nFIELD_SESSION checks=91 failures=0\n"
+    }
+  ]
+}

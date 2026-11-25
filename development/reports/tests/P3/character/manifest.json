@@ -1,0 +1,109 @@
+{
+  "git_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+  "engine_version": "4.7.2.stable.official.ed1daf0bf",
+  "language": "GDScript",
+  "protocol_version": 1,
+  "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+  "channel": "development",
+  "artifacts": {
+    "client.pck": {
+      "size": 10222760,
+      "sha256": "90d115536ace49126eae4ea62fd9189fd37803cf8c7e69a7b5298b79a8f0763f"
+    },
+    "server.pck": {
+      "size": 10222760,
+      "sha256": "375c0a5ac212922fea3498d291c56395290c6dc2e04ca3a79245ec0fe82f59c3"
+    },
+    "base.zip": {
+      "size": 1403990,
+      "sha256": "b6eeb2be4abeee9758354e930b1eab44a914179c7664dd6bd56656c52d311440"
+    },
+    "domain-tests.json": {
+      "size": 5949,
+      "sha256": "82d427f601e09e93623bc998b91bf87bad516a45eec7521885a0e005deb6dbb5"
+    }
+  },
+  "smokes": {
+    "client": {
+      "audio_pending": 0,
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "Windows",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 3,
+      "presentation_loaded": true,
+      "profile": "client",
+      "protocol_version": 1,
+      "release_order": [
+        "session",
+        "persistence",
+        "engine",
+        "core",
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+    },
+    "server": {
+      "audio_pending": 0,
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "headless",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 3,
+      "presentation_loaded": false,
+      "profile": "headless",
+      "protocol_version": 1,
+      "release_order": [
+        "session",
+        "persistence",
+        "engine",
+        "core",
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": "69ed8f14a584a71be123ee70a96772d022eda35da2a6f001aef7efede9e94029"
+    },
+    "base": {
+      "audio_pending": 0,
+      "content_hash": "fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579",
+      "display": "headless",
+      "event": "stopped",
+      "exit_code": 0,
+      "failed_module": "",
+      "mission_tick": 0,
+      "presentation_loaded": false,
+      "profile": "tool",
+      "protocol_version": 1,
+      "release_order": [
+        "content",
+        "compiler",
+        "telemetry"
+      ],
+      "state_hash": ""
+    }
+  },
+  "field": {
+    "content_hashes": {
+      "source": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "client": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "server": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+      "zip": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1"
+    },
+    "models": [
+      "models/general.glb",
+      "models/spear_soldier.glb",
+      "models/crossbowman.glb",
+      "models/horse.glb"
+    ],
+    "matches": {
+      "client": "FIELD_DESKTOP PASS result_slots=20",
+      "client_close": "playing voices retired",
+      "server": "FIELD_BOOT errors=0 people=20 slots=40"
+    }
+  }
+}

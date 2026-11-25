@@ -27,9 +27,11 @@
         "development/reports/tests/P2/field-benchmark-final/summary.json",
         "development/reports/tests/P2/field-final-acceptance/results.json",
         "development/reports/tests/P2/phase-performance-followup.md",
-        "development/reports/tests/P2/runtime-index-ab/summary.json"
+        "development/reports/tests/P2/runtime-index-ab/summary.json",
+        "docs/architecture/decisions/ADR-016-character-slice.md"
       ],
-      "resume": "按相同真实输入对多阶段批量数据表示做实现、差分与独立测量。两档均达到 §19.4 后，复查目标设备与阶段验收项；前置关闭后继续已授权 P3-CHR。"
+      "resume": "按相同真实输入对多阶段批量数据表示做实现、差分与独立测量。两档均达到 §19.4 后，复查目标设备与阶段验收项。",
+      "deferred_by": "项目负责人于 2026-11-25 要求后续优化性能，先交付 P3 人物。"
     }
   ],
   "note": "ADR-014 与 ADR-015 的 A 方案均已批准。"

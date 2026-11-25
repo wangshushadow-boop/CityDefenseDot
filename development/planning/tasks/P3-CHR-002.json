@@ -30,7 +30,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "base_commit": "bf47b7164044306f937acba96d9f2678253fcda9",
   "worktree": "D:\\work\\game\\recollection\\.worktrees\\p3-gear",
   "scope": "战斗与便装、真实库存物品、交接",
   "non_goals": [
@@ -39,5 +39,5 @@
   "acceptance": [
     "通过 T-CHR-02, T-CHR-04 中本任务对应部分，合并后实际验证完整人物流程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

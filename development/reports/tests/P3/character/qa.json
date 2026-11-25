@@ -1,0 +1,585 @@
+{
+  "scope": "P3-CHR candidate/legacy/cold client independent verification",
+  "p2_source": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "mixed_candidate": "Frozen joined assembly at time of candidate extraction; final- labels use separate documented package/source provenance.",
+  "status": "PASS",
+  "runs": [
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\legacy\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\legacy-import-engine.log",
+        "--import"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "265580d1f184b08033494c2f4b2c54446563cd390a15fc99809009253059ec91",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\legacy",
+      "marker": [],
+      "label": "legacy-import",
+      "log": "legacy-import.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\legacy\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\legacy-create-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\old.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "3c6f31ebf7b68313d4cf04cc8d83a2e6977a75715096b0daaf39bdb604c960be",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\legacy",
+      "marker": [
+        "LEGACY {\"empty_world\":\"world/d70349c7-3131-487a-8397-f9a07e6a809d\",\"goods_world\":\"world/eaaf6343-2f76-4e21-9f18-846e6fc1f50a\",\"hash\":\"d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1\",\"instance\":\"p2-ancestral-talisman\",\"legacy_inventory_sha\":\"81d459c777d9606c63403f1c50eb0a573aa9af9124861b55a1ba5c3d49dfae9f\",\"minute\":1430,\"owner\":\"oldbag\",\"packages\":[{\"id\":\"base\",\"version\":\"1.0.0\"},{\"id\":\"field\",\"version\":\"1.0.0\"}]}"
+      ],
+      "label": "legacy-create",
+      "log": "legacy-create.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p3-hero\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\hero-engine.log",
+        "--script",
+        "res://tests/p3/hero/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "2fbae45abc7dc68385170327d717c2c6f49635913de48e1ecaba5d724ba7f999",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\test",
+      "marker": [
+        "P3_HERO checks=116 failures=0"
+      ],
+      "label": "hero",
+      "log": "hero.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p3-gear\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\gear-inventory-engine.log",
+        "--script",
+        "res://tests/p3/gear_inventory/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "2eaea60aa35fe2fa0cf25cbcac970997374e810c4eba315c4584b0b08e6a486d",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\test",
+      "marker": [
+        "P3_GEAR_INVENTORY checks=19 failures=0"
+      ],
+      "label": "gear-inventory",
+      "log": "gear-inventory.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p3-gear\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\gear-engine.log",
+        "--script",
+        "res://tests/p3/gear/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "bb726326853137d7f14cd96adab77d4df0ea1bdffe852d6ea36830eb4aa26f17",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\test",
+      "marker": [
+        "P3_GEAR checks=40 failures=0"
+      ],
+      "label": "gear",
+      "log": "gear.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\joined\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\flow-engine.log",
+        "--script",
+        "res://tests/p3/character_flow/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "d6d960d72ca1c0a39361ad7de67c7ccae6697639080a46e03475ba2100f31987",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\test",
+      "marker": [
+        "CHARACTER_FLOW checks=58 failures=0"
+      ],
+      "label": "flow",
+      "log": "flow.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\candidate\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\compatibility2-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\new.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "6895be002e2274aaa363a3c40cb1be043cf45ac1b8fe178659717acb3bce1722",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\compatibility2",
+      "marker": [
+        "LEGACY_NEW checks=61 failures=0"
+      ],
+      "label": "compatibility2",
+      "log": "compatibility2.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\candidate\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\durable-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\fault.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "63c5b7386832c51e132a006aa6eedb8abbdba438edbb95aa3f1f9be2255111aa",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\durable",
+      "marker": [
+        "DURABLE_QA checks=29 failures=0"
+      ],
+      "label": "durable",
+      "log": "durable.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\latest\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\canonical-revised-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\canonical.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "149127dc8e32dd56d8e769c159ca986a51f216e6bcdabeecbeb4d2787daffca2",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\projection-new",
+      "marker": [
+        "PUBLIC_READMODEL checks=3 failures=0"
+      ],
+      "label": "canonical-revised",
+      "log": "canonical-revised.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\latest\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\gui-preflight-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\gui_external.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "f27105fabc31f29688186394f7944db816b9f75a6053294a57e1022e92d508d4",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\gui-preflight",
+      "marker": [
+        "PACK_GUI checks=25 failures=0 renderer=forward_plus adapter=NVIDIA GeForce RTX 3090"
+      ],
+      "label": "gui-preflight",
+      "log": "gui-preflight.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\latest\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\gui-picture-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\gui_external.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "4ca397f5357be4bdb79d112f709c3100d865566a034dfd4c8ff0fae7332b0d50",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\gui-picture",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "PACK_GUI checks=26 failures=0 renderer=forward_plus adapter=NVIDIA GeForce RTX 3090"
+      ],
+      "label": "gui-picture",
+      "log": "gui-picture.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source-import-engine.log",
+        "--import"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "8123a57f02624e47011ef5361f4367bec5ee585a75cd421606a6e020f03fa10e",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-source-old",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [],
+      "label": "final-source-import",
+      "log": "final-source-import.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source-old-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\new.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "6895be002e2274aaa363a3c40cb1be043cf45ac1b8fe178659717acb3bce1722",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-source-old",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "LEGACY_NEW checks=61 failures=0"
+      ],
+      "label": "final-source-old",
+      "log": "final-source-old.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source-fault-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\fault.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "63c5b7386832c51e132a006aa6eedb8abbdba438edbb95aa3f1f9be2255111aa",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-source-fault",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "DURABLE_QA checks=29 failures=0"
+      ],
+      "label": "final-source-fault",
+      "log": "final-source-fault.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source-canonical-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\canonical.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "149127dc8e32dd56d8e769c159ca986a51f216e6bcdabeecbeb4d2787daffca2",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-source-canonical",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "PUBLIC_READMODEL checks=3 failures=0"
+      ],
+      "label": "final-source-canonical",
+      "log": "final-source-canonical.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-hero-engine.log",
+        "--script",
+        "res://tests/p3/hero/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "e148fc6e5a206608ac6f9428cd1165b9418903f1e17b5f6f964c146403c56298",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-hero",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "P3_HERO checks=125 failures=0"
+      ],
+      "label": "final-hero",
+      "log": "final-hero.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-inventory-engine.log",
+        "--script",
+        "res://tests/p3/gear_inventory/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "2eaea60aa35fe2fa0cf25cbcac970997374e810c4eba315c4584b0b08e6a486d",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-inventory",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "P3_GEAR_INVENTORY checks=19 failures=0"
+      ],
+      "label": "final-inventory",
+      "log": "final-inventory.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-gear-engine.log",
+        "--script",
+        "res://tests/p3/gear/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "bb726326853137d7f14cd96adab77d4df0ea1bdffe852d6ea36830eb4aa26f17",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-gear",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "P3_GEAR checks=40 failures=0"
+      ],
+      "label": "final-gear",
+      "log": "final-gear.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-flow-engine.log",
+        "--script",
+        "res://tests/p3/character_flow/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "71dde227ed62da484492c45894b1424b1ac28b7653729edaf716d75b53d8e0e0",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-flow",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "CHARACTER_FLOW checks=68 failures=0"
+      ],
+      "label": "final-flow",
+      "log": "final-flow.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-camp-engine.log",
+        "--script",
+        "res://tests/p3/campaign_character/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "276925e03b0aa4ef0ff1d2b0837f4e0d25303efb613f590acadb8708f0e0e1df",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-camp",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "CAMPAIGN_CHARACTER checks=30 failures=0"
+      ],
+      "label": "final-camp",
+      "log": "final-camp.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-session-engine.log",
+        "--script",
+        "res://tests/p3/session_character/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "67ba2c249c6c062897a2b2bb904bb245220d3d4c71fd7cab234ae2eba99beada",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-session",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "SESSION_CHARACTER checks=28 failures=0"
+      ],
+      "label": "final-session",
+      "log": "final-session.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-source-gui-engine.log",
+        "--script",
+        "res://tests/p3/character_desktop/run.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "8add76d05415262fa58ed47dfbfb05ff83b680544f816bbb67309c906877a79f",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-source-gui",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent",
+      "marker": [
+        "CHARACTER_DESKTOP checks=83 failures=0"
+      ],
+      "label": "final-source-gui",
+      "log": "final-source-gui.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p3\\build\\53cde6d32a5d-a074ac6fd625\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-pack-gui-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\gui_external.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "4ca397f5357be4bdb79d112f709c3100d865566a034dfd4c8ff0fae7332b0d50",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-pack-gui",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent\\empty-cwd",
+      "pack_sha256": "90d115536ace49126eae4ea62fd9189fd37803cf8c7e69a7b5298b79a8f0763f",
+      "marker": [
+        "PACK_GUI checks=26 failures=0 renderer=forward_plus adapter=NVIDIA GeForce RTX 3090"
+      ],
+      "label": "final-pack-gui",
+      "log": "final-pack-gui.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p3\\build\\53cde6d32a5d-a074ac6fd625\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-pack-old-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\new.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "6895be002e2274aaa363a3c40cb1be043cf45ac1b8fe178659717acb3bce1722",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-pack-old",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent\\empty-cwd",
+      "pack_sha256": "90d115536ace49126eae4ea62fd9189fd37803cf8c7e69a7b5298b79a8f0763f",
+      "marker": [
+        "LEGACY_NEW checks=61 failures=0"
+      ],
+      "label": "final-pack-old",
+      "log": "final-pack-old.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p3\\build\\53cde6d32a5d-a074ac6fd625\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-pack-canonical-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\canonical.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "149127dc8e32dd56d8e769c159ca986a51f216e6bcdabeecbeb4d2787daffca2",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-pack-canonical",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent\\empty-cwd",
+      "pack_sha256": "90d115536ace49126eae4ea62fd9189fd37803cf8c7e69a7b5298b79a8f0763f",
+      "marker": [
+        "PUBLIC_READMODEL checks=3 failures=0"
+      ],
+      "label": "final-pack-canonical",
+      "log": "final-pack-canonical.log"
+    },
+    {
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p3\\build\\53cde6d32a5d-a074ac6fd625\\client.pck",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\final-pack-fault-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p3\\independent\\fault.gd"
+      ],
+      "exit": 0,
+      "error_output": false,
+      "stdout_sha256": "63c5b7386832c51e132a006aa6eedb8abbdba438edbb95aa3f1f9be2255111aa",
+      "user_profile": "D:\\work\\game\\recollection\\out\\p3\\independent\\profiles\\final-pack-fault",
+      "cwd": "D:\\work\\game\\recollection\\out\\p3\\independent\\empty-cwd",
+      "pack_sha256": "90d115536ace49126eae4ea62fd9189fd37803cf8c7e69a7b5298b79a8f0763f",
+      "marker": [
+        "DURABLE_QA checks=29 failures=0"
+      ],
+      "label": "final-pack-fault",
+      "log": "final-pack-fault.log"
+    }
+  ],
+  "test_probe_history": [
+    "compatibility.log: QA probe attempted canonical hashing of the UI read model; received InvalidArgument. The old-save replay uses direct deep comparison. canonical-before.log then isolated 8 non-string keys in the public hero/equipment read model before/after a perk. canonical-revised.log repeats the identical whole-read-model encode/decode check on the corrected implementation in all three states."
+  ],
+  "not_run": [
+    "人工主观手感/无障碍",
+    "P2图形性能重测",
+    "完整战役遇敌/领地或任务继承，属后续包"
+  ],
+  "package-provenance": {
+    "git_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+    "manifest": "out/p3/build/53cde6d32a5d-a074ac6fd625/manifest.json",
+    "manifest_sha256": "4d743e4d71624f2465bac3783f9977e6b784811c5713bf1a525691cbf0b782c9",
+    "artifacts": {
+      "client.pck": "90d115536ace49126eae4ea62fd9189fd37803cf8c7e69a7b5298b79a8f0763f",
+      "server.pck": "375c0a5ac212922fea3498d291c56395290c6dc2e04ca3a79245ec0fe82f59c3",
+      "base.zip": "b6eeb2be4abeee9758354e930b1eab44a914179c7664dd6bd56656c52d311440",
+      "domain-tests.json": "82d427f601e09e93623bc998b91bf87bad516a45eec7521885a0e005deb6dbb5"
+    },
+    "engine": "4.7.2.stable.official.ed1daf0bf"
+  }
+}

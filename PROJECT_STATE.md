@@ -1,6 +1,16 @@
 # recollection 项目状态
 
-**当前 P2 阶段阻塞在整场性能。** 15/16 个工作包验收，P0 和 P1 已通过。负责人已提前放行 P3 人物，正执行 P3-CHR；其他工作包沿用原阶段门禁。
+**P3 人物已交付并通过验收。** 在主菜单“新建沙盒”或“读取存档”后选择“人物”，即可创建、培养、换装和安排继承。P3 的其余 8 个工作包尚未启动。
+
+```powershell
+& "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe" --path game
+```
+
+当前生产源码 `53cde6d`。四个人物验收用例全部通过，正式客户端包独立验证 119 项；真实旧沙盒可读、可建角，存档故障具备原子回滚。P0/P1 已验收。P2 整场性能按负责人要求延期，GATE-P2 仍为 BLOCKED。[人物验收与未测项](development/reports/stages/P3-character.md) · [构建清单](development/reports/tests/P3/character/manifest.json) · [人物截图](development/reports/tests/P3/character/character.png)
+
+## P2 野战基线
+
+**当前 P2 阶段阻塞在整场性能。** 15/16 个工作包验收，P0 和 P1 已通过。负责人已批准延期优化。
 
 | 实际规模 | 平均 FPS | 帧 P95（ms） | 权威步 P95（ms） | FPS 下限 / 帧 P95 上限（ms） |
 |---|---:|---:|---:|---:|

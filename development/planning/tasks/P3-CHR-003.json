@@ -41,5 +41,5 @@
   "acceptance": [
     "通过 T-CHR-01, T-CHR-02, T-CHR-03, T-CHR-04 中本任务对应部分，合并后实际验证完整人物流程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

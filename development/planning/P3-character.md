@@ -13,3 +13,6 @@
 - P3-CHR-009 · 既有库存的安全扩展、空槽登记与实例守恒
 
 [范围与默认选择](../../docs/architecture/decisions/ADR-016-character-slice.md)
+
+
+9 项执行任务已集成至 53cde6d，T-CHR-01 至 04 通过。除 P3-CHR 外，其余 P3 工作包与阶段总门禁保持 PLANNED。[最终验收](../reports/stages/P3-character.md)

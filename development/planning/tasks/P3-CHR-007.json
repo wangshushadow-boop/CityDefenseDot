@@ -32,7 +32,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "base_commit": "9de2d29ef849be00a2d3cfb96d0a68b1765355fb",
   "worktree": "D:\\work\\game\\recollection",
   "scope": "人物用例、存档一致性与操作查询",
   "non_goals": [
@@ -41,5 +41,5 @@
   "acceptance": [
     "通过 T-CHR-01, T-CHR-02, T-CHR-03, T-CHR-04 中本任务对应部分，合并后实际验证完整人物流程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

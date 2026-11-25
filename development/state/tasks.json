@@ -754,12 +754,16 @@
       "child_ids": []
     },
     "P3-CHR": {
-      "status": "IN_PROGRESS",
-      "owner": null,
-      "base_commit": null,
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "status": "DONE",
+      "owner": "主 Agent",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+      "integrated_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+      "evidence": [
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/acceptance.json",
+        "development/reports/tests/P3/character/manifest.json"
+      ],
       "child_ids": [
         "P3-CHR-001",
         "P3-CHR-002",
@@ -2346,84 +2350,138 @@
       "child_ids": []
     },
     "P3-CHR-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "hero",
-      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "base_commit": "8945db41f4f618684f4e0bd1cdb57f45070d3f00",
+      "candidate_commit": "d903365bb6db6b57a1aa9abdf376b0612dfe249d",
+      "integrated_commit": "a561044e39e0a4fc5fee587d9353b4edb13a032d",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-001.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-002": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "gear",
-      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "base_commit": "bf47b7164044306f937acba96d9f2678253fcda9",
+      "candidate_commit": "21966aa89a4b6ce0f22ae3e0f1d5845cb4cc4540",
+      "integrated_commit": "0ce987e39f9caa649f09581a2893ab74e0f2acc4",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-002.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-003": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "runtime",
       "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "e36019a67eadbf81bd6a331ba2ed3feb2b385c03",
+      "integrated_commit": "5051ff2aa1188ebf4ac7f4cc88a7308e600a7c68",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-003.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-004": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "runtime",
-      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "base_commit": "e36019a67eadbf81bd6a331ba2ed3feb2b385c03",
+      "candidate_commit": "249c9d714a7c6e976e86f88dba39892f13f3fb74",
+      "integrated_commit": "5051ff2aa1188ebf4ac7f4cc88a7308e600a7c68",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-004.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-005": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "desktop",
-      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "base_commit": "74ede3d3ba7c86768875ebe93cd1a2f712c0893d",
+      "candidate_commit": "c031387943890b16cbb02456c5438d091153c6f5",
+      "integrated_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-005.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-006": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "desktop",
       "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "74ede3d3ba7c86768875ebe93cd1a2f712c0893d",
+      "integrated_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-006.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-007": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "base_commit": "9de2d29ef849be00a2d3cfb96d0a68b1765355fb",
+      "candidate_commit": "1c338db3c83de5bf9399f78d15a485804d0b43c3",
+      "integrated_commit": "1c338db3c83de5bf9399f78d15a485804d0b43c3",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-007.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-008": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "base_commit": "1396c417511f9fefe02b0eec10330c29f2cad2e0",
+      "candidate_commit": "9de2d29ef849be00a2d3cfb96d0a68b1765355fb",
+      "integrated_commit": "9de2d29ef849be00a2d3cfb96d0a68b1765355fb",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-008.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     },
     "P3-CHR-009": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "gear",
-      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "base_commit": "6cdc0065506bb4d4dca5980e69129655b230a6ad",
+      "candidate_commit": "bf47b7164044306f937acba96d9f2678253fcda9",
+      "integrated_commit": "0ce987e39f9caa649f09581a2893ab74e0f2acc4",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-009.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
       "child_ids": []
     }
   },
@@ -12330,6 +12388,598 @@
       "reason": "独立工作目录或精确路径分工",
       "evidence": [],
       "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-001.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-001.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-001.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-001.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-002.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-002.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-002.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-002.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-003",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-003.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-003",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-003.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-003",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-003.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-003",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-003.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-004",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-004.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-004",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-004.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-004",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-004.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-004",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-004.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-005",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-005.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-005",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-005.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-005",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-005.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-005",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-005.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-006",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-006.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-006",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-006.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-006",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-006.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-006",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-006.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-007",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-007.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-007",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-007.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-007",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-007.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-007",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-007.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-008",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-008.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-008",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-008.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-008",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-008.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-008",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-008.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-009",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "候选已实际自测并封存",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-009.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-009",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立审查与 QA 实测，退修负例已复验",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-009.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-009",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "受控接入同一战役与提交边界",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-009.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR-009",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "53cde6d 成品与冷源码终验通过",
+      "evidence": [
+        "development/reports/tasks/P3-CHR-009.md",
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/qa.json",
+        "development/reports/tests/P3/character/review.md",
+        "development/reports/tests/P3/character/acceptance.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "人物、集成与物理存档实测",
+      "evidence": [
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/acceptance.json",
+        "development/reports/tests/P3/character/manifest.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "独立 QA、代码审查及既有失败复测",
+      "evidence": [
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/acceptance.json",
+        "development/reports/tests/P3/character/manifest.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "已顺序集成并在冷档、成品重载",
+      "evidence": [
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/acceptance.json",
+        "development/reports/tests/P3/character/manifest.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P3-CHR",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T20:45:27+08:00",
+      "reason": "T-CHR-01 至 04 与限定范围的验收条件达成",
+      "evidence": [
+        "development/reports/stages/P3-character.md",
+        "development/reports/tests/P3/character/acceptance.json",
+        "development/reports/tests/P3/character/manifest.json"
+      ],
+      "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
     }
   ]
 }

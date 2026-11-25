@@ -33,7 +33,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "base_commit": "74ede3d3ba7c86768875ebe93cd1a2f712c0893d",
   "worktree": "D:\\work\\game\\recollection\\.worktrees\\p3-desktop",
   "scope": "主菜单人物接入与会话身份",
   "non_goals": [
@@ -42,5 +42,5 @@
   "acceptance": [
     "通过 T-CHR-01, T-CHR-02, T-CHR-03, T-CHR-04 中本任务对应部分，合并后实际验证完整人物流程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

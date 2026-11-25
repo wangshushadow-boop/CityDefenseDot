@@ -29,7 +29,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "base_commit": "6cdc0065506bb4d4dca5980e69129655b230a6ad",
   "worktree": "D:\\work\\game\\recollection\\.worktrees\\p3-gear",
   "scope": "既有库存的安全扩展、空槽登记与实例守恒",
   "non_goals": [
@@ -38,5 +38,5 @@
   "acceptance": [
     "通过 T-CHR-02 中本任务对应部分，合并后实际验证完整人物流程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

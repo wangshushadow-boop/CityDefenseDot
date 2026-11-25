@@ -33,3 +33,8 @@ AT-10 的四个结算写入断点覆盖进程终止、冷启动和重发，账�
 AT-04 的编队指挥、伤亡和逐人战果有实测，整场性能未达，完整场景为 FAIL。AT-05 已执行千人兵源、分波、未入场、撤退和逐槽战果，战役名册及俘虏持久回写留待后续阶段。
 
 [行军与突击的逐槽对照](../../development/reports/tests/P2/field-final-acceptance/results.json) · [阶段报告](../../development/reports/stages/P2.md)
+
+
+## P3 人物切片
+
+AT-01 的人物创建及 AT-09 的退休、继承人控制权、装备归属和冷载续玩已有成品证据。完整的跨队伍、封地、任务与战役流程沿用表中原状态。[人物工作包验收](../../development/reports/stages/P3-character.md)
