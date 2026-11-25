@@ -302,6 +302,10 @@ static func apply(hero: Dictionary, op: String, args: Dictionary, day: int) -> D
 	if day<maxi(hero.recovery_day,hero.practice_day): return R.fail("StaleVersion","day")
 	var h:=hero.duplicate(true)
 	match op:
+		"estate_service":
+			if not args.is_empty() or h.life_status!="Healthy":
+				return R.fail("InvalidState","character.estate_service")
+			_advance(h,"stewardship",60,1)
 		"focus":
 			if not _shape(args,["skill"]) or not h.skills.has(args.skill):return R.fail("InvalidArgument","skill")
 			if h.focus_points<1 or h.skills[args.skill].focus>=_rules.learning.focus_max:return R.fail("InsufficientResource","focus")

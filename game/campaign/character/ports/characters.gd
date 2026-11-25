@@ -249,13 +249,56 @@ static func governor_facts(repo: Dictionary, day: int) -> Dictionary:
 			"leadership":Hero.effective_skill(member,"leadership","settlement")})
 	return facts
 
+static func visit_people(repo: Dictionary) -> Dictionary:
+	var people := {"player_id":null,"can_visit":false,"members":{}}
+	if repo.is_empty():
+		return people
+	people.player_id = repo.household.leader
+	for id in repo.household.members:
+		var member: Dictionary = repo.heroes[id]
+		people.members[id] = {"name":member.name,"appearance":member.appearance,"life_status":member.life_status}
+		if id == people.player_id:
+			people.can_visit = member.life_status == "Healthy" and member.location_ref == Hero.HOME
+	return people
+
+## Separate receipt preserves every opaque event ID a pre-P5 world could legitimately contain.
+static func commission_reward(repo: Dictionary, actor_id: String, source: String, day: int) -> Dictionary:
+	if repo.is_empty() or repo.household.leader != actor_id or not source.begins_with("quest/liuxi/"):
+		return R.fail("Unauthorized","character.estate_reward")
+	var receipt := {"actor_id":actor_id,"source":source}
+	if repo.has("estate_reward"):
+		return R.ok(repo) if repo.estate_reward == receipt else R.fail("Conflict","character.estate_reward")
+	var hero: Dictionary = repo.heroes[actor_id]
+	if hero.location_ref != Hero.HOME:
+		return R.fail("InvalidState","character.visit_location")
+	var earned := Hero.apply(hero,"estate_service",{},day)
+	if not earned.ok: return earned
+	var next := repo.duplicate(true)
+	next.heroes[actor_id] = earned.value
+	next["estate_reward"] = receipt
+	return R.ok(next)
+
+static func validate_commission_reward(repo: Dictionary, actor_id: Variant, source: String, rewarded: bool) -> Dictionary:
+	if rewarded:
+		if not V.typed_id(actor_id,"hero") or not source.begins_with("quest/liuxi/") or not repo.get("heroes",{}).has(actor_id):
+			return R.fail("InvalidArgument","character.estate_actor")
+		if repo.get("estate_reward") == {"actor_id":actor_id,"source":source}:
+			return R.ok()
+	elif not repo.has("estate_reward"):
+		return R.ok()
+	return R.fail("InvalidState","character.estate_reward")
+
 static func validate(repo: Dictionary, inv: Variant, world: String, minute: int) -> Dictionary:
 	if repo.is_empty():
 		return Gear.validate(inv,{})
 	if not V.integer(repo.get("schema_version"),1,1):
 		return R.fail("StaleVersion","characters.schema_version")
-	if repo.size()!=6 or repo.get("world_id")!=world or not repo.get("heroes") is Dictionary or repo.heroes.is_empty() or not repo.get("last_practice") is Dictionary or not V.integer(repo.get("attempts")):
+	if repo.size()!=6+int(repo.has("estate_reward")) or repo.get("world_id")!=world or not repo.get("heroes") is Dictionary or repo.heroes.is_empty() or not repo.get("last_practice") is Dictionary or not V.integer(repo.get("attempts")):
 		return R.fail("InvalidArgument","characters")
+	if repo.has("estate_reward"):
+		var receipt: Variant = repo.estate_reward
+		if not receipt is Dictionary or receipt.size()!=2 or not V.typed_id(receipt.get("actor_id"),"hero") or not repo.heroes.has(receipt.actor_id) or not receipt.get("source") is String or not receipt.source.begins_with("quest/liuxi/"):
+			return R.fail("InvalidArgument","characters.estate_reward")
 	for id in repo.heroes:
 		var hero: Variant = repo.heroes[id]
 		if not hero is Dictionary or hero.get("id")!=id or not V.integer(hero.get("created_day"),0,_day(minute)):
