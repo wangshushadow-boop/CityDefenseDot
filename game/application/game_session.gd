@@ -79,18 +79,8 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 func finish_mission(outcome: Dictionary) -> Dictionary:
 	return _call(_finish,[outcome])
 
-func route_result(result: Variant = null) -> Dictionary:
-	if result==null:
-		return _call(_resume_persisted_result)
-	if not result is Dictionary:
-		return R.fail("InvalidArgument","result")
+func route_result(result: Dictionary) -> Dictionary:
 	return _call(_route,[result])
-
-func _resume_persisted_result() -> Dictionary:
-	if _phase!="Results" or _mission!=null or _spec.get("mode")!="campaign" or _final.is_empty():
-		return R.fail("InvalidState","pending.result")
-	# _load published this result only after checking the committed snapshot and reservation.
-	return _route(_final)
 
 func dispose_mission() -> Dictionary:
 	return _call(_dispose_mission)
@@ -114,6 +104,8 @@ func query(kind: String = "session", visibility: Dictionary = {}) -> Dictionary:
 		"campaign":
 			if _camp!=null and _spec.get("mode","campaign")=="campaign":
 				return _camp.read_snapshot(visibility)
+		"pending_result":
+			return _call(_pending_result_view,[visibility])
 		"field":
 			return _call(_field_query,[visibility])
 		"mission":
@@ -121,6 +113,15 @@ func query(kind: String = "session", visibility: Dictionary = {}) -> Dictionary:
 				var view: Dictionary=_mission.view()
 				return R.ok({"mission_id":view.mission_id,"phase":view.phase,"tick":view.tick})
 	return R.fail("NotFound","query")
+
+func _pending_result_view(visibility: Dictionary) -> Dictionary:
+	if _phase!="Results" or _mission!=null or _pending==null or _spec.get("mode")!="campaign":
+		return R.fail("InvalidState","pending.result")
+	var operation:="session.pending_result"
+	var request:={"scope_id":_id,"payload":{"type":operation}}
+	if visibility.size()!=1 or _issuer(visibility.get("context"),operation,request).is_empty():
+		return R.fail("Unauthorized","pending.result")
+	return S.validate_shape("MissionResult",_final)
 
 func _field_query(visibility: Dictionary) -> Dictionary:
 	if not _field or _mission==null or _phase not in ["Mission","Results","Recovery"] or not _field_gateway.is_valid():

@@ -10,6 +10,8 @@ var sampled := {}
 var retry_view := false
 
 func authorize(context: Variant, operation: String, _command: Dictionary) -> Dictionary:
+	if operation=="session.pending_result" and is_same(context,login):
+		return R.ok("player")
 	if operation.begins_with("field."):
 		if is_same(context,login):
 			return R.ok("player")
@@ -83,6 +85,8 @@ func run() -> void:
 	engine=Adapter.new(root,true)
 	durable=Store.new(ProjectSettings.globalize_path("user://field-session-"+Crypto.new().generate_random_bytes(8).hex_encode()))
 	app=new_app()
+	var routing: Array=app.get_method_list().filter(func(m):return m.name=="route_result")
+	check(routing.size()==1 and routing[0].args.size()==1 and routing[0].args[0].type==TYPE_DICTIONARY and routing[0].default_args.is_empty(),"frozen route_result(MissionResult) signature")
 	if not require(app.start_session("sandbox",F.options("field-campaign")),"start campaign"):
 		quit(1); return
 	if not await start_field(battle("campaign"),100,app):
@@ -193,7 +197,10 @@ func run() -> void:
 	check(not app.finish_mission(altered).ok and not app.route_result(altered).ok,"changed typed winner with original digest rejected")
 	var forged:=rehash(altered)
 	check(not app.finish_mission(forged).ok and not app.route_result(forged).ok,"changed typed winner with new digest rejected")
-	require(app.route_result(),"cold route obtains verified result from Session")
+	var recovered: Dictionary=app.query("pending_result",{"context":login})
+	require(recovered,"read verified cold result")
+	if recovered.ok:
+		require(app.route_result(recovered.value),"cold route obtains verified result from Session")
 	require(app.dispose_mission(),"return to campaign")
 	check(not app.dispatch(move,login).ok and not app.query("field",{"context":login,"projection":"input"}).ok,"released field has no command/view access")
 	var old_scope:=scope

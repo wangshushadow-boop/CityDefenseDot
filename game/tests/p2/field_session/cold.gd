@@ -3,6 +3,11 @@ extends "res://tests/p2/results/run.gd"
 const Inventory = preload("res://shared/inventory/inventory.gd")
 const SLOT := "resume-field"
 
+func recovery_authority(context: Variant, op: String, request: Dictionary) -> Dictionary:
+	if is_same(context,login) and op=="session.pending_result" and request.scope_id.begins_with("session/"):
+		return R.ok("owner")
+	return R.fail("Unauthorized","owner")
+
 func award(_spec: Dictionary,_result: Dictionary) -> Dictionary:
 	settlement_calls+=1
 	return R.ok([F.line("pool","purse",7)])
@@ -22,7 +27,7 @@ func run() -> void:
 	durable=Store.new(args[1])
 	core=Core.new("1234567890abcdef")
 	engine=Adapter.new(root,true)
-	var app:=F.App.new(durable,func():return F.Camp.new(),fresh,F.authorize,award)
+	var app:=F.App.new(durable,func():return F.Camp.new(),fresh,recovery_authority,award)
 	match args[0]:
 		"write":
 			require(app.start_session("sandbox",F.options(SLOT)),"start campaign")
@@ -38,15 +43,21 @@ func run() -> void:
 			require(app.load_session(SLOT,F.CONTENT),"load using only slot and installed content")
 			check(app.query().value.state=="Results" and not app.query("mission").ok,"no live Mission in new process")
 			var before: int=durable.recover(SLOT).value.snapshot.revision
-			var receipt: Dictionary=app.route_result()
-			check(receipt.ok and app.route_result()==receipt and settlement_calls==1,"stored result routes and replays once")
+			check(not app.query("pending_result",{"context":RefCounted.new()}).ok,"foreign reader cannot obtain pending result")
+			var recovered: Dictionary=app.query("pending_result",{"context":login})
+			if not require(recovered,"owner reads persisted result"):
+				quit(1);return
+			check(recovered.value.is_read_only() and recovered.value.slot_outcomes.is_read_only(),"recovery view is immutable")
+			var receipt: Dictionary=app.route_result(recovered.value)
+			check(receipt.ok and app.route_result(recovered.value)==receipt and settlement_calls==1,"stored result routes and replays once")
+			check(not app.query("pending_result",{"context":login}).ok,"settled checkpoint is no longer visible")
 			var saved: Dictionary=durable.recover(SLOT).value.snapshot
 			check(saved.revision==before+1,"one durable revision")
 			check_saved(false,107,1)
 			require(app.dispose_mission(),"resume campaign map")
 		"verify":
 			require(app.load_session(SLOT,F.CONTENT),"load settled campaign in third process")
-			check(app.query().value.state=="CampaignMap" and not app.route_result().ok and settlement_calls==0,"no pending work after restart")
+			check(app.query().value.state=="CampaignMap" and not app.query("pending_result",{"context":login}).ok and settlement_calls==0,"no pending work after restart")
 			check_saved(false,107,1)
 		_:
 			quit(2);return
