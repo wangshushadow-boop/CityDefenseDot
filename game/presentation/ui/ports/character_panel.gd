@@ -192,6 +192,8 @@ func _submit(op: String, args: Dictionary, success: String) -> void:
 	_render()
 
 func _render() -> void:
+	var focus:=get_viewport().gui_get_focus_owner()
+	var previous_focus: StringName=focus.name if _section=="governance" and focus!=null and is_ancestor_of(focus) else &""
 	_clear(_tabs)
 	_clear(_body)
 	_portrait=null
@@ -199,6 +201,8 @@ func _render() -> void:
 	if _model.ended:
 		_head.text="生涯已结束"
 		_label(_body,"本次人物生涯已结束，仍可返回主菜单读取其他存档。")
+		if _model.get("governance",{}).get("established",false):
+			_governance(_model.governance)
 		return
 	if _model.hero==null:
 		_head.text="创建人物"
@@ -206,21 +210,85 @@ func _render() -> void:
 		return
 	var hero: Dictionary=_model.hero
 	_head.text="%s　·　人物志"%hero.name
-	var titles := {"growth":"身世与成长","gear":"行装","family":"家人和继承"}
-	if hero.life_status=="Dead": _section="family"
+	var titles := {"growth":"身世与成长","gear":"行装","family":"家人和继承","governance":"领地治理"}
+	if hero.life_status=="Dead" and _section not in ["family","governance"]: _section="family"
 	for key in titles:
 		var tab:=_button(_tabs,titles[key],_set_section.bind(key))
-		tab.disabled=key==_section or (hero.life_status=="Dead" and key!="family")
+		tab.disabled=key==_section or (hero.life_status=="Dead" and key not in ["family","governance"])
 	match _section:
 		"growth": _growth(hero)
 		"gear": _equipment()
 		"family": _household(hero)
+		"governance":
+			_governance(_model.governance)
+			if previous_focus!=&"":
+				var target:=_body.find_child(previous_focus,true,false) as Button
+				if target==null or target.disabled:
+					for control: Button in _body.find_children("*","Button",true,false):
+						if not control.disabled:
+							target=control
+							break
+				if target!=null and not target.disabled: target.grab_focus()
 
 func _set_section(section: String) -> void:
 	_section=section
 	_scroll.scroll_vertical=0
 	_show_notice("")
 	_render()
+
+func _governance(fief: Dictionary) -> void:
+	var by_id: Dictionary={}
+	for member: Dictionary in fief.candidates:
+		by_id[member.id]=member.name
+	_label(_body,fief.name,25,GOLD)
+	if not fief.can_manage:
+		_label(_body,"只有能够理事的家主可以任免总督。",16,MUTED)
+	if not fief.established:
+		_label(_body,"接管家族庄邑后，可从在家的成年族人中任命总督。庄邑从接管当日开始记账。")
+		var open:=_button(_body,"接管"+str(fief.name),_submit.bind("governor_open",{},"家族已接管庄邑。"))
+		open.name="GovernorOpen"
+		open.disabled=not fief.can_manage
+		return
+	var summary:=_row(_body)
+	_label(summary,"繁荣　%.1f　　 忠诚　%.1f"%[fief.prosperity/10.0,fief.loyalty/10.0],21)
+	_label(summary,"现任总督　"+str(by_id.get(fief.governor_id,"空缺")),19,GOLD)
+	_label(_body,"总督人选",19,GOLD)
+	for member: Dictionary in fief.candidates:
+		var row:=_row(_body)
+		var details: String="%s　　管理 %d　·　统御 %d"%[member.name,member.stewardship,member.leadership]
+		if not member.eligible: details+="　·　"+str(member.reason)
+		_label(row,details)
+		if member.id==fief.governor_id:
+			var dismiss:=_button(row,"卸任总督",_submit.bind("governor_dismiss",{"settlement_id":fief.settlement_id},"总督现已卸任。"))
+			dismiss.name="GovernorDismiss"
+			dismiss.disabled=not fief.can_manage
+		elif member.eligible:
+			var assign:=_button(row,"任命"+str(member.name),_submit.bind("governor_assign",{"settlement_id":fief.settlement_id,"hero_id":member.id},"新任总督已到任。"))
+			assign.name="GovernorAssign_"+str(member.id).get_file()
+			assign.disabled=not fief.can_manage
+	var heading:=_row(_body)
+	_label(heading,"治理日结　·　每项 0–100 点",19,GOLD)
+	if fief.can_manage:
+		var wait_day:=_button(heading,"休养一日",_submit.bind("rest",{},"庄邑已结算一日。"))
+		wait_day.name="GovernorDay"
+	var reports:=_row(_body)
+	_governance_day(reports,"下一日预计",fief.next_report,by_id)
+	_governance_day(reports,"上次实结",fief.last_report,by_id)
+
+func _governance_day(parent: Node, title: String, report: Dictionary, names: Dictionary) -> void:
+	var column:=VBoxContainer.new()
+	column.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	parent.add_child(column)
+	if report.is_empty():
+		_label(column,title+"　·　尚无记录",16,MUTED)
+		return
+	_label(column,"%s　第 %d 日　·　%s"%[title,report.day,names.get(report.governor_id,"空缺")],17,GOLD)
+	for key in ["prosperity","loyalty"]:
+		var before: int=report[key+"_before"]
+		var after: int=report[key+"_after"]
+		var label: String="繁荣" if key=="prosperity" else "忠诚"
+		_label(column,"%s　%.1f → %.1f（%+.1f）"%[label,before/10.0,after/10.0,(after-before)/10.0],17)
+		_label(column,"基础 %+.1f　总督 %+.1f"%[report[key+"_base"]/10.0,report[key+"_bonus"]/10.0],15,MUTED)
 
 func _create_form() -> void:
 	var catalog: Dictionary=_model.catalog
