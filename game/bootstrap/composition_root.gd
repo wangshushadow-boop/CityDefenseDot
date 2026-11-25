@@ -18,6 +18,8 @@ const FieldSetup = preload("res://bootstrap/field_setup.gd")
 var _campaign_settlement: Callable
 var _save_owner: RefCounted
 var _save_session := ""
+var _character_world := ""
+const CHARACTER_ACTIONS := ["create","practice","focus","perk","equip","rest","retire"]
 var _field_authority: RefCounted
 var _field_mission: WeakRef
 var _field_launch := false
@@ -110,8 +112,7 @@ func _create_session(deps: Dictionary) -> Dictionary:
 			return field
 		# Only the CI replay restores a fixed authority-issued instance ID.
 		return Mission.new(core,engine_adapter,mode,Callable(),"mission/p1-training-replay" if replay else "")
-	# The frontend exposes world and training actions only. A gameplay exchange
-	# needs an installed trusted authority rather than a caller-supplied identity.
+	# Local character and field actions use session-bound capabilities.
 	return R.ok(Session.new(deps.persistence,func(): return Camp.new(),mission_factory,_field_permit,_campaign_settlement,_receive_match_result,_field_gateway))
 
 func boot(config: Dictionary) -> Dictionary:
@@ -191,6 +192,7 @@ func shutdown() -> Dictionary:
 		_drain()
 	_save_owner=null
 	_save_session=""
+	_character_world=""
 	_field_authority=null
 	_field_mission=null
 	_busy=false
@@ -201,16 +203,36 @@ func session() -> RefCounted:
 
 func new_world(slot: String) -> Dictionary:
 	if session()==null: return R.fail("InvalidState","session")
-	return session().start_session("sandbox",{"slot":slot,"seed":Crypto.new().generate_random_bytes(8).hex_encode(),
+	var opened: Dictionary = session().start_session("sandbox",{"slot":slot,"seed":Crypto.new().generate_random_bytes(8).hex_encode(),
 		"start_def":{},"content":_services.content})
+	if opened.ok:
+		_bind_world_owner(opened.value)
+	return opened
 
 func load_world(slot: String) -> Dictionary:
 	if session()==null: return R.fail("InvalidState","session")
 	var loaded: Dictionary = session().load_session(slot,_services.content)
 	if loaded.ok:
-		_save_owner = RefCounted.new()
-		_save_session = session().query().value.session_id
+		_bind_world_owner(loaded.value)
 	return loaded
+
+func _bind_world_owner(session_id: String) -> void:
+	_save_owner = RefCounted.new()
+	_save_session = session_id
+	var world: Dictionary = session().query("campaign")
+	_character_world = world.value.world_id if world.ok else ""
+
+func character_view() -> Dictionary:
+	if session()==null or _save_owner==null:
+		return R.fail("InvalidState","character.session")
+	return session().query("character",{"context":_save_owner})
+
+func character_command(operation: String, args: Dictionary, revision: int, request_id: String) -> Dictionary:
+	if session()==null or _save_owner==null or operation not in CHARACTER_ACTIONS:
+		return R.fail("Unauthorized","character.command")
+	var envelope := {"command_id":request_id,"actor_ref":"player","scope_id":_character_world,
+		"expected_revision":revision,"issued_tick":null,"sequence":null,"payload":{"type":"character."+operation,"args":args}}
+	return session().dispatch(envelope,_save_owner)
 
 func pending_result() -> Dictionary:
 	if session()==null or _save_owner==null: return R.fail("Unauthorized","pending.result")
@@ -240,6 +262,11 @@ func _field_principal(token: Variant) -> Dictionary:
 	return R.ok({"issuer_id":"player","team_key":0})
 
 func _field_permit(token: Variant, operation: String, envelope: Dictionary) -> Dictionary:
+	if operation.begins_with("character."):
+		var action := operation.trim_prefix("character.")
+		if (action=="view" or action in CHARACTER_ACTIONS) and _save_owner!=null and is_same(token,_save_owner) and envelope.get("session_id")==_save_session and envelope.get("scope_id")==_character_world:
+			return R.ok("player")
+		return R.fail("Unauthorized","character.authority")
 	if operation=="session.pending_result" and _save_owner!=null and is_same(token,_save_owner) and envelope.get("scope_id")==_save_session:
 		return R.ok("save_owner")
 	if not operation.begins_with("field."):
