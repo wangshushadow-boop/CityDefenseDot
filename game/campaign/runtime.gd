@@ -5,6 +5,7 @@ const V = preload("res://contracts/values.gd")
 const C = preload("res://contracts/canonical.gd")
 const Core = preload("res://core/runtime.gd")
 const Inventory = preload("res://shared/inventory/inventory.gd")
+const Characters = preload("res://campaign/character/ports/characters.gd")
 const DAY := 1440
 const PHASES := ["production", "ledger_validation", "market", "supply_payroll",
 	"territory", "politics_ai", "day_end"]
@@ -14,6 +15,9 @@ const METADATA := ["schema_version","world_id","seed","game_minute","revision","
 
 # The world contains committed metadata only. INV owns its live repository.
 var _world := {}
+var _characters := {}
+var _resting_hero := ""
+var _inventory_authority: Callable
 var _inventory: Inventory
 var _pending := {}
 var _planning_core: Core
@@ -77,10 +81,14 @@ func create_world(seed: String, start_def: Dictionary, content: Dictionary, auth
 		var created := inv.initialize(start_def.locations, ordered, authorize)
 		if not created.ok:
 			return created
+		var characters := Characters.validate({}, inv, world_id, minute)
+		if not characters.ok:
+			return characters
 	_world = {"schema_version": 1, "world_id": world_id, "seed": seed, "game_minute": minute,
 		"revision": 0, "last_committed_day": int(minute / DAY), "rng_states": streams,
 		"content_hash": content.content_hash, "content_packages": content.packages.duplicate(true), "freeze": null}
 	_inventory = inv
+	_inventory_authority = authorize
 	return save_snapshot()
 
 
@@ -98,6 +106,8 @@ func read_snapshot(visibility_context: Dictionary = {}) -> Dictionary:
 func _snapshot_with(metadata: Dictionary, inventory_snapshot: Variant) -> Dictionary:
 	var saved := metadata.duplicate(true)
 	saved["inventory"] = inventory_snapshot
+	if not _characters.is_empty():
+		saved["characters"] = _characters.duplicate(true)
 	return saved
 
 
@@ -160,6 +170,9 @@ func _day_txn() -> String:
 func _day_plan() -> Dictionary:
 	if _inventory == null:
 		return R.fail("InvalidState", "inventory")
+	var allowed := Characters.permit_exchange(_characters, _inventory, _pending.lines)
+	if not allowed.ok:
+		return allowed
 	return _inventory.prepare_exchange(_day_txn(), _pending.lines)
 
 
@@ -187,6 +200,9 @@ func _work_one() -> Dictionary:
 			return output if typeof(output.get("error")) == TYPE_DICTIONARY else R.fail("InvalidArgument", "planner.error")
 		if not C.is_json_array(output.get("value")) or not C.encode(output.value).ok or _pending.lines.size() + output.value.size() > C.MAX_ITEMS:
 			return R.fail("InvalidArgument", "planner.lines")
+		var allowed := Characters.permit_exchange(_characters, _inventory, output.value)
+		if not allowed.ok:
+			return allowed
 		_pending.lines.append_array(output.value.duplicate(true))
 	_pending.cursor += 1
 	if _pending.cursor == _pending.work.size():
@@ -202,6 +218,12 @@ func _commit_prepared() -> Dictionary:
 	var streams := _planning_core.snapshot_rng(_world.world_id)
 	if not streams.ok:
 		return streams
+	var recovered := _characters
+	if not _characters.is_empty():
+		var daily: Dictionary = Characters.recover(_characters, _world.world_id, _pending.day, _resting_hero)
+		if not daily.ok:
+			return daily
+		recovered = daily.value
 	if not _pending.lines.is_empty():
 		var plan := _day_plan()
 		if not plan.ok:
@@ -209,6 +231,7 @@ func _commit_prepared() -> Dictionary:
 		var committed := _inventory.commit(plan.value)
 		if not committed.ok:
 			return committed
+	_characters = recovered
 	_world.game_minute = _pending.day * DAY
 	_world.last_committed_day = _pending.day
 	_world.revision += 1
@@ -302,6 +325,11 @@ func exchange(txn_id: String, lines: Array, expected_inventory_revision: Variant
 		_busy = false
 		return plan
 	var new_txn: bool = not _inventory.ledger_for(txn_id).ok
+	if new_txn:
+		var allowed := Characters.permit_exchange(_characters, _inventory, lines)
+		if not allowed.ok:
+			_busy = false
+			return allowed
 	if new_txn and _world.revision >= V.MAX_INTEGER:
 		_busy = false
 		return R.fail("InvalidState", "revision")
@@ -316,6 +344,90 @@ func exchange(txn_id: String, lines: Array, expected_inventory_revision: Variant
 		_world.revision += 1
 	_busy = false
 	return committed
+
+
+func character_view() -> Dictionary:
+	if _world.is_empty() or _busy:
+		return R.fail("InvalidState", "character.view")
+	var reply: Dictionary = Characters.view(_characters, _inventory, _world.world_id, _world.game_minute)
+	if reply.ok:
+		reply.value["world_id"] = _world.world_id
+		reply.value["revision"] = _world.revision
+		reply.value["game_minute"] = _world.game_minute
+	return reply
+
+
+func character_command(op: String, args: Dictionary, txn: String, durable: Callable) -> Dictionary:
+	if not _can_write() or not _pending.is_empty() or _world.revision >= V.MAX_INTEGER:
+		return R.fail("InvalidState", "character.command")
+	if not durable.is_valid():
+		return R.fail("Unavailable", "durable")
+	if not C.Reader.valid_key(txn) or txn.is_empty():
+		return R.fail("InvalidArgument", "transaction_id")
+	_busy = true
+	var result := _commit_character(op, args, txn, durable)
+	_busy = false
+	return result
+
+
+func _commit_character(op: String, args: Dictionary, txn: String, durable: Callable) -> Dictionary:
+	var result: Dictionary = Characters.plan(_characters, _inventory, op, args, _world.world_id, _world.game_minute, txn)
+	if not result.ok:
+		return result
+	var plan: Dictionary = result.value
+	if not V.integer(plan.minute, _world.game_minute):
+		return R.fail("InvalidArgument", "character.minute")
+	# Run normal phase planners on the proposal; disk failure must not expose a partial day or inventory.
+	var candidate = get_script().new()
+	candidate._world = _world.duplicate(true)
+	candidate._characters = plan.repo
+	candidate._resting_hero = plan.get("resting_id", "")
+	candidate._inventory = plan.inventory
+	candidate._inventory_authority = _inventory_authority
+	candidate._planners = _planners
+	if plan.minute / DAY > _world.last_committed_day and plan.inventory != null and is_same(plan.inventory, _inventory):
+		var fork := Inventory.new()
+		var cloned := fork.restore(_inventory.snapshot(), _inventory_authority)
+		if not cloned.ok:
+			return cloned
+		candidate._inventory = fork
+	if plan.minute > _world.game_minute:
+		var elapsed: Dictionary = candidate.step_until(plan.minute, V.MAX_INTEGER)
+		if not elapsed.ok:
+			return elapsed
+	candidate._world.revision = maxi(_world.revision + 1, candidate._world.revision)
+	var saved: Dictionary = candidate.save_snapshot()
+	if not saved.ok:
+		return saved
+	var written: Variant = durable.call(saved.value, {"committed_revision":candidate._world.revision})
+	if not written is Dictionary or not written.get("ok") is bool:
+		return R.fail("Unavailable", "durable")
+	if not written.ok:
+		return written if written.get("error") is Dictionary else R.fail("Unavailable", "durable")
+	_world = candidate._world
+	_characters = candidate._characters
+	_inventory = candidate._inventory
+	return R.ok(_world.revision)
+
+
+func check_character_sources(sources: Array) -> Dictionary:
+	if _characters.is_empty():
+		return R.ok()
+	var reserved := {}
+	for source in sources:
+		if not source is Dictionary or not source.has("hero_id"):
+			return R.fail("InvalidArgument", "reserved_sources")
+		if source.hero_id == null:
+			continue
+		if not V.typed_id(source.hero_id, "hero") or not V.integer(source.get("count"), 1, 1):
+			return R.fail("InvalidArgument", "reserved_sources.hero")
+		if reserved.has(source.hero_id):
+			return R.fail("Conflict", "reserved_sources.hero_id")
+		var checked: Dictionary = Characters.can_deploy(_characters, source.hero_id)
+		if not checked.ok:
+			return checked
+		reserved[source.hero_id] = true
+	return R.ok()
 
 
 func freeze_for_encounter(id: String) -> Dictionary:
@@ -350,7 +462,7 @@ func restore(saved: Dictionary, authorize: Callable = Callable()) -> Dictionary:
 	if not V.integer(saved.get("schema_version"), 1, 1):
 		return R.fail("StaleVersion", "schema_version")
 	for key in saved:
-		if key != "inventory" and key not in METADATA:
+		if key not in ["inventory", "characters"] and key not in METADATA:
 			return R.fail("InvalidArgument", "snapshot.field")
 	if not C.encode(saved).ok or not C.Reader.valid_key(saved.get("world_id")) or not V.hex(saved.get("seed"),16) or not V.hex(saved.get("content_hash"),64) or not _packages_valid(saved.get("content_packages")):
 		return R.fail("InvalidArgument", "world")
@@ -378,11 +490,19 @@ func restore(saved: Dictionary, authorize: Callable = Callable()) -> Dictionary:
 		var checked := inv.restore(saved.inventory, authorize)
 		if not checked.ok:
 			return checked
+	var characters: Variant = saved.get("characters", {})
+	if not characters is Dictionary or (saved.has("characters") and characters.is_empty()):
+		return R.fail("InvalidArgument", "characters")
+	var checked_characters := Characters.validate(characters, inv, saved.world_id, saved.game_minute)
+	if not checked_characters.ok:
+		return checked_characters
 	var metadata := {}
 	for key: String in METADATA:
 		metadata[key] = saved[key]
 	_world = metadata.duplicate(true)
+	_characters = characters.duplicate(true)
 	_inventory = inv
+	_inventory_authority = authorize
 	_day_failed = false
 	return R.ok()
 
@@ -392,7 +512,9 @@ func dispose() -> Dictionary:
 		return R.fail("InvalidState", "dispose")
 	_clear_day()
 	_world = {}
+	_characters = {}
 	_inventory = null
+	_inventory_authority = Callable()
 	_planners = {}
 	_disposed = true
 	return R.ok()
