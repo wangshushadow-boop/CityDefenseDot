@@ -218,6 +218,37 @@ static func can_deploy(repo: Dictionary, hero_id: String) -> Dictionary:
 		return R.fail("InvalidState","character.deployment")
 	return R.ok()
 
+## The settlement owns the appointment. CHR supplies current qualifications and scoped skills.
+static func governor_facts(repo: Dictionary, day: int) -> Dictionary:
+	var facts := {"clan_id":null, "can_manage":false, "members":[]}
+	if repo.is_empty():
+		return facts
+	var house: Dictionary = repo.household
+	var leader: Variant = house.leader
+	facts.clan_id = house.id
+	facts.can_manage = leader != null and repo.heroes[leader].life_status in ["Healthy", "Wounded"]
+	for id in house.members:
+		var member: Dictionary = repo.heroes[id]
+		@warning_ignore("integer_division")
+		var age: int = member.age + (day - member.created_day) / 365
+		var reason := ""
+		if leader == null:
+			reason = "家族生涯已结束"
+		elif id == leader:
+			reason = "家主须主持家务"
+		elif age < 18:
+			reason = "尚未成年"
+		elif member.life_status == "Captive":
+			reason = "正在被俘"
+		elif member.life_status not in ["Healthy", "Wounded"]:
+			reason = "已故或已退休"
+		elif member.location_ref != Hero.HOME:
+			reason = "不在家中"
+		facts.members.append({"id":id, "name":member.name, "eligible":reason.is_empty(), "reason":reason,
+			"stewardship":Hero.effective_skill(member,"stewardship","settlement"),
+			"leadership":Hero.effective_skill(member,"leadership","settlement")})
+	return facts
+
 static func validate(repo: Dictionary, inv: Variant, world: String, minute: int) -> Dictionary:
 	if repo.is_empty():
 		return Gear.validate(inv,{})
