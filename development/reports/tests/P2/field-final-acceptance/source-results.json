@@ -5,6 +5,7 @@
   "engine": "Godot 4.7.2.stable.official.ed1daf0bf; Windows headless",
   "run_sha256": "4b5db2e7621227e5b6af3437e3e31f8a77b0e80695c49560e86f1251dbd34a89",
   "capture_sha256": "0404cf94a0236dd0a889d201760bee4bbc056dcec82401403a79bbf229a110b0",
+  "close_mixed_sha256": "52f2a9e02a1a6de507edb15a2d462f4fe0ea662211ab987a3c40128822044371",
   "overlay": {
     "game/mission/movement/path_queue.gd": "8f97526f99f6dd50f862cafef07a691e79dc537747f49c608948a8791d796028",
     "game/mission/movement/ports/field_movement.gd": "c69ebe51b7350577de86daee398f4875248000e2c2a8eb554cbee8b701f57fa1"
@@ -74,6 +75,33 @@
       "note": "5503 ticks; every slot matched but no western source was downed to create the required positive capture"
     },
     {
+      "case": "17 m custom deployment with hold",
+      "log": "fixed020/close-mixed.log",
+      "sha256": "79a372bb34ccdf0ecf07ff1288355635251a69f09caa56e267abb0b9ead1ab2b",
+      "status": "FAIL",
+      "exit": 1,
+      "checks": 7831,
+      "note": "actual 45 shots, 0 damage and 0 reinforcements"
+    },
+    {
+      "case": "80 columns close deployment initial",
+      "log": "fixed020/close-ranks.log",
+      "sha256": "2d88d518defb3e6cca5c2e00d7d4ad20fde733ab0706268997a0411b31e8fb48",
+      "status": "PASS",
+      "exit": 0,
+      "checks": 7106,
+      "note": "real wave and positive capture"
+    },
+    {
+      "case": "80 columns close deployment frozen",
+      "log": "fixed020/final-close-mixed.log",
+      "sha256": "d2c1a965214724093e1e4b426970f63c4ffe272bdcce5f65370571061106098a",
+      "status": "PASS",
+      "exit": 0,
+      "checks": 7109,
+      "note": "250 vs 250, 500 waiting, player withdrew, slot 73 uniquely captured"
+    },
+    {
       "case": "natural three-source field",
       "log": "fixed020/capture.log",
       "sha256": "ccb042421082c30e899469fda1ea17d0b86ed16de6d6faff3a696a5b1ee68ca1",
@@ -126,6 +154,15 @@
       "exit": 1,
       "checks": 566,
       "note": "reinforcement spawn not clear"
+    },
+    {
+      "case": "80 columns explicit reinforcement and withdrawal invariants",
+      "log": "fixed020/reviewed-close-mixed.log",
+      "sha256": "c46b80e00c7a0f5f487fb9d5eb9b48ecc8f3e08a5337e36eeed3f52e22f86ec9",
+      "status": "PASS",
+      "exit": 0,
+      "checks": 7112,
+      "note": "500 opening; 501 entered; 499 never entered; positive withdrawals; captured slot 73"
     }
   ],
   "march": {
@@ -237,6 +274,35 @@
       1
     ],
     "wound_flags": 51
+  },
+  "mixed_close": {
+    "captured_slots": [
+      73
+    ],
+    "downed": 1,
+    "entered": 501,
+    "first_reinforcement_tick": 2040,
+    "hits": 22,
+    "horses": 100,
+    "mix": {
+      "archer": 150,
+      "cavalry": 50,
+      "infantry": 250,
+      "mounted_archer": 50
+    },
+    "outcomes": {
+      "alive": 250,
+      "not_spawned": 499,
+      "withdrawn": 250,
+      "wounded": 1
+    },
+    "routes": 4,
+    "scenario": "close_mixed_80_columns",
+    "shots": 45,
+    "ticks": 2041,
+    "winner": [
+      1
+    ]
   },
   "small": {
     "player_hits": 12,

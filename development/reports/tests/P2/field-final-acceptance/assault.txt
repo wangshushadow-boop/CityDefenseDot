@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_STAGE progress tick=240 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=480 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=720 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=961 seen_targets=1 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=1201 seen_targets=1 shots=17 hits=9 downed=3 captured_candidates=0 entered=503
+FIELD_STAGE progress tick=1441 seen_targets=1 shots=32 hits=17 downed=4 captured_candidates=0 entered=504
+FIELD_STAGE progress tick=1682 seen_targets=2 shots=34 hits=17 downed=4 captured_candidates=0 entered=504
+FIELD_STAGE progress tick=1922 seen_targets=2 shots=39 hits=18 downed=5 captured_candidates=0 entered=505
+FIELD_STAGE progress tick=2162 seen_targets=2 shots=54 hits=18 downed=5 captured_candidates=0 entered=505
+FIELD_STAGE progress tick=2402 seen_targets=2 shots=68 hits=24 downed=5 captured_candidates=0 entered=505
+FIELD_STAGE progress tick=2642 seen_targets=2 shots=102 hits=39 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=2882 seen_targets=2 shots=161 hits=48 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=3122 seen_targets=2 shots=174 hits=48 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=3362 seen_targets=2 shots=246 hits=55 downed=6 captured_candidates=0 entered=506
+FIELD_STAGE progress tick=3602 seen_targets=2 shots=345 hits=68 downed=8 captured_candidates=0 entered=508
+FIELD_STAGE progress tick=3842 seen_targets=2 shots=379 hits=79 downed=8 captured_candidates=0 entered=508
+FIELD_STAGE progress tick=4082 seen_targets=2 shots=399 hits=84 downed=11 captured_candidates=0 entered=511
+FIELD_STAGE progress tick=4322 seen_targets=2 shots=433 hits=92 downed=13 captured_candidates=0 entered=513
+FIELD_STAGE progress tick=4562 seen_targets=2 shots=469 hits=103 downed=17 captured_candidates=0 entered=516
+FIELD_STAGE progress tick=4802 seen_targets=2 shots=469 hits=103 downed=17 captured_candidates=0 entered=517
+FIELD_STAGE progress tick=5042 seen_targets=2 shots=525 hits=111 downed=17 captured_candidates=0 entered=517
+FIELD_STAGE progress tick=5282 seen_targets=2 shots=534 hits=115 downed=17 captured_candidates=0 entered=517
+FAIL assault produced a positive capture candidate
+FIELD_STAGE {"damaging_hits":120,"delegate":"field-captain-0","downed":17,"entered":517,"exit_facts":250,"first_reinforcement_tick":1200,"hits_by_role":{"archer":53,"cavalry":7,"infantry":6,"mounted_archer":54},"horses":100,"integrity_hash":"f92c40efe4f1f93ad482c8d7d32a3913767e2035b575e8e4ba3eeeccf446cee1","layout":"shield_wall","mix":{"archer":150,"cavalry":50,"infantry":250,"mounted_archer":50},"mounted_roles":["cavalry","mounted_archer"],"observed_travel_m":{"archer":103.121658325195,"cavalry":93.4174575805664,"infantry":102.741218566895,"mounted_archer":96.6059951782227},"outcomes":{"alive":216,"not_spawned":483,"withdrawn":250,"wounded":51},"routes":15,"scenario":"assault","shots":606,"shots_by_role":{"archer":368,"mounted_archer":238},"targets":[5,6],"ticks":5503,"verified_capture_candidates":0,"winners":[1],"wound_flags":51}
+FIELD_ACCEPTANCE checks=15091 failures=1

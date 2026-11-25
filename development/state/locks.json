@@ -1,22 +1,5 @@
 {
   "schema_version": 1,
-  "locks": [
-    {
-      "task_id": "P2-FIELD-INTEGRATION-001",
-      "owner": "stage-acceptance",
-      "branch": "detached",
-      "base_commit": "6887ebdad8e095f88f842b7bf4db51ab70774179",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-stage-accept",
-      "allowed_paths": [
-        "game/tests/p2/field/",
-        "test_scenarios/p2/field/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/"
-      ]
-    }
-  ],
+  "locks": [],
   "note": "各阶段按执行任务独占写入，验收后释放。"
 }

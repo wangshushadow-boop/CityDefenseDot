@@ -31,7 +31,8 @@
     "P2-FIELD-INTEGRATION-016",
     "P2-FIELD-INTEGRATION-017",
     "P2-FIELD-INTEGRATION-018",
-    "P2-FIELD-INTEGRATION-019"
+    "P2-FIELD-INTEGRATION-019",
+    "P2-FIELD-INTEGRATION-020"
   ],
   "requirements": [
     "BAI-06",
@@ -65,5 +66,5 @@
     "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
     "GDD §19.4 和 AT-04 的真实窗口、完整动画/AI、玩家切换、胜负及固定步开销；另验 1000 人和 AT-05 战场分波。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "BLOCKED"
 }

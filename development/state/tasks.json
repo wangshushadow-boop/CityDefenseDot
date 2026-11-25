@@ -686,12 +686,21 @@
       ]
     },
     "P2-FIELD-INTEGRATION": {
-      "status": "IN_PROGRESS",
+      "status": "BLOCKED",
       "owner": "engine_dev",
       "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
       "candidate_commit": null,
       "integrated_commit": null,
-      "evidence": [],
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
       "child_ids": [
         "P2-FIELD-INTEGRATION-002",
         "P2-FIELD-INTEGRATION-003",
@@ -716,7 +725,7 @@
       ]
     },
     "GATE-P2": {
-      "status": "PLANNED",
+      "status": "BLOCKED",
       "owner": null,
       "base_commit": null,
       "candidate_commit": null,
@@ -724,7 +733,14 @@
       "evidence": [
         "docs/architecture/decisions/ADR-015-multiside-withdrawal.md",
         "development/reports/tests/P2/qa-ordinary-withdrawal.json",
-        "development/reports/stages/P2.md"
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
       ],
       "child_ids": []
     },
@@ -1979,12 +1995,21 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-001": {
-      "status": "IN_PROGRESS",
+      "status": "BLOCKED",
       "owner": "stage-acceptance",
       "base_commit": "6887ebdad8e095f88f842b7bf4db51ab70774179",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "7d360c2b90db38d099eb5529687c10aa4a5bcc6f",
+      "integrated_commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
       "child_ids": []
     },
     "P2-BAI-002": {
@@ -11926,6 +11951,114 @@
         "development/reports/integration/P2.md"
       ],
       "commit": "31eca5d8dfdfd7ba8932586e9658b0db51d7799a"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T20:08:46+08:00",
+      "reason": "已执行真实阶段用例与正式压力测量",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
+      "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T20:08:46+08:00",
+      "reason": "独审完成，保留未达性能门槛的实际结果",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
+      "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T20:08:46+08:00",
+      "reason": "已合入可复跑验收脚本，复核成品及双档表现",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
+      "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-001",
+      "old": "INTEGRATING",
+      "new": "BLOCKED",
+      "time": "2026-11-25T20:08:46+08:00",
+      "reason": "AT-04 和正式固定步、帧率、积压门槛未达",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
+      "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION",
+      "old": "IN_PROGRESS",
+      "new": "BLOCKED",
+      "time": "2026-11-25T20:08:46+08:00",
+      "reason": "已实测的整场性能不满足 §19.4；阶段验收子项阻塞",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
+      "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488"
+    },
+    {
+      "task_id": "GATE-P2",
+      "old": "PLANNED",
+      "new": "BLOCKED",
+      "time": "2026-11-25T20:08:46+08:00",
+      "reason": "真实混合野战未达帧、固定步与积压预算",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/integration/P2.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json",
+        "development/reports/tests/P2/field-regressions-final.json"
+      ],
+      "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488"
     }
   ]
 }

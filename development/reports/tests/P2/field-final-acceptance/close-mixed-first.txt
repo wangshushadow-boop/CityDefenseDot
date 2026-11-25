@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CLOSE tick=4 shots=0 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=184 shots=0 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=364 shots=4 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=544 shots=10 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=724 shots=10 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=904 shots=16 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1084 shots=22 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1264 shots=29 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1444 shots=29 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1624 shots=34 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1804 shots=39 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1984 shots=40 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=2164 shots=40 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=2344 shots=45 hits=0 down=0 winners_can_capture=0 entered=500
+FAIL genuine mixed force reinforcement and capture
+FIELD_STAGE {"capture_candidates":0,"downed":0,"entered":500,"first_reinforcement_tick":0,"hits":0,"horses":100,"mix":{"archer":150,"cavalry":50,"infantry":250,"mounted_archer":50},"outcomes":{"alive":250,"not_spawned":500,"withdrawn":250},"routes":0,"shots":45,"ticks":2404,"winner":[1]}
+FIELD_ACCEPTANCE checks=7831 failures=1

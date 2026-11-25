@@ -1,20 +1,22 @@
 # recollection 项目状态
 
-**P2 已验收 15/16 个工作包。** 成品已修复第 1304 步编队版本倒退和第 4371 步路径缓存失效。行军与冲锋都完成千槽结算，隔离正例验证了真实俘获。已测混合野战帧率和固定步未达预算，正在归档最终六轮。P3 人物的前置为 GATE-P2。[阶段报告](development/reports/stages/P2.md)
+**当前 P2 阶段阻塞在整场性能。** 15/16 个工作包验收，P0 和 P1 已通过。P3 人物（P3-CHR）已获授权，开始条件为 GATE-P2 通过。
 
-此前模块性能检查点为 `847890e`。Windows 冷开发交付有客户端、专服和内容 ZIP。四份野战模型、署名以及 48 条中英命令和警告均已验证；两个 PCK 分别捕获到每句真实声音。最终客户端在六个干净用户目录启动成功。P2 的 19 个模块测试入口及两项跨域/音频补充入口、P1 的 15 套回归均通过。20% 骑乘的 L3 夹具在 500 人时三轮固定步 P95 为 9.786–10.802 ms，1000 人为 21.559–22.890 ms，超出 16.667 ms。8 GiB 设备与人工听辨尚未实测。[构建清单](development/reports/tests/P2/build-checkpoint/final-manifest.json) · [P2 回归](development/reports/tests/P2/integrated-regressions.json) · [20% 骑乘原数](development/reports/tests/P2/l3-mixed-20pct-integrated.json)
+| 实际规模 | 平均 FPS | 帧 P95（ms） | 权威步 P95（ms） | FPS 下限 / 帧 P95 上限（ms） |
+|---|---:|---:|---:|---:|
+| 500 人＋100 匹马 | 2.33–2.36 | 450.92–468.88 | 43.76–44.82 | 60 / 20 |
+| 1000 人＋200 匹马 | 1.07–1.24 | 889.22–1027.83 | 92.39–105.09 | 30 / 40 |
 
-P0、P1 已验收。P2 从 P1 最终提交 `005d777` 分支，本阶段开发与集成记录在 `codex/p2-field`。下面的构建与启动入口属于最近一次已验收的 P1 版本。
+正式河原野战以 250 名步兵、150 名弓手、50 名骑兵、50 名骑射手和 100 匹马开场，双方合计预留 1000 个兵员槽。已修复失马后编队修订倒退以及同一步中路径结果被逐出造成的两处中断。玩家行军、改盾墙、切换敌方编队、交还指挥和撤退后，第 3503 步完成对账，11071 项全部通过。另一条冲锋轨迹第 5503 步正常结算，15091 项中有 1 项失败。该轨迹要求胜方俘获至少一名敌方伤员，但倒地的 17 人都属于最终胜方，实际俘获为零。
 
-| 项目 | 当前状态 |
-|---|---|
-| 引擎与契约 | Godot 4.7.2 Standard、类型化 GDScript、Forward+/Vulkan，已签核 ADR-011/012/013/014/015。Mission、联网与 MOD v1 端口已冻结。 |
-| 可运行入口 | 用指定 Godot 打开 [game/project.godot](game/project.godot)，或从仓库根运行 `Godot --path game`。专服固定步验收使用 `Godot --headless --path game -- --p1-smoke`。 |
-| 交付构建 | 客户端 PCK、专服 PCK、原始资源 ZIP 已独立冷重载。可从 Git 提交重建，产物写入本地 out/p1-build；版本和摘要见[交付清单](development/reports/tests/P1/build-manifest.json)。 |
-| 验证 | 15 套 Godot 入口通过。54 个阶段候选模块用例中 36 项完整通过，18 项完整条件尚未执行。四个断点恢复、50 次任务切换及存档冷载均通过。 |
-| 签核与预算 | 负责人批准默认 1A、2A，保留总体规格 §1.3 全部原创内容范围。后续以首批正式资产的实测工时和返工率安排预算。 |
-| 待验 | 正式战斗/世界/在线玩法、完整 AT-10/AT-15、固定设备的正式性能回退与发布验收按路线图进行。独立 EXE 导出缺少 4.7.2 Windows 模板，退出 1。 |
+补充场景将双方改为相距 6.5 米、每方 80 列，仍使用同一正式专服、兵种、三层 AI 和物理。第 2040 步真实补员，第 2041 步西军撤退，东军俘获西军伤员 73。1000 槽中 250 人生还、250 人撤退、1 人负伤、499 人未入场。修订版 7112 项全部通过。独立的三人自然胜利场另通过 594 项。
 
-[阶段验收报告](development/reports/stages/P1.md) · [运行与构建](ci/README.md) · [测试与未测项](development/reports/tests/P1/README.md) · [任务及锁](development/state/tasks.json) · [负责人签核](docs/architecture/decisions/ADR-013-p1-ports-and-save.md)
+从仓库根目录运行下列命令，在主菜单选择“进入河原野战”。
 
-[P2 工作批次](development/planning/P2.md) · [P2 阶段记录](development/reports/stages/P2.md)
+```powershell
+& "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe" --path game
+```
+
+正式生产提交为 `31eca5d`。客户端 PCK、专服 PCK 和基础内容 ZIP 均由干净的 Git 源码构建，15 套 P1 域回归通过。桌面客户端实际点击部署、发布命令、撤退和查看战果，成品专服亦完成千槽结算。
+
+[阶段报告与复验条件](development/reports/stages/P2.md) · [P2 阶段计划](development/planning/P2.md) · [任务状态](development/state/tasks.json) · [P1 验收](development/reports/stages/P1.md)

@@ -13,6 +13,23 @@
         "development/reports/tests/P2/qa-ordinary-withdrawal.json"
       ],
       "resolution": "2026-11-25 负责人选择 A，按方撤退。"
+    },
+    {
+      "id": "P2-FIELD-PERFORMANCE",
+      "stage": "P2",
+      "status": "OPEN",
+      "scope": "AT-04，500/1000 人整场性能，GATE-P2",
+      "owner": "主 Agent / Mission、AI 与移动模块所有者",
+      "reason": "RTX 3090 上真实两档混合野战连续出现帧预算、权威固定步预算与积压失败。",
+      "evidence": [
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-001.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json",
+        "development/reports/tests/P2/field-final-acceptance/results.json",
+        "development/reports/tests/P2/phase-performance-followup.md",
+        "development/reports/tests/P2/runtime-index-ab/summary.json"
+      ],
+      "resume": "按相同真实输入对多阶段批量数据表示做实现、差分与独立测量。两档均达到 §19.4 后，复查目标设备与阶段验收项；前置关闭后继续已授权 P3-CHR。"
     }
   ],
   "note": "ADR-014 与 ADR-015 的 A 方案均已批准。"

@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CLOSE tick=4 shots=0 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=184 shots=0 hits=0 down=0 winners_can_capture=0 entered=500
+CLOSE tick=364 shots=0 hits=1 down=0 winners_can_capture=0 entered=500
+CLOSE tick=544 shots=3 hits=2 down=0 winners_can_capture=0 entered=500
+CLOSE tick=724 shots=4 hits=3 down=0 winners_can_capture=0 entered=500
+CLOSE tick=904 shots=6 hits=4 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1084 shots=17 hits=10 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1264 shots=24 hits=13 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1444 shots=24 hits=13 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1624 shots=24 hits=13 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1804 shots=24 hits=13 down=0 winners_can_capture=0 entered=500
+CLOSE tick=1984 shots=43 hits=21 down=1 winners_can_capture=1 entered=500
+FIELD_STAGE {"captured_slots":[73],"downed":1,"entered":501,"first_reinforcement_tick":2040,"hits":22,"horses":100,"mix":{"archer":150,"cavalry":50,"infantry":250,"mounted_archer":50},"outcomes":{"alive":250,"not_spawned":499,"withdrawn":250,"wounded":1},"routes":4,"scenario":"close_mixed_80_columns","shots":45,"ticks":2041,"winner":[1]}
+FIELD_ACCEPTANCE checks=7112 failures=0

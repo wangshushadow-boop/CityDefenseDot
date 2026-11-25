@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+NATURAL_CAPTURE {"player_hits":12,"slots":[{"captor_team_key":null,"end_status":"alive","source_slot_id":0,"wounded":false,"xp":12},{"captor_team_key":0,"end_status":"wounded","source_slot_id":1,"wounded":true,"xp":0},{"captor_team_key":null,"end_status":"wounded","source_slot_id":2,"wounded":true,"xp":0}],"tick":293,"winners":[0]}
+FIELD_CAPTURE checks=594 failures=0

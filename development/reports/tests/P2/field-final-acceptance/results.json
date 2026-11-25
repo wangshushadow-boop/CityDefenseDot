@@ -1,0 +1,335 @@
+{
+  "source": {
+    "git_commit": "31eca5d8dfdfd7ba8932586e9658b0db51d7799a",
+    "server_pck": "D:\\work\\game\\recollection\\out\\p2-field-final\\31eca5d8dfdf-40b6dfa0026a\\server.pck",
+    "server_pck_sha256": "e23e7b8a6143af5c570e73a9f7c309598cbcd0d496e4ca3180f8bb6ef8c4274e",
+    "manifest_sha256": "be4cdf5a9cc25555b494f9e8e08441c8f475f33ae8eb6b400bddadde9adcf266",
+    "engine": "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+    "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+    "probe_source": ".worktrees\\p2-stage-accept\\game\\tests\\p2\\field\\run.gd",
+    "probe_sha256": "4b5db2e7621227e5b6af3437e3e31f8a77b0e80695c49560e86f1251dbd34a89",
+    "started": "2026-11-25T19:50:09.180748+08:00"
+  },
+  "runs": [
+    {
+      "name": "march",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-final\\31eca5d8dfdf-40b6dfa0026a\\server.pck",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\frozen-probe.gd",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\march-engine.log"
+      ],
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\empty-cwd",
+      "cwd_contains_no_game_sources": true,
+      "duration_s": 163.016,
+      "exit_code": 0,
+      "status": "PASS",
+      "checks": 11071,
+      "failed_assertions": 0,
+      "engine_diagnostics": [],
+      "ledger": {
+        "ledger_rows": 1000,
+        "checked_unique_rows_and_entire_id_range": true,
+        "row_status_and_wound_from_facts": true,
+        "all_captor_values_checked": true,
+        "total_entered": 507,
+        "replacements": 7,
+        "terminal_categories": {
+          "alive": 246,
+          "not_spawned": 493,
+          "withdrawn": 250,
+          "wounded": 11
+        },
+        "observed_capture_candidates": 0,
+        "positive_capture": "NOT_OBSERVED"
+      },
+      "summary": {
+        "damaging_hits": 41,
+        "delegate": "field-captain-0",
+        "downed": 7,
+        "entered": 507,
+        "exit_facts": 250,
+        "first_reinforcement_tick": 1200,
+        "hits_by_role": {
+          "archer": 24,
+          "mounted_archer": 17
+        },
+        "horses": 100,
+        "integrity_hash": "e04087362498c6dbfc3a917748c4503e13f86104322223a6995fbd97e167700f",
+        "layout": "shield_wall",
+        "mix": {
+          "archer": 150,
+          "cavalry": 50,
+          "infantry": 250,
+          "mounted_archer": 50
+        },
+        "mounted_roles": [
+          "cavalry",
+          "mounted_archer"
+        ],
+        "observed_travel_m": {
+          "archer": 90.0003204345703,
+          "cavalry": 93.4164352416992,
+          "infantry": 105.869071960449,
+          "mounted_archer": 89.3208770751953
+        },
+        "outcomes": {
+          "alive": 246,
+          "not_spawned": 493,
+          "withdrawn": 250,
+          "wounded": 11
+        },
+        "routes": 4,
+        "scenario": "march",
+        "shots": 164,
+        "shots_by_role": {
+          "archer": 96,
+          "mounted_archer": 68
+        },
+        "targets": [
+          5,
+          6
+        ],
+        "ticks": 3503,
+        "verified_capture_candidates": 0,
+        "winners": [
+          1
+        ],
+        "wound_flags": 11
+      },
+      "log_sha256": "86d4348ec24d49a9a884c3e9b94e6c6fe47a691ba5653de0d5a56798bd253cb9",
+      "last_progress_before_terminal": {
+        "tick": 3362,
+        "distinct_targets": 2,
+        "shots": 159,
+        "damage": 41,
+        "downed": 7,
+        "sourced_capture_candidates": 0,
+        "entered": 507
+      },
+      "probe_sha256": "4b5db2e7621227e5b6af3437e3e31f8a77b0e80695c49560e86f1251dbd34a89",
+      "server_sha256": "e23e7b8a6143af5c570e73a9f7c309598cbcd0d496e4ca3180f8bb6ef8c4274e",
+      "result_validation": {
+        "unique_slots_0_through_999": "PASS",
+        "all_slot_status_against_COM_and_RULES_observations": "PASS",
+        "wound_flags": "PASS",
+        "1000_captor_values_and_team_validity": "PASS",
+        "player_withdrawal_only_and_winner_team_1": "PASS",
+        "canonical_result_digest_and_server_match_receipt": "PASS",
+        "specific_capture_expectation": "PASS",
+        "note": "Reaching FIELD_STAGE result requires reaching all the slot-loop assertions and the final win/digest/receipt assertions. Scenario-specific capture expectation is a non-aborting check reported separately."
+      }
+    },
+    {
+      "name": "assault",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--main-pack",
+        "D:\\work\\game\\recollection\\out\\p2-field-final\\31eca5d8dfdf-40b6dfa0026a\\server.pck",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\frozen-probe.gd",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\assault-engine.log",
+        "--",
+        "--assault"
+      ],
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\empty-cwd",
+      "cwd_contains_no_game_sources": true,
+      "duration_s": 264.844,
+      "exit_code": 1,
+      "status": "FAIL",
+      "checks": 15091,
+      "failed_assertions": 1,
+      "engine_diagnostics": [
+        "FAIL assault produced a positive capture candidate"
+      ],
+      "ledger": {
+        "ledger_rows": 1000,
+        "checked_unique_rows_and_entire_id_range": true,
+        "row_status_and_wound_from_facts": true,
+        "all_captor_values_checked": true,
+        "total_entered": 517,
+        "replacements": 17,
+        "terminal_categories": {
+          "alive": 216,
+          "not_spawned": 483,
+          "withdrawn": 250,
+          "wounded": 51
+        },
+        "observed_capture_candidates": 0,
+        "positive_capture": "NOT_OBSERVED"
+      },
+      "summary": {
+        "damaging_hits": 120,
+        "delegate": "field-captain-0",
+        "downed": 17,
+        "entered": 517,
+        "exit_facts": 250,
+        "first_reinforcement_tick": 1200,
+        "hits_by_role": {
+          "archer": 53,
+          "cavalry": 7,
+          "infantry": 6,
+          "mounted_archer": 54
+        },
+        "horses": 100,
+        "integrity_hash": "f92c40efe4f1f93ad482c8d7d32a3913767e2035b575e8e4ba3eeeccf446cee1",
+        "layout": "shield_wall",
+        "mix": {
+          "archer": 150,
+          "cavalry": 50,
+          "infantry": 250,
+          "mounted_archer": 50
+        },
+        "mounted_roles": [
+          "cavalry",
+          "mounted_archer"
+        ],
+        "observed_travel_m": {
+          "archer": 103.121658325195,
+          "cavalry": 93.4174575805664,
+          "infantry": 102.741218566895,
+          "mounted_archer": 96.6059951782227
+        },
+        "outcomes": {
+          "alive": 216,
+          "not_spawned": 483,
+          "withdrawn": 250,
+          "wounded": 51
+        },
+        "routes": 15,
+        "scenario": "assault",
+        "shots": 606,
+        "shots_by_role": {
+          "archer": 368,
+          "mounted_archer": 238
+        },
+        "targets": [
+          5,
+          6
+        ],
+        "ticks": 5503,
+        "verified_capture_candidates": 0,
+        "winners": [
+          1
+        ],
+        "wound_flags": 51
+      },
+      "log_sha256": "27b43b51c41824eb496a11b03c2287e0ed750488d0fd8a928a01f22ced1707b4",
+      "last_progress_before_terminal": {
+        "tick": 5282,
+        "distinct_targets": 2,
+        "shots": 534,
+        "damage": 115,
+        "downed": 17,
+        "sourced_capture_candidates": 0,
+        "entered": 517
+      },
+      "probe_sha256": "4b5db2e7621227e5b6af3437e3e31f8a77b0e80695c49560e86f1251dbd34a89",
+      "server_sha256": "e23e7b8a6143af5c570e73a9f7c309598cbcd0d496e4ca3180f8bb6ef8c4274e",
+      "result_validation": {
+        "unique_slots_0_through_999": "PASS",
+        "all_slot_status_against_COM_and_RULES_observations": "PASS",
+        "wound_flags": "PASS",
+        "1000_captor_values_and_team_validity": "PASS",
+        "player_withdrawal_only_and_winner_team_1": "PASS",
+        "canonical_result_digest_and_server_match_receipt": "PASS",
+        "specific_capture_expectation": "FAIL",
+        "note": "Reaching FIELD_STAGE result requires reaching all the slot-loop assertions and the final win/digest/receipt assertions. Scenario-specific capture expectation is a non-aborting check reported separately."
+      }
+    }
+  ],
+  "status": "FAIL",
+  "not_run": [
+    "Graphical performance and human controls are outside this server PCK QA."
+  ],
+  "scope": "Only the observed battle facts and per-slot outcomes; a positive lower-level fixture is not substituted for a missing full-size capture.",
+  "small_natural_capture": {
+    "source_commit": "31eca5d8dfdfd7ba8932586e9658b0db51d7799a",
+    "archive_sha256": "2923e33f73e1cff24a034f23e0b98258909a7ce6a09a57ea720424836a390bd0",
+    "probe_sha256": "0404cf94a0236dd0a889d201760bee4bbc056dcec82401403a79bbf229a110b0",
+    "suite": "small real 3-slot natural capture, fresh committed game sources, test harness adds no production overlays",
+    "cases": [
+      {
+        "case": "cold-import",
+        "exit": 0,
+        "status": "PASS",
+        "summary": {},
+        "command": [
+          "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--path",
+          "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\capture-source\\game",
+          "--log-file",
+          "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\cold-import-engine.log",
+          "--import"
+        ],
+        "duration_s": 5.953,
+        "log_sha256": "1c33a3abe15cecc8eb65aeb149eaba6119b65080d6d9c17d280efff299f9f815",
+        "log": "out\\p2-qa\\phase-final-pck\\cold-import.log"
+      },
+      {
+        "case": "natural-capture",
+        "exit": 0,
+        "status": "PASS",
+        "summary": {
+          "player_hits": 12,
+          "slots": [
+            {
+              "captor_team_key": null,
+              "end_status": "alive",
+              "source_slot_id": 0,
+              "wounded": false,
+              "xp": 12
+            },
+            {
+              "captor_team_key": 0,
+              "end_status": "wounded",
+              "source_slot_id": 1,
+              "wounded": true,
+              "xp": 0
+            },
+            {
+              "captor_team_key": null,
+              "end_status": "wounded",
+              "source_slot_id": 2,
+              "wounded": true,
+              "xp": 0
+            }
+          ],
+          "tick": 293,
+          "winners": [
+            0
+          ]
+        },
+        "command": [
+          "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--path",
+          "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\capture-source\\game",
+          "--log-file",
+          "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\natural-capture-engine.log",
+          "--script",
+          "res://tests/p2/field/capture.gd"
+        ],
+        "duration_s": 1.11,
+        "log_sha256": "a159fadf91abc03b522dc12233863c8a5281b32250c54a9434b919e1b7a5392c",
+        "log": "out\\p2-qa\\phase-final-pck\\natural-capture.log"
+      }
+    ],
+    "status": "PASS"
+  },
+  "conclusions": {
+    "server_pck_acceptance_status": "FAIL",
+    "full_scale_ledger_status": "PASS",
+    "previous_4371_failure": "NOT_REPRODUCED: assault advanced past 4371 and finalized.",
+    "independent_small_real_capture_status": "PASS",
+    "sources_separate": "Cold dedicated server PCK for both thousand-slot trajectories; clean Git archive and the separate frozen small scenario for its real COM/AI positive capture and wounded uncaptured reinforcement.",
+    "graphical_performance_and_manual_gates": "NOT_RUN by this independent server-package and terminal-ledger verification."
+  }
+}

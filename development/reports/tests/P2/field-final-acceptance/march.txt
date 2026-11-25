@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_STAGE progress tick=240 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=480 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=720 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=961 seen_targets=1 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=1201 seen_targets=1 shots=17 hits=9 downed=3 captured_candidates=0 entered=503
+FIELD_STAGE progress tick=1441 seen_targets=1 shots=32 hits=17 downed=4 captured_candidates=0 entered=504
+FIELD_STAGE progress tick=1682 seen_targets=2 shots=34 hits=17 downed=4 captured_candidates=0 entered=504
+FIELD_STAGE progress tick=1922 seen_targets=2 shots=81 hits=41 downed=7 captured_candidates=0 entered=507
+FIELD_STAGE progress tick=2162 seen_targets=2 shots=102 hits=41 downed=7 captured_candidates=0 entered=507
+FIELD_STAGE progress tick=2402 seen_targets=2 shots=120 hits=41 downed=7 captured_candidates=0 entered=507
+FIELD_STAGE progress tick=2642 seen_targets=2 shots=135 hits=41 downed=7 captured_candidates=0 entered=507
+FIELD_STAGE progress tick=2882 seen_targets=2 shots=154 hits=41 downed=7 captured_candidates=0 entered=507
+FIELD_STAGE progress tick=3122 seen_targets=2 shots=154 hits=41 downed=7 captured_candidates=0 entered=507
+FIELD_STAGE progress tick=3362 seen_targets=2 shots=159 hits=41 downed=7 captured_candidates=0 entered=507
+FIELD_STAGE {"damaging_hits":41,"delegate":"field-captain-0","downed":7,"entered":507,"exit_facts":250,"first_reinforcement_tick":1200,"hits_by_role":{"archer":24,"mounted_archer":17},"horses":100,"integrity_hash":"e04087362498c6dbfc3a917748c4503e13f86104322223a6995fbd97e167700f","layout":"shield_wall","mix":{"archer":150,"cavalry":50,"infantry":250,"mounted_archer":50},"mounted_roles":["cavalry","mounted_archer"],"observed_travel_m":{"archer":90.0003204345703,"cavalry":93.4164352416992,"infantry":105.869071960449,"mounted_archer":89.3208770751953},"outcomes":{"alive":246,"not_spawned":493,"withdrawn":250,"wounded":11},"routes":4,"scenario":"march","shots":164,"shots_by_role":{"archer":96,"mounted_archer":68},"targets":[5,6],"ticks":3503,"verified_capture_candidates":0,"winners":[1],"wound_flags":11}
+FIELD_ACCEPTANCE checks=11071 failures=0

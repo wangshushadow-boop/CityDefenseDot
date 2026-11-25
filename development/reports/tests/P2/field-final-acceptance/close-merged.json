@@ -1,0 +1,37 @@
+{
+  "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488",
+  "command": "Godot --headless --path game --script res://tests/p2/field/close_mixed.gd",
+  "import_exit": 0,
+  "exit": 0,
+  "checks": 7112,
+  "summary": {
+    "captured_slots": [
+      73
+    ],
+    "downed": 1,
+    "entered": 501,
+    "first_reinforcement_tick": 2040,
+    "hits": 22,
+    "horses": 100,
+    "mix": {
+      "archer": 150,
+      "cavalry": 50,
+      "infantry": 250,
+      "mounted_archer": 50
+    },
+    "outcomes": {
+      "alive": 250,
+      "not_spawned": 499,
+      "withdrawn": 250,
+      "wounded": 1
+    },
+    "routes": 4,
+    "scenario": "close_mixed_80_columns",
+    "shots": 45,
+    "ticks": 2041,
+    "winner": [
+      1
+    ]
+  },
+  "stdout_sha256": "0045374a2d89ec9281c84d21e955e789bac6b1470c4998e447ab4d8f4858d4fa"
+}

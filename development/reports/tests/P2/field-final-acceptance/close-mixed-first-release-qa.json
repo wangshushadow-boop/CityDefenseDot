@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "checks": 7109,
+  "failures": 0,
+  "diagnostics": [],
+  "command": [
+    "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+    "--headless",
+    "--main-pack",
+    "D:\\work\\game\\recollection\\out\\p2-field-final\\31eca5d8dfdf-40b6dfa0026a\\server.pck",
+    "--script",
+    "D:\\work\\game\\recollection\\out\\p2-qa\\phase-close-mixed\\load_case.gd",
+    "--log-file",
+    "D:\\work\\game\\recollection\\out\\p2-qa\\phase-close-mixed\\engine.log",
+    "--",
+    "D:\\work\\game\\recollection\\out\\p2-qa\\phase-close-mixed\\qa-scripts.zip",
+    "4b5db2e7621227e5b6af3437e3e31f8a77b0e80695c49560e86f1251dbd34a89",
+    "3de46f9b957bb17b01c01db4ee78d68b3c6afe756e7aa0ecf9d40c0dca81a02e"
+  ],
+  "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\phase-close-mixed\\empty-cwd",
+  "cwd_empty_before_and_after": true,
+  "git_commit": "31eca5d8dfdfd7ba8932586e9658b0db51d7799a",
+  "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "server_sha256": "e23e7b8a6143af5c570e73a9f7c309598cbcd0d496e4ca3180f8bb6ef8c4274e",
+  "scripts": {
+    "run.gd": "4b5db2e7621227e5b6af3437e3e31f8a77b0e80695c49560e86f1251dbd34a89",
+    "close_mixed.gd": "3de46f9b957bb17b01c01db4ee78d68b3c6afe756e7aa0ecf9d40c0dca81a02e"
+  },
+  "extra_archive_files": [
+    "tests/p2/field/run.gd",
+    "tests/p2/field/close_mixed.gd"
+  ],
+  "scope": "The two frozen test scripts are mounted on the unchanged release server PCK. The close scenario uses the public map marker data at +/-3.25 m and 80 deployment columns. Its positive capture covers this configuration. The earlier unchanged default and assault reports apply to stock map data.",
+  "summary": {
+    "captured_slots": [
+      73
+    ],
+    "downed": 1,
+    "entered": 501,
+    "first_reinforcement_tick": 2040,
+    "hits": 22,
+    "horses": 100,
+    "mix": {
+      "archer": 150,
+      "cavalry": 50,
+      "infantry": 250,
+      "mounted_archer": 50
+    },
+    "outcomes": {
+      "alive": 250,
+      "not_spawned": 499,
+      "withdrawn": 250,
+      "wounded": 1
+    },
+    "routes": 4,
+    "scenario": "close_mixed_80_columns",
+    "shots": 45,
+    "ticks": 2041,
+    "winner": [
+      1
+    ]
+  },
+  "ledger_conservation_and_positive_capture": true,
+  "duration_seconds": 95.938,
+  "stdout": "stdout.log",
+  "stdout_sha256": "208a6e38570a514f3228a428f277bea006c0c3ca8a57e16f5299b3029a7eda01",
+  "loader_sha256": "33c570d2f43c64ea4132b49ca51f1ffc9410952b3753975baea05b9780386b76"
+}

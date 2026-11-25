@@ -1,0 +1,176 @@
+{
+  "500": {
+    "base": {
+      "auth": {
+        "P50_ms": 40.373,
+        "P95_ms": 49.992
+      },
+      "index": {
+        "P50_ms": 2.783,
+        "P95_ms": 3.3
+      },
+      "think": {
+        "P50_ms": 13.331,
+        "P95_ms": 16.067
+      },
+      "hud": {
+        "P50_ms": 0.993,
+        "P95_ms": 1.092
+      },
+      "input": {
+        "P50_ms": 0.812,
+        "P95_ms": 0.985
+      },
+      "visual": {
+        "P50_ms": 7.809,
+        "P95_ms": 9.521
+      },
+      "stable": 0,
+      "captures": [
+        "fff09276291d6092ce2748ce1fe4d91a747086bb1d73f311cc50b9e3faca0ea7",
+        "293ee1c16636b351b548bd5c52daa231aa8f1f81358f2c190fc6c269e6fd296d",
+        "eb5a420952b35c8cca465fcfd9f1640d902f39e53c22caacc2d733604bbfee7c",
+        "e5057bbf5417d83fd1804f38447d9de7dfed37431fb64798e9c5cd4fcb419fb9",
+        "939ecd71f6f9d0915378e4734b60d79d29a11830df940fd0ecbcc1031c222327",
+        "4b649724433ffa43e6a74df9a1ceca8a54dd67ca48b66a212ce6d72b60a42ec9",
+        "86b7941225c2d501c48747a4ecf79a1c1f001d4e349d0b74127fd07c6a9e5c8f",
+        "f83421c2c5bdd616bc58734e2c4959a9d2b5f93e85c61ab1b05cbdbd2fd2bea0"
+      ],
+      "contact": 977,
+      "shots": 52,
+      "hits": 34,
+      "downed": 3,
+      "last_tick": 1225
+    },
+    "candidate": {
+      "auth": {
+        "P50_ms": 37.051,
+        "P95_ms": 48.927
+      },
+      "index": {
+        "P50_ms": 0.665,
+        "P95_ms": 0.83
+      },
+      "think": {
+        "P50_ms": 11.014,
+        "P95_ms": 13.259
+      },
+      "hud": {
+        "P50_ms": 0.973,
+        "P95_ms": 1.097
+      },
+      "input": {
+        "P50_ms": 0.806,
+        "P95_ms": 0.964
+      },
+      "visual": {
+        "P50_ms": 7.572,
+        "P95_ms": 8.841
+      },
+      "stable": 124,
+      "captures": [
+        "fff09276291d6092ce2748ce1fe4d91a747086bb1d73f311cc50b9e3faca0ea7",
+        "293ee1c16636b351b548bd5c52daa231aa8f1f81358f2c190fc6c269e6fd296d",
+        "eb5a420952b35c8cca465fcfd9f1640d902f39e53c22caacc2d733604bbfee7c",
+        "e5057bbf5417d83fd1804f38447d9de7dfed37431fb64798e9c5cd4fcb419fb9",
+        "939ecd71f6f9d0915378e4734b60d79d29a11830df940fd0ecbcc1031c222327",
+        "4b649724433ffa43e6a74df9a1ceca8a54dd67ca48b66a212ce6d72b60a42ec9",
+        "86b7941225c2d501c48747a4ecf79a1c1f001d4e349d0b74127fd07c6a9e5c8f",
+        "f83421c2c5bdd616bc58734e2c4959a9d2b5f93e85c61ab1b05cbdbd2fd2bea0"
+      ],
+      "contact": 977,
+      "shots": 52,
+      "hits": 34,
+      "downed": 3,
+      "last_tick": 1225
+    },
+    "matching_checkpoints": 8
+  },
+  "1000": {
+    "base": {
+      "auth": {
+        "P50_ms": 79.705,
+        "P95_ms": 104.014
+      },
+      "index": {
+        "P50_ms": 5.582,
+        "P95_ms": 12.582
+      },
+      "think": {
+        "P50_ms": 28.162,
+        "P95_ms": 39.039
+      },
+      "hud": {
+        "P50_ms": 1.814,
+        "P95_ms": 2.022
+      },
+      "input": {
+        "P50_ms": 1.55,
+        "P95_ms": 1.848
+      },
+      "visual": {
+        "P50_ms": 17.09,
+        "P95_ms": 18.283
+      },
+      "stable": 0,
+      "captures": [
+        "cb2c1a1fddbc20c28220bba6e178b67f12946c392cf84331517f17ad53941111",
+        "994e94ef4983548bbee7cb7d42b99470c70225e07151e78da14bb7658bb111cb",
+        "9755e68df221fb7f59e5915dffe40cd6f5196c838f6fa6b146c0b0c02c943376",
+        "153ccdbd8a3eeebb04e8274e779aeab9916a578a4177925737c7f35630149e55",
+        "591b04a1d5ce8abb0ee87e0bc1fe5e7874ac2b24830966d461205622cc92f71e",
+        "f38599bc50a16f69bf9e9b5191412ba33a1d71401874f865d538b1253fda1ea1",
+        "2e62b5f6242ea743f4b0884fc01a71f2492740d90dc7708824b6d1c8b7b1f47f",
+        "0a52f245c6c26b1ae4fb878a01050abf01a16bed0d479f4c40fb1ab30d695225"
+      ],
+      "contact": 917,
+      "shots": 53,
+      "hits": 29,
+      "downed": 6,
+      "last_tick": 1165
+    },
+    "candidate": {
+      "auth": {
+        "P50_ms": 75.995,
+        "P95_ms": 100.129
+      },
+      "index": {
+        "P50_ms": 1.443,
+        "P95_ms": 12.228
+      },
+      "think": {
+        "P50_ms": 24.102,
+        "P95_ms": 37.008
+      },
+      "hud": {
+        "P50_ms": 1.815,
+        "P95_ms": 2.07
+      },
+      "input": {
+        "P50_ms": 1.543,
+        "P95_ms": 1.893
+      },
+      "visual": {
+        "P50_ms": 17.069,
+        "P95_ms": 18.859
+      },
+      "stable": 121,
+      "captures": [
+        "cb2c1a1fddbc20c28220bba6e178b67f12946c392cf84331517f17ad53941111",
+        "994e94ef4983548bbee7cb7d42b99470c70225e07151e78da14bb7658bb111cb",
+        "9755e68df221fb7f59e5915dffe40cd6f5196c838f6fa6b146c0b0c02c943376",
+        "153ccdbd8a3eeebb04e8274e779aeab9916a578a4177925737c7f35630149e55",
+        "591b04a1d5ce8abb0ee87e0bc1fe5e7874ac2b24830966d461205622cc92f71e",
+        "f38599bc50a16f69bf9e9b5191412ba33a1d71401874f865d538b1253fda1ea1",
+        "2e62b5f6242ea743f4b0884fc01a71f2492740d90dc7708824b6d1c8b7b1f47f",
+        "0a52f245c6c26b1ae4fb878a01050abf01a16bed0d479f4c40fb1ab30d695225"
+      ],
+      "contact": 917,
+      "shots": 53,
+      "hits": 29,
+      "downed": 6,
+      "last_tick": 1165
+    },
+    "matching_checkpoints": 8
+  }
+}

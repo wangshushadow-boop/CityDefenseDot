@@ -273,7 +273,9 @@
         "development/reports/tasks/P1-MIS-RT-PORTS-001.md",
         "development/reports/stages/P1.md",
         "development/reports/tests/P2/mission-002.txt",
-        "development/reports/tests/P2/field-revision-final.txt"
+        "development/reports/tests/P2/field-revision-final.txt",
+        "development/reports/stages/P2.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json"
       ]
     },
     "COM": {
@@ -325,7 +327,9 @@
         "T-BAI-04"
       ],
       "evidence": [
-        "development/reports/tests/P2/ai-001.txt"
+        "development/reports/tests/P2/ai-001.txt",
+        "development/reports/stages/P2.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json"
       ]
     },
     "BAI-T": {
@@ -395,7 +399,9 @@
       "evidence": [
         "development/reports/tasks/P2-MOV-001.md",
         "development/reports/tests/P2/movement-002.txt",
-        "development/reports/tests/P2/field-sweep-final.txt"
+        "development/reports/tests/P2/field-sweep-final.txt",
+        "development/reports/stages/P2.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json"
       ]
     },
     "SIEGE": {
@@ -498,7 +504,9 @@
       ],
       "evidence": [
         "development/reports/tests/P2/visuals-001.txt",
-        "development/reports/tests/P2/merged-mounted-visual.txt"
+        "development/reports/tests/P2/merged-mounted-visual.txt",
+        "development/reports/stages/P2.md",
+        "development/reports/tests/P2/field-benchmark-final/summary.json"
       ]
     },
     "AUD": {
@@ -711,7 +719,10 @@
       "evidence": [
         "development/reports/tasks/P1-TEST-HARNESS-001.md",
         "development/reports/stages/P1.md",
-        "development/reports/tests/P2/field-benchmark-validation.txt"
+        "development/reports/tests/P2/field-benchmark-validation.txt",
+        "development/reports/stages/P2.md",
+        "development/reports/tests/P2/field-regressions-final.json",
+        "development/reports/tests/P2/field-final-acceptance/close-mixed.json"
       ]
     },
     "CI": {

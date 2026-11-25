@@ -1,0 +1,75 @@
+{
+  "source_commit": "31eca5d8dfdfd7ba8932586e9658b0db51d7799a",
+  "archive_sha256": "2923e33f73e1cff24a034f23e0b98258909a7ce6a09a57ea720424836a390bd0",
+  "probe_sha256": "0404cf94a0236dd0a889d201760bee4bbc056dcec82401403a79bbf229a110b0",
+  "suite": "small real 3-slot natural capture, fresh committed game sources, test harness adds no production overlays",
+  "cases": [
+    {
+      "case": "cold-import",
+      "exit": 0,
+      "status": "PASS",
+      "summary": {},
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\capture-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\cold-import-engine.log",
+        "--import"
+      ],
+      "duration_s": 5.953,
+      "log_sha256": "1c33a3abe15cecc8eb65aeb149eaba6119b65080d6d9c17d280efff299f9f815",
+      "log": "out\\p2-qa\\phase-final-pck\\cold-import.log"
+    },
+    {
+      "case": "natural-capture",
+      "exit": 0,
+      "status": "PASS",
+      "summary": {
+        "player_hits": 12,
+        "slots": [
+          {
+            "captor_team_key": null,
+            "end_status": "alive",
+            "source_slot_id": 0,
+            "wounded": false,
+            "xp": 12
+          },
+          {
+            "captor_team_key": 0,
+            "end_status": "wounded",
+            "source_slot_id": 1,
+            "wounded": true,
+            "xp": 0
+          },
+          {
+            "captor_team_key": null,
+            "end_status": "wounded",
+            "source_slot_id": 2,
+            "wounded": true,
+            "xp": 0
+          }
+        ],
+        "tick": 293,
+        "winners": [
+          0
+        ]
+      },
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\capture-source\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\phase-final-pck\\natural-capture-engine.log",
+        "--script",
+        "res://tests/p2/field/capture.gd"
+      ],
+      "duration_s": 1.11,
+      "log_sha256": "a159fadf91abc03b522dc12233863c8a5281b32250c54a9434b919e1b7a5392c",
+      "log": "out\\p2-qa\\phase-final-pck\\natural-capture.log"
+    }
+  ],
+  "status": "PASS"
+}

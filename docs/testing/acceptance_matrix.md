@@ -7,7 +7,7 @@
 | AT-01 | 新建原创角色，招募、交易、旅行、接任务、野战、结算 | 状态闭环，经验/名望/货物/资金一次更新 | MOD-01/02, WLD, CHR, ARM, ECO, BAT, QST | NOT_RUN |
 | AT-02 | 创建两支家族队伍，组成军团，集结后围城 | 粮耗/凝聚力、器械、驻军、援军与撤围正常 | ARM, POL, SAI, SGE | NOT_RUN |
 | AT-03 | 城镇被围堵后开放商路 | 供应减少→价格/饥荒变化→恢复，库存及账本一致 | ECO, SET, WLD | NOT_RUN |
-| AT-04 | 500 人混合野战，玩家切换阵型、目标与委派 | 命令响应、兵种行为、路径、士气、胜负与预算达标 | BAT, COM, BAI, NAV | NOT_RUN |
+| AT-04 | 500 人混合野战，玩家切换阵型、目标与委派 | 命令响应、兵种行为、路径、士气、胜负与预算达标 | BAT, COM, BAI, NAV | FAIL [整场实测](../../development/reports/tests/P2/field-benchmark-final/summary.json) |
 | AT-05 | 千人军队分波次参战，部分未生成，玩家撤退 | 每个来源槽位有唯一结果，伤亡/俘虏正确 | BAT-02/03, ARM-05 | NOT_RUN |
 | AT-06 | 城门、城墙缺口、攻城塔多路径攻防 | AI 可操作器械和通行，胜负回写领地与损坏 | SGE, NAV, SET | NOT_RUN |
 | AT-07 | 城镇访问、锦标赛、盗匪藏身处、监狱任务 | 各模式共享角色/战斗，奖励/临时装备不串域 | MIS, QST, COM | NOT_RUN |
@@ -27,3 +27,9 @@
 ## P1 切片证据
 
 AT-10 的四个结算写入断点覆盖进程终止、冷启动和重发，账户及回执恰好提交一次。AT-15 已覆盖同一世界 50 次 Mission 切换、写盘与重载，完整八小时压力尚未执行。完整场景状态见上表。[运行记录](../../development/reports/tests/P1/session/README.md)
+
+## P2 实战验收
+
+AT-04 的编队指挥、伤亡和逐人战果有实测，整场性能未达，完整场景为 FAIL。AT-05 已执行千人兵源、分波、未入场、撤退和逐槽战果，战役名册及俘虏持久回写留待后续阶段。
+
+[行军与突击的逐槽对照](../../development/reports/tests/P2/field-final-acceptance/results.json) · [阶段报告](../../development/reports/stages/P2.md)
