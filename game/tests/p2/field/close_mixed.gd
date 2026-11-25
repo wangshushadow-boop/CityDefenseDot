@@ -87,7 +87,11 @@ func battle() -> void:
 		if not check(is_same(row.captor_team_key,captor),"winning attacker from actual downed generation"):return
 		if captor!=null:capture_slots.append(id)
 		totals[expected]=totals.get(expected,0)+1
-	check(known_slots.size()>500 and seen.size()==1000 and not capture_slots.is_empty() and result.outcome=="withdrawn" and result.winner_team_keys==[1] and hits>0,"genuine mixed force reinforcement and capture")
+	var entered := known_slots.size()
+	check(first_wave_tick>1 and first_wave_tick<tick and entered>500 and entered<1000,"reinforcements arrived before withdrawal with reserves still waiting")
+	check(seen.size()==1000 and totals.get("not_spawned",0)==1000-entered,"every unentered source remained in reserve")
+	check(totals.get("withdrawn",0)>0 and result.outcome=="withdrawn" and result.winner_team_keys==[1],"living soldiers withdrew and the other side won")
+	check(not capture_slots.is_empty() and totals.get("wounded",0)>=capture_slots.size() and hits>0,"the victor captured genuinely wounded soldiers")
 	var unsigned:=result.duplicate()
 	unsigned.erase("integrity_hash")
 	var digest:=Canon.hash_value(unsigned)
