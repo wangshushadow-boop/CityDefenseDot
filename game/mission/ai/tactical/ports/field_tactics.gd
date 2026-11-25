@@ -21,6 +21,28 @@ var _pending_job := {}
 var _busy := false
 var _closed := false
 
+var _checkpoint := {}
+
+func begin_tick() -> Dictionary:
+	if _busy or _closed or not _checkpoint.is_empty():
+		return R.fail("InvalidState","tick_transaction")
+	_checkpoint = {"instance":_instance, "plan":_plan, "candidate":_candidate, "stamp":_stamp, "job":_pending_job}
+	return R.ok()
+
+func commit_tick() -> void:
+	if not _busy:
+		_checkpoint = {}
+
+func rollback_tick() -> void:
+	if _busy or _closed or _checkpoint.is_empty():
+		return
+	_instance = _checkpoint.instance
+	_plan = _checkpoint.plan
+	_candidate = _checkpoint.candidate
+	_stamp = _checkpoint.stamp
+	_pending_job = _checkpoint.job
+	_checkpoint = {}
+
 func _init(scope: String, team: Variant, may_command: Callable, evaluate_site: Callable, current_view: Callable, admit_job: Callable) -> void:
 	_scope = scope
 	_team = team
@@ -33,6 +55,7 @@ func view() -> Dictionary:
 	return _plan.duplicate(true)
 
 func close() -> void:
+	_checkpoint = {}
 	_closed = true
 	_plan = {}
 	_candidate = {}
