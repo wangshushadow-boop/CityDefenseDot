@@ -19,6 +19,41 @@ var _pending: Array = []
 var _tick := 0
 var _in_callback := false
 
+var _checkpoint := {}
+var _changed_jobs := {}
+
+func begin_tick() -> Dictionary:
+	if _in_callback or not _checkpoint.is_empty():
+		return R.fail("InvalidState","tick_transaction")
+	var groups := {}
+	for id in _groups:
+		var saved: Dictionary = _groups[id].duplicate()
+		saved.queued = saved.queued.duplicate()
+		saved.layout_state = saved.layout_state.fork()
+		groups[id] = saved
+	_checkpoint = {"groups":groups, "ids":_used_ids.duplicate(), "members":_membership.duplicate(),
+		"sequences":_last_sequence.duplicate(), "history":_history.duplicate(), "pending":_pending.duplicate(), "tick":_tick}
+	return R.ok()
+
+func commit_tick() -> void:
+	if not _in_callback:
+		_checkpoint = {}
+		_changed_jobs.clear()
+
+func rollback_tick() -> void:
+	if _in_callback or _checkpoint.is_empty():
+		return
+	for entry in _changed_jobs.values():
+		entry.job.states = entry.states
+	_groups = _checkpoint.groups
+	_used_ids = _checkpoint.ids
+	_membership = _checkpoint.members
+	_last_sequence = _checkpoint.sequences
+	_history = _checkpoint.history
+	_pending = _checkpoint.pending
+	_tick = _checkpoint.tick
+	commit_tick()
+
 func _init(mission_id: String, authenticate: Callable, reachable: Callable) -> void:
 	_mission = mission_id
 	_auth = authenticate
@@ -239,6 +274,8 @@ func issue_order(order: Dictionary, context: Variant, expected_control_revision:
 		"source_revision":_groups[order.parameters.source_id].control_revision if uses_source else -1}
 	for id in order.formation_ids:
 		_mark(job, id, "Pending", "")
+	if not _checkpoint.is_empty() and is_same(records,_checkpoint.history.get(actor)):
+		records = records.duplicate()
 	records[order.order_id] = job
 	_history[actor] = records
 	_last_sequence[actor] = order.client_sequence
@@ -246,6 +283,10 @@ func issue_order(order: Dictionary, context: Variant, expected_control_revision:
 	return R.ok(receipt.duplicate(true))
 
 func _mark(job: Dictionary, id: int, state: String, reason: String) -> void:
+	if not _checkpoint.is_empty():
+		var key := [job.order.issuer_id, job.order.order_id]
+		if not _changed_jobs.has(key):
+			_changed_jobs[key] = {"job":job,"states":job.states.duplicate()}
 	job.states[id] = {"order_id":job.order.order_id, "issuer_id":job.order.issuer_id,
 		"state":state, "reason":reason, "tick":_tick}
 

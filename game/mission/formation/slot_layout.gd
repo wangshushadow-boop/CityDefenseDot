@@ -13,6 +13,12 @@ var _projecting := false
 func _init() -> void:
 	_slots.make_read_only()
 
+func fork() -> RefCounted:
+	var next = get_script().new()
+	next._span = _span
+	next._slots = _slots
+	return next
+
 func slots() -> Array:
 	return _slots
 
