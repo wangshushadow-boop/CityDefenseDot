@@ -3,6 +3,7 @@ extends RefCounted
 const R = preload("res://contracts/result.gd")
 const V = preload("res://contracts/values.gd")
 const C = preload("res://contracts/canonical.gd")
+const Hero = preload("res://campaign/character/hero_domain.gd")
 const Inventory = preload("res://shared/inventory/inventory.gd")
 const HOLDER := "@chr.holder/"
 const ITEM := "@chr.gear/"
@@ -67,6 +68,16 @@ static func _declared_item(id: String) -> bool:
 	return id.begins_with(ITEM) and parts.size() == 3 and V.typed_id(parts[0]+"/"+parts[1],"hero") and ITEMS.has(parts[2])
 
 
+static func holder_name(id: String) -> bool:
+	var parts := id.trim_prefix(HOLDER).split("/")
+	return id.begins_with(HOLDER) and parts.size() >= 3 and V.typed_id(parts[0]+"/"+parts[1],"hero")
+
+
+static func item_name(id: String) -> bool:
+	var parts := id.trim_prefix(ITEM).split("/")
+	return id.begins_with(ITEM) and parts.size() >= 3 and V.typed_id(parts[0]+"/"+parts[1],"hero")
+
+
 static func _layout(layout: Dictionary, hero_id: String) -> Dictionary:
 	var profiles := {}
 	var bag: Array = []
@@ -92,8 +103,7 @@ static func _reason(hero: Dictionary, kind: String, profile: String, slot: Strin
 	var spec: Dictionary = ITEMS[kind]
 	if spec.slot != slot or (profile == "civil" and not spec.get("civil",false)):
 		return "该物品不适用此装备槽"
-	var level: int = hero.get("skills",{}).get(spec.get("skill",""),{}).get("level",0)
-	if level < spec.get("minimum",0):
+	if spec.has("minimum") and Hero.effective_skill(hero,spec.skill) < spec.minimum:
 		return "骑术需达到 %d 级" % spec.minimum
 	if spec.get("needs_mount",false) and equipped.get("mount","") == "":
 		return "需要先装备坐骑"
@@ -142,13 +152,21 @@ static func view(inv: Variant, hero: Dictionary) -> Dictionary:
 			if not id.is_empty():
 				if not _declared_item(id):
 					return R.fail("InvalidState","character.item")
-				items[id] = _row(id)
+				var equipped_item := _row(id)
+				var reason := _remove_reason(slot,worn.profiles[profile])
+				if reason.is_empty() and not inv.available(_slot(hero.id,profile,slot),{"kind":"instance","id":id}).get("value",0):
+					reason = "物品已预留"
+				if hero.get("life_status") not in ["Healthy","Wounded"] and hero.has("life_status"):
+					reason = "当前人物状态不能换装"
+				equipped_item["remove_reason"] = reason
+				equipped_item["removable"] = reason.is_empty()
+				items[id] = equipped_item
 	for id in worn.bag:
 		var kind: String = id.get_file()
 		if not _declared_item(id):
 			return R.fail("InvalidState","character.item")
 		var row := _row(id)
-		row.options = []
+		row["options"] = []
 		for profile in SLOTS:
 			if row.slot not in SLOTS[profile]:
 				continue
@@ -291,6 +309,8 @@ static func validate(inv: Variant, heroes: Dictionary) -> Dictionary:
 		return R.ok() if heroes.is_empty() else R.fail("InvalidState","character.inventory")
 	if not inv is Inventory:
 		return R.fail("InvalidArgument","inventory")
+	if heroes.is_empty():
+		return R.fail("InvalidState","character.missing_repository") if inv.has_holder_endowment(HOLDER+"hero/") else R.ok()
 	var layout: Dictionary = inv.instance_layout()
 	var expected := {}
 	var issued := {}
@@ -302,7 +322,7 @@ static func validate(inv: Variant, heroes: Dictionary) -> Dictionary:
 		for kind in _kit(hero):
 			issued[_item_id(hero.id,kind)] = hero.id
 	for holder in layout.locations:
-		if holder.begins_with(HOLDER) and expected.get(holder) != layout.locations[holder]:
+		if holder_name(holder) and expected.get(holder) != layout.locations[holder]:
 			return R.fail("InvalidState","character.gear_holder")
 	for holder in expected:
 		if not layout.locations.has(holder):
@@ -312,7 +332,7 @@ static func validate(inv: Variant, heroes: Dictionary) -> Dictionary:
 			return R.fail("InvalidState","character.missing_item")
 	for item in layout.owners:
 		var holder: String = layout.owners[item]
-		if not item.begins_with(ITEM) and not holder.begins_with(HOLDER):
+		if not item_name(item) and not holder_name(holder):
 			continue
 		if not issued.has(item) or not expected.has(holder):
 			return R.fail("InvalidState","character.item_origin")
