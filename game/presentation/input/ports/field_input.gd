@@ -108,6 +108,15 @@ func set_control(actor_handle: Dictionary, control_revision: int) -> Dictionary:
 		_weapon_slot = 0
 	return R.ok()
 
+## Seed the next input sample from the controlled actor's horizontal facing.
+func align_look(heading: Vector3) -> Dictionary:
+	if _stepping or _mission.is_empty() or _actor.is_empty():
+		return R.fail("InvalidState","control")
+	if not heading.is_finite() or Vector2(heading.x,heading.z).length_squared() <= 0.000001:
+		return R.fail("InvalidArgument","heading")
+	_yaw = V.yaw_microradians(atan2(-heading.x,-heading.z)).value
+	return R.ok(Vector2(_yaw,_pitch)*0.000001)
+
 ## Let a quick tap wait for COM's legal release phase. Timing and equipment
 ## remain owned by the authority, including when local controls are remapped.
 func bind_combat_view(read_actor: Callable) -> void:
@@ -505,7 +514,8 @@ func step(tick: int) -> Dictionary:
 	if _mode == "battle" and not _actor.is_empty():
 		var stick := _look_stick().limit_length(1.0)
 		var delta: Vector2 = _mouse * _profile.options.mouse_sensitivity + stick * _profile.options.stick_sensitivity
-		_yaw = roundi(wrapf(_yaw*0.000001-delta.x*0.000001,-PI,PI)*1000000)
+		if delta.x != 0:
+			_yaw = V.yaw_microradians((_yaw-delta.x)*0.000001).value
 		_pitch = clampi(_pitch+roundi(delta.y)*(1 if _profile.options.invert_y else -1),-1570796,1570796)
 		if delta != Vector2.ZERO: inputs.append({"actor_handle":_actor,"yaw":_yaw,"pitch":_pitch})
 		if not _attack.is_empty() and not inputs.any(func(i): return i.has("input_phase")):
