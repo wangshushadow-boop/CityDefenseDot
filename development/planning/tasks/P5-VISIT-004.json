@@ -30,7 +30,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+  "base_commit": "f25ba232b8a1456c8c107ce2fb0a61a290788cbb",
   "worktree": "D:\\work\\game\\recollection",
   "scope": "访问鉴权、会话与存储故障重试",
   "non_goals": [
@@ -39,5 +39,5 @@
   "acceptance": [
     "按 ADR-018 复验所属端口及任务、奖励与既有战役的一致性。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

@@ -1,5 +1,9 @@
 # recollection 项目状态
 
+**P5 柳溪庄人物委托已交付。** 在沙盒「人物 → 领地治理 → 拜访庄署」选择在任总督，可交谈、核账、交差和领取管理经验。生产提交 `4cfca39`。独立 QA 在正式 PCK 通过 404 项、冷源码通过 550 项。P5 整体为 PARTIAL，P4 总督和 P3 人物可继续游玩，P2 性能延期。[阶段验收](development/reports/stages/P5-estate-visit.md) · [任务记录](development/reports/tasks/P5-estate-visit.md) · [实际会面截图](development/reports/tests/P5/estate-visit/estate-audience.png)
+
+## P4 治理基线
+
 **P4 家族总督已交付。** 在沙盒「人物 → 领地治理」接管柳溪庄，可任免家人、预览次日变化并休养查看实际账簿。生产版本 `0ca0100`。独立 QA 在打包客户端验证 158 项，含旧档和实机操作。P4 整体为 PARTIAL，P3 人物已验收，P2 性能延期。[验收报告](development/reports/stages/P4-governor.md) · [实机界面](development/reports/tests/P4/governor/governor.png) · [测试与证据](development/reports/tests/P4/governor/acceptance.json)
 
 ## P3 人物基线

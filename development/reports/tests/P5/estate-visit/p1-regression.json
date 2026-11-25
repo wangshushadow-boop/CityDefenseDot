@@ -1,0 +1,126 @@
+{
+  "build": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
+  "seed": 241124,
+  "results": [
+    {
+      "suite": "application",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 20.344,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-APP-01 / AT-10-SLICE PASS\nT-APP-02 PASS\nT-APP-03 PASS\nT-APP-04-SLICE PASS\nAPP_CHECKS errors=0"
+    },
+    {
+      "suite": "bootstrap",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.641,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-BOOT-01 PASS\nT-BOOT-02 PASS\nT-BOOT-03 PASS\nBOOT-BOUNDARIES PASS\nBOOT_CHECKS errors=0"
+    },
+    {
+      "suite": "campaign",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 1.015,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nPASS T-CAMP-01\nPASS T-CAMP-03\nPASS P1-CAMP-FREEZE-TRADE\nPASS P1-CAMP-20-SEED-SLICE"
+    },
+    {
+      "suite": "content",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.344,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-INF-CONTENT-01-SLICE PASS\nT-INF-CONTENT-02 PASS\nT-INF-CONTENT-03-SLICE PASS\nT-INF-CONTENT-04 PASS\nP1-CONTENT errors=0 base_hash=fe76080c6789c8173d3b9010b8ebcb41b0757b806f443b827c4417af5b65a579"
+    },
+    {
+      "suite": "contracts",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.453,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-CON-01 PASS\nT-CON-02 PASS\nT-CON-03 PASS\nP1-CON-BOUNDARY PASS\nCON_CHECKS errors=0"
+    },
+    {
+      "suite": "core",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.344,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-CORE-01 PASS digest=ef175296753b220567b00855d3cf0cfffe3e0308de4b842d37c9184442705f15\nT-CORE-02 PASS\nT-CORE-03 PASS\nCORE failures=0"
+    },
+    {
+      "suite": "definitions",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.25,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-DEF-01 PASS\nT-DEF-02 PASS\nT-DEF-03-SLICE PASS\nP1-DEF-BOUNDARIES PASS"
+    },
+    {
+      "suite": "engine",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.469,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-INF-ENGINE-01 PASS\nT-INF-ENGINE-02 PASS hits=[{ \"query_index\": 0, \"entity_handle\": \"near\", \"fraction_ppm\": 399000, \"point_mm\": [-2020, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 0, \"entity_handle\": \"far\", \"fraction_ppm\": 699000, \"point_mm\": [3980, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"near\", \"fraction_ppm\": 395508, \"point_mm\": [-2020, 1000, 150], \"normal_ppm\": [-572602, 0, 819833], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"far\", \"fraction_ppm\": 695313, \"point_mm\": [3980, 1000, 150], \"normal_ppm\": [-593542, 0, 804803], \"region\": \"body\" }]\nP1-ENGINE-HEADLESS-SLICE PASS\nT-INF-ENGINE-04 PASS loops=50 median_us=3632 p95_us=4039 max_us=4081\nENGINE failures=0"
+    },
+    {
+      "suite": "harness",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.25,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP1-HARNESS PASS seed=241124 draws=64 digest=93453943df5953ac2377dfc52d48f4a49ecf3907db418701e0ae55059fdb20e2"
+    },
+    {
+      "suite": "inventory",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 1.188,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nPASS T-INV-01\nPASS T-INV-02\nPASS T-INV-03\nPASS T-INV-04\nPASS P1-INV-PAGES"
+    },
+    {
+      "suite": "mission",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.859,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373\nT-MIS-RT-03 PASS switches=50 live_nodes=1\nMISSION failures=0"
+    },
+    {
+      "suite": "persistence",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 27.641,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nPERSIST_RACE [\"Unavailable\", \"ok\"]\nT-PERSIST-02 PASS\nT-PERSIST-01_SLICE PASS\nT-PERSIST-03_SLICE PASS\nT-PERSIST-04 NOT_RUN (requires real 50 Mission transitions)\nPERSIST_CHECKS errors=0 child_processes=27"
+    },
+    {
+      "suite": "ports",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.25,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nPASS T-CON-02\nPASS P1-PORTS-V1"
+    },
+    {
+      "suite": "rules",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.266,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-SHRULE-01 PASS\nT-SHRULE-02 PASS\nT-SHRULE-03 PASS\nP1-RULES-RNG PASS"
+    },
+    {
+      "suite": "telemetry",
+      "seed": 241124,
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.172,
+      "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP1-TELEM-BOUNDARY PASS T-TELEM-01/02/03 slices"
+    }
+  ]
+}

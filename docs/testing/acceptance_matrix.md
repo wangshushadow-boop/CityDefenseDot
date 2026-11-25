@@ -40,3 +40,5 @@ AT-04 的编队指挥、伤亡和逐人战果有实测，整场性能未达，�
 AT-01 的人物创建及 AT-09 的退休、继承人控制权、装备归属和冷载续玩已有成品证据。完整的跨队伍、封地、任务与战役流程沿用表中原状态。[人物工作包验收](../../development/reports/stages/P3-character.md)
 
 P4-GOV 已通过独立专项 T-GOV-01、T-GOV-02，覆盖总督资格与领地日结。AT-02、AT-03 等完整场景保留原验收状态。[总督专项报告](../../development/reports/stages/P4-governor.md)
+
+P5-VISIT 的 NPC 名册、时限庄簿委托、交差与单次领奖通过 T-VISIT-01/02；AT-01、AT-07、AT-09 等仍按完整场景验收。[庄署人物验收](../../development/reports/stages/P5-estate-visit.md)

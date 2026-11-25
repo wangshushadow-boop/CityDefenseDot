@@ -29,7 +29,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+  "base_commit": "e60d49aff760d01b888a5501145a8d209a14b2e2",
   "worktree": "D:\\work\\game\\recollection",
   "scope": "正式沙盒受信入口",
   "non_goals": [
@@ -38,5 +38,5 @@
   "acceptance": [
     "按 ADR-018 复验所属端口及任务、奖励与既有战役的一致性。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

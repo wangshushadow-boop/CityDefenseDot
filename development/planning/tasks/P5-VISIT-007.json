@@ -29,7 +29,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "f8c9bdb3f693a8bea840d8a30330c2f1d8f27aae",
+  "base_commit": "3de3b24db8021f442fee0cd1b4d799824f5e20f5",
   "worktree": "D:\\work\\game\\recollection",
   "scope": "复用现有领地日报核验，提供开庄日和历史官员能力上界。",
   "non_goals": [
@@ -38,5 +38,5 @@
   "acceptance": [
     "按 ADR-018 复验所属端口及任务、奖励与既有战役的一致性。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

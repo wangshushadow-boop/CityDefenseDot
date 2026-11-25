@@ -22,7 +22,8 @@
         "development/reports/stages/P1.md",
         "development/reports/tests/P2/field-desktop-final.txt",
         "development/reports/stages/P3-character.md",
-        "development/reports/stages/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/stages/P5-estate-visit.md"
       ]
     },
     "CORE": {
@@ -84,7 +85,8 @@
         "development/reports/stages/P1.md",
         "development/reports/tests/P2/merged-field-session.txt",
         "development/reports/stages/P3-character.md",
-        "development/reports/stages/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/stages/P5-estate-visit.md"
       ]
     },
     "CAMP": {
@@ -107,7 +109,8 @@
         "development/reports/tasks/P1-CAMP-RUNTIME-001.md",
         "development/reports/stages/P1.md",
         "development/reports/stages/P3-character.md",
-        "development/reports/stages/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/stages/P5-estate-visit.md"
       ]
     },
     "WORLD": {
@@ -133,7 +136,8 @@
       ],
       "evidence": [
         "development/reports/stages/P3-character.md",
-        "development/reports/stages/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/stages/P5-estate-visit.md"
       ]
     },
     "CLAN": {
@@ -223,7 +227,8 @@
         "T-GOV-02"
       ],
       "evidence": [
-        "development/reports/stages/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/stages/P5-estate-visit.md"
       ]
     },
     "POL": {
@@ -244,14 +249,19 @@
       "evidence": []
     },
     "QUEST": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P5-QUEST",
         "P7-POLISH",
         "P5-VISIT"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-VISIT-01",
+        "T-VISIT-02"
+      ],
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md"
+      ]
     },
     "SAI": {
       "status": "NOT_IMPLEMENTED",
@@ -499,7 +509,8 @@
       "verified_test_ids": [],
       "evidence": [
         "development/reports/stages/P3-character.md",
-        "development/reports/stages/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/stages/P5-estate-visit.md"
       ]
     },
     "INPUT": {

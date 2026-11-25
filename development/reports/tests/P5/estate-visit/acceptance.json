@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "game_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
+  "date": "2026-11-25",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "results": [
+    {
+      "id": "T-VISIT-01",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "拜访实际总督，查询近况、按首个日结核账、签结后原承办人领取管理经验。",
+      "evidence": [
+        "qa.json",
+        "qa-evidence.zip",
+        "review.md",
+        "integration.zip"
+      ]
+    },
+    {
+      "id": "T-VISIT-02",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "真实 P4 旧档、换任、逾期、奖励丢失确认重放、历史账簿跨域及规范摘要校验。",
+      "evidence": [
+        "qa.json",
+        "qa-evidence.zip",
+        "review-evidence.zip",
+        "integration.zip"
+      ]
+    }
+  ],
+  "not_run": [
+    "Physical gamepad and screen reader",
+    "Subjective human playtest",
+    "Full P5 or free-roaming town missions",
+    "P2 battle performance"
+  ]
+}

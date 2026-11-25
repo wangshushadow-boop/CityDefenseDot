@@ -2597,14 +2597,17 @@
       "child_ids": []
     },
     "P5-VISIT": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
       "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": [
         "P5-VISIT-001",
@@ -2617,86 +2620,107 @@
       ]
     },
     "P5-VISIT-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p5_quest",
       "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "e8a9740bcde9dde1ac33914105875e6a24c287af",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": []
     },
     "P5-VISIT-002": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "base_commit": "e3310754cf33d3b73128f1b94f7a63032e889eb9",
+      "candidate_commit": "f25ba232b8a1456c8c107ce2fb0a61a290788cbb",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": []
     },
     "P5-VISIT-003": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p5_runtime",
       "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "6d3d421c5bda96ccf57968cf1022ed919312fb01",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": []
     },
     "P5-VISIT-004": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "base_commit": "f25ba232b8a1456c8c107ce2fb0a61a290788cbb",
+      "candidate_commit": "a1d52cc03ddeb393623581315bd17aec3316579a",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": []
     },
     "P5-VISIT-005": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "base_commit": "e60d49aff760d01b888a5501145a8d209a14b2e2",
+      "candidate_commit": "98d9f668ddc8a6e1719a5950f73fdc91c17b26e1",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": []
     },
     "P5-VISIT-006": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "p5_ui",
       "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "6f64ac0f29d1156ade549723ca4866da48e172d4",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": []
     },
     "P5-VISIT-007": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "f8c9bdb3f693a8bea840d8a30330c2f1d8f27aae",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "base_commit": "3de3b24db8021f442fee0cd1b4d799824f5e20f5",
+      "candidate_commit": "81c41152bb0e653c3f869fdc0719690f8e808a4a",
+      "integrated_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
       "evidence": [
-        "docs/architecture/decisions/ADR-018-estate-visit.md",
-        "development/planning/P5-estate-visit.md"
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
       ],
       "child_ids": []
     }
@@ -13740,6 +13764,422 @@
         "development/planning/P5-estate-visit.md"
       ],
       "commit": "f8c9bdb3f693a8bea840d8a30330c2f1d8f27aae"
+    },
+    {
+      "task_id": "P5-VISIT-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "领域、会话与客户端真实运行",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "e8a9740bcde9dde1ac33914105875e6a24c287af"
+    },
+    {
+      "task_id": "P5-VISIT-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "最终 Git 冷归档及独立复验",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "领域、会话与客户端真实运行",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "f25ba232b8a1456c8c107ce2fb0a61a290788cbb"
+    },
+    {
+      "task_id": "P5-VISIT-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "最终 Git 冷归档及独立复验",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-003",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "领域、会话与客户端真实运行",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "6d3d421c5bda96ccf57968cf1022ed919312fb01"
+    },
+    {
+      "task_id": "P5-VISIT-003",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "最终 Git 冷归档及独立复验",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-004",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "领域、会话与客户端真实运行",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "a1d52cc03ddeb393623581315bd17aec3316579a"
+    },
+    {
+      "task_id": "P5-VISIT-004",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "最终 Git 冷归档及独立复验",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-005",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "领域、会话与客户端真实运行",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "98d9f668ddc8a6e1719a5950f73fdc91c17b26e1"
+    },
+    {
+      "task_id": "P5-VISIT-005",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "最终 Git 冷归档及独立复验",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-006",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "领域、会话与客户端真实运行",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "6f64ac0f29d1156ade549723ca4866da48e172d4"
+    },
+    {
+      "task_id": "P5-VISIT-006",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "最终 Git 冷归档及独立复验",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-007",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "领域、会话与客户端真实运行",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "81c41152bb0e653c3f869fdc0719690f8e808a4a"
+    },
+    {
+      "task_id": "P5-VISIT-007",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "最终 Git 冷归档及独立复验",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "完成受控集成并复验历史账簿与领取故障",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:29:11+08:00",
+      "reason": "完成受控集成并复验历史账簿与领取故障",
+      "evidence": [
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-003",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-003",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-004",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-004",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-005",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-005",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-006",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-006",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-007",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "独立 QA 及复审通过，核验最终候选与路径",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
+    },
+    {
+      "task_id": "P5-VISIT-007",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:31:55+08:00",
+      "reason": "成品与真实 P4 旧档通过，主 Agent 验收",
+      "evidence": [
+        "development/reports/stages/P5-estate-visit.md",
+        "development/reports/tasks/P5-estate-visit.md",
+        "development/reports/tests/P5/estate-visit/acceptance.json",
+        "development/reports/tests/P5/estate-visit/qa.json",
+        "development/reports/tests/P5/estate-visit/review.md"
+      ],
+      "commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99"
     }
   ]
 }

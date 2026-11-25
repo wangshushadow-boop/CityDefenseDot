@@ -1,0 +1,386 @@
+{
+  "status": "PASS",
+  "task": "P5-VISIT-QA",
+  "test_ids": [
+    "T-VISIT-01",
+    "T-VISIT-02"
+  ],
+  "game_commit": "4cfca392e3ff9cfaaf0cc239d268da2a4e464e99",
+  "client_sha256": "0729f3668416faebab5e30494d1a343349b3f16d68c087ca051f11760d9232ad",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "display": "Windows Vulkan Forward+ RTX 3090",
+  "screenshot": {
+    "width": 1280,
+    "height": 800,
+    "sha256": "3d17f6b3753b06add13f7be5f03ead1e79ce52f612a329771368cb6c9468fea2"
+  },
+  "old_build": "9b975cc1b1809b620415aa64101e74df8b351252",
+  "old_pack_sha256": "d687de84a3f05aa9234b504ea56fa3b6282159a954098fe19bd145034950826c",
+  "old_governor": {
+    "character_hash": "bbda9ce88e20d3027bda4ca134e8708c489b4a43f5ed7c7b6639c208267fb924",
+    "clan": "clan/b2561938-3e5f-4433-be37-dd6696d2243c",
+    "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+    "day": 3,
+    "governance_hash": "b4ebe51efd95591de3133d56993c4cd57920cdcc3270afcd39d9295dcffd920e",
+    "heir": "hero/a954db89-7b51-4c02-9f34-9fccc94d031b",
+    "hero": "hero/0300698e-2324-40d2-9be5-d1e383bb85df",
+    "inventory_hash": "6709896a4190da7beb2ac7a9e3b563766e929da1346ca3851ba10d81b2cd6e8e",
+    "minute": 4320,
+    "receipt_hash": "16e7ec2a509cae112360b860eb361b853f8015e361b73520aa1a385074a88970",
+    "settlement": "settlement/be431770-8bab-41a0-bd5a-fd4a47cb069d",
+    "world": "world/98ee50f3-c94e-4222-9540-4407e4f6632a",
+    "old_pack_sha256": "d687de84a3f05aa9234b504ea56fa3b6282159a954098fe19bd145034950826c",
+    "save_sha256": "a45c6807677b77e96be1f1cea4a0083a32cc1c31ca2b052b2ae4187e33660882"
+  },
+  "old_colliding_event": {
+    "character_hash": "eafa85b8ab44f2c3bfbdee57037ca6c9b9373d5273b4b3088a58afc52241fca4",
+    "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+    "governance_hash": "b4ebe51efd95591de3133d56993c4cd57920cdcc3270afcd39d9295dcffd920e",
+    "inventory_hash": "6709896a4190da7beb2ac7a9e3b563766e929da1346ca3851ba10d81b2cd6e8e",
+    "old_source": "quest/liuxi/hero/0300698e-2324-40d2-9be5-d1e383bb85df/3",
+    "receipt_hash": "ad26e3dd371d73facbb204428908805b583fe7fb48168305c5fec792301a47c9",
+    "receipts": 7,
+    "world": "world/98ee50f3-c94e-4222-9540-4407e4f6632a",
+    "sha256": "9885ff7d33fc211124e7ea6cf376e19be09371257a5ae147e05fd9bf11406dab"
+  },
+  "results": [
+    {
+      "label": "legacy-client",
+      "group": "old_build",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 13,
+      "log": "legacy-client.log"
+    },
+    {
+      "label": "legacy-reopen",
+      "group": "old_build",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 9,
+      "log": "legacy-reopen.log"
+    },
+    {
+      "label": "legacy-collision",
+      "group": "old_build",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 11,
+      "log": "legacy-collision.log"
+    },
+    {
+      "label": "final-success",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 57,
+      "log": "final-success.log"
+    },
+    {
+      "label": "final-expiry",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 36,
+      "log": "final-expiry.log"
+    },
+    {
+      "label": "final-succession",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 29,
+      "log": "final-succession.log"
+    },
+    {
+      "label": "final-unclaimed",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 36,
+      "log": "final-unclaimed.log"
+    },
+    {
+      "label": "final-disappear",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 32,
+      "log": "final-disappear.log"
+    },
+    {
+      "label": "final-away",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 41,
+      "log": "final-away.log"
+    },
+    {
+      "label": "final-collision",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 57,
+      "log": "final-collision.log"
+    },
+    {
+      "label": "final-estate_commission",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 71,
+      "log": "final-estate_commission.log"
+    },
+    {
+      "label": "final-visit_people",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 17,
+      "log": "final-visit_people.log"
+    },
+    {
+      "label": "final-estate_campaign",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 42,
+      "log": "final-estate_campaign.log"
+    },
+    {
+      "label": "final-visit_session",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 16,
+      "log": "final-visit_session.log"
+    },
+    {
+      "label": "final-estate_desktop",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 114,
+      "log": "final-estate_desktop.log"
+    },
+    {
+      "label": "final-history",
+      "group": "cold_source",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 2,
+      "log": "final-history.log"
+    },
+    {
+      "label": "packed-success",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 57,
+      "log": "packed-success.log"
+    },
+    {
+      "label": "packed-expiry",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 36,
+      "log": "packed-expiry.log"
+    },
+    {
+      "label": "packed-succession",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 29,
+      "log": "packed-succession.log"
+    },
+    {
+      "label": "packed-unclaimed",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 36,
+      "log": "packed-unclaimed.log"
+    },
+    {
+      "label": "packed-disappear",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 32,
+      "log": "packed-disappear.log"
+    },
+    {
+      "label": "packed-away",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 41,
+      "log": "packed-away.log"
+    },
+    {
+      "label": "packed-collision",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 57,
+      "log": "packed-collision.log"
+    },
+    {
+      "label": "packed-estate_desktop",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 114,
+      "log": "packed-estate_desktop.log"
+    },
+    {
+      "label": "packed-history",
+      "group": "release_pck",
+      "status": "PASS",
+      "exit_code": 0,
+      "assertions": 2,
+      "log": "packed-history.log"
+    }
+  ],
+  "assertions_by_group": {
+    "old_build": 33,
+    "cold_source": 550,
+    "release_pck": 404
+  },
+  "measured": {
+    "accepted": 3,
+    "actor": "hero/0300698e-2324-40d2-9be5-d1e383bb85df",
+    "answered": 6,
+    "correct_tenths": 4,
+    "issuer": "hero/a954db89-7b51-4c02-9f34-9fccc94d031b",
+    "ledger": 4,
+    "skill_after": {
+      "focus": 0,
+      "level": 4,
+      "xp": 21
+    },
+    "skill_before": {
+      "focus": 0,
+      "level": 2,
+      "xp": 0
+    },
+    "source": "quest/liuxi/hero/0300698e-2324-40d2-9be5-d1e383bb85df/3"
+  },
+  "initial_failures": [
+    {
+      "label": "pre-away",
+      "exit_code": 1,
+      "counts": [
+        [
+          "32",
+          "1"
+        ]
+      ],
+      "log": "pre-away.log"
+    },
+    {
+      "label": "pre-collision",
+      "exit_code": 1,
+      "counts": [
+        [
+          "32",
+          "1"
+        ]
+      ],
+      "log": "pre-collision.log"
+    },
+    {
+      "label": "pre-success",
+      "exit_code": 1,
+      "counts": [
+        [
+          "32",
+          "1"
+        ]
+      ],
+      "log": "pre-success.log"
+    },
+    {
+      "label": "pre-unclaimed",
+      "exit_code": 1,
+      "counts": [
+        [
+          "29",
+          "1"
+        ]
+      ],
+      "log": "pre-unclaimed.log"
+    },
+    {
+      "label": "pre2-collision",
+      "exit_code": 1,
+      "counts": [
+        [
+          "41",
+          "2"
+        ]
+      ],
+      "log": "pre2-collision.log"
+    },
+    {
+      "label": "pre2-success",
+      "exit_code": 1,
+      "counts": [
+        [
+          "41",
+          "2"
+        ]
+      ],
+      "log": "pre2-success.log"
+    },
+    {
+      "label": "pre3-success",
+      "exit_code": 1,
+      "counts": [
+        [
+          "41",
+          "2"
+        ]
+      ],
+      "log": "pre3-success.log"
+    },
+    {
+      "label": "source-history",
+      "exit_code": 1,
+      "counts": [
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "log": "source-history.log"
+    },
+    {
+      "label": "source-visit_session",
+      "exit_code": 1,
+      "counts": [
+        [
+          "9",
+          "1"
+        ]
+      ],
+      "log": "source-visit_session.log"
+    }
+  ],
+  "notes": [
+    "Cold source and packed suites overlap; do not add the groups as unique coverage.",
+    "A first-pass QA driver used a StringName answer key instead of a JSON string. Corrected and retained pre-*.log/JSON.",
+    "Early CHR reward published a StringName key and could not be encoded; corrected in f25ba23, before/after evidence retained.",
+    "Initial f8c9bdb application test used an invalid answer key. The real UI and independent driver used a string. Corrected and rerun in final candidate.",
+    "Initial f8c9bdb accepted a historical ledger containing an impossible 500000 governor bonus once the latest settlement ledger moved on; tested again on source and PCK."
+  ],
+  "not_run": [
+    "Physical gamepad and screen reader",
+    "Subjective human playtest",
+    "Full P5 or free-roaming town missions",
+    "P2 battle performance"
+  ]
+}

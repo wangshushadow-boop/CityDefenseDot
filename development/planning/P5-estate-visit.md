@@ -14,3 +14,5 @@
 QUEST、CAMP、UI 独立工作树，CHR、APP、BOOT 由主 Agent 接入。并行编写后在同一候选集成，独立 QA 使用上版物理存档、窗口及客户端包；独立审查验证真实来源、人物失效与冷恢复。
 
 终审发现长期保存的首日账可能与相邻日及能力上界冲突。增列 P5-VISIT-007，由 SET 提供同一历史账簿核验，CAMP 接入开庄日/能力投影。原有六项的写权限保持不变。
+
+七项任务的实际候选、独立审查退修与终验已记录。[任务与集成](../reports/tasks/P5-estate-visit.md) · [验收](../reports/stages/P5-estate-visit.md)
