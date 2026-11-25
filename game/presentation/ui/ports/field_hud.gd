@@ -16,7 +16,7 @@ var _language := "zh"
 var _large := false
 var _contrast := false
 var _captions := true
-var _capture := false
+var _capture := ""
 var _confirm := false
 var _draft := {}
 var _receipt := ""
@@ -81,7 +81,8 @@ func _ready() -> void:
 	_button("Large","large",_setting.bind("large"),_prefs,true)
 	_button("Contrast","contrast",_setting.bind("contrast"),_prefs,true)
 	_button("Subtitles","captions",_setting.bind("captions"),_prefs,true)
-	_button("Rebind","rebind",func(): _capture = true; _render(),_prefs)
+	_picker("Binding","binding",_prefs)
+	_button("Rebind","rebind",func(): _capture = _chosen("Binding"); _render(),_prefs)
 	resized.connect(_resize)
 	_appearance()
 	_resize()
@@ -107,9 +108,9 @@ func _button(id: String, caption: String, cb: Callable, parent: Container = null
 	_labels[id] = caption
 	return b
 
-func _picker(id: String, caption: String) -> void:
+func _picker(id: String, caption: String, parent: Container = null) -> void:
 	var row := HBoxContainer.new()
-	_body.add_child(row)
+	(parent if parent != null else _body).add_child(row)
 	var label := Label.new()
 	row.add_child(label)
 	_nodes[id+"Label"] = label
@@ -163,7 +164,7 @@ func _invalidate() -> void:
 	_draft.clear()
 	_choice_cache.clear()
 	_confirm = false
-	_capture = false
+	_capture = ""
 	_receipt = ""
 	if is_node_ready(): _render()
 
@@ -187,7 +188,7 @@ func refresh() -> Dictionary:
 		return R.fail("StaleVersion","hud_view")
 	if _view.get("phase") != v.phase:
 		_confirm = false
-		_capture = false
+		_capture = ""
 		_draft.clear()
 	_view = v.duplicate(true)
 	_revision = v.revision
@@ -337,8 +338,14 @@ func _render() -> void:
 	var fb: Dictionary = _view.get("command_feedback",{})
 	var msg := _receipt
 	if fb.get("ok") == false: msg = _error_text(fb)
-	_text("Receipt",_w("key") if _capture else msg)
-	_nodes.Rebind.visible = _view.get("allow_rebind",false)
+	var actions: Array = _view.get("bindable_actions",[]).filter(func(a):return a is String and a != "menu")
+	var can_bind: bool = _view.get("allow_rebind",false) and not actions.is_empty()
+	if not can_bind or not actions.has(_capture): _capture = ""
+	_choices("Binding",actions,actions.map(func(a):return Words.action_name(a,_language)))
+	_nodes.BindingRow.visible = can_bind
+	_nodes.Rebind.visible = can_bind
+	if not _capture.is_empty(): _nodes.Rebind.text = _w("key")
+	_text("Receipt",_w("key")+" · "+Words.action_name(_capture,_language) if not _capture.is_empty() else msg)
 	_nodes.Large.set_pressed_no_signal(_large)
 	_nodes.Contrast.set_pressed_no_signal(_contrast)
 	_nodes.Subtitles.set_pressed_no_signal(_captions)
@@ -382,12 +389,12 @@ func _result(rules: Dictionary) -> String:
 	if typeof(res) != TYPE_DICTIONARY: res = rules.get("outcome")
 	if typeof(res) != TYPE_DICTIONARY: return ""
 	var winners: Array = res.get("winner_team_keys",[])
-	var outcome: String = res.get("outcome","")
-	var won: bool = winners.any(func(team):return is_same(team,_view.get("team_key")))
-	if outcome == "victory" and not won:
-		outcome = "defeat"
-	elif outcome == "withdrawn" and won:
-		outcome = "victory"
+	var own: Variant = _view.get("team_key")
+	var outcome := "defeat"
+	if rules.get("teams",[]).any(func(t):return is_same(t.team_key,own) and t.get("withdrawn",false)):
+		outcome = "withdrawn"
+	elif winners.any(func(team):return is_same(team,own)): outcome = "victory"
+	elif res.get("outcome")=="draw": outcome = "draw"
 	var parts := [_w(outcome)]
 	if not winners.is_empty(): parts.append(_w("winners")+" "+" / ".join(winners.map(func(t):return str(t))))
 	var counts := {}
@@ -434,7 +441,7 @@ func _appearance() -> void:
 func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree(): return
 	if event is InputEventKey and event.echo: return
-	if not _capture:
+	if _capture.is_empty():
 		var focus := get_viewport().gui_get_focus_owner()
 		if _confirm and event is InputEventKey and event.keycode == KEY_ESCAPE and event.pressed:
 			_confirm = false
@@ -451,14 +458,16 @@ func _input(event: InputEvent) -> void:
 		elif event is InputEventJoypadButton and focus != null and is_ancestor_of(focus):
 			_pad_navigation(event,focus)
 		return
-	if not event.is_pressed(): return
-	if not (event is InputEventKey or event is InputEventJoypadButton or event is InputEventMouseButton): return
+	if event is InputEventJoypadMotion:
+		if absf(event.axis_value)<0.5: return
+	elif not (event is InputEventKey or event is InputEventJoypadButton or event is InputEventMouseButton) or not event.is_pressed(): return
 	get_viewport().set_input_as_handled()
-	_capture = false
+	var action := _capture
+	_capture = ""
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
 		_render()
 		return
-	_send("rebind",{"binding":"order_hold","event":event})
+	_send("rebind",{"binding":action,"event":event})
 
 func _pad_navigation(event: InputEventJoypadButton, focus: Control) -> void:
 	var code := event.button_index

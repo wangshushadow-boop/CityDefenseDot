@@ -18,7 +18,19 @@ const WORDS := {
 	"direction":["攻向","Direction"], "up":["上","Up"], "right":["右","Right"],
 	"left":["左","Left"], "down":["下","Down"], "downed":["主将倒地","Commander down"],
 	"settings":["显示设置","Display settings"], "large":["大字号","Larger type"],
-	"contrast":["高对比","High contrast"], "captions":["字幕","Captions"], "rebind":["修改坚守键","Rebind hold"],
+	"contrast":["高对比","High contrast"], "captions":["字幕","Captions"], "rebind":["更改绑定","Change binding"],
+	"binding":["动作","Action"], "command_mode":["指挥模式","Command mode"], "attack":["攻击","Attack"],
+	"block":["格挡","Block"], "cancel_attack":["取消攻击","Cancel attack"], "sprint":["疾跑","Sprint"],
+	"crouch":["蹲伏","Crouch"], "jump":["跳跃","Jump"], "move_left":["左移","Move left"],
+	"move_right":["右移","Move right"], "move_forward":["前进","Move forward"], "move_back":["后退","Move back"],
+	"look_left":["左看","Look left"], "look_right":["右看","Look right"], "look_up":["上看","Look up"],
+	"look_down":["下看","Look down"], "equip_melee":["装备近战武器","Equip melee weapon"],
+	"equip_ranged":["装备远程武器","Equip ranged weapon"], "interact":["互动","Interact"],
+	"mount":["上马","Mount"], "dismount":["下马","Dismount"], "select_all":["选中全部","Select all"],
+	"select_prev":["上一编队","Previous formation"], "select_next":["下一编队","Next formation"],
+	"order_move":["命令移动","Order move"], "order_charge":["命令冲锋","Order charge"],
+	"order_hold":["命令坚守","Order hold"], "cycle_layout":["切换阵型","Cycle layout"],
+	"order_cancel":["取消命令","Cancel order"],
 	"key":["请按新按键（Esc 取消）","Press a new key (Esc cancels)"], "language":["English","中文"],
 	"controller":["返回战场控制 · F6","Resume field controls · F6"], "accepted":["已提交","Submitted"],
 	"queued":["已排队","Queued"], "active":["执行中","Active"], "completed":["完成","Complete"],
@@ -47,3 +59,9 @@ const WORDS := {
 static func word(key: Variant, language: String) -> String:
 	var name := str(key)
 	return WORDS[name][int(language == "en")] if WORDS.has(name) else name
+
+static func action_name(action: String, language: String) -> String:
+	var slot := action.trim_prefix("select_")
+	if action.begins_with("select_") and slot.is_valid_int():
+		return ("选择编队 " if language=="zh" else "Select formation ")+slot
+	return word(action,language)

@@ -26,6 +26,7 @@ var last_action := {}
 var sent := []
 var failures := 0
 var checks := 0
+var encounter_template := {}
 
 func _initialize() -> void:
 	run.call_deferred()
@@ -45,6 +46,7 @@ func setup() -> void:
 		zones.append({"team_key":i,"min_mm":[0,0,0],"max_mm":[1000,1000,1000]})
 	for i in 4: rows.append({"handle":{"index":i,"generation":1},"source_slot":i,"components":{"team_key":0 if i<2 else 1}})
 	var encounter := {"schema_version":1,"encounter_id":"encounter/"+UUID,"reservation_revision":1,"mode":"custom","scene_def_id":"field:scene/river_plain","ruleset_id":"field:ruleset/field_battle","rng_seed":"1234567890abcdef","environment":{},"sides":sides,"reserved_sources":[{"source_party_id":"party/"+UUID,"troop_def_id":"field:troop/infantry","hero_id":null,"count":4,"source_slot_range":[0,4],"loadout_snapshot_id":"issued"}],"battle_limit":4,"deployment_constraints":{},"siege_snapshot":null}
+	encounter_template = encounter.duplicate(true)
 	var built := RULES.build(SCOPE,encounter,zones,func(ctx,t,_a):return ctx==login and is_same(t,0),
 		func(h):return R.ok({"hp":commander_hp if h.index==0 else 90,"routing":false}),func(_h):return R.ok([0,0,0]),
 		func(h):return R.ok(rows[h.index]))
@@ -66,7 +68,7 @@ func query() -> Dictionary:
 		"targets":[2],"team_key":0,"rules":rules.view(),"selection":input.view().selection,
 		"player":{"hp":commander_hp,"ammo":4,"morale":92,"direction":"up"},"delegate_candidate":"captain",
 		"deployment_zones":[{"id":"north","position_mm":[1000,0,300]}],"target_position":point,
-		"can_withdraw":true,"allow_rebind":true,"command_feedback":input.view().feedback,"subtitle":"Cavalry!"}
+		"can_withdraw":true,"allow_rebind":true,"bindable_actions":input.profile_view().bindings.keys(),"command_feedback":input.view().feedback,"subtitle":"Cavalry!"}
 	if phase=="ended":
 		v.result = rules.view().outcome.duplicate()
 		v.result.slot_outcomes = [{"end_status":"wounded"},{"end_status":"withdrawn"}]
@@ -159,6 +161,109 @@ func screenshot(stage: String) -> void:
 	check(root.get_texture().get_image().save_png(out)==OK,"capture "+stage)
 	print("HUD snapshot ",out)
 
+func start_binding(action: String) -> void:
+	var picker := control("Binding") as OptionButton
+	for i in picker.item_count:
+		if picker.get_item_metadata(i)==action:
+			select_option("Binding",i)
+			control("Rebind").grab_focus()
+			press_key(KEY_ENTER)
+			return
+	check(false,"missing binding "+action)
+
+func key_down(code: Key) -> InputEventKey:
+	var e := InputEventKey.new()
+	e.keycode = code
+	e.physical_keycode = code
+	e.pressed = true
+	return e
+
+func remap_actions() -> void:
+	var options := []
+	var picker := control("Binding") as OptionButton
+	for i in picker.item_count: options.append(picker.get_item_metadata(i))
+	var from_input: Array = input.profile_view().bindings.keys()
+	from_input.erase("menu")
+	check(options==from_input,"all INPUT actions offered except reserved menu")
+	start_binding("attack")
+	press_key(KEY_K)
+	start_binding("move_forward")
+	press_key(KEY_I)
+	start_binding("order_hold")
+	press_key(KEY_J)
+	start_binding("order_hold")
+	pad(JOY_BUTTON_PADDLE1)
+	start_binding("move_forward")
+	press_key(KEY_ESCAPE)
+	var bindings: Dictionary = input.profile_view().bindings
+	check(bindings.attack.desktop=="k/%d/0"%KEY_K and bindings.move_forward.desktop=="k/%d/0"%KEY_I,"attack/move remaps and cancellation")
+	check(bindings.order_hold.desktop=="k/%d/0"%KEY_J and bindings.order_hold.pad=="j/%d"%JOY_BUTTON_PADDLE1,"command keyboard and gamepad remaps")
+	var restored := FieldInput.new(profile)
+	check(restored.configure(SCOPE,"player",rows[0].handle,0,func(_b):return R.ok(),func(_o,_r):return R.ok()).ok and restored.profile_view().bindings==bindings,"all bindings restored from disk")
+	check(not restored.rebind("menu",key_down(KEY_P)).ok,"menu protected by INPUT")
+	restored.handle_event(key_down(KEY_I))
+	restored.handle_event(key_down(KEY_K))
+	var intents: Array = restored.step(1).value.batch.inputs
+	check(intents.any(func(i):return i.get("input_phase")=="start") and intents.any(func(i):return i.get("desired_direction")==[0,0,-1000000] and i.speed_fraction==1.0),"restored combat and movement produce real intents")
+	restored.set_context("command")
+	restored.set_formations([0],{0:0})
+	restored.select_formations([0])
+	restored.handle_event(key_down(KEY_J))
+	var order_frame := restored.step(2)
+	check(order_frame.value.orders.size()==1 and order_frame.value.orders[0].order.order_type=="hold","restored keyboard command emitted")
+	var joy := InputEventJoypadButton.new()
+	joy.button_index = JOY_BUTTON_PADDLE1
+	joy.pressed = true
+	# Release the keyboard before exercising the same action on the gamepad.
+	var released := key_down(KEY_J)
+	released.pressed = false
+	restored.handle_event(released)
+	restored.handle_event(joy)
+	order_frame = restored.step(3)
+	check(order_frame.value.orders.size()==1 and order_frame.value.orders[0].order.order_type=="hold","restored gamepad command emitted")
+	restored.free()
+
+func three_side_result(first_leaves: bool, draw := false) -> void:
+	var teams := [0,"0",2]
+	var encounter := encounter_template.duplicate(true)
+	encounter.sides.clear()
+	encounter.battle_limit = 3
+	encounter.reserved_sources[0].count = 3
+	encounter.reserved_sources[0].source_slot_range = [0,3]
+	var exits := []
+	var entities := []
+	var hp := [90 if first_leaves else 0,90,90]
+	for i in teams.size():
+		encounter.sides.append({"team_key":teams[i],"faction_id":"river","commander_hero_id":null,"roster_allocations":[{"source_slot_range":[i,i+1]}]})
+		exits.append({"team_key":teams[i],"min_mm":[0,0,0],"max_mm":[1,1,1]})
+		entities.append({"handle":{"index":i,"generation":1},"source_slot":i,"components":{"team_key":teams[i]}})
+	var built := RULES.build(SCOPE,encounter,exits,func(who,team,_act):return is_same(who,team),
+		func(h):return R.ok({"hp":hp[h.index],"routing":false}),func(_h):return R.ok([0,0,0]))
+	check(built.ok,"three-team RULES fixture")
+	if not built.ok: return
+	var rules3: RULES = built.value
+	if first_leaves: check(rules3.request_withdrawal(0,0).ok,"A requests own retreat")
+	var ctx := {"mission_id":SCOPE,"tick":0,"entities":entities,"spawned_slots":[0,1,2]}
+	var stepped := rules3.stage(ctx,{"mission_id":SCOPE,"source_tick":1})
+	check(stepped.ok and stepped.value.outcome==null,"other two sides continue")
+	rules3.commit()
+	if first_leaves:
+		hp[1] = 0
+		if draw: hp[2] = 0
+		ctx.entities = entities.slice(1)
+	else:
+		check(rules3.request_withdrawal("0","0").ok,"B requests own retreat after A fell")
+	ctx.tick = 1
+	check(rules3.stage(ctx,{"mission_id":SCOPE,"source_tick":2}).ok,"actual terminal tick")
+	rules3.commit()
+	var end := rules3.view()
+	check(end.outcome.outcome==("draw" if draw else ("victory" if first_leaves else "withdrawn")),"global cause from RULES")
+	for i in teams.size():
+		var v := {"scope_id":SCOPE,"revision":2,"phase":"ended","team_key":teams[i],"rules":end}
+		hud.mount(SCOPE,func():return R.ok(v),submit,prefs)
+		var expected: Array = ["Withdrawn","Draw","Draw"] if draw else (["Withdrawn","Defeat","Victory"] if first_leaves else ["Defeat","Withdrawn","Victory"])
+		check(control("Result").text.get_slice(" · ",0)==expected[i],"personal result "+str(i)+" "+expected[i])
+
 func run() -> void:
 	create_timer(20.0).timeout.connect(func():printerr("FAIL HUD timeout");quit(1))
 	if DisplayServer.get_name()=="headless" and root.size==Vector2i(64,64): root.size = Vector2i(960,600)
@@ -230,13 +335,7 @@ func run() -> void:
 	await click("Contrast")
 	await click("Subtitles")
 	check(control("Title").text=="Field command" and not control("Captions").visible,"locale captions")
-	control("Rebind").grab_focus()
-	press_key(KEY_ENTER)
-	press_key(KEY_J)
-	check(input.profile_view().bindings.order_hold.desktop=="k/%d/0"%KEY_J,"real remap from keyboard")
-	var restored := FieldInput.new(profile)
-	check(restored.configure(SCOPE,"player",{},0,func(_b):return R.ok(),func(_o,_r):return R.ok()).ok and restored.profile_view().bindings.order_hold.desktop=="k/%d/0"%KEY_J,"new INPUT reads saved binding")
-	restored.free()
+	remap_actions()
 	var old := hud
 	hud = HUD.new()
 	root.add_child(hud)
@@ -280,6 +379,9 @@ func run() -> void:
 	check(phase=="ended" and control("Leave").visible and control("Result").text.contains("Winners 1") and control("Result").text.contains("Wounded ×1"),"RULES result and supplied slot outcomes")
 	await click("Leave")
 	check(last_action.action=="leave","exit route")
+	three_side_result(true)
+	three_side_result(false)
+	three_side_result(true,true)
 	hud.release_scope()
 	check(not hud.visible and not hud.refresh().ok,"end lifecycle")
 	hud.free()
