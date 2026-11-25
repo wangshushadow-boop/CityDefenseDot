@@ -371,6 +371,11 @@ static func _visit_facts(characters: Dictionary, estate: Dictionary, world_id: S
 	var facts := Characters.visit_people(characters)
 	facts["world_id"] = world_id
 	facts["day"] = day
+	facts["opened_day"] = estate.opened_day
+	for person: Dictionary in estate.candidates:
+		var member: Dictionary = facts.members[person.id]
+		member["stewardship"] = person.stewardship
+		member["leadership"] = person.leadership
 	facts["settlement_id"] = estate.settlement_id if estate.established else null
 	facts["governor_id"] = estate.governor_id
 	facts["last_report"] = estate.last_report
