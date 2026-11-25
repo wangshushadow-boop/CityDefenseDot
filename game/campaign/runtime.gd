@@ -6,6 +6,7 @@ const C = preload("res://contracts/canonical.gd")
 const Core = preload("res://core/runtime.gd")
 const Inventory = preload("res://shared/inventory/inventory.gd")
 const Characters = preload("res://campaign/character/ports/characters.gd")
+const Governance = preload("res://campaign/settlement/ports/governance.gd")
 const DAY := 1440
 const PHASES := ["production", "ledger_validation", "market", "supply_payroll",
 	"territory", "politics_ai", "day_end"]
@@ -16,6 +17,7 @@ const METADATA := ["schema_version","world_id","seed","game_minute","revision","
 # The world contains committed metadata only. INV owns its live repository.
 var _world := {}
 var _characters := {}
+var _governance := {}
 var _resting_hero := ""
 var _inventory_authority: Callable
 var _inventory: Inventory
@@ -108,6 +110,8 @@ func _snapshot_with(metadata: Dictionary, inventory_snapshot: Variant) -> Dictio
 	saved["inventory"] = inventory_snapshot
 	if not _characters.is_empty():
 		saved["characters"] = _characters.duplicate(true)
+	if not _governance.is_empty():
+		saved["governance"] = _governance.duplicate(true)
 	return saved
 
 
@@ -224,6 +228,13 @@ func _commit_prepared() -> Dictionary:
 		if not daily.ok:
 			return daily
 		recovered = daily.value
+	var governed := _governance
+	if not governed.is_empty():
+		var facts := Characters.governor_facts(recovered, _pending.day)
+		var settlement := Governance.daily(governed, _pending.day, facts)
+		if not settlement.ok:
+			return settlement
+		governed = settlement.value
 	if not _pending.lines.is_empty():
 		var plan := _day_plan()
 		if not plan.ok:
@@ -232,6 +243,7 @@ func _commit_prepared() -> Dictionary:
 		if not committed.ok:
 			return committed
 	_characters = recovered
+	_governance = governed
 	_world.game_minute = _pending.day * DAY
 	_world.last_committed_day = _pending.day
 	_world.revision += 1
@@ -354,6 +366,8 @@ func character_view() -> Dictionary:
 		reply.value["world_id"] = _world.world_id
 		reply.value["revision"] = _world.revision
 		reply.value["game_minute"] = _world.game_minute
+		var day: int = _world.last_committed_day
+		reply.value["governance"] = Governance.view(_governance, _world.world_id, day, Characters.governor_facts(_characters, day))
 	return reply
 
 
@@ -371,28 +385,43 @@ func character_command(op: String, args: Dictionary, txn: String, durable: Calla
 
 
 func _commit_character(op: String, args: Dictionary, txn: String, durable: Callable) -> Dictionary:
-	var result: Dictionary = Characters.plan(_characters, _inventory, op, args, _world.world_id, _world.game_minute, txn)
-	if not result.ok:
-		return result
-	var plan: Dictionary = result.value
-	if not V.integer(plan.minute, _world.game_minute):
-		return R.fail("InvalidArgument", "character.minute")
 	# Run normal phase planners on the proposal; disk failure must not expose a partial day or inventory.
 	var candidate = get_script().new()
 	candidate._world = _world.duplicate(true)
-	candidate._characters = plan.repo
-	candidate._resting_hero = plan.get("resting_id", "")
-	candidate._inventory = plan.inventory
+	candidate._characters = _characters
+	candidate._governance = _governance
+	candidate._inventory = _inventory
 	candidate._inventory_authority = _inventory_authority
 	candidate._planners = _planners
-	if plan.minute / DAY > _world.last_committed_day and plan.inventory != null and is_same(plan.inventory, _inventory):
+	var minute: int = _world.game_minute
+	var day: int = _world.last_committed_day
+	if op.begins_with("governor_"):
+		var facts := Characters.governor_facts(_characters, day)
+		var settled := Governance.plan(_governance, op, args, _world.world_id, day, facts)
+		if not settled.ok:
+			return settled
+		candidate._governance = settled.value
+	else:
+		var result := Characters.plan(_characters, _inventory, op, args, _world.world_id, minute, txn)
+		if not result.ok:
+			return result
+		var plan: Dictionary = result.value
+		if not V.integer(plan.minute, minute):
+			return R.fail("InvalidArgument", "character.minute")
+		minute = plan.minute
+		candidate._characters = plan.repo
+		candidate._resting_hero = plan.get("resting_id", "")
+		candidate._inventory = plan.inventory
+		if not _governance.is_empty():
+			candidate._governance = Governance.reconcile(_governance, Characters.governor_facts(plan.repo, day))
+	if minute / DAY > day and _inventory != null and is_same(candidate._inventory, _inventory):
 		var fork := Inventory.new()
 		var cloned := fork.restore(_inventory.snapshot(), _inventory_authority)
 		if not cloned.ok:
 			return cloned
 		candidate._inventory = fork
-	if plan.minute > _world.game_minute:
-		var elapsed: Dictionary = candidate.step_until(plan.minute, V.MAX_INTEGER)
+	if minute > _world.game_minute:
+		var elapsed: Dictionary = candidate.step_until(minute, V.MAX_INTEGER)
 		if not elapsed.ok:
 			return elapsed
 	candidate._world.revision = maxi(_world.revision + 1, candidate._world.revision)
@@ -406,6 +435,7 @@ func _commit_character(op: String, args: Dictionary, txn: String, durable: Calla
 		return written if written.get("error") is Dictionary else R.fail("Unavailable", "durable")
 	_world = candidate._world
 	_characters = candidate._characters
+	_governance = candidate._governance
 	_inventory = candidate._inventory
 	return R.ok(_world.revision)
 
@@ -423,6 +453,8 @@ func check_character_sources(sources: Array) -> Dictionary:
 			return R.fail("InvalidArgument", "reserved_sources.hero")
 		if reserved.has(source.hero_id):
 			return R.fail("Conflict", "reserved_sources.hero_id")
+		if source.hero_id == _governance.get("governor_id"):
+			return R.fail("InvalidState", "reserved_sources.governor")
 		var checked: Dictionary = Characters.can_deploy(_characters, source.hero_id)
 		if not checked.ok:
 			return checked
@@ -462,7 +494,7 @@ func restore(saved: Dictionary, authorize: Callable = Callable()) -> Dictionary:
 	if not V.integer(saved.get("schema_version"), 1, 1):
 		return R.fail("StaleVersion", "schema_version")
 	for key in saved:
-		if key not in ["inventory", "characters"] and key not in METADATA:
+		if key not in ["inventory", "characters", "governance"] and key not in METADATA:
 			return R.fail("InvalidArgument", "snapshot.field")
 	if not C.encode(saved).ok or not C.Reader.valid_key(saved.get("world_id")) or not V.hex(saved.get("seed"),16) or not V.hex(saved.get("content_hash"),64) or not _packages_valid(saved.get("content_packages")):
 		return R.fail("InvalidArgument", "world")
@@ -496,11 +528,20 @@ func restore(saved: Dictionary, authorize: Callable = Callable()) -> Dictionary:
 	var checked_characters := Characters.validate(characters, inv, saved.world_id, saved.game_minute)
 	if not checked_characters.ok:
 		return checked_characters
+	var governance: Variant = saved.get("governance", {})
+	if saved.has("governance"):
+		if not governance is Dictionary or governance.is_empty():
+			return R.fail("InvalidArgument", "governance")
+		var day: int = saved.last_committed_day
+		var checked := Governance.validate(governance, saved.world_id, day, Characters.governor_facts(characters, day))
+		if not checked.ok:
+			return checked
 	var metadata := {}
 	for key: String in METADATA:
 		metadata[key] = saved[key]
 	_world = metadata.duplicate(true)
 	_characters = characters.duplicate(true)
+	_governance = governance.duplicate(true)
 	_inventory = inv
 	_inventory_authority = authorize
 	_day_failed = false
@@ -513,6 +554,7 @@ func dispose() -> Dictionary:
 	_clear_day()
 	_world = {}
 	_characters = {}
+	_governance = {}
 	_inventory = null
 	_inventory_authority = Callable()
 	_planners = {}
