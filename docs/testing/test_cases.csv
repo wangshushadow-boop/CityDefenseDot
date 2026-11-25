@@ -48,8 +48,8 @@ T-ECO-03,ECO,ECO-03,报价之后他人买走库存,提交旧报价,StaleVersion/
 T-ECO-04,ECO,ECO-04,工坊原料和现金不足,日结,减产/停产，商队与工坊账本不负,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
 T-ECO-05,ECO,ECO-05,非法部件与合法订单,分别制造,非法零变更；合法唯一产物，材料和经验准确,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
 T-ECO-06,ECO,ECO-06,多种子十年无玩家,跟踪库存与货币,硬不变量零失败，软趋势按评审基线,NOT_RUN,,docs/systems/game/campaign/economy/README.md,game/campaign/economy/
-T-GOV-01,SET,SET-01,已创立家户及接管庄邑,任免家人并推进战役日,总督技能改变真实指标且可解释,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
-T-GOV-02,SET,SET-01,既有人物档和已委任总督,失格与恢复及失败重试,治理资格与读档回执一致,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
+T-GOV-01,SET,SET-01,已创立家户及接管庄邑,任免家人并推进战役日,总督技能改变真实指标且可解释,PASS,development/reports/tests/P4/governor/acceptance.json,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
+T-GOV-02,SET,SET-01,既有人物档和已委任总督,失格与恢复及失败重试,治理资格与读档回执一致,PASS,development/reports/tests/P4/governor/acceptance.json,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
 T-SET-01,SET,SET-01,税收、工资、建筑和粮食不足,推进多日,资源不负、治理变量可解释,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
 T-SET-02,SET,SET-02 / POL-04,领地易主或叛乱,提交政治结果,owner、税收、驻军、总督引用一致,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/
 T-SET-03,SET,SET-03,围城与村庄劫掠中断,解除并等待恢复,资源与繁荣变化正确，无重复战利品,NOT_RUN,,docs/systems/game/campaign/settlement/README.md,game/campaign/settlement/

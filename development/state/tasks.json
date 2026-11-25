@@ -2485,14 +2485,17 @@
       "child_ids": []
     },
     "P4-GOV": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
       "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
+      "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": [
-        "docs/architecture/decisions/ADR-017-governor.md",
-        "development/planning/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": [
         "P4-GOV-001",
@@ -2504,74 +2507,92 @@
       ]
     },
     "P4-GOV-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "governor_set",
       "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "6e0750c017cf3f550adb0e89ca2989d32de5245e",
+      "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": [
-        "docs/architecture/decisions/ADR-017-governor.md",
-        "development/planning/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": []
     },
     "P4-GOV-002": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "base_commit": "3f1ca4788bab47ddc3878a069d3f4a5d5831f133",
+      "candidate_commit": "0412b831b4932f99384a5d45bbad0582fb765e37",
+      "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": [
-        "docs/architecture/decisions/ADR-017-governor.md",
-        "development/planning/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": []
     },
     "P4-GOV-003": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "governor_camp",
       "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "a5a85f851ae9435961cfe01af22c463d2a5f5830",
+      "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": [
-        "docs/architecture/decisions/ADR-017-governor.md",
-        "development/planning/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": []
     },
     "P4-GOV-004": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "base_commit": "0412b831b4932f99384a5d45bbad0582fb765e37",
+      "candidate_commit": "7cbdf21d42a738f2a3dd1bcb57792cf77b3fac5d",
+      "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": [
-        "docs/architecture/decisions/ADR-017-governor.md",
-        "development/planning/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": []
     },
     "P4-GOV-005": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
-      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "base_commit": "7cbdf21d42a738f2a3dd1bcb57792cf77b3fac5d",
+      "candidate_commit": "8c0f99a646469f2d722927b5f62c442a105a7acf",
+      "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": [
-        "docs/architecture/decisions/ADR-017-governor.md",
-        "development/planning/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": []
     },
     "P4-GOV-006": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "governor_ui",
       "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "7a7be546fa0215f4385e931a8e8f6f6b3ead2cf8",
+      "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": [
-        "docs/architecture/decisions/ADR-017-governor.md",
-        "development/planning/P4-governor.md"
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": []
     }
@@ -13155,6 +13176,370 @@
         "development/planning/P4-governor.md"
       ],
       "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
+    },
+    {
+      "task_id": "P4-GOV-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "开发与集成复跑",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "6e0750c017cf3f550adb0e89ca2989d32de5245e"
+    },
+    {
+      "task_id": "P4-GOV-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "冷归档及实机通过，送独立终审",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-002",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "开发与集成复跑",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0412b831b4932f99384a5d45bbad0582fb765e37"
+    },
+    {
+      "task_id": "P4-GOV-002",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "冷归档及实机通过，送独立终审",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-003",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "开发与集成复跑",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "a5a85f851ae9435961cfe01af22c463d2a5f5830"
+    },
+    {
+      "task_id": "P4-GOV-003",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "冷归档及实机通过，送独立终审",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-004",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "开发与集成复跑",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "7cbdf21d42a738f2a3dd1bcb57792cf77b3fac5d"
+    },
+    {
+      "task_id": "P4-GOV-004",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "冷归档及实机通过，送独立终审",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-005",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "开发与集成复跑",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "8c0f99a646469f2d722927b5f62c442a105a7acf"
+    },
+    {
+      "task_id": "P4-GOV-005",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "冷归档及实机通过，送独立终审",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-006",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "开发与集成复跑",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "7a7be546fa0215f4385e931a8e8f6f6b3ead2cf8"
+    },
+    {
+      "task_id": "P4-GOV-006",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "冷归档及实机通过，送独立终审",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "集成至同一游戏入口与战役时钟",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T21:06:52+08:00",
+      "reason": "独立冷包、治理实效及实机验收中",
+      "evidence": [
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "独立 QA 及技术终审通过，核验受控合并和候选提交",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "正式包与旧档复验通过，主 Agent 验收授权功能",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "独立 QA 及技术终审通过，核验受控合并和候选提交",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "正式包与旧档复验通过，主 Agent 验收授权功能",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-002",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "独立 QA 及技术终审通过，核验受控合并和候选提交",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-002",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "正式包与旧档复验通过，主 Agent 验收授权功能",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-003",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "独立 QA 及技术终审通过，核验受控合并和候选提交",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-003",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "正式包与旧档复验通过，主 Agent 验收授权功能",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-004",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "独立 QA 及技术终审通过，核验受控合并和候选提交",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-004",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "正式包与旧档复验通过，主 Agent 验收授权功能",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-005",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "独立 QA 及技术终审通过，核验受控合并和候选提交",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-005",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "正式包与旧档复验通过，主 Agent 验收授权功能",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-006",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "独立 QA 及技术终审通过，核验受控合并和候选提交",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P4-GOV-006",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T21:11:23+08:00",
+      "reason": "正式包与旧档复验通过，主 Agent 验收授权功能",
+      "evidence": [
+        "development/reports/stages/P4-governor.md",
+        "development/reports/tasks/P4-governor.md",
+        "development/reports/tests/P4/governor/acceptance.json",
+        "development/reports/tests/P4/governor/qa.json",
+        "development/reports/tests/P4/governor/review.md"
+      ],
+      "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
     }
   ]
 }

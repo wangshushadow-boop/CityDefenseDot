@@ -27,7 +27,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+  "base_commit": "7cbdf21d42a738f2a3dd1bcb57792cf77b3fac5d",
   "worktree": "D:\\work\\game\\recollection",
   "scope": "沙盒受信入口",
   "non_goals": [
@@ -36,5 +36,5 @@
   "acceptance": [
     "按 ADR-017 在所属入口验证任职权限、日结实效与事务一致性。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

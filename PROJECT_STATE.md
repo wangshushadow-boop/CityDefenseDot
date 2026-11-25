@@ -1,12 +1,16 @@
 # recollection 项目状态
 
+**P4 家族总督已交付。** 在沙盒「人物 → 领地治理」接管柳溪庄，可任免家人、预览次日变化并休养查看实际账簿。生产版本 `0ca0100`。独立 QA 在打包客户端验证 158 项，含旧档和实机操作。P4 整体为 PARTIAL，P3 人物已验收，P2 性能延期。[验收报告](development/reports/stages/P4-governor.md) · [实机界面](development/reports/tests/P4/governor/governor.png) · [测试与证据](development/reports/tests/P4/governor/acceptance.json)
+
+## P3 人物基线
+
 **P3 人物已交付并通过验收。** 在主菜单“新建沙盒”或“读取存档”后选择“人物”，即可创建、培养、换装和安排继承。P3 的其余 8 个工作包尚未启动。
 
 ```powershell
 & "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe" --path game
 ```
 
-当前生产源码 `53cde6d`。四个人物验收用例全部通过，正式客户端包独立验证 119 项；真实旧沙盒可读、可建角，存档故障具备原子回滚。P0/P1 已验收。P2 整场性能按负责人要求延期，GATE-P2 仍为 BLOCKED。[人物验收与未测项](development/reports/stages/P3-character.md) · [构建清单](development/reports/tests/P3/character/manifest.json) · [人物截图](development/reports/tests/P3/character/character.png)
+P3 人物生产源码 `53cde6d`。四个人物验收用例全部通过，正式客户端包独立验证 119 项；真实旧沙盒可读、可建角，存档故障具备原子回滚。P0/P1 已验收。P2 整场性能按负责人要求延期，GATE-P2 仍为 BLOCKED。[人物验收与未测项](development/reports/stages/P3-character.md) · [构建清单](development/reports/tests/P3/character/manifest.json) · [人物截图](development/reports/tests/P3/character/character.png)
 
 ## P2 野战基线
 

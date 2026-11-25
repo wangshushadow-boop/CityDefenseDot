@@ -28,7 +28,7 @@
     "docs/architecture/"
   ],
   "contract_changes": "approved_adr",
-  "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+  "base_commit": "3f1ca4788bab47ddc3878a069d3f4a5d5831f133",
   "worktree": "D:\\work\\game\\recollection",
   "scope": "家族成员资格与领地作用域技能",
   "non_goals": [
@@ -37,5 +37,5 @@
   "acceptance": [
     "按 ADR-017 在所属入口验证任职权限、日结实效与事务一致性。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

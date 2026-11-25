@@ -20,7 +20,7 @@ BAT-05,MUST,CORE;APP;MIS-RT;BAI;AUD;NATIVE,T-CORE-02;T-APP-03;T-MIS-RT-03;T-BAI-
 CHR-01,MUST,CHR;SHRULE,T-CHR-01;T-SHRULE-01,docs/systems/game/campaign/character/README.md;docs/systems/game/shared/rules/README.md,VERIFIED,PASS,CHR / 人物工作包,development/reports/tests/P3/character/acceptance.json
 CHR-02,MUST,CHR;INV,T-CHR-02;T-INV-02,docs/systems/game/campaign/character/README.md;docs/systems/game/shared/inventory/README.md,VERIFIED,PASS,CHR / 人物工作包,development/reports/tests/P3/character/acceptance.json
 CHR-03,MUST,CHR,T-CHR-03,docs/systems/game/campaign/character/README.md,VERIFIED,PASS,CHR / 人物工作包,development/reports/tests/P3/character/acceptance.json
-CLN-01,MUST,CLAN;SAI-C,T-CLAN-01;T-SAI-C-01,docs/systems/game/campaign/clan/README.md;docs/systems/game/campaign/strategic_ai/clan/README.md,NOT_IMPLEMENTED,NOT_RUN,,
+CLN-01,MUST,CLAN;SAI-C,T-CLAN-01;T-SAI-C-01,docs/systems/game/campaign/clan/README.md;docs/systems/game/campaign/strategic_ai/clan/README.md,PARTIAL,PARTIAL,CLAN / 家族职责,家族成员担任总督及出征互斥已实测。家族等级和其他职位待验。development/reports/stages/P4-governor.md
 CLN-02,MUST,CLAN;SAI-C,T-CLAN-02;T-SAI-C-02,docs/systems/game/campaign/clan/README.md;docs/systems/game/campaign/strategic_ai/clan/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 CLN-03,MUST,CHR;CLAN,T-CHR-04;T-CLAN-03,docs/systems/game/campaign/character/README.md;docs/systems/game/campaign/clan/README.md,PARTIAL,PARTIAL,CLAN / CHR,P3 人物退休、控制权及实际装备交接通过 T-CHR-04。完整军队、领地和任务待验。development/reports/stages/P3-character.md
 COM-01,MUST,COM,T-COM-01,docs/systems/game/mission/combat/README.md,PARTIAL,PARTIAL,,P2 已实测 T-COM-01。development/reports/tests/P2/combat-002.txt
@@ -76,7 +76,7 @@ SAI-03,MUST,CAMP;SAI;SAI-K;SAI-C;SAI-A;SAI-P;TOOLS,T-CAMP-04;T-SAI-03;T-SAI-K-02
 SAV-01,MUST,PERSIST,T-PERSIST-01,docs/systems/game/infrastructure/persistence/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 SAV-02,MUST,PERSIST;TEST,T-PERSIST-02;T-TEST-03,docs/systems/game/infrastructure/persistence/README.md;docs/systems/game/tests/README.md,PARTIAL,PARTIAL,,"P1 已实测 T-PERSIST-02, T-TEST-03，完整需求待后续验收。development/reports/stages/P1.md"
 SAV-03,MUST,CON;DEF;PERSIST,T-CON-03;T-DEF-03;T-PERSIST-03,docs/systems/game/contracts/README.md;docs/systems/game/shared/definitions/README.md;docs/systems/game/infrastructure/persistence/README.md,PARTIAL,PARTIAL,,P0 设计及实验索引（正式用例待验） ADR-012;P0-CONTRACTS-001 | P1 已实测 T-CON-03，完整需求待后续验收。development/reports/stages/P1.md
-SET-01,MUST,SET,T-SET-01;T-GOV-01;T-GOV-02,docs/systems/game/campaign/settlement/README.md,NOT_IMPLEMENTED,NOT_RUN,,
+SET-01,MUST,SET,T-SET-01;T-GOV-01;T-GOV-02,docs/systems/game/campaign/settlement/README.md,PARTIAL,PARTIAL,SET / 总督日结,总督对繁荣与忠诚的变化及任免已实测。税收、建筑、粮食及驻军维护待验。development/reports/stages/P4-governor.md
 SET-02,MUST,SET,T-SET-02,docs/systems/game/campaign/settlement/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 SET-03,MUST,SET,T-SET-03,docs/systems/game/campaign/settlement/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 SET-04,MUST,SET;INTERACT,T-SET-04;T-INTERACT-01,docs/systems/game/campaign/settlement/README.md;docs/systems/game/mission/interaction/README.md,NOT_IMPLEMENTED,NOT_RUN,,

@@ -37,5 +37,5 @@
   "acceptance": [
     "按 ADR-017 在所属入口验证任职权限、日结实效与事务一致性。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

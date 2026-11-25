@@ -1,9 +1,9 @@
 # SET — 城镇、城堡、村庄与领地治理
 
-> 版本 0.1（设计内容未变；目录版 0.2） | 状态：详细设计提案，待评审与实现 | 所属工程：recollection（古代中国风原创沙盒）
+> 版本 0.1（设计内容未变；目录版 0.2） | 状态：总督治理已验收，其余领地能力为设计提案 | 所属工程：recollection（古代中国风原创沙盒）
 > 实现目录：`game/campaign/settlement/` | 总体基线：[§8、§9.1、§13、§17](../../../../game_design.md) | [系统索引](../../../README.md)
 
-本文在总体规格书约束内补充实现级设计。接口为语言无关伪代码，字段及新增参数为拟定契约；未标明已冻结的数值需经 ADR/测试确认。公共语义见[公共契约](../../../../architecture/common_contracts.md)。测试均为待执行规格，不代表功能已实现。
+本文在总体规格书约束内补充实现级设计。接口为语言无关伪代码，字段及新增参数为拟定契约；未标明已冻结的数值需经 ADR/测试确认。公共语义见[公共契约](../../../../architecture/common_contracts.md)。本章保留完整领地测试判据。总督专项的实测范围见末节。
 
 ## 1. 职责与边界
 
@@ -78,3 +78,7 @@ GetAccessPolicy(settlement,actor) -> SettlementAccess
 
 - 主要实现目录：`game/campaign/settlement/`；权威设计：本文件。
 - 上级入口：[上级模块 / 分组](../README.md)；[全部模块索引](../../../README.md)。
+
+## 已实现的总督治理
+
+P4-GOV 已验证总督任免、既有家族成员资格、作用域技能、领地日结分项、读档与失格腾位。庄邑状态由本模块持有。[公共端口与原创新参数](../../../../architecture/decisions/ADR-017-governor.md) · [验收结果](../../../../../development/reports/stages/P4-governor.md)

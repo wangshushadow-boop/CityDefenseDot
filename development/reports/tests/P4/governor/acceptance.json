@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "game_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
+  "date": "2026-11-25",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "results": [
+    {
+      "id": "T-GOV-01",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "任免、作战互斥、能力与领地作用域天赋、按日实结、数值上下界及桌面。",
+      "evidence": [
+        "qa.json",
+        "qa-evidence.zip",
+        "review.md",
+        "integration.zip"
+      ]
+    },
+    {
+      "id": "T-GOV-02",
+      "status": "PASS",
+      "exit_code": 0,
+      "scope": "旧档、继任与失格、保留历史、故障、重放及多会话竞争。",
+      "evidence": [
+        "qa.json",
+        "review-evidence.zip",
+        "integration.zip"
+      ]
+    }
+  ],
+  "not_run": [
+    "真人手柄、屏幕朗读、主观试玩",
+    "P2 500/1000 人性能",
+    "完整 SET-01、CLN-01 及 P4 端到端 AT"
+  ]
+}

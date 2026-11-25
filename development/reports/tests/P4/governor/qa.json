@@ -1,0 +1,199 @@
+{
+  "task": "P4-GOV-QA",
+  "status": "PASS",
+  "test_ids": [
+    "T-GOV-01",
+    "T-GOV-02"
+  ],
+  "old_build": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+  "old_save_sha256": "b02e21d558ffda6e813038a3e2a1c6f055cafa352fa9bb4689e2676e01a6e1eb",
+  "old_archive": {
+    "clan": "clan/2912c636-5b01-4145-b77d-12a96be914d6",
+    "commands_hash": "ad332bca2c812225e479e39d848cb59d6ed51397ccc934e68c73771f4e6226c6",
+    "content_hash": "d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+    "day": 4,
+    "heir": "hero/0ed9ddfd-c5fe-4bce-93e7-b72e85bf2787",
+    "hero": "hero/792f7c5b-034a-49f1-84bc-6a91cf54ea6d",
+    "items_hash": "d1214c7a646bb810d36129485ebd0eaeda380cfe73a5731880af45bc85bc4bc7",
+    "minute": 5760,
+    "world": "world/6a7ad78b-5658-4b74-be3a-f296c87337dc"
+  },
+  "game_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "client_sha256": "d687de84a3f05aa9234b504ea56fa3b6282159a954098fe19bd145034950826c",
+  "renderer": "Windows · Vulkan 1.4.325 Forward+ · NVIDIA GeForce RTX 3090",
+  "results": [
+    {
+      "label": "legacy-family",
+      "group": "old_client",
+      "checks": 10,
+      "failed": 0,
+      "passed": 10,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "legacy-family.json",
+      "stdout_file": "legacy-family.log"
+    },
+    {
+      "label": "source-governance",
+      "group": "cold_source",
+      "checks": 58,
+      "failed": 0,
+      "passed": 58,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "source-governance.json",
+      "stdout_file": "source-governance.log"
+    },
+    {
+      "label": "source-governor_facts",
+      "group": "cold_source",
+      "checks": 13,
+      "failed": 0,
+      "passed": 13,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "source-governor_facts.json",
+      "stdout_file": "source-governor_facts.log"
+    },
+    {
+      "label": "source-governor_campaign",
+      "group": "cold_source",
+      "checks": 49,
+      "failed": 0,
+      "passed": 49,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "source-governor_campaign.json",
+      "stdout_file": "source-governor_campaign.log"
+    },
+    {
+      "label": "source-governor_session",
+      "group": "cold_source",
+      "checks": 17,
+      "failed": 0,
+      "passed": 17,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "source-governor_session.json",
+      "stdout_file": "source-governor_session.log"
+    },
+    {
+      "label": "source-desktop-repeat",
+      "group": "cold_source",
+      "checks": 73,
+      "failed": 0,
+      "passed": 73,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "source-desktop-repeat.json",
+      "stdout_file": "source-desktop-repeat.log"
+    },
+    {
+      "label": "integrated-behavior",
+      "group": "cold_source",
+      "checks": 85,
+      "failed": 0,
+      "passed": 85,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "integrated-behavior.json",
+      "stdout_file": "integrated-behavior.log"
+    },
+    {
+      "label": "pack-behavior",
+      "group": "production_client",
+      "checks": 85,
+      "failed": 0,
+      "passed": 85,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "pack-behavior.json",
+      "stdout_file": "pack-behavior.log"
+    },
+    {
+      "label": "pack-desktop",
+      "group": "production_client",
+      "checks": 73,
+      "failed": 0,
+      "passed": 73,
+      "exit_code": 0,
+      "status": "PASS",
+      "process_file": "pack-desktop.json",
+      "stdout_file": "pack-desktop.log"
+    },
+    {
+      "label": "source-desktop",
+      "group": "superseded",
+      "checks": 73,
+      "failed": 1,
+      "passed": 72,
+      "exit_code": 1,
+      "status": "FAIL",
+      "process_file": "source-desktop.json",
+      "stdout_file": "source-desktop.log"
+    }
+  ],
+  "checks_by_group": {
+    "old_client": 10,
+    "cold_source": 295,
+    "production_client": 158,
+    "superseded": 73
+  },
+  "daily_results": {
+    "appointed": {
+      "day": 6,
+      "governor_id": "hero/0ed9ddfd-c5fe-4bce-93e7-b72e85bf2787",
+      "loyalty_after": 499,
+      "loyalty_base": -1,
+      "loyalty_before": 499,
+      "loyalty_bonus": 1,
+      "prosperity_after": 505,
+      "prosperity_base": 1,
+      "prosperity_before": 501,
+      "prosperity_bonus": 3
+    },
+    "trained": {
+      "day": 7,
+      "governor_id": "hero/0ed9ddfd-c5fe-4bce-93e7-b72e85bf2787",
+      "loyalty_after": 499,
+      "loyalty_base": -1,
+      "loyalty_before": 499,
+      "loyalty_bonus": 1,
+      "prosperity_after": 529,
+      "prosperity_base": 1,
+      "prosperity_before": 505,
+      "prosperity_bonus": 23
+    },
+    "vacant": {
+      "day": 5,
+      "governor_id": null,
+      "loyalty_after": 499,
+      "loyalty_base": -1,
+      "loyalty_before": 500,
+      "loyalty_bonus": 0,
+      "prosperity_after": 501,
+      "prosperity_base": 1,
+      "prosperity_before": 500,
+      "prosperity_bonus": 0
+    }
+  },
+  "scope": "家族人物资格、实际任免、日结与技能、旧档、原子性、资格失效与传承。真实 Windows 窗口中的鼠标和键盘输入、日结预览和实结、存储、读回、继任以及无继任者界面亦已执行。",
+  "source": "Git 冷归档 0ca0100，4 个域套件、桌面套件及独立旧档故障探针。旧存档来自真实 5e1ad4c 运行时。正式 PCK 由单独进程在空工作目录启动，使用独立用户目录，项目测试代码从包外传入。",
+  "fixture": "正式 BOOT 创建/打开旧档及领地。异常分支以独立测试 principal 注入真实 GameSession、Campaign 与 SaveService 来发出受信战果意图并触发已有写盘故障点。客户端真实入口没有可向人物添加经验的 QA 接口。",
+  "prior_failure": "首次源码窗口 72/73，指定截图目录不存在，PNG 保存失败；其余 72 项通过。QA 创建输出目录，在新用户目录按相同判据复跑 73/73。两次均记录真实退出码。",
+  "checks_excluded_from_totals": [
+    "同一用例在源码、正式包有重叠；不同组的断言不可解释为唯一场景数。",
+    "前置开发树试组合 85/85 没有计入冷源码或成品数字。"
+  ],
+  "not_run": [
+    "真人手柄、屏幕朗读、主观试玩",
+    "P2 大规模实时战斗性能",
+    "完整 P4 领地财政、建设、围攻及 P3/P4 整体门禁"
+  ],
+  "reproduction": [
+    "用 git archive <old_build> -- game 还原 P3，并在新目录用 run.py old-import <old-game> import --profile old 和 run.py legacy-family <old-game> legacy.gd --profile old 生成存档。",
+    "证据内 legacy-save.zip 是相同 P3 软件实际写出的未修改存档。将 run.py、probe.gd、legacy-save.zip 放在同一目录，然后执行 python run.py pack-check <client.pck绝对路径> probe.gd --old。选择新的 label 即采用新的用户目录。",
+    "先创建截图目录并设置 RECOLLECTION_GOVERNOR_CAPTURES，再执行 python run.py pack-window <client.pck绝对路径> client_desktop.gd --desktop。每次运行以命名 JSON 与原始日志进行核验。"
+  ]
+}

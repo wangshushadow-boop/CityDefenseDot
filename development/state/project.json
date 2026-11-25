@@ -15,8 +15,8 @@
     "P8": "PLANNED"
   },
   "authorized_by": "项目负责人提前放行 P4 总督治理及必要前置接入。",
-  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
-  "integrated_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
+  "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+  "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",
@@ -43,7 +43,7 @@
     }
   },
   "updated_at": "2026-11-25",
-  "note": "P4-GOV 已启动；其他 P4 工作包按原前置。P2 性能延期，P3 人物已验收。",
+  "note": "P4-GOV 已验收。其余 P4 按原门禁；P3 仅人物完成，P2 性能延期。",
   "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
   "p1_decisions": {
@@ -87,13 +87,18 @@
       "evidence": "development/reports/stages/P3-character.md"
     }
   },
-  "last_completed_package": "P3-CHR",
+  "last_completed_package": "P4-GOV",
   "p4_governor_authorization": {
     "by": "项目负责人",
     "date": "2026-11-25",
     "scope": "P4-GOV",
     "waived_dependency": "GATE-P3",
     "decision": "P4 总督治理：从已有家族成员中任命总督，让人物能力实际影响领地日结。",
-    "evidence": "docs/architecture/decisions/ADR-017-governor.md"
+    "evidence": "docs/architecture/decisions/ADR-017-governor.md",
+    "result": {
+      "package": "DONE",
+      "game_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
+      "evidence": "development/reports/stages/P4-governor.md"
+    }
   }
 }

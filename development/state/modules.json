@@ -20,7 +20,8 @@
         "development/reports/tasks/P1-BOOT-001.md",
         "development/reports/stages/P1.md",
         "development/reports/tests/P2/field-desktop-final.txt",
-        "development/reports/stages/P3-character.md"
+        "development/reports/stages/P3-character.md",
+        "development/reports/stages/P4-governor.md"
       ]
     },
     "CORE": {
@@ -80,7 +81,8 @@
         "development/reports/tasks/P1-APP-CORE-001.md",
         "development/reports/stages/P1.md",
         "development/reports/tests/P2/merged-field-session.txt",
-        "development/reports/stages/P3-character.md"
+        "development/reports/stages/P3-character.md",
+        "development/reports/stages/P4-governor.md"
       ]
     },
     "CAMP": {
@@ -101,7 +103,8 @@
       "evidence": [
         "development/reports/tasks/P1-CAMP-RUNTIME-001.md",
         "development/reports/stages/P1.md",
-        "development/reports/stages/P3-character.md"
+        "development/reports/stages/P3-character.md",
+        "development/reports/stages/P4-governor.md"
       ]
     },
     "WORLD": {
@@ -125,7 +128,8 @@
         "T-CHR-04"
       ],
       "evidence": [
-        "development/reports/stages/P3-character.md"
+        "development/reports/stages/P3-character.md",
+        "development/reports/stages/P4-governor.md"
       ]
     },
     "CLAN": {
@@ -204,13 +208,18 @@
       "evidence": []
     },
     "SET": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P4-SET",
         "P4-GOV"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-GOV-01",
+        "T-GOV-02"
+      ],
+      "evidence": [
+        "development/reports/stages/P4-governor.md"
+      ]
     },
     "POL": {
       "status": "NOT_IMPLEMENTED",
@@ -482,7 +491,8 @@
       ],
       "verified_test_ids": [],
       "evidence": [
-        "development/reports/stages/P3-character.md"
+        "development/reports/stages/P3-character.md",
+        "development/reports/stages/P4-governor.md"
       ]
     },
     "INPUT": {
