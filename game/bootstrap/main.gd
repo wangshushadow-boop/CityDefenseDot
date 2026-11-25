@@ -11,6 +11,7 @@ var _desktop: Control
 var _profile_smoke := false
 var _last_tick := 0
 var _running := false
+var _field_scene: Node3D
 
 func _ready() -> void:
 	get_tree().auto_accept_quit=false
@@ -43,6 +44,7 @@ func _start() -> void:
 		_desktop=load("res://bootstrap/desktop.gd").new()
 		add_child(_desktop)
 		_desktop.mount(_root)
+		_desktop.field_requested.connect(_enter_field)
 	if _profile_smoke:
 		await get_tree().process_frame
 		var session_started: Dictionary=_root.start_training()
@@ -63,13 +65,36 @@ func _start() -> void:
 		_finish(digest.value,0)
 		return
 	if _profile=="headless":
-		var server: Dictionary=_root.start_training()
+		var server: Dictionary=_root.start_field()
 		if not server.ok:
 			_failure(server)
 			return
-	Engine.physics_ticks_per_second=30 if _profile=="headless" else 60
+	Engine.physics_ticks_per_second=60
 	set_physics_process(true)
 	_log("ready","",0)
+
+func _enter_field() -> void:
+	var started: Dictionary = _root.start_field()
+	if not started.ok:
+		_desktop.field_closed(started)
+		return
+	_field_scene=load("res://bootstrap/field_desktop.gd").new()
+	add_child(_field_scene)
+	_field_scene.leave_requested.connect(_leave_field)
+	var opened: Dictionary = _field_scene.mount(_root,started.value)
+	if not opened.ok:
+		_leave_field(opened)
+		return
+	_desktop.hide()
+
+func _leave_field(reply: Dictionary = {"ok":true}) -> void:
+	if _field_scene!=null:
+		_field_scene.release()
+		remove_child(_field_scene)
+		_field_scene.queue_free()
+		_field_scene=null
+	var end: Dictionary = _root.leave_field()
+	_desktop.field_closed(end if reply.ok else reply)
 
 func _physics_process(_delta: float) -> void:
 	if not _running:
@@ -77,7 +102,26 @@ func _physics_process(_delta: float) -> void:
 	var app: RefCounted=_root.session()
 	var view: Dictionary=app.query()
 	if view.ok and view.value.state=="Mission" and not view.value.paused:
-		var step: Dictionary=_root.training_step()
+		if _field_scene!=null and not _field_scene.running: return
+		var step: Dictionary
+		if _root.has_field():
+			var sampled: Dictionary = {"ok":true}
+			if _field_scene!=null:
+				sampled = _field_scene.before_step(app.query("mission").value.tick+1)
+			if not sampled.ok:
+				if sampled.error.code in ["StaleVersion","Unauthorized","Conflict"]: return
+				_failure(sampled)
+				return
+			step = _root.field_step()
+			if not step.ok and step.error.code in ["Unavailable","StaleVersion"] and step.error.field in ["navigation_sync","nav_revision","deployment.spawn_site"]:
+				return
+			if step.ok and _field_scene!=null:
+				var refreshed: Dictionary = _field_scene.after_step()
+				if not refreshed.ok:
+					_failure(refreshed)
+					return
+		else:
+			step = _root.training_step()
 		if not step.ok:
 			_failure(step)
 			return

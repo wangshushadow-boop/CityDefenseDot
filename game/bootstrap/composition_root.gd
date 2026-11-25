@@ -14,6 +14,14 @@ const Camp = preload("res://campaign/runtime.gd")
 const Mission = preload("res://mission/runtime/runtime.gd")
 const Session = preload("res://application/game_session.gd")
 
+const FieldSetup = preload("res://bootstrap/field_setup.gd")
+var _save_owner: RefCounted
+var _save_session := ""
+var _field_authority: RefCounted
+var _field_mission: WeakRef
+var _field_launch := false
+var _serial := 0
+
 var _host: Node
 var _registered := {}
 var _active := {}
@@ -90,11 +98,19 @@ func _create_session(deps: Dictionary) -> Dictionary:
 	var engine_adapter: RefCounted=deps.engine
 	var replay: bool=_config.get("smoke",false)
 	var mission_factory:=func(mode: String):
+		if _field_launch:
+			var runtime: Script = load("res://mission/runtime/field_mission.gd")
+			var brains: Script = load("res://mission/runtime/field_brains.gd")
+			if runtime == null or brains == null: return null
+			var create_brains := func(scope,adapter,form,teams):return brains.new(scope,adapter,form,teams)
+			var field: RefCounted = runtime.new(core,engine_adapter,mode,deps.content.registry,_field_principal,create_brains)
+			_field_mission = weakref(field)
+			return field
 		# Only the CI replay restores a fixed authority-issued instance ID.
 		return Mission.new(core,engine_adapter,mode,Callable(),"mission/p1-training-replay" if replay else "")
 	# The frontend exposes world and training actions only. A gameplay exchange
 	# needs an installed trusted authority rather than a caller-supplied identity.
-	return R.ok(Session.new(deps.persistence,func(): return Camp.new(),mission_factory,Callable()))
+	return R.ok(Session.new(deps.persistence,func(): return Camp.new(),mission_factory,_field_permit,Callable(),_receive_match_result,_field_gateway))
 
 func boot(config: Dictionary) -> Dictionary:
 	if _busy or not _stack.is_empty():
@@ -171,6 +187,10 @@ func shutdown() -> Dictionary:
 	_ready_for_requests=false
 	if not _stack.is_empty():
 		_drain()
+	_save_owner=null
+	_save_session=""
+	_field_authority=null
+	_field_mission=null
 	_busy=false
 	return R.ok(report()) if _stack.is_empty() else R.fail("Unavailable","shutdown")
 
@@ -184,7 +204,117 @@ func new_world(slot: String) -> Dictionary:
 
 func load_world(slot: String) -> Dictionary:
 	if session()==null: return R.fail("InvalidState","session")
-	return session().load_session(slot,_services.content)
+	var loaded: Dictionary = session().load_session(slot,_services.content)
+	if loaded.ok:
+		_save_owner = RefCounted.new()
+		_save_session = session().query().value.session_id
+	return loaded
+
+func pending_result() -> Dictionary:
+	if session()==null or _save_owner==null: return R.fail("Unauthorized","pending.result")
+	return session().query("pending_result",{"context":_save_owner})
+
+func resume_result() -> Dictionary:
+	var saved := pending_result()
+	if not saved.ok: return saved
+	var receipt: Dictionary = session().route_result(saved.value)
+	if not receipt.ok: return receipt
+	return session().dispose_mission()
+
+func _receive_match_result(result: Dictionary) -> Dictionary:
+	if not has_field() or result.get("encounter_id")!=null:
+		return R.fail("Unauthorized","field_match")
+	# A match result belongs to this server process. The P6 network transport consumes the same session route.
+	_report["last_match"] = {"result_id":result.result_id,"mission_id":result.mission_id,"outcome":result.outcome,
+		"winner_team_keys":result.winner_team_keys.duplicate(),"integrity_hash":result.integrity_hash}
+	return R.ok(_report.last_match.duplicate(true))
+
+func _field_principal(token: Variant) -> Dictionary:
+	if _field_authority == null or not is_same(token,_field_authority):
+		return R.fail("Unauthorized","field_authority")
+	return R.ok({"issuer_id":"player","team_key":0})
+
+func _field_permit(token: Variant, operation: String, envelope: Dictionary) -> Dictionary:
+	if operation=="session.pending_result" and _save_owner!=null and is_same(token,_save_owner) and envelope.get("scope_id")==_save_session:
+		return R.ok("save_owner")
+	if not operation.begins_with("field."):
+		return R.fail("Unauthorized","authority")
+	var principal := _field_principal(token)
+	return R.ok(principal.value.issuer_id) if principal.ok else principal
+
+func _field_gateway(operation: String, payload: Dictionary, token: Variant) -> Dictionary:
+	var field: RefCounted = _field_mission.get_ref() if _field_mission!=null else null
+	if field == null: return R.fail("NotFound","field_mission")
+	return field.gateway(operation,payload,token)
+
+func has_field() -> bool:
+	return _field_authority != null and _field_mission != null and _field_mission.get_ref() != null
+
+func start_field(limit: int = -1, total: int = -1, seed_value: int = 241124) -> Dictionary:
+	var app: RefCounted = session()
+	if app == null or has_field(): return R.fail("InvalidState","field")
+	var mode := "multiplayer" if _config.profile=="headless" else "custom"
+	var state: Dictionary = app.query().value
+	if state.state=="CampaignMap" or state.state=="CustomSetup": mode = "custom"
+	if state.state=="MultiplayerLobby": mode = "multiplayer"
+	if state.state not in ["Frontend","CampaignMap","CustomSetup","MultiplayerLobby"]: return R.fail("InvalidState","field")
+	if limit==-1: limit = _services.content.config.battle_limit
+	var setup := FieldSetup.build(_services.content,mode,limit,limit if total==-1 else total,seed_value)
+	if not setup.ok: return setup
+	if state.state=="Frontend":
+		var opened: Dictionary = app.start_session(mode,{})
+		if not opened.ok: return opened
+	_field_launch = true
+	_field_authority = RefCounted.new()
+	_serial = 0
+	var prepared: Dictionary = app.prepare_mission(setup.value.spec,setup.value.scene,setup.value.rules)
+	_field_launch = false
+	if not prepared.ok:
+		_field_mission = null
+		_field_authority = null
+		if state.state=="Frontend": app.close_session("field_prepare")
+	return prepared
+
+func field_view(projection: String) -> Dictionary:
+	return session().query("field",{"context":_field_authority,"projection":projection}) if has_field() else R.fail("NotFound","field")
+
+func field_command(operation: String, payload: Dictionary, revision: int, stable_id: String = "") -> Dictionary:
+	if not has_field(): return R.fail("NotFound","field")
+	var scope: String = session().query().value.mission_id
+	_serial += 1
+	var body := payload.duplicate()
+	body["type"] = operation
+	var id := stable_id if not stable_id.is_empty() else "field/%s"%_serial
+	var envelope := {"command_id":id,"actor_ref":"player","scope_id":scope,"expected_revision":revision,
+		"issued_tick":revision,"sequence":null,"payload":body}
+	return session().dispatch(envelope,_field_authority)
+
+func field_step() -> Dictionary:
+	if not has_field(): return R.fail("NotFound","field")
+	var tick: int = session().query("mission").value.tick+1
+	var done: Dictionary = session().step_fixed(tick,[])
+	if not done.ok: return done
+	for row in done.value.system_reports:
+		if row.id=="field.rules" and row.value.get("outcome") != null:
+			var result: Dictionary = session().finish_mission(row.value.outcome)
+			if not result.ok: return result
+			var routed: Dictionary = session().route_result(result.value)
+			if not routed.ok: return routed
+			break
+	return done
+
+func leave_field() -> Dictionary:
+	if not has_field(): return R.fail("NotFound","field")
+	var closed: Dictionary = session().dispose_mission()
+	if closed.ok:
+		_field_mission = null
+		_field_authority = null
+	return closed
+
+func field_camera_sweep(queries: Array, stamp: Dictionary) -> Dictionary:
+	if not has_field() or stamp.get("scope_id")!=session().query().value.mission_id:
+		return R.fail("Unauthorized","camera_scope")
+	return _services.engine.query_sweep_batch(queries,stamp)
 
 func start_training() -> Dictionary:
 	if session()==null: return R.fail("InvalidState","session")

@@ -32,6 +32,8 @@ static func resolve(args: PackedStringArray, display: String, environment: Dicti
 			config.player_options["battle_limit"]=value.to_int()
 		else:
 			return R.fail("InvalidArgument","argument")
+	if paths.is_empty() and not config.smoke:
+		config.content_paths.append("res://content/base/field")
 	if not paths.is_empty():
 		config.content_paths=paths
 		config.config_sources.content_paths="command_line"
