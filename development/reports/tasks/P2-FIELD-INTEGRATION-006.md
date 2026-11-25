@@ -38,3 +38,17 @@ Windows，Godot `4.7.2.stable.official.ed1daf0bf` Standard，真实 headless 场
 早期隔离副本遗漏 MOV 新增的 `jump_motion.gd`，引擎报脚本解析失败。补齐依赖后全部组合检查重跑通过，并新增最低断言数与真实命中判据，防止引擎脚本异常后以 0 退出而误记成功。最初的小队测试曾把自然溃逃胜利仅计作击倒，现分别核对 COM 的溃逃胜利和有预备队下的实际失能补员。
 
 P2 桌面、目标设备、真实联网和阶段最终验收本任务均未执行。独立代码审查、独立 QA 和合并态验收由主 Agent 负责。开发交付限于本工作区的未提交候选。
+
+## 2c49fb8 独立审查后的返修
+
+在授权工作树上原样运行两份外部复现。末尾撤销纯转向加攻击输入的凭据时，旧实现把 tick 从 1 推到 2，角色从 Ready 变为 Windup；替换凭据的场景则停在 tick 1，阻塞后续合法输入。两份旧版复现都退出 1。
+
+本次调整 `field_pipeline.gd` 的发布屏障和 `field_mission.gd` 的输入缓冲。所有非空外部批次在 MOV 或其他域发布前重新验证凭据、团队、角色世代与控制修订。该校验读取当步开始时的控制关系，使同一步由真实敌人击倒的玩家仍可正常结算。首次权限拒绝保留回滚和原批次。当次有效权限恢复时可以同 tick 原样重试；新凭据可以替代已失效的旧批次。没有替代输入时，下一次权威固定步复核仍已失效的凭据后，丢弃这批输入并继续。有效旧批次的冲突行为保留。
+
+| 复验 | 实际命令与范围 | 退出码 | 证据 |
+|---|---|---:|---|
+| 独立脚本原样重跑 | Godot headless，`--path game --script D:/work/game/recollection/out/p2-qa/field-final-review/scope_commit.gd` 与同目录 `rebind.gd` | 0、0 | 末尾撤权保持 tick 1、原方向、Ready；新凭据接续成功推进到 tick 2。`returned-after.log`、`rebind-after.log` |
+| 业务自测 | `--path game --script res://tests/p2/field_pipeline/run.gd -- --casualties` | 0 | 261 个检查通过，包括临时撤权同 tick 重试、纯转向与攻击、真实击倒、旧输入永久失效下的替代与服务器空输入推进。`returned-tests.log` |
+| 真实组合 | 使用独立 QA 集成源的临时副本，覆盖本次两个生产文件与业务测试脚本；同上 `--brains=res://mission/runtime/field_brains.gd --mount --large --objective` | 0 | 163 个检查通过，500 人加 248 匹马；第 737 步实际命中。`returned-combined.log` |
+
+另行定位双编队部署首次因 `deployment.spawn_site` 暂不可用。河原首次显示导航修订 1 已应用时，十个西侧站点的直接查询均未返回路径，Jolt 十处全部净空。随后修订 2 出现，路径查询成功；同一部署成功，首次玩家编队令使用序号 3。Mission 内已有按导航修订失效的缓存，BOOT 所有者负责保留待提交草案并重试。观测脚本 `west-probe.gd` 的附加调试探针在结束时打印了引擎资源回收告警，未用作正式通过证据。

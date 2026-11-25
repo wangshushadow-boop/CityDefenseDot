@@ -246,16 +246,33 @@ func request_end(outcome: Dictionary) -> Dictionary:
 	if decision==null or decision!=outcome: return R.fail("Conflict","field.outcome")
 	return super.request_end(outcome)
 
+func _pending_input_authorized() -> bool:
+	var batch:Dictionary=_input.batch
+	if batch.control_revision!=_control_revision:return false
+	if batch.inputs.is_empty():
+		var grant:=_identity(_input.context)
+		return grant.ok and grant.value.issuer_id==_local.issuer_id
+	# Admission binds every intent to one actor generation. A new casualty is a
+	# consequence of this tick, so verify control against the opening roster.
+	return _drive_authorized(_mission,batch.inputs[0].actor_handle,_input.context,batch.source_tick)
+
 func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 	# Player input is admitted only via the credentialed gateway. AI runs in the same fixed tick.
 	if not inputs.is_empty() or _accessing: return R.fail("Unauthorized","field.input")
 	if _rules!=null and _rules.view().outcome!=null: return R.fail("InvalidState","field.outcome")
+	if _input.get("denied",false) and _active() and V.integer(tick,1) and tick==_tick+1:
+		_accessing=true
+		var still_authorized:=_pending_input_authorized()
+		_accessing=false
+		if not still_authorized:_input={}
 	var previous_mode: String=_rules.view().control_mode if _rules!=null else ""
 	var result:=super.step_fixed(tick,[])
 	if result.ok:
 		if _rules.view().control_mode!=previous_mode:_control_revision+=1
 		if not _watching and _user_handle!=null and _rules.view().outcome==null:
 			_watching=_rules.watch_commander(_user_handle,_local.team_key).ok
+	elif not _input.is_empty() and result.error.code=="Unauthorized":
+		_input["denied"]=true
 	return result
 
 func _start(ctx: Dictionary, batch: Dictionary) -> Dictionary:
@@ -632,6 +649,8 @@ func _snapshot(ctx: Dictionary, batch: Dictionary) -> Dictionary:
 	return R.ok()
 
 func _seal_tick() -> Dictionary:
+	if not _input.is_empty() and not _input.batch.inputs.is_empty() and not _pending_input_authorized():
+		return R.fail("Unauthorized","field.input")
 	return _move.commit_step(_draft.stage)
 
 func _revert() -> void:

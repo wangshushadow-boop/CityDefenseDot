@@ -55,7 +55,8 @@ func _gateway(operation: String, payload: Dictionary, context: Variant, grant: D
 						if _frame.pose[horse.index].position.distance_squared_to(_player_pose.position)>9.0:return R.fail("Unavailable","mount.distance")
 				if intent.get("target_hint")!=null and not _visible_handle(intent.target_hint,grant.team_key):
 					return R.fail("NotFound","target_hint")
-			if not _input.is_empty() and batch!=_input.batch: return R.fail("Conflict","field.input")
+			if not _input.is_empty() and batch!=_input.batch:
+				if is_same(context,_input.context) or _pending_input_authorized():return R.fail("Conflict","field.input")
 			_input={"batch":batch,"context":context}
 			return R.ok({"source_tick":batch.source_tick})
 		"field.order":

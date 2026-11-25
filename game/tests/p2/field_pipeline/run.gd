@@ -13,6 +13,19 @@ class Passive:
 	func commit_tick():pass
 	func rollback_tick():pass
 
+class OpposingAttacker extends Passive:
+	func decide(tick,_nav,units,com,player):
+		var actions:=[]
+		for actor in units:
+			if is_same(actor.team_key,0):continue
+			var state:Dictionary=com.view(actor.handle).value
+			var input_phase:=""
+			if state.phase=="Ready":input_phase="start"
+			elif state.phase=="Hold" and tick-state.since>=7:input_phase="release"
+			if not input_phase.is_empty():
+				actions.append({"actor_handle":actor.handle,"input_phase":input_phase,"direction":"thrust","weapon_slot":0,"target_hint":player})
+		return R.ok({"actions":actions,"moves":[],"looks":[],"metrics":{}})
+
 var failed:=0
 var checks:=0
 var token:=RefCounted.new()
@@ -26,6 +39,7 @@ var brain_script:Script
 var scope:=""
 var site_positions:=[[[0,0,0],[0,0,-5000]],[[1150,0,0],[1150,0,5000]]]
 var action_contacts:=0
+var drill_attack:=false
 
 func check(condition:bool,label:String)->bool:
 	checks+=1
@@ -41,6 +55,7 @@ func _initialize():
 	run.call_deferred()
 
 func factory(world,engine,form,teams):
+	if drill_attack:return OpposingAttacker.new()
 	return brain_script.new(world,engine,form,teams) if brain_script!=null else Passive.new()
 
 func auth(t):
@@ -159,6 +174,78 @@ func real_hits()->void:
 	ok(mission.request_end(hud().rules.outcome),"natural ending")
 	var receipt:Dictionary=mission.finalize()
 	if ok(receipt,"actual damage through RESULTS"):check(receipt.value.slot_outcomes[0].xp>=1 and receipt.value.slot_outcomes[1].wounded,"hit provenance and XP")
+	mission.dispose()
+
+func nonmovement_revocation()->void:
+	if not await open(battle(["infantry"],[1],1)):return
+	var fault:=[false]
+	var late:=func(_ctx,_batch):
+		if fault[0]:revoke=true
+		return R.ok()
+	ok(mission.register_system("snapshot",{"id":"zz.revoke","run":late}),"revoke after candidate COM and look")
+	ok(mission.step_fixed(1,[]),"start look/attack authority test")
+	var old:Dictionary=mission.gateway("field.view",{"projection":"camera"},officer).value
+	var h:Dictionary=old.actor_handle
+	var intent:={"actor_handle":h,"input_phase":"start","weapon_slot":0,"direction":"thrust","target_hint":null}
+	ok(input(2,[{"actor_handle":h,"yaw":3000000,"pitch":0},intent]),"admit nonmovement batch")
+	fault[0]=true
+	var denied:Dictionary=mission.step_fixed(2,[])
+	var after:Dictionary=mission.gateway("field.view",{"projection":"camera"},officer).value
+	check(not denied.ok and denied.error.code=="Unauthorized" and after.tick==old.tick and after.heading==old.heading and after.player.phase==old.player.phase,"revoked nonmovement input cannot publish")
+	revoke=false
+	fault[0]=false
+	ok(mission.step_fixed(2,[]),"restored authority retries original same tick")
+	var accepted:Dictionary=mission.gateway("field.view",{"projection":"camera"},officer).value
+	check(accepted.tick==2 and accepted.heading!=old.heading and accepted.player.phase=="Windup","retry publishes both original intentions once")
+	mission.dispose()
+
+func input_on_incapacitation()->void:
+	var data:=battle(["infantry"],[1],1)
+	data.spec.reserved_sources[0].count=2
+	data.spec.reserved_sources[0].source_slot_range=[0,2]
+	data.spec.reserved_sources[1].source_slot_range=[2,3]
+	data.spec.sides[0].roster_allocations=[{"source_slot_range":[0,2]}]
+	data.spec.sides[1].roster_allocations=[{"source_slot_range":[2,3]}]
+	drill_attack=true
+	var ready:=await open(data)
+	drill_attack=false
+	if not ready:return
+	ok(mission.step_fixed(1,[]),"bind player and pending reserve")
+	var h:Dictionary=hud().player_handle
+	var downed:=false
+	for tick in range(2,280):
+		var look:Dictionary=input(tick,[{"actor_handle":h,"yaw":1500000,"pitch":0}])
+		if not look.ok:
+			ok(look,"player retained direct control before enemy hit")
+			break
+		var ran:Dictionary=mission.step_fixed(tick,[])
+		if not ran.ok:
+			ok(ran,"authorized input can complete its casualty tick")
+			break
+		for entry in ran.value.system_reports:
+			if entry.id=="field.combat" and entry.value.events.any(func(e):return e.type=="downed" and e.actor_handle==h):downed=true
+		if downed:break
+	check(downed and not mission.resolve_entity(scope,h).ok and hud().rules.commander_downed,"same-tick legitimate input permits actual player incapacity and retirement")
+	mission.dispose()
+
+func replace_expired_batch()->void:
+	if not await open(battle(["infantry"],[1],1)):return
+	ok(mission.step_fixed(1,[]),"open replacement test")
+	var actor:Dictionary=hud().player_handle
+	var start:={"actor_handle":actor,"input_phase":"start","weapon_slot":0,"direction":"thrust","target_hint":null}
+	var look:={"actor_handle":actor,"yaw":2700000,"pitch":0}
+	ok(input(2,[start]),"admit first authenticated batch")
+	check(not input(2,[look]).ok,"still valid conflicting batch rejected")
+	token=RefCounted.new()
+	check(not mission.step_fixed(2,[]).ok and mission.view().tick==1,"old credential refuses publication")
+	ok(input(2,[look]),"replacement credential supersedes the revoked batch")
+	ok(mission.step_fixed(2,[]),"replacement batch publishes")
+	check(hud().player.phase=="Ready","revoked attack never executed")
+	ok(input(3,[start]),"admit another attack")
+	token=RefCounted.new()
+	check(not mission.step_fixed(3,[]).ok and mission.view().tick==2,"unreplaced revoked batch rolls back")
+	ok(mission.step_fixed(3,[]),"authority advances without unreplaced invalid input")
+	check(hud().player.phase=="Ready" and mission.view().tick==3,"server did not replay revoked attack")
 	mission.dispose()
 
 func large_field()->void:
@@ -379,6 +466,9 @@ func run()->void:
 				return
 	await field_test()
 	await real_hits()
+	await nonmovement_revocation()
+	await input_on_incapacitation()
+	await replace_expired_batch()
 	await historical_grants()
 	if "--casualties" in OS.get_cmdline_user_args():
 		await casualty_wave(false)
