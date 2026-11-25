@@ -28,6 +28,7 @@ class Proxy:
 	var mount_generation := 0
 	var ranged: bool
 	var figure: Models.Figure
+	var last_mounted := false
 	var last_pose := -1.0
 	var distance: float
 
@@ -173,7 +174,7 @@ func apply_snapshot(s: Dictionary) -> Dictionary:
 		var mount_ref: Variant = a.get("mount_handle")
 		p.mount_index = mount_ref.index if _valid_handle(mount_ref) else -1
 		p.mount_generation = mount_ref.generation if p.mount_index >= 0 else 0
-		var new_ranged: bool = p.role == "archer" and a.get("weapon_slot",1) != 0
+		var new_ranged: bool = p.role in ["archer","mounted_archer"] and a.get("weapon_slot",1) != 0
 		if p.ranged != new_ranged or p.old_phase != p.phase:
 			p.last_pose = -1.0
 		p.ranged = new_ranged
@@ -214,7 +215,7 @@ func consume_view_events(scope_id: String, tick: int, events: Array) -> Dictiona
 			var role: Variant = p.role if p != null else e.get("role")
 			if role not in Models.FILES: continue
 			if _corpses.size() == CORPSE_LIMIT: _corpses.pop_front()
-			_corpses.append({"at":at,"role":role,"yaw":p.yaw if p != null else 0.0,
+			_corpses.append({"at":at,"role":role,"ranged":p.ranged if p!=null else e.get("weapon_slot",1)!=0,"yaw":p.yaw if p != null else 0.0,
 				"team":p.team if p != null else int(e.get("team",0)),"until":tick+150})
 		else:
 			if _impacts.size() == HIT_LIMIT: _impacts.pop_front()
@@ -282,10 +283,11 @@ func render_interpolated(alpha: float, eye: Vector3, near_radius: float = 22.0) 
 				transform3.basis = transform3.basis.scaled(Vector3.ONE*Models.HORSE_SCALE)
 			p.figure.root.transform = transform3
 			# Skin playback follows the same authority tick at 30 Hz near camera.
-			if t-p.last_pose >= 1.5 or p.last_pose < 0 or phase in ["Active","Guard","Windup","Recovery"]:
+			if t-p.last_pose >= 1.5 or p.last_pose < 0 or p.last_mounted != mounted or phase in ["Active","Guard","Windup","Recovery"]:
 				_models[p.role].pose(p.figure,t+offset,p.speed,phase,p.old_direction if old else p.direction,
 					(p.old_since if old else p.since)+offset,mounted,p.ranged)
 				p.last_pose = t
+				p.last_mounted = mounted
 			_skinned += 1
 		else:
 			var frame := 0
@@ -295,9 +297,7 @@ func render_interpolated(alpha: float, eye: Vector3, near_radius: float = 22.0) 
 				frame = 3 + maxi(0,Models.DIRECTIONS.find(p.old_direction if old else p.direction))
 			elif p.speed > .12:
 				frame = 1 + floori((t+offset)/9.0)%2
-			if (p.role == "cavalry" and not mounted) or (p.role == "archer" and not p.ranged):
-				frame += Models.POSES_PER_SET
-			_batches.push(p.role+str(frame),transform3,Models.COLORS[posmod(p.team,2)])
+			_batches.push(_batch_pose(p.role,mounted,p.ranged,frame),transform3,Models.COLORS[posmod(p.team,2)])
 			_far += 1
 	for s: Dictionary in _shots.values():
 		var dir: Vector3 = s.direction
@@ -311,7 +311,7 @@ func render_interpolated(alpha: float, eye: Vector3, near_radius: float = 22.0) 
 			_corpses.remove_at(i)
 		else:
 			var fallen := Basis(Vector3.UP,c.yaw)*Basis(Vector3.BACK,PI*.5)
-			_batches.push(c.role+"0",Transform3D(fallen,c.at+Vector3.UP*.20),Models.COLORS[posmod(c.team,2)])
+			_batches.push(_batch_pose(c.role,false,c.ranged,0),Transform3D(fallen,c.at+Vector3.UP*.20),Models.COLORS[posmod(c.team,2)])
 	for i in range(_impacts.size()-1,-1,-1):
 		var e := _impacts[i]
 		if e.until < _tick:
@@ -319,6 +319,12 @@ func render_interpolated(alpha: float, eye: Vector3, near_radius: float = 22.0) 
 		else:
 			_batches.push("impact",Transform3D(Basis.IDENTITY,e.at),Color.WHITE)
 	_batches.flush()
+
+func _batch_pose(role: String, mounted: bool, ranged: bool, frame: int) -> String:
+	if role=="mounted_archer" and not ranged: role = "cavalry"
+	if (role in ["cavalry","mounted_archer"] and not mounted) or (role=="archer" and not ranged):
+		frame += Models.POSES_PER_SET
+	return role+str(frame)
 
 func report() -> Dictionary:
 	return {"scope_id":_scope,"tick":_tick,"near_skeletons":_skinned,"far_animated_instances":_far,
