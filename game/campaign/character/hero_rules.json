@@ -1,0 +1,309 @@
+{
+  "attributes": {"strength": "力量", "control": "控制", "endurance": "耐力", "agility": "灵巧", "social": "社交", "intellect": "智识"},
+  "options": {
+    "culture": {"river": "河洛", "frontier": "朔原", "coast": "海隅"},
+    "childhood": {"village": "村塾识字", "stable": "驿舍牧马", "market": "坊市学徒"},
+    "occupation": {"guard": "乡勇", "caravan": "行商", "healer": "游医"},
+    "identity": {"traveler": "行旅", "veteran": "归伍", "scholar": "游学"},
+    "appearance": {"reed": "青衫束发", "pine": "束冠短髭", "plum": "绛衣高髻"},
+    "banner": {"heron": "苍鹭", "stag": "白鹿", "wave": "回澜"}
+  },
+  "defaults": {
+    "name": "沈川",
+    "age": 22,
+    "culture": "river",
+    "childhood": "village",
+    "occupation": "guard",
+    "identity": "traveler",
+    "appearance": "reed",
+    "banner": "heron"
+  },
+  "age_min": 18,
+  "age_max": 70,
+  "skills": {
+    "one_handed": {"label": "单手", "attribute": "strength"},
+    "two_handed": {"label": "双手", "attribute": "strength"},
+    "polearm": {"label": "长杆", "attribute": "strength"},
+    "bow": {"label": "弓术", "attribute": "control"},
+    "crossbow": {"label": "弩术", "attribute": "control"},
+    "throwing": {"label": "投掷", "attribute": "control"},
+    "riding": {"label": "骑术", "attribute": "endurance"},
+    "athletics": {"label": "跑动", "attribute": "endurance"},
+    "smithing": {"label": "锻造", "attribute": "endurance"},
+    "scouting": {"label": "侦察", "attribute": "agility"},
+    "tactics": {"label": "战术", "attribute": "agility"},
+    "roguery": {"label": "游荡", "attribute": "agility"},
+    "charm": {"label": "魅力", "attribute": "social"},
+    "leadership": {"label": "领导", "attribute": "social"},
+    "trade": {"label": "贸易", "attribute": "social"},
+    "stewardship": {"label": "管理", "attribute": "intellect"},
+    "medicine": {"label": "医术", "attribute": "intellect"},
+    "engineering": {"label": "工程", "attribute": "intellect"}
+  },
+  "perks": {
+    "one_handed_hand": {
+      "label": "收锋",
+      "skill": "one_handed",
+      "level": 3,
+      "group": "one_handed_craft",
+      "scope": "self",
+      "effect": "one_handed",
+      "bonus": 2
+    },
+    "one_handed_lead": {
+      "label": "交守",
+      "skill": "one_handed",
+      "level": 3,
+      "group": "one_handed_craft",
+      "scope": "captain",
+      "effect": "one_handed",
+      "bonus": 3
+    },
+    "two_handed_hand": {
+      "label": "攒力",
+      "skill": "two_handed",
+      "level": 3,
+      "group": "two_handed_craft",
+      "scope": "self",
+      "effect": "two_handed",
+      "bonus": 2
+    },
+    "two_handed_lead": {
+      "label": "压阵",
+      "skill": "two_handed",
+      "level": 3,
+      "group": "two_handed_craft",
+      "scope": "army",
+      "effect": "two_handed",
+      "bonus": 3
+    },
+    "polearm_hand": {"label": "探路", "skill": "polearm", "level": 3, "group": "polearm_craft", "scope": "self", "effect": "polearm", "bonus": 2},
+    "polearm_lead": {
+      "label": "拒骑",
+      "skill": "polearm",
+      "level": 3,
+      "group": "polearm_craft",
+      "scope": "party",
+      "effect": "polearm",
+      "bonus": 3
+    },
+    "bow_hand": {"label": "引弦", "skill": "bow", "level": 3, "group": "bow_craft", "scope": "self", "effect": "bow", "bonus": 2},
+    "bow_lead": {"label": "齐矢", "skill": "bow", "level": 3, "group": "bow_craft", "scope": "settlement", "effect": "bow", "bonus": 3},
+    "crossbow_hand": {
+      "label": "稳机",
+      "skill": "crossbow",
+      "level": 3,
+      "group": "crossbow_craft",
+      "scope": "self",
+      "effect": "crossbow",
+      "bonus": 2
+    },
+    "crossbow_lead": {
+      "label": "覆射",
+      "skill": "crossbow",
+      "level": 3,
+      "group": "crossbow_craft",
+      "scope": "clan",
+      "effect": "crossbow",
+      "bonus": 3
+    },
+    "throwing_hand": {
+      "label": "飞石",
+      "skill": "throwing",
+      "level": 3,
+      "group": "throwing_craft",
+      "scope": "self",
+      "effect": "throwing",
+      "bonus": 2
+    },
+    "throwing_lead": {
+      "label": "散手",
+      "skill": "throwing",
+      "level": 3,
+      "group": "throwing_craft",
+      "scope": "captain",
+      "effect": "throwing",
+      "bonus": 3
+    },
+    "riding_hand": {"label": "识马", "skill": "riding", "level": 3, "group": "riding_craft", "scope": "self", "effect": "riding", "bonus": 2},
+    "riding_lead": {"label": "领骑", "skill": "riding", "level": 3, "group": "riding_craft", "scope": "army", "effect": "riding", "bonus": 3},
+    "athletics_hand": {
+      "label": "健步",
+      "skill": "athletics",
+      "level": 3,
+      "group": "athletics_craft",
+      "scope": "self",
+      "effect": "athletics",
+      "bonus": 2
+    },
+    "athletics_lead": {
+      "label": "整队",
+      "skill": "athletics",
+      "level": 3,
+      "group": "athletics_craft",
+      "scope": "party",
+      "effect": "athletics",
+      "bonus": 3
+    },
+    "smithing_hand": {
+      "label": "识火",
+      "skill": "smithing",
+      "level": 3,
+      "group": "smithing_craft",
+      "scope": "self",
+      "effect": "smithing",
+      "bonus": 2
+    },
+    "smithing_lead": {
+      "label": "检械",
+      "skill": "smithing",
+      "level": 3,
+      "group": "smithing_craft",
+      "scope": "settlement",
+      "effect": "smithing",
+      "bonus": 3
+    },
+    "scouting_hand": {
+      "label": "辨迹",
+      "skill": "scouting",
+      "level": 3,
+      "group": "scouting_craft",
+      "scope": "self",
+      "effect": "scouting",
+      "bonus": 2
+    },
+    "scouting_lead": {
+      "label": "探营",
+      "skill": "scouting",
+      "level": 3,
+      "group": "scouting_craft",
+      "scope": "clan",
+      "effect": "scouting",
+      "bonus": 3
+    },
+    "tactics_hand": {"label": "观势", "skill": "tactics", "level": 3, "group": "tactics_craft", "scope": "self", "effect": "tactics", "bonus": 2},
+    "tactics_lead": {
+      "label": "持阵",
+      "skill": "tactics",
+      "level": 3,
+      "group": "tactics_craft",
+      "scope": "captain",
+      "effect": "tactics",
+      "bonus": 3
+    },
+    "roguery_hand": {"label": "匿踪", "skill": "roguery", "level": 3, "group": "roguery_craft", "scope": "self", "effect": "roguery", "bonus": 2},
+    "roguery_lead": {"label": "隐营", "skill": "roguery", "level": 3, "group": "roguery_craft", "scope": "army", "effect": "roguery", "bonus": 3},
+    "charm_hand": {"label": "善言", "skill": "charm", "level": 3, "group": "charm_craft", "scope": "self", "effect": "charm", "bonus": 2},
+    "charm_lead": {"label": "调和", "skill": "charm", "level": 3, "group": "charm_craft", "scope": "party", "effect": "charm", "bonus": 3},
+    "leadership_hand": {
+      "label": "笃行",
+      "skill": "leadership",
+      "level": 3,
+      "group": "leadership_craft",
+      "scope": "self",
+      "effect": "leadership",
+      "bonus": 2
+    },
+    "leadership_lead": {
+      "label": "振旅",
+      "skill": "leadership",
+      "level": 3,
+      "group": "leadership_craft",
+      "scope": "settlement",
+      "effect": "leadership",
+      "bonus": 3
+    },
+    "trade_hand": {"label": "估价", "skill": "trade", "level": 3, "group": "trade_craft", "scope": "self", "effect": "trade", "bonus": 2},
+    "trade_lead": {"label": "通货", "skill": "trade", "level": 3, "group": "trade_craft", "scope": "clan", "effect": "trade", "bonus": 3},
+    "stewardship_hand": {
+      "label": "清册",
+      "skill": "stewardship",
+      "level": 3,
+      "group": "stewardship_craft",
+      "scope": "self",
+      "effect": "stewardship",
+      "bonus": 2
+    },
+    "stewardship_lead": {
+      "label": "节用",
+      "skill": "stewardship",
+      "level": 3,
+      "group": "stewardship_craft",
+      "scope": "captain",
+      "effect": "stewardship",
+      "bonus": 3
+    },
+    "medicine_hand": {
+      "label": "辨伤",
+      "skill": "medicine",
+      "level": 3,
+      "group": "medicine_craft",
+      "scope": "self",
+      "effect": "medicine",
+      "bonus": 2
+    },
+    "medicine_lead": {
+      "label": "照护",
+      "skill": "medicine",
+      "level": 3,
+      "group": "medicine_craft",
+      "scope": "army",
+      "effect": "medicine",
+      "bonus": 3
+    },
+    "engineering_hand": {
+      "label": "测度",
+      "skill": "engineering",
+      "level": 3,
+      "group": "engineering_craft",
+      "scope": "self",
+      "effect": "engineering",
+      "bonus": 2
+    },
+    "engineering_lead": {
+      "label": "监造",
+      "skill": "engineering",
+      "level": 3,
+      "group": "engineering_craft",
+      "scope": "party",
+      "effect": "engineering",
+      "bonus": 3
+    }
+  },
+  "origins": {
+    "culture": {
+      "river": ["intellect", "stewardship", "honor"],
+      "frontier": ["endurance", "riding", "bravery"],
+      "coast": ["control", "throwing", "caution"]
+    },
+    "childhood": {
+      "village": ["intellect", "medicine", "mercy"],
+      "stable": ["agility", "riding", "bravery"],
+      "market": ["social", "trade", "caution"]
+    },
+    "occupation": {
+      "guard": ["strength", "one_handed", "bravery"],
+      "caravan": ["social", "trade", "honor"],
+      "healer": ["intellect", "medicine", "mercy"]
+    },
+    "identity": {
+      "traveler": ["agility", "scouting", "caution"],
+      "veteran": ["strength", "polearm", "honor"],
+      "scholar": ["intellect", "engineering", "mercy"]
+    }
+  },
+  "version": 1,
+  "learning": {
+    "base_xp": 20,
+    "level_step": 4,
+    "practice_units": 28,
+    "per_attribute": 12,
+    "per_focus": 20,
+    "cap_attribute": 4,
+    "cap_focus": 5,
+    "levels_per_rank": 3,
+    "focus_max": 5,
+    "skill_max": 300
+  },
+  "health": {"base_recovery": 5, "medicine_divisor": 4, "rest_bonus": 5, "fatal_percent": 15}
+}
