@@ -7,6 +7,7 @@ const V = preload("res://contracts/values.gd")
 const Book = preload("res://application/receipt_book.gd")
 const FieldCommands = preload("res://application/field_commands.gd")
 const FieldResults = preload("res://mission/results/ports/field_results.gd")
+const CHARACTER_ACTIONS := ["create", "practice", "perk", "focus", "equip", "rest", "retire", "outcome"]
 const RULES := {"story":{"campaign":true,"main_story":true},"sandbox":{"campaign":true,"main_story":false},
 	"custom":{"campaign":false,"main_story":false},"multiplayer":{"campaign":false,"main_story":false}}
 
@@ -104,6 +105,8 @@ func query(kind: String = "session", visibility: Dictionary = {}) -> Dictionary:
 		"campaign":
 			if _camp!=null and _spec.get("mode","campaign")=="campaign":
 				return _camp.read_snapshot(visibility)
+		"character":
+			return _call(_character_view, [visibility])
 		"pending_result":
 			return _call(_pending_result_view,[visibility])
 		"field":
@@ -113,6 +116,16 @@ func query(kind: String = "session", visibility: Dictionary = {}) -> Dictionary:
 				var view: Dictionary=_mission.view()
 				return R.ok({"mission_id":view.mission_id,"phase":view.phase,"tick":view.tick})
 	return R.fail("NotFound","query")
+
+func _character_view(visibility: Dictionary) -> Dictionary:
+	if _phase != "CampaignMap" or _camp == null or not _camp.has_method("character_view"):
+		return R.fail("InvalidState", "character.view")
+	var scope: String = _camp.read_snapshot().value.world_id
+	var request := {"scope_id":scope, "session_id":_id, "payload":{"type":"character.view"}}
+	if visibility.size() != 1 or _issuer(visibility.get("context"), "character.view", request) != "player":
+		return R.fail("Unauthorized", "character.view")
+	return _camp.character_view()
+
 
 func _pending_result_view(visibility: Dictionary) -> Dictionary:
 	if _phase!="Results" or _mission!=null or _pending==null or _spec.get("mode")!="campaign":
@@ -304,30 +317,57 @@ func _dispatch(envelope: Dictionary, context: Variant) -> Dictionary:
 	if not checked.ok:
 		return checked
 	var cmd: Dictionary=checked.value
-	if not _authorize.is_valid():
-		return R.fail("Unauthorized","authority")
-	var permit: Variant=_authorize.call(context,"exchange",cmd)
-	if typeof(permit)!=TYPE_DICTIONARY or permit.get("ok")!=true or typeof(permit.get("value"))!=TYPE_STRING or permit.value!=cmd.actor_ref:
-		return R.fail("Unauthorized","actor_ref")
-	var view: Dictionary=_camp.read_snapshot().value
-	if cmd.scope_id!=view.world_id:
-		return R.fail("Unauthorized","scope_id")
-	var key:=Book.key([cmd.scope_id,permit.value,cmd.command_id])
-	var digest:=Book.key(cmd)
-	var old: Variant=Book.replay(_commands,key,digest)
-	if old!=null:
+	var operation: Variant = cmd.payload.get("type")
+	if not operation is String:
+		return R.fail("InvalidArgument", "command.type")
+	var character: bool = operation.begins_with("character.")
+	var action: String = operation.trim_prefix("character.") if character else ""
+	if character:
+		if action not in CHARACTER_ACTIONS or cmd.payload.size() != 2 or not cmd.payload.get("args") is Dictionary:
+			return R.fail("InvalidArgument", "character.command")
+		if not _camp.has_method("character_command"):
+			return R.fail("Unavailable", "character.command")
+	elif operation != "exchange" or cmd.payload.size() != 2 or not C.is_json_array(cmd.payload.get("lines")):
+		return R.fail("InvalidArgument", "exchange")
+	var request := cmd.duplicate(true)
+	if character:
+		request["session_id"] = _id
+	var issuer := _issuer(context, operation, request)
+	if issuer.is_empty() or issuer != cmd.actor_ref:
+		return R.fail("Unauthorized", "actor_ref")
+	if character and issuer != ("character.authority" if action == "outcome" else "player"):
+		return R.fail("Unauthorized", "character.actor")
+	var view: Dictionary = _camp.read_snapshot().value
+	if cmd.scope_id != view.world_id:
+		return R.fail("Unauthorized", "scope_id")
+	var key := Book.key([cmd.scope_id, issuer, cmd.command_id])
+	var digest := Book.key(cmd)
+	var old: Variant = Book.replay(_commands, key, digest)
+	if old != null:
 		return old
-	if cmd.expected_revision!=null and cmd.expected_revision!=view.revision:
-		return R.fail("StaleVersion","expected_revision")
-	if cmd.payload.size()!=2 or cmd.payload.get("type")!="exchange" or not C.is_json_array(cmd.payload.get("lines")):
-		return R.fail("InvalidArgument","exchange")
-	var next: Dictionary=Book.record(_commands,key,digest,cmd.command_id,view.revision+1)
-	var durable:=func(world: Dictionary,_receipt: Dictionary):
-		return _write(world,next,_results,null)
-	var applied: Dictionary=_camp.exchange("app/command/"+key,cmd.payload.lines,-1,durable)
+	if cmd.expected_revision != view.revision and (character or cmd.expected_revision != null):
+		return R.fail("StaleVersion", "expected_revision")
+	var next := _commands.duplicate()
+	var durable := func(world: Dictionary, _receipt: Dictionary):
+		next[key] = Book.entry(digest, cmd.command_id, world.revision)
+		return _write(world, next, _results, null)
+	var transaction := "app/command/" + key
+	var applied: Dictionary
+	if character:
+		applied = _camp.character_command(action, cmd.payload.args, transaction, durable)
+	else:
+		applied = _camp.exchange(transaction, cmd.payload.lines, -1, durable)
 	if not applied.ok:
 		return applied
-	_commands=next
+	if not next.has(key):
+		# Older worlds can contain a matching INV receipt without the corresponding APP receipt.
+		var snapshot: Dictionary = _camp.save_snapshot()
+		if not snapshot.ok:
+			return snapshot
+		var persisted: Dictionary = durable.call(snapshot.value, {})
+		if not persisted.ok:
+			return persisted
+	_commands = next
 	return _ack(next[key].receipt)
 
 func _dispatch_field(envelope: Dictionary, context: Variant) -> Dictionary:
@@ -379,6 +419,10 @@ func _prepare(spec: Dictionary, scene: Dictionary, ruleset: Dictionary) -> Dicti
 		before=snapshot.value
 		if candidate.reservation_revision!=before.revision+1:
 			return R.fail("StaleVersion","reservation_revision")
+		if _camp.has_method("check_character_sources"):
+			var eligible: Dictionary = _camp.check_character_sources(candidate.reserved_sources)
+			if not eligible.ok:
+				return eligible
 		_phase="Encounter"
 		var token: Dictionary=_camp.freeze_for_encounter(candidate.encounter_id)
 		if not token.ok:
