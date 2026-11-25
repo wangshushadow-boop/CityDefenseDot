@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-008",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "BAI",
+  "title": "感知与调度同一步的撤销",
+  "spec": "docs/systems/game/mission/ai/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I"
+  ],
+  "requirements": [
+    "BAI-06"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01",
+    "T-MIS-RT-02"
+  ],
+  "allowed_paths": [
+    "game/mission/ai/",
+    "game/tests/p2/ai_transaction/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-008.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "game/contracts/",
+    "docs/architecture/",
+    "game/mission/ai/formation/",
+    "game/mission/ai/formation/behaviors/",
+    "game/mission/ai/formation/controller/",
+    "game/mission/ai/formation/evaluation/",
+    "game/mission/ai/individual/",
+    "game/mission/ai/individual/behaviors/",
+    "game/mission/ai/individual/controller/",
+    "game/mission/ai/individual/decision/",
+    "game/mission/ai/individual/roles/",
+    "game/mission/ai/individual/targeting/",
+    "game/mission/ai/tactical/",
+    "game/mission/ai/tactical/commander/",
+    "game/mission/ai/tactical/evaluation/",
+    "game/mission/ai/tactical/planning/",
+    "game/mission/ai/tactical/strategies/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "感知与调度同一步的撤销。仅供现有 Mission 私有固定步使用，保留已有实例和外部能力身份。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "连续成功、失败后同 tick 重试及旧权限拒绝，且对既有独立回归无影响。"
+  ],
+  "status": "PLANNED"
+}

@@ -297,7 +297,8 @@
       "work_package_ids": [
         "P0-NAV",
         "P2-FORM",
-        "P6-NET-INTEGRATION"
+        "P6-NET-INTEGRATION",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-FORM-01",
@@ -312,7 +313,8 @@
       "work_package_ids": [
         "P2-BAI",
         "P4-BAI-SIEGE",
-        "P7-POLISH"
+        "P7-POLISH",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-BAI-01",
@@ -327,7 +329,8 @@
       "status": "PARTIAL",
       "work_package_ids": [
         "P2-BAI-T",
-        "P4-BAI-SIEGE"
+        "P4-BAI-SIEGE",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-BAI-T-01",
@@ -342,7 +345,8 @@
       "status": "PARTIAL",
       "work_package_ids": [
         "P2-BAI-F",
-        "P4-BAI-SIEGE"
+        "P4-BAI-SIEGE",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-BAI-F-01",

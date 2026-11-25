@@ -1216,19 +1216,18 @@
         "APP",
         "INF-ENGINE",
         "CI",
-        "MIS-RT"
+        "MIS-RT",
+        "FORM",
+        "BAI",
+        "BAI-T",
+        "BAI-F"
       ],
       "depends_on": [
         "P2-MIS-RT-BATTLE",
         "P2-RULES-FIELD",
-        "P2-RESULTS",
         "P2-BAI-T",
         "P2-BAI-F",
-        "P2-BAI-I",
-        "P2-VIS-BATTLE",
-        "P2-AUD-BATTLE",
-        "P2-CAM",
-        "P2-UI-BATTLE"
+        "P2-BAI-I"
       ],
       "scope": "真实 500/1000 混合野战、真实动作/AI/导航/动画、玩家命令与结果；P2 后续任务完整收口。",
       "acceptance": "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
@@ -1239,7 +1238,11 @@
         "docs/systems/game/application/README.md",
         "docs/systems/game/infrastructure/engine/README.md",
         "docs/systems/ci/README.md",
-        "docs/systems/game/mission/runtime/README.md"
+        "docs/systems/game/mission/runtime/README.md",
+        "docs/systems/game/mission/formation/README.md",
+        "docs/systems/game/mission/ai/README.md",
+        "docs/systems/game/mission/ai/tactical/README.md",
+        "docs/systems/game/mission/ai/formation/README.md"
       ],
       "candidate_test_ids": [
         "T-TEST-01",

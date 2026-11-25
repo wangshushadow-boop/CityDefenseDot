@@ -35,8 +35,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-hud",
   "scope": "战斗 HUD、部署/编队/指令、目标和结果预览。 部署、命令、可辨反馈及战果读取",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -45,5 +45,5 @@
     "战斗可读性、权限/错误反馈与操作测试。",
     "部署、命令、可辨反馈及战果读取"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

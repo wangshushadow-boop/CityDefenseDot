@@ -1,5 +1,38 @@
 {
   "schema_version": 1,
-  "locks": [],
+  "locks": [
+    {
+      "task_id": "P2-RESULTS-001",
+      "owner": "results_dev",
+      "branch": "detached",
+      "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-results",
+      "allowed_paths": [
+        "game/mission/results/",
+        "game/tests/p2/results/",
+        "development/reports/tasks/P2-RESULTS-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-UI-BATTLE-001",
+      "owner": "hud_dev",
+      "branch": "detached",
+      "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-hud",
+      "allowed_paths": [
+        "game/presentation/ui/",
+        "game/tests/p2/ui/",
+        "development/reports/tasks/P2-UI-BATTLE-001.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    }
+  ],
   "note": "各阶段按执行任务独占写入，验收后释放。"
 }

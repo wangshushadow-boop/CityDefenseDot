@@ -10,14 +10,17 @@
   "depends_on": [
     "P2-MIS-RT-BATTLE",
     "P2-RULES-FIELD",
-    "P2-RESULTS",
     "P2-BAI-T",
     "P2-BAI-F",
     "P2-BAI-I",
+    "P2-RESULTS",
     "P2-VIS-BATTLE",
     "P2-AUD-BATTLE",
     "P2-CAM",
-    "P2-UI-BATTLE"
+    "P2-UI-BATTLE",
+    "P2-FIELD-INTEGRATION-002",
+    "P2-FIELD-INTEGRATION-003",
+    "P2-FIELD-INTEGRATION-006"
   ],
   "requirements": [
     "BAI-06",

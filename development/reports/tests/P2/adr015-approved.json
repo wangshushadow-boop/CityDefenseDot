@@ -1,0 +1,276 @@
+{
+  "candidate": "46af5b1fcc4eb0d13b64ef146298f82074685806",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "environment": "Windows x64 headless; isolated app data; Git archive of the approved merge",
+  "source_archive_sha256": "cc1964a4942d60b32bbd78b75fc04023e18da02c783998cafa54a4ad192ac15c",
+  "coverage": "ADR-015 A team-only withdrawal, genuine Mission with mixed typed teams, known physics contact, authorities, rollback, sparse reinforcements and P1 compatibility",
+  "results": [
+    {
+      "name": "p2-rules",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p2-rules\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p2/rules/run.gd"
+      ],
+      "success_markers": [
+        "P2-RULES-FIELD PASS"
+      ],
+      "probe_sha256": "62cd03da19e0b84047616c62cecab006f72ab399f24aceadb36f5b9af888b0c1",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-RULES-FIELD PASS assertions=38 physical_contacts=1\n"
+    },
+    {
+      "name": "p2-field_eligibility",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p2-field_eligibility\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p2/field_eligibility/run.gd"
+      ],
+      "success_markers": [
+        "P2-WAVE-ELIGIBILITY failures=0"
+      ],
+      "probe_sha256": "11b14c1cc688456fa7eb008a0e2cb89a25714530ebca46314ed6752d65e4723d",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-WAVE-ELIGIBILITY failures=0\n"
+    },
+    {
+      "name": "captains",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\captains\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\rules-a0fbd85\\captains.gd"
+      ],
+      "success_markers": [
+        "QA_CAPTAINS errors=0"
+      ],
+      "probe_sha256": "07336e78047e029f396598eb75048d00e2d1aa062cba81fc3e5396b2103e7c5e",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nQA_CAPTAINS errors=0 checks=12 entered=[0, 1, 3, 4, 6] retired=[{ \"source_slot_id\": 0, \"end_status\": \"wounded\", \"wounded\": true }, { \"source_slot_id\": 1, \"end_status\": \"withdrawn\" }]\n"
+    },
+    {
+      "name": "bad-reader",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\bad-reader\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-review\\rules6_bad_reader.gd"
+      ],
+      "success_markers": [
+        "empty successful read response="
+      ],
+      "probe_sha256": "afb8594869428bb70b41a71141920c0243ca2e1b20e1031cabd31624710369ba",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nempty successful read response={ \"ok\": false, \"error\": { \"code\": \"InvalidArgument\", \"field\": \"commander.resolve\", \"detail\": <null>, \"message_key\": \"error.invalid_argument\", \"retryable\": false } }\n"
+    },
+    {
+      "name": "captain-sort",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\captain-sort\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-review\\rules6_cap.gd"
+      ],
+      "success_markers": [
+        "same report=true",
+        " errors=0"
+      ],
+      "probe_sha256": "3c0aaab284c3ce3166c71c260ffde6ed134c852e2e9fd39db17540f26389c891",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nlookup re-entry withdrawal={ \"ok\": false, \"error\": { \"code\": \"InvalidState\", \"field\": \"outcome\", \"detail\": <null>, \"message_key\": \"error.invalid_state\", \"retryable\": false } } staged eligibility=[]\ndeparted team options=[] accepted={ \"ok\": false, \"error\": { \"code\": \"Unauthorized\", \"field\": \"commander\", \"detail\": <null>, \"message_key\": \"error.unauthorized\", \"retryable\": false } } mode=spectate facts=[]\nsimultaneous order forward=[0, \"0\"] reverse=[0, \"0\"] same report=true\nCAPTAINS checks=10 errors=0\n"
+    },
+    {
+      "name": "actual-mission",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\actual-mission\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-review\\rules6_mission.gd"
+      ],
+      "success_markers": [
+        "RULES_COMBINED checks=",
+        "faults=0"
+      ],
+      "probe_sha256": "38de9e6ddbe155ff695117945df3fa0169e7c29bc33490854027db5a1be0cfae",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nRULES_COMBINED checks=8 faults=0\n"
+    },
+    {
+      "name": "p1-engine",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p1-engine\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p1/engine/run.gd"
+      ],
+      "success_markers": [
+        "ENGINE failures=0"
+      ],
+      "probe_sha256": "1b602ee18ab395da856b723c23b54356de38d65949f6dc1fee9badd8b647b2a1",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-INF-ENGINE-01 PASS\nT-INF-ENGINE-02 PASS hits=[{ \"query_index\": 0, \"entity_handle\": \"near\", \"fraction_ppm\": 399000, \"point_mm\": [-2020, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 0, \"entity_handle\": \"far\", \"fraction_ppm\": 699000, \"point_mm\": [3980, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"near\", \"fraction_ppm\": 395508, \"point_mm\": [-2020, 1000, 150], \"normal_ppm\": [-572602, 0, 819833], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"far\", \"fraction_ppm\": 695313, \"point_mm\": [3980, 1000, 150], \"normal_ppm\": [-593542, 0, 804803], \"region\": \"body\" }]\nP1-ENGINE-HEADLESS-SLICE PASS\nT-INF-ENGINE-04 PASS loops=50 median_us=4000 p95_us=4329 max_us=4436\nENGINE failures=0\n"
+    },
+    {
+      "name": "p2-movement",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p2-movement\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p2/movement/run.gd"
+      ],
+      "success_markers": [
+        "MOV_QUEUE_CHECKS errors=0"
+      ],
+      "probe_sha256": "e8445e2df3821f730272422a3ae400057faabf0783ce8455c179a07bf436b108",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-MOV-01 PASS links=3 reopen_close=true\nMOV_LOAD agents=500 corridors=20 ticks=5 max_per_tick=4 elapsed_us=4903 errors=0\nMOV_LOAD agents=1000 corridors=20 ticks=5 max_per_tick=4 elapsed_us=9037 errors=0\nMOV_BURST agents=500 distinct=500 ticks=125 peak_queued=24\nMOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24\nT-MOV-04 PASS shared_requests=1500 distinct_requests=1500\nMOV_FAILED_ACCESS tick1=8 attempts_by_tick2=16\nT-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327\nT-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true\nMOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2669\nMOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8\nMOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=4761\nMOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8\nMOV_QUEUE_CHECKS errors=0 display=headless\n"
+    },
+    {
+      "name": "p1-rules",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p1-rules\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p1/rules/run.gd"
+      ],
+      "success_markers": [
+        "PASS"
+      ],
+      "probe_sha256": "3311868efe069ab47e3fae6baf6321556c77f1ccbaaa4834e437c64376ad1ab7",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nT-SHRULE-01 PASS\nT-SHRULE-02 PASS\nT-SHRULE-03 PASS\nP1-RULES-RNG PASS\n"
+    },
+    {
+      "name": "p1-mission",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p1-mission\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p1/mission/run.gd"
+      ],
+      "success_markers": [
+        "T-MIS-RT-03 PASS"
+      ],
+      "probe_sha256": "9bd3beba5b9978ee34d498647880b7c9d3437227d2125fc537153a9a2f84d3a3",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP1-MISSION-REPLAY profile=headless display=headless digest=24427810fe1ace3d1cdfb22fbb42cdca7b98ec8eee7bc7a362dde96fd9677373\nT-MIS-RT-03 PASS switches=50 live_nodes=1\nMISSION failures=0\n"
+    },
+    {
+      "name": "p2-combat",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p2-combat\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p2/combat/run.gd"
+      ],
+      "success_markers": [
+        "P2-COM-002 PASS errors=0"
+      ],
+      "probe_sha256": "0516610d38f85a49d4f5063738e4b1d0a84e0d15fad5e6aacb88443f7f5b9930",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1\nCOM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea\nCOM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=211 max_us=3138\nCOM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=390 max_us=2253\nCOM field physics batches=44 queries=46\nP2-COM-002 PASS errors=0\n"
+    },
+    {
+      "name": "p2-mission",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\p2-mission\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "res://tests/p2/mission/run.gd"
+      ],
+      "success_markers": [
+        "P2-MISSION-SOURCE PASS"
+      ],
+      "probe_sha256": "0f7a9fbb0dda2ac22b272b5291a8208afb3a204418adb3b0d3a9acef0554e43b",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nWAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100\nP2-MISSION-FIELD PASS checks=1038 failures=0\nP2-MISSION-SOURCE PASS failures=0\n"
+    },
+    {
+      "name": "host-only",
+      "status": "PASS",
+      "exit": 0,
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\host-only\\engine.log",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\snapshot\\game",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\adr015-approved\\host_only.gd"
+      ],
+      "success_markers": [
+        "HOST_ONLY team=[0] competing_others=4 admin_calls=0",
+        "RULES_COMBINED checks=10 faults=0"
+      ],
+      "probe_sha256": "6ef6f07d8d1c6da2af04cbec9b83f244c95645151d924fd691bd91cb0a3078af",
+      "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nHOST_ONLY team=[0] competing_others=4 admin_calls=0\nRULES_COMBINED checks=10 faults=0\n"
+    }
+  ],
+  "not_run": [
+    "Whole AT-04, whole AT-05 and P3 settlement",
+    "GUI or input devices"
+  ]
+}

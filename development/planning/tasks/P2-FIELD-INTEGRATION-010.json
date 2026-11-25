@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-010",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "BAI-F",
+  "title": "编队 AI 授权同一步的撤销",
+  "spec": "docs/systems/game/mission/ai/formation/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I"
+  ],
+  "requirements": [
+    "BAI-06"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01",
+    "T-MIS-RT-02"
+  ],
+  "allowed_paths": [
+    "game/mission/ai/formation/",
+    "game/tests/p2/formation_ai_transaction/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-010.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "game/contracts/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "编队 AI 授权同一步的撤销。仅供现有 Mission 私有固定步使用，保留已有实例和外部能力身份。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "连续成功、失败后同 tick 重试及旧权限拒绝，且对既有独立回归无影响。"
+  ],
+  "status": "PLANNED"
+}

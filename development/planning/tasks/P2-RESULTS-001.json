@@ -36,8 +36,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-results",
   "scope": "来源槽、伤亡/俘虏候选、经验/战利品意图及结果完整性。 来源全覆盖、完整摘要，区分观察和结算",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -46,5 +46,5 @@
     "每槽唯一终态、未入场明确、结果稳定、无战役写入。",
     "来源全覆盖、完整摘要，区分观察和结算"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

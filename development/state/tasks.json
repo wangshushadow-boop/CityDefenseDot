@@ -573,7 +573,8 @@
         "development/reports/tasks/P2-RULES-FIELD-001.md",
         "development/reports/reviews/P2.md",
         "development/reports/tests/P2/rules-001.txt",
-        "development/reports/integration/P2.md"
+        "development/reports/integration/P2.md",
+        "development/reports/tests/P2/adr015-approved.json"
       ],
       "child_ids": [
         "P2-RULES-FIELD-001",
@@ -581,9 +582,9 @@
       ]
     },
     "P2-RESULTS": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "results_dev",
+      "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -664,9 +665,9 @@
       ]
     },
     "P2-UI-BATTLE": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "hud_dev",
+      "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -687,7 +688,11 @@
         "P2-FIELD-INTEGRATION-004",
         "P2-FIELD-INTEGRATION-005",
         "P2-FIELD-INTEGRATION-001",
-        "P2-FIELD-INTEGRATION-006"
+        "P2-FIELD-INTEGRATION-006",
+        "P2-FIELD-INTEGRATION-007",
+        "P2-FIELD-INTEGRATION-008",
+        "P2-FIELD-INTEGRATION-009",
+        "P2-FIELD-INTEGRATION-010"
       ]
     },
     "GATE-P2": {
@@ -1780,14 +1785,15 @@
         "development/reports/tasks/P2-RULES-FIELD-001.md",
         "development/reports/reviews/P2.md",
         "development/reports/tests/P2/rules-001.txt",
-        "development/reports/integration/P2.md"
+        "development/reports/integration/P2.md",
+        "development/reports/tests/P2/adr015-approved.json"
       ],
       "child_ids": []
     },
     "P2-RESULTS-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "results_dev",
+      "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -1850,9 +1856,9 @@
       "child_ids": []
     },
     "P2-UI-BATTLE-001": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "hud_dev",
+      "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -2051,6 +2057,42 @@
         "development/reports/tests/P2/desktop-profile-006.txt",
         "development/reports/integration/P2.md"
       ],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-007": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-008": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-009": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-010": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
       "child_ids": []
     }
   },
@@ -9931,6 +9973,78 @@
         "development/reports/integration/P2.md"
       ],
       "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RESULTS",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-RESULTS",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-RESULTS-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-RESULTS-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-UI-BATTLE",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-UI-BATTLE",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-UI-BATTLE-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-UI-BATTLE-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:09:09+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
     }
   ]
 }
