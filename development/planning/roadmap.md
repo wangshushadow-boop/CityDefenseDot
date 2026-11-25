@@ -85,7 +85,8 @@
 ### P4 · 社会仿真与攻城
 
 - `P4-ECO`：经济、市场、商队、工坊与锻造；前置：GATE-P3
-- `P4-SET`：城镇、城堡、村庄与领地治理；前置：GATE-P3
+- `P4-GOV`：负责人单独放行家族总督对庄邑日结的治理；前置：GATE-P3（仅该包获豁免）、P3-CHR。见[执行计划](P4-governor.md)。
+- `P4-SET`：城镇、城堡、村庄与领地治理；前置：GATE-P3、P4-GOV
 - `P4-POL`：王国、决议、外交、战争与身份；前置：GATE-P3, P4-SET
 - `P4-ENC-SIEGE`：遭遇、战略围城、预留与自动结算（SIEGE）；前置：GATE-P3, P4-ECO, P4-SET, P4-POL
 - `P4-SAI`：战略 AI 总控、调度与任务规划；前置：GATE-P3, P4-ECO, P4-SET, P4-POL

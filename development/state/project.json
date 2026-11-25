@@ -2,19 +2,19 @@
   "schema_version": 1,
   "project": "recollection",
   "delivery_version": "0.3",
-  "active_stage": "P3",
+  "active_stage": "P4",
   "stage_status": {
     "P0": "DONE",
     "P1": "DONE",
     "P2": "BLOCKED",
     "P3": "PARTIAL",
-    "P4": "PLANNED",
+    "P4": "PARTIAL",
     "P5": "PLANNED",
     "P6": "PLANNED",
     "P7": "PLANNED",
     "P8": "PLANNED"
   },
-  "authorized_by": "项目负责人提前放行 P3 人物，后续补 P2 性能。",
+  "authorized_by": "项目负责人提前放行 P4 总督治理及必要前置接入。",
   "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
   "integrated_commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e",
   "technical_stack": {
@@ -29,7 +29,8 @@
       "ADR-013",
       "ADR-014",
       "ADR-015",
-      "ADR-016"
+      "ADR-016",
+      "ADR-017"
     ],
     "approval": {
       "by": "项目负责人",
@@ -42,7 +43,7 @@
     }
   },
   "updated_at": "2026-11-25",
-  "note": "单独获授权的 P3-CHR 已验收；其余 P3 工作包未开始。P2 野战性能已延期。",
+  "note": "P4-GOV 已启动；其他 P4 工作包按原前置。P2 性能延期，P3 人物已验收。",
   "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
   "p1_decisions": {
@@ -86,5 +87,13 @@
       "evidence": "development/reports/stages/P3-character.md"
     }
   },
-  "last_completed_package": "P3-CHR"
+  "last_completed_package": "P3-CHR",
+  "p4_governor_authorization": {
+    "by": "项目负责人",
+    "date": "2026-11-25",
+    "scope": "P4-GOV",
+    "waived_dependency": "GATE-P3",
+    "decision": "P4 总督治理：从已有家族成员中任命总督，让人物能力实际影响领地日结。",
+    "evidence": "docs/architecture/decisions/ADR-017-governor.md"
+  }
 }

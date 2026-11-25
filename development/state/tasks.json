@@ -2483,6 +2483,97 @@
         "development/reports/tests/P3/character/acceptance.json"
       ],
       "child_ids": []
+    },
+    "P4-GOV": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "child_ids": [
+        "P4-GOV-001",
+        "P4-GOV-002",
+        "P4-GOV-003",
+        "P4-GOV-004",
+        "P4-GOV-005",
+        "P4-GOV-006"
+      ]
+    },
+    "P4-GOV-001": {
+      "status": "IN_PROGRESS",
+      "owner": "governor_set",
+      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "child_ids": []
+    },
+    "P4-GOV-002": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "child_ids": []
+    },
+    "P4-GOV-003": {
+      "status": "IN_PROGRESS",
+      "owner": "governor_camp",
+      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "child_ids": []
+    },
+    "P4-GOV-004": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "child_ids": []
+    },
+    "P4-GOV-005": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "child_ids": []
+    },
+    "P4-GOV-006": {
+      "status": "IN_PROGRESS",
+      "owner": "governor_ui",
+      "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "child_ids": []
     }
   },
   "transitions": [
@@ -12980,6 +13071,90 @@
         "development/reports/tests/P3/character/manifest.json"
       ],
       "commit": "53cde6d32a5d0a8f40177e64b5773ce39dfe210e"
+    },
+    {
+      "task_id": "P4-GOV",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:01:31+08:00",
+      "reason": "负责人选择提前交付总督治理",
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
+    },
+    {
+      "task_id": "P4-GOV-001",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:01:31+08:00",
+      "reason": "公共端口已冻结，按互斥路径分配",
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
+    },
+    {
+      "task_id": "P4-GOV-002",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:01:31+08:00",
+      "reason": "公共端口已冻结，按互斥路径分配",
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
+    },
+    {
+      "task_id": "P4-GOV-003",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:01:31+08:00",
+      "reason": "公共端口已冻结，按互斥路径分配",
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
+    },
+    {
+      "task_id": "P4-GOV-004",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:01:31+08:00",
+      "reason": "公共端口已冻结，按互斥路径分配",
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
+    },
+    {
+      "task_id": "P4-GOV-005",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:01:31+08:00",
+      "reason": "公共端口已冻结，按互斥路径分配",
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
+    },
+    {
+      "task_id": "P4-GOV-006",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:01:31+08:00",
+      "reason": "公共端口已冻结，按互斥路径分配",
+      "evidence": [
+        "docs/architecture/decisions/ADR-017-governor.md",
+        "development/planning/P4-governor.md"
+      ],
+      "commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c"
     }
   ]
 }

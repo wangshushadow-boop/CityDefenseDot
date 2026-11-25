@@ -1657,6 +1657,43 @@
       ]
     },
     {
+      "id": "P4-GOV",
+      "stage": "P4",
+      "kind": "PACKAGE",
+      "title": "沙盒家族总督与领地日结",
+      "module_ids": [
+        "SET",
+        "CHR",
+        "CAMP",
+        "APP",
+        "BOOT",
+        "UI"
+      ],
+      "depends_on": [
+        "GATE-P3",
+        "P3-CHR"
+      ],
+      "scope": "从已有家族成员中任命总督，让人物能力实际影响领地日结。",
+      "acceptance": "接管、任免、技能实效、失格、旧档及日结原子性，经实际桌面与独立测试验收。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/settlement/README.md",
+        "docs/systems/game/campaign/character/README.md",
+        "docs/systems/game/campaign/README.md",
+        "docs/systems/game/application/README.md",
+        "docs/systems/game/bootstrap/README.md",
+        "docs/systems/game/presentation/ui/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-GOV-01",
+        "T-GOV-02"
+      ],
+      "requirement_ids": [
+        "SET-01",
+        "CLN-01"
+      ]
+    },
+    {
       "id": "P4-SET",
       "stage": "P4",
       "kind": "PACKAGE",
@@ -1665,7 +1702,8 @@
         "SET"
       ],
       "depends_on": [
-        "GATE-P3"
+        "GATE-P3",
+        "P4-GOV"
       ],
       "scope": "城镇/城堡/村庄、治理、驻军民兵、建设/饥荒/叛乱。",
       "acceptance": "治理/归属、建设/产出、合法过渡，日结资源一致。",

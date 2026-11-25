@@ -132,15 +132,20 @@ def validate():
         require(set(parent['depends_on'])<=seen,f'package prerequisite mismatch {t["id"]}')
         require(t['parent'] not in seen,f'execution task cannot depend on its own package: {t["id"]}')
     state=load('development/state/tasks.json')['tasks']; require(set(state)==set(full),'task state coverage mismatch')
-    # The owner allowed only the character work package to start against the archived P2 build.
-    waiver=load('development/state/project.json').get('p3_authorization', {})
+    project=load('development/state/project.json')
+    early_packages={
+        'P3-CHR': ('GATE-P2', 'p3_authorization', 'docs/architecture/decisions/ADR-016-character-slice.md'),
+        'P4-GOV': ('GATE-P3', 'p4_governor_authorization', 'docs/architecture/decisions/ADR-017-governor.md'),
+    }
     def available(task, dependency):
         if state[dependency]['status']=='DONE': return True
-        return (dependency=='GATE-P2' and (task=='P3-CHR' or execs.get(task,{}).get('parent')=='P3-CHR')
-                and waiver.get('scope')=='P3-CHR' and waiver.get('waived_dependency')==dependency
+        package=execs[task]['parent'] if task in execs else task
+        if package not in early_packages: return False
+        gate, record, adr=early_packages[package]
+        waiver=project.get(record, {})
+        return (dependency==gate and waiver.get('scope')==package and waiver.get('waived_dependency')==gate
                 and waiver.get('by')=='项目负责人' and bool(waiver.get('decision'))
-                and waiver.get('evidence')=='docs/architecture/decisions/ADR-016-character-slice.md'
-                and (ROOT / waiver['evidence']).is_file())
+                and waiver.get('evidence')==adr and (ROOT / adr).is_file())
     statuses={'PLANNED','READY','IN_PROGRESS','TESTING','REVIEW','INTEGRATING','DONE','BLOCKED'}
     for i,s in state.items():
         require(s['status'] in statuses,f'unknown task status {i}')
@@ -154,7 +159,7 @@ def validate():
             require(s.get('evidence'),f'DONE missing evidence {i}')
             if p['kind']=='PACKAGE': require(s['child_ids'] and all(state[c]['status']=='DONE' for c in s['child_ids']),f'package DONE without completed children {i}')
             if p.get('approval_required'): require(s.get('approval'),f'DONE requires human approval {i}')
-    project=load('development/state/project.json'); require(project['project']=='recollection','wrong state project')
+    require(project['project']=='recollection','wrong state project')
     require(set(project['stage_status'])==set(stages),'stage state mismatch')
     require(project['active_stage'] is None or project['active_stage'] in stages,'unknown active stage')
     for s in stages:
@@ -174,16 +179,16 @@ def validate():
     print(f'PASS: {len(packages)} graph nodes ({len(packages)-len(gateids)} work packages + {len(gateids)} gates), acyclic, {len(execs)} registered execution tasks')
     print(f'PASS: module/requirement/test references, state records, {len(roles)} custom role TOML files parse')
     print('Structure checks only. Codex runtime, game code, real tests and performance NOT verified by this script.')
-    return packages,state,project
+    return packages,state,project,available
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__); ap.add_argument('--ready',choices=[f'P{i}' for i in range(9)],help='list dependency-satisfied planning packages; not an authorization or execution')
-    args=ap.parse_args(); packages,state,project=validate()
+    args=ap.parse_args(); packages,state,project,available=validate()
     if args.ready:
         phase=args.ready
         print(f'Planning candidates for {phase}; authorized stage = {project["active_stage"] or "NONE"}.')
         for p in packages:
-            if p['stage']==phase and state[p['id']]['status'] in ('PLANNED','READY') and all(available(i,d) for d in p['depends_on']):
+            if p['stage']==phase and state[p['id']]['status'] in ('PLANNED','READY') and all(available(p['id'],d) for d in p['depends_on']):
                 print(f'  {p["id"]}: {p["title"]} ({p["kind"]})')
         print('Refine execution tasks, check actual permissions and obtain authorization before starting.')
 

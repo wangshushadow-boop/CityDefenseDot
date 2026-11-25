@@ -172,3 +172,5 @@ flowchart TD
 
 
 P3 人物沿用同一命令信封、持久化回执与世界内容摘要。可选的 v1 人物子仓库、模块所有权及旧世界处理见 [ADR-016](decisions/ADR-016-character-slice.md)。
+
+P4 总督的受信命令、SET 所有权、只读资格及可选 v1 快照见 [ADR-017](decisions/ADR-017-governor.md)。

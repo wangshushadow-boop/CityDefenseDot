@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "P4-GOV-005",
+  "kind": "EXECUTION",
+  "parent": "P4-GOV",
+  "stage": "P4",
+  "module_id": "BOOT",
+  "title": "沙盒受信入口",
+  "spec": "docs/systems/game/bootstrap/README.md",
+  "depends_on": [
+    "GATE-P3",
+    "P3-CHR"
+  ],
+  "requirements": [
+    "SET-01",
+    "CLN-01"
+  ],
+  "acceptance_test_ids": [
+    "T-GOV-01",
+    "T-GOV-02"
+  ],
+  "allowed_paths": [
+    "game/bootstrap/composition_root.gd"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "approved_adr",
+  "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
+  "worktree": "D:\\work\\game\\recollection",
+  "scope": "沙盒受信入口",
+  "non_goals": [
+    "完整领地经济、王国政治、战役地图和婚育。"
+  ],
+  "acceptance": [
+    "按 ADR-017 在所属入口验证任职权限、日结实效与事务一致性。"
+  ],
+  "status": "IN_PROGRESS"
+}

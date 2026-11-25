@@ -49,3 +49,5 @@ flowchart TD
 ## 5. 结束与恢复
 
 每一批结束写 task report、stage report、更新状态/锁/阻塞、保存当前 commit 与未完任务；不自动开始下一阶段。不允许无限修复循环、强制删除未提交成果或覆盖用户修改。会话中断、模型/额度限制后按 [恢复流程](workflows/recovery.md) 重新核验，不依赖聊天记忆。
+
+负责人另已单独提前放行 P4-GOV。只豁免该包与子任务对 GATE-P3 的依赖，其他阶段门禁仍适用。[范围与决策](../docs/architecture/decisions/ADR-017-governor.md)

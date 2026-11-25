@@ -8,7 +8,8 @@
         "P6-NET-INTEGRATION",
         "P2-FIELD-INTEGRATION",
         "P2-VIS-BATTLE",
-        "P3-CHR"
+        "P3-CHR",
+        "P4-GOV"
       ],
       "verified_test_ids": [
         "T-BOOT-01",
@@ -67,7 +68,8 @@
         "P4-SOCIETY-INTEGRATION",
         "P5-SINGLE-INTEGRATION",
         "P2-FIELD-INTEGRATION",
-        "P3-CHR"
+        "P3-CHR",
+        "P4-GOV"
       ],
       "verified_test_ids": [
         "T-APP-01",
@@ -89,7 +91,8 @@
         "P4-SOCIETY-INTEGRATION",
         "P5-SINGLE-INTEGRATION",
         "P7-POLISH",
-        "P3-CHR"
+        "P3-CHR",
+        "P4-GOV"
       ],
       "verified_test_ids": [
         "T-CAMP-01",
@@ -112,7 +115,8 @@
     "CHR": {
       "status": "VERIFIED",
       "work_package_ids": [
-        "P3-CHR"
+        "P3-CHR",
+        "P4-GOV"
       ],
       "verified_test_ids": [
         "T-CHR-01",
@@ -202,7 +206,8 @@
     "SET": {
       "status": "NOT_IMPLEMENTED",
       "work_package_ids": [
-        "P4-SET"
+        "P4-SET",
+        "P4-GOV"
       ],
       "verified_test_ids": [],
       "evidence": []
@@ -472,7 +477,8 @@
         "P5-UI-SINGLE",
         "P6-UI-MULTI",
         "P7-POLISH",
-        "P3-CHR"
+        "P3-CHR",
+        "P4-GOV"
       ],
       "verified_test_ids": [],
       "evidence": [

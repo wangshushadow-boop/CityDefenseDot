@@ -76,7 +76,7 @@ SAI-03,MUST,CAMP;SAI;SAI-K;SAI-C;SAI-A;SAI-P;TOOLS,T-CAMP-04;T-SAI-03;T-SAI-K-02
 SAV-01,MUST,PERSIST,T-PERSIST-01,docs/systems/game/infrastructure/persistence/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 SAV-02,MUST,PERSIST;TEST,T-PERSIST-02;T-TEST-03,docs/systems/game/infrastructure/persistence/README.md;docs/systems/game/tests/README.md,PARTIAL,PARTIAL,,"P1 已实测 T-PERSIST-02, T-TEST-03，完整需求待后续验收。development/reports/stages/P1.md"
 SAV-03,MUST,CON;DEF;PERSIST,T-CON-03;T-DEF-03;T-PERSIST-03,docs/systems/game/contracts/README.md;docs/systems/game/shared/definitions/README.md;docs/systems/game/infrastructure/persistence/README.md,PARTIAL,PARTIAL,,P0 设计及实验索引（正式用例待验） ADR-012;P0-CONTRACTS-001 | P1 已实测 T-CON-03，完整需求待后续验收。development/reports/stages/P1.md
-SET-01,MUST,SET,T-SET-01,docs/systems/game/campaign/settlement/README.md,NOT_IMPLEMENTED,NOT_RUN,,
+SET-01,MUST,SET,T-SET-01;T-GOV-01;T-GOV-02,docs/systems/game/campaign/settlement/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 SET-02,MUST,SET,T-SET-02,docs/systems/game/campaign/settlement/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 SET-03,MUST,SET,T-SET-03,docs/systems/game/campaign/settlement/README.md,NOT_IMPLEMENTED,NOT_RUN,,
 SET-04,MUST,SET;INTERACT,T-SET-04;T-INTERACT-01,docs/systems/game/campaign/settlement/README.md;docs/systems/game/mission/interaction/README.md,NOT_IMPLEMENTED,NOT_RUN,,
