@@ -31,7 +31,8 @@
     "metadata": {
       "simulation_scene": "res://content/base/field/river_plain.tscn",
       "spacing_mm": 1450,
-      "spawn_columns": 24
+      "spawn_columns": 24,
+      "allow_jump": true
     },
     "schema_version": 1
   },

@@ -16,6 +16,7 @@ func _initialize() -> void:
 		quit(1)
 		return
 	var defs: RefCounted = compiled.value.registry
+	check(defs.get_definition("field:scene/river_plain","scene").value.metadata.allow_jump,"River Plain allows jumping")
 	for role in ["infantry","archer","cavalry","mounted_archer"]:
 		var troop: Dictionary = defs.get_definition("field:troop/"+role,"troop").value
 		check(troop.role==role and troop.equipment_set_ids.size()==1,"troop equipment "+role)
