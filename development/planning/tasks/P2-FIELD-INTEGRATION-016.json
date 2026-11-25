@@ -8,6 +8,11 @@
   "title": "首次取得角色时同步输入航向",
   "spec": "docs/systems/game/presentation/input/README.md",
   "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I",
     "P2-INPUT"
   ],
   "requirements": [

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-019",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "MIS-RT",
+  "title": "交战中补员及步骑变化后继续权威步进",
+  "spec": "docs/systems/game/mission/runtime/README.md",
+  "depends_on": [
+    "P2-FIELD-INTEGRATION-006",
+    "P2-FIELD-INTEGRATION-013",
+    "P2-FIELD-INTEGRATION-014"
+  ],
+  "requirements": [
+    "BAT-01",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-02",
+    "T-TEST-01"
+  ],
+  "allowed_paths": [
+    "game/mission/runtime/field_pipeline.gd",
+    "game/mission/runtime/field_brains.gd",
+    "game/tests/p2/field_revision/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-019.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/contracts/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "867fb810890ab8804ff41eb916ad63a837152b6f",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field-revision",
+  "scope": "定位实际第 1304 步 formation_revision 陈旧。正式场景须通过原案例并继续；保持编队修订单调、拒绝真正过期命令和事务回滚。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "保留原始失败、短回归与实际可重现的交战通过，并接受独立复审复测。"
+  ],
+  "status": "IN_PROGRESS"
+}

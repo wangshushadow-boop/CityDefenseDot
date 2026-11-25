@@ -710,7 +710,8 @@
         "P2-FIELD-INTEGRATION-015",
         "P2-FIELD-INTEGRATION-016",
         "P2-FIELD-INTEGRATION-017",
-        "P2-FIELD-INTEGRATION-018"
+        "P2-FIELD-INTEGRATION-018",
+        "P2-FIELD-INTEGRATION-019"
       ]
     },
     "GATE-P2": {
@@ -1949,21 +1950,31 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-004": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "main",
       "base_commit": "36b083dc04927ae270960d94b6454def4f1b2648",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "862c53b07a939ba59115f09d26e8e67620380e65",
+      "integrated_commit": "ce9c8f153436e6700a6b2a249035ad302f41e153",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-004.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-desktop-final.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-005": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
       "base_commit": "7b6ca6f6e36fd90f86b6753dd9213efc773b1e24",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "598f2f4fcc88612fc0b995b629ea704891fa165e",
+      "integrated_commit": "867fb810890ab8804ff41eb916ad63a837152b6f",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-005.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-ci-final.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-001": {
@@ -2215,12 +2226,17 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-015": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "recollection_developer/benchmark",
       "base_commit": "b17709582b0f01937ec773f66f5ce55cc6ab5999",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "4adb1bbd671e7eef7fae92f523fb06cc96ff517e",
+      "integrated_commit": "8af636840ae5d64338ab63d2ebd82bda7769eecf",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-015.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-benchmark-validation.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-016": {
@@ -2238,18 +2254,37 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-017": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "root",
       "base_commit": "a89ac81541109869e6ab0b294e02bca1587e125e",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "fc295155a0f05584e933faceda21a617820c9eeb",
+      "integrated_commit": "b1893df44c31b6e4a9cd5ee4a940a22c274ad8c2",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-017.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-audio-final.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-018": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "recollection_developer/engine",
       "base_commit": "84c2e042cbe61d3b992c6398a5689958310f11da",
+      "candidate_commit": "924979f8988a5532d5fa683e444128b9cd1a638a",
+      "integrated_commit": "028ac8117bc9b16d3607923d1c57867a1a44e0e3",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-018.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-sweep-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-019": {
+      "status": "IN_PROGRESS",
+      "owner": "mission-revision-dev",
+      "base_commit": "867fb810890ab8804ff41eb916ad63a837152b6f",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -11425,6 +11460,304 @@
         "development/reports/integration/P2.md"
       ],
       "commit": "7b6ca6f6e36fd90f86b6753dd9213efc773b1e24"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-019",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T19:27:37+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "867fb810890ab8804ff41eb916ad63a837152b6f"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-019",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T19:27:37+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "867fb810890ab8804ff41eb916ad63a837152b6f"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-004",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-004.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-desktop-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "ce9c8f153436e6700a6b2a249035ad302f41e153"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-004",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-004.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-desktop-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "ce9c8f153436e6700a6b2a249035ad302f41e153"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-004",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-004.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-desktop-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "ce9c8f153436e6700a6b2a249035ad302f41e153"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-004",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-004.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-desktop-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "ce9c8f153436e6700a6b2a249035ad302f41e153"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-017",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-017.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-audio-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "b1893df44c31b6e4a9cd5ee4a940a22c274ad8c2"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-017",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-017.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-audio-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "b1893df44c31b6e4a9cd5ee4a940a22c274ad8c2"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-017",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-017.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-audio-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "b1893df44c31b6e4a9cd5ee4a940a22c274ad8c2"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-017",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-017.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-audio-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "b1893df44c31b6e4a9cd5ee4a940a22c274ad8c2"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-018",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-018.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-sweep-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "028ac8117bc9b16d3607923d1c57867a1a44e0e3"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-018",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-018.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-sweep-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "028ac8117bc9b16d3607923d1c57867a1a44e0e3"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-018",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-018.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-sweep-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "028ac8117bc9b16d3607923d1c57867a1a44e0e3"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-018",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-018.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-sweep-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "028ac8117bc9b16d3607923d1c57867a1a44e0e3"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-015",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-015.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-benchmark-validation.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "8af636840ae5d64338ab63d2ebd82bda7769eecf"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-015",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-015.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-benchmark-validation.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "8af636840ae5d64338ab63d2ebd82bda7769eecf"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-015",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-015.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-benchmark-validation.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "8af636840ae5d64338ab63d2ebd82bda7769eecf"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-015",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T19:29:49+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-015.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-benchmark-validation.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "8af636840ae5d64338ab63d2ebd82bda7769eecf"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-005",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T19:30:26+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-005.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-ci-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "867fb810890ab8804ff41eb916ad63a837152b6f"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-005",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T19:30:26+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-005.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-ci-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "867fb810890ab8804ff41eb916ad63a837152b6f"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-005",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T19:30:26+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-005.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-ci-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "867fb810890ab8804ff41eb916ad63a837152b6f"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-005",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T19:30:26+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-FIELD-INTEGRATION-005.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/field-ci-final.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "867fb810890ab8804ff41eb916ad63a837152b6f"
     }
   ]
 }

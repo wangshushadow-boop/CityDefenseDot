@@ -1,6 +1,6 @@
 # recollection 项目状态
 
-**P2 已验收 15/16 个工作包。正式整场性能首轮未通过。** 500 人、100 匹马在河原实际交战，RTX 3090 的首轮 1080p 平均 2.36 FPS，固定步 P95 44.99 ms。首次玩家图形闭环已走通部署、指挥、撤退及返回，集成审查仍在修正冷启动布阵和授权边界。后续 P3 人物已获负责人条件授权，前置为 GATE-P2。[阶段报告](development/reports/stages/P2.md)
+**P2 已验收 15/16 个工作包。** 正式河原两档实战均低于性能预算。首轮千槽结算在一次坐骑失能后卡在第 1304 步；源码和专服成品均已复现，正在验证修正。P3 人物已获条件授权，前置为 GATE-P2。[本期阶段报告](development/reports/stages/P2.md)
 
 此前模块性能检查点为 `847890e`。Windows 冷开发交付有客户端、专服和内容 ZIP。四份野战模型、署名以及 48 条中英命令和警告均已验证；两个 PCK 分别捕获到每句真实声音。最终客户端在六个干净用户目录启动成功。P2 的 19 个模块测试入口及两项跨域/音频补充入口、P1 的 15 套回归均通过。20% 骑乘的 L3 夹具在 500 人时三轮固定步 P95 为 9.786–10.802 ms，1000 人为 21.559–22.890 ms，超出 16.667 ms。8 GiB 设备与人工听辨尚未实测。[构建清单](development/reports/tests/P2/build-checkpoint/final-manifest.json) · [P2 回归](development/reports/tests/P2/integrated-regressions.json) · [20% 骑乘原数](development/reports/tests/P2/l3-mixed-20pct-integrated.json)
 

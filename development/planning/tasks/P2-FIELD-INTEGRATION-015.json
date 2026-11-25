@@ -8,6 +8,10 @@
   "title": "正式野战图形与固定步性能测量驱动",
   "spec": "docs/systems/game/tests/README.md",
   "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
     "P2-BAI-I",
     "P2-VIS-BATTLE",
     "P2-UI-BATTLE"
@@ -42,5 +46,5 @@
   "acceptance": [
     "真实窗口与权威循环采样，准确区分失败、未执行和通过，保留运行参数与重现命令。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

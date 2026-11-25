@@ -8,6 +8,11 @@
   "title": "将字幕交给已安装的战场 HUD",
   "spec": "docs/systems/game/presentation/audio/README.md",
   "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I",
     "P2-AUD-BATTLE"
   ],
   "requirements": [
@@ -42,5 +47,5 @@
     "保留本地化、优先级与字幕开关。BOOT 可指定由 HUD 独占字幕显示，默认独立音频窗口保持原行为。",
     "原模块和组合根实跑，无现有冻结接口变更。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

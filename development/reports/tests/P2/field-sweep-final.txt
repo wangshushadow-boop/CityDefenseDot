@@ -1,0 +1,37 @@
+36 项 Jolt 几何及轨迹摘要一致，保留对单面三角形和初始重叠的精确查询。千人 MOV 独立单模块 P95 15.213 与 24.069 ms，观察到波动。
+重新从 Git 归档 867fb810890ab8804ff41eb916ad63a837152b6f，导入 Godot 4.7.2 后实跑。独立 Windows 与专项对照见 field-frozen-five-qa.json。
+Godot --headless --path game --script res://tests/p2/field_sweep_batch/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SWEEP_TIMES clear requests=16 hits=0 samples=40 median_us=83 p95_us=237
+SWEEP_TIMES clear requests=64 hits=0 samples=40 median_us=321 p95_us=340
+SWEEP_TIMES clear requests=500 hits=0 samples=40 median_us=2489 p95_us=2867
+SWEEP_TIMES clear requests=1000 hits=0 samples=40 median_us=5084 p95_us=5524
+SWEEP_TIMES obstacles requests=1000 hits=59 samples=40 median_us=5656 p95_us=6029
+FIELD_SWEEP_BATCH checks=36 failures=0 replay_sha256=a97c34e6d363a9f08ecf926022de0cf846978955bdf99c88f3fad077895899f4
+Godot --headless --path game --script res://tests/p2/field_engine/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_ENGINE checks=70 failures=0
+Godot --headless --path game --script res://tests/p2/combat/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1
+COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea
+COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=194 max_us=1287
+COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=540 max_us=2392
+COM field physics batches=44 queries=46
+P2-COM-002 PASS errors=0
+Godot --headless --path game --script res://tests/p2/movement/run.gd | exit 0
+idors=20 ticks=5 max_per_tick=4 elapsed_us=9681 errors=0
+MOV_BURST agents=500 distinct=500 ticks=125 peak_queued=24
+MOV_BURST agents=1000 distinct=1000 ticks=250 peak_queued=24
+T-MOV-04 PASS shared_requests=1500 distinct_requests=1500
+MOV_FAILED_ACCESS tick1=8 attempts_by_tick2=16
+T-MOV-02 people=48 arrived=48 ticks=861 yields=12445 queried=1 outside=0 max_step=0.11333429068327
+T-MOV-03 speed_mps=8.79936218261719 yaw_radians=0.0340615734458 restricted_max_x=-2.00127339363098 blocked=true
+MOV_ACTIVE people=500 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=2753
+MOV_JOIN people=500 moved=500 member_queries=500 max_total_per_tick=8
+MOV_ACTIVE people=1000 ticks=24 queries=20 first_m=1.12436294555664 max_neighbour_checks=1758 tick_p95_us=3685
+MOV_JOIN people=1000 moved=1000 member_queries=1000 max_total_per_tick=8
+MOV_QUEUE_CHECKS errors=0 display=headless

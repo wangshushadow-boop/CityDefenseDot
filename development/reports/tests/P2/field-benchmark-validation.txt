@@ -1,0 +1,4 @@
+六轮战场驱动和原始数据独立复核通过，游戏性能未通过。
+Godot 真实渲染 6 进程 exit 0，benchmark.py 汇总 exit 1。
+主集成员从已合入 game/tests/p2/field_benchmark/evidence/reference-53m 解压六份 gzip，用 Python analyze 重新计算逐组全部指标、六份解压 SHA256 和拒绝原因，全部精确匹配（exit 0）。
+逐轮详情见 field-six-recount.json。500人 2.442–2.521 FPS，固定步 P95 42.863–44.895 ms。1000人 1.155–1.218 FPS，94.001–100.405 ms。六轮均未达到帧预算、固定步、无持续积压。

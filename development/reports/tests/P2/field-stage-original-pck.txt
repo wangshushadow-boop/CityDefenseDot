@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_STAGE progress tick=240 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=480 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=720 seen_targets=0 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=961 seen_targets=1 shots=0 hits=0 downed=0 captured_candidates=0 entered=500
+FIELD_STAGE progress tick=1201 seen_targets=1 shots=17 hits=9 downed=3 captured_candidates=0 entered=503
+FAIL fixed tick 1304 { "code": "StaleVersion", "field": "formation_revision", "detail": <null>, "message_key": "error.stale_version", "retryable": false }
+FIELD_STAGE {}
+FIELD_ACCEPTANCE checks=2625 failures=1

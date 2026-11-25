@@ -1250,7 +1250,9 @@
         "docs/systems/game/mission/ai/formation/README.md",
         "docs/systems/game/content/base/README.md",
         "docs/systems/game/presentation/visuals/README.md",
-        "docs/systems/game/mission/movement/README.md"
+        "docs/systems/game/mission/movement/README.md",
+        "docs/systems/game/presentation/input/README.md",
+        "docs/systems/game/presentation/audio/README.md"
       ],
       "candidate_test_ids": [
         "T-TEST-01",

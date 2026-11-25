@@ -452,7 +452,8 @@
       "status": "PARTIAL",
       "work_package_ids": [
         "P2-INPUT",
-        "P5-SINGLE-INTEGRATION"
+        "P5-SINGLE-INTEGRATION",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-INPUT-02",
@@ -500,7 +501,8 @@
         "P2-AUD-BATTLE",
         "P5-SINGLE-INTEGRATION",
         "P7-POLISH",
-        "P2-VIS-BATTLE"
+        "P2-VIS-BATTLE",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-AUD-02",

@@ -1,0 +1,1092 @@
+{
+  "source": {
+    "commit": "1d0f1fb4355c8f79c1059d2281d0a81c65a1d580",
+    "archive_sha256": "f3e4a305482b85541f5979dbfe70ca52787786d4c3432b6d40ac8edbdd5e3c9d",
+    "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+  },
+  "status": "PASS",
+  "scope": "Independent QA of five candidates. All 21 independent checks matched expected behavior or the measured failure in archived data; this is not stage acceptance.",
+  "candidates": {
+    "P2-FIELD-INTEGRATION-004": {
+      "sha": "862c53b",
+      "result": "PASS",
+      "source_kind": "Exact combined commit, independently cold imported; actual Windows 1280x720 Forward+ player and actual headless server startup.",
+      "cases": [
+        "boot",
+        "recovery",
+        "desktop",
+        "fast-close",
+        "scope-004"
+      ],
+      "reported": "Desktop deployed, executed the first player order, withdrew its own army, settled 20 slots and returned. Forced WM_CLOSE during two active voices ended with audio_pending=0 and exit 0. Headless 20/40 and cold settlement 28 checks passed."
+    },
+    "P2-FIELD-INTEGRATION-005": {
+      "sha": "598f2f4",
+      "result": "PASS",
+      "scope": "Static dependency/constructor access and candidate Git scope; packaging and both cold PCK launch checks assigned to main integration.",
+      "cases": [
+        "ci-ownership",
+        "ci-dependencies",
+        "scope-005"
+      ],
+      "independent_final_pck_export": "NOT_RUN"
+    },
+    "P2-FIELD-INTEGRATION-015": {
+      "sha": "4adb1bb",
+      "result": "PASS",
+      "scope": "Independent SHA256 checks of the 12 archived uncompressed traces, nearest-rank P95, durations, FPS, low 1%, hit checks and accumulated wall debt.",
+      "cases": [
+        "benchmark-reference-53m",
+        "benchmark-initial-22m",
+        "scope-015"
+      ],
+      "archived_reference_workload": {
+        "status": "FAIL",
+        "checks_failed_in_all_six": [
+          "frame_budget",
+          "tick_budget",
+          "no_sustained_backlog"
+        ],
+        "source": "84c2e04 with 3ca4284/8caab14/d7b810d; see corresponding provenance.",
+        "frames_and_ticks": [
+          270,
+          2160
+        ]
+      },
+      "full_graphical_benchmark_on_frozen_1d0f1fb_in_this_independent_batch": "NOT_RUN",
+      "initial_diagnostics": "All three initial 1000-body archived samples had zero hits during their sample windows, matching the recorded mixed_action failure. Initial reference misses visible skin/arrow conditions. No initial result supersedes the 53m reference set."
+    },
+    "P2-FIELD-INTEGRATION-017": {
+      "sha": "fc29515",
+      "result": "PASS",
+      "cases": [
+        "captions",
+        "audio-retirement",
+        "audio-suite",
+        "recorded",
+        "audio-device",
+        "fast-close",
+        "scope-017"
+      ],
+      "reported": "End-to-end fast-close had zero outstanding audio and no engine diagnostics. Three actual playback refs retired on Dummy in 68.561ms and WASAPI in 16.175ms, zero still alive, 48 recordings validated. RW process exited 0."
+    },
+    "P2-FIELD-INTEGRATION-018": {
+      "sha": "924979f",
+      "result": "PASS",
+      "scope": "Exact semantics, not the full-frame budget.",
+      "cases": [
+        "geometry",
+        "sweep-movement",
+        "scope-018"
+      ],
+      "reported": "36 geometry comparisons share the known Jolt result hash. Per-tick pose hashes on 500 and 1000 match both baselines. This repetition measured MOV stage P95 9.321/24.069ms; the 1000-person MOV alone exceeds 16.667ms.",
+      "thousand_unit_mov_60hz_comparison": "FAIL"
+    }
+  },
+  "cases": [
+    {
+      "case": "cold-import",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\cold-import-engine.log",
+        "--import"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "Godot Engine v4.7.2"
+      ],
+      "duration_s": 5.5,
+      "log": "out\\p2-qa\\final-five\\cold-import.log",
+      "sha256": "43ddac6608dd4de8b96fc803a7ae3081372fc4b41f2f3ece1dd7933da1f5788a",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": []
+    },
+    {
+      "case": "boot",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\boot-engine.log",
+        "--script",
+        "res://tests/p2/field_boot/run.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "FIELD_BOOT errors=0 people=20 slots=40"
+      ],
+      "duration_s": 0.813,
+      "log": "out\\p2-qa\\final-five\\boot.log",
+      "sha256": "4c1d22b6d458c7253c1828c60c91b5a2c2c0cd2e96d091d2fbd075c61f7d08e8",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "FIELD_BOOT errors=0 people=20 slots=40"
+      ]
+    },
+    {
+      "case": "recovery",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\recovery-engine.log",
+        "--script",
+        "res://tests/p2/field_boot/recovery.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "BOOT_RECOVERY checks=28 failures=0"
+      ],
+      "duration_s": 3.406,
+      "log": "out\\p2-qa\\final-five\\recovery.log",
+      "sha256": "94e5f7b84ae1820bc5ba1700b65a261e0482b3f0509c2320972ee333ded788cb",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": []
+    },
+    {
+      "case": "audio-retirement",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\audio-retirement-engine.log",
+        "--script",
+        "res://tests/p2/field_audio_handoff/retirement.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "AUDIO_RETIREMENT driver=Dummy refs=[1-9]",
+        "live=0",
+        "errors=0"
+      ],
+      "duration_s": 0.625,
+      "log": "out\\p2-qa\\final-five\\audio-retirement.log",
+      "sha256": "031be48f984b08e826fefc93393e5b3b67e6df48a7f7c2906d2176c9f53366f2",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "AUDIO_RETIREMENT driver=Dummy refs=3 live=0 elapsed_ms=68.561 mixed_after_stop=4096 pcm_frames=8192 pcm_peak=0.46170929074287 errors=0"
+      ]
+    },
+    {
+      "case": "captions",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\captions-engine.log",
+        "--script",
+        "res://tests/p2/field_audio_handoff/run.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "AUDIO_HANDOFF errors=0"
+      ],
+      "duration_s": 0.344,
+      "log": "out\\p2-qa\\final-five\\captions.log",
+      "sha256": "7dc3295782b088984fcf6a88ae5adf1127f084ab1c00b26863315d1d53334be4",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "AUDIO_HANDOFF errors=0"
+      ]
+    },
+    {
+      "case": "audio-suite",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\audio-suite-engine.log",
+        "--script",
+        "res://tests/p2/audio/run.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "T-AUD-01-AUTO PASS",
+        "T-AUD-02 PASS",
+        "T-AUD-03 PASS",
+        "P2-AUD-BATTLE-001 PASS"
+      ],
+      "duration_s": 1.469,
+      "log": "out\\p2-qa\\final-five\\audio-suite.log",
+      "sha256": "4675bade323f0fbe6cad895cadceb97204639f7edc825da3368828edeb01ef1e",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "T-AUD-01-AUTO PASS actors=500 confirmed_hits=250 budget=12 peak=10 dropped=185 voice_pcm_frames=16384 pcm_peak=0.43687245249748 human_intelligibility=NOT_RUN",
+        "T-AUD-02 PASS silent_victory_caption=audio.defeat",
+        "T-AUD-03 PASS remaining_audio_buses=0",
+        "P2-AUD-BATTLE-001 PASS errors=0"
+      ]
+    },
+    {
+      "case": "recorded",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\recorded-engine.log",
+        "--script",
+        "res://tests/p2/audio/recorded_voices.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "RECORDED_VOICES PASS samples=48"
+      ],
+      "duration_s": 4.89,
+      "log": "out\\p2-qa\\final-five\\recorded.log",
+      "sha256": "c610c6d20d4897a9dae3f32760940a2ba4101001e0360a3553cf83f770846d20",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "RECORDED_VOICE zh_CN pcm_frames=7680 peak=0.50477993488312",
+        "RECORDED_VOICE en_US pcm_frames=7680 peak=0.71526229381561",
+        "RECORDED_VOICES PASS samples=48 peak_sources=1 errors=0"
+      ]
+    },
+    {
+      "case": "geometry",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\geometry-engine.log",
+        "--script",
+        "res://tests/p2/field_sweep_batch/run.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "FIELD_SWEEP_BATCH checks=36 failures=0 replay_sha256=a97c34e6d363a9f08ecf926022de0cf846978955bdf99c88f3fad077895899f4"
+      ],
+      "duration_s": 1.0,
+      "log": "out\\p2-qa\\final-five\\geometry.log",
+      "sha256": "e5eb99cd0cfa8a88425e65bc6dce844b238ba33f9a89312d706e0326e606b194",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "FIELD_SWEEP_BATCH checks=36 failures=0 replay_sha256=a97c34e6d363a9f08ecf926022de0cf846978955bdf99c88f3fad077895899f4"
+      ]
+    },
+    {
+      "case": "sweep-movement",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\sweep-movement-engine.log",
+        "--script",
+        "res://tests/p2/field_sweep_batch/profile.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "f1466c3e5062ff83792978dcca3cf2b72543c05f88a2a71062e44edc570cfa03",
+        "c51273d588fe771cc378851598eb70a82913dc2beeefe9d716336429b3ef7ca2",
+        "MOV_SWEEP_AB PASS"
+      ],
+      "duration_s": 4.891,
+      "log": "out\\p2-qa\\final-five\\sweep-movement.log",
+      "sha256": "5eab404db3e541ba8bedd47dc3a151755c83a1b70cde36d2aa7bb1e58d7d29ec",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "MOV_SWEEP_AB people=500 moved=500 steps=200 samples=60 real_sweeps=84833 real_paths=500 median_us=7170 p95_us=9321 replay_sha256=f1466c3e5062ff83792978dcca3cf2b72543c05f88a2a71062e44edc570cfa03",
+        "MOV_SWEEP_AB people=1000 moved=1000 steps=200 samples=60 real_sweeps=138362 real_paths=1000 median_us=17861 p95_us=24069 replay_sha256=c51273d588fe771cc378851598eb70a82913dc2beeefe9d716336429b3ef7ca2",
+        "MOV_SWEEP_AB PASS"
+      ]
+    },
+    {
+      "case": "desktop",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--resolution",
+        "1280x720",
+        "--audio-driver",
+        "WASAPI",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\desktop-engine.log",
+        "--script",
+        "res://tests/p2/field_boot/desktop.gd",
+        "--",
+        "--battle-limit=20"
+      ],
+      "extra_environment": {
+        "RECOLLECTION_FIELD_SCREENSHOT": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\desktop.png"
+      },
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "FIELD_DESKTOP PASS result_slots=20"
+      ],
+      "duration_s": 3.531,
+      "log": "out\\p2-qa\\final-five\\desktop.log",
+      "sha256": "fd19160a11f07d2be82459f5355d4081831250a8e29510f3ed8b8c33e094def7",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "FIELD_DESKTOP PASS result_slots=20"
+      ]
+    },
+    {
+      "case": "fast-close",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--resolution",
+        "1280x720",
+        "--audio-driver",
+        "WASAPI",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\fast-close-engine.log",
+        "--script",
+        "res://tests/p2/field_boot/desktop.gd",
+        "--",
+        "--battle-limit=20"
+      ],
+      "extra_environment": {
+        "RECOLLECTION_VERIFY_FAST_CLOSE": "1"
+      },
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "FIELD_FAST_CLOSE voices=[1-9]",
+        "\"event\":\"stopped\"",
+        "\"exit_code\":0"
+      ],
+      "duration_s": 3.437,
+      "log": "out\\p2-qa\\final-five\\fast-close.log",
+      "sha256": "3919e0e7528a646c847272deaa61c0106d619734e44a2f1c40142aead686a32f",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "FIELD_FAST_CLOSE voices=2",
+        "P1_BOOT {\"audio_pending\":0,\"content_hash\":\"a95bfb75663b73ca9ef32c49100082b97c1e4edf8cdc3a9c422728ad052f1c56\",\"display\":\"Windows\",\"event\":\"stopped\",\"exit_code\":0,\"failed_module\":\"\",\"mission_tick\":6,\"presentation_loaded\":true,\"profile\":\"client\",\"protocol_version\":1,\"release_order\":[\"session\",\"persistence\",\"engine\",\"core\",\"content\",\"compiler\",\"telemetry\"],\"state_hash\":\"\"}"
+      ]
+    },
+    {
+      "case": "audio-device",
+      "command": [
+        "D:/Program/Godot/Standard/Godot_v4.7.2-stable_win64_console.exe",
+        "--resolution",
+        "1280x720",
+        "--audio-driver",
+        "WASAPI",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\audio-device-engine.log",
+        "--script",
+        "res://tests/p2/field_audio_handoff/retirement.gd"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "AUDIO_RETIREMENT driver=WASAPI refs=[1-9]",
+        "live=0",
+        "errors=0"
+      ],
+      "duration_s": 1.813,
+      "log": "out\\p2-qa\\final-five\\audio-device.log",
+      "sha256": "1eff61d5becdd83729f4f8a59d3cded5b426fe33c6effd8327ac5942f88c8079",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "AUDIO_RETIREMENT driver=WASAPI refs=3 live=0 elapsed_ms=16.175 mixed_after_stop=512 pcm_frames=7168 pcm_peak=0.20534040033817 errors=0"
+      ]
+    },
+    {
+      "case": "benchmark-reference-53m",
+      "status": "PASS",
+      "stage_perf": "FAIL",
+      "measurements": [
+        {
+          "trial": "500-1",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 53,
+          "raw_sha256": "57ab287e38b8da457a612efe99abba9b8340b3e0869d34348cf3bcf60daae206",
+          "fps": 2.521177329304529,
+          "low1": 2.2932045469659754,
+          "frame_p95_ms": 431.064,
+          "sim_p95_ms": 42.914,
+          "end_wall_debt_ms": 12012.792000000001,
+          "failed_checks": [
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "500-2",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 53,
+          "raw_sha256": "0be75481815841e5d131aef0f223bb97f3fe43360f1c1b99a71eea67f27a9828",
+          "fps": 2.4420217899976304,
+          "low1": 1.9987407933002208,
+          "frame_p95_ms": 469.99,
+          "sim_p95_ms": 44.895,
+          "end_wall_debt_ms": 12573.481,
+          "failed_checks": [
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "500-3",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 53,
+          "raw_sha256": "12e1c15e2928e43e4abc10c072736edac5c02128deb14549b461b0ce701bd671",
+          "fps": 2.515938329543305,
+          "low1": 2.2695344503981896,
+          "frame_p95_ms": 428.996,
+          "sim_p95_ms": 42.863,
+          "end_wall_debt_ms": 12029.449,
+          "failed_checks": [
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "1000-1",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 59,
+          "raw_sha256": "09cc2fbb12d4d99f6f9074ca40585efbe76c631369cf5582c80b53249bd88648",
+          "fps": 1.1968428880404012,
+          "low1": 1.0124582993737945,
+          "frame_p95_ms": 926.596,
+          "sim_p95_ms": 96.756,
+          "end_wall_debt_ms": 32313.563000000002,
+          "failed_checks": [
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "1000-2",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 59,
+          "raw_sha256": "7d3c6ff4eece7b58562f41d7351c9a01d7fa3e5af3031df2991b1b149bf60b07",
+          "fps": 1.1551561898235823,
+          "low1": 1.004569787965455,
+          "frame_p95_ms": 978.716,
+          "sim_p95_ms": 100.405,
+          "end_wall_debt_ms": 33680.945,
+          "failed_checks": [
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "1000-3",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 59,
+          "raw_sha256": "043a7b009767ec88663c4a624c35c43a433105ea913ff0b769fad8a94f2a9488",
+          "fps": 1.2182814667145063,
+          "low1": 1.0524044811382807,
+          "frame_p95_ms": 911.47,
+          "sim_p95_ms": 94.001,
+          "end_wall_debt_ms": 31652.775,
+          "failed_checks": [
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        }
+      ],
+      "provenance": {
+        "base": "84c2e042cbe61d3b992c6398a5689958310f11da",
+        "overlays": {
+          "3ca4284": [
+            "game/bootstrap/boot_config.gd",
+            "game/bootstrap/composition_root.gd",
+            "game/bootstrap/desktop.gd",
+            "game/bootstrap/field_desktop.gd",
+            "game/bootstrap/field_setup.gd",
+            "game/bootstrap/main.gd",
+            "game/tests/p2/field_boot/desktop.gd",
+            "game/tests/p2/field_boot/recovery.gd",
+            "game/tests/p2/field_boot/run.gd"
+          ],
+          "8caab14": [
+            "game/presentation/input/ports/field_input.gd",
+            "game/tests/p2/field_input_handoff/run.gd"
+          ],
+          "d7b810d": [
+            "game/presentation/audio/ports/field_audio.gd",
+            "game/tests/p2/field_audio_handoff/run.gd"
+          ]
+        },
+        "benchmark_sha256": "6231115fbccd653bef2cf8232ee28e4763065af10082bf36f2375b259a617c7d",
+        "reporter_sha256": "5944fbe79bf288f0d31a8c6b0e84b1f7ad250747de034e924f180dad1d3731b2",
+        "os": "Windows-11-10.0.26300-SP0",
+        "gpu_driver": "NVIDIA GeForce RTX 3090, 591.86, 24576 MiB"
+      },
+      "notes": "This QA independently recomputes reported measurements from the frozen raw data. It does not claim fresh six-run performance on the optimized 018 assembly."
+    },
+    {
+      "case": "benchmark-initial-22m",
+      "status": "PASS",
+      "stage_perf": "FAIL",
+      "measurements": [
+        {
+          "trial": "500-1",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 15,
+          "raw_sha256": "d94d64f6067eb659e0d1cd0aa9118e309b3964da5bcdf4ee4b609e13bda02c55",
+          "fps": 2.3599753220002775,
+          "low1": 2.0888644723841674,
+          "frame_p95_ms": 467.498,
+          "sim_p95_ms": 44.99,
+          "end_wall_debt_ms": 13370.347000000002,
+          "failed_checks": [
+            "visible_skinned_animation",
+            "visible_projectile_flight",
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "500-2",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 15,
+          "raw_sha256": "5824f66d29c4e7f364937546728d030ac0203852aac2794e3e162fa963be5980",
+          "fps": 2.2580445093690784,
+          "low1": 1.9703618175405548,
+          "frame_p95_ms": 476.264,
+          "sim_p95_ms": 45.643,
+          "end_wall_debt_ms": 14271.555,
+          "failed_checks": [
+            "visible_skinned_animation",
+            "visible_projectile_flight",
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "500-3",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 15,
+          "raw_sha256": "a85683b592d9388733f748f209fef6ec2142963fae25d0fd1bb665b560e4bac6",
+          "fps": 2.3033466603264916,
+          "low1": 1.9295297157223872,
+          "frame_p95_ms": 478.707,
+          "sim_p95_ms": 45.592,
+          "end_wall_debt_ms": 13848.864000000001,
+          "failed_checks": [
+            "visible_skinned_animation",
+            "visible_projectile_flight",
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "1000-1",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 0,
+          "raw_sha256": "0a9f9f2d0a6a270b06015aa133979f0b45a5906c14505a44cc8e17d1cb51e886",
+          "fps": 1.1725242853229976,
+          "low1": 0.9803402564962247,
+          "frame_p95_ms": 978.585,
+          "sim_p95_ms": 89.772,
+          "end_wall_debt_ms": 32822.101,
+          "failed_checks": [
+            "mixed_action",
+            "visible_skinned_animation",
+            "visible_projectile_flight",
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "1000-2",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 0,
+          "raw_sha256": "efb16127daa000aa8d8a54d7c81c569f6d692fc2ff6470a5a5e37d00abb91d2f",
+          "fps": 1.1683503243924676,
+          "low1": 1.030863007584059,
+          "frame_p95_ms": 951.582,
+          "sim_p95_ms": 89.247,
+          "end_wall_debt_ms": 32950.106,
+          "failed_checks": [
+            "mixed_action",
+            "visible_skinned_animation",
+            "visible_projectile_flight",
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        },
+        {
+          "trial": "1000-3",
+          "hash_verified": true,
+          "recomputed_agrees": true,
+          "sample_hits": 0,
+          "raw_sha256": "19664df294fcd563254c3d6f7f8c51626b018450257b059be2c78279b2b4f521",
+          "fps": 1.1752788094331639,
+          "low1": 1.0571003315066638,
+          "frame_p95_ms": 928.999,
+          "sim_p95_ms": 88.026,
+          "end_wall_debt_ms": 32768.975,
+          "failed_checks": [
+            "mixed_action",
+            "visible_skinned_animation",
+            "visible_projectile_flight",
+            "frame_budget",
+            "tick_budget",
+            "no_sustained_backlog"
+          ],
+          "ticks": 360,
+          "frames": 45
+        }
+      ],
+      "provenance": {
+        "driver_sha256": "272ef5933dbe3c2c8e0bb09f9fe163afc1a71a3a2c63fcacfa94e8e36434b720",
+        "imported_game": {
+          "application/field_commands.gd": "8e8ce6f29f3bdda350822f70c31d6ebbf94aa83c744547e7148fe234c122ee00",
+          "application/game_session.gd": "32ba455ea1d1059214ccd2058cd0c01ca161602e7f3771e206c8664f7aa57161",
+          "application/README.md": "e00687e47731f1c637343f8fbad7b45daf17ed7e516ea28d068d775908d015b7",
+          "application/receipt_book.gd": "e8d23ba7782feffa77ddd51a7fb84547e40a4f0bd14b543a820f17021795608e",
+          "bootstrap/boot_config.gd": "373bdc7f0e998c339c72904b1c39a77a2f7a3530ac6b59bf48e156a97e3ac2cf",
+          "bootstrap/composition_root.gd": "defef09a9f1401b33aa65fcc6a417488fa5dbad9b3603a7601096f42e19ffd5f",
+          "bootstrap/desktop.gd": "4ed6861e9312e031e0d1ae522256d01d7290859716244e8b8181e1e05aad8fb9",
+          "bootstrap/field_desktop.gd": "442912c649e2f9cf66e76ee5607e7a701201e3d552cbcdb8ad43602a86dc6b15",
+          "bootstrap/field_setup.gd": "a91c9181e8ac8a22b7baf694ecd09f3daac3477e369753f8f07a7685d0e78d98",
+          "bootstrap/main.gd": "3dec49d33765eb67aa59dc1dd9e70651b6f99ad3dd367a36c6273cc7f4162190",
+          "bootstrap/main.tscn": "7229f96ee7babddbea186ec6f1b772215c591c9e484eec824fdbe3676b0e8837",
+          "bootstrap/module_graph.gd": "ab4729f4fbfde7d08dc33896c23c3a92f89b5ec01132957bb1f0fd7aadb10f1f",
+          "bootstrap/README.md": "70dd55eb9ac3c8de39dade162f611fbd89856ffb0474e54aa41a06b9c7ef81db",
+          "campaign/character/README.md": "5e22e87020dd6f298cf98ebc88ac4ac20aca03c7893a9fbabb26be2be0c87a1a",
+          "campaign/clan/README.md": "c28caf5f832273e8ab160abc5543ac916d26c67630e339f8c9aa267f175b7fac",
+          "campaign/economy/README.md": "383341e47b59796bf79892573c06b6aa7fa2473db27055ec016e9fab45455332",
+          "campaign/encounter/README.md": "c3552bea4862b2b55cc254267e5bb240564de1e7b040822777818a97a363aa62",
+          "campaign/party/README.md": "cf18040a0bdf7bd384c35ffaea1e4a407a5c2dda7ced8892b82d4ae0e485a7aa",
+          "campaign/politics/README.md": "1ea29abd75ab715b19840ecac7b2d21ead218bd84d3bac6ec62a20d4ed9abf88",
+          "campaign/quest/README.md": "82ee3ae204088649ddcae1077b0af7fcdfe1cbf45ad812b0d14291d55b8a42ba",
+          "campaign/README.md": "6f1ed516831c34766b80c394946891b8c227c249a00f5edd0e0468cc03de43e6",
+          "campaign/runtime.gd": "ce8e413a668c63b783913a411fb69bcdc7e48d9312a8120a4d15f3508e4b676e",
+          "campaign/settlement/README.md": "e8aac7f130cebd950e394c9d9996d4e176decd1a1cac3db43d586b3d2e5f3753",
+          "campaign/strategic_ai/army/README.md": "00a80b31e2ca39c03e3e39311e10161eacc19ef05f1178e4a36619820dee8182",
+          "campaign/strategic_ai/clan/README.md": "84ee4db22c8899ba3093cf42d7f1604e726286c2305b355a8f8a2705bc84084c",
+          "campaign/strategic_ai/evaluation/README.md": "f82f279731863544e6392c41a2cfa17d641376a3d8826a050d517a8b780e20f6",
+          "campaign/strategic_ai/kingdom/README.md": "c185f449a45605e4eb216f3358e39933e4cbaa9e2c8191137107a56843497bfb",
+          "campaign/strategic_ai/party/README.md": "f0cb916058255a2cc5aac3bec82e2e91466570ae04b612d4a398286e175054ab",
+          "campaign/strategic_ai/perception/README.md": "80dc00c44577c37987e669d94aaae8ea52196bc945d032f9f9920ca1822f4273",
+          "campaign/strategic_ai/planning/README.md": "2759da9465bfab75266ccbfce7580c0c5083540111083eff5efa800f4e6908eb",
+          "campaign/strategic_ai/README.md": "30faacec22a3e8f00a6c1aa014569d73647502bab960464e46c4cf9f6516fd2c",
+          "campaign/strategic_ai/scheduler/README.md": "956c86ad08440c2a07838ddf18c928375731354de2fd63a77acef144fc71c432",
+          "campaign/world/README.md": "2e0abea054d082f16063384b3c3049ea69959098321c8e2eb0cef171a0862349",
+          "content/base/assets/README.md": "5257cecfc0515b5e7fbc2075e4359889eb48f278df288848b12855eb6c25a9de",
+          "content/base/definitions/README.md": "5cf35d33b4e163a2d5709e3ff880571b47891826bc80f659b8781dd240ccbec4",
+          "content/base/field/.gitattributes": "17a30f95cb8055742f0e36f28b8e640f5dca13e1ffb40536ea1c16cffa7a7037",
+          "content/base/field/assets.json": "6f9ea7b173c84d5d64ae4299e280504a45905044afeac910e49a9ab2770a811b",
+          "content/base/field/CREDITS.md": "220ce23dfee0ccb65b063458f06fe8fc9cb6cf58eb98564dd6d5aafad54f4c40",
+          "content/base/field/field.json": "1c5bfe1a9261eaf3c6c739916dcd539bf6cc311e5210bf4fba4f3ee395e72de6",
+          "content/base/field/manifest.json": "171aabffdd7ca1f0de0a9ec1f763b4ecfb286e6112e7c1471c3efbc1ecf8d206",
+          "content/base/field/models/crossbowman.glb": "f177bd6c582d8578929cb6b710cb1a61575a69bcd539d9b8c87dd620efdb1bb8",
+          "content/base/field/models/general.glb": "848e6d94c3f0bda60fb28176d41061b4771b4923bab0f63ce95898f4f7ea19b5",
+          "content/base/field/models/horse.glb": "fae7a7ec91e0d6a33554efb896fac9c4e8c632644183bcb8cc962f673d3ce609",
+          "content/base/field/models/spear_soldier.glb": "9d69862625b97ef0074887d81c317a76ecc63295ca3edb000931792f2c64033d",
+          "content/base/field/river_plain.scene.json": "26b7dbcb648ebaf99e0c93c73bbab252cdf24e413dee2e7ff6257d2e4633954c",
+          "content/base/field/river_plain.tscn": "bfd2046db32f8de6a75d4ac71bcbca9360577e09a0bfc7a5a8c322c149903f51",
+          "content/base/field/short_bow.tscn": "9f57f774f2c0348df3e40ab7f4cd0529e7f4c82da60157aefb1c21d43ce5c716",
+          "content/base/field/sidearm.tscn": "8088bf21f9c969d46b49bdf152fcc7974c5618d47358b8aef75366a02e0da420",
+          "content/base/localization/README.md": "480759348fd2300ea85901d413ae99e6478644e992976a7c48ff12d6c47d6cfd",
+          "content/base/maps/README.md": "09e388f00fafd2f861fd9975b28f04ca7d8a893a64ea8220df8eb4cf760a6c17",
+          "content/base/README.md": "5f2c5729024b5bc0d2fcbd2e31c985759950f51c38927411e49b21b746152d43",
+          "content/base/scenes/README.md": "8875e17a86449b34e29e781da7fc34ed646a25b4a94577ab82a8cf56e9b2fb19",
+          "content/expansions/naval/README.md": "aac18d2a91bc6484f906e45291d1583e7ebe2f67b78f927313790921fbbe0246",
+          "content/expansions/README.md": "50ce586d3f8b89261e46520fae7ef9b19003531b75d4dc923eb8d256bc52f46a",
+          "content/README.md": "e735d9731d3c9bd9cb6fa3f091e4e7826f0387fba0efdea8aa60e8e43f9a5f09",
+          "contracts/canonical.gd": "83e670e0f76f3ee7c6a933d73faa8b19a682ec88795ba3c2460773d1395b545b",
+          "contracts/field_sources.gd": "d0468c136c45860f0eb55559ebc980bcc146b85caf72d0fdca42b10108d705dc",
+          "contracts/ports/content_port.gd": "c553b721c55b1d48e7180279101cd3af2dac40c9255c0ccee20d5d86c751244b",
+          "contracts/ports/mission_port.gd": "e5f956313e70856574664e8cd408d0518612e3d4f7409b2aec389a58e63a60d5",
+          "contracts/ports/network_port.gd": "16d7f816d742fdd56c43166ca4d0120dbaa0ec18a4d3aebd04e3905e1a2d2c31",
+          "contracts/README.md": "b37419dbeeeadbd71e308dde252c4c3762ad9915404a51458d5221446acbf61d",
+          "contracts/result.gd": "a947eff1fc441e676c247f89fd19a12cd6666aa75b27e913755f8e03fa6387e5",
+          "contracts/schema.gd": "19878cc5ca6cc210b741f872929a7be76761a657b48efe82cc64e86a47485f8c",
+          "contracts/unicode_data.gd": "a69d549a7122cd3f3dfc3bcb0b0467cff67606d6702099e4eb09aeaf9b32b7bb",
+          "contracts/unicode_nfc.gd": "2e0ca51a2ef991b20371a44405961fa413faa350b0bb8f781e0f2c5d2e3d316e",
+          "contracts/values.gd": "0d644383223a084b470a5b00ca53045104dd7d07b165a0ed3d9710864c82a0ff",
+          "core/random_stream.gd": "32286eca0093695773c81b4b2f04a88a1554cf87e3d6998fce1c1caad4de0e81",
+          "core/README.md": "43236e8d6bf5803c6763d7867d1308524fe4d91227145f2a336ecf491b8cda51",
+          "core/runtime.gd": "d4dff6a3b08cd09c75d80822a7296f8eb59ff424dc65fdc541cf9f77c708f8e9",
+          "core/worker_queue.gd": "da19790a667f74b1d91c9640c7f7ed77f73be5461d0b243fe997491ade36c62d",
+          "infrastructure/content/base/definitions/runtime.json": "8aff7d5183221ba76705badb58c326f1a43495be74f7941532079ef0227b4852",
+          "infrastructure/content/base/manifest.json": "327d095284eab6158cdb7fe7a030dd7b88e9ea959bfb7905881074614d705ce8",
+          "infrastructure/content/base/scenes/training.scene.json": "77546bf8c20670f97a111211956779496d3e3a79c008e702d7bbccb59569b809",
+          "infrastructure/content/compiler.gd": "c52dbeaa8dfaa599f790019c8a0ac8dfed6377d63189f64d924445d56aa50074",
+          "infrastructure/content/package_files.gd": "67d0a03f309527e032a3d13c0a7cb45b37c46d88b5cdce611c230c148ff5d3cb",
+          "infrastructure/content/patch_set.gd": "6754455182119e1f19784e677cf5d4e4e00d4febfc49695e4c8bda77b66fe1fe",
+          "infrastructure/content/README.md": "fb77d2ff2561ae9a9b2884c44cded4878154f88dd344933f38629433bc84e00b",
+          "infrastructure/engine/adapter.gd": "1bc6177664c3482a003f2d5d49fa56653008cf2d07c9bd71b705c3a132ef2ca2",
+          "infrastructure/engine/field_bodies.gd": "51138d1aff01c8af24fe354612a76d43e6f1f83d377ac3b6b801b65d8a80a3d8",
+          "infrastructure/engine/queries.gd": "9eb76f4d2d5678024d7f19a5dfd736172fda31e6f4819e48af228f7808a50bdd",
+          "infrastructure/engine/README.md": "8b2de6de83cbc8e5b53c09f2049823347527d6d1b499ab2d2ee18c2c8dc63639",
+          "infrastructure/engine/simulation_root.tscn": "4151b861ce21ed7c2df03c27523136cd7e43a07dd29be1eacad2ff40f3f50009",
+          "infrastructure/network/README.md": "8a36a27ac78a59475d3e67b7458d2d23321c407f8d29908139c9ebc8fe8c11d2",
+          "infrastructure/persistence/atomic_windows.gd": "ef945b4ac193f7fbe36d7bef09007a72009accaad8564011a04a1d3052b1a8be",
+          "infrastructure/persistence/README.md": "99aca383db0f4bc4ad19934a9f75e57606496d083810b23cc26521bfc9956b90",
+          "infrastructure/persistence/save_service.gd": "eddccf7fa239495f84b6d93f7c6d6dcac4ce69a1fbde2afdc1cd48656cab0e9a",
+          "infrastructure/README.md": "6edb1e76822b9ba56757672c7255861c2c6625b456aa41685bb707db3914e1bc",
+          "infrastructure/telemetry/diagnostics.gd": "a2618d74147872090f761d197f9abca6e4494fd564ee79101f03cfc5fbc5686d",
+          "infrastructure/telemetry/README.md": "beccafdfd9fa54f1d1a57dfb5c4a5f14172930e56ad8294779e961d087be00f6",
+          "mission/ai/blackboard/README.md": "73b7dbcdc7dd8339c1fe3c820745c123c559444b3d99f4b5e9cc89b70c155a70",
+          "mission/ai/debug/README.md": "1fc0baaf54c2c4e177b548a5d6227dbafd6981d77e181167c0c2090ca7743012",
+          "mission/ai/formation/behaviors/field_behavior.gd": "7ebd069c507d09350809a041db39283f666376e1f1f76d99885d0a790ee34ca9",
+          "mission/ai/formation/behaviors/README.md": "1d79c7d16079b6522255b4670ed88061232c4440facb8093bd25357b17fab52b",
+          "mission/ai/formation/controller/README.md": "b9e9baa8f1f623ca4371561fa1f92d252a33e85faaab8c44245391942c2f7fb8",
+          "mission/ai/formation/evaluation/README.md": "e740d6cb7a42411d6bdaa0a50e299b6958292e6d5b9e836c4708090a82af746d",
+          "mission/ai/formation/ports/field_formation_ai.gd": "773841a35427dfa999ec3e27c48ddf2ae2ee3ebe1413abf6d1e41681939395a6",
+          "mission/ai/formation/README.md": "142bf79c1744ccae2649dfa9588751b78be4cf3063c6a1e4eb4dda48cba55d04",
+          "mission/ai/individual/behaviors/README.md": "6c1ee0f14399812eedb35d641d36ff46a63d5c9f27e6430b71a76211d20086e9",
+          "mission/ai/individual/controller/README.md": "ddade455b17d7f8d594ed292803ce5cd8ccb8fdd3845e1a528cc2519f9e71e39",
+          "mission/ai/individual/decision/README.md": "189032ded01672e9af7a97307ec6f127d799a26d882a552552028dbe158445a5",
+          "mission/ai/individual/ports/field_individual.gd": "3615091d460b6916d0dbea76830a8d34d87ca318f6026b6ff9a74b311c2bdcc6",
+          "mission/ai/individual/README.md": "3deb650d731b4fe1b3b9b15fb41833834b07458e6f278e7d6cad855ebf3b682b",
+          "mission/ai/individual/roles/README.md": "d6235aab7aa94c5f0125fd2c9e30f6ac57e8f9b0995ef111b3951ec10cac320d",
+          "mission/ai/individual/targeting/README.md": "2e7446e9804b0166a57ecdec08ceb9a92b736c6438070b9359117d891150ac3b",
+          "mission/ai/perception/field_perception.gd": "63f0cd064fa106f574679625ef186efa523b632ba02499faecec5883177e9eeb",
+          "mission/ai/perception/README.md": "110dd85533321b402db5777095a0d1c0a51f4ca279f53daa4b6cad7c4523a44c",
+          "mission/ai/ports/field_ai.gd": "f0859ed3461da2c71a1088d625a308abb996bb9dc24230ac8c545a95ca6eed1d",
+          "mission/ai/ports/README.md": "d2f19b71f2b2eab6f4a45238e2fc69992cede17345e8f5e82cf0fb48dcfc0a65",
+          "mission/ai/README.md": "6beba1149140f4c2a6fca23659d0eaec6a18c0c75e59987cbf7d532101245a38",
+          "mission/ai/scheduler/field_schedule.gd": "10b508fc3151bd1e870e7590b78406c5b92548f7580471785c2ae29ef2d74192",
+          "mission/ai/scheduler/README.md": "1c6e792fbc83ffdf6d8822630d457d258024c20a66b403fe16f6c5e14abfff46",
+          "mission/ai/tactical/commander/README.md": "49aaacfd95da03e4592887ac7a4f8e34aef45ae708974ba736c8117c6edfa19f",
+          "mission/ai/tactical/evaluation/README.md": "c12e825141ca6ec03636c60cf9a4cf46c51f169a5002e5f08e1a76f1498f6a70",
+          "mission/ai/tactical/planning/README.md": "e9c6cc68219ec09e7ea4e3084fd686e536fa3405132cecfbf25c69a9c8899c85",
+          "mission/ai/tactical/ports/field_tactics.gd": "d58f4d61345c2063f62aac3eb65d468ac6f4bdb15dbde8b610621d38dbee976b",
+          "mission/ai/tactical/README.md": "98f8eab79f6f7a83d6707b72c468d78122f77eb3409f7b5aee8e2fb0360873bd",
+          "mission/ai/tactical/strategies/README.md": "111c7e19d63b02d4d72d0a2d943ecf928f761d57b49db432ee01b6ef5413572b",
+          "mission/combat/field_sweeps.gd": "50380bcbb73341a6cd061f6852c73c24d431168a7a1179c411be654e5d0fd715",
+          "mission/combat/melee.gd": "e0b32f479cc9bf5a2b7f3dcec82b739a8171c08d895db4a85bfd96638b1e030d",
+          "mission/combat/ports/field_combat.gd": "6c78778e8944ab7c5eed9d05cdf9737ea3c5db0d67712dc41543e274396f5ae4",
+          "mission/combat/README.md": "39ff2f8ac2b1f36fb9a535b112834da9d0c75b44ce9782d99b3bdb03d0445e1d",
+          "mission/formation/order_rules.gd": "c441463fdc87885ec9c19c76fae6fd407051bcd4e8f0096ab6831c17e53942a4",
+          "mission/formation/ports/field_formation.gd": "4bcd38930dc8fee364e91d29259b470eefd537b8fd3fcdbe6cd07721512e6353",
+          "mission/formation/README.md": "62223f3cdf5a84698dbccacfbefac543f52f25e5a1517bef074f5eec33964035",
+          "mission/formation/slot_layout.gd": "b39244b9b21a6b05115e308437756a69f786f7437bfa6a62f7ce18b3c35b32e7",
+          "mission/interaction/README.md": "a6ddc822b217cef76314d3cf73a7642c39d9c97ccd059f57d676e0cd8ea3544b",
+          "mission/movement/intent_route.gd": "d22cda29a0db91da75d8d5b6ea60f5a3d629c8796f0d6f58492e2ec43d1e9687",
+          "mission/movement/jump_motion.gd": "4e397be4bf554b0574ae4f47179a0ef338d27fe792b41e5eca25acf88a662bb9",
+          "mission/movement/path_queue.gd": "dc6887833504561fb469347c26b4069d0bb41a64740458de23f07a0de29f645f",
+          "mission/movement/ports/field_movement.gd": "164f80f226c718f859476470d78da77c41cfd8cb0c26cf297b6ae80141f3ec20",
+          "mission/movement/README.md": "f147ad7faec7467f87247210b33f681b1deb72eb5421bb30924339deb45fca6a",
+          "mission/README.md": "b3a124b42984a80cb373fee93022f12ebb285e07a8454b148b7d8d09f94a7dca",
+          "mission/results/ports/field_results.gd": "8399b379628e77a96ca1ce5481f6c460009286848294b570d1898525f6fbf664",
+          "mission/results/README.md": "925a918b50efedbfb09c6d772649cf13e7b178deab4b87e64d8009a6fa34b989",
+          "mission/rules/ports/field_rules.gd": "8e2c2d267f0b2c10ebcc1464c684c2ddb86d3bdac93d1036c955f250b98fe998",
+          "mission/rules/README.md": "53514662c97338933c8b4d25b998189088f9185598d4abf72b9ed92d1d7ab107",
+          "mission/runtime/entities.gd": "f3ba085544025a1544954956e95a9a33c37f9eba069e24914456b782de65d52e",
+          "mission/runtime/field_brains.gd": "80108b4bb1f3204c059ae2546ecd6bc686dbaf10730a1ed0d044ac829a69dad1",
+          "mission/runtime/field_deployment.gd": "fbd4fbbd7aef18b9c0e0321693c8895a215eeaa79a868b174cc4f2ebfc03ce15",
+          "mission/runtime/field_mission.gd": "3678197d6e3d0df49e9624b39c2e443938564e275656abf825d3fc7f0ae37e50",
+          "mission/runtime/field_pipeline.gd": "6539005acf48ee547fb9224228a4e9917b51b1e03d4a18be6f1b452049b03c03",
+          "mission/runtime/README.md": "f2a415967fc9db966220c652e81f811433f096c7cab3d2f7741fba04c4ec86ff",
+          "mission/runtime/runtime.gd": "466b2395cec84ae6464b0c58bb330b73b2c9f798b74e1368db47bb0cc5a8c5b4",
+          "mission/siege/README.md": "96366b025c7ab1bc5ca87a9895e1829a063774eaf1342fb863db76002c002c21",
+          "multiplayer/README.md": "bbd19ffef95760075b4c1a2cd35cd37bdbfa36538fcad02cf86fb5e9a2fa8e03",
+          "presentation/audio/.gitattributes": "d8464d2ddda2a571653e13f644cf6978c609e40f40f11c64f65c7c360e71534e",
+          "presentation/audio/captions.tres": "50598d8d2a74422a84416abbfd7a562ec3687f4118f6cbb54ba9eaaadf31229e",
+          "presentation/audio/field_cues.gd": "d1772115d9c11bda35476f3bb50152273d5686c39b336d101c6078e62bcf5000",
+          "presentation/audio/orders_en.tres": "b2f3f6995d2d827bc4f90e0ffee67ae795006c2580c6c9b434bf03103aa1b69a",
+          "presentation/audio/orders_zh.tres": "6376aa3e86238187173fe1c3b00c5f921e9e68df31eddceb482e0ad59613872b",
+          "presentation/audio/ports/field_audio.gd": "a91f7e903cd5b782653d7c1853306c3d6d1620150a951554e996e33d10ab464b",
+          "presentation/audio/README.md": "26a9c7fc9347149cf971fc910ece38482c81debb13d97165aa6a56f897239db0",
+          "presentation/camera/ports/field_camera.gd": "7f339e7a3db122c63987771137de2a6610154af46be698716d645e9508d9162b",
+          "presentation/camera/README.md": "ffbe92d90ab01a248dcd6c935531b8180b82d5b5872e5462e1f9acde5b5632cd",
+          "presentation/input/field_profile.gd": "38987c28793e28801b97395b58b4ebede49101a26387d165bb890a557a197478",
+          "presentation/input/ports/field_input.gd": "e2ece5b130fb780e3f045f903bd69f9e80f2405a4dc099de96c0c2aa60282101",
+          "presentation/input/README.md": "97d438fa1644af6daa078a587db5d328cc549e29e97cdca537d26fcf32a578b5",
+          "presentation/README.md": "35d019fa025de973fd5f37de45dabbbb23bd15d0b6878b99237fd477d61ee09c",
+          "presentation/ui/field_hud_text.gd": "6508e124cd0de5989a27e17c9b151d6ea5414e8876a429017234bce6a13bb15a",
+          "presentation/ui/ports/field_hud.gd": "6d0450e51752e9fd3bf13b8dfda17637cf770f95c0576b52616ab17a43d375d8",
+          "presentation/ui/README.md": "f399ccbc8616c0302ecae268dabeec7e22cb8e5b9e496bca298e9bb727eccd5b",
+          "presentation/visuals/field_batches.gd": "55cc99ba7aa39707919353891fb5d6de4497add84d004c1f5b58318d1d8e832c",
+          "presentation/visuals/field_environment.gd": "146d53af3d5e9c49562343fc1b051e3780a8e16a5c68fbbd7b6d606f5329d064",
+          "presentation/visuals/field_ground.gdshader": "e484d544da1c17d2f395451225e120423f29880a20837e364140598af23b2c75",
+          "presentation/visuals/field_model.gd": "ac5fbe1841c7cc0af7795671464c7ce280a4e7cbbc6658d59c87c95300ad7264",
+          "presentation/visuals/ports/field_visuals.gd": "911d011bed22abdaf4f96a2cf58b3cf45d33450a6f22dca55f872a9d75a50e25",
+          "presentation/visuals/README.md": "1bf319e49e084943124f893c5d083f9eb95f6978a69d91a167121b0be4b436ba",
+          "project.godot": "89f6c0b2d0b6ddd429956035d9286825d1a2d97e509d4f3a0b06bd671a9b0342",
+          "shared/definitions/README.md": "6b7afdd3b35a305f8255b71cea6acb708ca9c2484ddec24dcd13856dd46028cc",
+          "shared/definitions/registry.gd": "d4bb7b7f0977aa469571941baf428041c5be1b0005addb8f523e53446b92e9e4",
+          "shared/inventory/inventory.gd": "9863ec663bbb1d5f0e6fca3bec266ba9146a6f16ca2b3d4c0d77cc1eacec943e",
+          "shared/inventory/README.md": "8d42d1fffb6b296a78cfbe81ae876a2ae340d1cc4f8d0342b89501888f7dae64",
+          "shared/README.md": "efc312829979bbadb6a56be36721b40e1665b67130469f527caf50578aa8bf8b",
+          "shared/rules/numeric_policy.gd": "5a37d78ca597c64f6fe69fdb34bf46dad4953a8eda9c611f4221dda0160a0ec8",
+          "shared/rules/README.md": "31443df7404c79e69bf94e047b28842a262033d3c8f562ed467c62be7ae5cb48",
+          "tests/p2/field_benchmark/run.gd": "9a5769f1b3886b356c0585c0e8eca48f4db335642f9db8709a8c05f9065d40da"
+        },
+        "os": "Windows-11-10.0.26300-SP0",
+        "gpu": "NVIDIA GeForce RTX 3090, 591.86, 24576 MiB",
+        "main_at_snapshot": "b17709582b0f01937ec773f66f5ce55cc6ab5999"
+      },
+      "notes": "This QA independently recomputes reported measurements from the frozen raw data. It does not claim fresh six-run performance on the optimized 018 assembly."
+    },
+    {
+      "case": "ci-ownership",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\game\\tests\\p2\\field_ci\\test_scope.py"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "Ran 1 test",
+        "OK"
+      ],
+      "duration_s": 0.11,
+      "log": "out\\p2-qa\\final-five\\ci-ownership.log",
+      "sha256": "1a52ff93b2b7c8bc576900f70c9062f5baedb573cf55507ec33070c999cd9b12",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "Ran 1 test in 0.000s"
+      ]
+    },
+    {
+      "case": "ci-dependencies",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot\\ci\\gates.py",
+        "dependencies"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "PASS|0 issue|issues=0"
+      ],
+      "duration_s": 0.594,
+      "log": "out\\p2-qa\\final-five\\ci-dependencies.log",
+      "sha256": "7fab8f6b7863e6ad4f9a384c950941acda84a093fe69a3f7863f3338f278c4e6",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "dependencies PASS issues=0"
+      ]
+    },
+    {
+      "case": "scope-004",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\development\\check_diff.py",
+        "D:\\work\\game\\recollection\\development\\planning\\tasks\\P2-FIELD-INTEGRATION-004.json",
+        "36b083dc04927ae270960d94b6454def4f1b2648",
+        "862c53b"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "0 outside authorization"
+      ],
+      "duration_s": 0.125,
+      "log": "out\\p2-qa\\final-five\\scope-004.log",
+      "sha256": "b428708cfa8b4d4d41b1765de95bbbb8c13966e4dffbb32541706c1352eb963e",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "PASS: 10 changed paths, 0 outside authorization. Committed diff only."
+      ]
+    },
+    {
+      "case": "scope-005",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\development\\check_diff.py",
+        "D:\\work\\game\\recollection\\development\\planning\\tasks\\P2-FIELD-INTEGRATION-005.json",
+        "7b6ca6f6e36fd90f86b6753dd9213efc773b1e24",
+        "598f2f4"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "0 outside authorization"
+      ],
+      "duration_s": 0.125,
+      "log": "out\\p2-qa\\final-five\\scope-005.log",
+      "sha256": "743cfdee5640385679efb91e15b914a5dabd7be86a6239065fafa8eeefaf2c69",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "PASS: 5 changed paths, 0 outside authorization. Committed diff only."
+      ]
+    },
+    {
+      "case": "scope-015",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\development\\check_diff.py",
+        "D:\\work\\game\\recollection\\development\\planning\\tasks\\P2-FIELD-INTEGRATION-015.json",
+        "b17709582b0f01937ec773f66f5ce55cc6ab5999",
+        "4adb1bb"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "0 outside authorization"
+      ],
+      "duration_s": 0.125,
+      "log": "out\\p2-qa\\final-five\\scope-015.log",
+      "sha256": "b0831534ae76f6f572a9c8df6e48e9bc0c6bda7a47efc7bd962f2cccf4919d9c",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "PASS: 20 changed paths, 0 outside authorization. Committed diff only."
+      ]
+    },
+    {
+      "case": "scope-017",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\development\\check_diff.py",
+        "D:\\work\\game\\recollection\\development\\planning\\tasks\\P2-FIELD-INTEGRATION-017.json",
+        "a89ac81541109869e6ab0b294e02bca1587e125e",
+        "fc29515"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "0 outside authorization"
+      ],
+      "duration_s": 0.141,
+      "log": "out\\p2-qa\\final-five\\scope-017.log",
+      "sha256": "743cfdee5640385679efb91e15b914a5dabd7be86a6239065fafa8eeefaf2c69",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "PASS: 5 changed paths, 0 outside authorization. Committed diff only."
+      ]
+    },
+    {
+      "case": "scope-018",
+      "command": [
+        "C:\\Users\\10822\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "D:\\work\\game\\recollection\\development\\check_diff.py",
+        "D:\\work\\game\\recollection\\development\\planning\\tasks\\P2-FIELD-INTEGRATION-018.json",
+        "84c2e042cbe61d3b992c6398a5689958310f11da",
+        "924979f"
+      ],
+      "extra_environment": {},
+      "cwd": "D:\\work\\game\\recollection\\out\\p2-qa\\final-five\\snapshot",
+      "exit": 0,
+      "checks": [
+        "0 outside authorization"
+      ],
+      "duration_s": 0.125,
+      "log": "out\\p2-qa\\final-five\\scope-018.log",
+      "sha256": "4223bee8a423bef576b18a3ee578b57185bf00a638444c7ea4c2c244a3b4c1c0",
+      "status": "PASS",
+      "diagnostics": [],
+      "observed": [
+        "PASS: 4 changed paths, 0 outside authorization. Committed diff only."
+      ]
+    }
+  ],
+  "independent_not_run": [
+    "New final-assembly 500/1000 three-window repeats",
+    "Production cold-export PCK in this independent batch (main integration owns it)",
+    "8 GiB GPU performance",
+    "Human controller feel/speech intelligibility and manual AT acceptance"
+  ],
+  "stage_performance_gate": "FAIL"
+}

@@ -8,6 +8,11 @@
   "title": "密集移动几何查询的保守批量裁剪实验",
   "spec": "docs/systems/game/infrastructure/engine/README.md",
   "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I",
     "P2-FIELD-INTEGRATION-003",
     "P2-MOV"
   ],
@@ -42,5 +47,5 @@
   "acceptance": [
     "同一空间逐请求与批请求对照，无差异；包含斜坡、障碍、薄门、隔离层、触地、坏请求与撤销。真实稠密夹具复测，候选无收益则记录并保留旧实现。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

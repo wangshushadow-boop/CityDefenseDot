@@ -1,0 +1,10 @@
+Windows 实战部署两编队、坚守、撤退和返回通过。实播两路音频时关闭，日志 audio_pending=0。恢复测试 28 项。
+重新从 Git 归档 867fb810890ab8804ff41eb916ad63a837152b6f，导入 Godot 4.7.2 后实跑。独立 Windows 与专项对照见 field-frozen-five-qa.json。
+Godot --headless --path game --script res://tests/p2/field_boot/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_BOOT errors=0 people=20 slots=40
+Godot --headless --path game --script res://tests/p2/field_boot/recovery.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BOOT_RECOVERY checks=28 failures=0
