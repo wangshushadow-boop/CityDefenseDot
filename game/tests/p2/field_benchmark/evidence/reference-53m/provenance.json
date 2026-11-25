@@ -1,0 +1,28 @@
+{
+  "base": "84c2e042cbe61d3b992c6398a5689958310f11da",
+  "overlays": {
+    "3ca4284": [
+      "game/bootstrap/boot_config.gd",
+      "game/bootstrap/composition_root.gd",
+      "game/bootstrap/desktop.gd",
+      "game/bootstrap/field_desktop.gd",
+      "game/bootstrap/field_setup.gd",
+      "game/bootstrap/main.gd",
+      "game/tests/p2/field_boot/desktop.gd",
+      "game/tests/p2/field_boot/recovery.gd",
+      "game/tests/p2/field_boot/run.gd"
+    ],
+    "8caab14": [
+      "game/presentation/input/ports/field_input.gd",
+      "game/tests/p2/field_input_handoff/run.gd"
+    ],
+    "d7b810d": [
+      "game/presentation/audio/ports/field_audio.gd",
+      "game/tests/p2/field_audio_handoff/run.gd"
+    ]
+  },
+  "benchmark_sha256": "6231115fbccd653bef2cf8232ee28e4763065af10082bf36f2375b259a617c7d",
+  "reporter_sha256": "5944fbe79bf288f0d31a8c6b0e84b1f7ad250747de034e924f180dad1d3731b2",
+  "os": "Windows-11-10.0.26300-SP0",
+  "gpu_driver": "NVIDIA GeForce RTX 3090, 591.86, 24576 MiB"
+}
