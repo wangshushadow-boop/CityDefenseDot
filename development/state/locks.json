@@ -77,24 +77,6 @@
       ]
     },
     {
-      "task_id": "P2-FIELD-INTEGRATION-013",
-      "owner": "brain_dev",
-      "branch": "detached",
-      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-field-brains",
-      "allowed_paths": [
-        "game/mission/runtime/field_brains.gd",
-        "game/mission/runtime/field_brains.gd.uid",
-        "game/tests/p2/field_brains/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-013.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/contracts/"
-      ]
-    },
-    {
       "task_id": "P2-FIELD-INTEGRATION-004",
       "owner": "main",
       "branch": "detached",
@@ -104,6 +86,38 @@
         "game/bootstrap/",
         "game/tests/p2/field_boot/",
         "development/reports/tasks/P2-FIELD-INTEGRATION-004.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-014",
+      "owner": "movement_dev",
+      "branch": "detached",
+      "base_commit": "333410e977b7e90b70f9c32a4f3eaf28be660a89",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-horse-movement",
+      "allowed_paths": [
+        "game/mission/movement/",
+        "game/tests/p2/mount_profile/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-014.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "game/contracts/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-015",
+      "owner": "recollection_developer/benchmark",
+      "branch": "detached",
+      "base_commit": "b17709582b0f01937ec773f66f5ce55cc6ab5999",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-field-benchmark",
+      "allowed_paths": [
+        "game/tests/p2/field_benchmark/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-015.md"
       ],
       "excluded_paths": [
         "development/state/",

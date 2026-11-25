@@ -32,14 +32,15 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
-  "scope": "MOV 所有者在既有 stage 内实现 set_profile(handle,profile,stage) -> Result，保留相同实体代际，切换速度、碰撞半径与路径缓存，支持失败重试。",
+  "base_commit": "333410e977b7e90b70f9c32a4f3eaf28be660a89",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-horse-movement",
+  "scope": "MOV 所有者在既有 stage 内实现 set_profile(handle,profile,stage) -> Result，保留相同实体代际，切换速度、碰撞半径与路径缓存，支持失败重试。 同一 stage 的 request_jump(handle, context, stage) 消费既有 jump 意图。",
   "non_goals": [
     "未经批准的公共契约扩展、其他阶段玩法。"
   ],
   "acceptance": [
-    "实测同代际步/骑切换的位移和碰撞半径、撤销及原 MOV 回归。"
+    "实测同代际步/骑切换的位移和碰撞半径、撤销及原 MOV 回归。",
+    "场景许可跳跃时，真实授权、地面与净空、起落、重复输入、上下马及回滚实测。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

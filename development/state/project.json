@@ -14,9 +14,9 @@
     "P7": "PLANNED",
     "P8": "PLANNED"
   },
-  "authorized_by": "项目负责人本次会话明确授权“开始p2的工作”",
+  "authorized_by": "项目负责人授权 P2，并于 2026-11-25 授权其通过后继续 P3 人物。",
   "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-  "integrated_commit": "314e0a55570dcc4311d742939da55daa13950617",
+  "integrated_commit": "c75b7d6a2494d4c2692037be163971884cf0b6c8",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",
@@ -65,5 +65,11 @@
       "reply": "A",
       "scope": "撤退仅限本方，其余各方继续至自然胜负；沿用既有行政结束入口。"
     }
+  },
+  "p3_authorization": {
+    "condition": "GATE-P2 通过",
+    "scope": "P3 人物，按路线图以 P3-CHR 为人物主模块，涵盖必要前置及人物闭环。",
+    "choices": "优先选择项目的默认方案，记录选择、依据和影响。",
+    "date": "2026-11-25"
   }
 }

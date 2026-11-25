@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-015",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "TEST",
+  "title": "正式野战图形与固定步性能测量驱动",
+  "spec": "docs/systems/game/tests/README.md",
+  "depends_on": [
+    "P2-BAI-I",
+    "P2-VIS-BATTLE",
+    "P2-UI-BATTLE"
+  ],
+  "requirements": [
+    "BAI-06",
+    "BAT-03",
+    "NET-06",
+    "SAV-02"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01",
+    "T-TEST-02",
+    "T-TEST-03",
+    "T-TEST-04"
+  ],
+  "allowed_paths": [
+    "game/tests/p2/field_benchmark/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-015.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "b17709582b0f01937ec773f66f5ce55cc6ab5999",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field-benchmark",
+  "scope": "通过 BOOT 正常路径实测 500/1000 混合野战，记录逐帧、固定步、交战、图形环境与门槛，原样返回未通过判据。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "真实窗口与权威循环采样，准确区分失败、未执行和通过，保留运行参数与重现命令。"
+  ],
+  "status": "IN_PROGRESS"
+}

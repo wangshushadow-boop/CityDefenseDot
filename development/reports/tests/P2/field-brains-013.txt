@@ -1,0 +1,9 @@
+Godot --headless --path game --script res://tests/p2/field_brains/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_BRAINS counts={ "tactical": 5, "formation": 55, "individual": 80, "orders": 4, "actions": 51, "moves": 22, "hits": 16 } modes={ "infantry": { "Melee": 11, "Hold": 7, "Routing": 3 }, "mounted_archer": { "Equip": 2, "MountedArchery": 18 }, "archer": { "Aim": 13, "Recover": 2, "Routing": 4 }, "cavalry": { "Hold": 10, "MountedStrike": 7, "Disengage": 3 } } checks=1318 failures=0
+
+Godot --headless --path game --script res://tests/p2/ai_transaction/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+AI_TRANSACTION checks=29 failures=0
