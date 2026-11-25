@@ -3,6 +3,7 @@ extends RefCounted
 const R = preload("res://contracts/result.gd")
 const Values = preload("res://contracts/values.gd")
 const Queries = preload("res://infrastructure/engine/queries.gd")
+const FieldBodies = preload("res://infrastructure/engine/field_bodies.gd")
 const DEFAULT_SCENE := "res://infrastructure/engine/simulation_root.tscn"
 
 var _host: Node
@@ -34,7 +35,7 @@ func open_scope(scope: String) -> Dictionary:
 	viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	_host.add_child(viewport)
 	_scopes[scope] = {"token":token,"view":viewport,"leases":{},"links":{},"revision":0,
-		"pending":false,"iteration":0,"requested":0,"claims":{},"presentation":null}
+		"pending":false,"iteration":0,"requested":0,"claims":{},"presentation":null,"field":FieldBodies.new(viewport)}
 	return R.ok(token)
 
 func _authorized(token: Dictionary) -> bool:
@@ -180,7 +181,36 @@ func query_path_batch(requests: Array, nav_revision: Variant, scope_id: String) 
 		return R.fail("NotFound","scope_id")
 	return _nav.paths(_scopes[scope_id],requests,nav_revision)
 
+func field_stage_bodies(scope: String, rows: Array) -> Dictionary:
+	if not _on_owner() or not _scopes.has(scope):
+		return R.fail("InvalidState","field.scope")
+	return _scopes[scope].field.stage(rows)
+
+func field_commit_bodies(scope: String) -> Dictionary:
+	if not _on_owner() or not _scopes.has(scope):
+		return R.fail("InvalidState","field.scope")
+	return _scopes[scope].field.commit()
+
+func field_rollback_bodies(scope: String) -> Dictionary:
+	if not _on_owner() or not _scopes.has(scope):
+		return R.fail("InvalidState","field.scope")
+	return _scopes[scope].field.rollback()
+
+func field_clearance(scope: String, sites: Array) -> Dictionary:
+	if not _on_owner() or not _scopes.has(scope):
+		return R.fail("InvalidState","field.scope")
+	return _scopes[scope].field.clearance(sites)
+
+func field_los(scope: String, from_m: Vector3, to_m: Vector3) -> bool:
+	return _on_owner() and _scopes.has(scope) and _scopes[scope].field.los(from_m,to_m)
+
+func field_sweep(scope: String, queries: Array, tick: int) -> Dictionary:
+	return _sweep(queries,{"scope_id":scope,"tick":tick},true)
+
 func query_sweep_batch(queries: Array, stamp: Dictionary) -> Dictionary:
+	return _sweep(queries,stamp,false)
+
+func _sweep(queries: Array, stamp: Dictionary, field: bool) -> Dictionary:
 	if not _on_owner():
 		return R.fail("InvalidState","thread")
 	if not _scopes.has(stamp.get("scope_id")):
@@ -189,7 +219,7 @@ func query_sweep_batch(queries: Array, stamp: Dictionary) -> Dictionary:
 		return R.fail("InvalidArgument","tick")
 	if stamp.has("generation") and stamp.generation != _scopes[stamp.scope_id].token.generation:
 		return R.fail("StaleVersion","generation")
-	return Queries.sweep(_scopes[stamp.scope_id],queries)
+	return Queries.sweep(_scopes[stamp.scope_id],queries,field)
 
 func release_scope(scope_id: String) -> Dictionary:
 	if not _on_owner():
