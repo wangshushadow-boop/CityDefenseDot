@@ -10,6 +10,7 @@ var _title: Label
 var _slot: LineEdit
 var _buttons := {}
 var _area: VBoxContainer
+var _character_panel: Control
 
 func _label(caption: String, size: int, color: Color=INK) -> Label:
 	var label:=Label.new()
@@ -65,6 +66,7 @@ func mount(context: RefCounted) -> void:
 	_button(files,"load","读取存档",func(): _display(_root.load_world(_slot.text)))
 	_button(files,"save","保存进度",func(): _display(_root.session().save_session()))
 	_button(files,"resume","继续待结算战果",func(): _display(_root.resume_result()))
+	_button(files,"character","人物",_open_character)
 	_area.add_child(HSeparator.new())
 	_area.add_child(_label("河滩练兵场",24))
 	var training:=_row()
@@ -76,6 +78,25 @@ func mount(context: RefCounted) -> void:
 	_area.add_child(_status)
 	_refresh()
 
+func _open_character() -> void:
+	var reply: Dictionary = _root.character_view()
+	if not reply.ok:
+		_display(reply)
+		return
+	_character_panel=load("res://presentation/ui/ports/character_panel.gd").new()
+	add_child(_character_panel)
+	_area.hide()
+	_character_panel.closed.connect(_close_character)
+	_character_panel.mount(reply.value,_root.character_view,_root.character_command)
+
+func _close_character() -> void:
+	remove_child(_character_panel)
+	_character_panel.queue_free()
+	_character_panel=null
+	_area.show()
+	_refresh()
+	_buttons.character.grab_focus()
+
 func _display(reply: Dictionary) -> void:
 	_status.text="操作完成" if reply.ok else "%s · %s"%[reply.error.code,reply.error.field]
 	_refresh()
@@ -86,6 +107,7 @@ func _refresh() -> void:
 	_buttons.new.disabled=state!="Frontend"
 	_buttons.load.disabled=state!="Frontend"
 	_buttons.save.disabled=state!="CampaignMap"
+	_buttons.character.visible=state=="CampaignMap"
 	_buttons.resume.visible=state=="Results" and _root.pending_result().ok
 	_buttons.resume.disabled=not _root.has_campaign_settlement()
 	if _buttons.resume.visible and _buttons.resume.disabled:
