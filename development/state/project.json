@@ -2,19 +2,19 @@
   "schema_version": 1,
   "project": "recollection",
   "delivery_version": "0.3",
-  "active_stage": "P4",
+  "active_stage": "P5",
   "stage_status": {
     "P0": "DONE",
     "P1": "DONE",
     "P2": "BLOCKED",
     "P3": "PARTIAL",
     "P4": "PARTIAL",
-    "P5": "PLANNED",
+    "P5": "PARTIAL",
     "P6": "PLANNED",
     "P7": "PLANNED",
     "P8": "PLANNED"
   },
-  "authorized_by": "项目负责人提前放行 P4 总督治理及必要前置接入。",
+  "authorized_by": "项目负责人提前放行 P5 总督访问与委托。",
   "base_commit": "5e1ad4c39e7362b8b3a4b86f50405b279c35086c",
   "integrated_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
   "technical_stack": {
@@ -30,7 +30,8 @@
       "ADR-014",
       "ADR-015",
       "ADR-016",
-      "ADR-017"
+      "ADR-017",
+      "ADR-018"
     ],
     "approval": {
       "by": "项目负责人",
@@ -43,7 +44,7 @@
     }
   },
   "updated_at": "2026-11-25",
-  "note": "P4-GOV 已验收。其余 P4 按原门禁；P3 仅人物完成，P2 性能延期。",
+  "note": "P5-VISIT 已启动，P4 总督、P3 人物可用，P2 性能延期。",
   "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
   "p1_decisions": {
@@ -100,5 +101,13 @@
       "game_commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70",
       "evidence": "development/reports/stages/P4-governor.md"
     }
+  },
+  "p5_visit_authorization": {
+    "by": "项目负责人",
+    "date": "2026-11-25",
+    "scope": "P5-VISIT",
+    "waived_dependency": "GATE-P4",
+    "decision": "拜访柳溪庄总督并办委托（推荐）：延续上次的庄邑，找到实际在任者、交谈、接事和回报。",
+    "evidence": "docs/architecture/decisions/ADR-018-estate-visit.md"
   }
 }

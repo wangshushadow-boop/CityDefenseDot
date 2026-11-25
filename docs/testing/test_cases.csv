@@ -63,6 +63,8 @@ T-ENC-02,ENC,BAT-03,提交前/中/后故障,恢复并重试,无重复资产或�
 T-ENC-03,ENC,ARM-05 / BAT-02,有预备队未生成,实时战斗结束,每槽唯一终态，未生成归源,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
 T-ENC-04,ENC,SGE-01,围城设备建造且商路阻断,推进/解围,费用、工事、粮耗和恢复一致,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
 T-ENC-05,ENC,SGE-03,强攻失败或守军出击成功,提交,围城或撤围状态按规则，领地不错误易主,NOT_RUN,,docs/systems/game/campaign/encounter/README.md,game/campaign/encounter/
+T-VISIT-01,QUEST,QST-01 / QST-04,柳溪庄有具名总督,会面接事与核对首日报表,真实对话资格和任务阶段及经验均一致,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
+T-VISIT-02,QUEST,QST-02,旧档或任期与日期发生变化,重进会话及故障重试,无孤儿任务或重复经验且失败可解释,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
 T-QUEST-01,QUEST,QST-01,多阶段交付/护送有时限,事件和期限触发,合法分支、完成或过期,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
 T-QUEST-02,QUEST,QST-02,发布者死亡、同一事件重复重放,推进,替代或失败，奖励仅一次,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/
 T-QUEST-03,QUEST,QST-03 / MOD-01 / MOD-02,分别创建剧情和沙盒,完整主线、失败恢复、继续,剧情可继续，沙盒无强制任务,NOT_RUN,,docs/systems/game/campaign/quest/README.md,game/campaign/quest/

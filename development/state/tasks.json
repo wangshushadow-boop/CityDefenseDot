@@ -2595,6 +2595,97 @@
         "development/reports/tests/P4/governor/review.md"
       ],
       "child_ids": []
+    },
+    "P5-VISIT": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": [
+        "P5-VISIT-001",
+        "P5-VISIT-002",
+        "P5-VISIT-003",
+        "P5-VISIT-004",
+        "P5-VISIT-005",
+        "P5-VISIT-006"
+      ]
+    },
+    "P5-VISIT-001": {
+      "status": "IN_PROGRESS",
+      "owner": "p5_quest",
+      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": []
+    },
+    "P5-VISIT-002": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": []
+    },
+    "P5-VISIT-003": {
+      "status": "IN_PROGRESS",
+      "owner": "p5_runtime",
+      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": []
+    },
+    "P5-VISIT-004": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": []
+    },
+    "P5-VISIT-005": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": []
+    },
+    "P5-VISIT-006": {
+      "status": "IN_PROGRESS",
+      "owner": "p5_ui",
+      "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": []
     }
   },
   "transitions": [
@@ -13540,6 +13631,90 @@
         "development/reports/tests/P4/governor/review.md"
       ],
       "commit": "0ca0100bd8ef201e2e2c6c2cd3c9f06e19bb5d70"
+    },
+    {
+      "task_id": "P5-VISIT",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:20:47+08:00",
+      "reason": "负责人选定此人物流程及必要前置",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
+    },
+    {
+      "task_id": "P5-VISIT-001",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:20:47+08:00",
+      "reason": "冻结端口后按限定目录实施",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
+    },
+    {
+      "task_id": "P5-VISIT-002",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:20:47+08:00",
+      "reason": "冻结端口后按限定目录实施",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
+    },
+    {
+      "task_id": "P5-VISIT-003",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:20:47+08:00",
+      "reason": "冻结端口后按限定目录实施",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
+    },
+    {
+      "task_id": "P5-VISIT-004",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:20:47+08:00",
+      "reason": "冻结端口后按限定目录实施",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
+    },
+    {
+      "task_id": "P5-VISIT-005",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:20:47+08:00",
+      "reason": "冻结端口后按限定目录实施",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
+    },
+    {
+      "task_id": "P5-VISIT-006",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:20:47+08:00",
+      "reason": "冻结端口后按限定目录实施",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
     }
   ]
 }

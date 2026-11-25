@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "P5-VISIT-002",
+  "kind": "EXECUTION",
+  "parent": "P5-VISIT",
+  "stage": "P5",
+  "module_id": "CHR",
+  "title": "在场人物事实与个人经验收据",
+  "spec": "docs/systems/game/campaign/character/README.md",
+  "depends_on": [
+    "GATE-P4",
+    "P4-GOV",
+    "P3-CHR"
+  ],
+  "requirements": [
+    "QST-01",
+    "QST-02",
+    "QST-04"
+  ],
+  "acceptance_test_ids": [
+    "T-VISIT-01",
+    "T-VISIT-02"
+  ],
+  "allowed_paths": [
+    "game/campaign/character/hero_domain.gd",
+    "game/campaign/character/ports/characters.gd",
+    "game/tests/p5/visit_people/"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "approved_adr",
+  "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+  "worktree": "D:\\work\\game\\recollection",
+  "scope": "在场人物事实与个人经验收据",
+  "non_goals": [
+    "P5 其他内容及完整城镇自由行走。"
+  ],
+  "acceptance": [
+    "按 ADR-018 复验所属端口及任务、奖励与既有战役的一致性。"
+  ],
+  "status": "IN_PROGRESS"
+}

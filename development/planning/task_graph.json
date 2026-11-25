@@ -2188,6 +2188,45 @@
       "requirement_ids": []
     },
     {
+      "id": "P5-VISIT",
+      "stage": "P5",
+      "kind": "PACKAGE",
+      "title": "柳溪庄总督会面与庄簿委托",
+      "module_ids": [
+        "QUEST",
+        "CHR",
+        "CAMP",
+        "APP",
+        "BOOT",
+        "UI"
+      ],
+      "depends_on": [
+        "GATE-P4",
+        "P4-GOV",
+        "P3-CHR"
+      ],
+      "scope": "查找柳溪庄实际在任总督，交谈、核对下一日庄簿、当面回报并领取一次性个人经验。",
+      "acceptance": "正式桌面拜访在任人物，取真实次日账证交差，验证期限、失格、奖励守恒及老档。",
+      "approval_required": false,
+      "spec_paths": [
+        "docs/systems/game/campaign/quest/README.md",
+        "docs/systems/game/campaign/character/README.md",
+        "docs/systems/game/campaign/README.md",
+        "docs/systems/game/application/README.md",
+        "docs/systems/game/bootstrap/README.md",
+        "docs/systems/game/presentation/ui/README.md"
+      ],
+      "candidate_test_ids": [
+        "T-VISIT-01",
+        "T-VISIT-02"
+      ],
+      "requirement_ids": [
+        "QST-01",
+        "QST-02",
+        "QST-04"
+      ]
+    },
+    {
       "id": "P5-QUEST",
       "stage": "P5",
       "kind": "PACKAGE",
@@ -2196,7 +2235,8 @@
         "QUEST"
       ],
       "depends_on": [
-        "GATE-P4"
+        "GATE-P4",
+        "P5-VISIT"
       ],
       "scope": "任务状态机、动态事件、原创剧情/教程、对话、失效和奖励幂等。",
       "acceptance": "主线/沙盒、分支、期限、替代角色、对话/任务命令。",

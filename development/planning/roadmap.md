@@ -102,7 +102,8 @@
 
 ### P5 · 完整单人内容
 
-- `P5-QUEST`：动态任务、剧情导演、对话与事件；前置：GATE-P4
+- `P5-VISIT`：柳溪庄总督会面与庄簿委托，前置 GATE-P4（本包提前放行）、P4-GOV、P3-CHR。见[执行计划](P5-estate-visit.md)。
+- `P5-QUEST`：动态任务、剧情导演、对话与事件；前置：GATE-P4、P5-VISIT
 - `P5-INTERACT`：场景交互、NPC 与访问流程；前置：GATE-P4, P5-QUEST
 - `P5-RULES-SINGLE`：Mission 规则、目标与玩法组合（SINGLE）；前置：GATE-P4, P5-INTERACT
 - `P5-BASE-INITIAL`：本体原创内容包与资源制作（INITIAL）；前置：GATE-P4, P5-QUEST

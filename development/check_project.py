@@ -136,6 +136,7 @@ def validate():
     early_packages={
         'P3-CHR': ('GATE-P2', 'p3_authorization', 'docs/architecture/decisions/ADR-016-character-slice.md'),
         'P4-GOV': ('GATE-P3', 'p4_governor_authorization', 'docs/architecture/decisions/ADR-017-governor.md'),
+        'P5-VISIT': ('GATE-P4', 'p5_visit_authorization', 'docs/architecture/decisions/ADR-018-estate-visit.md'),
     }
     def available(task, dependency):
         if state[dependency]['status']=='DONE': return True
