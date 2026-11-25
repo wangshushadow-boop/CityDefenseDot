@@ -15,6 +15,7 @@ const Mission = preload("res://mission/runtime/runtime.gd")
 const Session = preload("res://application/game_session.gd")
 
 const FieldSetup = preload("res://bootstrap/field_setup.gd")
+var _campaign_settlement: Callable
 var _save_owner: RefCounted
 var _save_session := ""
 var _field_authority: RefCounted
@@ -32,8 +33,9 @@ var _ready_for_requests := false
 var _config := {}
 var _report := {}
 
-func _init(host: Node) -> void:
+func _init(host: Node, campaign_settlement: Callable = Callable()) -> void:
 	_host=host
+	_campaign_settlement=campaign_settlement
 
 func register(descriptor: Dictionary) -> Dictionary:
 	if _busy or not _stack.is_empty():
@@ -110,7 +112,7 @@ func _create_session(deps: Dictionary) -> Dictionary:
 		return Mission.new(core,engine_adapter,mode,Callable(),"mission/p1-training-replay" if replay else "")
 	# The frontend exposes world and training actions only. A gameplay exchange
 	# needs an installed trusted authority rather than a caller-supplied identity.
-	return R.ok(Session.new(deps.persistence,func(): return Camp.new(),mission_factory,_field_permit,Callable(),_receive_match_result,_field_gateway))
+	return R.ok(Session.new(deps.persistence,func(): return Camp.new(),mission_factory,_field_permit,_campaign_settlement,_receive_match_result,_field_gateway))
 
 func boot(config: Dictionary) -> Dictionary:
 	if _busy or not _stack.is_empty():
@@ -213,6 +215,9 @@ func load_world(slot: String) -> Dictionary:
 func pending_result() -> Dictionary:
 	if session()==null or _save_owner==null: return R.fail("Unauthorized","pending.result")
 	return session().query("pending_result",{"context":_save_owner})
+
+func has_campaign_settlement() -> bool:
+	return _campaign_settlement.is_valid()
 
 func resume_result() -> Dictionary:
 	var saved := pending_result()

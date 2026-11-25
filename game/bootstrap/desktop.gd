@@ -87,6 +87,9 @@ func _refresh() -> void:
 	_buttons.load.disabled=state!="Frontend"
 	_buttons.save.disabled=state!="CampaignMap"
 	_buttons.resume.visible=state=="Results" and _root.pending_result().ok
+	_buttons.resume.disabled=not _root.has_campaign_settlement()
+	if _buttons.resume.visible and _buttons.resume.disabled:
+		_status.text="存档中有待结算的战果。载入对应的战役结算规则后可继续。"
 	_buttons.field.disabled=state not in ["Frontend","CampaignMap","CustomSetup"]
 	_buttons.train.disabled=state not in ["Frontend","CampaignMap","CustomSetup"]
 	_buttons.leave.disabled=state!="Mission"

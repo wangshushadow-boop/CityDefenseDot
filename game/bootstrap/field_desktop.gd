@@ -6,6 +6,7 @@ const Visuals = preload("res://presentation/visuals/ports/field_visuals.gd")
 const Audio = preload("res://presentation/audio/ports/field_audio.gd")
 const Camera = preload("res://presentation/camera/ports/field_camera.gd")
 const HUD = preload("res://presentation/ui/ports/field_hud.gd")
+const MEDIUM_NEAR_METRES := 53.0
 var application: RefCounted
 var scope := ""
 var running := false
@@ -19,8 +20,6 @@ var _hud_state := {}
 var _player := {}
 var _visual_state := {}
 var _target: Variant
-var _subtitle := ""
-var _subtitle_until := 0
 var _first := false
 var _look := Vector2.ZERO
 var _aim := Vector2.ZERO
@@ -29,6 +28,8 @@ var _camera_actor := {}
 var _last_actor := {}
 var _last_control_revision := -1
 var _deployment_sequence := 0
+var _deployment_attempt := 0
+var _deployment_request := {}
 var _last_audio_end := false
 var _exiting := false
 signal leave_requested
@@ -53,7 +54,7 @@ func mount(app: RefCounted, id: String) -> Dictionary:
 	if not opened.ok: return opened
 	opened = _audio.open_scope(id)
 	if not opened.ok: return opened
-	_audio.subtitle_requested.connect(_caption)
+	_audio.set_hud_captions(true)
 	opened = _input_port.configure(id,"player",{},0,_batch,_order)
 	if not opened.ok: return opened
 	_input_port.bind_combat_view(func(h):return R.ok(_player.get("player",{})) if h==_player.get("actor_handle") else R.fail("NotFound","actor"))
@@ -68,6 +69,7 @@ func mount(app: RefCounted, id: String) -> Dictionary:
 
 func begin() -> void:
 	if running: return
+	_deployment_request = {}
 	var view: Dictionary = application.field_view("input")
 	if view.ok: _deployment_sequence = view.value.get("last_order_sequence",0)
 	running = true
@@ -101,7 +103,7 @@ func _hud_view() -> Dictionary:
 	projection.command_feedback = local.feedback
 	projection.allow_rebind = true
 	projection.bindable_actions = _input_port.profile_view().bindings.keys()
-	projection.subtitle = _subtitle if Time.get_ticks_msec() < _subtitle_until else ""
+	projection.subtitle = _audio.caption_text()
 	if _target != null: projection.target_position = _target
 	return R.ok(projection)
 
@@ -119,17 +121,30 @@ func _hud_action(action: String,data: Dictionary) -> Dictionary:
 			var body := data.duplicate()
 			body.erase("scope_id")
 			body.erase("revision")
-			var sent: Dictionary = application.field_command("field."+action,body,data.revision)
-			if sent.ok and action=="deploy": begin()
-			return sent
+			if action=="deploy":
+				_deployment_attempt += 1
+				_deployment_request = {"body":body,"revision":data.revision,"id":"deployment/%d"%_deployment_attempt,"tries":0}
+				return _deliver_deployment()
+			return application.field_command("field."+action,body,data.revision)
 		"leave":
 			call_deferred("emit_signal","leave_requested")
 			return R.ok()
 	return R.fail("InvalidArgument","field.action")
 
-func _caption(key: String,_event_id: String) -> void:
-	_subtitle = tr(key)
-	_subtitle_until = Time.get_ticks_msec()+2600
+func _deliver_deployment() -> Dictionary:
+	var pending := _deployment_request
+	var reply: Dictionary = application.field_command("field.deploy",pending.body,pending.revision,pending.id)
+	if reply.ok:
+		begin()
+	elif reply.error.field in ["navigation_sync","nav_revision","field.navigation","deployment.spawn_site"] and pending.tries<60:
+		pending.tries += 1
+	else:
+		_deployment_request = {}
+	return reply
+
+func _physics_process(_delta: float) -> void:
+	if not running and not _exiting and not _deployment_request.is_empty():
+		_deliver_deployment()
 
 func _refresh_views() -> Dictionary:
 	var hud: Dictionary = application.field_view("hud")
@@ -149,6 +164,11 @@ func _refresh_views() -> Dictionary:
 	if h!=_last_actor or rev!=_last_control_revision:
 		var changed := _input_port.set_control(h,rev)
 		if not changed.ok: return changed
+		if not h.is_empty() and h!=_last_actor:
+			var aligned := _input_port.align_look(_player.heading)
+			if not aligned.ok: return aligned
+			_aim = aligned.value
+			_look = Vector2.ZERO
 		_last_actor = h
 		_last_control_revision = rev
 	_input_port.set_delegate_candidate(_hud_state.get("delegate_candidate",""))
@@ -247,7 +267,7 @@ func _process(_dt: float) -> void:
 	if not running:
 		_camera.update_view(scope,0,1.0/60.0)
 	if not _visual_state.is_empty():
-		_visuals.render_interpolated(Engine.get_physics_interpolation_fraction(),_camera.global_position)
+		_visuals.render_interpolated(Engine.get_physics_interpolation_fraction(),_camera.global_position,MEDIUM_NEAR_METRES)
 
 func release() -> void:
 	_exiting = true

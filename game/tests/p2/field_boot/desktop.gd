@@ -40,6 +40,7 @@ func run() -> void:
 		fail("player deployment controls missing")
 		return
 	group.pressed.emit()
+	button("Group2").pressed.emit()
 	zone.select(1)
 	zone.item_selected.emit(1)
 	button("Mark").pressed.emit()
@@ -54,7 +55,7 @@ func run() -> void:
 	if not h.ok or not h.value.actor_handle is Dictionary:
 		fail("player has no actor")
 		return
-	if h.value.last_order_sequence<1:
+	if h.value.last_order_sequence!=2:
 		fail("chosen formation was not deployed")
 		return
 	if not button("Group1").button_pressed: button("Group1").pressed.emit()
