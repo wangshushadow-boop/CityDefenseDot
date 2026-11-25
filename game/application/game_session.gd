@@ -5,6 +5,8 @@ const R = preload("res://contracts/result.gd")
 const S = preload("res://contracts/schema.gd")
 const V = preload("res://contracts/values.gd")
 const Book = preload("res://application/receipt_book.gd")
+const FieldCommands = preload("res://application/field_commands.gd")
+const FieldResults = preload("res://mission/results/ports/field_results.gd")
 const RULES := {"story":{"campaign":true,"main_story":true},"sandbox":{"campaign":true,"main_story":false},
 	"custom":{"campaign":false,"main_story":false},"multiplayer":{"campaign":false,"main_story":false}}
 
@@ -14,6 +16,10 @@ var _mission_factory: Callable
 var _authorize: Callable
 var _settle: Callable
 var _network_sink: Callable
+var _field_gateway: Callable
+var _field := false
+var _field_receipts := {}
+var _decision_digest := ""
 var _camp: RefCounted
 var _mission: RefCounted
 var _mode := ""
@@ -34,13 +40,14 @@ var _busy := false
 var _ack_lost := false
 
 func _init(persist: RefCounted, campaign_factory: Callable, mission_factory: Callable, authorize: Callable,
-		settle: Callable = Callable(), network_sink: Callable = Callable()) -> void:
+		settle: Callable = Callable(), network_sink: Callable = Callable(), field_gateway: Callable = Callable()) -> void:
 	_store=persist
 	_campaign_factory=campaign_factory
 	_mission_factory=mission_factory
 	_authorize=authorize
 	_settle=settle
 	_network_sink=network_sink
+	_field_gateway=field_gateway
 
 func _call(action: Callable, args: Array = []) -> Dictionary:
 	if _busy:
@@ -97,11 +104,34 @@ func query(kind: String = "session", visibility: Dictionary = {}) -> Dictionary:
 		"campaign":
 			if _camp!=null and _spec.get("mode","campaign")=="campaign":
 				return _camp.read_snapshot(visibility)
+		"field":
+			return _call(_field_query,[visibility])
 		"mission":
 			if _mission!=null:
 				var view: Dictionary=_mission.view()
 				return R.ok({"mission_id":view.mission_id,"phase":view.phase,"tick":view.tick})
 	return R.fail("NotFound","query")
+
+func _field_query(visibility: Dictionary) -> Dictionary:
+	if not _field or _mission==null or _phase not in ["Mission","Results","Recovery"] or not _field_gateway.is_valid():
+		return R.fail("InvalidState","field.scope")
+	var projection: Variant=visibility.get("projection")
+	var scope:=_mission_id()
+	if visibility.size()!=2 or not visibility.has("context") or projection not in ["hud","visual","camera","input"]:
+		return R.fail("InvalidArgument","field.query")
+	var payload := {"type":"field.view","scope_id":scope,"projection":projection}
+	var token: Variant=visibility.context
+	if _issuer(token,"field.view",{"scope_id":scope,"payload":payload}).is_empty():
+		return R.fail("Unauthorized","field.view")
+	return _field_gateway.call("field.view",payload,token)
+
+func _issuer(context: Variant, operation: String, command: Dictionary) -> String:
+	if context==null or not _authorize.is_valid():
+		return ""
+	var permit: Variant=_authorize.call(context,operation,command)
+	if permit is Dictionary and is_same(permit.get("ok"),true) and permit.get("value") is String:
+		return permit.value
+	return ""
 
 func _mission_id() -> String:
 	return _mission.view().mission_id if _mission!=null else ""
@@ -210,6 +240,8 @@ func _load(slot: String, content: Dictionary) -> Dictionary:
 		if book.pending.result!=null:
 			if typeof(book.pending.result)!=TYPE_DICTIONARY or not S.validate_settlement(checked.value,book.pending.result).ok:
 				return R.fail("Conflict","pending.result")
+			if _saved_field(checked.value,book.pending.result) and not FieldResults.validate_source_coverage(checked.value,book.pending.result).ok:
+				return R.fail("Conflict","pending.result")
 	elif world.freeze!=null:
 		return R.fail("Conflict","reservation")
 	_phase="LoadWorld"
@@ -234,6 +266,7 @@ func _load(slot: String, content: Dictionary) -> Dictionary:
 		if _pending.result!=null:
 			_spec=_pending.spec
 			_final=_pending.result
+			_field=_saved_field(_spec,_final)
 			_phase="Results"
 		else:
 			_phase="Recovery"
@@ -252,6 +285,8 @@ func _save() -> Dictionary:
 	return _write(snapshot.value,_commands,_results,null)
 
 func _dispatch(envelope: Dictionary, context: Variant) -> Dictionary:
+	if _field and _mission!=null:
+		return _dispatch_field(envelope,context)
 	if _camp==null or _phase!="CampaignMap":
 		return R.fail("InvalidState","campaign")
 	var checked:=S.validate_shape("CommandEnvelope",envelope)
@@ -283,6 +318,29 @@ func _dispatch(envelope: Dictionary, context: Variant) -> Dictionary:
 		return applied
 	_commands=next
 	return _ack(next[key].receipt)
+
+func _dispatch_field(envelope: Dictionary, context: Variant) -> Dictionary:
+	if not _field_gateway.is_valid():
+		return R.fail("Unavailable","field.gateway")
+	var parsed:=FieldCommands.prepare(envelope)
+	if not parsed.ok:
+		return parsed
+	var cmd: Dictionary=parsed.value.cmd
+	var operation: String=cmd.payload.type
+	if cmd.scope_id!=_mission_id() or _issuer(context,operation,cmd)!=cmd.actor_ref:
+		return R.fail("Unauthorized","field.authority")
+	var digest:=Book.key(cmd)
+	var replay: Variant=Book.replay(_field_receipts,cmd.command_id,digest)
+	if replay!=null:
+		return replay
+	if _phase!="Mission" or _ended or _paused:
+		return R.fail("InvalidState","field.command")
+	var applied: Dictionary=_field_gateway.call(operation,parsed.value.local,context)
+	if not applied.ok:
+		return applied
+	var row:=Book.entry(digest,cmd.command_id,cmd.expected_revision)
+	_field_receipts[cmd.command_id]=row
+	return _ack(row.receipt)
 
 func _ack(receipt: Dictionary) -> Dictionary:
 	return R.fail("Unavailable","receipt") if _ack_lost else R.ok(receipt.duplicate(true))
@@ -333,6 +391,9 @@ func _prepare(spec: Dictionary, scene: Dictionary, ruleset: Dictionary) -> Dicti
 		_phase=old_phase
 		return prepared
 	_spec=candidate
+	_field=ruleset.get("battle_mode")=="field" or _known_field(candidate)
+	_field_receipts.clear()
+	_decision_digest=""
 	_final={}
 	_routed={}
 	_ended=false
@@ -343,26 +404,71 @@ func _prepare(spec: Dictionary, scene: Dictionary, ruleset: Dictionary) -> Dicti
 func _step(tick: Variant, inputs: Array) -> Dictionary:
 	if _phase!="Mission" or _paused or _ended or not V.integer(tick,1):
 		return R.fail("InvalidState","tick")
+	if _field and not inputs.is_empty():
+		return R.fail("Unauthorized","field.input")
 	return _mission.step_fixed(tick,inputs)
 
+static func _known_field(spec: Dictionary) -> bool:
+	return spec.get("ruleset_id") in ["field:ruleset/field_battle","base:ruleset/field_battle"]
+
+static func _saved_field(spec: Dictionary, result: Dictionary) -> bool:
+	if _known_field(spec):
+		return true
+	for objective in result.objective_results:
+		if objective is Dictionary and objective.get("id")=="field" and result.stats.has("teams"):
+			return true
+	return false
+
+func _rule_decision() -> Variant:
+	for report in _mission.view().get("system_reports",[]):
+		if report.id=="field.rules" and report.phase=="objectives":
+			return report.value.get("outcome")
+	return null
+
+func _same_finish(request: Dictionary, digest: String) -> bool:
+	if request.has("result_id"):
+		return not _final.is_empty() and S.validate_shape("MissionResult",request).ok and request==_final
+	if not _decision_digest.is_empty():
+		return digest==_decision_digest
+	# A cold, pending field result preserves the complete result and its digest but not the
+	# complete RULES decision (for example the team that requested withdrawal).
+	return not _field and _final.get("winner_team_keys",[]).is_empty() and _final.get("objective_results",[]).is_empty() and request=={"outcome":_final.get("outcome")}
+
 func _finish(outcome: Dictionary) -> Dictionary:
+	var request_hash:=C.hash_value(outcome)
+	if not request_hash.ok:
+		return request_hash
 	if _phase=="Results" and not _final.is_empty():
-		return R.ok(_final.duplicate(true)) if _final.outcome==outcome.get("outcome") else R.fail("Conflict","outcome")
+		return R.ok(_final.duplicate(true)) if _same_finish(outcome,request_hash.value) else R.fail("Conflict","outcome")
 	if _phase not in ["Mission","Recovery"] or _mission==null:
 		return R.fail("InvalidState","mission")
+	if _ended and not _same_finish(outcome,request_hash.value):
+		return R.fail("Conflict","outcome")
 	if not _ended:
+		if _field:
+			var confirmed: Variant=_rule_decision()
+			if not confirmed is Dictionary or Book.key(confirmed)!=request_hash.value:
+				return R.fail("Conflict","field.outcome")
 		var ending: Dictionary=_mission.request_end(outcome)
 		if not ending.ok:
 			return ending
 		_ended=true
+		_decision_digest=request_hash.value
 	if _final.is_empty():
 		var finished: Dictionary=_mission.finalize()
 		if not finished.ok:
 			return finished
-		_final=finished.value
+		var value: Dictionary=finished.value
+		if value.get("outcome")!=outcome.get("outcome"):
+			return R.fail("Conflict","outcome")
+		if _field:
+			var coverage:=FieldResults.validate_source_coverage(_spec,value)
+			if not coverage.ok:
+				return coverage
+			if value.mission_id!=_mission_id() or value.winner_team_keys!=outcome.winner_team_keys or value.objective_results!=outcome.objective_results:
+				return R.fail("Conflict","field.result")
+		_final=value
 	var result: Dictionary=_final
-	if result.outcome!=outcome.get("outcome"):
-		return R.fail("Conflict","outcome")
 	if _spec.mode=="campaign":
 		var proposed := {"spec":_spec,"result":result}
 		var persisted:=_write(_camp.save_snapshot().value,_commands,_results,proposed)
@@ -467,6 +573,9 @@ func _dispose_mission() -> Dictionary:
 		if not cancelled.ok:
 			return cancelled
 	_spec={}
+	_field=false
+	_field_receipts.clear()
+	_decision_digest=""
 	_final={}
 	_routed={}
 	_paused=false
@@ -504,6 +613,9 @@ func _clear() -> void:
 	_pending=null
 	_commands={}
 	_results={}
+	_field=false
+	_field_receipts.clear()
+	_decision_digest=""
 	_spec={}
 	_final={}
 	_routed={}

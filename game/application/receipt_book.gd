@@ -15,10 +15,13 @@ static func replay(book: Dictionary, id: String, digest: String) -> Variant:
 		return R.fail("Conflict","request")
 	return R.ok(book[id].receipt.duplicate(true))
 
-static func record(book: Dictionary, id: String, digest: String, cmd: String, revision: int) -> Dictionary:
+static func entry(digest: String, cmd: String, revision: int) -> Dictionary:
 	var receipt := {"command_id":cmd,"status":"committed","committed_revision":revision,"errors":[],"view_changes":[]}
+	return {"digest":digest,"receipt":receipt}
+
+static func record(book: Dictionary, id: String, digest: String, cmd: String, revision: int) -> Dictionary:
 	var candidate := book.duplicate()
-	candidate[id]={"digest":digest,"receipt":receipt}
+	candidate[id]=entry(digest,cmd,revision)
 	return candidate
 
 static func valid(book: Variant) -> bool:
