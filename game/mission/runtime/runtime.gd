@@ -156,6 +156,9 @@ func apply_deployment(orders: Array) -> Dictionary:
 		_busy = false
 		if not deployed.ok:
 			return deployed
+		var completed := _complete_deployment(deployed.value)
+		if not completed.ok:
+			return completed
 		_entities = deployed.value.entities
 		return R.ok(deployed.value.handles)
 	var staged: Entities = _entities.fork()
@@ -180,6 +183,20 @@ func remove_entity(mission_id: String, handle: Dictionary) -> Dictionary:
 		return R.fail("InvalidState","phase")
 	return _entities.remove(mission_id,handle,_mission)
 
+# A field assembly can bind nonsource companions in the same unpublished store.
+func _complete_deployment(_deployment: Dictionary) -> Dictionary:
+	return R.ok()
+
+func _retire_companions(_store: Entities, _retiring: Array) -> void:
+	pass
+
+# Called after every registered projection has succeeded, before any commit hook.
+func _seal_tick() -> Dictionary:
+	return R.ok()
+
+func _needs_opening_wave(store: Entities) -> bool:
+	return store.active_sources==0
+
 func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 	if not _active():
 		return R.fail("InvalidState","phase")
@@ -200,13 +217,16 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 	var attempted := []
 	var retry_wave := false
 	_busy = true
-	var opening := _field != null and _tick == 0 and staged.active_sources == 0
+	var opening := _field != null and _tick == 0 and _needs_opening_wave(staged)
 	if opening:
 		var initial: Dictionary = _field.auto_wave(staged,_spec.battle_limit,_engine,_mission,_clear_sites)
 		if not initial.ok:
 			return _abort_tick(initial,attempted)
-		if initial.value.handles.is_empty():
+		if initial.value.handles.is_empty() and staged.active_sources==0:
 			return _abort_tick(R.fail("Unavailable","deployment.spawn_site"),attempted)
+		var completed := _complete_deployment(initial.value)
+		if not completed.ok:
+			return _abort_tick(completed,attempted)
 		staged = initial.value.entities
 	var context := _make_view(staged)
 	var ending := false
@@ -223,6 +243,9 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 						return _abort_tick(wave,attempted)
 					retry_wave = true
 				else:
+					var completed := _complete_deployment(wave.value)
+					if not completed.ok:
+						return _abort_tick(completed,attempted)
 					staged = wave.value.entities
 					context = _make_view(staged)
 		for id in ids:
@@ -260,6 +283,7 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 				if not retiring.is_empty():
 					if staged == _entities:
 						staged = staged.fork()
+					_retire_companions(staged,retiring)
 					for handle in retiring:
 						if typeof(handle) != TYPE_DICTIONARY:
 							return _abort_tick(R.fail("InvalidArgument","system.retire_handles"),attempted)
@@ -272,6 +296,9 @@ func step_fixed(tick: Variant, inputs: Array) -> Dictionary:
 			reports.append(entry)
 	# All fallible work precedes commit. Registered commit hooks publish a
 	# prevalidated domain candidate and may not query or produce fallible work.
+	var sealed := _seal_tick()
+	if not sealed.ok:
+		return _abort_tick(sealed,attempted)
 	for system in attempted:
 		if system.commit.is_valid():
 			system.commit.call()
