@@ -126,6 +126,13 @@ func scenario() -> void:
 	var inherited:=view()
 	verify(inherited.player_id==person.id and inherited.governance.governor_id==null,"governor who succeeds as clan head vacates office")
 	verify(find_button("卸任总督")==null and has_text("空缺"),"succession vacancy rendered")
+	if not await activate("家人和继承") or not await activate("安排退休"): return
+	for window: ConfirmationDialog in main.find_children("*","ConfirmationDialog",true,false):
+		if window.visible: dialog=window
+	if not verify(is_instance_valid(dialog) and dialog.visible,"last family head can confirm retirement"): return
+	dialog.get_ok_button().pressed.emit()
+	await process_frame
+	verify(view().ended and has_text("生涯已结束") and has_text("上次实结") and find_button("休养一日")==null,"end of career preserves read-only estate history")
 
 func run() -> void:
 	if not verify(DisplayServer.get_name()!="headless","real Windows renderer"):
