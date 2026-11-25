@@ -110,6 +110,75 @@ func owner_of(instance_id: String) -> Dictionary:
 	return R.ok(_state.owners[instance_id])
 
 
+## Isolated projection for cross-repository checks; no balances or ledger history are exposed.
+func instance_layout() -> Dictionary:
+	return {"locations": _locations.duplicate(true), "owners": _state.owners.duplicate()}
+
+
+## Used during migration to distinguish issued holders from an older user-defined name.
+func has_holder_endowment(holder_prefix: String) -> bool:
+	for holder in _locations:
+		if not holder.begins_with(holder_prefix):
+			continue
+		for record in _state.ledger:
+			for line in record.request.lines:
+				if line.get("reason") == "holder_endowment" and line.get("src") == null and line.get("dst") is String and line.dst.begins_with(holder_prefix) and line.get("source_ref") == record.request.txn_id:
+					return true
+		return false
+	return false
+
+
+## Campaign creates holders and their starting instances at one durable world commit.
+## Endowments only enter newly opened holders and use one recorded issuance transaction.
+func fork_with_locations(additions: Dictionary = {}, endowment: Array = [], txn_id: String = "") -> Dictionary:
+	if _busy or (not _ready and additions.is_empty()):
+		return R.fail("InvalidState", "inventory")
+	if _locations.size() + additions.size() > C.MAX_ITEMS:
+		return R.fail("InvalidState", "locations")
+	for id in additions:
+		if _locations.has(id):
+			return R.fail("Conflict", "location")
+	var candidate = get_script().new()
+	if not additions.is_empty():
+		var opened: Dictionary = candidate.initialize(additions, [], _authorize)
+		if not opened.ok:
+			return opened
+	if _ready:
+		candidate._locations.merge(_locations.duplicate(true))
+		candidate._initial = _initial.duplicate(true)
+		candidate._state = _state.duplicate(true)
+		candidate._authorize = _authorize
+		candidate._ready = true
+	if not endowment.is_empty():
+		if not _id(txn_id) or _state.applied.has(txn_id):
+			return R.fail("Conflict", "endowment.txn_id")
+		var lines := []
+		var issued := {}
+		for row in endowment:
+			if not row is Dictionary or row.size() != 2 or not additions.has(row.get("holder")) or not _id(row.get("instance_id")):
+				return R.fail("InvalidArgument", "endowment")
+			lines.append({"src":null, "dst":row.holder, "resource":{"kind":"instance","id":row.instance_id},
+				"amount":1, "reason":"holder_endowment", "source_ref":txn_id})
+			issued[row.instance_id] = true
+		# A consumed instance has no live owner, but its identity still belongs to the ledger.
+		for row in _initial:
+			if row.resource.kind == "instance" and issued.has(row.resource.id):
+				return R.fail("Conflict", "instance.origin")
+		for record in _state.ledger:
+			for entry in record.entries:
+				if entry.get("resource",{}).get("kind") == "instance" and issued.has(entry.resource.id):
+					return R.fail("Conflict", "instance.origin")
+		candidate._authorize = func(reason, source, _resource, mint): return mint and reason == "holder_endowment" and source == txn_id
+		var plan: Dictionary = candidate.prepare_exchange(txn_id, lines)
+		if not plan.ok:
+			return plan
+		var committed: Dictionary = candidate.commit(plan.value)
+		if not committed.ok:
+			return committed
+		candidate._authorize = _authorize
+	return R.ok(candidate)
+
+
 func ledger_for(txn_id: String) -> Dictionary:
 	if not _state.applied.has(txn_id):
 		return R.fail("NotFound", "txn_id")
