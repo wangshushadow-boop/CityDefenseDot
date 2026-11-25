@@ -7,7 +7,8 @@ const V = preload("res://contracts/values.gd")
 const Book = preload("res://application/receipt_book.gd")
 const FieldCommands = preload("res://application/field_commands.gd")
 const FieldResults = preload("res://mission/results/ports/field_results.gd")
-const CHARACTER_ACTIONS := ["create", "practice", "perk", "focus", "equip", "rest", "retire", "outcome"]
+const CHARACTER_ACTIONS := ["create", "practice", "perk", "focus", "equip", "rest", "retire", "outcome",
+	"governor_open", "governor_assign", "governor_dismiss"]
 const RULES := {"story":{"campaign":true,"main_story":true},"sandbox":{"campaign":true,"main_story":false},
 	"custom":{"campaign":false,"main_story":false},"multiplayer":{"campaign":false,"main_story":false}}
 
