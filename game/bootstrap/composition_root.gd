@@ -20,7 +20,7 @@ var _save_owner: RefCounted
 var _save_session := ""
 var _character_world := ""
 const CHARACTER_ACTIONS := ["create","practice","focus","perk","equip","rest","retire",
-	"governor_open","governor_assign","governor_dismiss"]
+	"governor_open","governor_assign","governor_dismiss","visit_accept","visit_report","visit_claim"]
 var _field_authority: RefCounted
 var _field_mission: WeakRef
 var _field_launch := false
