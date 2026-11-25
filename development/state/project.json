@@ -16,7 +16,7 @@
   },
   "authorized_by": "项目负责人授权 P2，并于 2026-11-25 授权其通过后继续 P3 人物。",
   "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-  "integrated_commit": "c75b7d6a2494d4c2692037be163971884cf0b6c8",
+  "integrated_commit": "7b6ca6f6e36fd90f86b6753dd9213efc773b1e24",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",

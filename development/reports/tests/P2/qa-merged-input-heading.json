@@ -1,0 +1,117 @@
+{
+  "sources": [
+    {
+      "commit": "84c2e042cbe61d3b992c6398a5689958310f11da",
+      "paths": [
+        "game"
+      ],
+      "archive_sha256": "2f5547bb47a775a68749fc841cf834c4908e3978e1a35a3ad4438841a9c5dd18"
+    },
+    {
+      "commit": "3ca4284a621f3fe4eaa5d834066addfa25acc63d",
+      "paths": [
+        "game/bootstrap",
+        "game/tests/p2/field_boot"
+      ],
+      "archive_sha256": "efb8f6cb134d18bb27aba859e1df4eee5c1391eba183dc3b158b260d8e14a197"
+    },
+    {
+      "commit": "8caab14da77f6d52238acfff77296d2809b49385",
+      "paths": [
+        "game/presentation/input/ports/field_input.gd",
+        "game/tests/p2/field_input_handoff"
+      ],
+      "archive_sha256": "fa647717d1515a1d5f072443cb28ae1110c9f2434216e6154899911213850ec9"
+    },
+    {
+      "commit": "d7b810d39c012bd8e5f4509a57bdb18feecf1319",
+      "paths": [
+        "game/presentation/audio/ports/field_audio.gd",
+        "game/tests/p2/field_audio_handoff"
+      ],
+      "archive_sha256": "831f224b5cb4ac80d5e8d406fc6f0c7e3d8a9953b06ed5094384be3f47460df1"
+    }
+  ],
+  "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "runs": [
+    {
+      "case": "p2_field_input_handoff_run.gd",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-input-handoff\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-input-handoff\\p2_field_input_handoff_run.gd-engine.log",
+        "--script",
+        "res://tests/p2/field_input_handoff/run.gd"
+      ],
+      "markers": [
+        "P2-FIELD-INTEGRATION-016 PASS checks=32 failures=0"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.447,
+      "log_sha256": "5c432731ba69b7a7ee77b73575ce02a957e75442a9572ee4bee7f3e71deefbf0",
+      "log": "out/p2-qa/final-field/field-input-handoff/p2_field_input_handoff_run.gd.log",
+      "observed": [
+        "P2-FIELD-INTEGRATION-016 PASS checks=32 failures=0"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "p2_input_run.gd",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-input-handoff\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-input-handoff\\p2_input_run.gd-engine.log",
+        "--script",
+        "res://tests/p2/input/run.gd"
+      ],
+      "markers": [
+        "checks=379 failures=0"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.442,
+      "log_sha256": "cf6d5d492cabe8f31f8887263bbd3d40e9ccec3e775adee5a9cb2b9da051ef8e",
+      "log": "out/p2-qa/final-field/field-input-handoff/p2_input_run.gd.log",
+      "observed": [
+        "T-INPUT-02 PASS",
+        "T-INPUT-03 PASS",
+        "T-INPUT-01-AUTOMATED PASS",
+        "P2-INPUT-001 PASS checks=379 failures=0 physical_pads=0"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "p2_input_retry_cases.gd",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-input-handoff\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-input-handoff\\p2_input_retry_cases.gd-engine.log",
+        "--script",
+        "res://tests/p2/input/retry_cases.gd"
+      ],
+      "markers": [
+        "checks=49 failures=0"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.35,
+      "log_sha256": "a4f8f39c402ca0929c99920f1d4f320fe07d4a462bbb3571cbcd5963e45339f7",
+      "log": "out/p2-qa/final-field/field-input-handoff/p2_input_retry_cases.gd.log",
+      "observed": [
+        "P2-INPUT-001-RETRY PASS checks=49 failures=0"
+      ],
+      "engine_diagnostics": []
+    }
+  ],
+  "status": "PASS"
+}

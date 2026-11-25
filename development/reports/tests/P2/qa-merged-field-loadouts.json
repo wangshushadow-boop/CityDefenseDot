@@ -1,0 +1,120 @@
+{
+  "task": "field-loadouts",
+  "source": [
+    {
+      "commit": "6bb4a967176446a14741bcc9129ab8ae41e040bf",
+      "paths": [
+        "game"
+      ],
+      "archive_sha256": "2a5d454c2026a5088133d7c31a4d26ad0a6b53aae6f2f26d0ad1acc6f698e5ca"
+    }
+  ],
+  "host": {
+    "os": "win32",
+    "godot": "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+    "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+  },
+  "started": "2026-11-25T08:52:33.687312+08:00",
+  "runs": [
+    {
+      "case": "cold_import",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-loadouts\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-loadouts\\cold_import-godot.log",
+        "--import"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 5.403,
+      "log": "out/p2-qa/final-field/field-loadouts/cold_import.log",
+      "log_sha256": "0ab8fd3338160770417aa4d0fc15d7dc12f4d363b712901ab3745b63334ab176",
+      "observed": []
+    },
+    {
+      "case": "p2_field_loadouts",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-loadouts\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-loadouts\\p2_field_loadouts-godot.log",
+        "--script",
+        "res://tests/p2/field_loadouts/run.gd"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 0.268,
+      "log": "out/p2-qa/final-field/field-loadouts/p2_field_loadouts.log",
+      "log_sha256": "ca7b3f887b1ea57613f3e7c381502d7d6c001b3eae17f3aae6190561e865870c",
+      "observed": [
+        "Field troop loadouts PASS digest=d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1"
+      ]
+    },
+    {
+      "case": "p2_field_assets",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-loadouts\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-loadouts\\p2_field_assets-godot.log",
+        "--script",
+        "res://tests/p2/field_assets/run.gd"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 0.354,
+      "log": "out/p2-qa/final-field/field-loadouts/p2_field_assets.log",
+      "log_sha256": "5f8c70eebe2036322918bdad2c317c0addf57c6f24d91b7690afc602b9ae3383",
+      "observed": [
+        "FIELD_RIG general bones=22 meshes=12 moving=20",
+        "FIELD_RIG spear_soldier bones=22 meshes=12 moving=19",
+        "FIELD_RIG crossbowman bones=22 meshes=12 moving=19",
+        "FIELD_RIG horse bones=50 meshes=1 moving=32",
+        "FIELD_CONTENT hash=d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1",
+        "P2-FIELD-ASSETS PASS failures=0"
+      ]
+    }
+  ],
+  "attribution_checks": [
+    {
+      "file": "models/general.glb",
+      "author": "Polyfork",
+      "license_record": "CC-BY-4.0",
+      "sha256": "848e6d94c3f0bda60fb28176d41061b4771b4923bab0f63ce95898f4f7ea19b5",
+      "reference_copy_sha256": "848e6d94c3f0bda60fb28176d41061b4771b4923bab0f63ce95898f4f7ea19b5",
+      "status": "PASS"
+    },
+    {
+      "file": "models/spear_soldier.glb",
+      "author": "Polyfork",
+      "license_record": "CC-BY-4.0",
+      "sha256": "9d69862625b97ef0074887d81c317a76ecc63295ca3edb000931792f2c64033d",
+      "reference_copy_sha256": "9d69862625b97ef0074887d81c317a76ecc63295ca3edb000931792f2c64033d",
+      "status": "PASS"
+    },
+    {
+      "file": "models/crossbowman.glb",
+      "author": "Polyfork",
+      "license_record": "CC-BY-4.0",
+      "sha256": "f177bd6c582d8578929cb6b710cb1a61575a69bcd539d9b8c87dd620efdb1bb8",
+      "reference_copy_sha256": "f177bd6c582d8578929cb6b710cb1a61575a69bcd539d9b8c87dd620efdb1bb8",
+      "status": "PASS"
+    },
+    {
+      "file": "models/horse.glb",
+      "author": "Quaternius",
+      "license_record": "CC0-1.0",
+      "sha256": "fae7a7ec91e0d6a33554efb896fac9c4e8c632644183bcb8cc962f673d3ce609",
+      "reference_copy_sha256": null,
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS"
+}

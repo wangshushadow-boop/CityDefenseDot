@@ -1,0 +1,14 @@
+Godot --headless --path game --script res://tests/p2/field_loadouts/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Field troop loadouts PASS digest=d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1
+
+Godot --headless --path game --script res://tests/p2/field_assets/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_RIG general bones=22 meshes=12 moving=20
+FIELD_RIG spear_soldier bones=22 meshes=12 moving=19
+FIELD_RIG crossbowman bones=22 meshes=12 moving=19
+FIELD_RIG horse bones=50 meshes=1 moving=32
+FIELD_CONTENT hash=d5004c269be174fbb4868c9201927193acd862563c787f29f5109805475cc2a1
+P2-FIELD-ASSETS PASS failures=0

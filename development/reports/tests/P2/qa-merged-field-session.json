@@ -1,0 +1,111 @@
+{
+  "task": "field-session",
+  "source": [
+    {
+      "commit": "26d5dce43d7c8f723646e73ea96b1baa7e2e3385",
+      "paths": [
+        "game"
+      ],
+      "archive_sha256": "ba209df3e4d1cac66b9d42c361258b1c0e1d1b5b913fb1d188ff9245059e0ed5"
+    }
+  ],
+  "host": {
+    "os": "win32",
+    "godot": "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+    "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+  },
+  "started": "2026-11-25T08:52:33.688311+08:00",
+  "runs": [
+    {
+      "case": "p2_field_session",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-session\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-session\\p2_field_session-godot.log",
+        "--script",
+        "res://tests/p2/field_session/run.gd"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 9.792,
+      "log": "out/p2-qa/final-field/field-session/p2_field_session.log",
+      "log_sha256": "6f2f919049117769c2e00efc32c2bbcb5a36f95a452641b41b579621be35ade7",
+      "observed": [
+        "COLD_FIELD write pid=20216 checks=21 failures=0",
+        "COLD_FIELD recover pid=18420 checks=14 failures=0",
+        "COLD_FIELD verify pid=2076 checks=7 failures=0",
+        "FIELD_SESSION checks=91 failures=0"
+      ],
+      "children": [
+        [
+          "write",
+          "20216",
+          "21"
+        ],
+        [
+          "recover",
+          "18420",
+          "14"
+        ],
+        [
+          "verify",
+          "2076",
+          "7"
+        ]
+      ]
+    },
+    {
+      "case": "p1_application",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-session\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-session\\p1_application-godot.log",
+        "--script",
+        "res://tests/p1/application/run.gd"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 19.41,
+      "log": "out/p2-qa/final-field/field-session/p1_application.log",
+      "log_sha256": "9ffdce1e73f631c990876cc3eddf60a016fe2358114be73bc9d7bfdc7aff5d1b",
+      "observed": [
+        "T-APP-01 / AT-10-SLICE PASS",
+        "T-APP-02 PASS",
+        "T-APP-03 PASS",
+        "T-APP-04-SLICE PASS",
+        "APP_CHECKS errors=0"
+      ]
+    },
+    {
+      "case": "p2_results",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-session\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-session\\p2_results-godot.log",
+        "--script",
+        "res://tests/p2/results/run.gd"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 2.752,
+      "log": "out/p2-qa/final-field/field-session/p2_results.log",
+      "log_sha256": "4364a6f1a67168ece23e20f6231bd4d8f18da3e197abdc7fa2faf0db33d5eb64",
+      "observed": [
+        "T-RESULTS-01 PASS physical_contacts=6",
+        "T-RESULTS-02 PASS",
+        "T-RESULTS-03 PASS",
+        "P2-RESULTS-001 PASS assertions=147 failures=0"
+      ]
+    }
+  ],
+  "status": "PASS"
+}

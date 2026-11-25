@@ -53,5 +53,5 @@
     "复用 Mission.register_system，组装 MOV、FORM、COM、BAI、RULES、RESULTS 的正常调用与提交顺序；不新增 Session、真值或公共 DTO。验证下游拒绝时各域回滚。",
     "独立审查、独立 QA 及合并态实测"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

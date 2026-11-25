@@ -1223,7 +1223,9 @@
         "BAI-F",
         "BASE",
         "VIS",
-        "MOV"
+        "MOV",
+        "INPUT",
+        "AUD"
       ],
       "depends_on": [
         "P2-MIS-RT-BATTLE",

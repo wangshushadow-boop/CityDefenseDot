@@ -1,0 +1,47 @@
+{
+  "source": {
+    "commit": "18a110459df153b625708237d1cd9d0b9a33f621",
+    "paths": [
+      "game"
+    ],
+    "archive_sha256": "cd38710890142556805260cc5b90354b56bca10875cb33818bc3564f66dfdbf6"
+  },
+  "additional_oracle_sha256": "54827061885870dc78b5e9107e692f0e2a04c4be1d004bf3bc06b44f247abdb7",
+  "runs": [
+    {
+      "case": "main",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\horse-movement-edge\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\horse-movement-edge\\main-engine.log",
+        "--script",
+        "res://tests/p2/mount_profile/run.gd"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "observed": "MOUNT_PROFILE checks=1713 failures=0",
+      "log_sha256": "c55aff546143a68ed3babc87da86535d2162191153ae5ee62a820fb679054754"
+    },
+    {
+      "case": "edge",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\horse-movement-edge\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\horse-movement-edge\\edge-engine.log",
+        "--script",
+        "res://tests/p2/mount_profile/qa_edge.gd"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "observed": "EDGE_REVIEW checks=222 failures=0 launch={ \"ok\": true, \"value\": <null> }",
+      "log_sha256": "fa966854cc59f460975f5f2fe5f0c5048d45c892bbce2cc85fe974c305640330"
+    }
+  ],
+  "status": "PASS"
+}

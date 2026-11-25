@@ -1,0 +1,15 @@
+Godot --headless --path game --script res://tests/p2/field_pipeline/run.gd | exit 0
+-- --brains=res://mission/runtime/field_brains.gd --mount --large --objective
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD 1000 reserved, 500 humans, entities=748 opening_us=144949 tick2_us=28763
+FIELD objective ticks=737 closest_observed_metres=0.9406790137291 real_contact=true
+P2-FIELD-INTEGRATION-006 PASS checks=163 failures=0 confirmed_contacts=1 real_brains=true
+
+
+
+Godot --headless --path game --script res://tests/p2/field_pipeline/run.gd | exit 0
+-- --casualties
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-FIELD-INTEGRATION-006 PASS checks=261 failures=0 confirmed_contacts=1 real_brains=false

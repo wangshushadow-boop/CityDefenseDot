@@ -1,0 +1,92 @@
+{
+  "task": "mounted-visual",
+  "source": [
+    {
+      "commit": "85ecc020fb9667fcd55bd70185dfa5bba2a16976",
+      "paths": [
+        "game"
+      ],
+      "archive_sha256": "754624ba442828d3adc630a1b3531ed7036d3168d3e66eeec77c3e6e33ddf686"
+    },
+    {
+      "commit": "6bb4a967176446a14741bcc9129ab8ae41e040bf",
+      "paths": [
+        "game/content/base/field"
+      ],
+      "archive_sha256": "53b1c3745123d472d7abba4117d3d230d1c2722d19d306f85fae7d77339a14a8"
+    }
+  ],
+  "host": {
+    "os": "win32",
+    "godot": "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+    "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+  },
+  "started": "2026-11-25T08:52:33.688311+08:00",
+  "runs": [
+    {
+      "case": "cold_import",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\mounted-visual\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\mounted-visual\\cold_import-godot.log",
+        "--import"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 5.408,
+      "log": "out/p2-qa/final-field/mounted-visual/cold_import.log",
+      "log_sha256": "069d618626d39cbb02a6c04db1c9dded6b409cd368a6e7e4b34c4336b74af9ab",
+      "observed": []
+    },
+    {
+      "case": "p2_mounted_visual",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\mounted-visual\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\mounted-visual\\p2_mounted_visual-godot.log",
+        "--script",
+        "res://tests/p2/mounted_visual/run.gd"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 1.19,
+      "log": "out/p2-qa/final-field/mounted-visual/p2_mounted_visual.log",
+      "log_sha256": "ace3ebf15ab4a3eabd8b003cf0ddf684f148346dd801429ff4f21841409971b1",
+      "observed": [
+        "MOUNTED_VISUAL checks=91 failures=0 display=headless viewport=(64, 64)"
+      ]
+    },
+    {
+      "case": "p2_visuals",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\mounted-visual\\fresh\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\mounted-visual\\p2_visuals-godot.log",
+        "--script",
+        "res://tests/p2/visuals/run.gd"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "duration_s": 7.937,
+      "log": "out/p2-qa/final-field/mounted-visual/p2_visuals.log",
+      "log_sha256": "df96e153642f019db8be4fddc58925d406a281a28e7843d17142debf6edc5d36",
+      "observed": [
+        "VIS_FUNCTIONAL failures=0"
+      ]
+    }
+  ],
+  "status": "PASS",
+  "window": {
+    "status": "NOT_RUN",
+    "reason": "Scheduled formal battlefield window must run without concurrent graphical work. See independent reviewer window.log for original 95 checks."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-016",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "INPUT",
+  "title": "首次取得角色时同步输入航向",
+  "spec": "docs/systems/game/presentation/input/README.md",
+  "depends_on": [
+    "P2-INPUT"
+  ],
+  "requirements": [
+    "BAI-06",
+    "BAT-03",
+    "NET-06",
+    "SAV-02"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01",
+    "T-TEST-02",
+    "T-TEST-03",
+    "T-TEST-04"
+  ],
+  "allowed_paths": [
+    "game/presentation/input/",
+    "game/tests/p2/field_input_handoff/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-016.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": "a89ac81541109869e6ab0b294e02bca1587e125e",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-input-heading",
+  "scope": "用已确认的角色朝向初始化方向输入，同一控制重新绑定后与镜头方向一致，步行和转向使用同一坐标。",
+  "non_goals": [
+    "未批准的公共契约或后续阶段范围。"
+  ],
+  "acceptance": [
+    "用已确认的角色朝向初始化方向输入，同一控制重新绑定后与镜头方向一致，步行和转向使用同一坐标。",
+    "原模块和组合根实跑，无现有冻结接口变更。"
+  ],
+  "status": "DONE"
+}

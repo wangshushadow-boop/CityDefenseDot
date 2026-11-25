@@ -2,81 +2,6 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P2-FIELD-INTEGRATION-011",
-      "owner": "main",
-      "branch": "detached",
-      "base_commit": "7fc48bc118f7f09083cc46263daf0945c9b2f70f",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-field-loadouts",
-      "allowed_paths": [
-        "game/content/base/field/field.json",
-        "game/tests/p2/field_loadouts/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-011.md",
-        "game/content/base/field/short_bow.tscn",
-        "game/content/base/field/manifest.json",
-        "game/content/base/field/CREDITS.md",
-        "game/content/base/field/.gitattributes",
-        "game/content/base/field/sidearm.tscn"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/contracts/"
-      ]
-    },
-    {
-      "task_id": "P2-FIELD-INTEGRATION-012",
-      "owner": "main",
-      "branch": "detached",
-      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-mounted-visual",
-      "allowed_paths": [
-        "game/presentation/visuals/",
-        "game/tests/p2/mounted_visual/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-012.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/",
-        "game/contracts/"
-      ]
-    },
-    {
-      "task_id": "P2-FIELD-INTEGRATION-002",
-      "owner": "session_dev",
-      "branch": "detached",
-      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-field-session",
-      "allowed_paths": [
-        "game/application/",
-        "game/tests/p2/field_session/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-002.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/"
-      ]
-    },
-    {
-      "task_id": "P2-FIELD-INTEGRATION-006",
-      "owner": "pipeline_dev",
-      "branch": "detached",
-      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-field-pipeline",
-      "allowed_paths": [
-        "game/mission/runtime/",
-        "game/tests/p2/field_pipeline/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-006.md"
-      ],
-      "excluded_paths": [
-        "game/contracts/",
-        "game/bootstrap/",
-        "development/state/",
-        "docs/architecture/",
-        "game/mission/runtime/field_brains.gd",
-        "game/mission/runtime/field_brains.gd.uid"
-      ]
-    },
-    {
       "task_id": "P2-FIELD-INTEGRATION-004",
       "owner": "main",
       "branch": "detached",
@@ -93,23 +18,6 @@
       ]
     },
     {
-      "task_id": "P2-FIELD-INTEGRATION-014",
-      "owner": "movement_dev",
-      "branch": "detached",
-      "base_commit": "333410e977b7e90b70f9c32a4f3eaf28be660a89",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-horse-movement",
-      "allowed_paths": [
-        "game/mission/movement/",
-        "game/tests/p2/mount_profile/",
-        "development/reports/tasks/P2-FIELD-INTEGRATION-014.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "game/contracts/",
-        "docs/architecture/"
-      ]
-    },
-    {
       "task_id": "P2-FIELD-INTEGRATION-015",
       "owner": "recollection_developer/benchmark",
       "branch": "detached",
@@ -118,6 +26,54 @@
       "allowed_paths": [
         "game/tests/p2/field_benchmark/",
         "development/reports/tasks/P2-FIELD-INTEGRATION-015.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-017",
+      "owner": "root",
+      "branch": "detached",
+      "base_commit": "a89ac81541109869e6ab0b294e02bca1587e125e",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-hud-captions",
+      "allowed_paths": [
+        "game/presentation/audio/",
+        "game/tests/p2/field_audio_handoff/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-017.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-018",
+      "owner": "recollection_developer/engine",
+      "branch": "detached",
+      "base_commit": "84c2e042cbe61d3b992c6398a5689958310f11da",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-sweep-culling",
+      "allowed_paths": [
+        "game/infrastructure/engine/",
+        "game/tests/p2/field_sweep_batch/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-018.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-005",
+      "owner": "root",
+      "branch": "detached",
+      "base_commit": "7b6ca6f6e36fd90f86b6753dd9213efc773b1e24",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-field-ci",
+      "allowed_paths": [
+        "ci/",
+        "game/tests/p2/field_ci/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-005.md"
       ],
       "excluded_paths": [
         "development/state/",

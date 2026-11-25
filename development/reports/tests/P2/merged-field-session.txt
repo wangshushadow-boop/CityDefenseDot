@@ -1,0 +1,31 @@
+Godot --headless --path game --script res://tests/p2/field_session/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+COLD_FIELD write pid=24652 checks=21 failures=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+COLD_FIELD recover pid=27192 checks=14 failures=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+COLD_FIELD verify pid=28456 checks=7 failures=0
+FIELD_SESSION checks=91 failures=0
+
+Godot --headless --path game --script res://tests/p1/application/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+T-APP-01 / AT-10-SLICE PASS
+T-APP-02 PASS
+T-APP-03 PASS
+T-APP-04-SLICE PASS
+APP_CHECKS errors=0
+
+Godot --headless --path game --script res://tests/p2/results/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+1000-source finalize_and_replay_us=245414 canonical_bytes=97164
+T-RESULTS-01 PASS physical_contacts=6
+T-RESULTS-02 PASS
+T-RESULTS-03 PASS
+P2-RESULTS-001 PASS assertions=147 failures=0

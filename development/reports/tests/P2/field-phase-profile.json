@@ -1,0 +1,187 @@
+{
+  "environment": "Godot 4.7.2 / Windows headless / seed 241124",
+  "scope": "Archived stage composition with timing wrappers. Real 50/30/10/10. Thirty opening ticks then 120 approach ticks. Counts in addition to 20% separate mounts. Parent and child measures overlap. Diagnostic only.",
+  "units": "median and nearest-rank P95 in ms",
+  "results": {
+    "500": {
+      "authority.all": [
+        33.186,
+        36.811
+      ],
+      "field_bodies.stage": [
+        3.195,
+        3.767
+      ],
+      "field_brains._dispatch": [
+        5.477,
+        7.245
+      ],
+      "field_brains._index": [
+        2.47,
+        2.973
+      ],
+      "field_brains.accept_actions": [
+        0.612,
+        0.786
+      ],
+      "field_brains.decide": [
+        8.114,
+        10.057
+      ],
+      "field_combat.field_view": [
+        2.124,
+        2.551
+      ],
+      "field_combat.step_field": [
+        0.539,
+        0.681
+      ],
+      "field_mission._visual": [
+        6.275,
+        7.438
+      ],
+      "field_movement.stage_step": [
+        9.425,
+        10.693
+      ],
+      "field_pipeline._advance_groups": [
+        0.37,
+        0.537
+      ],
+      "field_pipeline._fight": [
+        2.514,
+        3.056
+      ],
+      "field_pipeline._formations": [
+        0.321,
+        0.43
+      ],
+      "field_pipeline._publish": [
+        2.224,
+        2.906
+      ],
+      "field_pipeline._seal_tick": [
+        1.442,
+        1.812
+      ],
+      "field_pipeline._snapshot": [
+        0.014,
+        0.016
+      ],
+      "field_pipeline._start": [
+        1.503,
+        1.937
+      ],
+      "field_pipeline._think": [
+        10.995,
+        12.841
+      ],
+      "field_pipeline._walk": [
+        14.557,
+        16.42
+      ],
+      "field_results.observe_combat": [
+        0.008,
+        0.009
+      ],
+      "field_results.stage_snapshot": [
+        0.008,
+        0.009
+      ],
+      "present.projections": [
+        7.952,
+        9.522
+      ]
+    },
+    "1000": {
+      "authority.all": [
+        71.028,
+        89.143
+      ],
+      "field_bodies.stage": [
+        6.139,
+        8.838
+      ],
+      "field_brains._dispatch": [
+        11.328,
+        14.296
+      ],
+      "field_brains._index": [
+        5.684,
+        7.259
+      ],
+      "field_brains.accept_actions": [
+        1.425,
+        1.898
+      ],
+      "field_brains.decide": [
+        17.462,
+        21.769
+      ],
+      "field_combat.field_view": [
+        5.33,
+        6.746
+      ],
+      "field_combat.step_field": [
+        1.159,
+        1.543
+      ],
+      "field_mission._visual": [
+        17.231,
+        19.751
+      ],
+      "field_movement.stage_step": [
+        13.749,
+        24.11
+      ],
+      "field_pipeline._advance_groups": [
+        1.016,
+        1.451
+      ],
+      "field_pipeline._fight": [
+        6.083,
+        8.141
+      ],
+      "field_pipeline._formations": [
+        0.65,
+        0.855
+      ],
+      "field_pipeline._publish": [
+        6.269,
+        8.067
+      ],
+      "field_pipeline._seal_tick": [
+        3.975,
+        5.368
+      ],
+      "field_pipeline._snapshot": [
+        0.016,
+        0.019
+      ],
+      "field_pipeline._start": [
+        3.684,
+        5.162
+      ],
+      "field_pipeline._think": [
+        24.771,
+        31.079
+      ],
+      "field_pipeline._walk": [
+        25.108,
+        39.221
+      ],
+      "field_results.observe_combat": [
+        0.009,
+        0.012
+      ],
+      "field_results.stage_snapshot": [
+        0.009,
+        0.011
+      ],
+      "present.projections": [
+        20.62,
+        23.414
+      ]
+    }
+  }
+}

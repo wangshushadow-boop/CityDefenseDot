@@ -18,7 +18,6 @@
     "P2-AUD-BATTLE",
     "P2-CAM",
     "P2-UI-BATTLE",
-    "P2-FIELD-INTEGRATION-004",
     "P2-FIELD-INTEGRATION-002",
     "P2-FIELD-INTEGRATION-003",
     "P2-FIELD-INTEGRATION-006",
@@ -49,15 +48,16 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "7b6ca6f6e36fd90f86b6753dd9213efc773b1e24",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field-ci",
   "scope": "真实 500/1000 混合野战、真实动作/AI/导航/动画、玩家命令与结果；P2 后续任务完整收口。 复用已批准的生产入口，保持 P1 存档、客户端及无头回归。",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
   ],
   "acceptance": [
     "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
-    "复用已批准的生产入口，保持 P1 存档、客户端及无头回归。"
+    "复用已批准的生产入口，保持 P1 存档、客户端及无头回归。",
+    "BOOT、INPUT、AUD 签名与两条场景测试入口已冻结。CI 可并行开发。关闭本任务必须在包含 004、016、017 的正式 Git 合并提交上冷导出并从两个 PCK 完成真实战斗结算、退出验证。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

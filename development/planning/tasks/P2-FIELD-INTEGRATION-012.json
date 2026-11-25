@@ -41,5 +41,5 @@
   "acceptance": [
     "通过真实加载的步、弩、骑、骑射装备覆盖及原资产回归，区分骑乘与远程。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

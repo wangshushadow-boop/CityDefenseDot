@@ -1,0 +1,307 @@
+{
+  "sources": [
+    {
+      "commit": "ab770af5d97d6072346104c01eca3c7ea9ebb591",
+      "paths": [
+        "game"
+      ],
+      "archive_sha256": "cb23c0fe6e37579fd26ec683380945a3428291f98379de513195b9a5e41aac01"
+    },
+    {
+      "commit": "e96ed5ecc4c6ce0a51495597f4e18da27eedd173",
+      "paths": [
+        "game/mission/runtime/field_mission.gd",
+        "game/mission/runtime/field_pipeline.gd",
+        "game/mission/runtime/runtime.gd",
+        "game/tests/p2/field_pipeline"
+      ],
+      "archive_sha256": "c95899167098818b03d1b268141a37948bc568d362491137b8adf4f462a06a9a"
+    }
+  ],
+  "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "runs": [
+    {
+      "case": "scope_commit",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\scope_commit-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-final-review\\scope_commit.gd"
+      ],
+      "markers": [
+        "AUTH_REVIEW checks=[1-9][0-9]* failed=0",
+        "old_tick=1 tick=1",
+        "sealed=false"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.811,
+      "log_sha256": "1b99c4db38acbd7cff8ed9d224ce7de59145fa3544c402cd88a401c501eef908",
+      "log": "out/p2-qa/final-field/field-pipeline2/scope_commit.log",
+      "observed": [
+        "AUTH_COMMIT old_tick=1 tick=1 old_heading=(1.0, 0.0, 0.0) heading=(1.0, 0.0, 0.0) old_state=Ready new_state=Ready sealed=false",
+        "AUTH_REVIEW checks=6 failed=0"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "rebind",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\rebind-engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\field-final-review\\rebind.gd"
+      ],
+      "markers": [
+        "NEW_GRANT checks=[1-9][0-9]* failed=0",
+        "last_tick=2"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.624,
+      "log_sha256": "cfcd5d39ce2f090539af7f3e49f1147d101280294168823781a63ee5b18e678b",
+      "log": "out/p2-qa/final-field/field-pipeline2/rebind.log",
+      "observed": [
+        "REPLACEMENT old={ \"code\": \"Unauthorized\", \"field\": \"field.input\", \"detail\": <null>, \"message_key\": \"error.unauthorized\", \"retryable\": false } new_input=<null> retry=<null> last_tick=2",
+        "NEW_GRANT checks=5 failed=0"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "casualties",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\casualties-engine.log",
+        "--script",
+        "res://tests/p2/field_pipeline/run.gd",
+        "--",
+        "--casualties"
+      ],
+      "markers": [
+        "P2-FIELD-INTEGRATION-006 PASS checks=261 failures=0",
+        "confirmed_contacts=[1-9]"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 1.18,
+      "log_sha256": "cb513196206fd22f21d01832f63ea06f8c11e78f284f8359ebbb1972640c4d73",
+      "log": "out/p2-qa/final-field/field-pipeline2/casualties.log",
+      "observed": [
+        "P2-FIELD-INTEGRATION-006 PASS checks=261 failures=0 confirmed_contacts=1 real_brains=false"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "large-objective",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\large-objective-engine.log",
+        "--script",
+        "res://tests/p2/field_pipeline/run.gd",
+        "--",
+        "--brains=res://mission/runtime/field_brains.gd",
+        "--mount",
+        "--large",
+        "--objective"
+      ],
+      "markers": [
+        "P2-FIELD-INTEGRATION-006 PASS checks=163 failures=0",
+        "confirmed_contacts=[1-9]",
+        "real_brains=true",
+        "real_contact=true",
+        "FIELD 1000 reserved, 500 humans, entities=748"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 3.407,
+      "log_sha256": "6838355fde7dd5fa71dce227ffd54535102d30ee9fd557af77bcd8f719cb862c",
+      "log": "out/p2-qa/final-field/field-pipeline2/large-objective.log",
+      "observed": [
+        "FIELD 1000 reserved, 500 humans, entities=748 opening_us=145020 tick2_us=26509",
+        "FIELD objective ticks=737 closest_observed_metres=0.9406790137291 real_contact=true",
+        "P2-FIELD-INTEGRATION-006 PASS checks=163 failures=0 confirmed_contacts=1 real_brains=true"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "p2_mission_run.gd",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\p2_mission_run.gd-engine.log",
+        "--script",
+        "res://tests/p2/mission/run.gd"
+      ],
+      "markers": [
+        "P2-MISSION-FIELD PASS checks=1038 failures=0"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.995,
+      "log_sha256": "2f9a7949936e59def1a714c0fcd2feba50b70ee0a26bbc63e42f678b4a0caa2e",
+      "log": "out/p2-qa/final-field/field-pipeline2/p2_mission_run.gd.log",
+      "observed": [
+        "P2-MISSION-FIELD PASS checks=1038 failures=0",
+        "P2-MISSION-SOURCE PASS failures=0"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "p2_results_run.gd",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\p2_results_run.gd-engine.log",
+        "--script",
+        "res://tests/p2/results/run.gd"
+      ],
+      "markers": [
+        "assertions=147 failures=0"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 2.943,
+      "log_sha256": "b09019252fca86709eca7526ba078e0ca844444ca2bf4b759fd853fefb3df2fa",
+      "log": "out/p2-qa/final-field/field-pipeline2/p2_results_run.gd.log",
+      "observed": [
+        "T-RESULTS-01 PASS physical_contacts=6",
+        "T-RESULTS-02 PASS",
+        "T-RESULTS-03 PASS",
+        "P2-RESULTS-001 PASS assertions=147 failures=0"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "p2_rules_run.gd",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\p2_rules_run.gd-engine.log",
+        "--script",
+        "res://tests/p2/rules/run.gd"
+      ],
+      "markers": [
+        "assertions=38 physical_contacts=[1-9]"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.536,
+      "log_sha256": "937568d06fe86d281a0413f5e91aafbdf95143ea361d398fb2339c125f176aa7",
+      "log": "out/p2-qa/final-field/field-pipeline2/p2_rules_run.gd.log",
+      "observed": [
+        "P2-RULES-FIELD PASS assertions=38 physical_contacts=1"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "p2_field_engine_run.gd",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\p2_field_engine_run.gd-engine.log",
+        "--script",
+        "res://tests/p2/field_engine/run.gd"
+      ],
+      "markers": [
+        "checks=70 failures=0"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.256,
+      "log_sha256": "07d0b3afbaf9458c88917b5ba622802183288f6ce99f6a547e1a44ab6874ff44",
+      "log": "out/p2-qa/final-field/field-pipeline2/p2_field_engine_run.gd.log",
+      "observed": [
+        "FIELD_ENGINE checks=70 failures=0"
+      ],
+      "engine_diagnostics": []
+    },
+    {
+      "case": "p2_field_brains_rerun",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\p2_field_brains_rerun-engine.log",
+        "--script",
+        "res://tests/p2/field_brains/run.gd"
+      ],
+      "markers": [
+        "FIELD_BRAINS counts=.*\"tactical\": 5.*\"formation\": 55.*\"individual\": 80",
+        "\"Melee\"",
+        "\"MountedArchery\"",
+        "\"MountedStrike\"",
+        "\"Aim\"",
+        "checks=\\d+ failures=0"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "duration_s": 0.82,
+      "log_sha256": "d258f0a0f4ffd8705cb18d473fc6677164bb17c393d88d81b8feda54da78c14d",
+      "log": "out/p2-qa/final-field/field-pipeline2/p2_field_brains_rerun.log",
+      "observed": [
+        "FIELD_BRAINS counts={ \"tactical\": 5, \"formation\": 55, \"individual\": 80, \"orders\": 4, \"actions\": 49, \"moves\": 24, \"hits\": 13 } modes={ \"infantry\": { \"Melee\": 9, \"Hold\": 7, \"Routing\": 3, \"Approach\": 2 }, \"mounted_archer\": { \"Equip\": 2, \"MountedArchery\": 18 }, \"archer\": { \"Aim\": 13, \"Recover\": 2, \"Routing\": 4 }, \"cavalry\": { \"Hold\": 10, \"MountedStrike\": 7, \"Disengage\": 3 } } checks=1316 failures=0"
+      ],
+      "engine_diagnostics": []
+    }
+  ],
+  "additional_oracles": {
+    "out/p2-qa/field-final-review/scope_commit.gd": "26c5ff803577d7c62544fe19675ec39542d64f7c1067b2152ca1121b5fd419c7",
+    "out/p2-qa/field-final-review/rebind.gd": "e4dceae78a40816006b10a2fe0b5504173454adebe0820824dd3f35cc4b2194b"
+  },
+  "status": "PASS",
+  "prior_qa_crosscheck": {
+    "case": "p2_field_brains_run.gd",
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\src\\game",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\final-field\\field-pipeline2\\p2_field_brains_run.gd-engine.log",
+      "--script",
+      "res://tests/p2/field_brains/run.gd"
+    ],
+    "markers": [
+      "checks=1318 failures=0"
+    ],
+    "status": "FAIL",
+    "exit_code": 0,
+    "duration_s": 0.625,
+    "log_sha256": "d258f0a0f4ffd8705cb18d473fc6677164bb17c393d88d81b8feda54da78c14d",
+    "log": "out/p2-qa/final-field/field-pipeline2/p2_field_brains_run.gd.log",
+    "observed": [
+      "FIELD_BRAINS counts={ \"tactical\": 5, \"formation\": 55, \"individual\": 80, \"orders\": 4, \"actions\": 49, \"moves\": 24, \"hits\": 13 } modes={ \"infantry\": { \"Melee\": 9, \"Hold\": 7, \"Routing\": 3, \"Approach\": 2 }, \"mounted_archer\": { \"Equip\": 2, \"MountedArchery\": 18 }, \"archer\": { \"Aim\": 13, \"Recover\": 2, \"Routing\": 4 }, \"cavalry\": { \"Hold\": 10, \"MountedStrike\": 7, \"Disengage\": 3 } } checks=1316 failures=0"
+    ],
+    "explanation": "The supplementary QA harness initially imposed a historical exact count of 1318; the production runner also checks each dynamically emitted action. Its acceptance asserts nonzero real work for every layer and the four required role states, and returns failures=0. The initial actual run already returned 0 with 1316 checks; the final rerun below checks the actual four-role and three-layer contract."
+  }
+}
