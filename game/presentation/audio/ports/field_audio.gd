@@ -104,6 +104,13 @@ func open_scope(scope_id: String, voice_budget: int = 16, settings_path: String 
 	return R.ok()
 
 
+## A mounted HUD may render the same prioritized localized line itself.
+func set_hud_captions(active: bool) -> void:
+	if is_instance_valid(_layer): _layer.visible = not active
+
+func caption_text() -> String:
+	return _caption.text if is_instance_valid(_caption) and _caption.visible else ""
+
 func _valid_mix(settings: Dictionary) -> bool:
 	for key in settings:
 		if not DEFAULTS.has(key):
@@ -368,7 +375,7 @@ func _active_count() -> int:
 func diagnostics() -> Dictionary:
 	return {"scope":_scope,"allocated":_pool.size()+_music.size()+int(not _voice_id.is_empty()),"active":_active_count(),"peak":_peak,"played":_played,
 		"dropped":_dropped,"track":_track,"settings":_mix.duplicate(),"buses":_buses.duplicate(),
-		"voice_available":not _voice_id.is_empty(),"caption":_caption.text if is_instance_valid(_caption) and _caption.visible else ""}
+		"voice_available":not _voice_id.is_empty(),"caption":caption_text()}
 
 
 func stop_scope(scope_id: String) -> Dictionary:
