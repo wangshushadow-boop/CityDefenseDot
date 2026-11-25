@@ -5,8 +5,9 @@ const Values = preload("res://contracts/values.gd")
 var _revision_counter := 0
 
 static func _vector(value: Variant) -> bool:
-	return typeof(value) == TYPE_ARRAY and value.size() == 3 and value.all(
-		func(n): return Values.integer(n,-2147483648,2147483647))
+	return value is Array and value.size()==3 and (
+		Values.integer(value[0],-2147483648,2147483647) and Values.integer(value[1],-2147483648,2147483647)
+		and Values.integer(value[2],-2147483648,2147483647))
 
 static func _meters(value: Array) -> Vector3:
 	return Vector3(value[0],value[1],value[2]) * 0.001
@@ -87,11 +88,16 @@ static func _ray_hit(space: PhysicsDirectSpaceState3D, origin: Vector3, target: 
 	return hit
 
 static func _sphere_hit(space: PhysicsDirectSpaceState3D, origin: Vector3, target: Vector3,
-		radius: float, mask: int, excluded: Array[RID]) -> Dictionary:
-	var sphere := SphereShape3D.new()
-	sphere.radius = radius
-	var query := PhysicsShapeQueryParameters3D.new()
-	query.shape = sphere
+		radius: float, mask: int, excluded: Array[RID], cached: Dictionary) -> Dictionary:
+	var query: PhysicsShapeQueryParameters3D = cached.get(radius)
+	if query==null:
+		var sphere := SphereShape3D.new()
+		sphere.radius=radius
+		query=PhysicsShapeQueryParameters3D.new()
+		query.shape=sphere
+		if cached.size()<8:
+			cached[radius]=query
+	query.motion=Vector3.ZERO
 	query.collision_mask = mask
 	query.exclude = excluded
 	# A shape cast ignores existing penetration. Query the starting sphere
@@ -149,6 +155,7 @@ static func _sphere_hit(space: PhysicsDirectSpaceState3D, origin: Vector3, targe
 static func sweep(scope: Dictionary, queries: Array, field := false) -> Dictionary:
 	var space: PhysicsDirectSpaceState3D = scope.view.world_3d.direct_space_state
 	var result := []
+	var spheres:={}
 	for index in queries.size():
 		var q: Variant = queries[index]
 		if typeof(q) != TYPE_DICTIONARY or not _vector(q.get("from")) or not _vector(q.get("to")):
@@ -169,7 +176,7 @@ static func sweep(scope: Dictionary, queries: Array, field := false) -> Dictiona
 			if radius == 0:
 				hit = _ray_hit(space,origin,target,mask,excluded)
 			else:
-				hit = _sphere_hit(space,origin,target,float(radius)*0.001,mask,excluded)
+				hit = _sphere_hit(space,origin,target,float(radius)*0.001,mask,excluded,spheres)
 			if hit.is_empty():
 				break
 			if hit.has("error"):
