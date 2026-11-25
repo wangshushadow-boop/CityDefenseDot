@@ -1,0 +1,18 @@
+Godot --headless --path game --script res://tests/p2/formation_transaction/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Formation tick transaction PASS
+
+Godot --headless --path game --script res://tests/p2/formation/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-FORM-GEOMETRY count=500 kinds=7 elapsed_us=240084
+P2-FORM-GEOMETRY count=1000 kinds=7 elapsed_us=598696
+P2-FORM-ROLLBACK exercised
+T-FORM-01 PASS
+T-FORM-02 PASS
+T-FORM-03-READ-MODEL PASS
+T-FORM-04-AUTHORITY PASS
+P2-FORM-002 PASS
+T-FORM-02-LAYOUT PASS
+P2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124

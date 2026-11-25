@@ -38,7 +38,9 @@
     "game/contracts/",
     "game/bootstrap/",
     "development/state/",
-    "docs/architecture/"
+    "docs/architecture/",
+    "game/mission/runtime/field_brains.gd",
+    "game/mission/runtime/field_brains.gd.uid"
   ],
   "contract_changes": "forbidden",
   "base_commit": null,

@@ -1,0 +1,14 @@
+Godot --headless --path game --script res://tests/p2/field_engine/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FIELD_ENGINE checks=70 failures=0
+
+Godot --headless --path game --script res://tests/p2/combat/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1
+COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea
+COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=194 max_us=1291
+COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=379 max_us=2381
+COM field physics batches=44 queries=46
+P2-COM-002 PASS errors=0

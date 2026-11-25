@@ -1,0 +1,13 @@
+Godot --headless --path game --script res://tests/p2/results/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+1000-source finalize_and_replay_us=240581 canonical_bytes=97164
+T-RESULTS-01 PASS physical_contacts=6
+T-RESULTS-02 PASS
+T-RESULTS-03 PASS
+P2-RESULTS-001 PASS assertions=147 failures=0
+
+Godot --headless --path game --script res://tests/p2/rules/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-RULES-FIELD PASS assertions=38 physical_contacts=1

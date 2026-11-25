@@ -41,5 +41,5 @@
   "acceptance": [
     "连续成功、失败后同 tick 重试及旧权限拒绝，且对既有独立回归无影响。"
   ],
-  "status": "IN_PROGRESS"
+  "status": "DONE"
 }

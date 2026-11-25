@@ -1,0 +1,192 @@
+{
+  "candidate_source": "Separate Git archives from frozen candidate worktrees",
+  "engine": "Godot 4.7.2.stable.official.ed1daf0bf",
+  "hardware": "Windows, RTX 3090. OpenGL 3.3 NVIDIA 591.86 at 720p; Vulkan 1.4.325 Forward+ at 1080p",
+  "status": "PASS for assigned suites",
+  "completed_runs": 16,
+  "failures": 0,
+  "screenshot_inspection": "Inspected Chinese deployment and large-text English battle UI at 1280x720. Command/authority feedback is visible; English panel scrolls. Six original PNGs have hashes in per-run reports.",
+  "not_run": [
+    "T-RESULTS-04 siege changes belongs to P4",
+    "Physical gamepad and hot-plug (0 devices); GUI tests inject events",
+    "Human field playtest, full-scene HUD overlay and final integrated P2 frame-rate acceptance"
+  ],
+  "results": [
+    {
+      "candidate": "58d301d12ed84069204b471a45fb316bfced8590",
+      "suite": "results",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-RESULTS-001 PASS assertions=147 failures=0"
+      ],
+      "evidence": "results/results-headless/results.json"
+    },
+    {
+      "candidate": "58d301d12ed84069204b471a45fb316bfced8590",
+      "suite": "rules",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-RULES-FIELD PASS assertions=38 physical_contacts=1"
+      ],
+      "evidence": "results/rules-headless/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "input",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-INPUT-001 PASS checks=379 failures=0 physical_pads=0"
+      ],
+      "evidence": "hud/input-headless/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "input",
+      "mode": "window1080",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-INPUT-001 PASS checks=380 failures=0 physical_pads=0"
+      ],
+      "evidence": "hud/input-window1080/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "input",
+      "mode": "window1080-repeat",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-INPUT-001 PASS checks=380 failures=0 physical_pads=0"
+      ],
+      "evidence": "hud/input-window1080-repeat/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "input",
+      "mode": "window720",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-INPUT-001 PASS checks=380 failures=0 physical_pads=0"
+      ],
+      "evidence": "hud/input-window720/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "ui",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "FIELD_HUD checks=123 failed=0 display=headless viewport=(960, 600)"
+      ],
+      "evidence": "hud/ui-headless/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "ui",
+      "mode": "window1080",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "FIELD_HUD checks=125 failed=0 display=Windows viewport=(1920, 1080)"
+      ],
+      "evidence": "hud/ui-window1080/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "ui",
+      "mode": "window1080-repeat",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "FIELD_HUD checks=125 failed=0 display=Windows viewport=(1920, 1080)"
+      ],
+      "evidence": "hud/ui-window1080-repeat/results.json"
+    },
+    {
+      "candidate": "8c1631656dc4deeb110a46ea7aafed8210f674d7",
+      "suite": "ui",
+      "mode": "window720",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "FIELD_HUD checks=125 failed=0 display=Windows viewport=(1280, 720)"
+      ],
+      "evidence": "hud/ui-window720/results.json"
+    },
+    {
+      "candidate": "9ec1e5692763e198df825b855a01987dc2beacf0",
+      "suite": "formation",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-FORM-001 PASS failures=0 reachable_slots=66499 seed=241124"
+      ],
+      "evidence": "formation/formation-headless/results.json"
+    },
+    {
+      "candidate": "9ec1e5692763e198df825b855a01987dc2beacf0",
+      "suite": "formation_transaction",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "Formation tick transaction PASS"
+      ],
+      "evidence": "formation/formation_transaction-headless/results.json"
+    },
+    {
+      "candidate": "20f94c23fce536102177c1c60de7513b25322d3e",
+      "suite": "tactical",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "FIELD_TACTICS errors=0 nav_queries=1576 physical_los=4593"
+      ],
+      "evidence": "tactics/tactical-headless/results.json"
+    },
+    {
+      "candidate": "20f94c23fce536102177c1c60de7513b25322d3e",
+      "suite": "tactics_transaction",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "Tactics tick transaction PASS"
+      ],
+      "evidence": "tactics/tactics_transaction-headless/results.json"
+    },
+    {
+      "candidate": "4a13ee6fa6442121d595ff50483fe2864707aa21",
+      "suite": "formation_ai",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "P2-BAI-F-001 PASS assertions=4877 failures=0"
+      ],
+      "evidence": "formation_ai/formation_ai-headless/results.json"
+    },
+    {
+      "candidate": "4a13ee6fa6442121d595ff50483fe2864707aa21",
+      "suite": "formation_ai_transaction",
+      "mode": "headless",
+      "status": "PASS",
+      "exit_code": 0,
+      "markers": [
+        "Formation AI tick transaction PASS"
+      ],
+      "evidence": "formation_ai/formation_ai_transaction-headless/results.json"
+    }
+  ]
+}

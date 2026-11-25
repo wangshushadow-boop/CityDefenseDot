@@ -13,8 +13,7 @@
     "P2-BAI-T",
     "P2-BAI-F",
     "P2-BAI-I",
-    "P2-RESULTS",
-    "P2-UI-BATTLE"
+    "P2-RESULTS"
   ],
   "requirements": [
     "BAI-06",

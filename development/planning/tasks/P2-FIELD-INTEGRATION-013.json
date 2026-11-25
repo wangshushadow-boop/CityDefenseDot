@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-013",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "MIS-RT",
+  "title": "同一野战内三个 AI 层的授权调度",
+  "spec": "docs/systems/game/mission/runtime/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I",
+    "P2-RESULTS",
+    "P2-FIELD-INTEGRATION-003",
+    "P2-FIELD-INTEGRATION-007",
+    "P2-FIELD-INTEGRATION-008",
+    "P2-FIELD-INTEGRATION-009",
+    "P2-FIELD-INTEGRATION-010"
+  ],
+  "requirements": [
+    "BAT-01",
+    "MIS-02"
+  ],
+  "acceptance_test_ids": [
+    "T-MIS-RT-01",
+    "T-MIS-RT-02",
+    "T-TEST-01"
+  ],
+  "allowed_paths": [
+    "game/mission/runtime/field_brains.gd",
+    "game/mission/runtime/field_brains.gd.uid",
+    "game/tests/p2/field_brains/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-013.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/contracts/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "同一 Mission 的内部装配脚本，只从实时观测、阵型、实测地形生成已授权命令，接纳实际回执。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "L1/L2/L3 按授权工作，角色差异、导航、遮挡、个人控制与同一步回滚可验证。"
+  ],
+  "status": "PLANNED"
+}

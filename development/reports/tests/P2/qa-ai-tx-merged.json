@@ -1,0 +1,307 @@
+{
+  "tested_commits": {
+    "engine": "25d430dbbe61bdb5b77435be4b2aaa83017d3008",
+    "ai": "62ac8947187ef0a4001bc31bc14f2e3c1b879458"
+  },
+  "engine": "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+  "version": "4.7.2.stable.official.ed1daf0bf",
+  "host": "Windows-11-10.0.26300-SP0",
+  "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+  "mode": "Headless, Godot real installed binary, committed trees as received; original suites and separately authored, locally executed probes. Fixed deterministic arrangements as defined in each entry. No window or whole-phase acceptance.",
+  "started_utc": "2026-11-25T00:24:21.046284+00:00",
+  "results": [
+    {
+      "name": "field_engine",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field",
+      "commit": "25d430dbbe61bdb5b77435be4b2aaa83017d3008",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\engine-field_engine.engine.log",
+        "--script",
+        "res://tests/p2/field_engine/run.gd"
+      ],
+      "rc": 0,
+      "duration_s": 0.261,
+      "expected": [
+        "FIELD_ENGINE checks=70 failures=0"
+      ],
+      "errors": [],
+      "stdout_log": "engine-field_engine.log",
+      "stdout_sha256": "98a3e3ad65a815ad666bcbc887b54ea557d8a6a43695d3a5f62c4bab8aef0728",
+      "engine_log": "engine-field_engine.engine.log",
+      "lines": [
+        "FIELD_ENGINE checks=70 failures=0"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "engine",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field",
+      "commit": "25d430dbbe61bdb5b77435be4b2aaa83017d3008",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\engine-engine.engine.log",
+        "--script",
+        "res://tests/p1/engine/run.gd"
+      ],
+      "rc": 0,
+      "duration_s": 0.446,
+      "expected": [
+        "T-INF-ENGINE-01 PASS",
+        "T-INF-ENGINE-02 PASS",
+        "P1-ENGINE-HEADLESS-SLICE PASS",
+        "T-INF-ENGINE-04 PASS",
+        "ENGINE failures=0"
+      ],
+      "errors": [],
+      "stdout_log": "engine-engine.log",
+      "stdout_sha256": "38ffb0477816a4c898684a594f7f1679df0b080e15d2bf3763f52787f402f37e",
+      "engine_log": "engine-engine.engine.log",
+      "lines": [
+        "T-INF-ENGINE-01 PASS",
+        "T-INF-ENGINE-02 PASS hits=[{ \"query_index\": 0, \"entity_handle\": \"near\", \"fraction_ppm\": 399000, \"point_mm\": [-2020, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 0, \"entity_handle\": \"far\", \"fraction_ppm\": 699000, \"point_mm\": [3980, 1000, 0], \"normal_ppm\": [-1000000, 0, 0], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"near\", \"fraction_ppm\": 395508, \"point_mm\": [-2020, 1000, 150], \"normal_ppm\": [-572602, 0, 819833], \"region\": \"body\" }, { \"query_index\": 1, \"entity_handle\": \"far\", \"fraction_ppm\": 695313, \"point_mm\": [3980, 1000, 150], \"normal_ppm\": [-593542, 0, 804803], \"region\": \"body\" }]",
+        "P1-ENGINE-HEADLESS-SLICE PASS",
+        "T-INF-ENGINE-04 PASS loops=50 median_us=3975 p95_us=4254 max_us=4568",
+        "ENGINE failures=0"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "combat",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field",
+      "commit": "25d430dbbe61bdb5b77435be4b2aaa83017d3008",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\engine-combat.engine.log",
+        "--script",
+        "res://tests/p2/combat/run.gd"
+      ],
+      "rc": 0,
+      "duration_s": 0.44,
+      "expected": [
+        "P2-COM-002 PASS errors=0"
+      ],
+      "errors": [],
+      "stdout_log": "engine-combat.log",
+      "stdout_sha256": "234c54bcc8f5b19978527d33fdbcbbc19a1422e5cd0029b62cb5e9a5281ab549",
+      "engine_log": "engine-combat.engine.log",
+      "lines": [
+        "P2-COM-001 T-COM-01/T-COM-05 slice errors=0 replay_sha256=f6091a635eb32cff95435c9029519a919c629b5af5e396e25f978c343844acd1",
+        "COM field 30/144 Hz replay_sha256=dad5d4710a83d151426bd03ca217d8f027c94e44d6d8494efa84f611dbaad4ea",
+        "COM crowd actors=500 ticks=60 synthetic_sweeps=100 p95_us=301 max_us=1318",
+        "COM crowd actors=1000 ticks=60 synthetic_sweeps=200 p95_us=383 max_us=2335",
+        "COM field physics batches=44 queries=46",
+        "P2-COM-002 PASS errors=0"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "ai_transaction",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx",
+      "commit": "62ac8947187ef0a4001bc31bc14f2e3c1b879458",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\ai-ai_transaction.engine.log",
+        "--script",
+        "res://tests/p2/ai_transaction/run.gd"
+      ],
+      "rc": 0,
+      "duration_s": 0.35,
+      "expected": [
+        "AI_TRANSACTION checks=",
+        " failures=0"
+      ],
+      "errors": [],
+      "stdout_log": "ai-ai_transaction.log",
+      "stdout_sha256": "7dea5430f1d85311ae832246b965b38972d9ccdf5888600cf9998b836a2f47e0",
+      "engine_log": "ai-ai_transaction.engine.log",
+      "lines": [
+        "AI_TRANSACTION checks=29 failures=0"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "ai",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx",
+      "commit": "62ac8947187ef0a4001bc31bc14f2e3c1b879458",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\ai-ai.engine.log",
+        "--script",
+        "res://tests/p2/ai/run.gd"
+      ],
+      "rc": 0,
+      "duration_s": 3.311,
+      "expected": [
+        "FIELD_AI errors=0"
+      ],
+      "errors": [],
+      "stdout_log": "ai-ai.log",
+      "stdout_sha256": "58762ccb1eaad5ba7483e5bdff9280f21a8ff2519c0de3b3218b89f01f7e7f7e",
+      "engine_log": "ai-ai.engine.log",
+      "lines": [
+        "T-BAI-01/02 FORM+COM+MOV real_occlusion=true errors=0",
+        "T-BAI-04 threaded_late_result_rejected=true",
+        "T-BAI-02 dynamic_wall=true ttl=12 emergency_debt_repaid=true",
+        "BAI_CADENCE two_seconds critical/normal=[19, 10] threatened_squads=[10, 10]",
+        "BAI_LOAD people=500 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 5120 } urgent=120 examined=254439 physical_los=10504 contacts=10239 com_inputs=5120 max_backlog=0 ai_p50_us=2991 ai_p95_us=3790 ai_p99_us=5098 combined_p95_us=6504 cpu_budget=PASS",
+        "BAI_MEAN_US people=500 publish=195.016666666667 schedule=371.858333333333 decisions=2557.55833333333 los_inclusive=821.525 cache_hits=130 scouts=196 group_contacts=396 mov_begin=567.641666666667 mov_step=1505.95 project_mov=60.1583333333333 com_fork=37.6333333333333 com_step=374.375 commit_and_publish=53.2333333333333",
+        "BAI_LOAD people=1000 ticks=120 hz=60 full_publish=false legacy_read=false jobs={ \"tactical\": 4, \"formation\": 192, \"individual\": 10120 } urgent=120 examined=494511 physical_los=20501 contacts=20226 com_inputs=10114 max_backlog=0 ai_p50_us=5914 ai_p95_us=6566 ai_p99_us=7286 combined_p95_us=12019 cpu_budget=PASS",
+        "BAI_MEAN_US people=1000 publish=367.883333333333 schedule=603.083333333333 decisions=5023.39166666667 los_inclusive=1572.525 cache_hits=167 scouts=196 group_contacts=396 mov_begin=1100.325 mov_step=2970.76666666667 project_mov=130.591666666667 com_fork=78.0 com_step=729.816666666667 commit_and_publish=107.591666666667",
+        "FIELD_AI errors=0"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "individual",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx",
+      "commit": "62ac8947187ef0a4001bc31bc14f2e3c1b879458",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\ai-individual.engine.log",
+        "--script",
+        "res://tests/p2/individual/run.gd"
+      ],
+      "rc": 0,
+      "duration_s": 4.239,
+      "expected": [
+        "P2-BAI-I-001 PASS",
+        " errors=0"
+      ],
+      "errors": [],
+      "stdout_log": "ai-individual.log",
+      "stdout_sha256": "674514a738919ed85c2c65fbc03d6c613ecedcb303b2b0bebe8e85af996496a0",
+      "engine_log": "ai-individual.engine.log",
+      "lines": [
+        "L3_ROLE role=infantry weapon= starts=[1, 11, 21] hits=3 modes=[\"Melee\"]",
+        "L3_ROLE role=archer weapon=bow starts=[1, 13] hits=2 modes=[\"Aim\", \"Approach\", \"Equip\"]",
+        "L3_ROLE role=archer weapon=crossbow starts=[1, 21] hits=1 modes=[\"Aim\", \"Approach\"]",
+        "L3_ROLE role=cavalry weapon= starts=[1, 23] hits=1 modes=[\"MountedStrike\", \"Disengage\"]",
+        "L3_ROLE role=mounted_archer weapon=bow starts=[2, 14] hits=2 modes=[\"Equip\", \"MountedArchery\", \"Charge\"]",
+        "L3_TRANSITION outgoing switch=3 old=cancel new_strike=true unavailable_ticks=0",
+        "L3_TRANSITION outgoing switch=5 old=release new_strike=true unavailable_ticks=0",
+        "L3_TRANSITION incoming switch=2 old=cancel new_strike=true unavailable_ticks=0",
+        "L3_TRANSITION incoming switch=5 old=release new_strike=true unavailable_ticks=0",
+        "L3_TRANSITION hidden switch=2 old=cancel new_strike=true unavailable_ticks=8",
+        "L3_TRANSITION hidden switch=5 old=release new_strike=true unavailable_ticks=5",
+        "L3_TRANSITION casualty switch=5 old=release new_strike=true unavailable_ticks=5",
+        "L3_LOAD_DOMAINS_US movement_p95=4144 pose_read_and_dict_p95=1878 combat_inclusive_p95=11062",
+        "L3_LOAD confirmed_COM_actions=3909 eligible_emergencies=113 real_MOV_displaced=true instrumented_workload_p95_us=29286",
+        "T-BAI-I-04 humans=1000 additional_mounts=500 ticks=120 jobs=10120 successful_reactions=113 backlog=0 max_jobs_tick=85 L3_decide_accept_p95_us=4209",
+        "P2-BAI-I-001 PASS checks=910 errors=0 paths=445 los=20596 sweeps=151"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "extra_replay",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field",
+      "commit": "25d430dbbe61bdb5b77435be4b2aaa83017d3008",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-engine-field\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\engine-extra_replay.engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\engine_extra_temporary.gd"
+      ],
+      "rc": 0,
+      "duration_s": 0.165,
+      "expected": [
+        "QA_ENGINE_CHECKS=9 failures=0"
+      ],
+      "errors": [],
+      "stdout_log": "engine-extra_replay.log",
+      "stdout_sha256": "6ccda306540a1af7788cd120ac6a4970ac67440af9a651738b4d6402a69fa306",
+      "engine_log": "engine-extra_replay.engine.log",
+      "lines": [
+        "QA actual arena true",
+        "QA commit generation five true",
+        "QA tentative higher generation physical body true",
+        "QA rolled-back physical identity restored immediately true",
+        "QA older than restored committed generation is rejected true",
+        "QA discarded generation nine does not block generation six retry true",
+        "QA superseded generation five rejected with position intact true",
+        "QA physical retirement true",
+        "QA retired generation six cannot reappear true",
+        "QA_ENGINE_CHECKS=9 failures=0"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "extra_replay",
+      "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx",
+      "commit": "62ac8947187ef0a4001bc31bc14f2e3c1b879458",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-ai-tx\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\ai-extra_replay.engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\engine-ai-integration\\ai_extra_temporary.gd"
+      ],
+      "rc": 0,
+      "duration_s": 0.257,
+      "expected": [
+        "QA_AI_CHECKS=10 failures=0"
+      ],
+      "errors": [],
+      "stdout_log": "ai-extra_replay.log",
+      "stdout_sha256": "c18478ae9726c450168bca1b490921085df341aa877529961b486456c2be7354",
+      "engine_log": "ai-extra_replay.engine.log",
+      "lines": [
+        "QA publish generation four true",
+        "QA tentative generation eight true",
+        "QA rolled-back generations visible only at committed birth true",
+        "QA abandoned copied worker denied and untouched original grant restored true",
+        "QA restored grant executes exactly once true",
+        "QA identical tick and generation retry true",
+        "QA same public stamp, distinct capability true",
+        "QA late originals and copies cannot consume replacement true",
+        "QA replacement accepted once true",
+        "QA old generation rejected after committed replay true",
+        "QA_AI_CHECKS=10 failures=0"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "extra_probe_sources": {
+    "engine": "extends SceneTree\n\nconst Adapter = preload(\"res://infrastructure/engine/adapter.gd\")\nconst Scope := \"qa-generation\"\nvar engine: Adapter\nvar checks := []\n\nfunc check(value: bool, label: String) -> void:\n\tchecks.append({\"label\":label,\"passed\":value})\n\tprint(\"QA \",label,\" \",value)\n\nfunc row(g: int, x: float) -> Dictionary:\n\treturn {\"handle\":{\"index\":43,\"generation\":g},\"team_key\":0,\"position\":Vector3(x,0,0),\"facing\":Vector3.RIGHT,\"shield\":false}\n\nfunc ids(x: int) -> Array:\n\tvar result := engine.field_sweep(Scope,[{\"from\":[x*1000-800,1050,0],\"to\":[x*1000+800,1050,0]}],22)\n\tif not result.ok: return [\"error\"]\n\treturn result.value.map(func(h): return h.target)\n\nfunc stale(result: Dictionary) -> bool:\n\treturn not result.ok and result.error.code==\"StaleVersion\"\n\nfunc _initialize() -> void:\n\trun.call_deferred()\n\nfunc run() -> void:\n\tengine=Adapter.new(root)\n\tvar scope := engine.open_scope(Scope)\n\tvar loaded := engine.load_scene({\"id\":\"field:scene/river_plain\",\"simulation_scene\":\"res://content/base/field/river_plain.tscn\"},scope.value)\n\tcheck(loaded.ok,\"actual arena\")\n\tawait physics_frame\n\tawait physics_frame\n\tvar v5 := row(5,2)\n\tvar v9 := row(9,12)\n\tcheck(engine.field_stage_bodies(Scope,[v5]).ok and engine.field_commit_bodies(Scope).ok,\"commit generation five\")\n\tcheck(engine.field_stage_bodies(Scope,[v9]).ok and ids(12)==[v9.handle] and ids(2)==[],\"tentative higher generation physical body\")\n\tcheck(engine.field_rollback_bodies(Scope).ok and ids(12)==[] and ids(2)==[v5.handle],\"rolled-back physical identity restored immediately\")\n\tcheck(stale(engine.field_stage_bodies(Scope,[row(4,-12)])) and ids(-12)==[],\"older than restored committed generation is rejected\")\n\tvar v6 := row(6,6)\n\tcheck(engine.field_stage_bodies(Scope,[v6]).ok and engine.field_commit_bodies(Scope).ok and ids(6)==[v6.handle],\"discarded generation nine does not block generation six retry\")\n\tcheck(stale(engine.field_stage_bodies(Scope,[v5])) and ids(2)==[] and ids(6)==[v6.handle],\"superseded generation five rejected with position intact\")\n\tcheck(engine.field_stage_bodies(Scope,[]).ok and engine.field_commit_bodies(Scope).ok and ids(6)==[],\"physical retirement\")\n\tcheck(stale(engine.field_stage_bodies(Scope,[v6])) and ids(6)==[],\"retired generation six cannot reappear\")\n\tengine.release_scope(Scope)\n\tvar failed := checks.filter(func(c):return not c.passed)\n\tprint(\"QA_ENGINE_CHECKS=\",checks.size(),\" failures=\",failed.size())\n\tquit(0 if failed.is_empty() else 1)\n",
+    "ai": "extends SceneTree\n\nconst AI = preload(\"res://mission/ai/ports/field_ai.gd\")\nvar checks := []\n\nfunc check(value: bool, label: String) -> void:\n\tchecks.append({\"label\":label,\"passed\":value})\n\tprint(\"QA \",label,\" \",value)\n\nfunc unit(g: int, x: float) -> Dictionary:\n\treturn {\"handle\":{\"index\":0,\"generation\":g},\"team_key\":0,\"formation_id\":0,\"role\":\"infantry\",\"position\":Vector3(x,0,0),\"hp\":80,\"control_revision\":1,\"order_revision\":1,\"urgent\":true}\n\nfunc pick(ai: RefCounted) -> Dictionary:\n\tfor job in ai.schedule().value.jobs:\n\t\tif job.layer==\"individual\": return job\n\treturn {}\n\nfunc stale(result: Dictionary) -> bool:\n\treturn not result.ok and result.error.code==\"StaleVersion\"\n\nfunc _initialize() -> void:\n\tvar ai := AI.new(\"qa-grant\",func(_a,_b): return true,5)\n\tvar v4 := unit(4,4)\n\tvar v8 := unit(8,8)\n\tcheck(ai.begin_tick().ok and ai.publish(1,1,[v4]).ok,\"publish generation four\")\n\tvar initial := pick(ai)\n\tai.commit_tick()\n\tcheck(ai.begin_tick().ok and ai.publish(2,1,[v8]).ok,\"tentative generation eight\")\n\tvar dead := pick(ai)\n\tvar escaped: Dictionary = dead.duplicate(true)\n\tai.rollback_tick()\n\tcheck(ai.sense(v4.handle).ok and not ai.sense(v8.handle).ok,\"rolled-back generations visible only at committed birth\")\n\tcheck(stale(ai.collect(escaped,[])) and ai.collect(initial,[]).ok,\"abandoned copied worker denied and untouched original grant restored\")\n\tvar drained: Array=ai.drain().value\n\tcheck(drained.size()==1 and is_same(drained[0].job,initial),\"restored grant executes exactly once\")\n\tcheck(ai.begin_tick().ok and ai.publish(2,1,[v8]).ok,\"identical tick and generation retry\")\n\tvar retry := pick(ai)\n\tcheck(not retry.is_empty() and retry.id!=escaped.id and retry.stamp==escaped.stamp and retry.subject==escaped.subject,\"same public stamp, distinct capability\")\n\tcheck(stale(ai.collect(dead,[])) and stale(ai.collect(escaped,[])) and ai.collect(retry,[]).ok,\"late originals and copies cannot consume replacement\")\n\tvar rows: Array=ai.drain().value\n\tcheck(rows.size()==1 and is_same(rows[0].job,retry) and stale(ai.collect(retry,[])),\"replacement accepted once\")\n\tai.commit_tick()\n\tcheck(stale(ai.publish(3,1,[v4])) and not ai.sense(v4.handle).ok and ai.sense(v8.handle).ok,\"old generation rejected after committed replay\")\n\tvar failed := checks.filter(func(c):return not c.passed)\n\tprint(\"QA_AI_CHECKS=\",checks.size(),\" failures=\",failed.size())\n\tquit(0 if failed.is_empty() else 1)\n"
+  },
+  "all_pass": true,
+  "post_run_worktree_status": {
+    "engine": "",
+    "ai": ""
+  },
+  "not_run": [
+    "Merged-state gate, whole field AT-04/05, real window, 8 GiB device and human playtest are outside this QA batch. L3 individual fixed-step timing is diagnostic, not full AT-04."
+  ]
+}

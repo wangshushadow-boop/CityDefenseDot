@@ -24,7 +24,11 @@
   "allowed_paths": [
     "game/content/base/field/field.json",
     "game/tests/p2/field_loadouts/",
-    "development/reports/tasks/P2-FIELD-INTEGRATION-011.md"
+    "development/reports/tasks/P2-FIELD-INTEGRATION-011.md",
+    "game/content/base/field/short_bow.tscn",
+    "game/content/base/field/manifest.json",
+    "game/content/base/field/CREDITS.md",
+    "game/content/base/field/.gitattributes"
   ],
   "excluded_paths": [
     "development/state/",
@@ -32,8 +36,8 @@
     "game/contracts/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "7fc48bc118f7f09083cc46263daf0945c9b2f70f",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field-loadouts",
   "scope": "野战兵种与骑射配装。沿用现有四个模型及现有数据契约。",
   "non_goals": [
     "未经批准的公共契约扩展、其他阶段玩法。"
@@ -41,5 +45,5 @@
   "acceptance": [
     "通过真实加载的步、弩、骑、骑射装备覆盖及原资产回归，区分骑乘与远程。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

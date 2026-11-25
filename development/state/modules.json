@@ -421,12 +421,18 @@
       "evidence": []
     },
     "RESULTS": {
-      "status": "NOT_IMPLEMENTED",
+      "status": "PARTIAL",
       "work_package_ids": [
         "P2-RESULTS"
       ],
-      "verified_test_ids": [],
-      "evidence": []
+      "verified_test_ids": [
+        "T-RESULTS-01",
+        "T-RESULTS-02",
+        "T-RESULTS-03"
+      ],
+      "evidence": [
+        "development/reports/tests/P2/results-001.txt"
+      ]
     },
     "UI": {
       "status": "NOT_IMPLEMENTED",

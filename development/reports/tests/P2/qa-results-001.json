@@ -1,0 +1,60 @@
+[
+  {
+    "suite": "results",
+    "mode": "headless",
+    "candidate": "58d301d12ed84069204b471a45fb316bfced8590",
+    "source_worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-results",
+    "archive_sha256": "a2309ece2c18fcf00003919310d394c3b28f57fe72349fe3e0f57ec67aacb6d3",
+    "script_sha256": "2e0b305c1c072ecea91fa5d58cb68d7bb3d7c6f4031710823eaf385883b361e2",
+    "start": "2026-11-25T08:23:34.223583+08:00",
+    "duration_s": 2.867,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\field-joined-qa\\results\\results-headless\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\field-joined-qa\\results\\snapshot\\game",
+      "--script",
+      "res://tests/p2/results/run.gd"
+    ],
+    "exit_code": 0,
+    "timeout": false,
+    "errors": [],
+    "markers": [
+      "P2-RESULTS-001 PASS assertions=147 failures=0"
+    ],
+    "screenshots": [],
+    "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\n1000-source finalize_and_replay_us=240931 canonical_bytes=97164\nT-RESULTS-01 PASS physical_contacts=6\nT-RESULTS-02 PASS\nT-RESULTS-03 PASS\nP2-RESULTS-001 PASS assertions=147 failures=0\n",
+    "status": "PASS"
+  },
+  {
+    "suite": "rules",
+    "mode": "headless",
+    "candidate": "58d301d12ed84069204b471a45fb316bfced8590",
+    "source_worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-results",
+    "archive_sha256": "a2309ece2c18fcf00003919310d394c3b28f57fe72349fe3e0f57ec67aacb6d3",
+    "script_sha256": "62cd03da19e0b84047616c62cecab006f72ab399f24aceadb36f5b9af888b0c1",
+    "start": "2026-11-25T08:23:37.090981+08:00",
+    "duration_s": 0.55,
+    "command": [
+      "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+      "--headless",
+      "--log-file",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\field-joined-qa\\results\\rules-headless\\engine.log",
+      "--path",
+      "D:\\work\\game\\recollection\\out\\p2-qa\\field-joined-qa\\results\\snapshot\\game",
+      "--script",
+      "res://tests/p2/rules/run.gd"
+    ],
+    "exit_code": 0,
+    "timeout": false,
+    "errors": [],
+    "markers": [
+      "P2-RULES-FIELD PASS assertions=38 physical_contacts=1"
+    ],
+    "screenshots": [],
+    "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nP2-RULES-FIELD PASS assertions=38 physical_contacts=1\n",
+    "status": "PASS"
+  }
+]

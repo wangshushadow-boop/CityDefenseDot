@@ -123,9 +123,9 @@ T-RULES-05,RULES,SGE-02,城防突破并满足占领条件,评估,不是仅按击
 T-INTERACT-01,INTERACT,SET-04,世界中领主死亡、商人存在,进入城镇,仅合法 NPC 生成,NOT_RUN,,docs/systems/game/mission/interaction/README.md,game/mission/interaction/
 T-INTERACT-02,INTERACT,QST-04,对话目标离场或权限变化,执行选择,拒绝/替代流程，无越权,NOT_RUN,,docs/systems/game/mission/interaction/README.md,game/mission/interaction/
 T-INTERACT-03,INTERACT,MIS-01 / MIS-02,潜入、监狱、酒馆和访问,交互并离开,规则反馈正确，无临时装备串域,NOT_RUN,,docs/systems/game/mission/interaction/README.md,game/mission/interaction/
-T-RESULTS-01,RESULTS,BAT-02 / ARM-05,部分槽未生成、撤离受伤、英雄击倒,构建结果,每槽唯一分类，总量守恒,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
-T-RESULTS-02,RESULTS,BAT-03,缺槽、重复槽、revision 不符,验证,拒绝并保留诊断,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
-T-RESULTS-03,RESULTS,BAT-04,自定义或多人赛局,结果路由,不会生成战役资产变更,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
+T-RESULTS-01,RESULTS,BAT-02 / ARM-05,部分槽未生成、撤离受伤、英雄击倒,构建结果,每槽唯一分类，总量守恒,PASS,development/reports/tests/P2/results-001.txt,docs/systems/game/mission/results/README.md,game/mission/results/
+T-RESULTS-02,RESULTS,BAT-03,缺槽、重复槽、revision 不符,验证,拒绝并保留诊断,PASS,development/reports/tests/P2/results-001.txt,docs/systems/game/mission/results/README.md,game/mission/results/
+T-RESULTS-03,RESULTS,BAT-04,自定义或多人赛局,结果路由,不会生成战役资产变更,PASS,development/reports/tests/P2/results-001.txt,docs/systems/game/mission/results/README.md,game/mission/results/
 T-RESULTS-04,RESULTS,SGE-03,城防和设备损坏,生成结果,差异可追踪且不误计人形槽,NOT_RUN,,docs/systems/game/mission/results/README.md,game/mission/results/
 T-UI-01,UI,UX-01,键鼠、手柄及回退/取消,完成招募交易战斗等主流程,无阻断，取消不改数据,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
 T-UI-02,UI,UX-02,多编队部署和命令失败,操作 HUD,选择、目标、当前命令和失败原因准确,NOT_RUN,,docs/systems/game/presentation/ui/README.md,game/presentation/ui/
