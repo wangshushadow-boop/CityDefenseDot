@@ -28,7 +28,8 @@
     "game/content/base/field/short_bow.tscn",
     "game/content/base/field/manifest.json",
     "game/content/base/field/CREDITS.md",
-    "game/content/base/field/.gitattributes"
+    "game/content/base/field/.gitattributes",
+    "game/content/base/field/sidearm.tscn"
   ],
   "excluded_paths": [
     "development/state/",

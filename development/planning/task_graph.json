@@ -1222,7 +1222,8 @@
         "BAI-T",
         "BAI-F",
         "BASE",
-        "VIS"
+        "VIS",
+        "MOV"
       ],
       "depends_on": [
         "P2-MIS-RT-BATTLE",
@@ -1246,7 +1247,8 @@
         "docs/systems/game/mission/ai/tactical/README.md",
         "docs/systems/game/mission/ai/formation/README.md",
         "docs/systems/game/content/base/README.md",
-        "docs/systems/game/presentation/visuals/README.md"
+        "docs/systems/game/presentation/visuals/README.md",
+        "docs/systems/game/mission/movement/README.md"
       ],
       "candidate_test_ids": [
         "T-TEST-01",

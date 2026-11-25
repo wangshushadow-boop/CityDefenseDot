@@ -705,7 +705,8 @@
         "P2-FIELD-INTEGRATION-010",
         "P2-FIELD-INTEGRATION-011",
         "P2-FIELD-INTEGRATION-012",
-        "P2-FIELD-INTEGRATION-013"
+        "P2-FIELD-INTEGRATION-013",
+        "P2-FIELD-INTEGRATION-014"
       ]
     },
     "GATE-P2": {
@@ -1939,9 +1940,9 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-004": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "main",
+      "base_commit": "36b083dc04927ae270960d94b6454def4f1b2648",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -2165,6 +2166,15 @@
       "status": "IN_PROGRESS",
       "owner": "brain_dev",
       "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-014": {
+      "status": "PLANNED",
+      "owner": null,
+      "base_commit": null,
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -10822,6 +10832,24 @@
         "development/reports/integration/P2.md"
       ],
       "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-004",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:31:45+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "36b083dc04927ae270960d94b6454def4f1b2648"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-004",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:31:45+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "36b083dc04927ae270960d94b6454def4f1b2648"
     }
   ]
 }

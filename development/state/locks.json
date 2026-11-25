@@ -14,7 +14,8 @@
         "game/content/base/field/short_bow.tscn",
         "game/content/base/field/manifest.json",
         "game/content/base/field/CREDITS.md",
-        "game/content/base/field/.gitattributes"
+        "game/content/base/field/.gitattributes",
+        "game/content/base/field/sidearm.tscn"
       ],
       "excluded_paths": [
         "development/state/",
@@ -91,6 +92,22 @@
         "development/state/",
         "docs/architecture/",
         "game/contracts/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-004",
+      "owner": "main",
+      "branch": "detached",
+      "base_commit": "36b083dc04927ae270960d94b6454def4f1b2648",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-field-boot",
+      "allowed_paths": [
+        "game/bootstrap/",
+        "game/tests/p2/field_boot/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-004.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
       ]
     }
   ],

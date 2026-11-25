@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-014",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "MOV",
+  "title": "同一步坐骑上下及坐骑失能的移动状态",
+  "spec": "docs/systems/game/mission/movement/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I"
+  ],
+  "requirements": [
+    "BAI-06"
+  ],
+  "acceptance_test_ids": [
+    "T-TEST-01",
+    "T-MIS-RT-02"
+  ],
+  "allowed_paths": [
+    "game/mission/movement/",
+    "game/tests/p2/mount_profile/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-014.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "game/contracts/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "MOV 所有者在既有 stage 内实现 set_profile(handle,profile,stage) -> Result，保留相同实体代际，切换速度、碰撞半径与路径缓存，支持失败重试。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "实测同代际步/骑切换的位移和碰撞半径、撤销及原 MOV 回归。"
+  ],
+  "status": "PLANNED"
+}

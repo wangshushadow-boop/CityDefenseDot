@@ -380,7 +380,8 @@
         "P2-MOV",
         "P7-POLISH",
         "P2-BAI",
-        "P2-BAI-I"
+        "P2-BAI-I",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-MOV-01",

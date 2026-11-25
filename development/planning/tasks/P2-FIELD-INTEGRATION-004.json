@@ -41,8 +41,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "36b083dc04927ae270960d94b6454def4f1b2648",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field-boot",
   "scope": "真实 500/1000 混合野战、真实动作/AI/导航/动画、玩家命令与结果；P2 后续任务完整收口。 复用已批准的生产入口，保持 P1 存档、客户端及无头回归。",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -52,5 +52,5 @@
     "复用已批准的生产入口，保持 P1 存档、客户端及无头回归。",
     "组合根可按冻结签名编写。关闭前必须在实际 002/003/006/011/012/013 合并树中通过完整启动，不接受临时假端口。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }
