@@ -1,6 +1,6 @@
 # recollection 项目状态
 
-**P2 已验收 12/16 个工作包，阶段等待负责人决定 ADR-015。** 兵源分波、战斗、移动、编队和三层 AI 已集成，输入、相机、视觉与音频通过本批独立验收。三方撤退、战果、战斗 UI 和整场集成尚待完成。AT-04 与 AT-05 战场切片未执行。[待决撤退规则](docs/architecture/decisions/ADR-015-multiside-withdrawal.md) · [阶段验收记录](development/reports/stages/P2.md)
+**P2 开发中，13/16 个工作包已验收。** 负责人已批准 ADR-015 A，三方野战中撤退只影响本方。正在实现逐源战果与战斗 HUD，随后进行整场装配与验收。[撤退决定](docs/architecture/decisions/ADR-015-multiside-withdrawal.md) · [阶段记录](development/reports/stages/P2.md)
 
 本批运行代码为 `847890e`。Windows 冷开发交付有客户端、专服和内容 ZIP。四份野战模型、署名以及 48 条中英命令和警告均已验证；两个 PCK 分别捕获到每句真实声音。最终客户端在六个干净用户目录启动成功。P2 的 19 个模块测试入口及两项跨域/音频补充入口、P1 的 15 套回归均通过。20% 骑乘的 L3 夹具在 500 人时三轮固定步 P95 为 9.786–10.802 ms，1000 人为 21.559–22.890 ms，超出 16.667 ms。8 GiB 设备与人工听辨尚未实测。[构建清单](development/reports/tests/P2/build-checkpoint/final-manifest.json) · [P2 回归](development/reports/tests/P2/integrated-regressions.json) · [20% 骑乘原数](development/reports/tests/P2/l3-mixed-20pct-integrated.json)
 

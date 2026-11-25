@@ -561,15 +561,19 @@
       ]
     },
     "P2-RULES-FIELD": {
-      "status": "BLOCKED",
+      "status": "DONE",
       "owner": "main",
       "base_commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a",
-      "candidate_commit": null,
-      "integrated_commit": null,
+      "candidate_commit": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
+      "integrated_commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18",
       "evidence": [
         "docs/architecture/decisions/ADR-015-multiside-withdrawal.md",
         "development/reports/tests/P2/qa-ordinary-withdrawal.json",
-        "development/reports/stages/P2.md"
+        "development/reports/stages/P2.md",
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
       ],
       "child_ids": [
         "P2-RULES-FIELD-001",
@@ -687,7 +691,7 @@
       ]
     },
     "GATE-P2": {
-      "status": "BLOCKED",
+      "status": "PLANNED",
       "owner": null,
       "base_commit": null,
       "candidate_commit": null,
@@ -1765,14 +1769,18 @@
       "child_ids": []
     },
     "P2-RULES-FIELD-001": {
-      "status": "BLOCKED",
+      "status": "DONE",
       "owner": "main",
       "base_commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a",
       "candidate_commit": "a0fbd85e90498836a6052fb1b25ead973c29c7e3",
-      "integrated_commit": null,
+      "integrated_commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18",
       "evidence": [
         "docs/architecture/decisions/ADR-015-multiside-withdrawal.md",
-        "development/reports/tests/P2/qa-ordinary-withdrawal.json"
+        "development/reports/tests/P2/qa-ordinary-withdrawal.json",
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
       ],
       "child_ids": []
     },
@@ -9766,6 +9774,163 @@
         "development/reports/stages/P2.md"
       ],
       "commit": "847890eed355815e60e21be2a6817a9dc11877b9"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "BLOCKED",
+      "new": "READY",
+      "time": "2026-11-25T08:08:24+08:00",
+      "reason": "ADR-015 A 已由项目负责人批准。",
+      "evidence": [],
+      "commit": "dd7e41cb7ccc169cd8a92d29f418159857d4860a"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:08:24+08:00",
+      "reason": "恢复已独立审查与测试的普通队长候选 a0fbd85，核验批准语义。",
+      "evidence": [],
+      "commit": "dd7e41cb7ccc169cd8a92d29f418159857d4860a"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "BLOCKED",
+      "new": "READY",
+      "time": "2026-11-25T08:08:24+08:00",
+      "reason": "ADR-015 A 已由项目负责人批准。",
+      "evidence": [],
+      "commit": "dd7e41cb7ccc169cd8a92d29f418159857d4860a"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:08:24+08:00",
+      "reason": "恢复已独立审查与测试的普通队长候选 a0fbd85，核验批准语义。",
+      "evidence": [],
+      "commit": "dd7e41cb7ccc169cd8a92d29f418159857d4860a"
+    },
+    {
+      "task_id": "GATE-P2",
+      "old": "BLOCKED",
+      "new": "PLANNED",
+      "time": "2026-11-25T08:08:24+08:00",
+      "reason": "恢复 P2；各剩余工作包完成后进行阶段验收。",
+      "evidence": [],
+      "commit": "dd7e41cb7ccc169cd8a92d29f418159857d4860a"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RULES-FIELD-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
+    },
+    {
+      "task_id": "P2-RULES-FIELD",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T08:09:03+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-RULES-FIELD-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/rules-001.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "e1bb2eb23b37a9ce5a0b5400aaaca7e010c63f18"
     }
   ]
 }

@@ -1,0 +1,16 @@
+Godot --headless --path game --script res://tests/p2/rules/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-RULES-FIELD PASS assertions=38 physical_contacts=1
+
+Godot --headless --path game --script res://tests/p2/field_eligibility/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+P2-WAVE-ELIGIBILITY failures=0
+
+Godot --headless --path game --script res://tests/p2/mission/run.gd | exit 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WAVES reserved=1000 initial=500 added=200+200 active=500 entered=900 never_entered=100
+P2-MISSION-FIELD PASS checks=1038 failures=0
+P2-MISSION-SOURCE PASS failures=0

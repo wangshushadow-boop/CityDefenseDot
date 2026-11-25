@@ -1,22 +1,5 @@
 {
   "schema_version": 1,
-  "locks": [
-    {
-      "task_id": "P2-RULES-FIELD-001",
-      "owner": "main",
-      "branch": "detached",
-      "base_commit": "23928560d3c5cc7b4f51be076ca8c467432afa2a",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-rules",
-      "allowed_paths": [
-        "game/mission/rules/",
-        "game/tests/p2/rules/",
-        "development/reports/tasks/P2-RULES-FIELD-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/"
-      ]
-    }
-  ],
+  "locks": [],
   "note": "各阶段按执行任务独占写入，验收后释放。"
 }
