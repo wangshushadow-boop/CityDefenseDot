@@ -665,22 +665,25 @@ func _prepare_drives(tick: int) -> Dictionary:
 		if not replay or not _direct.has_answer(tick,_revision,origin_mm,goal_mm,b.profile):
 			if unused<=0: continue
 			unused -= 1
-		var ticket: Dictionary = _direct.request_path(origin_mm,goal_mm,b.profile)
-		if not ticket.ok: return ticket
-		jobs.append({"body":b,"ticket":ticket.value,"index":index})
+		var request: Dictionary = _direct.request_drive_path(origin_mm,goal_mm,b.profile)
+		if not request.ok: return request
+		jobs.append({"body":b,"path":request.value,"index":index})
 	if jobs.is_empty(): return R.ok()
 	var spent: Dictionary = _direct.process_budget(tick,available)
 	if not spent.ok: return spent
 	for job in jobs:
-		var solved: Dictionary = _direct.poll_path(job.ticket)
-		if not solved.ok:
-			if solved.error.code=="Unavailable": continue
-			return solved
+		var path: Variant = job.path.cached
+		if path==null or job.path.ticket.nav_revision!=spent.value.nav_revision:
+			var solved: Dictionary = _direct.poll_path(job.path.ticket)
+			if not solved.ok:
+				if solved.error.code=="Unavailable": continue
+				return solved
+			path=solved.value
 		var b: Body = job.body
 		var leg := IntentRoute.new()
 		leg.revision = _revision
 		leg.direction = b.drive.direction
-		var checked := leg.from_path(b.position,solved.value)
+		var checked := leg.from_path(b.position,path)
 		if not checked.ok: return checked
 		b.leg = leg
 		b.leg_cursor = 0

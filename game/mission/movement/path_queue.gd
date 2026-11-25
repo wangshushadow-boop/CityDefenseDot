@@ -105,6 +105,14 @@ func request_path(origin: Array, goal: Array, profile: String, priority: int = 0
 	_by_route[key] = job
 	return R.ok(ticket)
 
+## A driver consumes one leg in this batch, even if solving other legs evicts its cache entry.
+func request_drive_path(origin: Array, goal: Array, profile: String) -> Dictionary:
+	var admitted := request_path(origin,goal,profile)
+	if not admitted.ok: return admitted
+	var ticket: Dictionary = admitted.value
+	var solved: Dictionary = _completed.get(ticket.request_id,{})
+	return R.ok({"ticket":ticket,"cached":null if solved.is_empty() else solved.result.duplicate(true)})
+
 static func _comes_first(left: Dictionary, right: Dictionary) -> bool:
 	if left.priority != right.priority:
 		return left.priority > right.priority
