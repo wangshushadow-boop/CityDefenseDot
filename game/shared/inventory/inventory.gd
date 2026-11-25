@@ -115,6 +115,19 @@ func instance_layout() -> Dictionary:
 	return {"locations": _locations.duplicate(true), "owners": _state.owners.duplicate()}
 
 
+## Used during migration to distinguish issued holders from an older user-defined name.
+func has_holder_endowment(holder_prefix: String) -> bool:
+	for holder in _locations:
+		if not holder.begins_with(holder_prefix):
+			continue
+		for record in _state.ledger:
+			for line in record.request.lines:
+				if line.get("reason") == "holder_endowment" and line.get("src") == null and line.get("dst") is String and line.dst.begins_with(holder_prefix) and line.get("source_ref") == record.request.txn_id:
+					return true
+		return false
+	return false
+
+
 ## Campaign creates holders and their starting instances at one durable world commit.
 ## Endowments only enter newly opened holders and use one recorded issuance transaction.
 func fork_with_locations(additions: Dictionary = {}, endowment: Array = [], txn_id: String = "") -> Dictionary:
