@@ -22,7 +22,7 @@ func exercise() -> void:
 	if not check(app.dispatch(command("rest","rest",{}),player).ok,"advance a real campaign day"): return
 	var v: Dictionary=query_character().value.visit
 	var reply := person.duplicate()
-	reply.answer=v.ledger.prosperity_after-v.ledger.prosperity_before
+	reply["answer"]=v.ledger.prosperity_after-v.ledger.prosperity_before
 	if not check(app.dispatch(command("return","visit_report",reply),player).ok,"governor signs the real result"): return
 	var claim:=command("fee","visit_claim",{})
 	var signed: Dictionary=query_character().value
