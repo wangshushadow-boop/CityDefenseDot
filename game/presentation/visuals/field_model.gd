@@ -1,13 +1,16 @@
 extends RefCounted
 ## Near meshes retain the imported skeleton, equipment and gait clips. The same
 ## mesh and joint weights supply a small shared pose bank for distant units.
-const FILES := {"infantry":"spear_soldier", "archer":"crossbowman", "cavalry":"general", "mount":"horse"}
+const FILES := {"infantry":"spear_soldier", "archer":"crossbowman", "cavalry":"general", "mount":"horse", "mounted_archer":"general"}
+const SHORT_BOW := "res://content/base/field/short_bow.tscn"
+const SIDEARM := "res://content/base/field/sidearm.tscn"
 const COLORS := [Color("#a73325"), Color("#276d98")]
 const HORSE_SCALE := 0.43
 const SADDLE_OFFSET := Vector3(0, .59, .039)
 const DIRECTIONS := ["up","left","right","thrust"]
 const POSES_PER_SET := 8
 var scene: PackedScene
+var hand_prop: PackedScene
 var role: String
 var poses: Array[Mesh] = []
 var vertex_paint := StandardMaterial3D.new()
@@ -21,8 +24,9 @@ class Figure:
 	var left_leg: int
 	var right_leg: int
 	var tunic: MeshInstance3D
-	var weapon: MeshInstance3D
-	var spare: MeshInstance3D
+	var ranged_weapon: Node3D
+	var melee_weapon: MeshInstance3D
+	var hand: BoneAttachment3D
 	var clip := ""
 
 func load_model(kind: String, host: Node3D) -> bool:
@@ -36,17 +40,21 @@ func load_model(kind: String, host: Node3D) -> bool:
 	scene = load(path) as PackedScene
 	if scene == null:
 		return false
+	if role in ["mounted_archer","archer"]:
+		hand_prop = load(SHORT_BOW if role=="mounted_archer" else SIDEARM) as PackedScene
+		if hand_prop == null: return false
 	var figure := instantiate(host)
-	if figure.skeleton == null or figure.player == null:
+	if figure.skeleton == null or figure.player == null or (hand_prop != null and (figure.ranged_weapon == null or figure.melee_weapon == null)):
 		figure.root.free()
 		return false
-	var variants := 2 if role in ["cavalry","archer"] else 1
+	# The mounted archer and cavalry use the same general.glb melee mesh and pose bank.
+	var variants := 2 if role in ["cavalry","archer","mounted_archer"] else 1
 	for variant in variants:
 		for frame in POSES_PER_SET:
 			var phase := "Guard" if frame == 7 else ("Active" if frame >= 3 else "Ready")
 			var direction: String = DIRECTIONS[clampi(frame-3,0,3)]
 			pose(figure, float(frame) * 13.0, 0 if frame == 0 else 2.8, phase, direction,
-				frame*13-1, role == "cavalry" and variant == 0, role == "archer" and variant == 0)
+				frame*13-1, role in ["cavalry","mounted_archer"] and variant==0, role=="mounted_archer" or (role=="archer" and variant==0))
 			poses.append(_bake(figure))
 	figure.root.free()
 	return true
@@ -73,18 +81,19 @@ func instantiate(host: Node3D) -> Figure:
 	f.left_leg = f.skeleton.find_bone("LeftUpLeg")
 	f.right_leg = f.skeleton.find_bone("RightUpLeg")
 	f.tunic = f.root.find_child("garment-tunic", true, false) as MeshInstance3D
-	if role == "archer":
-		f.weapon = f.root.find_child("attach-righthand-mesh",true,false) as MeshInstance3D
-		# Alternative melee slot follows the same hand as the imported crossbow.
-		var hand := BoneAttachment3D.new()
-		f.skeleton.add_child(hand)
-		hand.bone_name = "RightHand"
-		f.spare = MeshInstance3D.new()
-		var blade := BoxMesh.new()
-		blade.size = Vector3(.055, .035, .60)
-		f.spare.mesh = blade
-		f.spare.position.z = .22
-		hand.add_child(f.spare)
+	if role in ["archer","mounted_archer"] and f.skeleton.find_bone("RightHand")>=0:
+		var original := f.root.find_child("attach-righthand-mesh",true,false) as MeshInstance3D
+		f.hand = BoneAttachment3D.new()
+		f.skeleton.add_child(f.hand)
+		f.hand.bone_name = "RightHand"
+		if role == "mounted_archer":
+			f.melee_weapon = original
+			f.ranged_weapon = hand_prop.instantiate()
+			f.hand.add_child(f.ranged_weapon)
+		else:
+			f.ranged_weapon = original
+			f.melee_weapon = hand_prop.instantiate() as MeshInstance3D
+			f.hand.add_child(f.melee_weapon)
 	return f
 
 func pose(f: Figure, time: float, speed: float, phase: String, direction: String, since: int,
@@ -99,9 +108,9 @@ func pose(f: Figure, time: float, speed: float, phase: String, direction: String
 	f.player.seek(fposmod(time / 60.0, maxf(duration, .01)), true)
 	if f.right < 0:
 		return
-	if f.weapon:
-		f.weapon.visible = ranged
-		f.spare.visible = not ranged
+	if f.ranged_weapon:
+		f.ranged_weapon.visible = ranged
+		f.melee_weapon.visible = not ranged
 	if mounted:
 		for joint in [f.left_leg, f.right_leg]:
 			var sign_x := -1 if joint == f.left_leg else 1
@@ -117,6 +126,16 @@ func pose(f: Figure, time: float, speed: float, phase: String, direction: String
 		bend = -.55
 	elif phase == "Stagger":
 		arm = Quaternion(Vector3.BACK, -.38)
+	elif role=="mounted_archer" and ranged:
+		# Aim along character forward while preserving the mounted or walking lower body.
+		_aim_bone(f.skeleton,"RightArm","RightForeArm",Vector3(-.2,-.15,1))
+		_aim_bone(f.skeleton,"RightForeArm","RightHand",Vector3(.4,.22,1))
+		_aim_bone(f.skeleton,"LeftArm","LeftForeArm",Vector3(.65,-.1,-.22))
+		_aim_bone(f.skeleton,"LeftForeArm","LeftHand",Vector3(-.7,.5,.45))
+		var wrist := f.hand.get_bone_idx()
+		var forearm_rotation := f.skeleton.get_bone_global_pose(f.forearm).basis.get_rotation_quaternion()
+		f.skeleton.set_bone_pose_rotation(wrist,forearm_rotation.inverse()*Quaternion(Vector3.UP,PI))
+		return
 	else:
 		var sweep := -.78
 		match phase:
@@ -132,6 +151,14 @@ func pose(f: Figure, time: float, speed: float, phase: String, direction: String
 				bend = -.7 + sweep*.55
 	f.skeleton.set_bone_pose_rotation(f.right, f.skeleton.get_bone_pose_rotation(f.right)*arm)
 	f.skeleton.set_bone_pose_rotation(f.forearm, f.skeleton.get_bone_pose_rotation(f.forearm)*Quaternion(Vector3.UP,bend))
+
+func _aim_bone(skel: Skeleton3D, bone: String, child: String, direction: Vector3) -> void:
+	var id := skel.find_bone(bone)
+	var rotation := skel.get_bone_global_pose(id).basis.get_rotation_quaternion()
+	var axis := skel.get_bone_rest(skel.find_bone(child)).origin.normalized()
+	var aim := Quaternion(rotation*axis,direction.normalized())*rotation
+	var parent := skel.get_bone_global_pose(skel.get_bone_parent(id)).basis.get_rotation_quaternion()
+	skel.set_bone_pose_rotation(id,parent.inverse()*aim)
 
 static func saddle_offset(f: Figure) -> Vector3:
 	if f == null: return SADDLE_OFFSET
@@ -150,6 +177,10 @@ func _bake(f: Figure) -> Mesh:
 		if part.mesh == null or not part.is_visible_in_tree():
 			continue
 		var mesh_xform := root_xform * part.global_transform
+		if f.hand != null and f.hand.is_ancestor_of(part):
+			# During synchronous baking BoneAttachment's render notification may be pending.
+			var joint_pose := f.skeleton.get_bone_global_pose(f.hand.get_bone_idx())
+			mesh_xform = root_xform * f.skeleton.global_transform * joint_pose * f.hand.global_transform.affine_inverse() * part.global_transform
 		var binds: Array[Transform3D] = []
 		if part.skin:
 			for b in part.skin.get_bind_count():
