@@ -25,6 +25,7 @@ func _initialize() -> void:
 		for slot in kit.slots:
 			var item: Dictionary = defs.get_definition(kit.slots[slot],"item").value
 			check(slot in item.slot_tags and FileAccess.file_exists(FIELD.path_join(item.asset_ref)),"asset "+slot)
+			if slot=="melee": check(item.category=={"archer":"blade","cavalry":"halberd","mounted_archer":"halberd","infantry":"spear"}[role],"melee equipment")
 			if slot=="ranged": check(item.category==("bow" if role=="mounted_archer" else "crossbow"),"bow or crossbow")
 	var prop := load(FIELD+"/short_bow.tscn") as PackedScene
 	var figure: Node = prop.instantiate()

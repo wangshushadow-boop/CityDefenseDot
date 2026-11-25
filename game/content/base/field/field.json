@@ -146,7 +146,7 @@
     "slot_tags": [
       "melee"
     ],
-    "asset_ref": "models/general.glb",
+    "asset_ref": "sidearm.tscn",
     "schema_version": 1
   },
   {
@@ -213,11 +213,11 @@
   {
     "id": "field:equipment/cavalry",
     "slots": {
-      "melee": "field:item/blade",
+      "melee": "field:item/halberd",
       "mount": "field:item/horse"
     },
     "item_ids": [
-      "field:item/blade",
+      "field:item/halberd",
       "field:item/horse"
     ],
     "schema_version": 1
@@ -225,15 +225,28 @@
   {
     "id": "field:equipment/mounted_archer",
     "slots": {
-      "melee": "field:item/blade",
+      "melee": "field:item/halberd",
       "ranged": "field:item/bow",
       "mount": "field:item/horse"
     },
     "item_ids": [
-      "field:item/blade",
+      "field:item/halberd",
       "field:item/bow",
       "field:item/horse"
     ],
+    "schema_version": 1
+  },
+  {
+    "id": "field:item/halberd",
+    "name": "戟",
+    "category": "halberd",
+    "base_value": 0,
+    "weight": 1,
+    "quality_policy": "standard",
+    "slot_tags": [
+      "melee"
+    ],
+    "asset_ref": "models/general.glb",
     "schema_version": 1
   }
 ]
