@@ -9,6 +9,30 @@ var _clocks := {}
 var _calendar := {}
 var _emergencies := {}
 var _last_tick := -1
+var _checkpoint := {}
+var _changed_due := []
+
+func begin_tick() -> void:
+	var days := {}
+	for layer in _calendar:
+		days[layer] = _calendar[layer].duplicate()
+	_checkpoint = {"roster":_roster_id,"tick":_last_tick,"clocks":_clocks.duplicate(),
+		"calendar":days,"emergencies":_emergencies.duplicate()}
+
+func commit_tick() -> void:
+	_checkpoint = {}
+	_changed_due.clear()
+
+func rollback_tick() -> void:
+	for i in range(_changed_due.size()-1,-1,-1):
+		var change: Array = _changed_due[i]
+		change[0].due = change[1]
+	_roster_id = _checkpoint.roster
+	_last_tick = _checkpoint.tick
+	_clocks = _checkpoint.clocks
+	_calendar = _checkpoint.calendar
+	_emergencies = _checkpoint.emergencies
+	commit_tick()
 
 static func _before(a: Dictionary,b: Dictionary) -> bool:
 	if a.due != b.due:
@@ -21,6 +45,8 @@ func _queue(layer: String, clock: Dictionary) -> void:
 	var days: Dictionary = _calendar[layer]
 	if not days.has(clock.due):
 		days[clock.due] = []
+	elif not _checkpoint.is_empty() and is_same(days[clock.due],_checkpoint.calendar.get(layer,{}).get(clock.due)):
+		days[clock.due] = days[clock.due].duplicate()
 	days[clock.due].append(clock)
 
 func _sync(layers: Array, tick: int, board: RefCounted) -> void:
@@ -102,6 +128,8 @@ func due(tick: int, hz: int, board: RefCounted, budgets: Dictionary) -> Dictiona
 				next_period = maxi(1,roundi(hz/5.0))
 			if name=="individual" and board.high_priority(id,tick):
 				next_period = maxi(1,roundi(hz/10.0))
+			if not _checkpoint.is_empty():
+				_changed_due.append([clock,clock.due])
 			clock.due = tick+next_period
 			_queue(name,clock)
 	_last_tick = tick
