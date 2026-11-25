@@ -754,13 +754,23 @@
       "child_ids": []
     },
     "P3-CHR": {
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "owner": null,
       "base_commit": null,
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
-      "child_ids": []
+      "child_ids": [
+        "P3-CHR-001",
+        "P3-CHR-002",
+        "P3-CHR-003",
+        "P3-CHR-004",
+        "P3-CHR-005",
+        "P3-CHR-006",
+        "P3-CHR-007",
+        "P3-CHR-008",
+        "P3-CHR-009"
+      ]
     },
     "P3-CLAN": {
       "status": "PLANNED",
@@ -2333,6 +2343,87 @@
         "development/reports/tests/P2/field-path-final.txt",
         "development/reports/integration/P2.md"
       ],
+      "child_ids": []
+    },
+    "P3-CHR-001": {
+      "status": "IN_PROGRESS",
+      "owner": "hero",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-002": {
+      "status": "IN_PROGRESS",
+      "owner": "gear",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-003": {
+      "status": "IN_PROGRESS",
+      "owner": "runtime",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-004": {
+      "status": "IN_PROGRESS",
+      "owner": "runtime",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-005": {
+      "status": "IN_PROGRESS",
+      "owner": "desktop",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-006": {
+      "status": "IN_PROGRESS",
+      "owner": "desktop",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-007": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-008": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P3-CHR-009": {
+      "status": "IN_PROGRESS",
+      "owner": "gear",
+      "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
       "child_ids": []
     }
   },
@@ -12059,6 +12150,186 @@
         "development/reports/tests/P2/field-regressions-final.json"
       ],
       "commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488"
+    },
+    {
+      "task_id": "P3-CHR",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "负责人提前授权人物工作包",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "冻结本次人物接口与分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-001",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-001",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-002",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-003",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-003",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-004",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-004",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:54+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-005",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-005",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-006",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-006",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-007",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-007",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-008",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-008",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-009",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "已冻结调用边界",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
+    },
+    {
+      "task_id": "P3-CHR-009",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T20:19:55+08:00",
+      "reason": "独立工作目录或精确路径分工",
+      "evidence": [],
+      "commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a"
     }
   ]
 }

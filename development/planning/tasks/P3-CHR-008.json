@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "P3-CHR-008",
+  "kind": "EXECUTION",
+  "parent": "P3-CHR",
+  "stage": "P3",
+  "module_id": "CLAN",
+  "title": "本次人物退休所需的家族成员及合法继承条件",
+  "spec": "docs/systems/game/campaign/clan/README.md",
+  "depends_on": [
+    "GATE-P2"
+  ],
+  "requirements": [
+    "CHR-01",
+    "CHR-02",
+    "CHR-03",
+    "CLN-03"
+  ],
+  "acceptance_test_ids": [
+    "T-CHR-04"
+  ],
+  "allowed_paths": [
+    "game/campaign/clan/ports/character_household.gd",
+    "development/reports/tasks/P3-CHR-008.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "approved_adr",
+  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "worktree": "D:\\work\\game\\recollection",
+  "scope": "本次人物退休所需的家族成员及合法继承条件",
+  "non_goals": [
+    "其他 P3 工作包的全域功能。"
+  ],
+  "acceptance": [
+    "通过 T-CHR-04 中本任务对应部分，合并后实际验证完整人物流程。"
+  ],
+  "status": "IN_PROGRESS"
+}

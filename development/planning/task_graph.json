@@ -1334,7 +1334,13 @@
       "kind": "PACKAGE",
       "title": "英雄、成长、装备与生命状态",
       "module_ids": [
-        "CHR"
+        "CHR",
+        "CAMP",
+        "APP",
+        "BOOT",
+        "UI",
+        "CLAN",
+        "INV"
       ],
       "depends_on": [
         "GATE-P2"
@@ -1343,7 +1349,13 @@
       "acceptance": "成长/装备/生命规则，库存一致性。",
       "approval_required": false,
       "spec_paths": [
-        "docs/systems/game/campaign/character/README.md"
+        "docs/systems/game/campaign/character/README.md",
+        "docs/systems/game/campaign/README.md",
+        "docs/systems/game/application/README.md",
+        "docs/systems/game/bootstrap/README.md",
+        "docs/systems/game/presentation/ui/README.md",
+        "docs/systems/game/campaign/clan/README.md",
+        "docs/systems/game/shared/inventory/README.md"
       ],
       "candidate_test_ids": [
         "T-CHR-01",

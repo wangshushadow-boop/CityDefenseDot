@@ -2,20 +2,20 @@
   "schema_version": 1,
   "project": "recollection",
   "delivery_version": "0.3",
-  "active_stage": "P2",
+  "active_stage": "P3",
   "stage_status": {
     "P0": "DONE",
     "P1": "DONE",
     "P2": "BLOCKED",
-    "P3": "PLANNED",
+    "P3": "IN_PROGRESS",
     "P4": "PLANNED",
     "P5": "PLANNED",
     "P6": "PLANNED",
     "P7": "PLANNED",
     "P8": "PLANNED"
   },
-  "authorized_by": "项目负责人授权 P2，并于 2026-11-25 授权其通过后继续 P3 人物。",
-  "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
+  "authorized_by": "项目负责人提前放行 P3 人物，后续补 P2 性能。",
+  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
   "integrated_commit": "3e99f22ce9b3dd2ddc3e0525bd362c3e77063488",
   "technical_stack": {
     "status": "APPROVED",
@@ -41,7 +41,7 @@
     }
   },
   "updated_at": "2026-11-25",
-  "note": "功能、PCK 和结算证据已归档；GATE-P2 因整场性能未达阻塞。P3 人物已获条件授权。",
+  "note": "P2 性能阻塞保留。当前仅 P3-CHR 及其必要接入。",
   "last_completed_stage": "P1",
   "p1_review_candidate": "f37b8f42e10f2e439f8757fc26e7f8d40e634fd2",
   "p1_decisions": {
@@ -73,9 +73,11 @@
     }
   },
   "p3_authorization": {
-    "condition": "GATE-P2 通过",
-    "scope": "P3 人物，按路线图以 P3-CHR 为人物主模块，涵盖必要前置及人物闭环。",
-    "choices": "优先选择项目的默认方案，记录选择、依据和影响。",
-    "date": "2026-11-25"
+    "scope": "P3-CHR",
+    "waived_dependency": "GATE-P2",
+    "decision": "p2性能后面再优化先完成功能，现在开始完成p3的人物，遇到需要决定的就参考骑马与砍杀游戏中的做法来完成",
+    "by": "项目负责人",
+    "date": "2026-11-25",
+    "evidence": "docs/architecture/decisions/ADR-016-character-slice.md"
   }
 }

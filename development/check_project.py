@@ -132,13 +132,22 @@ def validate():
         require(set(parent['depends_on'])<=seen,f'package prerequisite mismatch {t["id"]}')
         require(t['parent'] not in seen,f'execution task cannot depend on its own package: {t["id"]}')
     state=load('development/state/tasks.json')['tasks']; require(set(state)==set(full),'task state coverage mismatch')
+    # The owner allowed only the character work package to start against the archived P2 build.
+    waiver=load('development/state/project.json').get('p3_authorization', {})
+    def available(task, dependency):
+        if state[dependency]['status']=='DONE': return True
+        return (dependency=='GATE-P2' and (task=='P3-CHR' or execs.get(task,{}).get('parent')=='P3-CHR')
+                and waiver.get('scope')=='P3-CHR' and waiver.get('waived_dependency')==dependency
+                and waiver.get('by')=='项目负责人' and bool(waiver.get('decision'))
+                and waiver.get('evidence')=='docs/architecture/decisions/ADR-016-character-slice.md'
+                and (ROOT / waiver['evidence']).is_file())
     statuses={'PLANNED','READY','IN_PROGRESS','TESTING','REVIEW','INTEGRATING','DONE','BLOCKED'}
     for i,s in state.items():
         require(s['status'] in statuses,f'unknown task status {i}')
         p=full[i]
         if i in byid and p['kind']=='PACKAGE': require(set(s['child_ids'])=={k for k,t in execs.items() if t['parent']==i},f'child state mismatch {i}')
         if s['status'] in {'READY','IN_PROGRESS','TESTING','REVIEW','INTEGRATING','DONE'}:
-            require(all(state[d]['status']=='DONE' for d in p['depends_on']),f'active/done with unfinished dependency {i}')
+            require(all(available(i,d) for d in p['depends_on']),f'active/done with unfinished dependency {i}')
             if i in execs:
                 require(s.get('base_commit') and execs[i].get('base_commit')==s['base_commit'] and execs[i].get('worktree'),f'missing task base commit/worktree {i}')
         if s['status']=='DONE':
@@ -174,7 +183,7 @@ def main():
         phase=args.ready
         print(f'Planning candidates for {phase}; authorized stage = {project["active_stage"] or "NONE"}.')
         for p in packages:
-            if p['stage']==phase and state[p['id']]['status'] in ('PLANNED','READY') and all(state[d]['status']=='DONE' for d in p['depends_on']):
+            if p['stage']==phase and state[p['id']]['status'] in ('PLANNED','READY') and all(available(i,d) for d in p['depends_on']):
                 print(f'  {p["id"]}: {p["title"]} ({p["kind"]})')
         print('Refine execution tasks, check actual permissions and obtain authorization before starting.')
 

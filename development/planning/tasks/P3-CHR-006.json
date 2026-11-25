@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "P3-CHR-006",
+  "kind": "EXECUTION",
+  "parent": "P3-CHR",
+  "stage": "P3",
+  "module_id": "UI",
+  "title": "人物创建与面板、培养、换装、退休操作",
+  "spec": "docs/systems/game/presentation/ui/README.md",
+  "depends_on": [
+    "GATE-P2"
+  ],
+  "requirements": [
+    "CHR-01",
+    "CHR-02",
+    "CHR-03",
+    "CLN-03"
+  ],
+  "acceptance_test_ids": [
+    "T-CHR-01",
+    "T-CHR-02",
+    "T-CHR-03",
+    "T-CHR-04"
+  ],
+  "allowed_paths": [
+    "game/presentation/ui/ports/character_panel.gd",
+    "development/reports/tasks/P3-CHR-006.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/"
+  ],
+  "contract_changes": "approved_adr",
+  "base_commit": "650adc4be589f06c7e28ce78170b4ee0f7673c3a",
+  "worktree": "D:\\work\\game\\recollection\\.worktrees\\p3-desktop",
+  "scope": "人物创建与面板、培养、换装、退休操作",
+  "non_goals": [
+    "其他 P3 工作包的全域功能。"
+  ],
+  "acceptance": [
+    "通过 T-CHR-01, T-CHR-02, T-CHR-03, T-CHR-04 中本任务对应部分，合并后实际验证完整人物流程。"
+  ],
+  "status": "IN_PROGRESS"
+}

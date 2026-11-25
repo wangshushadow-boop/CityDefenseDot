@@ -73,7 +73,7 @@
 ### P3 · 战略世界与角色
 
 - `P3-WORLD`：世界地图、时钟、交通、情报；前置：GATE-P2
-- `P3-CHR`：英雄、成长、装备与生命状态；前置：GATE-P2
+- `P3-CHR`：英雄、成长、装备与生命状态；负责人于 2026-11-25 特批提前执行，见 [ADR-016](../../docs/architecture/decisions/ADR-016-character-slice.md)。原阶段门禁保留为 GATE-P2
 - `P3-CLAN`：家族、婚育、同伴、职责与继承；前置：GATE-P2, P3-CHR
 - `P3-PARTY`：队伍、军团、名册、俘虏、补给；前置：GATE-P2, P3-CHR, P3-CLAN, P3-WORLD
 - `P3-ENC-ENCOUNTER`：遭遇、战略围城、预留与自动结算（ENCOUNTER）；前置：GATE-P2, P3-PARTY, P3-WORLD
