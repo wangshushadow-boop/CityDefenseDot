@@ -146,7 +146,7 @@ static func _sphere_hit(space: PhysicsDirectSpaceState3D, origin: Vector3, targe
 		return hit
 	return {}
 
-static func sweep(scope: Dictionary, queries: Array) -> Dictionary:
+static func sweep(scope: Dictionary, queries: Array, field := false) -> Dictionary:
 	var space: PhysicsDirectSpaceState3D = scope.view.world_3d.direct_space_state
 	var result := []
 	for index in queries.size():
@@ -181,10 +181,13 @@ static func sweep(scope: Dictionary, queries: Array) -> Dictionary:
 			var handle := str(object.get_meta("entity_handle",str(scope.view.get_path_to(object))))
 			if handle in ignored:
 				continue
-			hits.append({"query_index":index,"entity_handle":handle,
+			var row := {"query_index":index,"entity_handle":handle,
 				"fraction_ppm":roundi(clampf(hit.fraction,0,1)*1000000),
 				"point_mm":_quantized(hit.position,1000),"normal_ppm":_quantized(hit.normal,1000000),
-				"region":str(object.get_meta("region","body"))})
+				"region":str(object.get_meta("region","body"))}
+			if field:
+				scope.field.tag_hit(object,hit.position,row)
+			hits.append(row)
 		hits.sort_custom(func(a,b):
 			if a.fraction_ppm == b.fraction_ppm:
 				return a.entity_handle < b.entity_handle
