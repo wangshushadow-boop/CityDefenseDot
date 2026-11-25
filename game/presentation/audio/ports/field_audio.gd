@@ -18,6 +18,7 @@ var _mix := DEFAULTS.duplicate()
 var _buses := {}
 var _pool := []
 var _music: Array[AudioStreamPlayer] = []
+var _playbacks: Array[WeakRef] = []
 var _track := "silent"
 var _deck := 0
 var _fade := 1.0
@@ -308,7 +309,7 @@ func play_event(event: Dictionary, listener_position: Vector3 = Vector3.ZERO) ->
 	slot.score = score
 	slot.cue = clip
 	slot.category = category
-	player.play()
+	_play_tracked(player)
 	if device_voice:
 		_tts_owner = get_instance_id()
 		_speaking = true
@@ -336,7 +337,7 @@ func transition_music(state: String) -> Dictionary:
 		next.stream = _cues.clip(state)
 		next.volume_linear = 0.0001
 		_start_gains[_deck] = 0.0001
-		next.play()
+		_play_tracked(next)
 	_track = state
 	_fade = 0.0
 	_peak = maxi(_peak,_active_count())
@@ -346,6 +347,8 @@ func transition_music(state: String) -> Dictionary:
 func _process(delta: float) -> void:
 	if _scope.is_empty():
 		return
+	if _playbacks.size() > _pool.size() + _music.size():
+		_playbacks = active_playbacks()
 	var speaking := _tts_owner == get_instance_id() and DisplayServer.tts_is_speaking()
 	if speaking != _speaking:
 		_speaking = speaking
@@ -370,6 +373,16 @@ func _active_count() -> int:
 	for player in _music:
 		count += int(player.playing)
 	return count + int(_speaking)
+
+func _play_tracked(player: Variant) -> void:
+	player.play()
+	if player.has_stream_playback():
+		_playbacks.append(weakref(player.get_stream_playback()))
+
+## Godot may still be fading an already stopped or preempted playback.
+## The desktop can retain this snapshot across scope disposal for process exit.
+func active_playbacks() -> Array[WeakRef]:
+	return _playbacks.filter(func(ref: WeakRef): return ref.get_ref() != null)
 
 
 func diagnostics() -> Dictionary:
