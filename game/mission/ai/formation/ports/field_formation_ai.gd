@@ -18,6 +18,28 @@ var _tokens := {}
 var _closed := false
 var _reading := false
 
+var _checkpoint := {}
+
+func begin_tick() -> Dictionary:
+	if _reading or _closed or not _checkpoint.is_empty():
+		return R.fail("InvalidState","tick_transaction")
+	_checkpoint = {"states":_states.duplicate(), "accepted":_accepted.duplicate(),
+		"pending":_pending.duplicate(), "tokens":_tokens.duplicate()}
+	return R.ok()
+
+func commit_tick() -> void:
+	if not _reading:
+		_checkpoint = {}
+
+func rollback_tick() -> void:
+	if _reading or _closed or _checkpoint.is_empty():
+		return
+	_states = _checkpoint.states
+	_accepted = _checkpoint.accepted
+	_pending = _checkpoint.pending
+	_tokens = _checkpoint.tokens
+	_checkpoint = {}
+
 func _init(scope: String, issuer: String, ai_formation_view: Callable, formation_view: Callable, team_key: Variant, collect_job: Callable) -> void:
 	_scope = scope
 	_issuer = issuer
@@ -108,6 +130,7 @@ func _current_view(id: int, published: Dictionary) -> Dictionary:
 	return R.ok(state)
 
 func close() -> void:
+	_checkpoint = {}
 	_closed = true
 	_states.clear()
 	_pending.clear()
