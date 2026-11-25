@@ -36,8 +36,8 @@
     "docs/architecture/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-engine-field",
   "scope": "真实 500/1000 混合野战、真实动作/AI/导航/动画、玩家命令与结果；P2 后续任务完整收口。 复用已批准的生产入口，保持 P1 存档、客户端及无头回归。",
   "non_goals": [
     "未批准的公共契约或后续阶段范围。"
@@ -46,5 +46,5 @@
     "AT-04、§19.4 真实压测；AT-05 战场切片；不伪造持久结算。",
     "复用已批准的生产入口，保持 P1 存档、客户端及无头回归。"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

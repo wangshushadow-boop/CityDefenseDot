@@ -676,9 +676,9 @@
       ]
     },
     "P2-FIELD-INTEGRATION": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "engine_dev",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -692,7 +692,9 @@
         "P2-FIELD-INTEGRATION-007",
         "P2-FIELD-INTEGRATION-008",
         "P2-FIELD-INTEGRATION-009",
-        "P2-FIELD-INTEGRATION-010"
+        "P2-FIELD-INTEGRATION-010",
+        "P2-FIELD-INTEGRATION-011",
+        "P2-FIELD-INTEGRATION-012"
       ]
     },
     "GATE-P2": {
@@ -1902,9 +1904,9 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-003": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "engine_dev",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -2060,24 +2062,42 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-007": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "main",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-008": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "ai_tx_dev",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-009": {
+      "status": "IN_PROGRESS",
+      "owner": "main",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-010": {
+      "status": "IN_PROGRESS",
+      "owner": "main",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [],
+      "child_ids": []
+    },
+    "P2-FIELD-INTEGRATION-011": {
       "status": "PLANNED",
       "owner": null,
       "base_commit": null,
@@ -2086,7 +2106,7 @@
       "evidence": [],
       "child_ids": []
     },
-    "P2-FIELD-INTEGRATION-010": {
+    "P2-FIELD-INTEGRATION-012": {
       "status": "PLANNED",
       "owner": null,
       "base_commit": null,
@@ -10045,6 +10065,114 @@
       "reason": "并行隔离工作树",
       "evidence": [],
       "commit": "46af5b1fcc4eb0d13b64ef146298f82074685806"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "依赖已满足",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "分配执行任务",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-003",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-003",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-007",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-007",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-008",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-008",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-009",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-009",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-010",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-010",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:16:01+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c"
     }
   ]
 }

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "P2-FIELD-INTEGRATION-011",
+  "kind": "EXECUTION",
+  "parent": "P2-FIELD-INTEGRATION",
+  "stage": "P2",
+  "module_id": "BASE",
+  "title": "野战兵种与骑射配装",
+  "spec": "docs/systems/game/content/base/README.md",
+  "depends_on": [
+    "P2-MIS-RT-BATTLE",
+    "P2-RULES-FIELD",
+    "P2-BAI-T",
+    "P2-BAI-F",
+    "P2-BAI-I",
+    "P2-VIS-BATTLE"
+  ],
+  "requirements": [
+    "BAT-01"
+  ],
+  "acceptance_test_ids": [
+    "T-BASE-01"
+  ],
+  "allowed_paths": [
+    "game/content/base/field/field.json",
+    "game/tests/p2/field_loadouts/",
+    "development/reports/tasks/P2-FIELD-INTEGRATION-011.md"
+  ],
+  "excluded_paths": [
+    "development/state/",
+    "docs/architecture/",
+    "game/contracts/"
+  ],
+  "contract_changes": "forbidden",
+  "base_commit": null,
+  "worktree": null,
+  "scope": "野战兵种与骑射配装。沿用现有四个模型及现有数据契约。",
+  "non_goals": [
+    "未经批准的公共契约扩展、其他阶段玩法。"
+  ],
+  "acceptance": [
+    "通过真实加载的步、弩、骑、骑射装备覆盖及原资产回归，区分骑乘与远程。"
+  ],
+  "status": "PLANNED"
+}

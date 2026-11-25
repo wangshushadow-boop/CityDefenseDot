@@ -32,6 +32,105 @@
         "development/state/",
         "docs/architecture/"
       ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-003",
+      "owner": "engine_dev",
+      "branch": "detached",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-engine-field",
+      "allowed_paths": [
+        "game/infrastructure/engine/",
+        "game/tests/p2/field_engine/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-003.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-007",
+      "owner": "main",
+      "branch": "detached",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-form-tx",
+      "allowed_paths": [
+        "game/mission/formation/",
+        "game/tests/p2/formation_transaction/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-007.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "game/contracts/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-008",
+      "owner": "ai_tx_dev",
+      "branch": "detached",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-ai-tx",
+      "allowed_paths": [
+        "game/mission/ai/",
+        "game/tests/p2/ai_transaction/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-008.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "game/contracts/",
+        "docs/architecture/",
+        "game/mission/ai/formation/",
+        "game/mission/ai/formation/behaviors/",
+        "game/mission/ai/formation/controller/",
+        "game/mission/ai/formation/evaluation/",
+        "game/mission/ai/individual/",
+        "game/mission/ai/individual/behaviors/",
+        "game/mission/ai/individual/controller/",
+        "game/mission/ai/individual/decision/",
+        "game/mission/ai/individual/roles/",
+        "game/mission/ai/individual/targeting/",
+        "game/mission/ai/tactical/",
+        "game/mission/ai/tactical/commander/",
+        "game/mission/ai/tactical/evaluation/",
+        "game/mission/ai/tactical/planning/",
+        "game/mission/ai/tactical/strategies/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-009",
+      "owner": "main",
+      "branch": "detached",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-tactics-tx",
+      "allowed_paths": [
+        "game/mission/ai/tactical/",
+        "game/tests/p2/tactics_transaction/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-009.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "game/contracts/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-010",
+      "owner": "main",
+      "branch": "detached",
+      "base_commit": "e1c7f957c7ef0aa050fb7f26af6305c54c24c11c",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-formai-tx",
+      "allowed_paths": [
+        "game/mission/ai/formation/",
+        "game/tests/p2/formation_ai_transaction/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-010.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "game/contracts/",
+        "docs/architecture/"
+      ]
     }
   ],
   "note": "各阶段按执行任务独占写入，验收后释放。"

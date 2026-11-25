@@ -476,7 +476,8 @@
         "P0-BATTLE",
         "P2-VIS-BATTLE",
         "P5-SINGLE-INTEGRATION",
-        "P7-POLISH"
+        "P7-POLISH",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [
         "T-VIS-01",
@@ -603,7 +604,8 @@
         "P0-CONTENT",
         "P5-BASE-INITIAL",
         "P7-BASE-FULL",
-        "P2-VIS-BATTLE"
+        "P2-VIS-BATTLE",
+        "P2-FIELD-INTEGRATION"
       ],
       "verified_test_ids": [],
       "evidence": []
