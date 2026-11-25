@@ -115,13 +115,23 @@ static func validate(state: Dictionary, world: String, day: int, facts: Dictiona
 		if report.is_empty() and state.prosperity == INITIAL and state.loyalty == INITIAL:
 			return R.ok()
 		return R.fail("InvalidArgument", "governance.genesis")
+	var verified := validate_daily_report(report, day, state.opened_day, _member(facts, report.get("governor_id")))
+	if not verified.ok:
+		return verified
+	if state.prosperity != report.prosperity_after or state.loyalty != report.loyalty_after:
+		return R.fail("InvalidArgument", "governance.report")
+	return R.ok()
+
+## Historical users retain the account exactly as SET calculated it, including the bounds.
+static func validate_daily_report(report: Dictionary, day: int, opened_day: int, historical_member: Dictionary) -> Dictionary:
+	if day <= opened_day:
+		return R.fail("InvalidArgument", "governance.report_day")
 	var id: Variant = report.get("governor_id")
-	var historical_member := _member(facts, id)
-	if id != null and (not V.typed_id(id, "hero") or historical_member.is_empty()):
+	if id != null and (not V.typed_id(id, "hero") or not V.integer(historical_member.get("stewardship")) or not V.integer(historical_member.get("leadership"))):
 		return R.fail("InvalidArgument", "governance.report_governor")
 	if not V.integer(report.get("prosperity_before"), 0, LIMIT) or not V.integer(report.get("loyalty_before"), 0, LIMIT):
 		return R.fail("InvalidArgument", "governance.report_before")
-	if state.opened_day + 1 == day and (report.prosperity_before != INITIAL or report.loyalty_before != INITIAL):
+	if opened_day + 1 == day and (report.prosperity_before != INITIAL or report.loyalty_before != INITIAL):
 		return R.fail("InvalidArgument", "governance.first_day")
 	var lower := 0 if id == null else 1
 	# The P3 household retains former office-holders. Learned skills and perks can increase after a report.
@@ -130,13 +140,14 @@ static func validate(state: Dictionary, world: String, day: int, facts: Dictiona
 	if not V.integer(report.get("prosperity_bonus"), lower, max_prosperity) or not V.integer(report.get("loyalty_bonus"), lower, max_loyalty):
 		return R.fail("InvalidArgument", "governance.report_bonus")
 	var expected := _report(day, id, report.prosperity_before, report.loyalty_before, report.prosperity_bonus, report.loyalty_bonus)
-	if report != expected or state.prosperity != expected.prosperity_after or state.loyalty != expected.loyalty_after:
+	if report != expected:
 		return R.fail("InvalidArgument", "governance.report")
 	return R.ok()
 
 static func view(state: Dictionary, world: String, day: int, facts: Dictionary) -> Dictionary:
 	var established := not state.is_empty()
 	return {"established":established, "can_manage":facts.get("can_manage", false),
+		"opened_day":state.get("opened_day"),
 		"settlement_id":state.get("settlement_id", _estate_id(world)), "name":ESTATE_NAME,
 		"owner_clan_id":state.get("owner_clan_id"), "governor_id":state.get("governor_id"),
 		"candidates":facts.get("members", []).duplicate(true),
