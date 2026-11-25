@@ -4,12 +4,13 @@ const R = preload("res://contracts/result.gd")
 const V = preload("res://contracts/values.gd")
 const Queue = preload("res://mission/movement/path_queue.gd")
 const IntentRoute = preload("res://mission/movement/intent_route.gd")
+const JumpMotion = preload("res://mission/movement/jump_motion.gd")
 const Schema = preload("res://contracts/schema.gd")
 const CELL := 1.2
 const NEIGHBOURS := 48
 const QUERIES_PER_TICK := 8
-# Layer 2 holds actor hurtboxes. MOV's spatial grid already resolves agent bodies.
-const SCENERY_MASK := 0xfffffffd
+# Legacy hurtboxes use layer 2, scoped field bodies use layer 30. MOV resolves actors in its own grid.
+const SCENERY_MASK := 0xffffffff ^ 2 ^ (1 << 29)
 
 class Drive:
 	var handle: Dictionary
@@ -21,11 +22,14 @@ class Body:
 	var birth: RefCounted
 	var generation: int
 	var profile: String
+	var profile_tick := -1
+	var airborne := false
 	var position: Vector3
 	var velocity := Vector3.ZERO
 	var heading: Vector3
 	var radius: float
 	var group := ""
+	var route_key: Variant = ""
 	var offset := Vector3.ZERO
 	var revision := -1
 	var cursor := 1
@@ -53,11 +57,13 @@ class Body:
 		if new_birth:
 			birth = other.birth
 			generation = other.generation
-			profile = other.profile
-			radius = other.radius
 		if new_birth or not is_same(assignment_stamp,other.assignment_stamp):
+			profile = other.profile
+			profile_tick = other.profile_tick
+			radius = other.radius
 			assignment_stamp = other.assignment_stamp
 			group = other.group
+			route_key = other.route_key
 			offset = other.offset
 			revision = other.revision
 			path = other.path
@@ -66,6 +72,7 @@ class Body:
 			join_index = other.join_index
 			passages = other.passages
 		position = other.position
+		airborne = other.airborne
 		velocity = other.velocity
 		heading = other.heading
 		cursor = other.cursor
@@ -114,6 +121,8 @@ var _access: RefCounted
 var _direct: RefCounted
 var _authorize: Callable
 var _drivers := {}
+var _airborne_count := 0
+var _launches := {}
 var _had_drives := false
 var _members_ready := false
 var _next_driver := 0
@@ -155,6 +164,9 @@ static func _point_ok(p: Vector3) -> bool:
 static func _mm(p: Vector3) -> Array:
 	return [roundi(p.x * 1000), roundi(p.y * 1000), roundi(p.z * 1000)]
 
+static func _radius(profile: String) -> float:
+	return 0.47 if profile == "mounted" else 0.28
+
 func spawn(handle: Dictionary, position: Vector3, profile: String = "foot", heading: Vector3 = Vector3.FORWARD, stage: Variant = null) -> Dictionary:
 	if stage != null or _stage != null or _busy:
 		if not _editable(stage): return R.fail("InvalidState","movement_stage")
@@ -168,7 +180,7 @@ func spawn(handle: Dictionary, position: Vector3, profile: String = "foot", head
 	b.birth = RefCounted.new()
 	b.generation = handle.generation
 	b.profile = profile
-	b.radius = 0.47 if profile == "mounted" else 0.28
+	b.radius = _radius(profile)
 	b.position = position
 	b.heading = flat.normalized()
 	_bodies[handle.index] = b
@@ -176,12 +188,49 @@ func spawn(handle: Dictionary, position: Vector3, profile: String = "foot", head
 	_buffer_stamp = _lineup
 	return R.ok()
 
+## COM can dismount a rider in damage, after this step's motion already ran.
+## Keep that displacement and use the new footprint and route from now on.
+func set_profile(handle: Dictionary, profile: String, stage: Variant) -> Dictionary:
+	if _busy or _stage==null or not is_same(stage,_stage):
+		return R.fail("InvalidState","movement_stage")
+	if profile not in ["foot","mounted"] or not _valid_handle(handle):
+		return R.fail("InvalidArgument","movement_profile")
+	var b: Body = _draft._body(handle)
+	if b==null: return R.fail("NotFound","movement_handle")
+	if b.profile==profile: return R.ok()
+	if b.airborne: return R.fail("InvalidState","airborne")
+	b.assignment_stamp = RefCounted.new()
+	b.profile = profile
+	b.profile_tick = _stage_tick
+	b.radius = _radius(profile)
+	if profile=="foot": b.velocity = b.velocity.limit_length(3.4)
+	if not b.group.is_empty():
+		var shared: Corridor = _draft._routes[b.group]
+		b.route_key = b.group if shared.profile==profile else [b.group,profile]
+		if not _draft._routes.has(b.route_key):
+			_draft._routes[b.route_key] = _corridor(shared.origin,shared.goal,profile)
+	b.revision = -1
+	b.access_version = -1
+	b.ticket = {}
+	b.path = PackedVector3Array()
+	b.passages = []
+	b.leg = null
+	b.leg_cursor = 0
+	b.courtesy_time = 0.0
+	b.wait = 0.0
+	b.blocked = ""
+	b.arrived = false
+	_draft._members_ready = false
+	return R.ok()
+
 func despawn(handle: Dictionary, stage: Variant = null) -> Dictionary:
 	if stage != null or _stage != null or _busy:
 		if not _editable(stage): return R.fail("InvalidState","movement_stage")
 		return _draft.despawn(handle)
-	if _body(handle) == null:
+	var b := _body(handle)
+	if b == null:
 		return R.fail("NotFound", "movement_handle")
+	if b.airborne: _airborne_count -= 1
 	_retired[handle.index] = handle.generation
 	_bodies.erase(handle.index)
 	_drivers.erase(handle.index)
@@ -225,12 +274,19 @@ func set_corridor(group: String, origin: Vector3, goal: Vector3, profile: String
 			return R.fail("Conflict", "corridor_profile")
 		if old.origin.is_equal_approx(origin) and old.goal.is_equal_approx(goal):
 			return R.ok()
+	_routes[group] = _corridor(origin,goal,profile)
+	var other := "foot" if profile=="mounted" else "mounted"
+	var alternate := [group,other]
+	if _routes.has(alternate):
+		_routes[alternate] = _corridor(origin,goal,other)
+	return R.ok()
+
+static func _corridor(origin: Vector3,goal: Vector3,profile: String) -> Corridor:
 	var route := Corridor.new()
 	route.origin = origin
 	route.goal = goal
 	route.profile = profile
-	_routes[group] = route
-	return R.ok()
+	return route
 
 func assign(handle: Dictionary, group: String, slot_offset: Vector3 = Vector3.ZERO, stage: Variant = null) -> Dictionary:
 	if stage != null or _stage != null or _busy:
@@ -240,12 +296,17 @@ func assign(handle: Dictionary, group: String, slot_offset: Vector3 = Vector3.ZE
 	var route: Corridor = _routes.get(group)
 	if b == null or route == null:
 		return R.fail("NotFound", "movement_assignment")
-	if b.profile != route.profile or not _point_ok(slot_offset) or not is_zero_approx(slot_offset.y):
+	var key: Variant = group
+	if b.profile!=route.profile:
+		if b.group!=group: return R.fail("InvalidArgument","movement_slot")
+		key = b.route_key
+	if not _point_ok(slot_offset) or not is_zero_approx(slot_offset.y):
 		return R.fail("InvalidArgument", "movement_slot")
 	if b.group != group or b.offset != slot_offset:
 		_members_ready = false
 		b.assignment_stamp = RefCounted.new()
 		b.group = group
+		b.route_key = key
 		b.offset = slot_offset
 		b.revision = -1
 		b.access_version = -1
@@ -260,7 +321,7 @@ func view(handle: Dictionary, stage: Variant = null) -> Dictionary:
 	if b == null:
 		return R.fail("NotFound", "movement_handle")
 	return R.ok({"position":b.position, "velocity":b.velocity, "heading":b.heading,
-		"profile":b.profile, "arrived":b.arrived, "blocked":b.blocked})
+		"profile":b.profile, "arrived":b.arrived, "blocked":b.blocked,"airborne":b.airborne})
 
 ## Tickets bind each index to a particular spawn, including abandoned draft births.
 func bind_roster(handles: Array, stage: Variant = null) -> Dictionary:
@@ -326,6 +387,26 @@ func _read_roster(token: Variant, stage: Variant, full: bool) -> Dictionary:
 
 func _editable(stage: Variant) -> bool:
 	return _stage != null and is_same(stage,_stage) and not _stage_ready and not _busy
+
+func request_jump(handle: Dictionary,context: Variant,stage: Variant) -> Dictionary:
+	if not _editable(stage): return R.fail("InvalidState","movement_stage")
+	var b: Body = _draft._body(handle)
+	if b==null: return R.fail("NotFound","movement_handle")
+	if b.airborne or b.profile!="foot" or b.profile_tick==_stage_tick:
+		return R.fail("InvalidState","jump_profile")
+	_busy = true
+	var launch := R.fail("Unauthorized","movement_control")
+	if _authorized(handle,context,_stage_tick):
+		var sweep: Callable = _engine.query_sweep_batch.bind({"scope_id":_scope,"tick":_stage_tick})
+		launch = JumpMotion.can_launch(b.position,b.radius,SCENERY_MASK,sweep)
+	_busy = false
+	if not launch.ok: return launch
+	_launches[handle.index] = {"handle":handle.duplicate(),"context":context}
+	_draft._airborne_count += 1
+	b.airborne = true
+	b.arrived = false
+	b.velocity.y = JumpMotion.SPEED
+	return R.ok()
 
 ## Both controllers use a composition-owned authority reader; the caller's context
 ## is only a credential. Movement reuse is permitted only for the same actor birth.
@@ -428,6 +509,8 @@ func begin_step(tick: int) -> Dictionary:
 	_draft._access = _access.fork()
 	_draft._direct = _direct.fork()
 	_draft._drivers = _drivers.duplicate()
+	_draft._airborne_count = _airborne_count
+	_launches = {}
 	_draft._next_driver = _next_driver
 	_draft._exact_sweeps_until = _exact_sweeps_until
 	_stage = RefCounted.new()
@@ -456,6 +539,11 @@ func commit_step(stage: Variant) -> Dictionary:
 	# The control snapshot can change after staging. Check every active drive
 	# before the first published write, blocking nested stage edits from readers.
 	_busy = true
+	for grant in _launches.values():
+		if _draft._body(grant.handle)!=null and not _authorized(grant.handle,grant.context,_stage_tick):
+			_busy=false
+			rollback_step(stage)
+			return R.fail("Unauthorized","movement_control")
 	for id in _draft._drivers:
 		var b: Body = _draft._bodies[id]
 		if not _authorized(b.drive.handle,b.drive.context,_stage_tick):
@@ -492,6 +580,8 @@ func commit_step(stage: Variant) -> Dictionary:
 	_access = _draft._access
 	_direct = _draft._direct
 	_drivers = _draft._drivers
+	_airborne_count = _draft._airborne_count
+	_launches = {}
 	_had_drives = _draft._had_drives
 	_members_ready = _draft._members_ready
 	_next_driver = _draft._next_driver
@@ -503,6 +593,7 @@ func commit_step(stage: Variant) -> Dictionary:
 func rollback_step(stage: Variant) -> Dictionary:
 	if _busy or _stage == null or not is_same(stage,_stage): return R.fail("InvalidState","movement_stage")
 	_stage = null
+	_launches = {}
 	_stage_ready = false
 	return R.ok()
 
@@ -567,7 +658,7 @@ func _prepare_drives(tick: int) -> Dictionary:
 		if jobs.size()>=QUERIES_PER_TICK or (unused<=0 and not replay): break
 		var index := (_next_driver+offset)%ids.size()
 		var b: Body = _bodies[ids[index]]
-		if b.drive.fraction<=0 or not _needs_leg(b): continue
+		if b.airborne or b.drive.fraction<=0 or not _needs_leg(b): continue
 		var goal := b.position+b.drive.direction*IntentRoute.RANGE
 		var origin_mm := _mm(b.position)
 		var goal_mm := _mm(goal)
@@ -633,6 +724,7 @@ func _scene_clearances(tick: int, dt: float) -> Dictionary:
 	var lengths := PackedFloat32Array()
 	for id in _drivers:
 		var b: Body = _bodies[id]
+		if b.airborne: continue
 		if broad.value!=null and not broad.value.has(_scene_cell(b.position)):
 			b.scene_travel = INF
 			continue
@@ -669,8 +761,8 @@ func _members(tick: int, remaining: int) -> Dictionary:
 	var full := false
 	var stamp := RefCounted.new()
 	for b: Body in _bodies.values():
-		if b.drive!=null or b.revoked: continue
-		var route: Corridor = _routes.get(b.group)
+		if b.drive!=null or b.revoked or b.airborne: continue
+		var route: Corridor = _routes.get(b.route_key)
 		if route == null or route.version < 0 or not route.reachable or b.revision == route.version:
 			continue
 		b.assignment_stamp = stamp
@@ -718,7 +810,7 @@ func _members(tick: int, remaining: int) -> Dictionary:
 			elif result.error.code != "Unavailable":
 				return result
 			continue
-		var route: Corridor = _routes[b.group]
+		var route: Corridor = _routes[b.route_key]
 		var points: Array = result.value.points
 		b.path = PackedVector3Array()
 		b.revision = route.version
@@ -973,7 +1065,7 @@ func _advance(b: Body, target: Vector3, dt: float, fraction: float, direct: bool
 
 func step(tick: int, dt: float) -> Dictionary:
 	if _busy or _stage != null: return R.fail("InvalidState","movement_stage")
-	if not _drivers.is_empty():
+	if not _drivers.is_empty() or _airborne_count>0:
 		var staged := stage_step(tick,dt)
 		if not staged.ok: return staged
 		var published := commit_step(staged.value.stage_token)
@@ -1006,9 +1098,9 @@ func _run_step(tick: int, dt: float) -> Dictionary:
 	_yields = 0
 	var bodies := _bodies.values()
 	_prepare_grid(bodies)
-	if not _had_drives:
+	if not _had_drives and _airborne_count==0:
 		for b: Body in bodies:
-			_move(b, _routes.get(b.group), dt)
+			_move(b, _routes.get(b.route_key), dt)
 	else:
 		for b: Body in bodies:
 			if b.drive!=null and not _authorized(b.drive.handle,b.drive.context,tick):
@@ -1016,13 +1108,37 @@ func _run_step(tick: int, dt: float) -> Dictionary:
 				b.drive = null
 				b.leg = null
 				b.revoked = true
-			if b.drive!=null or b.revoked:
+			if b.airborne:
+				var moved := _move_airborne(b,dt,tick)
+				if not moved.ok: return moved
+			elif b.drive!=null or b.revoked:
 				_move_direct(b,dt)
 			else:
-				_move(b, _routes.get(b.group), dt)
+				_move(b, _routes.get(b.route_key), dt)
 	var shared: int = _queue.attempts_at(tick)
 	var members: int = _access.attempts_at(tick)
 	var direct: int = _direct.attempts_at(tick)
 	return R.ok({"queried":shared,"member_queried":members,"intent_queried":direct,
 		"total_queried":shared+members+direct,"nav_revision":_revision,
 		"neighbour_checks":_checks,"yielding":_yields})
+
+func _move_airborne(b: Body,dt: float,tick: int) -> Dictionary:
+	var desired: Variant = null if b.drive==null else b.drive.direction*(b.drive.fraction*3.4)
+	var sweep: Callable = _engine.query_sweep_batch.bind({"scope_id":_scope,"tick":tick})
+	var flight := JumpMotion.advance(b.position,b.velocity,desired,dt,b.radius,SCENERY_MASK,sweep,
+		func(next: Vector3): return _clear_step(b,next))
+	if not flight.ok: return flight
+	b.position = flight.value.position
+	b.velocity = flight.value.velocity
+	b.blocked = flight.value.blocked
+	var cell := _cell(b.position)
+	if cell!=b.grid_cell: _relocate(b,cell)
+	if flight.value.landed:
+		b.airborne=false
+		_airborne_count -= 1
+		b.assignment_stamp=RefCounted.new()
+		b.revision=-1
+		b.access_version=-1
+		b.leg=null
+		_members_ready=false
+	return R.ok()

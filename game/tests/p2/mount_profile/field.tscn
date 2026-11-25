@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://tests/p2/ai/arena.tscn" id="field"]
+
+[sub_resource type="BoxShape3D" id="floor"]
+size = Vector3(75,1,70)
+
+[sub_resource type="BoxShape3D" id="roof"]
+size = Vector3(4,0.12,4)
+
+[node name="ProfileAndJumpField" instance=ExtResource("field")]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+position = Vector3(-12.5,-0.5,0)
+
+[node name="Shape" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("floor")
+
+[node name="LowRoof" type="StaticBody3D" parent="."]
+position = Vector3(7,1.91,-8)
+
+[node name="Shape" type="CollisionShape3D" parent="LowRoof"]
+shape = SubResource("roof")
+
+[node name="RaisedRoof" type="StaticBody3D" parent="."]
+position = Vector3(-7,2.40,-8)
+
+[node name="Shape" type="CollisionShape3D" parent="RaisedRoof"]
+shape = SubResource("roof")
