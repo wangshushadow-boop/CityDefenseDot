@@ -41,7 +41,9 @@
     "culture_id": "base:culture/river",
     "tier": 1,
     "role": "infantry",
-    "equipment_set_ids": [],
+    "equipment_set_ids": [
+      "field:equipment/infantry"
+    ],
     "skills": {},
     "wage_per_day": 0,
     "recruit_cost": 0,
@@ -61,7 +63,9 @@
     "culture_id": "base:culture/river",
     "tier": 1,
     "role": "archer",
-    "equipment_set_ids": [],
+    "equipment_set_ids": [
+      "field:equipment/archer"
+    ],
     "skills": {},
     "wage_per_day": 0,
     "recruit_cost": 0,
@@ -81,7 +85,9 @@
     "culture_id": "base:culture/river",
     "tier": 1,
     "role": "cavalry",
-    "equipment_set_ids": [],
+    "equipment_set_ids": [
+      "field:equipment/cavalry"
+    ],
     "skills": {},
     "wage_per_day": 0,
     "recruit_cost": 0,
@@ -93,6 +99,141 @@
       "model": "models/general.glb",
       "mount_model": "models/horse.glb"
     },
+    "schema_version": 1
+  },
+  {
+    "id": "field:troop/mounted_archer",
+    "name": "河原骑射手",
+    "culture_id": "base:culture/river",
+    "tier": 1,
+    "role": "mounted_archer",
+    "equipment_set_ids": [
+      "field:equipment/mounted_archer"
+    ],
+    "skills": {},
+    "wage_per_day": 0,
+    "recruit_cost": 0,
+    "upgrade_edges": [],
+    "tags": [
+      "field"
+    ],
+    "metadata": {
+      "model": "models/general.glb",
+      "mount_model": "models/horse.glb"
+    },
+    "schema_version": 1
+  },
+  {
+    "id": "field:item/spear",
+    "name": "长枪",
+    "category": "spear",
+    "base_value": 0,
+    "weight": 1,
+    "quality_policy": "standard",
+    "slot_tags": [
+      "melee"
+    ],
+    "asset_ref": "models/spear_soldier.glb",
+    "schema_version": 1
+  },
+  {
+    "id": "field:item/blade",
+    "name": "短刀",
+    "category": "blade",
+    "base_value": 0,
+    "weight": 1,
+    "quality_policy": "standard",
+    "slot_tags": [
+      "melee"
+    ],
+    "asset_ref": "models/general.glb",
+    "schema_version": 1
+  },
+  {
+    "id": "field:item/crossbow",
+    "name": "弩",
+    "category": "crossbow",
+    "base_value": 0,
+    "weight": 1,
+    "quality_policy": "standard",
+    "slot_tags": [
+      "ranged"
+    ],
+    "asset_ref": "models/crossbowman.glb",
+    "schema_version": 1
+  },
+  {
+    "id": "field:item/bow",
+    "name": "短弓",
+    "category": "bow",
+    "base_value": 0,
+    "weight": 1,
+    "quality_policy": "standard",
+    "slot_tags": [
+      "ranged"
+    ],
+    "asset_ref": "short_bow.tscn",
+    "schema_version": 1
+  },
+  {
+    "id": "field:item/horse",
+    "name": "乘马",
+    "category": "horse",
+    "base_value": 0,
+    "weight": 1,
+    "quality_policy": "standard",
+    "slot_tags": [
+      "mount"
+    ],
+    "asset_ref": "models/horse.glb",
+    "schema_version": 1
+  },
+  {
+    "id": "field:equipment/infantry",
+    "slots": {
+      "melee": "field:item/spear"
+    },
+    "item_ids": [
+      "field:item/spear"
+    ],
+    "schema_version": 1
+  },
+  {
+    "id": "field:equipment/archer",
+    "slots": {
+      "melee": "field:item/blade",
+      "ranged": "field:item/crossbow"
+    },
+    "item_ids": [
+      "field:item/blade",
+      "field:item/crossbow"
+    ],
+    "schema_version": 1
+  },
+  {
+    "id": "field:equipment/cavalry",
+    "slots": {
+      "melee": "field:item/blade",
+      "mount": "field:item/horse"
+    },
+    "item_ids": [
+      "field:item/blade",
+      "field:item/horse"
+    ],
+    "schema_version": 1
+  },
+  {
+    "id": "field:equipment/mounted_archer",
+    "slots": {
+      "melee": "field:item/blade",
+      "ranged": "field:item/bow",
+      "mount": "field:item/horse"
+    },
+    "item_ids": [
+      "field:item/blade",
+      "field:item/bow",
+      "field:item/horse"
+    ],
     "schema_version": 1
   }
 ]
