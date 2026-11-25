@@ -2612,7 +2612,8 @@
         "P5-VISIT-003",
         "P5-VISIT-004",
         "P5-VISIT-005",
-        "P5-VISIT-006"
+        "P5-VISIT-006",
+        "P5-VISIT-007"
       ]
     },
     "P5-VISIT-001": {
@@ -2679,6 +2680,18 @@
       "status": "IN_PROGRESS",
       "owner": "p5_ui",
       "base_commit": "9b975cc1b1809b620415aa64101e74df8b351252",
+      "candidate_commit": null,
+      "integrated_commit": null,
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "child_ids": []
+    },
+    "P5-VISIT-007": {
+      "status": "IN_PROGRESS",
+      "owner": "root",
+      "base_commit": "f8c9bdb3f693a8bea840d8a30330c2f1d8f27aae",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [
@@ -13715,6 +13728,18 @@
         "development/planning/P5-estate-visit.md"
       ],
       "commit": "9b975cc1b1809b620415aa64101e74df8b351252"
+    },
+    {
+      "task_id": "P5-VISIT-007",
+      "old": "PLANNED",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T21:26:25+08:00",
+      "reason": "在既有 SET 端口验证历史账簿，修复独立复现的问题",
+      "evidence": [
+        "docs/architecture/decisions/ADR-018-estate-visit.md",
+        "development/planning/P5-estate-visit.md"
+      ],
+      "commit": "f8c9bdb3f693a8bea840d8a30330c2f1d8f27aae"
     }
   ]
 }

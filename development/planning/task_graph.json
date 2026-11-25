@@ -2198,7 +2198,8 @@
         "CAMP",
         "APP",
         "BOOT",
-        "UI"
+        "UI",
+        "SET"
       ],
       "depends_on": [
         "GATE-P4",
@@ -2214,7 +2215,8 @@
         "docs/systems/game/campaign/README.md",
         "docs/systems/game/application/README.md",
         "docs/systems/game/bootstrap/README.md",
-        "docs/systems/game/presentation/ui/README.md"
+        "docs/systems/game/presentation/ui/README.md",
+        "docs/systems/game/campaign/settlement/README.md"
       ],
       "candidate_test_ids": [
         "T-VISIT-01",

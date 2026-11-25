@@ -55,6 +55,14 @@
         "game/tests/p5/estate_desktop/"
       ],
       "owner": "p5_ui"
+    },
+    {
+      "task_id": "P5-VISIT-007",
+      "worktree": "D:\\work\\game\\recollection",
+      "paths": [
+        "game/campaign/settlement/ports/governance.gd"
+      ],
+      "owner": "root"
     }
   ],
   "note": "各阶段按执行任务独占写入，验收后释放。"

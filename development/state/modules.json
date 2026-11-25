@@ -215,7 +215,8 @@
       "status": "PARTIAL",
       "work_package_ids": [
         "P4-SET",
-        "P4-GOV"
+        "P4-GOV",
+        "P5-VISIT"
       ],
       "verified_test_ids": [
         "T-GOV-01",

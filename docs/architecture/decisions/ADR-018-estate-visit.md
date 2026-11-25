@@ -19,3 +19,5 @@ facts 包含 world_id、day、player_id（可空）、can_visit、members（英�
 CHR 用人物仓库的可选 estate_reward={actor_id,source} 记录这一次亲办委托的经验来源。成长沿用原有学习曲线。该字段由 CAMP 冷恢复时与任务签结/领取标志相互核对。旧版本普通人物事件曾允许任意来源字符串，原有来源与经验完整保留。
 
 visit 读模型含 settlement_id、can_visit、speaker（null 或 {id,name,appearance}）、status（未接时 none）、actor_id、issuer_id、accepted_day、deadline_day、ledger、reason、rewarded、can_accept、can_report、can_claim、answers（规范整数数组；有效回报时三个备选）。尚未接时以 null 表示日期和身份。交互入口从治理页「拜访庄署」，支持真实鼠标、键盘、查簿和返回。推进游戏日复用正式 rest。项目其他 P5 任务及完整城镇自由行走留在原有计划。
+
+终审补充。首次记录时，QUEST 同时保存规范庄簿的 SHA-256（ledger_hash）。SET 开放其既有日报算式的只读核验，CAMP 向任务提供 opened_day 及原发布者有效管理/统御。接事日期必须不早于开庄；相邻日存在时核对前日结余和次日起账；真实领地能力限定历史贡献上界。
