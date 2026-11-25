@@ -22,9 +22,11 @@ var _scheduler := Schedule.new()
 var _issued := {}
 var _results := {}
 var _serial := 0
+var _issued_total := 0
 var _stale_results := 0
 var _closed := false
 var _busy := false
+var _checkpoint := {}
 
 func _init(mission_id: String, line_of_sight: Callable, tick_hz := 60, live_stamp: Callable = Callable()) -> void:
 	_mission = mission_id
@@ -32,6 +34,44 @@ func _init(mission_id: String, line_of_sight: Callable, tick_hz := 60, live_stam
 	_hz = tick_hz
 	_live = live_stamp
 	_live_required = not live_stamp.is_null()
+
+func begin_tick() -> Dictionary:
+	if _busy or _closed or not _checkpoint.is_empty():
+		return R.fail("InvalidState","ai_transaction")
+	_checkpoint = {"board":_board,"tick":_tick,"nav":_nav,"visibility":_visibility_revision,
+		"roster":_roster,"version":_roster_version,"generations":_last_generation,
+		"issued":_issued.duplicate(),"results":_results.duplicate(),"issued_total":_issued_total,"stale":_stale_results}
+	if _board != null:
+		_board.begin_tick()
+	_scheduler.begin_tick()
+	return R.ok()
+
+func commit_tick() -> void:
+	if _busy or _checkpoint.is_empty():
+		return
+	if _checkpoint.board != null:
+		_checkpoint.board.commit_tick()
+	_scheduler.commit_tick()
+	_checkpoint = {}
+
+func rollback_tick() -> void:
+	if _busy or _checkpoint.is_empty():
+		return
+	_board = _checkpoint.board
+	if _board != null:
+		_board.rollback_tick()
+	_scheduler.rollback_tick()
+	_tick = _checkpoint.tick
+	_nav = _checkpoint.nav
+	_visibility_revision = _checkpoint.visibility
+	_roster = _checkpoint.roster
+	_roster_version = _checkpoint.version
+	_last_generation = _checkpoint.generations
+	_issued = _checkpoint.issued
+	_results = _checkpoint.results
+	_issued_total = _checkpoint.issued_total
+	_stale_results = _checkpoint.stale
+	_checkpoint = {}
 
 func publish(tick: int, nav_revision: int, units: Array) -> Dictionary:
 	if _closed or _busy:
@@ -56,6 +96,8 @@ func publish(tick: int, nav_revision: int, units: Array) -> Dictionary:
 				var after: Dictionary = next.formations[group][0]
 				if after.control_revision < before.control_revision or after.order_revision < before.order_revision:
 					return R.fail("StaleVersion","formation_revision")
+	if not _checkpoint.is_empty() and is_same(_last_generation,_checkpoint.generations):
+		_last_generation = _last_generation.duplicate()
 	for id in next.actors:
 		_last_generation[id] = next.actors[id].handle.generation
 	_board = next
@@ -139,11 +181,13 @@ func schedule(budgets: Dictionary = {}) -> Dictionary:
 		if job.layer != "individual":
 			# A due group starts with current, locally confirmed observations.
 			sense(_board.next_scout(job.subject,job.layer=="tactical"),18.0,2)
+		# A copied grant from a discarded attempt must never match a new grant.
 		_serial += 1
 		job.id = _serial
 		job.stamp = _stamp(job.layer,job.subject)
 		job.make_read_only()
 		_issued[job.id] = job
+	_issued_total += selected.value.jobs.size()
 	selected.value.jobs.make_read_only()
 	return selected
 
@@ -239,7 +283,11 @@ func drain() -> Dictionary:
 	var rows := []
 	for id in keys:
 		if _fresh(_results[id].job):
-			rows.append(_results[id])
+			var row: Dictionary = _results[id]
+			if not _checkpoint.is_empty() and _checkpoint.results.has(id):
+				rows.append({"job":row.job,"intents":row.intents.duplicate(true)})
+			else:
+				rows.append(row)
 		else:
 			_stale_results += 1
 	_results.clear()
@@ -248,11 +296,12 @@ func drain() -> Dictionary:
 func metrics() -> Dictionary:
 	return {"examined":_board.examined if _board else 0,"rays":_board.rays if _board else 0,
 		"cache_hits":_board.cache_hits if _board else 0,"los_us":_board.los_us if _board else 0,
-		"scouts":_board.scouts if _board else 0,"stale_results":_stale_results,"issued_total":_serial}
+		"scouts":_board.scouts if _board else 0,"stale_results":_stale_results,"issued_total":_issued_total}
 
 func close() -> Dictionary:
 	if _busy:
 		return R.fail("InvalidState","ai_callback")
+	commit_tick()
 	_closed = true
 	_board = null
 	_last_generation.clear()

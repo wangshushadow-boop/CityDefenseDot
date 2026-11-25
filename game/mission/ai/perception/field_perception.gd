@@ -38,6 +38,46 @@ var rays := 0
 var cache_hits := 0
 var los_us := 0
 var scouts := 0
+var _checkpoint := {}
+
+func begin_tick() -> void:
+	# Roster rows are immutable. Keep their identity and save only the writable projections.
+	_checkpoint = {"positions":_positions,"cells":_cells,"grid":_grid,"urgent":urgent,"status":_status,
+		"owned":_owned,"contacts":_contacts,"sense":_sense_cache,"observers":_by_observer,
+		"teams":_by_team,"formations":_by_formation,"visibility":_visibility,"epoch":_cache_epoch,
+		"threat":_threat_until.duplicate(),"team_scout":_team_scout.duplicate(),"formation_scout":_formation_scout.duplicate(),
+		"examined":examined,"rays":rays,"cache_hits":cache_hits,"los_us":los_us,"scouts":scouts}
+
+func commit_tick() -> void:
+	_checkpoint = {}
+
+func rollback_tick() -> void:
+	_positions = _checkpoint.positions
+	_cells = _checkpoint.cells
+	_grid = _checkpoint.grid
+	urgent = _checkpoint.urgent
+	_status = _checkpoint.status
+	_owned = _checkpoint.owned
+	_contacts = _checkpoint.contacts
+	_sense_cache = _checkpoint.sense
+	_by_observer = _checkpoint.observers
+	_by_team = _checkpoint.teams
+	_by_formation = _checkpoint.formations
+	_visibility = _checkpoint.visibility
+	_cache_epoch = _checkpoint.epoch
+	_threat_until = _checkpoint.threat
+	_team_scout = _checkpoint.team_scout
+	_formation_scout = _checkpoint.formation_scout
+	examined = _checkpoint.examined
+	rays = _checkpoint.rays
+	cache_hits = _checkpoint.cache_hits
+	los_us = _checkpoint.los_us
+	scouts = _checkpoint.scouts
+	_checkpoint = {}
+
+func _prepare_cell(key: Vector2i) -> void:
+	if _grid.has(key) and is_same(_grid[key],_checkpoint.grid.get(key)):
+		_grid[key] = _grid[key].duplicate()
 
 func _init() -> void:
 	if not _offsets.is_empty():
@@ -150,6 +190,12 @@ func advance(tick: int, epoch: int, changed_nav: bool, points: PackedVector3Arra
 		var next := cell(points[i])
 		var old := _cells[i]
 		if next != old:
+			if not _checkpoint.is_empty():
+				if is_same(_cells,_checkpoint.cells):
+					_cells = _cells.duplicate()
+					_grid = _grid.duplicate()
+				_prepare_cell(old)
+				_prepare_cell(next)
 			_grid[old].erase(i)
 			if _grid[old].is_empty():
 				_grid.erase(old)
@@ -158,16 +204,19 @@ func advance(tick: int, epoch: int, changed_nav: bool, points: PackedVector3Arra
 			_grid[next].append(i)
 			_cells[i] = next
 	_positions = points.duplicate()
-	_status.merge(updates,true)
+	if not updates.is_empty():
+		if not _checkpoint.is_empty() and is_same(_status,_checkpoint.status):
+			_status = _status.duplicate()
+		_status.merge(updates,true)
 	urgent = signals
-	_owned.clear()
-	_contacts.clear()
-	_sense_cache.clear()
-	_by_observer.clear()
-	_by_formation.clear()
-	_by_team.clear()
+	_owned = {}
+	_contacts = {}
+	_sense_cache = {}
+	_by_observer = {}
+	_by_formation = {}
+	_by_team = {}
 	if epoch < 0 or epoch != _cache_epoch or changed_nav:
-		_visibility.clear()
+		_visibility = {}
 		_threat_until.clear()
 	_cache_epoch = epoch
 	examined = 0
@@ -198,6 +247,8 @@ func high_priority(id: int, tick: int) -> bool:
 func _own(row: Dictionary) -> Dictionary:
 	var id: int = row.handle.index
 	if not _owned.has(id):
+		if not _checkpoint.is_empty() and is_same(_owned,_checkpoint.owned):
+			_owned = _owned.duplicate()
 		var view := row.duplicate()
 		view.position = _positions[_slots[id]]
 		view.urgent = urgent.has(id)
@@ -216,6 +267,8 @@ func resolve(h: Dictionary) -> Dictionary:
 func _contact(own: Dictionary) -> Dictionary:
 	var id: int = own.handle.index
 	if not _contacts.has(id):
+		if not _checkpoint.is_empty() and is_same(_contacts,_checkpoint.contacts):
+			_contacts = _contacts.duplicate()
 		var public_row := {"handle":own.handle,"team_key":own.team_key,"formation_id":own.formation_id,
 			"role":own.role,"position":_positions[_slots[id]]}
 		public_row.make_read_only()
@@ -288,7 +341,13 @@ func sense(me: Dictionary, radius: float, limit: int, stamp: Dictionary, visible
 	for k in mini(limit,friends.size()):
 		var rank := friends[k]
 		allies.append(_contact(actors[(int(rank.y) << 16) | int(rank.z)]))
-	var pairs: Dictionary = _visibility.get_or_add(id,{})
+	var pairs: Dictionary = _visibility.get(id,{})
+	if not _checkpoint.is_empty() and is_same(_sense_cache,_checkpoint.sense):
+		# Only needed if sensing the existing tick before advancing its roster.
+		_sense_cache = _sense_cache.duplicate()
+		_by_observer = _copy_contact_maps(_by_observer)
+		_by_team = _copy_contact_maps(_by_team)
+		_by_formation = _copy_contact_maps(_by_formation)
 	for k in mini(2*limit,opponents.size()):
 		var rank := opponents[k]
 		var target_id := (int(rank.y) << 16) | int(rank.z)
@@ -301,6 +360,12 @@ func sense(me: Dictionary, radius: float, limit: int, stamp: Dictionary, visible
 			cache_hits += 1
 			clear = pair.clear
 		else:
+			if not _checkpoint.is_empty():
+				if is_same(_visibility,_checkpoint.visibility):
+					_visibility = _visibility.duplicate()
+				if is_same(pairs,_checkpoint.visibility.get(id)):
+					pairs = pairs.duplicate()
+			_visibility[id] = pairs
 			rays += 1
 			var start := Time.get_ticks_usec()
 			var outcome: Variant = visible.call(position,target)
@@ -324,3 +389,9 @@ func sense(me: Dictionary, radius: float, limit: int, stamp: Dictionary, visible
 	result.make_read_only()
 	_sense_cache[id] = {"radius":radius,"limit":limit,"view":result}
 	return R.ok(result)
+
+static func _copy_contact_maps(index: Dictionary) -> Dictionary:
+	var copy := {}
+	for key in index:
+		copy[key] = index[key].duplicate()
+	return copy
