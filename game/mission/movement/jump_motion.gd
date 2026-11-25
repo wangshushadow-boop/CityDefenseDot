@@ -12,6 +12,17 @@ static func _mm(p: Vector3) -> Array:
 static func _query(a: Vector3,b: Vector3,radius: float,mask: int) -> Dictionary:
 	return {"from":_mm(a),"to":_mm(b),"radius_mm":roundi(radius*1000),"mask":mask}
 
+## Probe the proposed horizontal destination before leaving its supported neighbour.
+## The bottom is the lowest coordinate representable by the engine query port.
+static func _landing_support(p: Vector3,mask: int,sweep: Callable) -> Dictionary:
+	var start := _mm(p+Vector3.UP*SKIN)
+	var query := {"from":start,"to":[start[0],-2147483648,start[2]],"mask":mask}
+	var hits: Dictionary = sweep.call([query])
+	if not hits.ok: return hits
+	for hit in hits.value:
+		if hit.normal_ppm[1]>=500000: return R.ok(true)
+	return R.ok(false)
+
 static func can_launch(p: Vector3,r: float,mask: int,sweep: Callable) -> Dictionary:
 	var head := p+Vector3.UP*(HEIGHT-r)
 	var queries := [_query(p+Vector3.UP*.07,p+Vector3.DOWN*.12,0.0,mask),
@@ -49,7 +60,12 @@ static func advance(p: Vector3, velocity: Vector3, desired: Variant, dt: float, 
 			delta=delta.limit_length(maxf(0,delta.length()*fraction-SKIN))
 			blocked="scene"
 		if is_same(actor_clearance.call(at+delta),true):
-			at += delta
+			var support := _landing_support(at+delta,mask,sweep)
+			if not support.ok: return support
+			if support.value:
+				at += delta
+			else:
+				blocked="no_landing"
 		else:
 			blocked="yield"
 	var next_v := velocity.y-GRAVITY*dt
@@ -65,6 +81,9 @@ static func advance(p: Vector3, velocity: Vector3, desired: Variant, dt: float, 
 				continue
 			landed = rise<0.0
 			rise *= hit.fraction_ppm*.000001
+			if landed and hit.normal_ppm[1]>=999999:
+				# Recover the actual flat contact height rather than accumulating sweep quantization.
+				rise = hit.point_mm[1]*0.001-at.y
 			next_v=0.0
 			break
 	at.y += rise

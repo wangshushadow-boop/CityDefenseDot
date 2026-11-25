@@ -2,6 +2,7 @@ extends SceneTree
 
 const Field = preload("res://mission/movement/ports/field_movement.gd")
 const Adapter = preload("res://infrastructure/engine/adapter.gd")
+const Edges = preload("res://tests/p2/mount_profile/jump_edges.gd")
 const SCOPE := "profile-field"
 const RIDER := {"index":0,"generation":3}
 const ALLY := {"index":1,"generation":1}
@@ -189,6 +190,9 @@ func run() -> void:
 		check(jump_case(Vector3(-7,0,-8),true,false),"ceiling and stationary authority")
 		no_launch(Vector3(7,0,-8),"jump_headroom")
 		no_launch(Vector3(34,0,-8),"jump_ground")
+		var edges := Edges.new()
+		edges.obstacles(engine,SCOPE,check)
+		await edges.river(engine,self,check)
 	engine.release_scope(SCOPE)
 	print("MOUNT_PROFILE checks=",checks," failures=",failures)
 	quit(1 if failures else 0)
