@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Wood"]
+albedo_color = Color(0.43, 0.24, 0.105, 1)
+
+[sub_resource type="BoxMesh" id="Limb"]
+material = SubResource("Wood")
+size = Vector3(0.032, 1, 0.026)
+
+[sub_resource type="StandardMaterial3D" id="Thread"]
+albedo_color = Color(0.8, 0.72, 0.51, 1)
+
+[sub_resource type="BoxMesh" id="String"]
+material = SubResource("Thread")
+size = Vector3(0.009, 1, 0.009)
+
+[node name="ShortBow" type="Node3D"]
+
+[node name="Segment1" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.41000, 0.11500)
+rotation = Vector3(-0.34302, 0, 0)
+scale = Vector3(1, 0.14866, 1)
+mesh = SubResource("Limb")
+
+[node name="Segment2" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.26000, 0.05750)
+rotation = Vector3(-0.38588, 0, 0)
+scale = Vector3(1, 0.17270, 1)
+mesh = SubResource("Limb")
+
+[node name="Segment3" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.09000, 0.01250)
+rotation = Vector3(-0.13801, 0, 0)
+scale = Vector3(1, 0.18173, 1)
+mesh = SubResource("Limb")
+
+[node name="Segment4" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.09000, 0.01250)
+rotation = Vector3(0.13801, 0, 0)
+scale = Vector3(1, 0.18173, 1)
+mesh = SubResource("Limb")
+
+[node name="Segment5" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.26000, 0.05750)
+rotation = Vector3(0.38588, 0, 0)
+scale = Vector3(1, 0.17270, 1)
+mesh = SubResource("Limb")
+
+[node name="Segment6" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.41000, 0.11500)
+rotation = Vector3(0.34302, 0, 0)
+scale = Vector3(1, 0.14866, 1)
+mesh = SubResource("Limb")
+
+[node name="Segment7" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.00000, 0.14000)
+rotation = Vector3(0.00000, 0, 0)
+scale = Vector3(1, 0.96000, 1)
+mesh = SubResource("String")

@@ -23,7 +23,8 @@
       "models/general.glb",
       "models/spear_soldier.glb",
       "models/crossbowman.glb",
-      "models/horse.glb"
+      "models/horse.glb",
+      "short_bow.tscn"
     ],
     "patches": []
   },
