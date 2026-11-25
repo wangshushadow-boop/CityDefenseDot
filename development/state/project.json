@@ -16,7 +16,7 @@
   },
   "authorized_by": "项目负责人本次会话明确授权“开始p2的工作”",
   "base_commit": "005d777101654e67263e04fc6f2965403222e0b4",
-  "integrated_commit": "fe71df99a24008828bec740ac16af2a86bdf809c",
+  "integrated_commit": "314e0a55570dcc4311d742939da55daa13950617",
   "technical_stack": {
     "status": "APPROVED",
     "engine": "Godot Standard",

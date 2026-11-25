@@ -670,12 +670,17 @@
       ]
     },
     "P2-UI-BATTLE": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "hud_dev",
       "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "194117f2de161260635d0254c3176257fe57e409",
+      "integrated_commit": "314e0a55570dcc4311d742939da55daa13950617",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": [
         "P2-UI-BATTLE-001"
       ]
@@ -1869,12 +1874,17 @@
       "child_ids": []
     },
     "P2-UI-BATTLE-001": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "owner": "hud_dev",
       "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
-      "candidate_commit": null,
-      "integrated_commit": null,
-      "evidence": [],
+      "candidate_commit": "194117f2de161260635d0254c3176257fe57e409",
+      "integrated_commit": "314e0a55570dcc4311d742939da55daa13950617",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
       "child_ids": []
     },
     "P2-MIS-RT-BATTLE-003": {
@@ -1906,9 +1916,9 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-002": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "session_dev",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -1998,9 +2008,9 @@
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-006": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "pipeline_dev",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -2145,16 +2155,16 @@
     "P2-FIELD-INTEGRATION-012": {
       "status": "IN_PROGRESS",
       "owner": "main",
-      "base_commit": "7fc48bc118f7f09083cc46263daf0945c9b2f70f",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
       "child_ids": []
     },
     "P2-FIELD-INTEGRATION-013": {
-      "status": "PLANNED",
-      "owner": null,
-      "base_commit": null,
+      "status": "IN_PROGRESS",
+      "owner": "brain_dev",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
       "candidate_commit": null,
       "integrated_commit": null,
       "evidence": [],
@@ -10646,6 +10656,172 @@
         "development/reports/integration/P2.md"
       ],
       "commit": "fe71df99a24008828bec740ac16af2a86bdf809c"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-002",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:29:15+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "5b606542d09acdcd0305c25adb955f06d67a13da"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-002",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:29:15+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "5b606542d09acdcd0305c25adb955f06d67a13da"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-006",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:29:15+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "5b606542d09acdcd0305c25adb955f06d67a13da"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-006",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:29:15+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "5b606542d09acdcd0305c25adb955f06d67a13da"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-013",
+      "old": "PLANNED",
+      "new": "READY",
+      "time": "2026-11-25T08:29:15+08:00",
+      "reason": "已核对前置与路径",
+      "evidence": [],
+      "commit": "5b606542d09acdcd0305c25adb955f06d67a13da"
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-013",
+      "old": "READY",
+      "new": "IN_PROGRESS",
+      "time": "2026-11-25T08:29:15+08:00",
+      "reason": "并行隔离工作树",
+      "evidence": [],
+      "commit": "5b606542d09acdcd0305c25adb955f06d67a13da"
+    },
+    {
+      "task_id": "P2-UI-BATTLE-001",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-UI-BATTLE-001",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-UI-BATTLE-001",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-UI-BATTLE-001",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-UI-BATTLE",
+      "old": "IN_PROGRESS",
+      "new": "TESTING",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "候选实际自测",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-UI-BATTLE",
+      "old": "TESTING",
+      "new": "REVIEW",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "独立审查和 QA，修复及复核",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-UI-BATTLE",
+      "old": "REVIEW",
+      "new": "INTEGRATING",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "授权路径检查通过并合并",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
+    },
+    {
+      "task_id": "P2-UI-BATTLE",
+      "old": "INTEGRATING",
+      "new": "DONE",
+      "time": "2026-11-25T08:30:50+08:00",
+      "reason": "主 Agent 核验合并态实际入口",
+      "evidence": [
+        "development/reports/tasks/P2-UI-BATTLE-001.md",
+        "development/reports/reviews/P2.md",
+        "development/reports/tests/P2/hud-merged.txt",
+        "development/reports/integration/P2.md"
+      ],
+      "commit": "314e0a55570dcc4311d742939da55daa13950617"
     }
   ]
 }

@@ -43,8 +43,8 @@
     "game/mission/runtime/field_brains.gd.uid"
   ],
   "contract_changes": "forbidden",
-  "base_commit": null,
-  "worktree": null,
+  "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
+  "worktree": "D:/work/game/recollection/.worktrees/p2-field-pipeline",
   "scope": "复用 Mission.register_system，组装 MOV、FORM、COM、BAI、RULES、RESULTS 的正常调用与提交顺序；不新增 Session、真值或公共 DTO。验证下游拒绝时各域回滚。",
   "non_goals": [
     "未经批准的公共契约扩展、其他阶段玩法。"
@@ -53,5 +53,5 @@
     "复用 Mission.register_system，组装 MOV、FORM、COM、BAI、RULES、RESULTS 的正常调用与提交顺序；不新增 Session、真值或公共 DTO。验证下游拒绝时各域回滚。",
     "独立审查、独立 QA 及合并态实测"
   ],
-  "status": "PLANNED"
+  "status": "IN_PROGRESS"
 }

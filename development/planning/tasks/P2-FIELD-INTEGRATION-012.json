@@ -32,7 +32,7 @@
     "game/contracts/"
   ],
   "contract_changes": "forbidden",
-  "base_commit": "7fc48bc118f7f09083cc46263daf0945c9b2f70f",
+  "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
   "worktree": "D:/work/game/recollection/.worktrees/p2-mounted-visual",
   "scope": "骑射的坐骑和近远程持械表现。沿用现有四个模型及现有数据契约。",
   "non_goals": [

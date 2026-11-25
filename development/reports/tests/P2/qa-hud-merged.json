@@ -1,0 +1,202 @@
+{
+  "commit": "194117f2de161260635d0254c3176257fe57e409",
+  "worktree": "D:\\work\\game\\recollection\\.worktrees\\p2-hud",
+  "task": "P2-UI-BATTLE-001 independent QA",
+  "host": "Windows-11-10.0.26300-SP0",
+  "engine_version": "4.7.2.stable.official.ed1daf0bf",
+  "engine": "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+  "results": [
+    {
+      "suite": "ui-headless",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-hud\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\hud-revision\\ui-headless.engine.log",
+        "--script",
+        "res://tests/p2/ui/run.gd"
+      ],
+      "status": "PASS",
+      "rc": 0,
+      "elapsed_s": 1.463,
+      "output": [
+        "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+        "",
+        "FIELD_HUD checks=156 failed=0 display=headless viewport=(960, 600)"
+      ],
+      "stdout": "ui-headless.log",
+      "sha256": "0e338a4795c643bc4a1aff8ecbae885268dfe88c9cf83837c2a364b6fa7da341"
+    },
+    {
+      "suite": "input-headless",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-hud\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\hud-revision\\input-headless.engine.log",
+        "--script",
+        "res://tests/p2/input/run.gd"
+      ],
+      "status": "PASS",
+      "rc": 0,
+      "elapsed_s": 0.44,
+      "output": [
+        "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+        "",
+        "T-INPUT-02 PASS",
+        "T-INPUT-03 PASS",
+        "T-INPUT-01-AUTOMATED PASS",
+        "P2-INPUT-001 PASS checks=379 failures=0 physical_pads=0"
+      ],
+      "stdout": "input-headless.log",
+      "sha256": "b56dcbfe141bc29618c07370047cd9627c994477f7798b1f4fcd3be65579ff89"
+    },
+    {
+      "suite": "mouse-rebind-headless",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-hud\\game",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\hud-revision\\mouse-rebind-headless.engine.log",
+        "--script",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\hud-revision\\extra_mouse.gd"
+      ],
+      "status": "PASS",
+      "rc": 0,
+      "elapsed_s": 1.554,
+      "output": [
+        "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+        "",
+        "QA_MOUSE m/8/0 m/9/0 intents=[{ \"actor_handle\": { \"index\": 0, \"generation\": 1 }, \"input_phase\": \"start\", \"direction\": \"up\", \"weapon_slot\": 0, \"target_hint\": <null> }, { \"actor_handle\": { \"index\": 0, \"generation\": 1 }, \"desired_direction\": [0, 0, -1000000], \"speed_fraction\": 1.0, \"stance\": \"walk\" }]",
+        "FIELD_HUD checks=161 failed=0 display=headless viewport=(960, 600)"
+      ],
+      "stdout": "mouse-rebind-headless.log",
+      "sha256": "28d0e41c54fd4a5a4f7ddfe3abb3fb9f1a171e0cd839a2111662276869fb0867"
+    },
+    {
+      "suite": "ui-720p",
+      "rc": 0,
+      "status": "PASS",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-hud\\game",
+        "--resolution",
+        "1280x720",
+        "--rendering-method",
+        "gl_compatibility",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\hud-revision\\ui-720p.engine.log",
+        "--script",
+        "res://tests/p2/ui/run.gd",
+        "--",
+        "--snapshot"
+      ],
+      "host_display": "Windows",
+      "renderer": "OpenGL",
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "assertions": 158,
+      "failures": 0,
+      "log": "ui-720p.engine.log",
+      "sha256": "2da03ef7f66411cfde603a0b5cbb715b05de83ccf188357f306afc6c5d98bb51",
+      "screenshots": [
+        {
+          "file": "recollection-field-hud-1280x720-deployment-zh.png",
+          "bytes": 51535,
+          "sha256": "a3180d4247d0494cc5ec6e780f15d0c93a3e3e9c40ae6a020d8559d3ed06ec88",
+          "width": 1280,
+          "height": 720
+        },
+        {
+          "file": "recollection-field-hud-1280x720-battle-en.png",
+          "bytes": 82391,
+          "sha256": "c7a4f2cb3b63608f3646b2a3521376a2f1671dd85010b8e5b6d0c74daf38d781",
+          "width": 1280,
+          "height": 720
+        }
+      ]
+    },
+    {
+      "suite": "ui-1080p",
+      "rc": 0,
+      "status": "PASS",
+      "command": [
+        "D:\\Program\\Godot\\Standard\\Godot_v4.7.2-stable_win64_console.exe",
+        "--path",
+        "D:\\work\\game\\recollection\\.worktrees\\p2-hud\\game",
+        "--resolution",
+        "1920x1080",
+        "--log-file",
+        "D:\\work\\game\\recollection\\out\\p2-qa\\hud-revision\\ui-1080p.engine.log",
+        "--script",
+        "res://tests/p2/ui/run.gd",
+        "--",
+        "--snapshot"
+      ],
+      "host_display": "Windows",
+      "renderer": "Vulkan",
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "assertions": 158,
+      "failures": 0,
+      "log": "ui-1080p.engine.log",
+      "sha256": "8ac858d6ddbd215041470b4660bf1987ebe88b582af0fff2c976b3d9dd7bdc9c",
+      "screenshots": [
+        {
+          "file": "recollection-field-hud-1920x1080-deployment-zh.png",
+          "bytes": 51257,
+          "sha256": "92e64c054772eb2333576f37a2919088fe13d41f25c8979122bbca4498e8ce0b",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "file": "recollection-field-hud-1920x1080-battle-en.png",
+          "bytes": 83804,
+          "sha256": "8647ecd80d3588cc728c775989eb9de38977f1cc1d21144f78e45b1fc71f8395",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "three_sides": {
+      "authority": "Real RULES.stage and commit; team keys [int 0, string 0, int 2] and all three personal HUD outputs checked in each scenario",
+      "case_early_withdraw_then_victory": [
+        "Withdrawn",
+        "Defeat",
+        "Victory"
+      ],
+      "case_other_team_withdraws_after_first_falls": [
+        "Defeat",
+        "Withdrawn",
+        "Victory"
+      ],
+      "case_early_withdraw_then_draw": [
+        "Withdrawn",
+        "Draw",
+        "Draw"
+      ]
+    },
+    "profile": {
+      "source": "Real Godot viewport dispatch (generated keyboard/mouse/pad events), HUD action picker, FieldInput persistence and fresh FieldInput.step() receipts",
+      "coverage": [
+        "Original candidate rebinds attack=K, forward=I, hold=J and pad Paddle1. Escape cancels, reserved menu protected, and new input instance emits correct move/attack/order.",
+        "Independent extra_mouse.gd extends the stock suite, rebinds attack=mouse X1 and forward=mouse X2 through HUD. A fresh on-disk profile emits attack start and [0,0,-1000000] with speed 1.0 when both inputs are pressed."
+      ],
+      "attachment_sha256": "8eb32173b929017d39714909d75a6924281c952bc0aa0ecbf514e1f965a08fd2"
+    },
+    "screenshots": "Independent visual inspection of both sizes: Chinese deployment names two selected formation rows and both previews; English large-type panel shows readiness, formation status and unauthorized feedback. At 720p the panel scrolls vertically, at 1080p Display settings is visible below Resume. Fixture background is gray."
+  },
+  "status": "PASS tested HUD regression",
+  "not_run": {
+    "physical_gamepad": "NOT_RUN. INPUT reported physical_pads=0; no physical actions or hotplug exercised.",
+    "human_playtest": "NOT_RUN. Rendered HUD snapshots inspected independently on fixture background. End-user readability/comfort over a live battle and full Mission integration acceptance remain pending."
+  },
+  "git_status_after": ""
+}

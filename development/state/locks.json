@@ -2,22 +2,6 @@
   "schema_version": 1,
   "locks": [
     {
-      "task_id": "P2-UI-BATTLE-001",
-      "owner": "hud_dev",
-      "branch": "detached",
-      "base_commit": "46af5b1fcc4eb0d13b64ef146298f82074685806",
-      "worktree": "D:/work/game/recollection/.worktrees/p2-hud",
-      "allowed_paths": [
-        "game/presentation/ui/",
-        "game/tests/p2/ui/",
-        "development/reports/tasks/P2-UI-BATTLE-001.md"
-      ],
-      "excluded_paths": [
-        "development/state/",
-        "docs/architecture/"
-      ]
-    },
-    {
       "task_id": "P2-FIELD-INTEGRATION-011",
       "owner": "main",
       "branch": "detached",
@@ -42,12 +26,66 @@
       "task_id": "P2-FIELD-INTEGRATION-012",
       "owner": "main",
       "branch": "detached",
-      "base_commit": "7fc48bc118f7f09083cc46263daf0945c9b2f70f",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
       "worktree": "D:/work/game/recollection/.worktrees/p2-mounted-visual",
       "allowed_paths": [
         "game/presentation/visuals/",
         "game/tests/p2/mounted_visual/",
         "development/reports/tasks/P2-FIELD-INTEGRATION-012.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/",
+        "game/contracts/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-002",
+      "owner": "session_dev",
+      "branch": "detached",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-field-session",
+      "allowed_paths": [
+        "game/application/",
+        "game/tests/p2/field_session/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-002.md"
+      ],
+      "excluded_paths": [
+        "development/state/",
+        "docs/architecture/"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-006",
+      "owner": "pipeline_dev",
+      "branch": "detached",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-field-pipeline",
+      "allowed_paths": [
+        "game/mission/runtime/",
+        "game/tests/p2/field_pipeline/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-006.md"
+      ],
+      "excluded_paths": [
+        "game/contracts/",
+        "game/bootstrap/",
+        "development/state/",
+        "docs/architecture/",
+        "game/mission/runtime/field_brains.gd",
+        "game/mission/runtime/field_brains.gd.uid"
+      ]
+    },
+    {
+      "task_id": "P2-FIELD-INTEGRATION-013",
+      "owner": "brain_dev",
+      "branch": "detached",
+      "base_commit": "5b606542d09acdcd0305c25adb955f06d67a13da",
+      "worktree": "D:/work/game/recollection/.worktrees/p2-field-brains",
+      "allowed_paths": [
+        "game/mission/runtime/field_brains.gd",
+        "game/mission/runtime/field_brains.gd.uid",
+        "game/tests/p2/field_brains/",
+        "development/reports/tasks/P2-FIELD-INTEGRATION-013.md"
       ],
       "excluded_paths": [
         "development/state/",
