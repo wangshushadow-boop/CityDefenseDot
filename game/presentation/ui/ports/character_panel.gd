@@ -15,6 +15,8 @@ var _read: Callable
 var _write: Callable
 var _model := {}
 var _section := "growth"
+var _visit_page := "roster"
+var _visit_person := ""
 var _skill := "one_handed"
 var _profile := "combat"
 var _slot := "main_hand"
@@ -157,7 +159,12 @@ func mount(model: Dictionary, read: Callable, write: Callable) -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if is_visible_in_tree() and event.is_action_pressed("ui_cancel") and not is_instance_valid(_confirm):
 		get_viewport().set_input_as_handled()
-		closed.emit()
+		if _section=="visit" and _visit_page!="roster":
+			_open_visit("roster")
+		elif _section=="visit":
+			_set_section("governance")
+		else:
+			closed.emit()
 
 func _show_notice(message: String) -> void:
 	_notice.text=message
@@ -171,7 +178,10 @@ func _submit(op: String, args: Dictionary, success: String) -> void:
 	if reply.ok or not reply.error.retryable: _pending.clear()
 	if not reply.ok:
 		var field: String=reply.error.field
-		_show_notice("%s（%s）"%[ERRORS.get(reply.error.code,"操作失败"),field])
+		if op=="visit_report" and field=="visit.answer":
+			_show_notice("总督摇了摇头：「数目不合。再看看起账和结账两栏。」")
+		else:
+			_show_notice("%s（%s）"%[ERRORS.get(reply.error.code,"操作失败"),field])
 		if reply.error.code!="StaleVersion": return
 	else:
 		_show_notice(success)
@@ -193,11 +203,16 @@ func _submit(op: String, args: Dictionary, success: String) -> void:
 
 func _render() -> void:
 	var focus:=get_viewport().gui_get_focus_owner()
-	var previous_focus: StringName=focus.name if _section=="governance" and focus!=null and is_ancestor_of(focus) else &""
+	var previous_focus: StringName=focus.name if _section in ["governance","visit"] and focus!=null and is_ancestor_of(focus) else &""
 	_clear(_tabs)
 	_clear(_body)
 	_portrait=null
 	_portrait_id=""
+	if _section=="visit":
+		_head.text="柳溪庄　·　庄署"
+		_render_visit(_model.visit)
+		_restore_body_focus(previous_focus)
+		return
 	if _model.ended:
 		_head.text="生涯已结束"
 		_label(_body,"本次人物生涯已结束，仍可返回主菜单读取其他存档。")
@@ -221,14 +236,17 @@ func _render() -> void:
 		"family": _household(hero)
 		"governance":
 			_governance(_model.governance)
-			if previous_focus!=&"":
-				var target:=_body.find_child(previous_focus,true,false) as Button
-				if target==null or target.disabled:
-					for control: Button in _body.find_children("*","Button",true,false):
-						if not control.disabled:
-							target=control
-							break
-				if target!=null and not target.disabled: target.grab_focus()
+			_restore_body_focus(previous_focus)
+
+func _restore_body_focus(previous: StringName) -> void:
+	if previous==&"": return
+	var target:=_body.find_child(previous,true,false) as Button
+	if target==null or target.disabled:
+		for control: Button in _body.find_children("*","Button",true,false):
+			if not control.disabled:
+				target=control
+				break
+	if target!=null and not target.disabled: target.grab_focus()
 
 func _set_section(section: String) -> void:
 	_section=section
@@ -240,7 +258,10 @@ func _governance(fief: Dictionary) -> void:
 	var by_id: Dictionary={}
 	for member: Dictionary in fief.candidates:
 		by_id[member.id]=member.name
-	_label(_body,fief.name,25,GOLD)
+	var title:=_row(_body)
+	_label(title,fief.name,25,GOLD)
+	if fief.established and _model.has("visit"):
+		_button(title,"拜访庄署",_open_visit.bind("roster")).name="VisitEstate"
 	if not fief.can_manage:
 		_label(_body,"只有能够理事的家主可以任免总督。",16,MUTED)
 	if not fief.established:
@@ -274,6 +295,112 @@ func _governance(fief: Dictionary) -> void:
 	var reports:=_row(_body)
 	_governance_day(reports,"下一日预计",fief.next_report,by_id)
 	_governance_day(reports,"上次实结",fief.last_report,by_id)
+
+func _open_visit(page: String, person: String="") -> void:
+	var fresh: Dictionary=_read.call()
+	if not fresh.ok:
+		_show_notice("庄署名册暂时无法读取。")
+		return
+	_model=fresh.value
+	_section="visit"
+	_visit_page=page
+	_visit_person=person
+	_scroll.scroll_vertical=0
+	_show_notice("")
+	_render()
+
+func _render_visit(visit: Dictionary) -> void:
+	var speaker: Variant=visit.speaker
+	var nav:=_row(_body)
+	_button(nav,"返回治理",_set_section.bind("governance")).name="LeaveEstate"
+	var roster:=_button(nav,"在场名册",_open_visit.bind("roster"))
+	roster.name="VisitRoster"
+	roster.disabled=_visit_page=="roster"
+	var journal:=_button(nav,"委托簿",_open_visit.bind("journal"))
+	journal.name="VisitJournal"
+	journal.disabled=_visit_page=="journal"
+	if _visit_page=="journal":
+		_visit_journal(visit)
+		return
+	if _visit_page=="roster":
+		_label(_body,"庄署会客",25,GOLD)
+		if speaker==null:
+			_label(_body,"总督席位空着。",18)
+		else:
+			var row:=_row(_body)
+			_label(row,"在任总督　"+str(speaker.name),20)
+			var meet:=_button(row,"会见"+str(speaker.name),_open_visit.bind("talk",speaker.id))
+			meet.name="MeetGovernor"
+			meet.disabled=not visit.can_visit
+		if not visit.can_visit:
+			_label(_body,"家主在家且身体康健时可以会客。",16,MUTED)
+		return
+	if speaker==null or speaker.id!=_visit_person or not visit.can_visit:
+		_label(_body,"这次会面已经结束。请查看在场名册。",20,GOLD)
+		return
+	var conversation:=_row(_body)
+	var portrait_column:=VBoxContainer.new()
+	conversation.add_child(portrait_column)
+	_preview(portrait_column,speaker.appearance)
+	var lines:=VBoxContainer.new()
+	lines.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	lines.add_theme_constant_override("separation",10)
+	conversation.add_child(lines)
+	_label(lines,"总督　"+str(speaker.name),24,GOLD)
+	var target:={"hero_id":_visit_person,"settlement_id":visit.settlement_id}
+	if _visit_page=="news":
+		var fief: Dictionary=_model.governance
+		_label(lines,"「今日庄上繁荣 %.1f 点，忠诚 %.1f 点。若要查清盈亏，须看逐日账簿。」"%[fief.prosperity/10.0,fief.loyalty/10.0])
+	elif _visit_page=="commission":
+		if visit.can_accept:
+			_label(lines,"「劳烦你替我核对明日庄簿，看看繁荣实增多少。三日之内来报，我教你些理账的本事。」")
+			_button(lines,"接下核账委托",_submit.bind("visit_accept",target,"已接下「核对庄簿」。")).name="AcceptCommission"
+		elif visit.can_report:
+			_label(lines,"「第 %d 日的簿册就在案上。你算算，这一日繁荣实增多少？」"%visit.ledger.day)
+			_visit_ledger(lines,visit.ledger)
+			var choices:=_row(lines)
+			for answer: int in visit.answers:
+				var args:=target.duplicate()
+				args["answer"]=answer
+				_button(choices,"%+.1f 点"%(answer/10.0),_submit.bind("visit_report",args,"总督签结了这份庄簿。"))
+		elif visit.status=="active":
+			_label(lines,"「首笔日账还没结。明日再来，你我对着庄簿核一遍。」")
+			_button(lines,"休养一日",_submit.bind("rest",{},"次日的庄簿已经结算。")).name="WaitForLedger"
+		elif visit.status=="completed":
+			_label(lines,"「你核得仔细。此事已经签结，凭委托簿便可查阅。」")
+		else:
+			_label(lines,visit.reason if not str(visit.reason).is_empty() else "「眼下没有新的差事。」")
+	else:
+		_label(lines,"「家主来了。案上是柳溪庄的日簿，有什么事要商议？」")
+	var options:=_row(lines)
+	if _visit_page!="news":
+		_button(options,"问庄中近况",_open_visit.bind("news",_visit_person)).name="AskNews"
+	if _visit_page!="commission":
+		_button(options,"谈核对庄簿",_open_visit.bind("commission",_visit_person)).name="AskCommission"
+	_button(options,"告辞",_open_visit.bind("roster")).name="EndAudience"
+
+func _visit_ledger(parent: Node, ledger: Dictionary) -> void:
+	_label(parent,"第 %d 日　繁荣起账 %.1f　结账 %.1f"%[ledger.day,ledger.prosperity_before/10.0,ledger.prosperity_after/10.0],17,GOLD)
+
+func _visit_journal(visit: Dictionary) -> void:
+	if visit.status=="none":
+		_label(_body,"尚未接取庄署委托。",20)
+		return
+	var statuses:={"active":"待日结","ready":"待回报","completed":"已签结","expired":"已逾期","failed":"已中止"}
+	_label(_body,"核对庄簿　·　"+str(statuses.get(visit.status,visit.status)),24,GOLD)
+	_label(_body,"第 %d 日受托　·　第 %d 日结束前回报"%[visit.accepted_day,visit.deadline_day])
+	if not visit.ledger.is_empty(): _visit_ledger(_body,visit.ledger)
+	if not str(visit.reason).is_empty(): _label(_body,visit.reason,16,MUTED)
+	if visit.can_claim:
+		_button(_body,"领取管理经验",_submit.bind("visit_claim",{},"经验已计入承办人的管理技能。")).name="ClaimCommission"
+	elif visit.rewarded:
+		_label(_body,"管理经验已领取。",16)
+	elif visit.status=="completed":
+		_label(_body,"签结待领。由原承办人康健归家后领取。",16)
+	elif visit.status=="active" and visit.can_visit:
+		_button(_body,"休养一日",_submit.bind("rest",{},"次日的庄簿已经结算。")).name="WaitForLedger"
+	if visit.can_report and visit.speaker!=null:
+		_button(_body,"向总督回报",_open_visit.bind("commission",visit.issuer_id)).name="ReturnCommission"
 
 func _governance_day(parent: Node, title: String, report: Dictionary, names: Dictionary) -> void:
 	var column:=VBoxContainer.new()
