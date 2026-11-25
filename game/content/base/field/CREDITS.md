@@ -11,4 +11,4 @@
 
 Quaternius 在 LowPoly Animated Animals 中发布坐骑及步态动画。[作者发布页](https://quaternius.itch.io/lowpoly-animated-animals)
 
-本项目另行制作野战地形、导航、兵种配置及低多边形骑射短弓 short_bow.tscn。文件摘要见包内 assets.json。
+本项目另行制作野战地形、导航、兵种配置及低多边形骑射短弓 short_bow.tscn 与弩手副刀 sidearm.tscn。文件摘要见包内 assets.json。

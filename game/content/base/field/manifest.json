@@ -24,7 +24,8 @@
       "models/spear_soldier.glb",
       "models/crossbowman.glb",
       "models/horse.glb",
-      "short_bow.tscn"
+      "short_bow.tscn",
+      "sidearm.tscn"
     ],
     "patches": []
   },
