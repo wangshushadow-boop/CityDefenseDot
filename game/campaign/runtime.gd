@@ -7,6 +7,7 @@ const Core = preload("res://core/runtime.gd")
 const Inventory = preload("res://shared/inventory/inventory.gd")
 const Characters = preload("res://campaign/character/ports/characters.gd")
 const Governance = preload("res://campaign/settlement/ports/governance.gd")
+const Commission = preload("res://campaign/quest/ports/estate_commission.gd")
 const DAY := 1440
 const PHASES := ["production", "ledger_validation", "market", "supply_payroll",
 	"territory", "politics_ai", "day_end"]
@@ -18,6 +19,7 @@ const METADATA := ["schema_version","world_id","seed","game_minute","revision","
 var _world := {}
 var _characters := {}
 var _governance := {}
+var _commission := {}
 var _resting_hero := ""
 var _inventory_authority: Callable
 var _inventory: Inventory
@@ -112,6 +114,8 @@ func _snapshot_with(metadata: Dictionary, inventory_snapshot: Variant) -> Dictio
 		saved["characters"] = _characters.duplicate(true)
 	if not _governance.is_empty():
 		saved["governance"] = _governance.duplicate(true)
+	if not _commission.is_empty():
+		saved["estate_commission"] = _commission.duplicate(true)
 	return saved
 
 
@@ -244,6 +248,7 @@ func _commit_prepared() -> Dictionary:
 			return committed
 	_characters = recovered
 	_governance = governed
+	_reconcile_commission(_pending.day)
 	_world.game_minute = _pending.day * DAY
 	_world.last_committed_day = _pending.day
 	_world.revision += 1
@@ -358,6 +363,30 @@ func exchange(txn_id: String, lines: Array, expected_inventory_revision: Variant
 	return committed
 
 
+static func _estate_view(characters: Dictionary, governance: Dictionary, world_id: String, day: int) -> Dictionary:
+	return Governance.view(governance, world_id, day, Characters.governor_facts(characters, day))
+
+
+static func _visit_facts(characters: Dictionary, estate: Dictionary, world_id: String, day: int) -> Dictionary:
+	var facts := Characters.visit_people(characters)
+	facts["world_id"] = world_id
+	facts["day"] = day
+	facts["settlement_id"] = estate.settlement_id if estate.established else null
+	facts["governor_id"] = estate.governor_id
+	facts["last_report"] = estate.last_report
+	return facts
+
+
+func _current_visit_facts(day: int) -> Dictionary:
+	var estate := _estate_view(_characters, _governance, _world.world_id, day)
+	return _visit_facts(_characters, estate, _world.world_id, day)
+
+
+func _reconcile_commission(day: int) -> void:
+	if not _commission.is_empty():
+		_commission = Commission.reconcile(_commission, _current_visit_facts(day))
+
+
 func character_view() -> Dictionary:
 	if _world.is_empty() or _busy:
 		return R.fail("InvalidState", "character.view")
@@ -367,7 +396,9 @@ func character_view() -> Dictionary:
 		reply.value["revision"] = _world.revision
 		reply.value["game_minute"] = _world.game_minute
 		var day: int = _world.last_committed_day
-		reply.value["governance"] = Governance.view(_governance, _world.world_id, day, Characters.governor_facts(_characters, day))
+		var estate := _estate_view(_characters, _governance, _world.world_id, day)
+		reply.value["governance"] = estate
+		reply.value["visit"] = Commission.view(_commission, _visit_facts(_characters, estate, _world.world_id, day))
 	return reply
 
 
@@ -378,6 +409,8 @@ func character_command(op: String, args: Dictionary, txn: String, durable: Calla
 		return R.fail("Unavailable", "durable")
 	if not C.Reader.valid_key(txn) or txn.is_empty():
 		return R.fail("InvalidArgument", "transaction_id")
+	if op == "outcome" and args.get("source") is String and args.source.begins_with("quest/liuxi/"):
+		return R.fail("Unauthorized", "visit.reward_source")
 	_busy = true
 	var result := _commit_character(op, args, txn, durable)
 	_busy = false
@@ -390,12 +423,23 @@ func _commit_character(op: String, args: Dictionary, txn: String, durable: Calla
 	candidate._world = _world.duplicate(true)
 	candidate._characters = _characters
 	candidate._governance = _governance
+	candidate._commission = _commission
 	candidate._inventory = _inventory
 	candidate._inventory_authority = _inventory_authority
 	candidate._planners = _planners
 	var minute: int = _world.game_minute
 	var day: int = _world.last_committed_day
-	if op.begins_with("governor_"):
+	if op.begins_with("visit_"):
+		var planned := Commission.plan(_commission, op, args, _current_visit_facts(day))
+		if not planned.ok:
+			return planned
+		candidate._commission = planned.value
+		if op == "visit_claim" and not _commission.get("rewarded", false) and planned.value.rewarded:
+			var award := Characters.commission_reward(_characters, planned.value.actor_id, Commission.reward_source(planned.value), day)
+			if not award.ok:
+				return award
+			candidate._characters = award.value
+	elif op.begins_with("governor_"):
 		var facts := Characters.governor_facts(_characters, day)
 		var settled := Governance.plan(_governance, op, args, _world.world_id, day, facts)
 		if not settled.ok:
@@ -414,6 +458,7 @@ func _commit_character(op: String, args: Dictionary, txn: String, durable: Calla
 		candidate._inventory = plan.inventory
 		if not _governance.is_empty():
 			candidate._governance = Governance.reconcile(_governance, Characters.governor_facts(plan.repo, day))
+	candidate._reconcile_commission(day)
 	if minute / DAY > day and _inventory != null and is_same(candidate._inventory, _inventory):
 		var fork := Inventory.new()
 		var cloned := fork.restore(_inventory.snapshot(), _inventory_authority)
@@ -436,6 +481,7 @@ func _commit_character(op: String, args: Dictionary, txn: String, durable: Calla
 	_world = candidate._world
 	_characters = candidate._characters
 	_governance = candidate._governance
+	_commission = candidate._commission
 	_inventory = candidate._inventory
 	return R.ok(_world.revision)
 
@@ -494,7 +540,7 @@ func restore(saved: Dictionary, authorize: Callable = Callable()) -> Dictionary:
 	if not V.integer(saved.get("schema_version"), 1, 1):
 		return R.fail("StaleVersion", "schema_version")
 	for key in saved:
-		if key not in ["inventory", "characters", "governance"] and key not in METADATA:
+		if key not in ["inventory", "characters", "governance", "estate_commission"] and key not in METADATA:
 			return R.fail("InvalidArgument", "snapshot.field")
 	if not C.encode(saved).ok or not C.Reader.valid_key(saved.get("world_id")) or not V.hex(saved.get("seed"),16) or not V.hex(saved.get("content_hash"),64) or not _packages_valid(saved.get("content_packages")):
 		return R.fail("InvalidArgument", "world")
@@ -529,19 +575,32 @@ func restore(saved: Dictionary, authorize: Callable = Callable()) -> Dictionary:
 	if not checked_characters.ok:
 		return checked_characters
 	var governance: Variant = saved.get("governance", {})
+	var day: int = saved.last_committed_day
 	if saved.has("governance"):
 		if not governance is Dictionary or governance.is_empty():
 			return R.fail("InvalidArgument", "governance")
-		var day: int = saved.last_committed_day
 		var checked := Governance.validate(governance, saved.world_id, day, Characters.governor_facts(characters, day))
 		if not checked.ok:
 			return checked
+	var commission: Variant = saved.get("estate_commission", {})
+	if saved.has("estate_commission"):
+		if not commission is Dictionary or commission.is_empty():
+			return R.fail("InvalidArgument", "estate_commission")
+		var estate := _estate_view(characters, governance, saved.world_id, day)
+		var checked := Commission.validate(commission, _visit_facts(characters, estate, saved.world_id, day))
+		if not checked.ok:
+			return checked
+	var receipt := Characters.validate_commission_reward(characters, commission.get("actor_id", ""),
+		Commission.reward_source(commission), commission.get("rewarded", false))
+	if not receipt.ok:
+		return receipt
 	var metadata := {}
 	for key: String in METADATA:
 		metadata[key] = saved[key]
 	_world = metadata.duplicate(true)
 	_characters = characters.duplicate(true)
 	_governance = governance.duplicate(true)
+	_commission = commission.duplicate(true)
 	_inventory = inv
 	_inventory_authority = authorize
 	_day_failed = false
@@ -555,6 +614,7 @@ func dispose() -> Dictionary:
 	_world = {}
 	_characters = {}
 	_governance = {}
+	_commission = {}
 	_inventory = null
 	_inventory_authority = Callable()
 	_planners = {}
