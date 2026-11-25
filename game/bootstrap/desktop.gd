@@ -3,6 +3,7 @@ extends Control
 const PAPER := Color("#eee9d8")
 const INK := Color("#24332e")
 const ACCENT := Color("#79422d")
+signal field_requested
 var _root: RefCounted
 var _status: Label
 var _title: Label
@@ -63,9 +64,11 @@ func mount(context: RefCounted) -> void:
 	_button(files,"new","新建沙盒",func(): _display(_root.new_world(_slot.text)))
 	_button(files,"load","读取存档",func(): _display(_root.load_world(_slot.text)))
 	_button(files,"save","保存进度",func(): _display(_root.session().save_session()))
+	_button(files,"resume","继续待结算战果",func(): _display(_root.resume_result()))
 	_area.add_child(HSeparator.new())
 	_area.add_child(_label("河滩练兵场",24))
 	var training:=_row()
+	_button(training,"field","进入河原野战",func():field_requested.emit())
 	_button(training,"train","进入训练",func(): _display(_root.start_training()))
 	_button(training,"leave","结束训练",func(): _display(_root.session().dispose_mission()))
 	_button(training,"close","关闭会话",func(): _display(_root.session().close_session("frontend")))
@@ -83,9 +86,18 @@ func _refresh() -> void:
 	_buttons.new.disabled=state!="Frontend"
 	_buttons.load.disabled=state!="Frontend"
 	_buttons.save.disabled=state!="CampaignMap"
+	_buttons.resume.visible=state=="Results" and _root.pending_result().ok
+	_buttons.resume.disabled=not _root.has_campaign_settlement()
+	if _buttons.resume.visible and _buttons.resume.disabled:
+		_status.text="存档中有待结算的战果。载入对应的战役结算规则后可继续。"
+	_buttons.field.disabled=state not in ["Frontend","CampaignMap","CustomSetup"]
 	_buttons.train.disabled=state not in ["Frontend","CampaignMap","CustomSetup"]
 	_buttons.leave.disabled=state!="Mission"
 	_buttons.close.disabled=state=="Frontend"
+
+func field_closed(reply: Dictionary) -> void:
+	show()
+	_display(reply)
 
 func show_failure(error: Dictionary, retry: Callable) -> void:
 	for child in get_children():

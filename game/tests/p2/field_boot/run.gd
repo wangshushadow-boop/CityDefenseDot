@@ -1,0 +1,57 @@
+extends SceneTree
+const Composition = preload("res://bootstrap/composition_root.gd")
+const Config = preload("res://bootstrap/boot_config.gd")
+var errors := 0
+var app: RefCounted
+func check(ok: bool, label: String) -> bool:
+	if not ok:
+		errors += 1
+		printerr("FAIL ",label)
+	return ok
+
+func _initialize() -> void:
+	run.call_deferred()
+
+func run() -> void:
+	var config := Config.resolve([],DisplayServer.get_name(),{})
+	if not check(config.ok,"default configuration"): quit(1); return
+	app=Composition.new(root)
+	var boot: Dictionary=app.boot(config.value)
+	if not check(boot.ok,"normal boot "+str(boot)): quit(1); return
+	var opened: Dictionary=app.start_field(20,40)
+	if not check(opened.ok,"normal field start "+str(opened)): quit(1); return
+	var hud: Dictionary=app.field_view("hud")
+	check(hud.ok and hud.value.phase=="deployment" and not hud.value.formations.is_empty(),"initial deployment")
+	if not check(not app.session().finish_mission({"outcome":"victory"}).ok,"premature end rejected"): quit(1);return
+	var first: Dictionary
+	for i in 50:
+		await physics_frame
+		first=app.field_step()
+		if first.ok:break
+		if first.error.code not in ["Unavailable","StaleVersion"]:break
+	if not check(first.ok,"first field step "+str(first)):quit(1);return
+	var humans: Array=first.value.entities.filter(func(e):return e.source_slot!=null)
+	check(humans.size()==20 and first.value.tick==1,"20 real humans deployed")
+	var input: Dictionary=app.field_view("input")
+	if not check(input.ok and input.value.actor_handle is Dictionary,"real player possession"):quit(1);return
+	var handle: Dictionary=input.value.actor_handle
+	var batch := {"mission_id":opened.value,"source_tick":2,"control_revision":input.value.control_revision,
+		"inputs":[{"actor_handle":handle,"desired_direction":[1000000,0,0],"speed_fraction":1.0,"stance":"walk"}]}
+	var accepted: Dictionary=app.field_command("field.input",{"batch":batch},input.value.revision,"smoke-input")
+	if not check(accepted.ok,"normal player command "+str(accepted)):quit(1);return
+	var second: Dictionary=app.field_step()
+	if not check(second.ok,"second step "+str(second)):quit(1);return
+	hud=app.field_view("hud")
+	var left: Dictionary=app.field_command("field.withdraw",{},hud.value.revision)
+	if not check(left.ok,"authorized withdrawal "+str(left)):quit(1);return
+	var terminal: Dictionary=app.field_step()
+	if not check(terminal.ok,"finish authoritative result "+str(terminal)):quit(1);return
+	hud=app.field_view("hud")
+	check(hud.ok and hud.value.phase=="ended" and hud.value.result.slot_outcomes.size()==40,"complete results in same view")
+	var session: Dictionary=app.session().query()
+	check(session.value.state=="Results","final session phase")
+	if config.value.profile=="headless": check(app.report().last_match.winner_team_keys==[1],"headless results sink")
+	check(app.leave_field().ok and not app.has_field(),"dispose grants")
+	check(app.shutdown().ok,"release all modules")
+	print("FIELD_BOOT errors=",errors," people=",humans.size()," slots=40")
+	quit(1 if errors else 0)
