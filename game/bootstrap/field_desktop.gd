@@ -269,6 +269,9 @@ func _process(_dt: float) -> void:
 	if not _visual_state.is_empty():
 		_visuals.render_interpolated(Engine.get_physics_interpolation_fraction(),_camera.global_position,MEDIUM_NEAR_METRES)
 
+func active_playbacks() -> Array[WeakRef]:
+	return _audio.active_playbacks()
+
 func release() -> void:
 	_exiting = true
 	_hud.release_scope()

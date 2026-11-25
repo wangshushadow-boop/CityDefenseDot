@@ -71,6 +71,14 @@ func run() -> void:
 	if not held:
 		fail("first player order after deployment was not executed")
 		return
+	if OS.get_environment("RECOLLECTION_VERIFY_FAST_CLOSE")=="1":
+		var playing: Array[WeakRef] = main._field_scene.active_playbacks()
+		if playing.is_empty():
+			fail("no real audio playback to retire")
+			return
+		print("FIELD_FAST_CLOSE voices=",playing.size())
+		main.notification(Node.NOTIFICATION_WM_CLOSE_REQUEST)
+		return
 	var withdraw:=button("Withdraw")
 	if withdraw==null or not withdraw.is_visible_in_tree():
 		fail("withdraw control missing")

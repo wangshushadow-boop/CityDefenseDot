@@ -12,6 +12,8 @@ var _profile_smoke := false
 var _last_tick := 0
 var _running := false
 var _field_scene: Node3D
+var _retiring_audio: Array[WeakRef] = []
+var _finishing := false
 
 func _ready() -> void:
 	get_tree().auto_accept_quit=false
@@ -87,12 +89,17 @@ func _enter_field() -> void:
 		return
 	_desktop.hide()
 
+func _release_field_scene() -> void:
+	if _field_scene==null: return
+	_retiring_audio = _retiring_audio.filter(func(ref): return ref.get_ref()!=null)
+	_retiring_audio.append_array(_field_scene.active_playbacks())
+	_field_scene.release()
+	remove_child(_field_scene)
+	_field_scene.queue_free()
+	_field_scene=null
+
 func _leave_field(reply: Dictionary = {"ok":true}) -> void:
-	if _field_scene!=null:
-		_field_scene.release()
-		remove_child(_field_scene)
-		_field_scene.queue_free()
-		_field_scene=null
+	_release_field_scene()
 	var end: Dictionary = _root.leave_field()
 	_desktop.field_closed(end if reply.ok else reply)
 
@@ -131,7 +138,7 @@ func _log(event: String, state_hash: String, code: int, error: Dictionary = {}) 
 	var detail: Dictionary=_root.report() if _root!=null else {}
 	var record := {"event":event,"profile":_profile,"protocol_version":Protocol.VERSION,
 		"content_hash":_content_hash,"mission_tick":_last_tick,"state_hash":state_hash,"exit_code":code,
-		"display":DisplayServer.get_name(),"presentation_loaded":_desktop!=null,
+		"audio_pending":_retiring_audio.size(),"display":DisplayServer.get_name(),"presentation_loaded":_desktop!=null,
 		"failed_module":detail.get("failed_module",""),"release_order":detail.get("release_order",[])}
 	if not error.is_empty():
 		record["error"]=error
@@ -140,6 +147,7 @@ func _log(event: String, state_hash: String, code: int, error: Dictionary = {}) 
 func _failure(reply: Dictionary) -> void:
 	_running=false
 	set_physics_process(false)
+	_release_field_scene()
 	if _root!=null:
 		_root.shutdown()
 	_log("failed","",1,reply.error)
@@ -152,13 +160,24 @@ func _failure(reply: Dictionary) -> void:
 		_desktop.show_failure(reply.error,func(): get_tree().reload_current_scene())
 
 func _finish(state_hash: String, code: int) -> void:
+	if _finishing: return
+	_finishing=true
 	_running=false
 	set_physics_process(false)
+	_release_field_scene()
 	if _root!=null:
 		var closed: Dictionary=_root.shutdown()
 		if not closed.ok:
+			_finishing=false
 			_failure(closed)
 			return
+	# After stop(), the mixer still owns streams until a later audio callback.
+	# Only the process exit waits; returning to the launcher stays immediate.
+	var deadline := Time.get_ticks_msec()+250
+	while not _retiring_audio.is_empty():
+		_retiring_audio = _retiring_audio.filter(func(ref): return ref.get_ref()!=null)
+		if _retiring_audio.is_empty() or Time.get_ticks_msec()>=deadline: break
+		await get_tree().process_frame
 	_log("stopped",state_hash,code)
 	get_tree().quit(code)
 
