@@ -525,7 +525,10 @@ func _sync_profile(rider: Dictionary) -> Dictionary:
 	if not switched.ok:_draft["profile_error"]=true
 	if switched.ok:
 		var member:Dictionary=_form.member_formation(rider)
-		if member.ok:_draft.layout_cache.erase(member.value)
+		if member.ok and _draft.layout_cache.has(member.value):
+			# Rebuild profile-specific lanes without losing the committed revision or changing its snapshot.
+			var layout: Dictionary = _draft.layout_cache[member.value]
+			_draft.layout_cache[member.value] = layout.merged({"signature":null},true)
 	return switched
 
 func _apply_mount_requests(tick: int) -> Dictionary:
